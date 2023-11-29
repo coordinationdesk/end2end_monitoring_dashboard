@@ -1,0 +1,71 @@
+{
+    "aliases": {
+        "raw-data-aps-file": {}
+    },
+    "index_patterns": [
+        "raw-data-aps-file*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "ingestionTime": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            },
+            "reportName": {
+                "type": "keyword"
+            },
+            "reportFolder": {
+                "type": "keyword"
+            },
+            "session_id": {
+                "type": "keyword"
+            },
+            "name": {
+                "type": "keyword"
+            },
+            "channel": {
+                "type": "long"
+            },
+            "block_number": {
+                "type": "long"
+            },
+            "final_block": {
+                "type": "boolean"
+            },
+            "publication_date": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "eviction_date": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "size": {
+                "type": "long"
+            },
+            "retransfer": {
+                "type": "boolean"
+            },
+            "interface_name": {
+                "type": "keyword"
+            },
+            "production_service_type": {
+                "type": "keyword"
+            },
+            "production_service_name": {
+                "type": "keyword"
+            }
+        },
+        "_meta": {
+            "partition_field": "ingestionTime",
+            "partition_format": "static"
+        }
+    }
+}

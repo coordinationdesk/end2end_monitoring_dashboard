@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Earth_Explorer_File xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <Earth_Explorer_Header>
+        <Fixed_Header>
+            <File_Name>S5P_OPER_REP__SUP___20221007T012935_20221007T035455_0001</File_Name>
+            <File_Description>FOS and Spacecraft Unavailability Report</File_Description>
+            <Notes />
+            <Mission>Sentinel-5P</Mission>
+            <File_Class>OPER</File_Class>
+            <File_Type>REP__SUP__</File_Type>
+            <Validity_Period>
+                <Validity_Start>UTC=2022-10-07T01:29:35</Validity_Start>
+                <Validity_Stop>UTC=2022-10-07T03:54:55</Validity_Stop>
+            </Validity_Period>
+            <File_Version>0001</File_Version>
+            <Source>
+                <System>FOS</System>
+                <Creator>MCS</Creator>
+                <Creator_Version>1.0</Creator_Version>
+                <Creation_Date>UTC=2022-10-06T16:54:04</Creation_Date>
+            </Source>
+        </Fixed_Header>
+        <Variable_Header />
+    </Earth_Explorer_Header>
+    <Data_Block Type="xml">
+        <Unavailability_Reference>S5P-UNA-2022/0009</Unavailability_Reference>
+        <Unavailability_Type>Return to Operations</Unavailability_Type>
+        <Comment>Due to a collision risk identified for Sentinel-5P on 07/10/2022 a Collision Avoidance Manoeuvre (CAM) has been scheduled. Refer to event #27468 in SCARF for further details.</Comment>
+        <List_Of_Subsystem_Unavailabilities count="1">
+            <Subsystem_Unavailability>
+                <Subsystem>S/C Manoeuvre</Subsystem>
+                <StartTime>UTC=2022-10-07T01:29:35</StartTime>
+                <StartDOY>280</StartDOY>
+                <StartOrbit>25817</StartOrbit>
+                <StartAnxOffset></StartAnxOffset>
+                <EndTime>UTC=2022-10-07T03:54:55</EndTime>
+                <EndDOY>280</EndDOY>
+                <EndOrbit>25818</EndOrbit>
+                <EndAnxOffset></EndAnxOffset>
+                <Type>Planned</Type>
+                <Comment>Due to a collision risk identified for Sentinel-5P on 07/10/2022 a Collision Avoidance Manoeuvre (CAM) has been scheduled. Refer to event #27468 in SCARF for further details.</Comment>
+                <Comment>Due to a collision risk identified for Sentinel-5P on 07/10/2022 a Collision Avoidance Manoeuvre (CAM) has been scheduled. Refer to event #27468 in SCARF for further details.</Comment>
+            </Subsystem_Unavailability>
+        </List_Of_Subsystem_Unavailabilities>
+    </Data_Block>
+</Earth_Explorer_File>

@@ -1,0 +1,65 @@
+{
+    "aliases": {
+        "raw-data-app-product": {}
+    },
+    "index_patterns": [
+        "raw-data-app-product-*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "ingestionTime": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            },
+            "reportName": {
+                "type": "keyword"
+            },
+            "reportFolder": {
+                "type": "keyword"
+            },
+            "satellite_id": {
+                "type": "keyword"
+            },
+            "station_id": {
+                "type": "keyword"
+            },
+            "acquisition_id": {
+                "type": "keyword"
+            },
+            "downlink_orbit": {
+                "type": "keyword"
+            },
+            "downlink_start_date": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "downlink_stop_date": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "downlink_duration": {
+                "type": "long"
+            },
+            "interface_name": {
+                "type": "keyword"
+            },
+            "production_service_type": {
+                "type": "keyword"
+            },
+            "production_service_name": {
+                "type": "keyword"
+            }
+        },
+        "_meta": {
+            "partition_field": "ingestionTime",
+            "partition_format": "static"
+        }
+    }
+}

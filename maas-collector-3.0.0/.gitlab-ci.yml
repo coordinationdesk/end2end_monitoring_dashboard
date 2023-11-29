@@ -1,0 +1,43 @@
+###################################################
+# INCLUDE generic templates from ci-cd project
+# Templates used:
+#   - Sonar
+#   - Docker build and publish
+#   - Docker release publication on IPA Harbor registry
+#   - Helm packaging and publication
+#   - Changelog auto generation
+#   - Python
+###################################################
+include:
+  - project: "$CI_TEMPLATE_PROJECT_PATH" #devops/ci-cd'
+    ref: develop
+    file:
+      - "/sonar/base.yaml"
+      - "/docker/shell/base.yaml"
+      #- "/docker/harbor.yaml" Uncomment if harbor is in use
+      - "/helm/base.yaml"
+      - "/changelog.yaml"
+      - "/python.yaml"
+            
+# Official language image. Look for the different tagged releases at:
+# https://hub.docker.com/r/library/python/tags/
+image: python:3.11.4
+
+stages:
+  - build
+  - test
+  - package
+  - deploy
+  - doc
+
+variables:
+  CHART_PATH: "./charts/collector"
+  DOCKER_NO_LOGIN: "true"
+
+  #You have to define this variable if you use the nexus else the NEXUS_CENTRAL_PASSWORD will not be transfered to the docker image
+  PYPI_REPO_TARGET_BASE: "maas-pypi-group"
+
+pip-audit:
+  variables:
+    # PYSEC-2022-166 is the vulnerability in paramiko
+    VULNERABILITIES_IGNORE_LIST: PYSEC-2022-166

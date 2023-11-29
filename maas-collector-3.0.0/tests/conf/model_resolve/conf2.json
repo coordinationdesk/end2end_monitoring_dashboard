@@ -1,0 +1,15 @@
+{
+    "collectors": [
+        {
+            "id_field": "",
+            "routing_key": "",
+            "model": "PostPonedModel2",
+            "extractor": {
+                "class": "LogExtractor",
+                "args": {
+                    "pattern": ".*"
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,52 @@
+{
+    "aliases": {
+        "raw-data-deletion-issue": {}
+    },
+    "index_patterns": [
+        "raw-data-deletion-issue-*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "ingestionTime": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            },
+            "reportName": {
+                "type": "keyword"
+            },
+            "reportFolder": {
+                "type": "keyword"
+            },
+            "key": {
+                "type": "keyword"
+            },
+            "interface_name": {
+                "type": "keyword"
+            },
+            "deletion_interfaces": {
+                "type": "keyword"
+            },
+            "deletion_date": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "deletion_cause": {
+                "type": "keyword"
+            },
+            "interface_type": {
+                "type": "keyword"
+            }
+        },
+        "_meta": {
+            "partition_field": "ingestionTime",
+            "partition_format": "static"
+        }
+    }
+}

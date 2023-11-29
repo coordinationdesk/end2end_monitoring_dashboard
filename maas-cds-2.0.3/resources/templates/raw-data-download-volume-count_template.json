@@ -1,0 +1,57 @@
+{
+    "aliases": {
+        "raw-data-download-volume-count": {}
+    },
+    "index_patterns": [
+        "raw-data-download-volume-count-*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "ingestionTime": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            },
+            "reportName": {
+                "type": "keyword"
+            },
+            "reportFolder": {
+                "type": "keyword"
+            },
+            "interface_name": {
+                "type": "keyword"
+            },
+            "mission": {
+                "type": "keyword"
+            },
+            "instrument": {
+                "type": "keyword"
+            },
+            "type": {
+                "type": "keyword"
+            },
+            "volume": {
+                "type": "long"
+            },
+            "number": {
+                "type": "long"
+            },
+            "volume_increase": {
+                "type": "long"
+            },
+            "number_increase": {
+                "type": "long"
+            }
+        },
+        "_meta": {
+            "partition_field": "ingestionTime",
+            "partition_format": "statistics"
+        }
+    }
+}

@@ -1,0 +1,54 @@
+{
+    "model": [
+        {
+            "index": "raw-data-dsib",
+            "name": "DSIB",
+            "fields": [
+                {
+                    "name": "sessionID",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "timeFinished",
+                    "type": "Date"                    
+                },
+                {
+                    "name": "dataSize",
+                    "type": "Long"                    
+                }
+
+            ]
+        },
+        {
+            "name": "",
+            "fields": [
+                {
+                    "name": "",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "",
+                    "type": "Date",
+                    "converter": {
+                        "type": "datetime",
+                        "from": "",
+                        "to": ""
+                    }
+                }
+
+            ]
+        }
+    ],
+    "extractors": [
+        {
+            "model": "",
+            "class": "XMLExtractor",
+            "args": {
+                "attr_map": {
+
+                }
+            }
+        }
+
+    ]
+}

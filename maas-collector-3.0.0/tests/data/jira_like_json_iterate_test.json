@@ -1,0 +1,128 @@
+{
+    "id": "243744",
+    "self": "https://jira-dmz:8443/rest/api/2/issue/243744",
+    "key": "MNT-192",
+    "changelog": {
+        "startAt": 0,
+        "maxResults": 19,
+        "total": 19,
+        "histories": [
+            {
+                "id": "1656614",
+                "author": {
+                    "self": "https://jira-dmz:8443/rest/api/2/user?username=ads004",
+                    "name": "ads004",
+                    "key": "ads004",
+                    "emailAddress": "yvan.lebras@airbus.com",
+                    "avatarUrls": {
+                        "48x48": "https://jira-dmz:8443/secure/useravatar?avatarId=10212",
+                        "24x24": "https://jira-dmz:8443/secure/useravatar?size=small&avatarId=10212",
+                        "16x16": "https://jira-dmz:8443/secure/useravatar?size=xsmall&avatarId=10212",
+                        "32x32": "https://jira-dmz:8443/secure/useravatar?size=medium&avatarId=10212"
+                    },
+                    "displayName": "Yvan Le Bras_ads004",
+                    "active": true,
+                    "timeZone": "Europe/Paris"
+                },
+                "created": "2020-04-03T09:27:54.000+0200",
+                "items": [
+                    {
+                        "field": "Originator",
+                        "fieldtype": "custom",
+                        "from": "ads004",
+                        "fromString": "Yvan Le Bras_ads004",
+                        "to": "ads016",
+                        "toString": "CharlesHenri BARD_ads016"
+                    }
+                ]
+            },
+            {
+                "id": "1656634",
+                "author": {
+                    "self": "https://jira-dmz:8443/rest/api/2/user?username=ads004",
+                    "name": "ads004",
+                    "key": "ads004",
+                    "emailAddress": "yvan.lebras@airbus.com",
+                    "avatarUrls": {
+                        "48x48": "https://jira-dmz:8443/secure/useravatar?avatarId=10212",
+                        "24x24": "https://jira-dmz:8443/secure/useravatar?size=small&avatarId=10212",
+                        "16x16": "https://jira-dmz:8443/secure/useravatar?size=xsmall&avatarId=10212",
+                        "32x32": "https://jira-dmz:8443/secure/useravatar?size=medium&avatarId=10212"
+                    },
+                    "displayName": "Yvan Le Bras_ads004",
+                    "active": true,
+                    "timeZone": "Europe/Paris"
+                },
+                "created": "2020-04-03T09:41:56.000+0200",
+                "items": [
+                    {
+                        "field": "summary",
+                        "fieldtype": "jira",
+                        "from": null,
+                        "fromString": "the Save button is not available when an order (here status SUBMITTED) is edited",
+                        "to": null,
+                        "toString": "[MISEO] The Save button is not available when an order (here status SUBMITTED) is edited"
+                    }
+                ]
+            },
+            {
+                "id": "1658736",
+                "author": {
+                    "self": "https://jira-dmz:8443/rest/api/2/user?username=rompteas",
+                    "name": "rompteas",
+                    "key": "rompteas",
+                    "emailAddress": "sylvie.rompteaux@thalesaleniaspace.com",
+                    "avatarUrls": {
+                        "48x48": "https://jira-dmz:8443/secure/useravatar?avatarId=25418",
+                        "24x24": "https://jira-dmz:8443/secure/useravatar?size=small&avatarId=25418",
+                        "16x16": "https://jira-dmz:8443/secure/useravatar?size=xsmall&avatarId=25418",
+                        "32x32": "https://jira-dmz:8443/secure/useravatar?size=medium&avatarId=25418"
+                    },
+                    "displayName": "Sylvie Rompteaux",
+                    "active": true,
+                    "timeZone": "Europe/Paris"
+                },
+                "created": "2020-04-07T10:58:51.000+0200",
+                "items": [
+                    {
+                        "field": "Fix Version",
+                        "fieldtype": "jira",
+                        "from": null,
+                        "fromString": null,
+                        "to": "36566",
+                        "toString": "TBD"
+                    }
+                ]
+            },
+            {
+                "id": "1659267",
+                "author": {
+                    "self": "https://jira-dmz:8443/rest/api/2/user?username=ads004",
+                    "name": "ads004",
+                    "key": "ads004",
+                    "emailAddress": "yvan.lebras@airbus.com",
+                    "avatarUrls": {
+                        "48x48": "https://jira-dmz:8443/secure/useravatar?avatarId=10212",
+                        "24x24": "https://jira-dmz:8443/secure/useravatar?size=small&avatarId=10212",
+                        "16x16": "https://jira-dmz:8443/secure/useravatar?size=xsmall&avatarId=10212",
+                        "32x32": "https://jira-dmz:8443/secure/useravatar?size=medium&avatarId=10212"
+                    },
+                    "displayName": "Yvan Le Bras_ads004",
+                    "active": true,
+                    "timeZone": "Europe/Paris"
+                },
+                "created": "2020-04-07T18:07:45.000+0200",
+                "items": [
+                    {
+                        "field": "Analysis results",
+                        "fieldtype": "custom",
+                        "from": null,
+                        "fromString": null,
+                        "to": null,
+                        "toString": "[YLB 07/04/2020]\r\nThe problem is not reproducible in factory.\r\nMore information have been asked to local industrial support on the structural characteristics of the order (no sensitive data) to catch the specific characteristics that leads to this behavior."
+                    }
+                ]
+            }
+        ]
+    }
+}

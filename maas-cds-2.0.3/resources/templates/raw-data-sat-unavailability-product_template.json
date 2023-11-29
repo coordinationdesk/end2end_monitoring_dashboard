@@ -1,0 +1,81 @@
+{
+    "aliases": {
+        "raw-data-sat-unavailability-product": {}
+    },
+    "index_patterns": [
+        "raw-data-sat-unavailability-product-*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "ingestionTime": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            },
+            "reportFolder": {
+                "type": "keyword"
+            },
+            "reportName": {
+                "type": "keyword"
+            },
+            "file_name": {
+                "type": "keyword"
+            },
+            "mission": {
+                "type": "keyword"
+            },
+            "unavailability_reference": {
+                "type": "keyword"
+            },
+            "unavailability_type": {
+                "type": "keyword"
+            },
+            "subsystem": {
+                "type": "keyword"
+            },
+            "start_time": {
+                "type": "keyword"
+            },
+            "start_orbit": {
+                "type": "keyword"
+            },
+            "start_anx_offset": {
+                "type": "integer"
+            },
+            "end_time": {
+                "type": "keyword"
+            },
+            "end_orbit": {
+                "type": "keyword"
+            },
+            "end_anx_offset": {
+                "type": "integer"
+            },
+            "type": {
+                "type": "keyword"
+            },
+            "comment": {
+                "type": "keyword"
+            },
+            "interface_name": {
+                "type": "keyword"
+            },
+            "production_service_type": {
+                "type": "keyword"
+            },
+            "production_service_name": {
+                "type": "keyword"
+            }
+        },
+        "_meta": {
+            "partition_field": "ingestionTime",
+            "partition_format": "static"
+        }
+    }
+}

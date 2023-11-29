@@ -1,0 +1,40 @@
+{
+    "aliases": {
+        "maas-model-test": {}
+    },
+    "index_patterns": [
+        "maas-model-test-*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "missing_periods": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "keyword"
+                    },
+                    "product_type": {
+                        "type": "keyword"
+                    },
+                    "sensing_start_date": {
+                        "type": "date",
+                        "locale": "utc"
+                    },
+                    "sensing_end_date": {
+                        "type": "date",
+                        "locale": "utc"
+                    },
+                    "duration": {
+                        "type": "integer"
+                    }
+                }
+            }
+        }
+    }
+}

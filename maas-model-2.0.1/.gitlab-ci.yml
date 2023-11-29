@@ -1,0 +1,42 @@
+###################################################
+# INCLUDE generic templates from ci-cd project
+# Templates used:
+#   - Sonar
+#   - Docker build and publish
+#   - Changelog auto generation
+###################################################
+include:
+  - project: "$CI_TEMPLATE_PROJECT_PATH" #devops/ci-cd'
+    ref: develop
+    file:
+      - "/sonar/base.yaml"
+      - "/changelog.yaml"
+      - "/python.yaml"
+
+# Official language image. Look for the different tagged releases at:
+# https://hub.docker.com/r/library/python/tags/
+image: python:3.11.4
+
+stages:
+  - test
+  - deploy
+  - doc
+  - triggers
+
+trigger_engine:
+  stage: triggers
+  trigger: maas/CORE/maas-engine
+  only:
+    - develop
+  except:
+    refs:
+      - schedules
+
+trigger_collector:
+  stage: triggers
+  trigger: maas/CORE/maas-collector
+  only:
+    - develop
+  except:
+    refs:
+      - schedules

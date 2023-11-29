@@ -1,0 +1,33 @@
+{
+    "aliases": {
+        "cds-s2-tilpar": {}
+    },
+    "index_patterns": [
+        "cds-s2-tilpar-*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "geometry": {
+                "type": "geo_shape"
+            },
+            "name": {
+                "type": "keyword"
+            },
+            "timestamp": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            }
+        },
+        "_meta": {
+            "partition_field": "timestamp",
+            "partition_format": "tiles"
+        }
+    }
+}

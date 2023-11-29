@@ -1,0 +1,192 @@
+<?xml version="1.0"?>
+<GS2_PROCESSING_BASELINE_PARAMETERS xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="T:\SENTINEL-2\04-SEGMENT_SOL\02-Spec-SSI-S2\03-GS\03-Schemas_Image_S2\GS2_GIPP\gs2_processing_baseline_parameters.xsd">
+  <HEADER>
+    <SATELLITE>S2B</SATELLITE>
+    <SCHEME_VERSION>String</SCHEME_VERSION>
+    <PRODUCTION_DATE>2021-07-06T00:03:01.0Z</PRODUCTION_DATE>
+    <PROVIDER>QCC</PROVIDER>
+    <CONSUMER>IPF</CONSUMER>
+  </HEADER>
+  <SPECIFIC_HEADER>
+    <TYPE>GENERAL_PARAMETERS_FILE</TYPE>
+    <APPLICABILITY_DATE>2021-07-08T06:00:00.0Z</APPLICABILITY_DATE>
+    <VERSION_NUMBER>0301</VERSION_NUMBER>
+    <PARAMETER_ID>String</PARAMETER_ID>
+  </SPECIFIC_HEADER>
+  <DATA>
+    <Idp_Sc_List workflow="l1ab">
+      <Idp_Sc_Name>DECOMP</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.00</Idp_Sc_Version>
+    </Idp_Sc_List>  
+    <Idp_Sc_List workflow="l1ab">
+      <Idp_Sc_Name>FORMAT_IMG_L1A</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.00</Idp_Sc_Version>
+    </Idp_Sc_List>  
+    <Idp_Sc_List workflow="l1ab">
+      <Idp_Sc_Name>FORMAT_IMG_L1B</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.00</Idp_Sc_Version>
+    </Idp_Sc_List>
+    <Idp_Sc_List workflow="l1c">
+      <Idp_Sc_Name>FORMAT_IMG_L1C</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.00</Idp_Sc_Version>
+    </Idp_Sc_List>
+    <Idp_Sc_List workflow="l1c">
+      <Idp_Sc_Name>FORMAT_IMG_PVI_TCI</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.00</Idp_Sc_Version>
+    </Idp_Sc_List>
+    <Idp_Sc_List workflow="l0c">
+      <Idp_Sc_Name>FORMAT_IMG_QL_L0</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.00</Idp_Sc_Version>
+    </Idp_Sc_List>
+    <Idp_Sc_List workflow="l0c">
+      <Idp_Sc_Name>FORMAT_ISP</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.00</Idp_Sc_Version>
+    </Idp_Sc_List>
+    <Idp_Sc_List workflow="l0c">
+      <Idp_Sc_Name>FORMAT_METADATA_DS_L0C</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.01</Idp_Sc_Version>
+    </Idp_Sc_List>
+    <Idp_Sc_List workflow="l1ab">
+      <Idp_Sc_Name>FORMAT_METADATA_DS_L1A</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.01</Idp_Sc_Version>
+    </Idp_Sc_List>	 
+    <Idp_Sc_List workflow="l1ab">
+      <Idp_Sc_Name>FORMAT_METADATA_DS_L1B</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.01</Idp_Sc_Version>
+    </Idp_Sc_List>	 
+    <Idp_Sc_List workflow="l1c">
+      <Idp_Sc_Name>FORMAT_METADATA_DS_L1C</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.01</Idp_Sc_Version>
+    </Idp_Sc_List>
+    <Idp_Sc_List workflow="l0c">
+      <Idp_Sc_Name>FORMAT_METADATA_GR_L0C</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.01</Idp_Sc_Version>
+    </Idp_Sc_List>
+    <Idp_Sc_List workflow="l1ab">
+      <Idp_Sc_Name>FORMAT_METADATA_GR_L1A</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.01</Idp_Sc_Version>
+    </Idp_Sc_List>	 
+    <Idp_Sc_List workflow="l1ab">
+      <Idp_Sc_Name>FORMAT_METADATA_GR_L1B</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.01</Idp_Sc_Version>
+    </Idp_Sc_List>	 
+    <Idp_Sc_List workflow="l1c">
+      <Idp_Sc_Name>FORMAT_METADATA_TILE_L1C</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.01</Idp_Sc_Version>
+    </Idp_Sc_List>	 
+    <Idp_Sc_List workflow="l1c">
+      <Idp_Sc_Name>GEN_ORTHO_TOA</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.02</Idp_Sc_Version>
+    </Idp_Sc_List>
+    <Idp_Sc_List workflow="l1ab">
+      <Idp_Sc_Name>GEO1B_FINALIZE</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.00</Idp_Sc_Version>
+    </Idp_Sc_List>	 
+    <Idp_Sc_List workflow="l1ab">
+      <Idp_Sc_Name>GET_GRI</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.00</Idp_Sc_Version>
+    </Idp_Sc_List>	 
+    <Idp_Sc_List workflow="l1ab">
+      <Idp_Sc_Name>GET_TILE_LIST</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.00</Idp_Sc_Version>
+    </Idp_Sc_List>
+    <Idp_Sc_List workflow="l0c">
+       <Idp_Sc_Name>GSE</Idp_Sc_Name>
+       <Idp_Sc_Version>04.04.00</Idp_Sc_Version>
+    </Idp_Sc_List> 	 
+    <Idp_Sc_List workflow="l0c">
+      <Idp_Sc_Name>INIT_LOC_L0</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.03</Idp_Sc_Version>
+    </Idp_Sc_List>	 
+    <Idp_Sc_List workflow="l1ab">
+      <Idp_Sc_Name>INIT_LOC_L1</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.00</Idp_Sc_Version>
+    </Idp_Sc_List>	 
+    <Idp_Sc_List workflow="l1ab">
+      <Idp_Sc_Name>INIT_VS_GEO</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.00</Idp_Sc_Version>
+    </Idp_Sc_List>	 
+    <Idp_Sc_List workflow="l1c">
+      <Idp_Sc_Name>MASK_S2</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.00</Idp_Sc_Version>
+    </Idp_Sc_List>
+    <Idp_Sc_List workflow="l0c">
+      <Idp_Sc_Name>OLQC</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.00</Idp_Sc_Version>
+    </Idp_Sc_List>
+    <Idp_Sc_List workflow="l1ab">
+      <Idp_Sc_Name>OLQC</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.00</Idp_Sc_Version>
+    </Idp_Sc_List>
+    <Idp_Sc_List workflow="l1c">
+      <Idp_Sc_Name>OLQC</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.00</Idp_Sc_Version>
+    </Idp_Sc_List>	 
+    <Idp_Sc_List workflow="l0c">
+      <Idp_Sc_Name>QL_CLOUD_MASK</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.00</Idp_Sc_Version>
+    </Idp_Sc_List>	 
+    <Idp_Sc_List workflow="l1ab">
+      <Idp_Sc_Name>QL_CLOUD_MASK</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.00</Idp_Sc_Version>
+    </Idp_Sc_List>	 
+    <Idp_Sc_List workflow="l1ab">
+      <Idp_Sc_Name>QL_DECOMP</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.00</Idp_Sc_Version>
+    </Idp_Sc_List>	 	 
+    <Idp_Sc_List workflow="l0c">
+      <Idp_Sc_Name>QL_GEO</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.00</Idp_Sc_Version>
+    </Idp_Sc_List>
+    <Idp_Sc_List workflow="l1ab">
+      <Idp_Sc_Name>RADIO_AB</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.00</Idp_Sc_Version>
+    </Idp_Sc_List>
+    <Idp_Sc_List workflow="l1ab">
+      <Idp_Sc_Name>RADIO_FINALIZE</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.00</Idp_Sc_Version>
+    </Idp_Sc_List>
+    <Idp_Sc_List workflow="l1ab">
+      <Idp_Sc_Name>RESAMPLE_TO_VS</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.01</Idp_Sc_Version>
+    </Idp_Sc_List>
+    <Idp_Sc_List workflow="l1ab">
+      <Idp_Sc_Name>SPATIO</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.01</Idp_Sc_Version>
+    </Idp_Sc_List>
+    <Idp_Sc_List workflow="l1c">
+      <Idp_Sc_Name>TILE_FINALIZE</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.00</Idp_Sc_Version>
+    </Idp_Sc_List>
+    <Idp_Sc_List workflow="l1c">
+      <Idp_Sc_Name>TILE_INIT</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.00</Idp_Sc_Version>
+    </Idp_Sc_List>
+    <Idp_Sc_List workflow="l1ab">
+      <Idp_Sc_Name>TP_COLLECT</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.00</Idp_Sc_Version>
+    </Idp_Sc_List>
+    <Idp_Sc_List workflow="l1ab">
+      <Idp_Sc_Name>TP_FILTER</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.00</Idp_Sc_Version>
+    </Idp_Sc_List>
+    <Idp_Sc_List workflow="l1ab">
+      <Idp_Sc_Name>UNFORMAT_GRI</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.00</Idp_Sc_Version>
+    </Idp_Sc_List>	 
+    <Idp_Sc_List workflow="l1ab">
+      <Idp_Sc_Name>UNFORMAT_SAFE_DS</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.00</Idp_Sc_Version>
+    </Idp_Sc_List>	 
+    <Idp_Sc_List workflow="l1ab">
+      <Idp_Sc_Name>UNFORMAT_SAFE_GR</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.00</Idp_Sc_Version>
+    </Idp_Sc_List>
+    <Idp_Sc_List workflow="l1ab">
+      <Idp_Sc_Name>UPDATE_LOC</Idp_Sc_Name>
+      <Idp_Sc_Version>04.04.00</Idp_Sc_Version>
+    </Idp_Sc_List>
+    <Baseline_Version>03.01</Baseline_Version>
+    <Validity_Date>UTC=2015-06-22T,00:00:00</Validity_Date>
+  </DATA>
+</GS2_PROCESSING_BASELINE_PARAMETERS>

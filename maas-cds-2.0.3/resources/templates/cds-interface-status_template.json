@@ -1,0 +1,44 @@
+{
+    "aliases": {
+        "cds-interface-status": {}
+    },
+    "index_patterns": [
+        "cds-interface-status-*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "updateTime": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            },
+            "interface_name": {
+                "type": "keyword"
+            },
+            "status": {
+                "type": "keyword"
+            },
+            "status_time_start": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "status_time_stop": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "status_duration": {
+                "type": "long"
+            }
+        },
+        "_meta": {
+            "partition_field": "status_time_start",
+            "partition_format": "monitoring"
+        }
+    }
+}

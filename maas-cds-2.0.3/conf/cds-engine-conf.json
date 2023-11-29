@@ -1,0 +1,25 @@
+{
+    "_comment": "!!! Sample config, edit one on maas-deploy-cds for production usages !!!",
+    "amqp": [
+        {
+            "name": "collect-exchange",
+            "queues": [
+                {
+                    "name": "collect-new.raw.data.test-product",
+                    "routing_key": "new.raw.data.test-product",
+                    "events": [
+                        "SINK"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "etl-exchange",
+            "queues": []
+        }
+    ],
+    "modules": [
+        "maas_cds.engines.reports"
+    ],
+    "model": "maas_cds.model"
+}

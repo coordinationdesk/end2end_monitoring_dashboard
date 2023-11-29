@@ -1,0 +1,49 @@
+{
+    "collectors": [
+        {
+            "class": "ODataCollectorConfiguration",
+            "id_field": "product_id",
+            "routing_key": "new.raw.data.oauth-product",
+            "interface_name": "no_auth_test",
+            "auth_method": "",
+            "odata_product_url": "http://my_super_product_url",
+            "hours_delta": 3,
+            "product_per_page": 1000,
+            "no_probe": true,
+            "model": {
+                "index": "raw-data-prip-product",
+                "name": "PripProduct",
+                "fields": [
+                    {
+                        "name": "product_id",
+                        "type": "Keyword"
+                    },
+                    {
+                        "name": "product_name",
+                        "type": "Keyword"
+                    },
+                    {
+                        "name": "content_length",
+                        "type": "Integer"
+                    },
+                    {
+                        "name": "publication_date",
+                        "type": "Date"
+                    }
+                ]
+            },
+            "extractor": {
+                "class": "JSONExtractor",
+                "args": {
+                    "attr_map": {
+                        "product_id": "`this`.Id",
+                        "product_name": "`this`.Name",
+                        "content_length": "`this`.ContentLength",
+                        "publication_date": "`this`.PublicationDate"
+                    },
+                    "iterate_nodes": "$.value"
+                }
+            }
+        }
+    ]
+}

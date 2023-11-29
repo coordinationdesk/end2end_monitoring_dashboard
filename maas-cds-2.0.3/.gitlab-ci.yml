@@ -1,0 +1,34 @@
+###################################################
+# INCLUDE generic templates from ci-cd project
+# Templates used:
+#   - Sonar
+#   - Python
+#   - Docker build and publish
+#   - Changelog auto generation
+###################################################
+include:
+  - project: "$CI_TEMPLATE_PROJECT_PATH" #devops/ci-cd'
+    ref: develop
+    file:
+      - "/sonar/base.yaml"
+      - "/python.yaml"
+      - "/docker/shell/base.yaml"
+      # Uncomment when harbor will be used
+      #- "/docker/harbor.yaml"
+      - "/changelog.yaml"
+
+image: python:3.11.4
+
+stages:
+  - build
+  - test
+  - package
+  - deploy
+  - doc
+
+variables:
+  CHART_PATH: "./charts/maas-engine"
+  DOCKER_NO_LOGIN: "true"
+
+  #You have to define this variable if you use the nexus else the NEXUS_CENTRAL_PASSWORD will not be transfered to the docker image
+  PYPI_REPO_TARGET_BASE: "maas-pypi-group"

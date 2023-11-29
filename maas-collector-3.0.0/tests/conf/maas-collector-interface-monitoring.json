@@ -1,0 +1,77 @@
+{
+    "collectors": [
+        {
+            "class": "InterfaceMonitorCollectorConfiguration",
+            "id_field": [
+                "interface_name",
+                "probe_time_start"
+            ],
+            "routing_key": "new.raw.data.interface-probe",
+            "interface_name": "OMCS_Monitoring",
+            "file_pattern": "MAAS-Monitoring-*.json",
+            "extra_http_probes": [],
+            "refresh_interval": 0,
+            "model": {
+                "index": "raw-data-interface-probe",
+                "name": "InterfaceProbe",
+                "fields": [
+                    {
+                        "name": "probe_time_start",
+                        "type": "Date"
+                    },
+                    {
+                        "name": "probe_time_stop",
+                        "type": "Date"
+                    },
+                    {
+                        "name": "probe_duration",
+                        "type": "Float"
+                    },
+                    {
+                        "name": "status",
+                        "type": "Keyword"
+                    },
+                    {
+                        "name": "interface_name",
+                        "type": "Keyword"
+                    },
+                    {
+                        "name": "details",
+                        "type": "Keyword"
+                    },
+                    {
+                        "name": "status_code",
+                        "type": "Integer"
+                    },
+                    {
+                        "name": "most_recent_modification_date",
+                        "type": "Date"
+                    }
+                ],
+                "partition_field": "ingestionTime",
+                "partition_format": "monitoring"
+            },
+            "extractor": {
+                "class": "JSONExtractor",
+                "args": {
+                    "iterate_nodes": "$.results",
+                    "attr_map": {
+                        "probe_time_start": "`this`.probe_time_start",
+                        "probe_time_stop": "`this`.probe_time_end",
+                        "probe_duration": "`this`.probe_duration",
+                        "interface_name": "`this`.interface_name",
+                        "status": "`this`.status",
+                        "status_code": "`this`.status_code",
+                        "details": "`this`.details",
+                        "most_recent_modification_date": "`this`.most_recent_modification_date"
+                    }
+                }
+            }
+        }
+    ],
+    "amqp": {
+        "new.raw.data.interface-probe": {
+            "chunk_size": 1
+        }
+    }
+}

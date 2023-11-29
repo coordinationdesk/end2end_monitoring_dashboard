@@ -1,0 +1,458 @@
+import pytest
+from unittest.mock import patch
+
+import datetime
+from maas_cds.model import (
+    CdsCadipAcquisitionPassStatus,
+    ApsSession,
+    ApsQualityInfo,
+)
+from maas_engine.engine import Engine
+
+from opensearchpy import Search
+
+from maas_cds.engines.reports.acquisition_pass_status import (
+    XBandV2AcquisitionPassStatusConsolidatorEngine,
+)
+
+
+@pytest.fixture
+def init_engine(monkeypatch):
+    def get_model_mock(*args, **kwargs):
+        return CdsCadipAcquisitionPassStatus
+
+    monkeypatch.setattr(Engine, "get_model", get_model_mock)
+    engine = XBandV2AcquisitionPassStatusConsolidatorEngine(args=None)
+    return engine
+
+
+@pytest.fixture
+def raw_session():
+    data_dict = {
+        "session_id": "S1A_pytest",
+        "num_channels": 4,
+        "publication_date": "2019-02-16T12:00:00.000Z",
+        "satellite_id": "S2A",
+        "station_unit_id": "SGS",
+        "downlink_orbit": "62343",
+        "acquisition_id": "415_01",
+        "antenna_id": "INU",
+        "front_end_id": "aaa",
+        "ground_station": "pytest",
+        "retransfer": False,
+        "antenna_status": True,
+        "front_end_status": False,
+        "planned_data_start": "2019-02-16T02:00:00.000Z",
+        "planned_data_stop": "2019-02-16T02:10:00.000Z",
+        "downlink_start": "2022-01-03T02:11:00.000Z",
+        "downlink_stop": "2019-02-16T02:15:00.000Z",
+        "downlink_status": True,
+        "delivery_push_status": True,
+        "quality_infos": [
+            {
+                "AcquiredTFs": 10,
+                "ErrorTFs": 2,
+                "CorrectedTFs": 8,
+                "UncorrectableTFs": 0,
+                "DataTFs": 100,
+                "ErrorDataTFs": 5,
+                "CorrectedDataTFs": 95,
+                "UncorrectableDataTFs": 0,
+                "TotalChunks": 500,
+                "TotalVolume": 1024,
+                "DeliveryStart": "2022-01-01T00:00:00.000Z",
+                "DeliveryStop": "2022-01-02T00:00:00.000Z",
+            },
+            {
+                "AcquiredTFs": 5,
+                "ErrorTFs": 1,
+                "CorrectedTFs": 4,
+                "UncorrectableTFs": 0,
+                "DataTFs": 50,
+                "ErrorDataTFs": 2,
+                "CorrectedDataTFs": 48,
+                "UncorrectableDataTFs": 0,
+                "TotalChunks": 250,
+                "TotalVolume": 512,
+                "DeliveryStart": "2022-01-02T00:00:00.000Z",
+                "DeliveryStop": "2022-01-03T00:00:00.000Z",
+            },
+            {
+                "AcquiredTFs": 7,
+                "ErrorTFs": 1,
+                "CorrectedTFs": 6,
+                "UncorrectableTFs": 0,
+                "DataTFs": 70,
+                "ErrorDataTFs": 3,
+                "CorrectedDataTFs": 67,
+                "UncorrectableDataTFs": 0,
+                "TotalChunks": 350,
+                "TotalVolume": 716,
+                "DeliveryStart": "2022-01-03T00:00:00.000Z",
+                "DeliveryStop": "2022-01-04T00:00:00.000Z",
+            },
+        ],
+    }
+    raw_document = ApsSession(**data_dict)
+    raw_document.meta.id = "5b65d059c9dac47b8bdbb6f6fdddecbe"
+    raw_document.full_clean()
+    return raw_document
+
+
+@pytest.fixture
+def cds_session_1():
+    data_dict = {
+        "session_id": "S1A_pytest",
+        "num_channels": 4,
+        "publication_date": "2019-02-16T12:00:00.000Z",
+        "satellite_id": "S2A",
+        "station_unit_id": "SGS",
+        "downlink_orbit": "62343",
+        "acquisition_id": "415_01",
+        "ground_station": "pytest",
+        "antenna_id": "INU",
+        "front_end_id": "aaa",
+        "retransfer": False,
+        "antenna_status": True,
+        "front_end_status": False,
+        "planned_data_start": "2019-02-16T02:00:00.000Z",
+        "planned_data_stop": "2019-02-16T02:10:00.000Z",
+        "downlink_start": "2022-01-03T02:11:00.000Z",
+        "downlink_stop": "2019-02-16T02:15:00.000Z",
+        "downlink_status": True,
+        "delivery_push_status": True,
+        "global_status": "NOK",
+        "quality_infos": [
+            {
+                "AcquiredTFs": 10,
+                "ErrorTFs": 2,
+                "CorrectedTFs": 8,
+                "UncorrectableTFs": 0,
+                "DataTFs": 100,
+                "ErrorDataTFs": 5,
+                "CorrectedDataTFs": 95,
+                "UncorrectableDataTFs": 0,
+                "TotalChunks": 500,
+                "TotalVolume": 1024,
+                "DeliveryStart": "2022-01-01T00:00:00.000Z",
+                "DeliveryStop": "2022-01-02T00:00:00.000Z",
+            },
+            {
+                "AcquiredTFs": 5,
+                "ErrorTFs": 1,
+                "CorrectedTFs": 4,
+                "UncorrectableTFs": 0,
+                "DataTFs": 50,
+                "ErrorDataTFs": 2,
+                "CorrectedDataTFs": 48,
+                "UncorrectableDataTFs": 0,
+                "TotalChunks": 250,
+                "TotalVolume": 512,
+                "DeliveryStart": "2022-01-02T00:00:00.000Z",
+                "DeliveryStop": "2022-01-03T00:00:00.000Z",
+            },
+            {
+                "AcquiredTFs": 7,
+                "ErrorTFs": 1,
+                "CorrectedTFs": 6,
+                "UncorrectableTFs": 0,
+                "DataTFs": 70,
+                "ErrorDataTFs": 3,
+                "CorrectedDataTFs": 67,
+                "UncorrectableDataTFs": 0,
+                "TotalChunks": 350,
+                "TotalVolume": 716,
+                "DeliveryStart": "2022-01-03T00:00:00.000Z",
+                "DeliveryStop": "2022-01-04T00:00:00.000Z",
+            },
+        ],
+    }
+    document = CdsCadipAcquisitionPassStatus(**data_dict)
+    document.meta.id = "5b65d059c9dac47b8bdbb6f6fdddecbe"
+    document.full_clean()
+    return document
+
+
+## Unitary tests
+
+
+def test_global_status(init_engine, raw_session):
+    """
+    Test the global status calculation for different session statuses.
+
+    Args:
+        init_engine: Fixture to initialize the engine object.
+        raw_session: Fixture providing a raw session object.
+
+    Returns:
+        None
+    """
+    engine = init_engine
+
+    global_status_NOK = engine.get_global_status(raw_session)
+
+    raw_session.antenna_status = True
+    raw_session.front_end_status = True
+    raw_session.delivery_push_status = True
+
+    global_status_OK = engine.get_global_status(raw_session)
+
+    assert global_status_NOK == "NOK"
+    assert global_status_OK == "OK"
+
+
+@pytest.fixture
+def quality_infos():
+    """
+    Fixture providing a list of mock quality info objects.
+    """
+    quality_infos = [
+        {
+            "AcquiredTFs": 10,
+            "ErrorTFs": 2,
+            "CorrectedTFs": 8,
+            "UncorrectableTFs": 0,
+            "DataTFs": 100,
+            "ErrorDataTFs": 5,
+            "CorrectedDataTFs": 95,
+            "UncorrectableDataTFs": 0,
+            "TotalChunks": 500,
+            "TotalVolume": 1024,
+            "DeliveryStart": "2022-01-01T00:00:00.000Z",
+            "DeliveryStop": "2022-01-02T00:00:00.000Z",
+        },
+        {
+            "AcquiredTFs": 5,
+            "ErrorTFs": 1,
+            "CorrectedTFs": 4,
+            "UncorrectableTFs": 0,
+            "DataTFs": 50,
+            "ErrorDataTFs": 2,
+            "CorrectedDataTFs": 48,
+            "UncorrectableDataTFs": 0,
+            "TotalChunks": 250,
+            "TotalVolume": 512,
+            "DeliveryStart": "2022-01-02T00:00:00.000Z",
+            "DeliveryStop": "2022-01-03T00:00:00.000Z",
+        },
+        {
+            "AcquiredTFs": 7,
+            "ErrorTFs": 1,
+            "CorrectedTFs": 6,
+            "UncorrectableTFs": 0,
+            "DataTFs": 70,
+            "ErrorDataTFs": 3,
+            "CorrectedDataTFs": 67,
+            "UncorrectableDataTFs": 0,
+            "TotalChunks": 350,
+            "TotalVolume": 716,
+            "DeliveryStart": "2022-01-03T00:00:00.000Z",
+            "DeliveryStop": "2022-01-04T00:00:00.000Z",
+        },
+    ]
+
+    return quality_infos
+
+
+def test_aggregate_quality_infos_metrics(raw_session, init_engine):
+    """
+    Test aggregating quality information metrics into the document object.
+
+    Args:
+        mock_quality_infos: Fixture providing a list of mock quality info objects.
+
+    Returns:
+        None
+    """
+    document = CdsCadipAcquisitionPassStatus()
+
+    engine = init_engine
+
+    document = engine.aggregate_quality_infos_metrics(
+        document, raw_session.quality_infos
+    )
+
+    assert document.AcquiredTFs == 22
+    assert document.ErrorTFs == 4
+    assert document.CorrectedTFs == 18
+    assert document.UncorrectableTFs == 0
+    assert document.DataTFs == 220
+    assert document.ErrorDataTFs == 10
+    assert document.CorrectedDataTFs == 210
+    assert document.UncorrectableDataTFs == 0
+    assert document.TotalChunks == 1100
+    assert document.TotalVolume == 2252
+    assert document.delivery_start == datetime.datetime.strptime(
+        "2022-01-01T00:00:00.000Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+    )
+    assert document.delivery_stop == datetime.datetime.strptime(
+        "2022-01-04T00:00:00.000Z", "%Y-%m-%dT%H:%M:%S.%f%z"
+    )
+
+
+## Integration tests
+
+
+@patch("opensearchpy.Search.execute")
+@patch("maas_model.document.Document.search")
+def test_session_consolidation(
+    mock_search,
+    mock_execute,
+    init_engine,
+    raw_session,
+):
+    """Test for consolidation method"""
+
+    mock_search.return_value = Search()
+    mock_execute.return_value = []
+
+    engine = init_engine
+
+    publication = engine.consolidate(raw_session, CdsCadipAcquisitionPassStatus())
+    publication.full_clean()
+
+    assert publication.to_dict() == {
+        "session_id": "S1A_pytest",
+        "num_channels": 4,
+        "publication_date": "2019-02-16T12:00:00.000Z",
+        "satellite_id": "S2A",
+        "mission": "S2",
+        "station_unit_id": "SGS",
+        "downlink_orbit": "62343",
+        "acquisition_id": "415_01",
+        "ground_station": "pytest",
+        "antenna_id": "INU",
+        "front_end_id": "aaa",
+        "retransfer": False,
+        "antenna_status": True,
+        "front_end_status": False,
+        "planned_data_start": "2019-02-16T02:00:00.000Z",
+        "planned_data_stop": "2019-02-16T02:10:00.000Z",
+        "downlink_start": "2022-01-03T02:11:00.000Z",
+        "downlink_stop": "2019-02-16T02:15:00.000Z",
+        "from_acq_delivery_timeliness": (21 * 60 * 60 + 49 * 60) * 1000000,  # downlink_stop - delivery_start
+        "delivery_bitrate": 2252 / (21 * 60 * 60 + 49 * 60), # total volume / from_acq_delivery_timeliness * 1000000
+        "downlink_status": True,
+        "delivery_push_status": True,
+        "global_status": "NOK",
+        "delivery_start": "2022-01-01T00:00:00.000Z",
+        "delivery_stop": "2022-01-04T00:00:00.000Z",
+        "AcquiredTFs": 22,
+        "ErrorTFs": 4,
+        "CorrectedTFs": 18,
+        "UncorrectableTFs": 0,
+        "DataTFs": 220,
+        "ErrorDataTFs": 10,
+        "CorrectedDataTFs": 210,
+        "UncorrectableDataTFs": 0,
+        "TotalChunks": 1100,
+        "TotalVolume": 2252,
+        "quality_infos": [
+            {
+                "AcquiredTFs": 10,
+                "ErrorTFs": 2,
+                "CorrectedTFs": 8,
+                "UncorrectableTFs": 0,
+                "DataTFs": 100,
+                "ErrorDataTFs": 5,
+                "CorrectedDataTFs": 95,
+                "UncorrectableDataTFs": 0,
+                "TotalChunks": 500,
+                "TotalVolume": 1024,
+                "DeliveryStart": "2022-01-01T00:00:00.000Z",
+                "DeliveryStop": "2022-01-02T00:00:00.000Z",
+            },
+            {
+                "AcquiredTFs": 5,
+                "ErrorTFs": 1,
+                "CorrectedTFs": 4,
+                "UncorrectableTFs": 0,
+                "DataTFs": 50,
+                "ErrorDataTFs": 2,
+                "CorrectedDataTFs": 48,
+                "UncorrectableDataTFs": 0,
+                "TotalChunks": 250,
+                "TotalVolume": 512,
+                "DeliveryStart": "2022-01-02T00:00:00.000Z",
+                "DeliveryStop": "2022-01-03T00:00:00.000Z",
+            },
+            {
+                "AcquiredTFs": 7,
+                "ErrorTFs": 1,
+                "CorrectedTFs": 6,
+                "UncorrectableTFs": 0,
+                "DataTFs": 70,
+                "ErrorDataTFs": 3,
+                "CorrectedDataTFs": 67,
+                "UncorrectableDataTFs": 0,
+                "TotalChunks": 350,
+                "TotalVolume": 716,
+                "DeliveryStart": "2022-01-03T00:00:00.000Z",
+                "DeliveryStop": "2022-01-04T00:00:00.000Z",
+            },
+        ],
+    }
+
+
+# For reviewer je ne vois pas comment tester action_iterator_from_quality_info
+# car il faut mocker deux fois d'affilé self.input_documents dans le même appel
+# est-ce possible ?
+
+# @patch("opensearchpy.Search.execute")
+# @patch("maas_model.document.Document.search")
+# def test_quality_info(
+#     mock_search,
+#     mock_execute,
+#     raw_quality_info,
+#     raw_session,
+#     monkeypatch,
+# ):
+#     # Patch because no config file here
+#     def get_model_mock(*args, **kwargs):
+#         return CdsCadipAcquisitionPassStatus
+
+#     mock_search.return_value = Search()
+#     mock_execute.return_value = []
+
+#     monkeypatch.setattr(Engine, "get_model", get_model_mock)
+
+#     engine = XBandV2AcquisitionPassStatusConsolidatorEngine(args=None)
+
+#     # cds_session = engine.consolidate(raw_session, CdsCadipAcquisitionPassStatus())
+#     # cds_session.full_clean()
+
+#     # mock_execute.return_value = [cds_session]
+
+#     # mock payload
+#     engine.payload = maas_model.MAASMessage(document_class="ApsQualityInfo")
+#     # monkeypatch.setattr(engine, "find_or_init_session", lambda _, x: cds_session)
+#     engine.input_documents = [raw_quality_info]
+
+#     publication = next(engine.action_iterator())
+#     publication = engine.consolidate(raw_quality_info, CdsCadipAcquisitionPassStatus())
+
+#     publication.full_clean()
+
+#     # merge dict puis comparaison
+#     assert publication.to_dict() == {
+#         "session_id": "S1A_pytest",
+#         "num_channels": 4,
+#         "publication_date": "2019-02-16T12:00:00.000Z",
+#         "satellite_id": "S2A",
+#         "station_unit_id": "SGS",
+#         "downlink_orbit": "62343",
+#         "acquisition_id": "415_01",
+#         "ground_station": "pytest",
+#         "antenna_id": "INU",
+#         "front_end_id": "aaa",
+#         "retransfer": False,
+#         "antenna_status": True,
+#         "front_end_status": False,
+#         "planned_data_start": "2019-02-16T02:00:00.000Z",
+#         "planned_data_stop": "2019-02-16T02:10:00.000Z",
+#         "downlink_start": "2022-01-03T02:11:00.000Z",
+#         "downlink_stop": "2022-02-16T02:15:00.000Z",
+#         "downlink_status": True,
+#         "delivery_push_status": True,
+#         "global_status": "NOK",
+#     }

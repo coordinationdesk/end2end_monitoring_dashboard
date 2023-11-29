@@ -1,0 +1,15 @@
+{{- if .Values.configMap.create -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "maas-engine.configMapName" . }}
+  labels:
+    {{- include "maas-engine.labels" . | nindent 4 }}
+  {{- with .Values.configMap.annotations }}
+  annotations:
+    {{- toYaml . | nindent 2 }}
+  {{- end }}
+data:
+  {{ default "engine.conf" .Values.configMap.fileName }}: |-
+    {{ toJson .Values.configMap.content }}
+{{- end }}

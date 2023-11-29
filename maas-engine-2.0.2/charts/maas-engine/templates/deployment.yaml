@@ -1,0 +1,129 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "maas-engine.fullname" . }}
+  labels:
+    {{- include "maas-engine.labels" . | nindent 4 }}
+    role: compute
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "maas-engine.selectorLabels" . | nindent 6 }}
+      role: compute
+  template:
+    metadata:
+      {{- if or .Values.configMap.create .Values.podAnnotations }}
+      annotations:
+      {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.configMap.create }}
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+      {{- end }}
+      {{- end }}
+      labels:
+        {{- include "maas-engine.selectorLabels" . | nindent 8 }}
+        role: compute
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "maas-engine.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{ if or .Values.configMap.create .Values.configMap.name -}}
+      volumes:
+        - name: conf-files
+          configMap:
+            name: "{{ include "maas-engine.configMapName" . }}"
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["python", "-m", "maas_engine"]
+          {{- with .Values.args }}
+          args: {{- toYaml . | nindent 10 }}
+          {{- else }}
+          args:
+            - --config
+          {{- if or .Values.configMap.create .Values.configMap.name }}
+            - /app/conf/{{ default "engine.conf" .Values.configMap.fileName }}
+          {{- else }}
+            - /app/conf/default-engine.conf
+          {{- end }}
+            - --healthcheck-port
+            - "80"
+          {{- end }}
+          env:
+          {{- if .Values.config.elasticsearch }}
+          - name: ES_URL
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.config.elasticsearch.secretName }}
+                key: url
+          - name: ES_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.config.elasticsearch.secretName }}
+                key: username
+          - name: ES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.config.elasticsearch.secretName }}
+                key: password
+          {{- end }}
+          {{- if .Values.config.amqp.secretName }}
+          - name: AMQP_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.config.amqp.secretName }}
+                key: username
+          - name: AMQP_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.config.amqp.secretName }}
+                key: password
+          - name: AMQP_URL
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.config.amqp.secretName }}
+                key: url
+          {{- end }}
+          {{- if .Values.addEnvs }}
+            {{- toYaml .Values.addEnvs | nindent 10 }}
+          {{- end }}
+          {{ if or .Values.configMap.create .Values.configMap.name -}}
+          volumeMounts:
+          - name: conf-files
+            mountPath: /app/conf/
+            readOnly: true
+          {{- end }}
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          {{- with .Values.probes }}
+            {{- toYaml . | nindent 10 }}
+          {{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
