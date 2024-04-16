@@ -1,0 +1,57 @@
+{
+    "aliases": {
+        "cds-dataflow": {}
+    },
+    "index_patterns": [
+        "cds-dataflow-*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "product_type": {
+                "type": "keyword"
+            },
+            "mission": {
+                "type": "keyword"
+            },
+            "level": {
+                "type": "keyword"
+            },
+            "origin_level": {
+                "type": "keyword"
+            },
+            "instrument": {
+                "type": "keyword"
+            },
+            "mode": {
+                "type": "keyword"
+            },
+            "type": {
+                "type": "keyword"
+            },
+            "groups": {
+                "type": "keyword"
+            },
+            "published_by": {
+                "type": "keyword"
+            },
+            "consumed_by": {
+                "type": "keyword"
+            },
+            "ingestionTime": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            }
+        },
+        "_meta": {
+            "partition_field": "ingestionTime",
+            "partition_format": "conf"
+        }
+    }
+}

@@ -1,0 +1,83 @@
+{
+    "aliases": {
+        "raw-data-cams-cloud-anomaly-correlation": {}
+    },
+    "index_patterns": [
+        "raw-data-cams-cloud-anomaly-correlation-*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "ingestionTime": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            },
+            "interface_name": {
+                "type": "keyword"
+            },
+            "reportName": {
+                "type": "keyword"
+            },
+            "reportFolder": {
+                "type": "keyword"
+            },
+            "key": {
+                "type": "keyword"
+            },
+            "title": {
+                "type": "keyword"
+            },
+            "status": {
+                "type": "keyword"
+            },
+            "created": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "updated": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "issue": {
+                "type": "keyword"
+            },
+            "summary": {
+                "type": "keyword"
+            },
+            "description": {
+                "type": "keyword"
+            },
+            "station_type": {
+                "type": "keyword"
+            },
+            "station": {
+                "type": "keyword"
+            },
+            "impacted_passes": {
+                "type": "keyword"
+            },
+            "impacted_observations": {
+                "type": "keyword"
+            },
+            "origin": {
+                "type": "keyword"
+            },
+            "satellite_unit": {
+                "type": "keyword"
+            },
+            "products": {
+                "type": "keyword"
+            }
+        },
+        "_meta": {
+            "partition_field": "ingestionTime",
+            "partition_format": "static"
+        }
+    }
+}

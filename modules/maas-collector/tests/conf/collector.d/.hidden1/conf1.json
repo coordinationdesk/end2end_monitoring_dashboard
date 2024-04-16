@@ -1,0 +1,19 @@
+{
+    "collectors": [
+        {
+            "id_field": "",
+            "routing_key": "",
+            "model": {
+                "fields": [],
+                "index": "",
+                "name": "EmptyModel4"
+            },
+            "extractor": {
+                "class": "LogExtractor",
+                "args": {
+                    "pattern": ".*"
+                }
+            }
+        }
+    ]
+}

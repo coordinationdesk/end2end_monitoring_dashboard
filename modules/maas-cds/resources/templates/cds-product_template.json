@@ -1,0 +1,230 @@
+{
+    "aliases": {
+        "cds-product": {}
+    },
+    "index_patterns": [
+        "cds-product-*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "updateTime": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            },
+            "key": {
+                "type": "keyword"
+            },
+            "name": {
+                "type": "keyword"
+            },
+            "mission": {
+                "type": "keyword"
+            },
+            "satellite_unit": {
+                "type": "keyword"
+            },
+            "sensing_start_date": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "sensing_end_date": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "sensing_duration": {
+                "type": "long",
+                "meta": {
+                    "unit": "s"
+                }
+            },
+            "expected_tiles": {
+                "type": "keyword"
+            },
+            "datatake_id": {
+                "type": "keyword"
+            },
+            "hex_datatake_id": {
+                "type": "keyword"
+            },
+            "absolute_orbit": {
+                "type": "keyword"
+            },
+            "instrument_mode": {
+                "type": "keyword"
+            },
+            "product_level": {
+                "type": "keyword"
+            },
+            "product_class": {
+                "type": "keyword",
+                "meta": {
+                    "_specific": "S1"
+                }
+            },
+            "product_granularity": {
+                "type": "keyword",
+                "meta": {
+                    "_specific": "S2"
+                }
+            },
+            "product_type": {
+                "type": "keyword"
+            },
+            "polarization": {
+                "type": "keyword",
+                "meta": {
+                    "_specific": "S1"
+                }
+            },
+            "instrument_swath": {
+                "type": "keyword",
+                "meta": {
+                    "_specific": "S1"
+                }
+            },
+            "quality_control": {
+                "type": "keyword"
+            },
+            "dataflow_status": {
+                "type": "keyword"
+            },
+            "site_center": {
+                "type": "keyword"
+            },
+            "prip_id": {
+                "type": "keyword"
+            },
+            "prip_service": {
+                "type": "keyword"
+            },
+            "prip_publication_date": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "ddip_id": {
+                "type": "keyword"
+            },
+            "ddip_name": {
+                "type": "keyword"
+            },
+            "ddip_publication_date": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "from_prip_ddip_timeliness": {
+                "type": "long"
+            },
+            "dddas_id": {
+                "type": "keyword"
+            },
+            "dddas_name": {
+                "type": "keyword"
+            },
+            "dddas_publication_date": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "from_prip_dddas_timeliness": {
+                "type": "long"
+            },
+            "ddcreodias_id": {
+                "type": "keyword"
+            },
+            "ddcreodias_name": {
+                "type": "keyword"
+            },
+            "ddcreodias_publication_date": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "from_prip_ddcreodias_timeliness": {
+                "type": "long"
+            },
+            "expected_lta_number": {
+                "type": "integer"
+            },
+            "nb_lta_served": {
+                "type": "integer"
+            },
+            "auxip_publication_date": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "auxip_id": {
+                "type": "keyword"
+            },
+            "timeliness": {
+                "type": "keyword"
+            },
+            "relative_orbit": {
+                "type": "keyword"
+            },
+            "detector_id": {
+                "type": "keyword",
+                "meta": {
+                    "_specific": "S2"
+                }
+            },
+            "tile_number": {
+                "type": "keyword",
+                "meta": {
+                    "_specific": "S2"
+                }
+            },
+            "collection_number": {
+                "type": "keyword"
+            },
+            "processor_version": {
+                "type": "keyword"
+            },
+            "product_discriminator_date": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "cams_tickets": {
+                "type": "keyword"
+            },
+            "last_attached_ticket": {
+                "type": "keyword"
+            },
+            "last_attached_ticket_url": {
+                "type": "keyword"
+            },
+            "cams_origin": {
+                "type": "keyword"
+            },
+            "cams_description": {
+                "type": "keyword"
+            },
+            "content_length": {
+                "type": "long"
+            },
+            "product_group_id": {
+                "type": "keyword"
+            },
+            "datastrip_id": {
+                "type": "keyword"
+            },
+            "quality_status": {
+                "type": "keyword"
+            },
+            "cloud_cover": {
+                "type": "float"
+            },
+            "EU_coverage_percentage": {
+                "type": "float"
+            }
+        },
+        "_meta": {
+            "partition_field": "sensing_start_date",
+            "partition_format": "%Y-%m"
+        }
+    }
+}

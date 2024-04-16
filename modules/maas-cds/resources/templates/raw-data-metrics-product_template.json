@@ -1,0 +1,59 @@
+{
+    "aliases": {
+        "raw-data-metrics-product": {}
+    },
+    "index_patterns": [
+        "raw-data-metrics-product-*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "ingestionTime": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            },
+            "reportName": {
+                "type": "keyword"
+            },
+            "reportFolder": {
+                "type": "keyword"
+            },
+            "name": {
+                "type": "keyword"
+            },
+            "timestamp": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "metric_type": {
+                "type": "keyword"
+            },
+            "counter": {
+                "type": "long"
+            },
+            "interface_name": {
+                "type": "keyword"
+            },
+            "production_service_type": {
+                "type": "keyword"
+            },
+            "production_service_name": {
+                "type": "keyword"
+            },
+            "modification_date": {
+                "type": "date",
+                "locale": "utc"
+            }
+        },
+        "_meta": {
+            "partition_field": "ingestionTime",
+            "partition_format": "%Y"
+        }
+    }
+}

@@ -1,0 +1,17 @@
+version: '3'
+services:
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+  es-node:
+    image: opensearchproject/opensearch:latest
+    container_name: odfe-node
+    environment:
+      - discovery.type=single-node
+      # disable HTTPS
+      - plugins.security.ssl.http.enabled=false
+    ports:
+      - 9200:9200

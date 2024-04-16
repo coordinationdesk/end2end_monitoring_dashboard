@@ -1,0 +1,54 @@
+{
+    "aliases": {
+        "raw-data-dd-archive": {}
+    },
+    "index_patterns": [
+        "raw-data-dd-archive-*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "ingestionTime": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            },
+            "reportName": {
+                "type": "keyword"
+            },
+            "reportFolder": {
+                "type": "keyword"
+            },
+            "product_id": {
+                "type": "keyword"
+            },
+            "product_name": {
+                "type": "keyword"
+            },
+            "content_length": {
+                "type": "long"
+            },
+            "ingestion_date": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "start_date": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "end_date": {
+                "type": "date",
+                "locale": "utc"
+            }
+        },
+        "_meta": {
+            "partition_field": "ingestion_date",
+            "partition_format": "%Y"
+        }
+    }
+}

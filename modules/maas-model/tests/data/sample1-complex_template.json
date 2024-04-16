@@ -1,0 +1,74 @@
+{
+    "aliases": {
+        "maas-model-test": {}
+    },
+    "index_patterns": [
+        "maas-model-test-*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "metadata": {
+                "type": "object",
+                "properties": {
+                    "updateTime": {
+                        "type": "date",
+                        "format": "date_time",
+                        "locale": "utc"
+                    }
+                }
+            },
+            "kw_field": {
+                "type": "keyword"
+            },
+            "int_field": {
+                "type": "integer"
+            },
+            "date_field": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            },
+            "properties": {
+                "type": "object",
+                "properties": {
+                    "datatake_id": {
+                        "type": "keyword"
+                    },
+                    "metadata": {
+                        "type": "object",
+                        "properties": {
+                            "updateTime": {
+                                "type": "date",
+                                "format": "date_time",
+                                "locale": "utc"
+                            }
+                        }
+                    },
+                    "product_class": {
+                        "type": "keyword",
+                        "meta": {
+                            "_specific": "S1"
+                        }
+                    },
+                    "footprint": {
+                        "type": "geo_shape"
+                    }
+                }
+            },
+            "footprint": {
+                "type": "geo_shape"
+            },
+            "ingestionTime": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            }
+        }
+    }
+}

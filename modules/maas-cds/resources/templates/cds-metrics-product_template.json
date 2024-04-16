@@ -1,0 +1,58 @@
+{
+    "aliases": {
+        "cds-metrics-product": {}
+    },
+    "index_patterns": [
+        "cds-metrics-product-*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "updateTime": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            },
+            "name": {
+                "type": "keyword"
+            },
+            "timestamp": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "metric_type": {
+                "type": "keyword"
+            },
+            "counter": {
+                "type": "long"
+            },
+            "mission": {
+                "type": "keyword"
+            },
+            "satellite_unit": {
+                "type": "keyword"
+            },
+            "product_type": {
+                "type": "keyword"
+            },
+            "interface_name": {
+                "type": "keyword"
+            },
+            "production_service_type": {
+                "type": "keyword"
+            },
+            "production_service_name": {
+                "type": "keyword"
+            }
+        },
+        "_meta": {
+            "partition_field": "timestamp",
+            "partition_format": "%Y"
+        }
+    }
+}

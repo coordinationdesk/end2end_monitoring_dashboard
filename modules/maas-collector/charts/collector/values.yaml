@@ -1,0 +1,128 @@
+# Default values for maas-collector.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: tpzf-ssa-docker-registry:5000/maas/maas-collector
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext:
+  {}
+  # fsGroup: 2000
+
+securityContext:
+  {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+resources:
+  {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+# Container Args
+# collectors-configmap-name:
+# S3 bucket collection
+collector: "NOT DEFINED (PLEASE OVERLOAD VALUES)"
+args: []
+
+config:
+  conf:
+    # Internal name of the configuration file in /conf folder.
+    # Files are loaded by 'configMap'
+    fileName: null
+    # Use all file in the sub folder
+    folder: /conf/collector/
+    # Name of the secret kubernetes object containing the file of credenttials used in the collector interfaces
+    secretName: ""
+    #secretFileName: credentials.json
+
+  opensearch:
+    url: "http://localhost:9200"
+    # secretName: elastic-client-secret
+  amqp:
+    url: "amqp://localhost:5672"
+    # secretName: amqp-client-secret
+
+# Additionnal env to pass to the application
+addEnvs: []
+#  - name: EXTRA_ENV
+#    value: yolo
+# - name: EXTRA_ENV_BY_SECRET
+#     valueFrom:
+#       secretKeyRef:
+#         name: secretName
+#         key: username
+
+# Expect a configMap with a file named "maas-collector-conf.json"
+configMap:
+  # The name of the config map providing files to be mount on /conf/collector/.
+  name: ""
+
+probes:
+  livenessProbe:
+    httpGet:
+      path: /
+      port: http
+    initialDelaySeconds: 30
+  readinessProbe:
+    httpGet:
+      path: /
+      port: http
+    initialDelaySeconds: 30
+
+persistence:
+  enabled: false
+  mountPath: /data
+  #existingClaim: ""
+  #annotations: {}
+  #accessMode: ""
+  #size: ""
+  #storageClass: ""
+  #subPath: ""
+#extraVolumes: {}
+#extraVolumeMounts: {}

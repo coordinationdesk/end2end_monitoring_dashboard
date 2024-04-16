@@ -1,0 +1,96 @@
+{
+    "aliases": {
+        "cds-downlink-datatake": {}
+    },
+    "index_patterns": [
+        "cds-downlink-datatake-*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "updateTime": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            },
+            "reportName": {
+                "type": "keyword"
+            },
+            "satellite_unit": {
+                "type": "keyword"
+            },
+            "mission": {
+                "type": "keyword"
+            },
+            "datatake_id": {
+                "type": "keyword"
+            },
+            "effective_downlink_start": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "effective_downlink_stop": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "acquisition_start": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "acquisition_stop": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "downlink_duration": {
+                "type": "long"
+            },
+            "latency": {
+                "type": "long"
+            },
+            "station": {
+                "type": "keyword"
+            },
+            "downlink_polarization": {
+                "type": "keyword"
+            },
+            "downlink_absolute_orbit": {
+                "type": "keyword"
+            },
+            "acquisition_absolute_orbit": {
+                "type": "keyword"
+            },
+            "acquisition_relative_orbit": {
+                "type": "keyword"
+            },
+            "channel": {
+                "type": "keyword"
+            },
+            "partial": {
+                "type": "keyword"
+            },
+            "session_id": {
+                "type": "keyword"
+            },
+            "observation_time_start": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "delivery_stop": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "from_sensing_to_delivery_stop_timeliness": {
+                "type": "long"
+            }
+        },
+        "_meta": {
+            "partition_field": "effective_downlink_start",
+            "partition_format": "static"
+        }
+    }
+}

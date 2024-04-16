@@ -1,0 +1,39 @@
+{
+    "aliases": {
+        "cds-interface-product-deletion": {}
+    },
+    "index_patterns": [
+        "cds-interface-product-deletion-*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "ingestionTime": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            },
+            "reportName": {
+                "type": "keyword"
+            },
+            "product_name": {
+                "type": "keyword"
+            },
+            "jira_issue": {
+                "type": "keyword"
+            },
+            "interface_type": {
+                "type": "keyword"
+            }
+        },
+        "_meta": {
+            "partition_field": "ingestionTime",
+            "partition_format": "static"
+        }
+    }
+}

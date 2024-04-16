@@ -1,0 +1,37 @@
+# syntax=docker/dockerfile:1
+
+ARG PYTHON_VERSION=3.11.8
+ARG DEBIAN_VERSION="bookworm"
+
+FROM python:${PYTHON_VERSION}-slim-${DEBIAN_VERSION}
+LABEL Author="TELESPAZIO FRANCE"
+
+WORKDIR /app
+
+COPY ./maas-model/dist/*.whl  ./
+COPY ./maas-engine/dist/*.whl  ./
+COPY ./maas-cds/dist/*.whl  ./
+
+# update distrib and add needed tools
+# follow best pratices: https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#sort-multi-line-arguments
+# RUN apt-get update
+# RUN apt-get install -y curl jq
+# RUN rm -rf /var/lib/apt/lists/*
+
+RUN pip install ./maas_model*.whl 
+RUN pip install ./maas_engine*.whl 
+RUN pip install ./maas_cds*.whl 
+
+RUN pip install *.whl
+RUN rm -f *.whl
+
+#Copy template for opensearch database, as initialisation scripts are provided
+COPY ./maas-cds/resources/ resources/
+# Copy default configuration for mass_cds
+COPY ./maas-cds/conf/cds-engine-conf.json conf/default-engine.conf
+
+VOLUME ["/conf"]
+
+ENTRYPOINT [ "python", "-m"]
+
+CMD ["maas_engine", "-v", "--config", "/conf/default-engine.conf"]

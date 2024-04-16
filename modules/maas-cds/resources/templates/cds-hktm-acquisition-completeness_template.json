@@ -1,0 +1,88 @@
+{
+    "aliases": {
+        "cds-hktm-acquisition-completeness": {}
+    },
+    "index_patterns": [
+        "cds-hktm-acquisition-completeness-*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "ingestionTime": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            },
+            "reportName": {
+                "type": "keyword"
+            },
+            "reportFolder": {
+                "type": "keyword"
+            },
+            "satellite_unit": {
+                "type": "keyword"
+            },
+            "mission": {
+                "type": "keyword"
+            },
+            "absolute_orbit": {
+                "type": "keyword"
+            },
+            "channel": {
+                "type": "long"
+            },
+            "session_id": {
+                "type": "keyword"
+            },
+            "session_id_full": {
+                "type": "keyword"
+            },
+            "ground_station": {
+                "type": "keyword"
+            },
+            "cadip_completeness": {
+                "type": "long"
+            },
+            "edrs_completeness": {
+                "type": "long"
+            },
+            "last_attached_ticket": {
+                "type": "keyword"
+            },
+            "last_attached_ticket_url": {
+                "type": "keyword"
+            },
+            "cams_tickets": {
+                "type": "keyword"
+            },
+            "cams_origin": {
+                "type": "keyword"
+            },
+            "cams_description": {
+                "type": "keyword"
+            },
+            "execution_time": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "interface_name": {
+                "type": "keyword"
+            },
+            "production_service_type": {
+                "type": "keyword"
+            },
+            "production_service_name": {
+                "type": "keyword"
+            }
+        },
+        "_meta": {
+            "partition_field": "ingestionTime",
+            "partition_format": "static"
+        }
+    }
+}

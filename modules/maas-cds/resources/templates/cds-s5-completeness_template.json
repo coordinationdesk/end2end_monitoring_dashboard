@@ -1,0 +1,107 @@
+{
+    "aliases": {
+        "cds-s5-completeness": {}
+    },
+    "index_patterns": [
+        "cds-s5-completeness-*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1,
+            "mapping": {
+                "total_fields": {
+                    "limit": "2000"
+                }
+            }
+        }
+    },
+    "mappings": {
+        "properties": {
+            "updateTime": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            },
+            "key": {
+                "type": "keyword"
+            },
+            "absolute_orbit": {
+                "type": "keyword"
+            },
+            "mission": {
+                "type": "keyword"
+            },
+            "satellite_unit": {
+                "type": "keyword"
+            },
+            "datatake_id": {
+                "type": "keyword"
+            },
+            "observation_time_start": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "observation_time_stop": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "observation_duration": {
+                "type": "long"
+            },
+            "timeliness": {
+                "type": "keyword"
+            },
+            "product_type": {
+                "type": "keyword"
+            },
+            "product_level": {
+                "type": "keyword"
+            },
+            "value": {
+                "type": "long"
+            },
+            "expected": {
+                "type": "long"
+            },
+            "value_adjusted": {
+                "type": "long"
+            },
+            "percentage": {
+                "type": "long",
+                "meta": {
+                    "metric_type": "gauge",
+                    "unit": "percent"
+                }
+            },
+            "status": {
+                "type": "keyword"
+            },
+            "slice_value": {
+                "type": "long"
+            },
+            "slice_expected": {
+                "type": "long"
+            },
+            "cams_tickets": {
+                "type": "keyword"
+            },
+            "last_attached_ticket": {
+                "type": "keyword"
+            },
+            "last_attached_ticket_url": {
+                "type": "keyword"
+            },
+            "cams_origin": {
+                "type": "keyword"
+            },
+            "cams_description": {
+                "type": "keyword"
+            }
+        },
+        "_meta": {
+            "partition_field": "observation_time_start",
+            "partition_format": "static"
+        }
+    }
+}

@@ -1,0 +1,39 @@
+{
+    "aliases": {
+        "cds-grafana-usage": {}
+    },
+    "index_patterns": [
+        "cds-grafana-usage-*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "access_date": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            },
+            "user": {
+                "type": "keyword"
+            },
+            "interface_name": {
+                "type": "keyword"
+            },
+            "dashboard_title": {
+                "type": "keyword"
+            },
+            "dashboard_uid": {
+                "type": "keyword"
+            }
+        },
+        "_meta": {
+            "partition_field": "access_date",
+            "partition_format": "%Y-%m"
+        }
+    }
+}

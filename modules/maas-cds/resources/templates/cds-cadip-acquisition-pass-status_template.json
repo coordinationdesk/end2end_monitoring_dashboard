@@ -1,0 +1,221 @@
+{
+    "aliases": {
+        "cds-cadip-acquisition-pass-status": {}
+    },
+    "index_patterns": [
+        "cds-cadip-acquisition-pass-status*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "updateTime": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            },
+            "reportName": {
+                "type": "keyword"
+            },
+            "reportFolder": {
+                "type": "keyword"
+            },
+            "session_id": {
+                "type": "keyword"
+            },
+            "num_channels": {
+                "type": "long"
+            },
+            "satellite_id": {
+                "type": "keyword"
+            },
+            "mission": {
+                "type": "keyword"
+            },
+            "ground_station": {
+                "type": "keyword"
+            },
+            "station_unit_id": {
+                "type": "keyword"
+            },
+            "acquisition_id": {
+                "type": "keyword"
+            },
+            "publication_date": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "downlink_orbit": {
+                "type": "keyword"
+            },
+            "antenna_id": {
+                "type": "keyword"
+            },
+            "antenna_status": {
+                "type": "boolean"
+            },
+            "front_end_id": {
+                "type": "keyword"
+            },
+            "retransfer": {
+                "type": "boolean"
+            },
+            "front_end_status": {
+                "type": "boolean"
+            },
+            "planned_data_start": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "planned_data_stop": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "delivery_bitrate": {
+                "type": "float"
+            },
+            "downlink_start": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "downlink_stop": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "downlink_status": {
+                "type": "boolean"
+            },
+            "delivery_push_status": {
+                "type": "boolean"
+            },
+            "global_status": {
+                "type": "keyword"
+            },
+            "interface_name": {
+                "type": "keyword"
+            },
+            "production_service_type": {
+                "type": "keyword"
+            },
+            "production_service_name": {
+                "type": "keyword"
+            },
+            "last_attached_ticket": {
+                "type": "keyword"
+            },
+            "last_attached_ticket_url": {
+                "type": "keyword"
+            },
+            "cams_tickets": {
+                "type": "keyword"
+            },
+            "cams_origin": {
+                "type": "keyword"
+            },
+            "cams_description": {
+                "type": "keyword"
+            },
+            "ErrorTFs": {
+                "type": "long"
+            },
+            "CorrectedTFs": {
+                "type": "long"
+            },
+            "DataTFs": {
+                "type": "long"
+            },
+            "CorrectedDataTFs": {
+                "type": "long"
+            },
+            "TotalChunks": {
+                "type": "long"
+            },
+            "AcquiredTFs": {
+                "type": "long"
+            },
+            "fer_data": {
+                "type": "float"
+            },
+            "UncorrectableTFs": {
+                "type": "long"
+            },
+            "ErrorDataTFs": {
+                "type": "long"
+            },
+            "UncorrectableDataTFs": {
+                "type": "long"
+            },
+            "TotalVolume": {
+                "type": "long"
+            },
+            "delivery_start": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "delivery_stop": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "quality_infos": {
+                "type": "object",
+                "properties": {
+                    "Channel": {
+                        "type": "long"
+                    },
+                    "AcquiredTFs": {
+                        "type": "long"
+                    },
+                    "SessionId": {
+                        "type": "keyword"
+                    },
+                    "ErrorTFs": {
+                        "type": "long"
+                    },
+                    "CorrectedTFs": {
+                        "type": "long"
+                    },
+                    "UncorrectableTFs": {
+                        "type": "long"
+                    },
+                    "DataTFs": {
+                        "type": "long"
+                    },
+                    "ErrorDataTFs": {
+                        "type": "long"
+                    },
+                    "CorrectedDataTFs": {
+                        "type": "long"
+                    },
+                    "UncorrectableDataTFs": {
+                        "type": "long"
+                    },
+                    "DeliveryStart": {
+                        "type": "date",
+                        "locale": "utc"
+                    },
+                    "DeliveryStop": {
+                        "type": "date",
+                        "locale": "utc"
+                    },
+                    "TotalChunks": {
+                        "type": "long"
+                    },
+                    "TotalVolume": {
+                        "type": "long"
+                    }
+                }
+            },
+            "from_acq_delivery_timeliness": {
+                "type": "long"
+            }
+        },
+        "_meta": {
+            "partition_field": "planned_data_start",
+            "partition_format": "static"
+        }
+    }
+}

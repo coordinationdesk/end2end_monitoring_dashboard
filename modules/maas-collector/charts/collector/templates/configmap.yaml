@@ -1,0 +1,11 @@
+{{ if .Values.knownHosts -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "maas-collector.fullname" . }}-known-hosts
+  labels:
+    {{- include "maas-collector.labels" . | nindent 4 }}
+data: 
+  known_hosts: |
+{{- .Values.knownHosts | nindent 4 }}
+{{- end }}

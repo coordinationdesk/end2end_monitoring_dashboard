@@ -1,0 +1,170 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "maas-collector.fullname" . }}
+  labels:
+    {{- include "maas-collector.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "maas-collector.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      annotations:
+      {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+      labels:
+        {{- include "maas-collector.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "maas-collector.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- if or .Values.configMap.name .Values.config.conf.secretName .Values.knownHosts }}
+      volumes:
+        {{- if .Values.configMap.name }}
+        - name: conf-files
+          configMap:
+            name: "{{ include "maas-collector.configMapName" . }}"
+        {{- end }}
+        {{- if .Values.knownHosts }}
+        - name: known-hosts-config
+          configMap:
+            name: {{ include "maas-collector.fullname" . }}-known-hosts
+        {{- end }}
+        {{- if .Values.config.conf.secretName }}
+        - name: credentials
+          secret:
+            secretName: {{ .Values.config.conf.secretName }}
+        {{- end }}
+        {{- if .Values.persistence.enabled }}
+        - name: data
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.existingClaim | default (include "maas-collector.fullname" .) }}
+        {{- end -}}
+        {{- if .Values.extraVolumes }}
+{{ tpl .Values.extraVolumes . | indent 6 }}
+        {{- end }}
+      {{- end }}
+      {{- with .Values.initContainers }}
+      initContainers:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          command: ["python", "-m", "maas_collector.rawdata.cli.{{ .Values.collector | default "" }}"]
+          {{- with .Values.args }}
+          args: {{- toYaml . | nindent 10 }}
+          {{- end }}
+          env:
+          {{- if .Values.config.elasticsearch }}
+          - name: ES_URL
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.config.elasticsearch.secretName }}
+                key: url
+          - name: ES_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.config.elasticsearch.secretName }}
+                key: username
+          - name: ES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.config.elasticsearch.secretName }}
+                key: password
+          {{- end }}
+          {{- if .Values.config.amqp.secretName }}
+          - name: AMQP_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.config.amqp.secretName }}
+                key: username
+          - name: AMQP_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.config.amqp.secretName }}
+                key: password
+          - name: AMQP_URL
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.config.amqp.secretName }}
+                key: url
+          {{- end }}
+          {{- if .Values.config.conf.fileName }}
+          - name: RAWDATA_CONFIG
+            value: /conf/collector/{{ .Values.config.conf.fileName }}
+          {{- end }}
+          {{- if .Values.config.conf.folder }}
+          - name: RAWDATA_CONFIG_DIR
+            value: {{ .Values.config.conf.folder }}
+          {{- end }}
+          {{- if .Values.config.conf.secretName }}
+          - name: CREDENTIAL_FILE
+            value: /conf/secrets/{{ .Values.config.conf.secretFileName | default "credentials.json" }}
+          {{- end }}
+          {{- if .Values.addEnvs }}
+            {{- toYaml .Values.addEnvs | nindent 10 }}
+          {{- end }}
+          {{- if or .Values.configMap.name .Values.config.conf.secretName .Values.knownHosts }}
+          volumeMounts:
+            {{- if .Values.configMap.name }}
+            - name: conf-files
+              mountPath: /conf/collector/
+              readOnly: true
+            {{- end }}
+            {{- if .Values.config.conf.secretName }}
+            - name: credentials
+              mountPath: "/conf/secrets/"
+              readOnly: true
+            {{- end }}
+            {{- if .Values.knownHosts }}
+            - name: known-hosts-config
+              mountPath: /root/.ssh/
+            {{- end }}
+            {{- if and .Values.persistence.enabled }}
+            - name: data
+              mountPath: {{ .Values.persistence.mountPath | default "/data" }}
+              {{- if .Values.persistence.subPath }}
+              subPath: {{ .Values.persistence.subPath }}
+              {{- end }}
+            {{- end }}
+            {{- if .Values.extraVolumeMounts }}
+{{ tpl .Values.extraVolumeMounts . | indent 8 }}
+            {{- end }}
+          {{- end }}
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          {{- with .Values.probes }}
+            {{- toYaml . | nindent 10 }}
+          {{- end }}
+          {{- with .Values.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

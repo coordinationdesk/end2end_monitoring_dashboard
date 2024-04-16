@@ -1,0 +1,29 @@
+{
+  "Quality_report": {
+    "Processing_data": {
+      "Input_PDI": "S2B_OPER_MSI_L2A_TL_SGS__20200714T120236_A015250_T26QPE_N02.14",
+      "Processing_start": "2020-07-14T14:44:43.068Z",
+      "Processing_stop": "2020-07-14T14:44:44.735Z"
+    },
+    "Quality_cheks": {
+      "-global_status": "FAILED",
+      "FORMAT_CORRECTNESS": {
+        "-status": "PASSED"
+      },
+      "GENERAL_QUALITY": {
+        "-status": "PASSED"
+      },
+      "GEOMETRIC_QUALITY": {
+        "-status": "PASSED"
+      },
+      "RADIOMETRIC_QUALITY": {
+        "-status": "FAILED",
+        "FAILED_CHECK": "ECMWF data conformity and completeness check"
+      },
+      "SENSOR_QUALITY": {
+        "-status": "PASSED"
+      }
+    }
+  },
+  "#omit-xml-declaration": "yes"
+}

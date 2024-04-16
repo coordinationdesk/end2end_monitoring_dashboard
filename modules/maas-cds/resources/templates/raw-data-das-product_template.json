@@ -1,0 +1,72 @@
+{
+    "aliases": {
+        "raw-data-das-product": {}
+    },
+    "index_patterns": [
+        "raw-data-das-product-*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "ingestionTime": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            },
+            "reportName": {
+                "type": "keyword"
+            },
+            "product_id": {
+                "type": "keyword"
+            },
+            "product_name": {
+                "type": "keyword"
+            },
+            "content_length": {
+                "type": "long"
+            },
+            "publication_date": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "start_date": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "end_date": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "origin_date": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "modification_date": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "eviction_date": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "interface_name": {
+                "type": "keyword"
+            },
+            "production_service_type": {
+                "type": "keyword"
+            },
+            "production_service_name": {
+                "type": "keyword"
+            }
+        },
+        "_meta": {
+            "partition_field": "ingestionTime",
+            "partition_format": "%Y"
+        }
+    }
+}

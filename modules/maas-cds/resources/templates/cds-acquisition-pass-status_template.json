@@ -1,0 +1,144 @@
+{
+    "aliases": {
+        "cds-acquisition-pass-status": {}
+    },
+    "index_patterns": [
+        "cds-acquisition-pass-status-*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "updateTime": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            },
+            "reportName": {
+                "type": "keyword"
+            },
+            "satellite_id": {
+                "type": "keyword"
+            },
+            "mission": {
+                "type": "keyword"
+            },
+            "delivery_bitrate": {
+                "type": "float"
+            },
+            "doy": {
+                "type": "integer"
+            },
+            "downlink_orbit": {
+                "type": "keyword"
+            },
+            "antenna_id": {
+                "type": "keyword"
+            },
+            "antenna_status": {
+                "type": "keyword"
+            },
+            "front_end_id": {
+                "type": "keyword"
+            },
+            "front_end_status": {
+                "type": "keyword"
+            },
+            "planned_data_start": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "planned_data_stop": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "first_frame_start": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "last_frame_stop": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "delivery_push_status": {
+                "type": "keyword"
+            },
+            "start_delivery": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "stop_delivery": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "number_of_chunks": {
+                "type": "integer"
+            },
+            "overall_data_volume": {
+                "type": "long"
+            },
+            "overall_number_of_downlinked_frames": {
+                "type": "long"
+            },
+            "overall_number_of_bad_downlinked_frames": {
+                "type": "long"
+            },
+            "fer_downlink": {
+                "type": "float"
+            },
+            "overall_number_of_data_acquired_frames": {
+                "type": "long"
+            },
+            "overall_number_of_bad_data_acquired_frames": {
+                "type": "long"
+            },
+            "fer_data": {
+                "type": "float"
+            },
+            "notes": {
+                "type": "text"
+            },
+            "cams_tickets": {
+                "type": "keyword"
+            },
+            "last_attached_ticket": {
+                "type": "keyword"
+            },
+            "last_attached_ticket_url": {
+                "type": "keyword"
+            },
+            "cams_origin": {
+                "type": "keyword"
+            },
+            "cams_description": {
+                "type": "keyword"
+            },
+            "ground_station": {
+                "type": "keyword"
+            },
+            "from_acq_delivery_timeliness": {
+                "type": "long"
+            },
+            "report_type": {
+                "type": "keyword"
+            },
+            "report_name_daily": {
+                "type": "keyword"
+            },
+            "report_name_weekly": {
+                "type": "keyword"
+            },
+            "report_name_monthly": {
+                "type": "keyword"
+            }
+        },
+        "_meta": {
+            "partition_field": "planned_data_start",
+            "partition_format": "static"
+        }
+    }
+}

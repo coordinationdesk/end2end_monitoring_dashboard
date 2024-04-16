@@ -1,0 +1,44 @@
+{
+    "aliases": {
+        "raw-data-grafana-usage": {}
+    },
+    "index_patterns": [
+        "raw-data-grafana-usage-*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "ingestionTime": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            },
+            "access_date": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            },
+            "user": {
+                "type": "keyword"
+            },
+            "reportName": {
+                "type": "keyword"
+            },
+            "interface_name": {
+                "type": "keyword"
+            },
+            "dashboard": {
+                "type": "keyword"
+            }
+        },
+        "_meta": {
+            "partition_field": "ingestionTime",
+            "partition_format": "%Y-%m"
+        }
+    }
+}

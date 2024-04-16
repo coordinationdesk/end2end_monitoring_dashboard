@@ -1,0 +1,106 @@
+{
+    "aliases": {
+        "cds-cams-tickets": {}
+    },
+    "index_patterns": [
+        "cds-cams-tickets-*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "title": {
+                "type": "keyword"
+            },
+            "key": {
+                "type": "keyword"
+            },
+            "affected_systems": {
+                "type": "keyword"
+            },
+            "criticality": {
+                "type": "keyword"
+            },
+            "urgency": {
+                "type": "keyword"
+            },
+            "originating_entity": {
+                "type": "keyword"
+            },
+            "entity": {
+                "type": "keyword"
+            },
+            "assigned_element": {
+                "type": "keyword"
+            },
+            "review_board_dispositions": {
+                "type": "keyword"
+            },
+            "reporter": {
+                "type": "keyword"
+            },
+            "involved_entities": {
+                "type": "keyword"
+            },
+            "created": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "updated": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "occurence_date": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "status": {
+                "type": "keyword"
+            },
+            "environment": {
+                "type": "keyword"
+            },
+            "linked_issues": {
+                "type": "keyword"
+            },
+            "origin": {
+                "type": "keyword"
+            },
+            "description": {
+                "type": "keyword"
+            },
+            "correlation_file_id": {
+                "type": "keyword"
+            },
+            "url": {
+                "type": "keyword"
+            },
+            "datatake_ids": {
+                "type": "keyword"
+            },
+            "acquisition_pass": {
+                "type": "keyword"
+            },
+            "products": {
+                "type": "keyword"
+            },
+            "publications": {
+                "type": "keyword"
+            },
+            "addressed_entities": {
+                "type": "keyword"
+            },
+            "esa_group": {
+                "type": "keyword"
+            }
+        },
+        "_meta": {
+            "partition_field": "created",
+            "partition_format": "static"
+        }
+    }
+}

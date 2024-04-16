@@ -1,0 +1,136 @@
+{
+    "defaults": [
+        {
+            "id": [
+                "CONSOLIDATE_DD_PRODUCT",
+                "CONSOLIDATE_PRODUCT",
+                "COMPUTE_CONTAINER_PRODUCTS",
+                "COMPUTE_CONTAINER_RELATED",
+                "MISSING_CONSOLIDATION"
+            ],
+            "dd_attrs": {
+                "DHUS": {
+                    "raw_data_model": "DdProduct",
+                    "publication_date": "ddip_publication_date",
+                    "from_prip_timeliness": "from_prip_ddip_timeliness",
+                    "product_name": "ddip_name",
+                    "container_id": "ddip_id",
+                    "container_name": "ddip_container_name"
+                },
+                "DAS": {
+                    "raw_data_model": "DasProduct",
+                    "publication_date": "dddas_publication_date",
+                    "from_prip_timeliness": "from_prip_dddas_timeliness",
+                    "product_name": "dddas_name",
+                    "container_id": "dddas_id",
+                    "container_name": "dddas_container_name"
+                },
+                "CREODIAS": {
+                    "raw_data_model": "CreodiasProduct",
+                    "publication_date": "ddcreodias_publication_date",
+                    "from_prip_timeliness": "from_prip_ddcreodias_timeliness",
+                    "product_name": "ddcreodias_name",
+                    "container_id": "ddcreodias_id",
+                    "container_name": "ddcreodias_container_name"
+                }
+            }
+        },
+        {
+            "id": "CONSOLIDATE_DATATAKE",
+            "send_reports": true
+        },
+        {
+            "id": "CONSOLIDATE_PUBLICATION",
+            "send_reports": false,
+            "min_doi": null
+        },
+        {
+            "id": "CONSOLIDATE_PRODUCT",
+            "send_reports": false,
+            "min_doi": null,
+            "container_rk": "new.container-products"
+        },
+        {
+            "id": "COMPUTE_COMPLETENESS",
+            "send_reports": false,
+            "completeness_tolerance": {
+                "S1": {
+                    "local": {
+                        "WV_.*0.": -759000,
+                        "WV_.*1.": -13500000,
+                        "WV_.*2.": -12843000,
+                        "S.*0.": -1000000,
+                        "S.*1.": -2400000,
+                        "S.*2.": -2000000,
+                        "EW_.*0.": -135000,
+                        "EW_.*1.": 230000,
+                        "IW_.*0.": -512000,
+                        "IW_.*1.": 150000
+                    },
+                    "slice": {
+                        "IW_OCN__2.": -7400000,
+                        "EW_OCN__2.": -8200000,
+                        "EW_SLC__1.": -8200000
+                    }
+                }
+            },
+            "generate_missing_periods": true,
+            "missing_periods_maximal_offset": {
+                "S1": {
+                    "local": {
+                        "WV_.*0.": 6000000,
+                        "S.*0.": 6000000,
+                        "EW_.*0.": 6000000,
+                        "IW_.*0.": 6000000
+                    }
+                },
+                "S2": {
+                    "local": {
+                        "MSI_L0__DS": 10000000
+                    }
+                }
+            }
+        },
+        {
+            "id": "COMPUTE_S3_COMPLETENESS",
+            "completeness_tolerance": {
+                "S3": {
+                    "local": {
+                        "SR_1_LAN_RD": -180000000,
+                        "DO_0_(DOP|NAV)___|GN_0_GNS___|MW_0_MWR___": -180000000,
+                        "SL_(0_SLT___|1_RBT___|2_(FRP___|LST___))": -240000000,
+                        "SR_(0_SRA___|1_SRA_(__|A_|BS))": -540000000,
+                        "TM_0_(HKM(___|2__)|NAT___)|MW_1_(CAL___|MWR___)": -180000000,
+                        "OL_(0_EFR___|1_E(FR___|RR___)|2_L(FR___|RR___))": 0,
+                        "SY_(1_MISR__|2_(AOD___|SYN___|VG(K___|P___)))": 0
+                    }
+                }
+            }
+        },
+        {
+            "id": "COMPUTE_S5_COMPLETENESS",
+            "completeness_tolerance": {
+                "S5": {
+                    "local": {
+                        "OPER_L0__(ENG_A_|ODB_[1-8]_|SAT_A)": -180000000,
+                        "NRTI_L1B_(ENG_DB|RA_BD[1-8])": -180000000,
+                        "NRTI_L2__(AER_AI|AER_LH|CLOUD_|CO____|FRESCO|HCHO__|NO2___|O3__PR|O3____|SO2___)": -180000000,
+                        "OFFL_L1B_(ENG_DB|RA_BD[1-8])": -180000000,
+                        "OFFL_L2__(AER_AI|AER_LH|CH4___|CLOUD_|CO____|FRESCO|HCHO__|NO2___|NP_BD(3|6|7)|O3__PR|O3____|SO2___)": -180000000
+                    }
+                }
+            }
+        },
+        {
+            "id": "CONSOLIDATE_DELETION",
+            "send_reports": false,
+            "interface_dict": {
+                "werum": "Werum",
+                "exprivia": "Exprivia",
+                "acri": "Acri",
+                "cloudferro": "CloudFerro",
+                "dlr": "S5P_DLR"
+            }
+        }
+    ]
+}

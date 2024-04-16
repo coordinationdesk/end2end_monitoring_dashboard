@@ -1,0 +1,14 @@
+{
+    "models": [
+        {
+            "fields": [],
+            "index": "",
+            "name": "PostPonedModel1"
+        },
+        {
+            "fields": [],
+            "index": "",
+            "name": "PostPonedModel2"
+        }
+    ]
+}

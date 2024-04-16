@@ -1,0 +1,47 @@
+# syntax=docker/dockerfile:1
+
+ARG PYTHON_VERSION=3.11.8
+ARG DEBIAN_VERSION="bookworm"
+
+FROM python:${PYTHON_VERSION}-slim-${DEBIAN_VERSION}
+LABEL Author="TELESPAZIO FRANCE"
+
+WORKDIR /app
+
+COPY ./maas-model/dist/*.whl  ./
+COPY ./maas-collector/dist/*.whl  ./
+
+# update distrib and add needed tools
+# follow best pratices: https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#sort-multi-line-arguments
+RUN apt-get update
+RUN apt-get install -y curl jq
+RUN rm -rf /var/lib/apt/lists/*
+
+RUN pip install ./maas_model*.whl
+RUN pip install ./maas_collector*.whl
+RUN rm -f *.whl
+
+VOLUME ["/conf", "/data"]
+
+ENTRYPOINT [ "python", "-m"]
+
+CMD [ "maas-collector", "maas_collector.rawdata.cli.filesystem", "-v", "/data" ]
+
+## launch as a filesytem consumer
+# docker run -it --rm \
+#   -v $PWD/tests/data/:/data \
+#   -v $PWD/tests/conf:/conf \
+#   -e "ES_URL=http://<user>:<passwd>@<elastic_url>:<port>" \
+#   -e "AMQP_URL=http://<user>:<passwd>@<rabbitmq_url>:<port>" \
+#   maas-collector
+
+## launch as a S3 bucket listener
+# docker run -it --rm \
+#   -v $PWD/tests/conf:/conf \
+#   -e "ES_URL=http://<user>:<passwd>@<elastic_url>:<port>" \
+#   -e "AMQP_URL=http://<user>:<passwd>@<rabbitmq_url>:<port>" \
+#   -e "S3_ENDPOINT=http://<S3_end_point_url" \
+#   -e "S3_KEY_ID=<s3_key_id>" \
+#   -e "S3_ACCESS_KEY=<S3_KEY>" \
+#   -e "S3_BUCKET=<bucket_name>" \
+#   maas-collector maas_collector.rawdata.cli.s3

@@ -1,0 +1,63 @@
+{
+    "aliases": {
+        "raw-data-databudget": {}
+    },
+    "index_patterns": [
+        "raw-data-databudget-*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "ingestionTime": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            },
+            "reportName": {
+                "type": "keyword"
+            },
+            "reportFolder": {
+                "type": "keyword"
+            },
+            "type": {
+                "type": "keyword"
+            },
+            "num_day": {
+                "type": "keyword"
+            },
+            "level": {
+                "type": "keyword"
+            },
+            "timeliness": {
+                "type": "keyword"
+            },
+            "produced": {
+                "type": "keyword"
+            },
+            "archived": {
+                "type": "keyword"
+            },
+            "disseminated": {
+                "type": "keyword"
+            },
+            "volume_day": {
+                "type": "keyword"
+            },
+            "mission": {
+                "type": "keyword"
+            },
+            "version": {
+                "type": "keyword"
+            }
+        },
+        "_meta": {
+            "partition_field": "ingestionTime",
+            "partition_format": "conf"
+        }
+    }
+}

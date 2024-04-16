@@ -1,0 +1,67 @@
+{
+    "aliases": {
+        "cds-ddp-data-available": {}
+    },
+    "index_patterns": [
+        "cds-ddp-data-available-*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "updateTime": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            },
+            "session_id": {
+                "type": "keyword"
+            },
+            "time_start": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "time_stop": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "time_created": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "time_finished": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "transfer_time": {
+                "type": "long"
+            },
+            "mission": {
+                "type": "keyword"
+            },
+            "satellite_unit": {
+                "type": "keyword"
+            },
+            "data_size": {
+                "type": "long"
+            },
+            "interface_name": {
+                "type": "keyword"
+            },
+            "production_service_type": {
+                "type": "keyword"
+            },
+            "production_service_name": {
+                "type": "keyword"
+            }
+        },
+        "_meta": {
+            "partition_field": "time_created",
+            "partition_format": "static"
+        }
+    }
+}

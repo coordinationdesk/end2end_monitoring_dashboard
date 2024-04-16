@@ -1,0 +1,57 @@
+{
+    "aliases": {
+        "raw-data-cams-anomaly-correlation": {}
+    },
+    "index_patterns": [
+        "raw-data-cams-anomaly-correlation-*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "ingestionTime": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            },
+            "interface_name": {
+                "type": "keyword"
+            },
+            "reportName": {
+                "type": "keyword"
+            },
+            "reportFolder": {
+                "type": "keyword"
+            },
+            "key": {
+                "type": "keyword"
+            },
+            "cams_issue": {
+                "type": "keyword"
+            },
+            "origin": {
+                "type": "keyword"
+            },
+            "description": {
+                "type": "keyword"
+            },
+            "datatake_ids": {
+                "type": "keyword"
+            },
+            "acquisition_pass": {
+                "type": "keyword"
+            },
+            "products": {
+                "type": "keyword"
+            }
+        },
+        "_meta": {
+            "partition_field": "ingestionTime",
+            "partition_format": "static"
+        }
+    }
+}

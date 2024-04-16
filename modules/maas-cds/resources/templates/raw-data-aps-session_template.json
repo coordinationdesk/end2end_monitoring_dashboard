@@ -1,0 +1,153 @@
+{
+    "aliases": {
+        "raw-data-aps-session": {}
+    },
+    "index_patterns": [
+        "raw-data-aps-session*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "ingestionTime": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            },
+            "reportName": {
+                "type": "keyword"
+            },
+            "reportFolder": {
+                "type": "keyword"
+            },
+            "session_id": {
+                "type": "keyword"
+            },
+            "num_channels": {
+                "type": "long"
+            },
+            "satellite_id": {
+                "type": "keyword"
+            },
+            "ground_station": {
+                "type": "keyword"
+            },
+            "station_unit_id": {
+                "type": "keyword"
+            },
+            "acquisition_id": {
+                "type": "keyword"
+            },
+            "publication_date": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "downlink_orbit": {
+                "type": "keyword"
+            },
+            "antenna_id": {
+                "type": "keyword"
+            },
+            "antenna_status": {
+                "type": "boolean"
+            },
+            "front_end_id": {
+                "type": "keyword"
+            },
+            "retransfer": {
+                "type": "boolean"
+            },
+            "front_end_status": {
+                "type": "boolean"
+            },
+            "planned_data_start": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "planned_data_stop": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "downlink_start": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "downlink_stop": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "downlink_status": {
+                "type": "boolean"
+            },
+            "delivery_push_status": {
+                "type": "boolean"
+            },
+            "interface_name": {
+                "type": "keyword"
+            },
+            "production_service_type": {
+                "type": "keyword"
+            },
+            "production_service_name": {
+                "type": "keyword"
+            },
+            "quality_infos": {
+                "type": "object",
+                "properties": {
+                    "Channel": {
+                        "type": "long"
+                    },
+                    "AcquiredTFs": {
+                        "type": "long"
+                    },
+                    "SessionId": {
+                        "type": "keyword"
+                    },
+                    "ErrorTFs": {
+                        "type": "long"
+                    },
+                    "CorrectedTFs": {
+                        "type": "long"
+                    },
+                    "UncorrectableTFs": {
+                        "type": "long"
+                    },
+                    "DataTFs": {
+                        "type": "long"
+                    },
+                    "ErrorDataTFs": {
+                        "type": "long"
+                    },
+                    "CorrectedDataTFs": {
+                        "type": "long"
+                    },
+                    "UncorrectableDataTFs": {
+                        "type": "long"
+                    },
+                    "DeliveryStart": {
+                        "type": "date",
+                        "locale": "utc"
+                    },
+                    "DeliveryStop": {
+                        "type": "date",
+                        "locale": "utc"
+                    },
+                    "TotalChunks": {
+                        "type": "long"
+                    },
+                    "TotalVolume": {
+                        "type": "long"
+                    }
+                }
+            }
+        },
+        "_meta": {
+            "partition_field": "ingestionTime",
+            "partition_format": "static"
+        }
+    }
+}

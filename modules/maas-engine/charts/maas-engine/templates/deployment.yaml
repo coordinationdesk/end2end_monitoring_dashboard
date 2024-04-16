@@ -1,0 +1,138 @@
+{{/*
+For multideployment the template iterates on <deployments>
+  deployment.overWriteValues are merged in main values
+  deployment.name is added to merged values
+  as is merged values could be used for deployment generation
+*/}}
+{{ if .Values.deployments }}
+{{ $main_dict := . | deepCopy }}
+{{- range $deployment  := $main_dict.Values.deployments}}
+{{ $overWritedValues := $deployment.overWriteValues | default dict }}
+{{ $mergedValues := $main_dict | deepCopy }}
+{{ $_ := set $mergedValues "Values" (deepCopy $main_dict.Values | merge $overWritedValues) }}
+{{ $_ := set $mergedValues "deploymentName" $deployment.name }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "maas-engine.fullname" $mergedValues}}
+  labels:
+    {{- include "maas-engine.labels" $mergedValues | nindent 4 }}
+    role: compute-{{$deployment.name}}
+spec:
+  replicas: {{ $mergedValues.Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "maas-engine.selectorLabels" $mergedValues | nindent 6 }}
+      role: compute
+  template:
+    metadata:
+      {{- if $mergedValues.Values.podAnnotations }}
+      annotations:
+      {{- with $mergedValues.Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- end }}
+      labels:
+        {{- include "maas-engine.selectorLabels" $mergedValues | nindent 8 }}
+        role: compute
+    spec:
+      {{- with $mergedValues.Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml $mergedValues.Values.podSecurityContext | nindent 8 }}
+      volumes:
+        - name: conf-files
+          configMap:
+            # Convention is engine configuration config map named using <deployment name>-cfg
+            name: "{{- include "maas-engine.configMapName" $mergedValues}}"
+      containers:
+        - name: {{ $mergedValues.Chart.Name }}
+          securityContext:
+            {{- toYaml $mergedValues.Values.securityContext | nindent 12 }}
+          image: "{{ $mergedValues.Values.image.repository }}:{{ $mergedValues.Values.image.tag | default $mergedValues.Chart.AppVersion }}"
+          imagePullPolicy: {{ $mergedValues.Values.image.pullPolicy }}
+          command: ["python", "-m", "maas_engine"]
+          {{- with $mergedValues.Values.args }}
+          args: {{- toYaml . | nindent 10 }} {{/* if args are defined in values they surcharge all args values */}}
+          {{- else }}
+          args:
+          {{- if and $mergedValues.Values.configMap (and $mergedValues.Values.configMap.fileName $mergedValues.Values.configMap.content)}} {{/* if config map fileName and content defined use it for --config */}}
+            - --config
+            - /app/conf/{{ default "" $mergedValues.Values.configMap.fileName }} 
+          {{- else }} {{/* else if config map fileName and content not defined --config-directory is used now engine manage full directory and parent deployment should add and create configmap withe defolts or extended config files */}}
+            - --config-directory
+            - /app/conf/ 
+          {{- end }}
+            - {{ $mergedValues.Values.config.logLevel | default "-v" | quote }}           
+            - --healthcheck-port
+            - "80"
+            - -f
+          {{- end }}
+          env:
+          {{- if $mergedValues.Values.config.elasticsearch }}
+          - name: ES_URL
+            valueFrom:
+              secretKeyRef:
+                name: {{ $mergedValues.Values.config.elasticsearch.secretName }}
+                key: url
+          - name: ES_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: {{ $mergedValues.Values.config.elasticsearch.secretName }}
+                key: username
+          - name: ES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ $mergedValues.Values.config.elasticsearch.secretName }}
+                key: password
+          {{- end }}
+          {{- if $mergedValues.Values.config.amqp.secretName }}
+          - name: AMQP_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: {{ $mergedValues.Values.config.amqp.secretName }}
+                key: username
+          - name: AMQP_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ $mergedValues.Values.config.amqp.secretName }}
+                key: password
+          - name: AMQP_URL
+            valueFrom:
+              secretKeyRef:
+                name: {{ $mergedValues.Values.config.amqp.secretName }}
+                key: url
+          {{- end }}
+          {{- if $mergedValues.Values.addEnvs }}
+            {{- toYaml $mergedValues.Values.addEnvs | nindent 10 }}
+          {{- end }}
+          volumeMounts:
+            - name: conf-files
+              mountPath: /app/conf/
+              readOnly: true
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          {{- with $mergedValues.Values.probes }}
+            {{- toYaml . | nindent 10 }}
+          {{- end }}
+          resources:
+            {{- toYaml $mergedValues.Values.resources | nindent 12 }}
+      {{- with $mergedValues.Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with $mergedValues.Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with $mergedValues.Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+{{ end }}
+{{ end }}

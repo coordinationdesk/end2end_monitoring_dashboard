@@ -1,0 +1,78 @@
+{
+    "aliases": {
+        "cds-databudget": {}
+    },
+    "index_patterns": [
+        "cds-databudget-*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "ingestionTime": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            },
+            "reportName": {
+                "type": "keyword"
+            },
+            "databudget_type": {
+                "type": "keyword"
+            },
+            "database_type": {
+                "type": "keyword"
+            },
+            "database_timeliness": {
+                "type": "keyword"
+            },
+            "num_day": {
+                "type": "keyword"
+            },
+            "data_category": {
+                "type": "keyword"
+            },
+            "level": {
+                "type": "keyword"
+            },
+            "timeliness": {
+                "type": "keyword"
+            },
+            "produced": {
+                "type": "keyword"
+            },
+            "archived": {
+                "type": "keyword"
+            },
+            "disseminated": {
+                "type": "keyword"
+            },
+            "volume_day": {
+                "type": "float"
+            },
+            "mission": {
+                "type": "keyword"
+            },
+            "version": {
+                "type": "keyword"
+            },
+            "threshold_subtype": {
+                "type": "keyword"
+            },
+            "threshold_volume": {
+                "type": "float"
+            },
+            "threshold_count": {
+                "type": "float"
+            }
+        },
+        "_meta": {
+            "partition_field": "ingestionTime",
+            "partition_format": "conf"
+        }
+    }
+}

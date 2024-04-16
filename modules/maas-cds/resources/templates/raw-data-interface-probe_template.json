@@ -1,0 +1,60 @@
+{
+    "aliases": {
+        "raw-data-interface-probe": {}
+    },
+    "index_patterns": [
+        "raw-data-interface-probe-*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "ingestionTime": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            },
+            "reportName": {
+                "type": "keyword"
+            },
+            "reportFolder": {
+                "type": "keyword"
+            },
+            "probe_time_start": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "probe_time_stop": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "probe_duration": {
+                "type": "float"
+            },
+            "status": {
+                "type": "keyword"
+            },
+            "interface_name": {
+                "type": "keyword"
+            },
+            "details": {
+                "type": "keyword"
+            },
+            "status_code": {
+                "type": "integer"
+            },
+            "most_recent_modification_date": {
+                "type": "date",
+                "locale": "utc"
+            }
+        },
+        "_meta": {
+            "partition_field": "ingestionTime",
+            "partition_format": "monitoring"
+        }
+    }
+}

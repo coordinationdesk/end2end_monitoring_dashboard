@@ -1,0 +1,22 @@
+#python ignores
+venv
+.eggs
+.tox
+# dist # Needed as CI get build from local
+docs
+
+#ide ignore
+.vscode
+
+#git ignores
+.gitignore
+.gitlab-cy.yml
+*.md
+
+#Docker and build ignores
+charts/
+Dockerfile
+.dockerignore
+
+#other ignores
+*.exe

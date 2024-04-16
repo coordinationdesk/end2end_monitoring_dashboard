@@ -1,0 +1,127 @@
+{
+    "aliases": {
+        "cds-edrs-acquisition-pass-status": {}
+    },
+    "index_patterns": [
+        "cds-edrs-acquisition-pass-status-*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "updateTime": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            },
+            "reportName": {
+                "type": "keyword"
+            },
+            "link_session_id": {
+                "type": "keyword"
+            },
+            "geo_satellite_id": {
+                "type": "keyword"
+            },
+            "satellite_id": {
+                "type": "keyword"
+            },
+            "mission": {
+                "type": "keyword"
+            },
+            "doy": {
+                "type": "integer"
+            },
+            "planned_link_session_start": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "planned_link_session_stop": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "moc_accept_status": {
+                "type": "keyword"
+            },
+            "uplink_status": {
+                "type": "keyword"
+            },
+            "spacecraft_execution": {
+                "type": "keyword"
+            },
+            "edte_acquisition_status": {
+                "type": "keyword"
+            },
+            "dcsu_archive_status": {
+                "type": "keyword"
+            },
+            "sfdap_dissem_status": {
+                "type": "keyword"
+            },
+            "total_status": {
+                "type": "keyword"
+            },
+            "ground_station": {
+                "type": "keyword"
+            },
+            "dissemination_start": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "dissemination_stop": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "cadus": {
+                "type": "long"
+            },
+            "fer": {
+                "type": "long"
+            },
+            "archived_data_size": {
+                "type": "float"
+            },
+            "disseminated_data": {
+                "type": "float"
+            },
+            "notes": {
+                "type": "keyword"
+            },
+            "cams_tickets": {
+                "type": "keyword"
+            },
+            "last_attached_ticket": {
+                "type": "keyword"
+            },
+            "last_attached_ticket_url": {
+                "type": "keyword"
+            },
+            "cams_origin": {
+                "type": "keyword"
+            },
+            "cams_description": {
+                "type": "keyword"
+            },
+            "report_type": {
+                "type": "keyword"
+            },
+            "report_name_daily": {
+                "type": "keyword"
+            },
+            "report_name_weekly": {
+                "type": "keyword"
+            },
+            "report_name_monthly": {
+                "type": "keyword"
+            }
+        },
+        "_meta": {
+            "partition_field": "planned_link_session_start",
+            "partition_format": "product"
+        }
+    }
+}

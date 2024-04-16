@@ -1,0 +1,77 @@
+{
+    "aliases": {
+        "cds-sat-unavailability": {}
+    },
+    "index_patterns": [
+        "cds-sat-unavailability-*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "updateTime": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            },
+            "key": {
+                "type": "keyword"
+            },
+            "mission": {
+                "type": "keyword"
+            },
+            "satellite_unit": {
+                "type": "keyword"
+            },
+            "file_name": {
+                "type": "keyword"
+            },
+            "unavailability_reference": {
+                "type": "keyword"
+            },
+            "unavailability_type": {
+                "type": "keyword"
+            },
+            "subsystem": {
+                "type": "keyword"
+            },
+            "start_time": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "start_orbit": {
+                "type": "keyword"
+            },
+            "start_anx_offset": {
+                "type": "integer"
+            },
+            "end_time": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "end_orbit": {
+                "type": "keyword"
+            },
+            "end_anx_offset": {
+                "type": "integer"
+            },
+            "type": {
+                "type": "keyword"
+            },
+            "comment": {
+                "type": "keyword"
+            },
+            "unavailability_duration": {
+                "type": "long"
+            }
+        },
+        "_meta": {
+            "partition_field": "start_time",
+            "partition_format": "static"
+        }
+    }
+}

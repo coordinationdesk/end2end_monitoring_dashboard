@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<GS2_PROCESSING_BASELINE_PARAMETERS xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="L2A_PB_GIPP.xsd">
+	<DATA>
+		<Idp_Sc_List workflow="l2a">
+			<Idp_Sc_Name>Sen2Cor</Idp_Sc_Name>
+			<Idp_Sc_Version>02.08.00</Idp_Sc_Version>
+		</Idp_Sc_List>
+		<Idp_Sc_List workflow="l2a">
+			<Idp_Sc_Name>OLQC</Idp_Sc_Name>
+			<Idp_Sc_Version>01.06.04</Idp_Sc_Version>
+		</Idp_Sc_List>
+		<Idp_Sc_List workflow="l2a">
+			<Idp_Sc_Name>CompressTileImage</Idp_Sc_Name>
+			<Idp_Sc_Version>01.00.03</Idp_Sc_Version>
+		</Idp_Sc_List>
+		<Baseline_Version>02.14</Baseline_Version>
+	</DATA>
+</GS2_PROCESSING_BASELINE_PARAMETERS>

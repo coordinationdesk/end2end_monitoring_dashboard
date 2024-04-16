@@ -1,0 +1,86 @@
+{
+    "aliases": {
+        "raw-data-aps-quality-info": {}
+    },
+    "index_patterns": [
+        "raw-data-aps-quality-info*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "ingestionTime": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            },
+            "reportName": {
+                "type": "keyword"
+            },
+            "reportFolder": {
+                "type": "keyword"
+            },
+            "session_id": {
+                "type": "keyword"
+            },
+            "channel": {
+                "type": "long"
+            },
+            "acquired_tfs": {
+                "type": "long"
+            },
+            "error_tfs": {
+                "type": "long"
+            },
+            "corrected_tfs": {
+                "type": "long"
+            },
+            "uncorrectable_tfs": {
+                "type": "long"
+            },
+            "data_tfs": {
+                "type": "long"
+            },
+            "error_data_tfs": {
+                "type": "long"
+            },
+            "corrected_data_tfs": {
+                "type": "long"
+            },
+            "uncorrectable_data_tfs": {
+                "type": "long"
+            },
+            "delivery_start": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "delivery_stop": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "total_chunks": {
+                "type": "long"
+            },
+            "total_volume": {
+                "type": "long"
+            },
+            "interface_name": {
+                "type": "keyword"
+            },
+            "production_service_type": {
+                "type": "keyword"
+            },
+            "production_service_name": {
+                "type": "keyword"
+            }
+        },
+        "_meta": {
+            "partition_field": "ingestionTime",
+            "partition_format": "static"
+        }
+    }
+}

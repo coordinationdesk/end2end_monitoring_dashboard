@@ -1,0 +1,87 @@
+{
+    "aliases": {
+        "raw-data-cams-tickets": {}
+    },
+    "index_patterns": [
+        "raw-data-cams-tickets-*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "ingestionTime": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            },
+            "reportFolder": {
+                "type": "keyword"
+            },
+            "title": {
+                "type": "keyword"
+            },
+            "key": {
+                "type": "keyword"
+            },
+            "affected_systems": {
+                "type": "keyword"
+            },
+            "criticality": {
+                "type": "keyword"
+            },
+            "urgency": {
+                "type": "keyword"
+            },
+            "originating_entity": {
+                "type": "keyword"
+            },
+            "entity": {
+                "type": "keyword"
+            },
+            "assigned_element": {
+                "type": "keyword"
+            },
+            "review_board_dispositions": {
+                "type": "keyword"
+            },
+            "reporter": {
+                "type": "keyword"
+            },
+            "involved_entities": {
+                "type": "keyword"
+            },
+            "created": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "updated": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "occurence_date": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "status": {
+                "type": "keyword"
+            },
+            "environment": {
+                "type": "keyword"
+            },
+            "linked_issues": {
+                "type": "keyword"
+            },
+            "interface_name": {
+                "type": "keyword"
+            }
+        },
+        "_meta": {
+            "partition_field": "created",
+            "partition_format": "static"
+        }
+    }
+}

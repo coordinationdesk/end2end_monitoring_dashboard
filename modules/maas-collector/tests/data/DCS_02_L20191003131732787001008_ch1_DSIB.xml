@@ -1,0 +1,19 @@
+<DCSU_Session_Information_Block>
+    <session_id>L20191003131732787001008</session_id>
+    <time_start>2019-12-08T05:08:15Z</time_start>
+    <time_stop>2019-12-08T05:12:55Z</time_stop>
+    <time_created>2019-12-08T05:08:15Z</time_created>
+    <time_finished>2019-12-08T05:12:27Z</time_finished>
+    <data_size>8819975080</data_size>
+    <dsdb_list>
+        <dsdb_name>DCS_02_L20191003131732787001008_ch1_DSDB_00001.raw</dsdb_name>
+        <dsdb_name>DCS_02_L20191003131732787001008_ch1_DSDB_00002.raw</dsdb_name>
+        <dsdb_name>DCS_02_L20191003131732787001008_ch1_DSDB_00003.raw</dsdb_name>
+        <dsdb_name>DCS_02_L20191003131732787001008_ch1_DSDB_00004.raw</dsdb_name>
+        <dsdb_name>DCS_02_L20191003131732787001008_ch1_DSDB_00005.raw</dsdb_name>
+        <dsdb_name>DCS_02_L20191003131732787001008_ch1_DSDB_00006.raw</dsdb_name>
+        <dsdb_name>DCS_02_L20191003131732787001008_ch1_DSDB_00007.raw</dsdb_name>
+        <dsdb_name>DCS_02_L20191003131732787001008_ch1_DSDB_00008.raw</dsdb_name>
+        <dsdb_name>DCS_02_L20191003131732787001008_ch1_DSDB_00009.raw</dsdb_name>
+    </dsdb_list>
+</DCSU_Session_Information_Block>

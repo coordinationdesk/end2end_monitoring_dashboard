@@ -1,0 +1,108 @@
+{
+    "aliases": {
+        "cds-hktm-production-completeness": {}
+    },
+    "index_patterns": [
+        "cds-hktm-production-completeness-*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "ingestionTime": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            },
+            "reportName": {
+                "type": "keyword"
+            },
+            "reportFolder": {
+                "type": "keyword"
+            },
+            "satellite_unit": {
+                "type": "keyword"
+            },
+            "mission": {
+                "type": "keyword"
+            },
+            "datatake_id": {
+                "type": "keyword"
+            },
+            "x_on": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "x_off": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "effective_downlink_start": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "effective_downlink_stop": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "downlink_start": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "downlink_stop": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "downlink_duration": {
+                "type": "long"
+            },
+            "latency": {
+                "type": "long"
+            },
+            "station": {
+                "type": "keyword"
+            },
+            "downlink_absolute_orbit": {
+                "type": "keyword"
+            },
+            "absolute_orbit": {
+                "type": "keyword"
+            },
+            "partial": {
+                "type": "keyword"
+            },
+            "interface_name": {
+                "type": "keyword"
+            },
+            "acquisition_start": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "acquisition_stop": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "acquisition_duration": {
+                "type": "long"
+            },
+            "number_of_scenes": {
+                "type": "long"
+            },
+            "completeness": {
+                "type": "long"
+            },
+            "downlink_execution_time": {
+                "type": "date",
+                "locale": "utc"
+            }
+        },
+        "_meta": {
+            "partition_field": "ingestionTime",
+            "partition_format": "static"
+        }
+    }
+}
