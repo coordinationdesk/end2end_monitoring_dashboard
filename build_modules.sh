@@ -22,6 +22,8 @@ else
     source "${VENV_PATH}/bin/activate"
 fi
 
-build_module_docker_image maas-collector ${COLLECTOR_TAG_VERSION}
-build_module_docker_image maas-cds ${CDS_TAG_VERSION}
+build_module maas-model
+build_module maas-engine
+build_module maas-collector
+build_module maas-cds
 

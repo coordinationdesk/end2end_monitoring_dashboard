@@ -8,8 +8,8 @@ LABEL Author="TELESPAZIO FRANCE"
 
 WORKDIR /app
 
-COPY ./maas-model/dist/*.whl  ./
-COPY ./maas-collector/dist/*.whl  ./
+COPY ./dist/maas-model/*.whl  ./
+COPY ./dist/maas-collector/*.whl  ./
 
 # update distrib and add needed tools
 # follow best pratices: https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#sort-multi-line-arguments

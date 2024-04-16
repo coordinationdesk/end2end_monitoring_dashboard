@@ -167,6 +167,8 @@ function build_module(){
                 error "Building ${MODULE}"
             else
                 info "Build ${MODULE} done"
+                info "Copy ${MODULE} in dist in folder ${WORK_DIR}/modules/${MODULE}/dist/ ${WORK_DIR}/modules/dist/${MODULE}/."
+                cp -ar ${WORK_DIR}/modules/${MODULE}/dist/ ${WORK_DIR}/modules/dist/${MODULE}/
             fi
         else 
             error "${WORK_DIR}/modules/${MODULE}/tox.ini not Found skiping !"
@@ -249,9 +251,9 @@ function omcs_source_venv() {
 
 function omcs_update_datasources() {
     if [[ "TRUE" == $(omcs_check_venv) ]] ; then
-        for DATASOURCE in $(find ${WORK_DIR}/configuration/grafana/datasources/ -type f -name "*.yaml")
+        for DATASOURCE in $(find ${WORK_DIR}/deployment/configuration/grafana/datasources/ -type f -name "*.yaml")
         do
-            sed -i "s#@elastic_url@#https://odfe-node:${ES_PORT}#g" ${DATASOURCE}
+            sed -i "s#@elastic_url@#https://${ES_URL}:${ES_PORT}#g" ${DATASOURCE}
             sed -i "s#@elastic_user@#${ES_USERNAME}#g" ${DATASOURCE}
             sed -i "s#@elastic_user_pwd@#${ES_PASSWORD}#g" ${DATASOURCE}
         done
@@ -303,7 +305,7 @@ function omcs_init_db() {
 
 function omcs_start_engine() {
     if [[ "TRUE" == $(omcs_check_venv) ]] ; then
-        TZ=UTC python -m maas_engine -v --es-ignore-certs-verification True -c ${WORK_DIR}/configuration/engine/cds-engine-conf.json -f --healthcheck-port ${INITDB_HEALTH_PORT} | tee ${LOGS_DIR}/engine.log &
+        TZ=UTC python -m maas_engine -v --es-ignore-certs-verification True -c ${WORK_DIR}/deployment/configuration/engine/cds-engine-conf.json -f --healthcheck-port ${INITDB_HEALTH_PORT} | tee ${LOGS_DIR}/engine.log &
     else
         warn "Python virtual environement ${VENV_NAME} not sourced! prefer sourcing venv befaure using command \"omcs_source_venv\""
     fi
@@ -311,7 +313,7 @@ function omcs_start_engine() {
 
 function omcs_collect_local_data() {
     if [[ "TRUE" == $(omcs_check_venv) ]] ; then
-        TZ=UTC python -m maas_collector.rawdata.cli.filesystem -v --es-ignore-certs-verification True -d ${WORK_DIR}/configuration/collector/ --healthcheck-port ${COLLECTOR_HEALTH_PORT} ${WORK_DIR}/data/reports -p 0 -f | tee ${LOGS_DIR}/collecte_local.log
+        TZ=UTC python -m maas_collector.rawdata.cli.filesystem -v --es-ignore-certs-verification True -d ${WORK_DIR}/deployment/configuration/collector/ --healthcheck-port ${COLLECTOR_HEALTH_PORT} ${WORK_DIR}/data/reports -p 0 -f | tee ${LOGS_DIR}/collecte_local.log
     else
         warn "Python virtual environement ${VENV_NAME} not sourced! prefer sourcing venv befaure using command \"omcs_source_venv\""
     fi
@@ -319,7 +321,7 @@ function omcs_collect_local_data() {
 
 function omcs_collect_external_data() {
     if [[ "TRUE" == $(omcs_check_venv) ]] ; then
-        TZ=UTC python -m maas_collector.rawdata.cli.odata -v --es-ignore-certs-verification True -d ${WORK_DIR}/configuration/collector/ --healthcheck-port ${COLLECTOR_HEALTH_PORT} --credential-file ${WORK_DIR}/configuration/credentials/maas-api-collector-credentials.json -p 0 -f | tee ${LOGS_DIR}/collecte_external.log
+        TZ=UTC python -m maas_collector.rawdata.cli.odata -v --es-ignore-certs-verification True -d ${WORK_DIR}/deployment/configuration/collector/ --healthcheck-port ${COLLECTOR_HEALTH_PORT} --credential-file ${WORK_DIR}/deployment/configuration/credentials/maas-api-collector-credentials.json -p 0 -f | tee ${LOGS_DIR}/collecte_external.log
     else
         warn "Python virtual environement ${VENV_NAME} not sourced! prefer sourcing venv befaure using command \"omcs_source_venv\""
     fi

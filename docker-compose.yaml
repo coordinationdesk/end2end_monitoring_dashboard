@@ -38,9 +38,9 @@ services:
     # ports:
     #   - ${GRF_PORT}:3000
     volumes:
-      - ./configuration/grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
-      - ./configuration/grafana/datasources:/etc/grafana/provisioning/datasources
-      - ./configuration/grafana/dashboards:/var/lib/grafana/dashboards
+      - ./deployment/configuration/grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
+      - ./deployment/configuration/grafana/datasources:/etc/grafana/provisioning/datasources
+      - ./deployment/configuration/grafana/dashboards:/var/lib/grafana/dashboards
 
 
 
