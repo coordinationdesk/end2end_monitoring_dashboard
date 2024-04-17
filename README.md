@@ -82,7 +82,7 @@ All cots are used as docker containers and could be organized in a docker-compos
 cat ${WORK_DIR}/docker-compose.yaml
 ```
 
-To launch cots uses `docker-compose`commands:
+To launch cots use `docker-compose`commands:
 
 ```bash
 docker-compose -f ${WORK_DIR}/docker-compose.yaml up -d
