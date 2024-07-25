@@ -1,0 +1,117 @@
+{
+    "amqp": [
+        {
+            "name": "collect-exchange",
+            "queues": []
+        },
+        {
+            "name": "etl-exchange",
+            "queues": [
+                {
+                    "name": "etl-compute.cds-datatake",
+                    "routing_key": "compute.cds-datatake",
+                    "events": [
+                        "COMPUTE_COMPLETENESS"
+                    ]
+                },
+                {
+                    "name": "etl-new.cds-product-s1",
+                    "routing_key": "new.cds-product-s1",
+                    "events": [
+                        "COMPUTE_COMPLETENESS"
+                    ]
+                },
+                {
+                    "name": "etl-update.cds-product-s1",
+                    "routing_key": "update.cds-product-s1",
+                    "events": [
+                        "COMPUTE_COMPLETENESS"
+                    ]
+                },
+                {
+                    "name": "etl-new.cds-product-s2",
+                    "routing_key": "new.cds-product-s2",
+                    "events": [
+                        "COMPUTE_COMPLETENESS"
+                    ]
+                },
+                {
+                    "name": "etl-update.cds-product-s2",
+                    "routing_key": "update.cds-product-s2",
+                    "events": [
+                        "COMPUTE_COMPLETENESS"
+                    ]
+                },
+                {
+                    "name": "etl-new.cds-datatake-s1",
+                    "routing_key": "new.cds-datatake-s1",
+                    "events": [
+                        {
+                            "id": "COMPUTE_COMPLETENESS"
+                        },
+                        {
+                            "id": "CORRELATE_ACQUISITIONS",
+                            "chunk_size": 128,
+                            "source_type": "CdsDatatake"
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-update.cds-datatake-s1",
+                    "routing_key": "update.cds-datatake-s1",
+                    "events": [
+                        {
+                            "id": "COMPUTE_COMPLETENESS"
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-new.cds-datatake-s2",
+                    "routing_key": "new.cds-datatake-s2",
+                    "events": [
+                        {
+                            "id": "COMPUTE_COMPLETENESS"
+                        },
+                        {
+                            "id": "CORRELATE_ACQUISITIONS",
+                            "chunk_size": 128,
+                            "source_type": "CdsDatatake"
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-update.cds-datatake-s2",
+                    "routing_key": "update.cds-datatake-s2",
+                    "events": [
+                        {
+                            "id": "COMPUTE_COMPLETENESS"
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-update.hktm-products",
+                    "routing_key": "update.hktm-products",
+                    "events": [
+                        {
+                            "id": "COMPUTE_HKTM_RELATED",
+                            "send_reports": false,
+                            "tolerance_value": 30,
+                            "target_model": "CdsHktmProductionCompleteness"
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-update.hktm-acquisition",
+                    "routing_key": "update.hktm-acquisition",
+                    "events": [
+                        {
+                            "id": "COMPUTE_HKTM_RELATED",
+                            "send_reports": false,
+                            "target_model": "CdsHktmAcquisitionCompleteness"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

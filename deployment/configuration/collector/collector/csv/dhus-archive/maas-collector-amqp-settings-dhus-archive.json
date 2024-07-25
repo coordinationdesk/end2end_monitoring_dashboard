@@ -1,0 +1,7 @@
+{
+    "amqp": {
+        "new.raw.data.dd-archive": {
+            "chunk_size": 512
+        }
+    }
+}

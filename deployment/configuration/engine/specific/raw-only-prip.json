@@ -1,0 +1,25 @@
+{
+    "amqp": [
+        {
+            "name": "collect-exchange",
+            "queues": [
+                {
+                    "name": "collect-new.raw.data.prip-product",
+                    "routing_key": "new.raw.data.prip-product",
+                    "events": [
+                        "CONSOLIDATE_PUBLICATION",
+                        {
+                            "id": "CONSOLIDATE_PRODUCT",
+                            "send_reports": true,
+                            "container_chunk_size": 128
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "etl-exchange",
+            "queues": []
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+{
+    "amqp": {
+        "new.raw.data.s5aps.product": {
+            "chunk_size": 512
+        },
+        "new.raw.data.aps.product": {
+            "chunk_size": 512
+        },
+        "new.raw.data.ddp-data-available": {
+            "chunk_size": 512
+        }
+    }
+}

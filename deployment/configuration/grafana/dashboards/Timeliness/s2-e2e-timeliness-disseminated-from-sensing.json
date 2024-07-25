@@ -1,0 +1,1338 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 306,
+      "panels": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "gridPos": {
+            "h": 11,
+            "w": 24,
+            "x": 0,
+            "y": 1
+          },
+          "id": 89,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "This dashboard features a Timeliness computation of products published at the following interfaces for S2 mission:\n - DD DHUS, DAS.\n\nTimeliness is computed from metadata attached to each DD product (Publication Date - Content Date/End (which is the end of sensing)).\n\nDiscrepancies are displayed through the following indicators:\n - Percent of products below timeliness threshold;\n - Average timeliness of products;\n - Time series of product displayed against the timeliness threshold;\n - Detailed list of product out of accepted range.\n\nInformation is available for each satellite managed by OMCS.\n\nTips:\n - Annotations are available on time series;\n - Satellite to consider can be selected in the upper bar.\n - Dissemination service to consider can be selected in the upper bar filter named \"Dissemination service\".\n\nThe information displayed was originally taken from Product at PRIP DD  \n\nTime reference for this dashboard is : sensing_start_date\n\nImportant notice : Tables & timelines can only display up to 10 000 entries. Please make use of filters to narrow down the retrieved data and get a more realistic view.",
+            "mode": "markdown"
+          },
+          "pluginVersion": "10.3.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "refId": "A"
+            }
+          ],
+          "type": "text"
+        }
+      ],
+      "title": "Dashboard Description",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P4E6B5BC91908CBD9"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 290,
+      "panels": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "refId": "A"
+        }
+      ],
+      "title": "E2E Timeliness (Disseminated vs Sensing)",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P9C1AEFD5EC435EE7"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "semi-dark-red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit",
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 0,
+        "y": 2
+      },
+      "id": 297,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto",
+        "text": {}
+      },
+      "pluginVersion": "10.3.1",
+      "targets": [
+        {
+          "alias": "< 12h",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "4",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_sensing_timeliness: [0 TO 43200000000] AND service_type : DD AND service_id:${dd_service}  AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_level:${product_level} AND product_type:${product_type}  AND timeliness:${timeliness}",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "Total",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "4",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "service_type : DD AND service_id:${dd_service}  AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_level:${product_level} AND product_type:${product_type} AND timeliness:$timeliness",
+          "refId": "B",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "$timeliness E2E Timeliness (12h from sensing)",
+      "transformations": [
+        {
+          "id": "seriesToRows",
+          "options": {}
+        },
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "Metric": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value": {
+                "aggregations": [
+                  "sum"
+                ],
+                "operation": "aggregate"
+              }
+            }
+          }
+        },
+        {
+          "id": "rowsToFields",
+          "options": {}
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Completeness 12h",
+            "binary": {
+              "left": "< 12h",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Total"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P9C1AEFD5EC435EE7"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "h",
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 4,
+        "y": 2
+      },
+      "id": 304,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.3.1",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "metrics": [
+            {
+              "field": "from_sensing_timeliness",
+              "id": "1",
+              "type": "avg"
+            }
+          ],
+          "query": "service_type : DD AND service_id:${dd_service}  AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_level:${product_level} AND product_type:${product_type} AND timeliness: ${timeliness}",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "$timeliness E2E Average Timeliness ",
+      "transformations": [
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "isNull",
+                  "options": {}
+                },
+                "fieldName": "Average from_sensing_timeliness"
+              }
+            ],
+            "match": "any",
+            "type": "exclude"
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "Average from_sensing_timeliness",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "3600000000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Average from_sensing_timeliness": true,
+              "Average from_sensing_timeliness / 3600000000": false
+            },
+            "indexByName": {},
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P9C1AEFD5EC435EE7"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "From Sensing Timeliness (hour)",
+            "axisPlacement": "auto",
+            "axisSoftMax": 24,
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "scheme",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "stepAfter",
+            "lineWidth": 1,
+            "pointSize": 6,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "always",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 12
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 24
+              }
+            ]
+          },
+          "unit": "h",
+          "unitScale": true
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Time"
+            },
+            "properties": [
+              {
+                "id": "custom.axisLabel",
+                "value": "Sensing Time"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 16,
+        "x": 8,
+        "y": 2
+      },
+      "id": 302,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.4.2",
+      "targets": [
+        {
+          "alias": "Timeliness",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "4",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "from_sensing_timeliness",
+              "id": "1",
+              "type": "max"
+            }
+          ],
+          "query": "service_type : DD AND service_id:${dd_service}  AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_level:${product_level} AND product_type:${product_type} AND timeliness:${timeliness}",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "$timeliness - From Sensing to Dissemination over time",
+      "transformations": [
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "isNull",
+                  "options": {}
+                },
+                "fieldName": "Timeliness"
+              }
+            ],
+            "match": "any",
+            "type": "exclude"
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "From Sensing Timeliness (hour)",
+            "binary": {
+              "left": "Timeliness",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "3600000000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P9C1AEFD5EC435EE7"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "semi-dark-red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 95
+              }
+            ]
+          },
+          "unit": "percentunit",
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 0,
+        "y": 8
+      },
+      "id": 298,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto",
+        "text": {}
+      },
+      "pluginVersion": "10.3.1",
+      "targets": [
+        {
+          "alias": "< 24h",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "4",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_sensing_timeliness: [0 TO 86400000000] AND service_type : DD AND service_id:${dd_service}  AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_level:${product_level} AND product_type:${product_type} AND timeliness:${timeliness}",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "Total",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "4",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "service_type : DD AND service_id:${dd_service}  AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_level:${product_level} AND product_type:${product_type} AND timeliness:${timeliness}",
+          "refId": "B",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "${timeliness} E2E Timeliness (24h from sensing)",
+      "transformations": [
+        {
+          "id": "seriesToRows",
+          "options": {}
+        },
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "Metric": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value": {
+                "aggregations": [
+                  "sum"
+                ],
+                "operation": "aggregate"
+              }
+            }
+          }
+        },
+        {
+          "id": "rowsToFields",
+          "options": {}
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Completeness 24h",
+            "binary": {
+              "left": "< 24h",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Total"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P9C1AEFD5EC435EE7"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": true
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "semi-dark-red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 95
+              }
+            ]
+          },
+          "unit": "none",
+          "unitScale": true
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "satellite_unit"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 89
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sensing_end_date"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 210
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sensing_start_date"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 198
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "absolute_orbit"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 105
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "datatake_id"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 116
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "instrument_mode"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 135
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "timeliness"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 134
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "product_level"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 132
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "product_type"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 149
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "from_sensing_timeliness"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 188
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "name"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 801
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Product Name"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 696
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CAMs Link"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "title": "",
+                    "url": "https://esa-cams.atlassian.net/browse/${__value.raw}\r"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 24,
+        "x": 0,
+        "y": 14
+      },
+      "id": 293,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "10.3.1",
+      "targets": [
+        {
+          "alias": "< 3h",
+          "bucketAggs": [],
+          "datasource": {
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "10000"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "service_type : DD AND service_id:${dd_service}  AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_level:${product_level} AND product_type:${product_type} AND timeliness:$timeliness AND timeliness:${timeliness} AND from_sensing_timeliness: [43200000000 TO *]",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Out of timeliness products (${timeliness}> 12h)",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "From sensing timeliness (h)",
+            "binary": {
+              "left": "from_sensing_timeliness",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "3600000000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "include": [
+                "from_sensing_timeliness"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "time",
+                "targetField": "sensing_start_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "sensing_end_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "publication_date"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "_id": true,
+              "_index": true,
+              "_type": true,
+              "cams_tickets": true,
+              "content_length": true,
+              "from_sensing_timeliness": true,
+              "highlight": true,
+              "key": true,
+              "last_attached_ticket": false,
+              "last_attached_ticket_url": true,
+              "mission": true,
+              "modification_date": true,
+              "polarization": true,
+              "product_class": true,
+              "product_uuid": true,
+              "publication_date": false,
+              "sensing_duration": true,
+              "service_id": true,
+              "service_type": true,
+              "sort": true,
+              "updateTime": true
+            },
+            "indexByName": {
+              "From sensing timeliness (h)": 10,
+              "_id": 13,
+              "_index": 14,
+              "_type": 15,
+              "absolute_orbit": 4,
+              "cams_description": 33,
+              "cams_origin": 32,
+              "cams_tickets": 27,
+              "content_length": 16,
+              "datatake_id": 5,
+              "from_sensing_timeliness": 11,
+              "highlight": 17,
+              "instrument_mode": 6,
+              "key": 18,
+              "last_attached_ticket": 31,
+              "last_attached_ticket_url": 30,
+              "mission": 0,
+              "modification_date": 19,
+              "name": 12,
+              "product_discriminator_date": 28,
+              "product_level": 8,
+              "product_type": 9,
+              "product_uuid": 20,
+              "publication_date": 21,
+              "satellite_unit": 1,
+              "sensing_duration": 22,
+              "sensing_end_date": 3,
+              "sensing_start_date": 2,
+              "service_id": 23,
+              "service_type": 24,
+              "sort": 25,
+              "tile_number": 29,
+              "timeliness": 7,
+              "updateTime": 26
+            },
+            "renameByName": {
+              "From sensing timeliness (h)": "Timeliness (h)",
+              "absolute_orbit": "Absolute Orbit",
+              "cams_description": "CAMs Description",
+              "cams_origin": "CAMs Origin",
+              "datatake_id": "Datatake ID",
+              "from_sensing_timeliness": "",
+              "instrument_mode": "Instrument",
+              "last_attached_ticket": "CAMs Link",
+              "last_attached_ticket_url": "",
+              "name": "Product Name",
+              "product_level": "Level",
+              "product_type": "Type",
+              "publication_date": "DD Publication Date",
+              "satellite_unit": "Satellite",
+              "sensing_end_date": "Sensing End",
+              "sensing_start_date": "Sensing Start",
+              "tile_number": "",
+              "timeliness": "Category"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [
+    "Timeliness"
+  ],
+  "templating": {
+    "list": [
+      {
+        "hide": 2,
+        "label": "Mission",
+        "name": "mission",
+        "query": "S2",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": false,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P9C1AEFD5EC435EE7"
+        },
+        "definition": "{\"find\":\"terms\",\"field\":\"satellite_unit\", \"query\":\"mission: $mission\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Satellite",
+        "multi": true,
+        "name": "satellite_unit",
+        "options": [],
+        "query": "{\"find\":\"terms\",\"field\":\"satellite_unit\", \"query\":\"mission: $mission\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": false,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P9C1AEFD5EC435EE7"
+        },
+        "definition": "{\"find\":\"terms\",\"field\":\"timeliness\", \"query\":\"mission: $mission AND satellite_unit : $satellite_unit\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Category",
+        "multi": true,
+        "name": "timeliness",
+        "options": [],
+        "query": "{\"find\":\"terms\",\"field\":\"timeliness\", \"query\":\"mission: $mission AND satellite_unit : $satellite_unit\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": false,
+          "text": [
+            "L0_",
+            "L1_",
+            "L2_"
+          ],
+          "value": [
+            "L0_",
+            "L1_",
+            "L2_"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P9C1AEFD5EC435EE7"
+        },
+        "definition": "{\"find\":\"terms\",\"field\":\"product_level\", \"query\":\"mission: $mission AND satellite_unit : $satellite_unit AND timeliness: $timeliness\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Level",
+        "multi": true,
+        "name": "product_level",
+        "options": [],
+        "query": "{\"find\":\"terms\",\"field\":\"product_level\", \"query\":\"mission: $mission AND satellite_unit : $satellite_unit AND timeliness: $timeliness\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": false,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P9C1AEFD5EC435EE7"
+        },
+        "definition": "{\"find\":\"terms\",\"field\":\"product_type\", \"query\":\"mission: $mission AND satellite_unit : $satellite_unit AND product_level:$product_level  AND timeliness: $timeliness\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Product Type",
+        "multi": true,
+        "name": "product_type",
+        "options": [],
+        "query": "{\"find\":\"terms\",\"field\":\"product_type\", \"query\":\"mission: $mission AND satellite_unit : $satellite_unit AND product_level:$product_level  AND timeliness: $timeliness\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": false,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P9C1AEFD5EC435EE7"
+        },
+        "definition": "{\"find\":\"terms\",\"field\":\"service_id\", \"query\":\"mission: $mission AND satellite_unit : $satellite_unit AND service_type: LTA\"}",
+        "hide": 2,
+        "includeAll": true,
+        "label": "LTA Service",
+        "multi": true,
+        "name": "lta_service",
+        "options": [],
+        "query": "{\"find\":\"terms\",\"field\":\"service_id\", \"query\":\"mission: $mission AND satellite_unit : $satellite_unit AND service_type: LTA\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": false,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P9C1AEFD5EC435EE7"
+        },
+        "definition": "{\"find\":\"terms\",\"field\":\"service_id\", \"query\":\"mission: $mission AND satellite_unit : $satellite_unit AND service_type: PRIP\"}",
+        "hide": 2,
+        "includeAll": true,
+        "label": "PRIP Service",
+        "multi": true,
+        "name": "prip_service",
+        "options": [],
+        "query": "{\"find\":\"terms\",\"field\":\"service_id\", \"query\":\"mission: $mission AND satellite_unit : $satellite_unit AND service_type: PRIP\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "DAS",
+          "value": "DAS"
+        },
+        "description": "Dissemination service, DHUS or DAS ",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Dissemination service",
+        "multi": false,
+        "name": "dd_service",
+        "options": [
+          {
+            "selected": false,
+            "text": "DHUS",
+            "value": "DHUS"
+          },
+          {
+            "selected": true,
+            "text": "DAS",
+            "value": "DAS"
+          }
+        ],
+        "query": "DHUS,DAS",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P9C1AEFD5EC435EE7"
+        },
+        "filters": [],
+        "hide": 0,
+        "label": "Ad-Hoc filter",
+        "name": "Filter",
+        "skipUrlSync": false,
+        "type": "adhoc"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-1d/d",
+    "to": "now-1d/d"
+  },
+  "timepicker": {},
+  "timezone": "utc",
+  "title": "S2 E2E Timeliness (Disseminated from Sensing)",
+  "uid": "LYiLzXw7k",
+  "weekStart": ""
+}

@@ -1,0 +1,3013 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 307,
+      "panels": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "gridPos": {
+            "h": 11,
+            "w": 24,
+            "x": 0,
+            "y": 1
+          },
+          "id": 89,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "This dashboard features an Acquisition Timeliness for Mission S1, S2, S3, S5.\n\nInformation is taken from station reports made available through CADIP interface for S1,S2,S3 and XBAND for S5\n\n\nTimeliness is computed using following logics : \n- (stop_delivery date - first_frame_start date) for mission S1,S2 and S3\n- (delivery_stop date - downlink_start date) for mission S5\n\nDiscrepancies are displayed through the following indicators:\n\n- Percent of products below timeliness threshold;\n- Average timeliness of products;\n- Time series of product displayed against the timeliness threshold;\n- Detailed list of product out of accepted range.\n\nTips:\n - Annotations are available on time series;\n - Satellite, mission, reception station or downlink orbit to consider can be selected in the upper bar.\n- Use Downlink Orbit Cadip to filter the downlink orbit for mission S1,S2 and S3\n- Use Downlink Orbit DDP to filter the downlink orbit for mission S5\n\nThe information displayed was originally taken from Session with Quality Infos at each CADIP station and from EDRS Report Ticket at JIRA EDRS  \n\nImportant notice : Tables & timelines can only display up to 10 000 entries. Please make use of filters to narrow down the retrieved data and get a more realistic view.\n\n",
+            "mode": "markdown"
+          },
+          "pluginVersion": "10.3.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "refId": "A"
+            }
+          ],
+          "type": "text"
+        }
+      ],
+      "title": "Dashboard Description",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P4E6B5BC91908CBD9"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 290,
+      "panels": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "refId": "A"
+        }
+      ],
+      "title": "Acquisition Timeliness",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "description": "1h",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 3,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "semi-dark-red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 95
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 0,
+        "y": 2
+      },
+      "id": 308,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto",
+        "text": {}
+      },
+      "pluginVersion": "10.4.1",
+      "targets": [
+        {
+          "alias": "less_1H_ddp",
+          "bucketAggs": [
+            {
+              "field": "first_frame_start",
+              "id": "4",
+              "settings": {
+                "interval": "1d",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P56531AF06C445A86"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_acq_delivery_timeliness: [0 TO 3600000000] AND mission:$mission AND satellite_id:$satellite_unit AND mission:S5 AND ground_station:$ground_station AND downlink_orbit:$downlink_orbit_ddp AND (cams_tickets: $cams_ids)\n",
+          "refId": "A",
+          "timeField": "planned_data_start"
+        },
+        {
+          "alias": "total_ddp",
+          "bucketAggs": [
+            {
+              "field": "first_frame_start",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P56531AF06C445A86"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "mission:$mission AND satellite_id:$satellite_unit AND mission:S5 AND ground_station:$ground_station AND downlink_orbit:$downlink_orbit_ddp AND from_acq_delivery_timeliness:* AND (cams_tickets: $cams_ids)",
+          "refId": "B",
+          "timeField": "planned_data_start"
+        },
+        {
+          "alias": "less_1H_cadip",
+          "bucketAggs": [
+            {
+              "field": "downlink_start",
+              "id": "4",
+              "settings": {
+                "interval": "1d",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE0BF01AC3817A56D"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_acq_delivery_timeliness: [0 TO 3600000000] AND mission:$mission AND satellite_id:$satellite_unit AND ground_station:$ground_station AND downlink_orbit:$downlink_orbit_cadip AND (cams_tickets: $cams_ids)",
+          "refId": "C",
+          "timeField": "planned_data_start"
+        },
+        {
+          "alias": "total_cadip",
+          "bucketAggs": [
+            {
+              "field": "downlink_start",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE0BF01AC3817A56D"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "mission:$mission AND satellite_id:$satellite_unit AND ground_station:$ground_station AND downlink_orbit:$downlink_orbit_cadip AND from_acq_delivery_timeliness:* AND (cams_tickets: $cams_ids)",
+          "refId": "D",
+          "timeField": "planned_data_start"
+        }
+      ],
+      "title": "Timeliness ( < 60min )",
+      "transformations": [
+        {
+          "id": "seriesToRows",
+          "options": {}
+        },
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "Metric": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value": {
+                "aggregations": [
+                  "sum"
+                ],
+                "operation": "aggregate"
+              }
+            }
+          }
+        },
+        {
+          "id": "rowsToFields",
+          "options": {}
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "total",
+            "binary": {
+              "left": "total_cadip",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "total_ddp"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "less1h",
+            "binary": {
+              "left": "less_1H_cadip",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "less_1H_ddp"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "less_3H_cadip": true,
+              "less_3H_ddp": true,
+              "total_cadip": true,
+              "total_ddp": true
+            },
+            "indexByName": {},
+            "renameByName": {}
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "less1H100",
+            "binary": {
+              "left": "less1h",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "100"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "max"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "timeliness ",
+            "binary": {
+              "left": "less1H100",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "total"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "description": " 1h15",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 3,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "semi-dark-red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 95
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 3,
+        "y": 2
+      },
+      "id": 315,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto",
+        "text": {}
+      },
+      "pluginVersion": "10.4.1",
+      "targets": [
+        {
+          "alias": "less_1H_ddp",
+          "bucketAggs": [
+            {
+              "field": "first_frame_start",
+              "id": "4",
+              "settings": {
+                "interval": "1d",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P56531AF06C445A86"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_acq_delivery_timeliness: [0 TO 4500000000] AND mission:$mission AND satellite_id:$satellite_unit AND mission:S5 AND ground_station:$ground_station AND downlink_orbit:$downlink_orbit_ddp AND (cams_tickets: $cams_ids)\n",
+          "refId": "A",
+          "timeField": "planned_data_start"
+        },
+        {
+          "alias": "total_ddp",
+          "bucketAggs": [
+            {
+              "field": "first_frame_start",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P56531AF06C445A86"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "mission:$mission AND satellite_id:$satellite_unit AND mission:S5 AND ground_station:$ground_station AND downlink_orbit:$downlink_orbit_ddp AND from_acq_delivery_timeliness:* AND (cams_tickets: $cams_ids)",
+          "refId": "B",
+          "timeField": "planned_data_start"
+        },
+        {
+          "alias": "less_1H_cadip",
+          "bucketAggs": [
+            {
+              "field": "downlink_start",
+              "id": "4",
+              "settings": {
+                "interval": "1d",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE0BF01AC3817A56D"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_acq_delivery_timeliness: [0 TO 4500000000] AND mission:$mission AND satellite_id:$satellite_unit AND ground_station:$ground_station AND downlink_orbit:$downlink_orbit_cadip AND (cams_tickets: $cams_ids)",
+          "refId": "C",
+          "timeField": "planned_data_start"
+        },
+        {
+          "alias": "total_cadip",
+          "bucketAggs": [
+            {
+              "field": "downlink_start",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE0BF01AC3817A56D"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "mission:$mission AND satellite_id:$satellite_unit AND ground_station:$ground_station AND downlink_orbit:$downlink_orbit_cadip AND from_acq_delivery_timeliness:*  AND (cams_tickets: $cams_ids)",
+          "refId": "D",
+          "timeField": "planned_data_start"
+        }
+      ],
+      "title": "Timeliness ( < 75min )",
+      "transformations": [
+        {
+          "id": "seriesToRows",
+          "options": {}
+        },
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "Metric": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value": {
+                "aggregations": [
+                  "sum"
+                ],
+                "operation": "aggregate"
+              }
+            }
+          }
+        },
+        {
+          "id": "rowsToFields",
+          "options": {}
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "total",
+            "binary": {
+              "left": "total_cadip",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "total_ddp"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "less1h",
+            "binary": {
+              "left": "less_1H_cadip",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "less_1H_ddp"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "less_3H_cadip": true,
+              "less_3H_ddp": true,
+              "total_cadip": true,
+              "total_ddp": true
+            },
+            "indexByName": {},
+            "renameByName": {}
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "less1H100",
+            "binary": {
+              "left": "less1h",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "100"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "max"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "timeliness ",
+            "binary": {
+              "left": "less1H100",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "total"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "super-light-blue",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "semi-dark-red",
+                "value": null
+              }
+            ]
+          },
+          "unit": "\u00b5s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 6,
+        "y": 2
+      },
+      "id": 311,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.4.1",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "planned_data_start",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P56531AF06C445A86"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "from_acq_delivery_timeliness",
+              "id": "1",
+              "type": "min"
+            }
+          ],
+          "query": "mission:$mission AND satellite_id:$satellite_unit AND mission:S5 AND ground_station:$ground_station AND downlink_orbit:$downlink_orbit_ddp AND (cams_tickets: $cams_ids)",
+          "refId": "A",
+          "timeField": "planned_data_start"
+        },
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "planned_data_start",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE0BF01AC3817A56D"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "from_acq_delivery_timeliness",
+              "id": "1",
+              "type": "min"
+            }
+          ],
+          "query": "mission:$mission AND satellite_id:$satellite_unit AND ground_station:$ground_station AND downlink_orbit:$downlink_orbit_cadip AND (cams_tickets: $cams_ids)",
+          "refId": "B",
+          "timeField": "planned_data_start"
+        }
+      ],
+      "title": "Min timeliness acquisition",
+      "transformations": [
+        {
+          "id": "joinByField",
+          "options": {}
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "mode": "reduceFields",
+            "reducers": [
+              "min"
+            ]
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [],
+              "reducer": "min"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "description": "Data reaching the top of the chart exceeds 120 minutes (2h)",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line"
+            }
+          },
+          "decimals": 1,
+          "mappings": [],
+          "max": 120,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-green",
+                "value": null
+              },
+              {
+                "color": "#f1bc31",
+                "value": 60
+              },
+              {
+                "color": "#e25822",
+                "value": 75
+              },
+              {
+                "color": "#b22222",
+                "value": 90
+              },
+              {
+                "color": "#7c0a02",
+                "value": 105
+              },
+              {
+                "color": "#410e14",
+                "value": 120.0002
+              }
+            ]
+          },
+          "unit": "m"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Acquisition timeliness (max)"
+            },
+            "properties": [
+              {
+                "id": "custom.gradientMode",
+                "value": "scheme"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 15,
+        "x": 9,
+        "y": 2
+      },
+      "id": 310,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "10.1.1",
+      "targets": [
+        {
+          "alias": "less_1H_ddp",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P56531AF06C445A86"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "10000"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "mission:$mission AND satellite_id:$satellite_unit AND mission:S5 AND ground_station:$ground_station AND downlink_orbit:$downlink_orbit_ddp AND from_acq_delivery_timeliness:* AND (cams_tickets: $cams_ids)",
+          "refId": "A",
+          "timeField": "planned_data_start"
+        },
+        {
+          "alias": "total_cadip",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE0BF01AC3817A56D"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "10000"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "mission:$mission AND satellite_id:$satellite_unit AND ground_station:$ground_station AND downlink_orbit:$downlink_orbit_cadip AND from_acq_delivery_timeliness:* AND (cams_tickets: $cams_ids)",
+          "refId": "D",
+          "timeField": "planned_data_start"
+        }
+      ],
+      "title": "Acquisition Timeliness Over Time",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "planned_data_start",
+                "from_acq_delivery_timeliness"
+              ]
+            }
+          }
+        },
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "Metric": {
+                "aggregations": [
+                  "max"
+                ]
+              },
+              "Time": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value": {
+                "aggregations": [
+                  "max"
+                ],
+                "operation": "aggregate"
+              },
+              "from_acq_delivery_timeliness": {
+                "aggregations": [
+                  "max"
+                ],
+                "operation": "aggregate"
+              },
+              "less_1H_ddp": {
+                "aggregations": [
+                  "max"
+                ],
+                "operation": "aggregate"
+              },
+              "planned_data_start": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "publication_date": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "total_cadip": {
+                "aggregations": [
+                  "max"
+                ],
+                "operation": "aggregate"
+              }
+            }
+          }
+        },
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "isNull",
+                  "options": {}
+                },
+                "fieldName": "from_acq_delivery_timeliness (max)"
+              }
+            ],
+            "match": "any",
+            "type": "exclude"
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Acquisition timeliness (max)",
+            "binary": {
+              "left": "from_acq_delivery_timeliness (max)",
+              "operator": "/",
+              "right": "60000000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "super-light-green",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "semi-dark-red",
+                "value": null
+              }
+            ]
+          },
+          "unit": "\u00b5s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 6,
+        "y": 5
+      },
+      "id": 314,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.4.1",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "planned_data_start",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P56531AF06C445A86"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "from_acq_delivery_timeliness",
+              "id": "1",
+              "type": "avg"
+            }
+          ],
+          "query": "mission:$mission AND satellite_id:$satellite_unit AND mission:S5 AND ground_station:$ground_station AND downlink_orbit:$downlink_orbit_ddp AND (cams_tickets: $cams_ids)",
+          "refId": "A",
+          "timeField": "planned_data_start"
+        },
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "planned_data_start",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE0BF01AC3817A56D"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "from_acq_delivery_timeliness",
+              "id": "1",
+              "type": "avg"
+            }
+          ],
+          "query": "mission:$mission AND satellite_id:$satellite_unit AND ground_station:$ground_station AND downlink_orbit:$downlink_orbit_cadip AND (cams_tickets: $cams_ids)",
+          "refId": "B",
+          "timeField": "planned_data_start"
+        }
+      ],
+      "title": "Avg timeliness acquisition",
+      "transformations": [
+        {
+          "id": "joinByField",
+          "options": {}
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "mode": "reduceFields",
+            "reducers": [
+              "mean"
+            ]
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [],
+              "reducer": "mean"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "description": "1h30",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 3,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "semi-dark-red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 95
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 0,
+        "y": 6
+      },
+      "id": 318,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto",
+        "text": {}
+      },
+      "pluginVersion": "10.4.1",
+      "targets": [
+        {
+          "alias": "less_1H_ddp",
+          "bucketAggs": [
+            {
+              "field": "first_frame_start",
+              "id": "4",
+              "settings": {
+                "interval": "1d",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P56531AF06C445A86"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_acq_delivery_timeliness: [0 TO 5400000000] AND mission:$mission AND satellite_id:$satellite_unit AND mission:S5 AND ground_station:$ground_station AND downlink_orbit:$downlink_orbit_ddp AND (cams_tickets: $cams_ids)\n",
+          "refId": "A",
+          "timeField": "planned_data_start"
+        },
+        {
+          "alias": "total_ddp",
+          "bucketAggs": [
+            {
+              "field": "first_frame_start",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P56531AF06C445A86"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "mission:$mission AND satellite_id:$satellite_unit AND mission:S5 AND ground_station:$ground_station AND downlink_orbit:$downlink_orbit_ddp AND from_acq_delivery_timeliness:* AND (cams_tickets: $cams_ids)",
+          "refId": "B",
+          "timeField": "planned_data_start"
+        },
+        {
+          "alias": "less_1H_cadip",
+          "bucketAggs": [
+            {
+              "field": "downlink_start",
+              "id": "4",
+              "settings": {
+                "interval": "1d",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE0BF01AC3817A56D"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_acq_delivery_timeliness: [0 TO 5400000000] AND mission:$mission AND satellite_id:$satellite_unit AND ground_station:$ground_station AND downlink_orbit:$downlink_orbit_cadip AND (cams_tickets: $cams_ids)",
+          "refId": "C",
+          "timeField": "planned_data_start"
+        },
+        {
+          "alias": "total_cadip",
+          "bucketAggs": [
+            {
+              "field": "downlink_start",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE0BF01AC3817A56D"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "mission:$mission AND satellite_id:$satellite_unit AND ground_station:$ground_station AND downlink_orbit:$downlink_orbit_cadip AND from_acq_delivery_timeliness:* AND (cams_tickets: $cams_ids)",
+          "refId": "D",
+          "timeField": "planned_data_start"
+        }
+      ],
+      "title": "Timeliness ( < 90min )",
+      "transformations": [
+        {
+          "id": "seriesToRows",
+          "options": {}
+        },
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "Metric": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value": {
+                "aggregations": [
+                  "sum"
+                ],
+                "operation": "aggregate"
+              }
+            }
+          }
+        },
+        {
+          "id": "rowsToFields",
+          "options": {}
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "total",
+            "binary": {
+              "left": "total_cadip",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "total_ddp"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "less1h",
+            "binary": {
+              "left": "less_1H_cadip",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "less_1H_ddp"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "less_3H_cadip": true,
+              "less_3H_ddp": true,
+              "total_cadip": true,
+              "total_ddp": true
+            },
+            "indexByName": {},
+            "renameByName": {}
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "less1H100",
+            "binary": {
+              "left": "less1h",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "100"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "max"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "timeliness ",
+            "binary": {
+              "left": "less1H100",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "total"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "description": "1h45",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 3,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "semi-dark-red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 95
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 3,
+        "y": 6
+      },
+      "id": 316,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto",
+        "text": {}
+      },
+      "pluginVersion": "10.4.1",
+      "targets": [
+        {
+          "alias": "less_1H_ddp",
+          "bucketAggs": [
+            {
+              "field": "first_frame_start",
+              "id": "4",
+              "settings": {
+                "interval": "1d",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P56531AF06C445A86"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_acq_delivery_timeliness: [0 TO 6300000000] AND mission:$mission AND satellite_id:$satellite_unit AND mission:S5 AND ground_station:$ground_station AND downlink_orbit:$downlink_orbit_ddp AND (cams_tickets: $cams_ids)\n",
+          "refId": "A",
+          "timeField": "planned_data_start"
+        },
+        {
+          "alias": "total_ddp",
+          "bucketAggs": [
+            {
+              "field": "first_frame_start",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P56531AF06C445A86"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "mission:$mission AND satellite_id:$satellite_unit AND mission:S5 AND ground_station:$ground_station AND downlink_orbit:$downlink_orbit_ddp AND from_acq_delivery_timeliness:* AND (cams_tickets: $cams_ids)",
+          "refId": "B",
+          "timeField": "planned_data_start"
+        },
+        {
+          "alias": "less_1H_cadip",
+          "bucketAggs": [
+            {
+              "field": "downlink_start",
+              "id": "4",
+              "settings": {
+                "interval": "1d",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE0BF01AC3817A56D"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_acq_delivery_timeliness: [0 TO 6300000000] AND mission:$mission AND satellite_id:$satellite_unit AND ground_station:$ground_station AND downlink_orbit:$downlink_orbit_cadip AND (cams_tickets: $cams_ids)",
+          "refId": "C",
+          "timeField": "planned_data_start"
+        },
+        {
+          "alias": "total_cadip",
+          "bucketAggs": [
+            {
+              "field": "downlink_start",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE0BF01AC3817A56D"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "mission:$mission AND satellite_id:$satellite_unit AND ground_station:$ground_station AND downlink_orbit:$downlink_orbit_cadip AND from_acq_delivery_timeliness:* AND (cams_tickets: $cams_ids)",
+          "refId": "D",
+          "timeField": "planned_data_start"
+        }
+      ],
+      "title": "Timeliness ( < 105min )",
+      "transformations": [
+        {
+          "id": "seriesToRows",
+          "options": {}
+        },
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "Metric": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value": {
+                "aggregations": [
+                  "sum"
+                ],
+                "operation": "aggregate"
+              }
+            }
+          }
+        },
+        {
+          "id": "rowsToFields",
+          "options": {}
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "total",
+            "binary": {
+              "left": "total_cadip",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "total_ddp"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "less1h",
+            "binary": {
+              "left": "less_1H_cadip",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "less_1H_ddp"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "less_3H_cadip": true,
+              "less_3H_ddp": true,
+              "total_cadip": true,
+              "total_ddp": true
+            },
+            "indexByName": {},
+            "renameByName": {}
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "less1H100",
+            "binary": {
+              "left": "less1h",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "100"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "max"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "timeliness ",
+            "binary": {
+              "left": "less1H100",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "total"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "super-light-orange",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "semi-dark-red",
+                "value": null
+              }
+            ]
+          },
+          "unit": "h"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 6,
+        "y": 8
+      },
+      "id": 312,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.4.1",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "planned_data_start",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P56531AF06C445A86"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "from_acq_delivery_timeliness",
+              "id": "1",
+              "type": "max"
+            }
+          ],
+          "query": "mission:$mission AND satellite_id:$satellite_unit AND mission:S5 AND ground_station:$ground_station AND downlink_orbit:$downlink_orbit_ddp AND (cams_tickets: $cams_ids)",
+          "refId": "A",
+          "timeField": "planned_data_start"
+        },
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "planned_data_start",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE0BF01AC3817A56D"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "from_acq_delivery_timeliness",
+              "id": "1",
+              "type": "max"
+            }
+          ],
+          "query": "mission:$mission AND satellite_id:$satellite_unit AND ground_station:$ground_station AND downlink_orbit:$downlink_orbit_cadip AND (cams_tickets: $cams_ids)",
+          "refId": "B",
+          "timeField": "planned_data_start"
+        }
+      ],
+      "title": "Max timeliness acquisition",
+      "transformations": [
+        {
+          "id": "joinByField",
+          "options": {}
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "mode": "seriesToRows",
+            "reducers": [
+              "max"
+            ]
+          }
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "mode": "reduceFields",
+            "reducers": [
+              "max"
+            ]
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "Max",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "3600000000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 3,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 5
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 3,
+        "y": 10
+      },
+      "id": 309,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto",
+        "text": {}
+      },
+      "pluginVersion": "10.4.1",
+      "targets": [
+        {
+          "alias": "less_3H_ddp",
+          "bucketAggs": [
+            {
+              "field": "first_frame_start",
+              "id": "4",
+              "settings": {
+                "interval": "1d",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P56531AF06C445A86"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_acq_delivery_timeliness: [6300000000 TO *] AND mission:$mission AND satellite_id:$satellite_unit AND mission:S5 AND ground_station:$ground_station AND downlink_orbit: $downlink_orbit_ddp ",
+          "refId": "A",
+          "timeField": "planned_data_start"
+        },
+        {
+          "alias": "total_ddp",
+          "bucketAggs": [
+            {
+              "field": "first_frame_start",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P56531AF06C445A86"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "mission:$mission AND satellite_id:$satellite_unit AND mission:S5 AND ground_station:$ground_station AND downlink_orbit: $downlink_orbit_ddp AND from_acq_delivery_timeliness:* AND (cams_tickets: $cams_ids)",
+          "refId": "B",
+          "timeField": "planned_data_start"
+        },
+        {
+          "alias": "less_3H_cadip",
+          "bucketAggs": [
+            {
+              "field": "downlink_start",
+              "id": "4",
+              "settings": {
+                "interval": "1d",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE0BF01AC3817A56D"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_acq_delivery_timeliness: [6300000000 TO *] AND mission:$mission AND satellite_id:$satellite_unit AND ground_station:$ground_station AND downlink_orbit: $downlink_orbit_cadip AND (cams_tickets: $cams_ids)",
+          "refId": "C",
+          "timeField": "planned_data_start"
+        },
+        {
+          "alias": "total_cadip",
+          "bucketAggs": [
+            {
+              "field": "downlink_start",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE0BF01AC3817A56D"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "mission:$mission AND satellite_id:$satellite_unit AND ground_station:$ground_station AND downlink_orbit: $downlink_orbit_cadip AND from_acq_delivery_timeliness:* AND (cams_tickets: $cams_ids)",
+          "refId": "D",
+          "timeField": "planned_data_start"
+        }
+      ],
+      "title": "Timeliness ( > 105min )",
+      "transformations": [
+        {
+          "id": "seriesToRows",
+          "options": {}
+        },
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "Metric": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value": {
+                "aggregations": [
+                  "sum"
+                ],
+                "operation": "aggregate"
+              }
+            }
+          }
+        },
+        {
+          "id": "rowsToFields",
+          "options": {}
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "total",
+            "binary": {
+              "left": "total_cadip",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "total_ddp"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "less3h",
+            "binary": {
+              "left": "less_3H_cadip",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "less_3H_ddp"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "disabled": true,
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "less_3H_cadip": true,
+              "less_3H_ddp": true,
+              "total_cadip": true,
+              "total_ddp": true
+            },
+            "indexByName": {},
+            "renameByName": {}
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "less3H100",
+            "binary": {
+              "left": "less3h",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "100"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "max"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "timeliness ",
+            "binary": {
+              "left": "less3H100",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "total"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "super-light-purple",
+            "mode": "fixed"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "semi-dark-red",
+                "value": null
+              }
+            ]
+          },
+          "unit": "\u00b5s"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 6,
+        "y": 11
+      },
+      "id": 313,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.4.1",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P56531AF06C445A86"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "10000"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "mission:$mission AND satellite_id:$satellite_unit AND mission:S5 AND ground_station:$ground_station AND downlink_orbit:$downlink_orbit_ddp AND (cams_tickets: $cams_ids)",
+          "refId": "A",
+          "timeField": "planned_data_start"
+        },
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE0BF01AC3817A56D"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "10000"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "mission:$mission AND satellite_id:$satellite_unit AND ground_station:$ground_station AND downlink_orbit:$downlink_orbit_cadip AND (cams_tickets: $cams_ids)",
+          "refId": "B",
+          "timeField": "planned_data_start"
+        }
+      ],
+      "title": "StdDev timeliness acquisition",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "pattern": "from_acq_delivery_timeliness"
+            }
+          }
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "reducers": [
+              "stdDev"
+            ]
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "inspect": true
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "semi-dark-red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 95
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "satellite_unit"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 89
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sensing_end_date"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 210
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sensing_start_date"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 198
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "absolute_orbit"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 105
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "datatake_id"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 116
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "instrument_mode"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 135
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "timeliness"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 134
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "product_level"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 132
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "product_type"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 149
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "from_sensing_timeliness"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 188
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "name"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 801
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Product Name"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 696
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CAMs Link"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "title": "",
+                    "url": "https://esa-cams.atlassian.net/browse/${__value.raw}"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 24,
+        "x": 0,
+        "y": 14
+      },
+      "id": 293,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Timeliness (h)"
+          }
+        ]
+      },
+      "pluginVersion": "10.4.1",
+      "targets": [
+        {
+          "alias": "< 3h",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P56531AF06C445A86"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "10000"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "from_acq_delivery_timeliness: [3600000000 TO *] AND mission:$mission AND satellite_id:$satellite_unit AND mission:S5 AND ground_station:$ground_station AND downlink_orbit:$downlink_orbit_ddp AND (cams_tickets: $cams_ids)",
+          "refId": "A",
+          "timeField": "planned_data_start"
+        },
+        {
+          "alias": "< 3h",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE0BF01AC3817A56D"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "10000"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "from_acq_delivery_timeliness: [3600000000 TO *] AND mission:$mission AND satellite_id:$satellite_unit AND ground_station:$ground_station AND downlink_orbit:$downlink_orbit_cadip AND (cams_tickets: $cams_ids)",
+          "refId": "B",
+          "timeField": "planned_data_start"
+        }
+      ],
+      "title": "Out of timeliness acquisition ( > 60min )",
+      "transformations": [
+        {
+          "id": "joinByField",
+          "options": {
+            "byField": "publication_date",
+            "mode": "outer"
+          }
+        },
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "time",
+                "targetField": "delivery_start"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "delivery_stop"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "downlink_start"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "downlink_stop"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "planned_data_stop"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "From acquisition delivery timeliness (h)",
+            "binary": {
+              "left": "from_acq_delivery_timeliness",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "3600000000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "include": [
+                "from_sensing_timeliness"
+              ],
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "AcquiredTFs": true,
+              "CorrectedDataTFs": true,
+              "CorrectedTFs": true,
+              "DataTFs": true,
+              "ErrorDataTFs": true,
+              "ErrorTFs": true,
+              "TotalChunks": true,
+              "TotalVolume": true,
+              "UncorrectableDataTFs": true,
+              "UncorrectableTFs": true,
+              "_id": true,
+              "_index": true,
+              "_type": true,
+              "acquisition_id": true,
+              "antenna_id": true,
+              "antenna_status": true,
+              "cams_tickets": true,
+              "content_length": true,
+              "delivery_push_status": true,
+              "downlink_status": true,
+              "from_sensing_timeliness": true,
+              "front_end_id": true,
+              "front_end_status": true,
+              "global_status": true,
+              "ground_station": true,
+              "highlight": true,
+              "key": true,
+              "last_attached_ticket": false,
+              "last_attached_ticket_url": true,
+              "mission": true,
+              "modification_date": true,
+              "num_channels": true,
+              "planned_data_stop": false,
+              "polarization": true,
+              "product_class": true,
+              "product_uuid": true,
+              "publication_date": true,
+              "quality_infos": true,
+              "reportFolder": true,
+              "retransfer": false,
+              "satellite_id": false,
+              "sensing_duration": true,
+              "service_id": true,
+              "service_type": true,
+              "session_id": false,
+              "sort": true,
+              "updateTime": true
+            },
+            "indexByName": {
+              "AcquiredTFs": 14,
+              "CorrectedDataTFs": 15,
+              "CorrectedTFs": 16,
+              "DataTFs": 17,
+              "ErrorDataTFs": 18,
+              "ErrorTFs": 19,
+              "From acquisition delivery timeliness (h)": 36,
+              "TotalChunks": 20,
+              "TotalVolume": 21,
+              "UncorrectableDataTFs": 22,
+              "UncorrectableTFs": 23,
+              "_id": 1,
+              "_index": 2,
+              "_type": 3,
+              "acquisition_id": 24,
+              "antenna_id": 25,
+              "antenna_status": 26,
+              "cams_description": 12,
+              "cams_origin": 11,
+              "cams_tickets": 8,
+              "delivery_bitrate": 27,
+              "delivery_push_status": 28,
+              "delivery_start": 29,
+              "delivery_stop": 30,
+              "downlink_orbit": 31,
+              "downlink_start": 32,
+              "downlink_status": 33,
+              "downlink_stop": 34,
+              "from_acq_delivery_timeliness": 35,
+              "front_end_id": 37,
+              "front_end_status": 38,
+              "global_status": 39,
+              "ground_station": 40,
+              "highlight": 4,
+              "last_attached_ticket": 10,
+              "last_attached_ticket_url": 9,
+              "mission": 0,
+              "num_channels": 41,
+              "planned_data_start": 13,
+              "planned_data_stop": 42,
+              "publication_date": 5,
+              "quality_infos": 43,
+              "reportFolder": 44,
+              "retransfer": 45,
+              "satellite_id": 46,
+              "session_id": 47,
+              "sort": 6,
+              "station_unit_id": 48,
+              "updateTime": 7
+            },
+            "renameByName": {
+              "From acquisition delivery timeliness (h)": "Timeliness (h)",
+              "From sensing timeliness (h)": "Timeliness (h)",
+              "absolute_orbit": "Absolute Orbit",
+              "cams_description": "CAMs Descirpiton",
+              "cams_origin": "CAMs Origin",
+              "datatake_id": "Datatake ID",
+              "from_acq_delivery_timeliness": "Timeliness (\u00b5s)",
+              "from_sensing_timeliness": "",
+              "instrument_mode": "Instrument",
+              "last_attached_ticket": "CAMs Link",
+              "last_attached_ticket_url": "",
+              "name": "Product Name",
+              "product_level": "Level",
+              "product_type": "Type",
+              "publication_date": "PRIP Publication Date",
+              "satellite_unit": "Satellite",
+              "sensing_end_date": "Sensing End",
+              "sensing_start_date": "Sensing Start",
+              "timeliness": "Category"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [
+    "Timeliness"
+  ],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "hide": 0,
+        "includeAll": true,
+        "label": "Mission",
+        "multi": true,
+        "name": "mission",
+        "options": [
+          {
+            "selected": true,
+            "text": "All",
+            "value": "$__all"
+          },
+          {
+            "selected": false,
+            "text": "S1",
+            "value": "S1"
+          },
+          {
+            "selected": false,
+            "text": "S2",
+            "value": "S2"
+          },
+          {
+            "selected": false,
+            "text": "S3",
+            "value": "S3"
+          },
+          {
+            "selected": false,
+            "text": "S5",
+            "value": "S5"
+          }
+        ],
+        "query": "S1,S2,S3,S5",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P4E6B5BC91908CBD9"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"satellite_unit\",\"query\":\"mission: ${mission}\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Satellite",
+        "multi": true,
+        "name": "satellite_unit",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"satellite_unit\",\"query\":\"mission: ${mission}\"}",
+        "refresh": 1,
+        "regex": ".*[^_]",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "hide": 0,
+        "includeAll": true,
+        "label": "Reception Station",
+        "multi": true,
+        "name": "ground_station",
+        "options": [
+          {
+            "selected": true,
+            "text": "All",
+            "value": "$__all"
+          },
+          {
+            "selected": false,
+            "text": "INS",
+            "value": "INS"
+          },
+          {
+            "selected": false,
+            "text": "INU",
+            "value": "INU"
+          },
+          {
+            "selected": false,
+            "text": "MPS",
+            "value": "MPS"
+          },
+          {
+            "selected": false,
+            "text": "MTI",
+            "value": "MTI"
+          },
+          {
+            "selected": false,
+            "text": "NSG",
+            "value": "NSG"
+          },
+          {
+            "selected": false,
+            "text": "SGS",
+            "value": "SGS"
+          }
+        ],
+        "query": "INS,INU,MPS,MTI,NSG,SGS",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "allValue": "* OR ( NOT cams_tickets: *)",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "PB40898D8F967833A"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"key\",\"query\":\"acquisition_pass:*\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "CAMS Ticket",
+        "multi": true,
+        "name": "cams_ids",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"key\",\"query\":\"acquisition_pass:*\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P56531AF06C445A86"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"downlink_orbit\",\"query\":\"mission:$mission AND satellite_id:$satellite_unit AND ground_station:$ground_station\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Downlink Orbit DDP",
+        "multi": true,
+        "name": "downlink_orbit_ddp",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"downlink_orbit\",\"query\":\"mission:$mission AND satellite_id:$satellite_unit AND ground_station:$ground_station\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "PE0BF01AC3817A56D"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"downlink_orbit\",\"query\":\"mission:$mission AND satellite_id:$satellite_unit AND ground_station:$ground_station\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Downlink Orbit Cadip",
+        "multi": true,
+        "name": "downlink_orbit_cadip",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"downlink_orbit\",\"query\":\"mission:$mission AND satellite_id:$satellite_unit AND ground_station:$ground_station\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "datasource": {
+          "type": "datasource",
+          "uid": "-- Mixed --"
+        },
+        "filters": [],
+        "hide": 0,
+        "name": "Filters",
+        "skipUrlSync": false,
+        "type": "adhoc"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-1M/M",
+    "to": "now-1M/M"
+  },
+  "timepicker": {},
+  "timezone": "utc",
+  "title": "Acquisition Timeliness",
+  "uid": "ArGraZm4kgdfg",
+  "weekStart": ""
+}

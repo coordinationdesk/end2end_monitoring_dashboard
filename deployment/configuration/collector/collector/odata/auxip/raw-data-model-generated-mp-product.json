@@ -1,0 +1,80 @@
+{
+    "models": [
+        {
+            "index": "raw-data-mp-product",
+            "name": "MpProduct",
+            "fields": [
+                {
+                    "name": "satellite_id",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "datatake_id",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "observation_time_start",
+                    "type": "Date"
+                },
+                {
+                    "name": "observation_time_stop",
+                    "type": "Date"
+                },
+                {
+                    "name": "observation_duration",
+                    "type": "Integer"
+                },
+                {
+                    "name": "l0_sensing_time_start",
+                    "type": "Date"
+                },
+                {
+                    "name": "l0_sensing_duration",
+                    "type": "Integer"
+                },
+                {
+                    "name": "number_of_scenes",
+                    "type": "Integer"
+                },
+                {
+                    "name": "absolute_orbit",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "relative_orbit",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "polarization",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "instrument_mode",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "instrument_swath",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "timeliness",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "interface_name",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "production_service_type",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "production_service_name",
+                    "type": "Keyword"
+                }
+            ],
+            "partition_field": "ingestionTime",
+            "partition_format": "static"
+        }
+    ]
+}

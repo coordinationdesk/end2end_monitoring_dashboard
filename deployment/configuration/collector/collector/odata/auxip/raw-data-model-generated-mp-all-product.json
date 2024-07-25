@@ -1,0 +1,116 @@
+{
+    "models": [
+        {
+            "index": "raw-data-mp-all-product",
+            "name": "MpAllProduct",
+            "fields": [
+                {
+                    "name": "reportFolder",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "satellite_id",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "mission",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "datatake_id",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "effective_downlink_start",
+                    "type": "Date"
+                },
+                {
+                    "name": "effective_downlink_stop",
+                    "type": "Date"
+                },
+                {
+                    "name": "downlink_duration",
+                    "type": "Long"
+                },
+                {
+                    "name": "latency",
+                    "type": "Long"
+                },
+                {
+                    "name": "station",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "downlink_polarization",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "downlink_absolute_orbit",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "relative_orbit",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "absolute_orbit",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "channel",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "partial",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "interface_name",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "acquisition_start",
+                    "type": "Date"
+                },
+                {
+                    "name": "acquisition_stop",
+                    "type": "Date"
+                },
+                {
+                    "name": "acquisition_duration",
+                    "type": "Long"
+                },
+                {
+                    "name": "number_of_scenes",
+                    "type": "Integer"
+                },
+                {
+                    "name": "timeliness",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "status",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "polarization",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "instrument_mode",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "session_id",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "downlink_execution_time",
+                    "type": "Date"
+                }
+            ],
+            "partition_field": "ingestionTime",
+            "partition_format": "static"
+        }
+    ]
+}

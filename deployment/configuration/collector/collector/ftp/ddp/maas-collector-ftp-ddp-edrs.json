@@ -1,0 +1,53 @@
+{
+    "collectors": [
+        {
+            "class": "FTPCollectorConfiguration",
+            "id_field": [
+                "session_id",
+                "interface_name",
+                "time_created",
+                "reportName"
+            ],
+            "routing_key": "new.raw.data.ddp-data-available",
+            "interface_name": "DDP_EDRS_EDIP",
+            "file_pattern": "*_DSIB.xml",
+            "model": "DdpDataAvailable",
+            "directories": [
+                "/NOMINAL/S1A/",
+                "/NOMINAL/S1B/",
+                "/NOMINAL/S2A/",
+                "/NOMINAL/S2B/"
+            ],
+            "refresh_interval": 10,
+            "expected_collect_interval": 2160,
+            "recurse": true,
+            "store_meta": [
+                "reportFolder",
+                "interface_name",
+                "production_service_name"
+            ],
+            "extractor": {
+                "class": "EdrsDdpExtractor",
+                "args": {
+                    "attr_map": {
+                        "session_id": "session_id",
+                        "time_start": "time_start",
+                        "time_stop": "time_stop",
+                        "time_created": "time_created",
+                        "time_finished": "time_finished",
+                        "data_size": "data_size",
+                        "interface_name": {
+                            "python": "lambda root: 'DDP_EDRS_EDIP'"
+                        },
+                        "production_service_type": {
+                            "python": "lambda root: 'DDP'"
+                        },
+                        "production_service_name": {
+                            "python": "lambda root: 'EDRS_EDIP'"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

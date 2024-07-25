@@ -1,0 +1,957 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 8,
+      "panels": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 24,
+            "x": 0,
+            "y": 1
+          },
+          "id": 10,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "This dashboard features Planned Downlink Acquisition.\nThe information displayed was originally taken from MP ALL at AUXIP  \n\nMPS: Maspalomas  \nINS/INU: Inuvik (INU is for S5p, INS for S2)  \nNSG: Neustrelitz  \nMTI: Matera  \nSGS: Svalbard  \n\nInformation is taken from Mission Plannings.\n\nInformation is available for the following missions: S1 and S2.\n\nTime reference for this dashboard is : effective_downlink_start\n\nImportant notice : Tables & timelines can only display up to 10 000 entries. Please make use of filters to narrow down the retrieved data and get a more realistic view.",
+            "mode": "markdown"
+          },
+          "pluginVersion": "10.4.1",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [
+                {
+                  "field": "sensing_start_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "",
+              "refId": "A",
+              "timeField": "sensing_start_date"
+            }
+          ],
+          "type": "text"
+        }
+      ],
+      "title": "Dashboard Description",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 6,
+      "panels": [],
+      "title": "Planned Downlinks",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "mappings": [
+            {
+              "options": {
+                "EDRS-A": {
+                  "color": "dark-orange",
+                  "index": 0
+                },
+                "EDRS-B": {
+                  "color": "orange",
+                  "index": 1
+                },
+                "EDRS-C": {
+                  "color": "super-light-orange",
+                  "index": 2
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "pattern": "*INS*",
+                "result": {
+                  "color": "dark-purple",
+                  "index": 3
+                }
+              },
+              "type": "regex"
+            },
+            {
+              "options": {
+                "pattern": "*SGS*",
+                "result": {
+                  "color": "semi-dark-purple",
+                  "index": 4
+                }
+              },
+              "type": "regex"
+            },
+            {
+              "options": {
+                "pattern": "*MTI*",
+                "result": {
+                  "color": "purple",
+                  "index": 5
+                }
+              },
+              "type": "regex"
+            },
+            {
+              "options": {
+                "pattern": "*MPS*",
+                "result": {
+                  "color": "light-purple",
+                  "index": 6
+                }
+              },
+              "type": "regex"
+            },
+            {
+              "options": {
+                "pattern": "*NSG*",
+                "result": {
+                  "color": "super-light-purple",
+                  "index": 7
+                }
+              },
+              "type": "regex"
+            }
+          ],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "purple",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Count"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "mode": "thresholds"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 3,
+        "x": 0,
+        "y": 2
+      },
+      "id": 12,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "distinctCount"
+          ],
+          "fields": "/^downlink_absolute_orbit$/",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.4.1",
+      "repeat": "station",
+      "repeatDirection": "v",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "downlink_absolute_orbit",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "100000"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P293BB09C7A4C4C01"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "mission:$mission AND satellite_unit:$satellite AND datatake_id:$datatake_id AND station: *${station:raw}*",
+          "refId": "B",
+          "timeField": "effective_downlink_start"
+        }
+      ],
+      "title": "Count $station",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Dashboard --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "links": [
+            {
+              "title": "Datatake Completeness",
+              "url": "${__data.fields[\"Datatake_link\"]}=1&var-satellite=${__data.fields[\"satellite_unit\"]}&var-datatake_id=${__data.fields.datatake_id}&from=${__data.fields[\"acq_onehour\"]}&to=${__data.fields[\"acq_threehours\"]}"
+            }
+          ],
+          "mappings": [
+            {
+              "options": {
+                "0S1": {
+                  "index": 0,
+                  "text": "d/sStGi_ynz/s1-datatake-completeness-produced-vs-planned?orgId"
+                },
+                "0S2": {
+                  "index": 1,
+                  "text": "d/sStGi_ymz/s2-datatake-completeness-produced-vs-planned?orgId"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "purple",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 21,
+        "x": 3,
+        "y": 2
+      },
+      "id": 4,
+      "options": {
+        "colorByField": "station",
+        "colors": [
+          {
+            "color": "#FA6400",
+            "text": "EDRS-A"
+          },
+          {
+            "color": "#FF9830",
+            "text": "EDRS-B"
+          },
+          {
+            "color": "#FFCB7D",
+            "text": "EDRS-C"
+          },
+          {
+            "color": "#8F3BB8",
+            "text": "INS_"
+          },
+          {
+            "color": "#A352CC",
+            "text": "SGS_"
+          },
+          {
+            "color": "#B877D9",
+            "text": "MTI_"
+          },
+          {
+            "color": "#CA95E5",
+            "text": "MPS_"
+          },
+          {
+            "color": "#DEB6F2",
+            "text": "NSG_"
+          }
+        ],
+        "endField": "effective_downlink_stop",
+        "experiments": {
+          "enabled": false,
+          "lockToExtents": false,
+          "relativeXAxis": false
+        },
+        "labelFields": [
+          "satellite_id",
+          "station",
+          "datatake_id",
+          "reportName",
+          "partial"
+        ],
+        "showYAxis": true,
+        "sortBy": "text",
+        "sortOrder": "asc",
+        "startField": "effective_downlink_start",
+        "textField": "satellite_unit"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Dashboard --"
+          },
+          "panelId": 2,
+          "refId": "A"
+        }
+      ],
+      "title": "Downlink Timeline",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "mission"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "acquisition_start_link",
+            "binary": {
+              "left": "acquisition_start",
+              "reducer": "sum",
+              "right": "0"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "time",
+                "targetField": "acquisition_start_link"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "acq_onehour",
+            "binary": {
+              "left": "acquisition_start_link",
+              "operator": "-",
+              "reducer": "sum",
+              "right": "3600000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "acq_threehours",
+            "binary": {
+              "left": "acquisition_start_link",
+              "reducer": "sum",
+              "right": "10800000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "Total": "Datatake_link"
+            }
+          }
+        }
+      ],
+      "type": "marcusolsson-gantt-panel"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P293BB09C7A4C4C01"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "inspect": false
+          },
+          "mappings": [
+            {
+              "options": {
+                "0S1": {
+                  "index": 0,
+                  "text": "d/sStGi_ynz/s1-datatake-completeness-produced-vs-planned?orgId"
+                },
+                "0S2": {
+                  "index": 1,
+                  "text": "d/sStGi_ymz/s2-datatake-completeness-produced-vs-planned?orgId"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Datatake ID"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "title": "",
+                    "url": "${__data.fields[\"Datatake_link\"]}=1&var-satellite=${__data.fields[\"satellite_unit\"]}&var-datatake_id=${__data.fields.datatake_id}&from=${__data.fields[\"acq_onehour\"]}&to=${__data.fields[\"acq_threehours\"]}"
+                  }
+                ]
+              },
+              {
+                "id": "custom.width",
+                "value": 116
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Datatake_link"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Mission"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 91
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Satellite"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 91
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Station"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 112
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Channel"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 94
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Polarization"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 126
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Partial"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 89
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 21,
+        "x": 3,
+        "y": 11
+      },
+      "id": 2,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": [
+            "downlink_duration"
+          ],
+          "reducer": [
+            "count"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "Acquisition start - 1h"
+          }
+        ]
+      },
+      "pluginVersion": "10.4.1",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P293BB09C7A4C4C01"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "10000"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "mission:$mission AND satellite_unit:$satellite AND station: *${station:raw}* AND datatake_id : $datatake_id",
+          "refId": "A",
+          "timeField": "effective_downlink_start"
+        }
+      ],
+      "title": "Downlink Table",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "mission"
+              ],
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "acquisition_start_link",
+            "binary": {
+              "left": "acquisition_start",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "0"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "time",
+                "targetField": "acquisition_start_link"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "acq_onehour",
+            "binary": {
+              "left": "acquisition_start_link",
+              "operator": "-",
+              "reducer": "sum",
+              "right": "3600000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "acq_threehours",
+            "binary": {
+              "left": "acquisition_start_link",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "10800000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Total": false,
+              "_id": true,
+              "_index": true,
+              "_type": true,
+              "acq_onehour": false,
+              "acq_threehours": false,
+              "acquisition_start_link": true,
+              "application_date": true,
+              "highlight": true,
+              "latency": true,
+              "reportName": true,
+              "sort": true,
+              "updateTime": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "_id": 10,
+              "_index": 11,
+              "_type": 12,
+              "application_date": 18,
+              "channel": 8,
+              "datatake_id": 2,
+              "downlink_absolute_orbit": 4,
+              "downlink_duration": 7,
+              "downlink_polarization": 9,
+              "effective_downlink_start": 5,
+              "effective_downlink_stop": 6,
+              "highlight": 13,
+              "latency": 14,
+              "mission": 0,
+              "reportName": 15,
+              "satellite_unit": 1,
+              "sort": 16,
+              "station": 3,
+              "updateTime": 17
+            },
+            "renameByName": {
+              "Total": "Datatake_link",
+              "acq_onehour": "Acquisition start - 1h",
+              "acq_threehours": "Acquisition start + 3h",
+              "acquisition_absolute_orbit": "Acq Absolute Orbit",
+              "acquisition_relative_orbit": "Acq Relative Orbit",
+              "acquisition_start": "Acq Start",
+              "acquisition_stop": "Acq Stop",
+              "channel": "Channel",
+              "datatake_id": "Datatake ID",
+              "downlink_absolute_orbit": "Dwnlk Absolute Orbit",
+              "downlink_duration": "Dwnlk Duration",
+              "downlink_polarization": "Polarization",
+              "effective_downlink_start": "Effective Dwnlk Start",
+              "effective_downlink_stop": "Effective Dwnlk Stop",
+              "mission": "Mission",
+              "partial": "Partial",
+              "satellite_unit": "Satellite",
+              "station": "Station"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [
+    "Acquisition"
+  ],
+  "templating": {
+    "list": [
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P293BB09C7A4C4C01"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"mission\",\"query\":\"mission: *\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Mission",
+        "multi": true,
+        "name": "mission",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"mission\",\"query\":\"mission: *\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P293BB09C7A4C4C01"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"satellite_unit\",\"query\":\"mission: $mission\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Satellite",
+        "multi": true,
+        "name": "satellite",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"satellite_unit\",\"query\":\"mission: $mission\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P293BB09C7A4C4C01"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"station\",\"query\":\"mission:$mission AND satellite_unit:$satellite\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Station",
+        "multi": false,
+        "name": "station",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"station\",\"query\":\"mission:$mission AND satellite_unit:$satellite\"}",
+        "refresh": 1,
+        "regex": "/([^_]+)/g",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P293BB09C7A4C4C01"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"datatake_id\",\"query\":\"mission:$mission AND satellite_unit:$satellite AND station:$station\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Datatake ID",
+        "multi": true,
+        "name": "datatake_id",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"datatake_id\",\"query\":\"mission:$mission AND satellite_unit:$satellite AND station:$station\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Acquisition Planned Downlinks",
+  "uid": "RIn0sd37z",
+  "weekStart": ""
+}

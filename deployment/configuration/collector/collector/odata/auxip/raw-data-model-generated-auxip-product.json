@@ -1,0 +1,56 @@
+{
+    "models": [
+        {
+            "index": "raw-data-auxip-product",
+            "name": "AuxipProduct",
+            "fields": [
+                {
+                    "name": "product_id",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "product_name",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "content_length",
+                    "type": "Long"
+                },
+                {
+                    "name": "publication_date",
+                    "type": "Date"
+                },
+                {
+                    "name": "origin_date",
+                    "type": "Date"
+                },
+                {
+                    "name": "eviction_date",
+                    "type": "Date"
+                },
+                {
+                    "name": "start_date",
+                    "type": "Date"
+                },
+                {
+                    "name": "end_date",
+                    "type": "Date"
+                },
+                {
+                    "name": "interface_name",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "production_service_type",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "production_service_name",
+                    "type": "Keyword"
+                }
+            ],
+            "partition_field": "ingestionTime",
+            "partition_format": "static"
+        }
+    ]
+}

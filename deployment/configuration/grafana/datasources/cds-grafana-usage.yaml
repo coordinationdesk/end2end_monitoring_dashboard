@@ -1,0 +1,20 @@
+apiVersion: 1
+datasources:
+- name: cds-grafana-usage
+  type: elasticsearch
+  access: proxy
+  url: 'https://omcs-es-node:9200'
+  database: ''
+  basicAuth: true
+  isDefault: false
+  jsonData:
+    includeFrozen: false
+    index: cds-grafana-usage
+    oauthPassThru: false
+    sigV4Auth: false
+    timeField: access_date
+    tlsSkipVerify: true
+  editable: true
+  basicAuthUser: 'admin'
+  secureJsonData:
+    basicAuthPassword: 'admin'

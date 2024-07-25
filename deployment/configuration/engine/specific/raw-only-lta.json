@@ -1,0 +1,24 @@
+{
+    "amqp": [
+        {
+            "name": "collect-exchange",
+            "queues": [
+                {
+                    "name": "collect-new.raw.data.lta-product",
+                    "routing_key": "new.raw.data.lta-product",
+                    "events": [
+                        "CONSOLIDATE_PUBLICATION",
+                        {
+                            "id": "CONSOLIDATE_LTA_PRODUCT",
+                            "send_reports": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "etl-exchange",
+            "queues": []
+        }
+    ]
+}

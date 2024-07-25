@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: esa-csc-prd-cce-omcs-db
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: esa-csc-prd-cce-omcs-etl
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: esa-csc-prd-cce-omcs-front
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: storage
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: monitoring
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: container-registry

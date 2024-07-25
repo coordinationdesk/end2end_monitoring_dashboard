@@ -1,0 +1,3367 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 16,
+        "x": 0,
+        "y": 0
+      },
+      "id": 6,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<div style=\"position:relative;font-size:30px;color:#e8e8e4;background-color:#003247;width:100%;height:100px;text-align:center;padding-top:20px\">\r\n   Welcome to OMCS Operational Dashboard\r\n   <div>\r\n   <div style=\"position:absolute;text-align:right;font-size:12px;padding-right:15px;font-size:12px\">\r\n      Release Date: ${deploymentDate} | v${version}\r\n   </div>\r\n</div>",
+        "mode": "html"
+      },
+      "pluginVersion": "10.2.0",
+      "transparent": true,
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P4E6B5BC91908CBD9"
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 8,
+        "x": 16,
+        "y": 0
+      },
+      "id": 31,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<center><p style=\"font-size:18px\">Archiving Completeness</center></p> \r\n\r\n",
+        "mode": "html"
+      },
+      "pluginVersion": "10.2.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P58807B943476643B"
+      },
+      "description": "Percentage of product published at LTA vs expected products to be published from PRIP\n\nTime Period (based on publication date at PRIP) : now-3d to now-4d (24h sliding window, 3 days in the past)",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "index": 0,
+                  "text": "0%"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": null
+              },
+              {
+                "color": "dark-orange",
+                "value": 80
+              },
+              {
+                "color": "dark-yellow",
+                "value": 95
+              },
+              {
+                "color": "dark-green",
+                "value": 99
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 16,
+        "y": 2
+      },
+      "hideTimeOverride": true,
+      "id": 11,
+      "links": [
+        {
+          "title": "LTA Completeness",
+          "url": "/grafana/d/KnP3Me7Vk/lta-completeness?orgId=1&var-mission=S1&var-satellite=All&var-product_type=All&var-lta=All&var-all_lta=All&from=now-4d&to=now-3d"
+        }
+      ],
+      "options": {
+        "colorMode": "background_solid",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "/^Result$/",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "pluginVersion": "10.2.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P58807B943476643B"
+          },
+          "metrics": [
+            {
+              "field": "nb_lta_served",
+              "id": "1",
+              "type": "sum"
+            }
+          ],
+          "query": "mission: S1 AND product_level:$product_level_lta AND product_type: $product_type_lta AND prip_id: *",
+          "refId": "lta_served",
+          "timeField": "prip_publication_date"
+        },
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P58807B943476643B"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "expected_lta_number",
+              "id": "1",
+              "type": "sum"
+            }
+          ],
+          "query": "mission: S1 AND product_level:$product_level_lta AND product_type: $product_type_lta AND prip_id: *",
+          "refId": "lta_expected",
+          "timeField": "prip_publication_date"
+        }
+      ],
+      "timeFrom": "1d",
+      "timeShift": "3d",
+      "title": "S1",
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "mode": "reduceFields",
+            "reducers": [
+              "sum"
+            ]
+          }
+        },
+        {
+          "id": "concatenate",
+          "options": {}
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "obtained",
+            "binary": {
+              "left": "Sum nb_lta_served",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "100"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Result",
+            "binary": {
+              "left": "obtained",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Sum expected_lta_number"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P58807B943476643B"
+      },
+      "description": "Percentage of product published at LTA vs expected products to be published from PRIP\n\nTime Period (based on publication date at PRIP) : now-3d to now-4d (24h sliding window, 3 days in the past)",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "index": 0,
+                  "text": "0%"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": null
+              },
+              {
+                "color": "dark-orange",
+                "value": 80
+              },
+              {
+                "color": "dark-yellow",
+                "value": 95
+              },
+              {
+                "color": "dark-green",
+                "value": 99
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 18,
+        "y": 2
+      },
+      "hideTimeOverride": true,
+      "id": 29,
+      "links": [
+        {
+          "title": "LTA Completeness",
+          "url": "/grafana/d/yDEHKjS4k/dd-completeness?orgId=1&var-mission=S2&var-satellite=All&var-product_level=All&var-product_type=All&var-timeliness=All&var-datatake_id=All&var-instrument_mode=All&var-dd_service=dddas&from=now-4d&to=now-3d"
+        }
+      ],
+      "options": {
+        "colorMode": "background_solid",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "/^Result$/",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "pluginVersion": "10.2.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P58807B943476643B"
+          },
+          "metrics": [
+            {
+              "field": "nb_lta_served",
+              "id": "1",
+              "type": "sum"
+            }
+          ],
+          "query": "mission: S2 AND product_level:$product_level_lta AND product_type: $product_type_lta AND prip_id: *",
+          "refId": "lta_served",
+          "timeField": "prip_publication_date"
+        },
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P58807B943476643B"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "expected_lta_number",
+              "id": "1",
+              "type": "sum"
+            }
+          ],
+          "query": "mission: S2 AND product_level:$product_level_lta AND product_type: $product_type_lta AND prip_id: *",
+          "refId": "lta_expected",
+          "timeField": "prip_publication_date"
+        }
+      ],
+      "timeFrom": "1d",
+      "timeShift": "3d",
+      "title": "S2",
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "mode": "reduceFields",
+            "reducers": [
+              "sum"
+            ]
+          }
+        },
+        {
+          "id": "concatenate",
+          "options": {}
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "obtained",
+            "binary": {
+              "left": "Sum nb_lta_served",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "100"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Result",
+            "binary": {
+              "left": "obtained",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Sum expected_lta_number"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P58807B943476643B"
+      },
+      "description": "Percentage of product published at LTA vs expected products to be published from PRIP\n\nTime Period (based on publication date at PRIP) : now-3d to now-4d (24h sliding window, 3 days in the past)",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "index": 0,
+                  "text": "0%"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": null
+              },
+              {
+                "color": "dark-orange",
+                "value": 80
+              },
+              {
+                "color": "dark-yellow",
+                "value": 95
+              },
+              {
+                "color": "dark-green",
+                "value": 99
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 20,
+        "y": 2
+      },
+      "hideTimeOverride": true,
+      "id": 28,
+      "links": [
+        {
+          "title": "LTA Completeness",
+          "url": "/grafana/d/KnP3Me7Vk/lta-completeness?orgId=1&var-mission=S3&var-satellite=All&var-product_type=All&var-lta=All&var-all_lta=All&from=now-4d&to=now-3d"
+        }
+      ],
+      "options": {
+        "colorMode": "background_solid",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "/^Result$/",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "pluginVersion": "10.2.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P58807B943476643B"
+          },
+          "metrics": [
+            {
+              "field": "nb_lta_served",
+              "id": "1",
+              "type": "sum"
+            }
+          ],
+          "query": "mission: S3 AND product_level:$product_level_lta AND product_type: $product_type_lta AND prip_id: *",
+          "refId": "lta_served",
+          "timeField": "prip_publication_date"
+        },
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P58807B943476643B"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "expected_lta_number",
+              "id": "1",
+              "type": "sum"
+            }
+          ],
+          "query": "mission: S3 AND product_level:$product_level_lta AND product_type: $product_type_lta AND prip_id: *",
+          "refId": "lta_expected",
+          "timeField": "prip_publication_date"
+        }
+      ],
+      "timeFrom": "1d",
+      "timeShift": "3d",
+      "title": "S3",
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "mode": "reduceFields",
+            "reducers": [
+              "sum"
+            ]
+          }
+        },
+        {
+          "id": "concatenate",
+          "options": {}
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "obtained",
+            "binary": {
+              "left": "Sum nb_lta_served",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "100"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Result",
+            "binary": {
+              "left": "obtained",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Sum expected_lta_number"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P58807B943476643B"
+      },
+      "description": "Percentage of product published at LTA vs expected products to be published from PRIP\n\nTime Period (based on publication date at PRIP) : now-3d to now-4d (24h sliding window, 3 days in the past)",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "index": 0,
+                  "text": "0%"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": null
+              },
+              {
+                "color": "dark-orange",
+                "value": 80
+              },
+              {
+                "color": "dark-yellow",
+                "value": 95
+              },
+              {
+                "color": "dark-green",
+                "value": 99
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 22,
+        "y": 2
+      },
+      "hideTimeOverride": true,
+      "id": 27,
+      "links": [
+        {
+          "title": "LTA Completeness",
+          "url": "/grafana/d/KnP3Me7Vk/lta-completeness?orgId=1&var-mission=S5&var-satellite=All&var-product_type=All&var-lta=All&var-all_lta=All&from=now-4d&to=now-3d"
+        }
+      ],
+      "options": {
+        "colorMode": "background_solid",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "last"
+          ],
+          "fields": "/^Result$/",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "pluginVersion": "10.2.0",
+      "targets": [
+        {
+          "alias": "Sum nb_lta_served",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P58807B943476643B"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "mission: S5 AND product_level:$product_level_lta AND product_type: $product_type_lta AND prip_id: *",
+          "refId": "lta_served",
+          "timeField": "prip_publication_date"
+        },
+        {
+          "alias": "Sum expected_lta_number",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P58807B943476643B"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "mission: S5 AND product_level:$product_level_lta AND product_type: $product_type_lta AND prip_id: *",
+          "refId": "lta_expected",
+          "timeField": "prip_publication_date"
+        }
+      ],
+      "timeFrom": "1d",
+      "timeShift": "3d",
+      "title": "S5",
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "mode": "reduceFields",
+            "reducers": [
+              "sum"
+            ]
+          }
+        },
+        {
+          "id": "concatenate",
+          "options": {}
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "obtained",
+            "binary": {
+              "left": "Sum nb_lta_served",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "100"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Result",
+            "binary": {
+              "left": "obtained",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Sum expected_lta_number"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "gridPos": {
+        "h": 18,
+        "w": 4,
+        "x": 0,
+        "y": 4
+      },
+      "id": 10,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<ul>\n    <li class=\"css-1kygs5l\">\n        <div class=\"css-1whfrzg\">\n                <a class=\"css-1nqqpiv\" href=\"/grafana/d/Uaq0mY57z/home?var-selected_tag=Acquisition\">Acquisition</a>\n        </div>\n    </li>\n    <li class=\"css-1kygs5l\">\n        <div class=\"css-1whfrzg\">\n                <a class=\"css-1nqqpiv\" href=\"/grafana/d/Uaq0mY57z/home?var-selected_tag=Completeness\">Completeness</a>\n        </div>\n    </li>\n    <li class=\"css-1kygs5l\">\n        <div class=\"css-1whfrzg\">\n                <a class=\"css-1nqqpiv\" href=\"/grafana/d/Uaq0mY57z/home?var-selected_tag=Timeliness\">Timeliness</a>\n        </div>\n    </li>\n    <li class=\"css-1kygs5l\">\n        <div class=\"css-1whfrzg\">\n                <a class=\"css-1nqqpiv\" href=\"/grafana/d/Uaq0mY57z/home?var-selected_tag=Volumes and Count\">Volumes and Count</a>\n        </div>\n    </li>\n    <li class=\"css-1kygs5l\">\n        <div class=\"css-1whfrzg\">\n                <a class=\"css-1nqqpiv\" href=\"/grafana/d/Uaq0mY57z/home?var-selected_tag=System Technical budget\">System Technical budget</a>\n        </div>\n    </li>\n    <li class=\"css-1kygs5l\">\n        <div class=\"css-1whfrzg\">\n                <a class=\"css-1nqqpiv\" href=\"/grafana/d/Uaq0mY57z/home?var-selected_tag=Unavailability\">Unavailability</a>\n        </div>\n    </li>\n    <li class=\"css-1kygs5l\">\n        <div class=\"css-1whfrzg\">\n                <a class=\"css-1nqqpiv\" href=\"/grafana/d/Uaq0mY57z/home?var-selected_tag=Anomalies\">Anomalies</a>\n        </div>\n    </li>\n    <li class=\"css-1kygs5l\">\n        <div class=\"css-1whfrzg\">\n                <a class=\"css-1nqqpiv\" href=\"/grafana/d/Uaq0mY57z/home?var-selected_tag=Monitoring\">Monitoring</a>\n        </div>\n    </li>\n</ul>",
+        "mode": "html"
+      },
+      "pluginVersion": "10.2.0",
+      "title": "Menu",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "gridPos": {
+        "h": 18,
+        "w": 12,
+        "x": 4,
+        "y": 4
+      },
+      "id": 8,
+      "options": {
+        "includeVars": false,
+        "keepTime": false,
+        "maxItems": 100,
+        "query": "",
+        "showHeadings": false,
+        "showRecentlyViewed": false,
+        "showSearch": true,
+        "showStarred": false,
+        "tags": [
+          "${selected_tag}"
+        ]
+      },
+      "pluginVersion": "10.2.0",
+      "title": "${selected_tag}",
+      "type": "dashlist"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P4E6B5BC91908CBD9"
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 8,
+        "x": 16,
+        "y": 5
+      },
+      "id": 30,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<center><p style=\"font-size:18px\">Dissemination Completeness</center></p> \r\n\r\n",
+        "mode": "html"
+      },
+      "pluginVersion": "10.2.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P58807B943476643B"
+      },
+      "description": "Percentage of product published at DD vs expected products to be published from PRIP\n\nTime Period (based on publication date at PRIP) : now-3d to now-4d (24h sliding window, 3 days in the past)",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "index": 0,
+                  "text": "0%"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": null
+              },
+              {
+                "color": "dark-orange",
+                "value": 80
+              },
+              {
+                "color": "dark-yellow",
+                "value": 95
+              },
+              {
+                "color": "dark-green",
+                "value": 99
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 16,
+        "y": 7
+      },
+      "hideTimeOverride": true,
+      "id": 12,
+      "links": [
+        {
+          "title": "DD Completeness",
+          "url": "/grafana/d/yDEHKjS4k/dd-completeness?orgId=1&var-mission=S1&var-satellite=All&var-product_level=All&var-product_type=All&var-timeliness=All&var-datatake_id=All&var-instrument_mode=All&var-dd_service=dddas&from=now-4d&to=now-3d"
+        }
+      ],
+      "options": {
+        "colorMode": "background_solid",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "/^result$/",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "pluginVersion": "10.2.0",
+      "targets": [
+        {
+          "alias": "dd_prip",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P58807B943476643B"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "mission: S1 AND product_level:$product_level_dd AND product_type: $product_type_dd AND prip_id: * AND dddas_publication_date:* ",
+          "refId": "dd_prip",
+          "timeField": "prip_publication_date"
+        },
+        {
+          "alias": "prip",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P58807B943476643B"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "mission: S1 AND product_level:$product_level_dd AND product_type: $product_type_dd AND prip_id: *",
+          "refId": "prip",
+          "timeField": "prip_publication_date"
+        }
+      ],
+      "timeFrom": "1d",
+      "timeShift": "3d",
+      "title": "S1",
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "mode": "reduceFields",
+            "reducers": [
+              "sum"
+            ]
+          }
+        },
+        {
+          "id": "concatenate",
+          "options": {}
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "obtained",
+            "binary": {
+              "left": "dd_prip",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "100"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "result",
+            "binary": {
+              "left": "obtained",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "prip"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P58807B943476643B"
+      },
+      "description": "Percentage of product published at DD vs expected products to be published from PRIP\n\nTime Period (based on publication date at PRIP) : now-3d to now-4d (24h sliding window, 3 days in the past)",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "index": 0,
+                  "text": "0%"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": null
+              },
+              {
+                "color": "dark-orange",
+                "value": 80
+              },
+              {
+                "color": "dark-yellow",
+                "value": 95
+              },
+              {
+                "color": "dark-green",
+                "value": 99
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 18,
+        "y": 7
+      },
+      "hideTimeOverride": true,
+      "id": 23,
+      "links": [
+        {
+          "title": "DD Completeness",
+          "url": "/grafana/d/yDEHKjS4k/dd-completeness?orgId=1&from=now-4d&to=now-3d&var-mission=S2&var-satellite=All&var-product_level=All&var-product_type=All&var-timeliness=All&var-datatake_id=All&var-instrument_mode=All&var-dd_service=dddas"
+        }
+      ],
+      "options": {
+        "colorMode": "background_solid",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "/^result$/",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "pluginVersion": "10.2.0",
+      "targets": [
+        {
+          "alias": "dd_prip",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P58807B943476643B"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "mission: S2 AND product_level:$product_level_dd AND product_type: $product_type_dd AND prip_id: * AND dddas_publication_date:* ",
+          "refId": "dd_prip",
+          "timeField": "prip_publication_date"
+        },
+        {
+          "alias": "prip",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P58807B943476643B"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "mission: S2 AND product_level:$product_level_dd AND product_type: $product_type_dd AND prip_id: *",
+          "refId": "prip",
+          "timeField": "prip_publication_date"
+        }
+      ],
+      "timeFrom": "1d",
+      "timeShift": "3d",
+      "title": "S2",
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "mode": "reduceFields",
+            "reducers": [
+              "sum"
+            ]
+          }
+        },
+        {
+          "id": "concatenate",
+          "options": {}
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "obtained",
+            "binary": {
+              "left": "dd_prip",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "100"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "result",
+            "binary": {
+              "left": "obtained",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "prip"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P58807B943476643B"
+      },
+      "description": "Percentage of product published at DD vs expected products to be published from PRIP\n\nTime Period (based on publication date at PRIP) : now-3d to now-4d (24h sliding window, 3 days in the past)",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "index": 0,
+                  "text": "0%"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": null
+              },
+              {
+                "color": "dark-orange",
+                "value": 80
+              },
+              {
+                "color": "dark-yellow",
+                "value": 95
+              },
+              {
+                "color": "dark-green",
+                "value": 99
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 20,
+        "y": 7
+      },
+      "hideTimeOverride": true,
+      "id": 24,
+      "links": [
+        {
+          "title": "DD Completeness",
+          "url": "/grafana/d/yDEHKjS4k/dd-completeness?orgId=1&var-mission=S3&var-satellite=All&var-product_level=All&var-product_type=All&var-timeliness=All&var-datatake_id=All&var-instrument_mode=All&var-dd_service=dddas&from=now-4d&to=now-1d"
+        }
+      ],
+      "options": {
+        "colorMode": "background_solid",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "/^result$/",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "pluginVersion": "10.2.0",
+      "targets": [
+        {
+          "alias": "dd_prip",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P58807B943476643B"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "mission: S3 AND product_level:$product_level_dd AND product_type: $product_type_dd AND prip_id: * AND dddas_publication_date:* ",
+          "refId": "dd_prip",
+          "timeField": "prip_publication_date"
+        },
+        {
+          "alias": "prip",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P58807B943476643B"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "mission: S3 AND product_level:$product_level_dd AND product_type: $product_type_dd AND prip_id: *",
+          "refId": "prip",
+          "timeField": "prip_publication_date"
+        }
+      ],
+      "timeFrom": "1d",
+      "timeShift": "4d",
+      "title": "S3",
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "mode": "reduceFields",
+            "reducers": [
+              "sum"
+            ]
+          }
+        },
+        {
+          "id": "concatenate",
+          "options": {}
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "obtained",
+            "binary": {
+              "left": "dd_prip",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "100"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "result",
+            "binary": {
+              "left": "obtained",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "prip"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P58807B943476643B"
+      },
+      "description": "Percentage of product published at DD vs expected products to be published from PRIP\n\nTime Period (based on publication date at PRIP) : now-3d to now-4d (24h sliding window, 3 days in the past)",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "index": 0,
+                  "text": "0%"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": null
+              },
+              {
+                "color": "dark-orange",
+                "value": 80
+              },
+              {
+                "color": "dark-yellow",
+                "value": 95
+              },
+              {
+                "color": "dark-green",
+                "value": 99
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 22,
+        "y": 7
+      },
+      "hideTimeOverride": true,
+      "id": 26,
+      "links": [
+        {
+          "title": "DD Completeness",
+          "url": "/grafana/d/yDEHKjS4k/dd-completeness?orgId=1&var-mission=S5&var-satellite=All&var-product_level=All&var-product_type=All&var-timeliness=All&var-datatake_id=All&var-instrument_mode=All&var-dd_service=dddas&from=now-4d&to=now-3d"
+        }
+      ],
+      "options": {
+        "colorMode": "background_solid",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "/^result$/",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "pluginVersion": "10.2.0",
+      "targets": [
+        {
+          "alias": "dd_prip",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P58807B943476643B"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "mission: S5 AND product_level:$product_level_dd AND product_type: $product_type_dd AND prip_id: * AND dddas_publication_date:* ",
+          "refId": "dd_prip",
+          "timeField": "prip_publication_date"
+        },
+        {
+          "alias": "prip",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P58807B943476643B"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "mission: S5 AND product_level:$product_level_dd AND product_type: $product_type_dd AND prip_id: *",
+          "refId": "prip",
+          "timeField": "prip_publication_date"
+        }
+      ],
+      "timeFrom": "1d",
+      "timeShift": "3d",
+      "title": "S5",
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "mode": "reduceFields",
+            "reducers": [
+              "sum"
+            ]
+          }
+        },
+        {
+          "id": "concatenate",
+          "options": {}
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "obtained",
+            "binary": {
+              "left": "dd_prip",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "100"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "result",
+            "binary": {
+              "left": "obtained",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "prip"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P4E6B5BC91908CBD9"
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 8,
+        "x": 16,
+        "y": 10
+      },
+      "id": 20,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<center><p style=\"font-size:18px\">Production Completeness</center></p> \r\n",
+        "mode": "html"
+      },
+      "pluginVersion": "10.2.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PA3CBD0DC9D8FBBE1"
+      },
+      "description": "Completeness % for NRT & NRT-PT products only\n\nTime period \"Last day\" : now-3h - now-27h (sliding window of 24h)\n\n",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "index": 0,
+                  "text": "0%"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": null
+              },
+              {
+                "color": "dark-orange",
+                "value": 80
+              },
+              {
+                "color": "dark-yellow",
+                "value": 95
+              },
+              {
+                "color": "dark-green",
+                "value": 99
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 16,
+        "y": 12
+      },
+      "hideTimeOverride": true,
+      "id": 13,
+      "links": [
+        {
+          "title": "S1 Production Completeness (Produced vs Planned)",
+          "url": "/grafana/d/9_6v0ss7z/s1-production-completeness-produced-vs-planned?orgId=1&from=now-27h&to=now-3h"
+        }
+      ],
+      "options": {
+        "colorMode": "background_solid",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "/^result$/",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.2.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "observation_time_start",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PA3CBD0DC9D8FBBE1"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "sensing_global_expected",
+              "id": "1",
+              "type": "sum"
+            }
+          ],
+          "query": "mission: S1 AND (timeliness: NRT OR timeliness: NRT-PT)",
+          "refId": "expected",
+          "timeField": "observation_time_start"
+        },
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "observation_time_start",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PA3CBD0DC9D8FBBE1"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "sensing_global_value_adjusted",
+              "id": "1",
+              "type": "sum"
+            }
+          ],
+          "query": "mission: S1 AND (timeliness: NRT OR timeliness: NRT-PT)",
+          "refId": "duration",
+          "timeField": "observation_time_start"
+        }
+      ],
+      "timeFrom": "24h",
+      "timeShift": "3h",
+      "title": "S1",
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "mode": "reduceFields",
+            "reducers": [
+              "sum"
+            ]
+          }
+        },
+        {
+          "id": "concatenate",
+          "options": {}
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "obtained",
+            "binary": {
+              "left": "Sum sensing_global_value_adjusted",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "100"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "result",
+            "binary": {
+              "left": "obtained",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Sum sensing_global_expected"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PA3CBD0DC9D8FBBE1"
+      },
+      "description": "Completeness % for all products\n\nTime period \"Last day\" : now-7h - now-31h (sliding window of 24h)\n\n",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "index": 0,
+                  "text": "0%"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": null
+              },
+              {
+                "color": "dark-orange",
+                "value": 80
+              },
+              {
+                "color": "dark-yellow",
+                "value": 95
+              },
+              {
+                "color": "dark-green",
+                "value": 99
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 18,
+        "y": 12
+      },
+      "hideTimeOverride": true,
+      "id": 14,
+      "links": [
+        {
+          "title": "S2 Production Completeness (Produced vs Planned)",
+          "url": "/grafana/d/9_6v0ss8z/s2-production-completeness-produced-vs-planned?orgId=1&from=now-31h&to=now-7h"
+        }
+      ],
+      "options": {
+        "colorMode": "background_solid",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "/^result$/",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.2.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "observation_time_start",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PA3CBD0DC9D8FBBE1"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "final_completeness_expected",
+              "id": "1",
+              "type": "sum"
+            }
+          ],
+          "query": "mission:S2",
+          "refId": "expected",
+          "timeField": "observation_time_start"
+        },
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "observation_time_start",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PA3CBD0DC9D8FBBE1"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "final_completeness_value",
+              "id": "1",
+              "type": "sum"
+            }
+          ],
+          "query": "mission:S2",
+          "refId": "duration",
+          "timeField": "observation_time_start"
+        }
+      ],
+      "timeFrom": "24h",
+      "timeShift": "7h",
+      "title": "S2",
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "mode": "reduceFields",
+            "reducers": [
+              "sum"
+            ]
+          }
+        },
+        {
+          "id": "concatenate",
+          "options": {}
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "obtained",
+            "binary": {
+              "left": "Sum final_completeness_value",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "100"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "result",
+            "binary": {
+              "left": "obtained",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Sum final_completeness_expected"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P067F7001DCF53170"
+      },
+      "description": "Completeness % for NR products only\n\nTime period \"Last day\" : now-3h - now-27h (sliding window of 24h)",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "index": 0,
+                  "text": "0%"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": null
+              },
+              {
+                "color": "dark-orange",
+                "value": 80
+              },
+              {
+                "color": "#eab839",
+                "value": 95
+              },
+              {
+                "color": "dark-green",
+                "value": 99
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 20,
+        "y": 12
+      },
+      "hideTimeOverride": true,
+      "id": 15,
+      "links": [
+        {
+          "title": "S3 Production Completeness (Produced vs Planned)",
+          "url": "/grafana/d/T_6v1ss8z/s3-production-completeness-produced-vs-planned?orgId=1&from=now-27h&to=now-3h"
+        }
+      ],
+      "options": {
+        "colorMode": "background_solid",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "/^Result$/",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.2.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "observation_time_start",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P067F7001DCF53170"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "expected",
+              "id": "1",
+              "type": "sum"
+            }
+          ],
+          "query": "mission:S3 AND timeliness : NR",
+          "refId": "expected",
+          "timeField": "observation_time_start"
+        },
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "observation_time_start",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P067F7001DCF53170"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "value_adjusted",
+              "id": "1",
+              "type": "sum"
+            }
+          ],
+          "query": "mission:S3 AND timeliness : NR ",
+          "refId": "duration",
+          "timeField": "observation_time_start"
+        }
+      ],
+      "timeFrom": "24h",
+      "timeShift": "3h",
+      "title": "S3",
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "mode": "reduceFields",
+            "reducers": [
+              "sum"
+            ]
+          }
+        },
+        {
+          "id": "concatenate",
+          "options": {}
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "obtained",
+            "binary": {
+              "left": "Sum value_adjusted",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "100"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Result",
+            "binary": {
+              "left": "obtained",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Sum expected"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P6A55C5DC33AFF17F"
+      },
+      "description": "Completeness % for NRTI products only\n\nTime period \"Last day\" : now-7h - now-31h \n\n(sliding window of 24h)\n",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "index": 0,
+                  "text": "0%"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": null
+              },
+              {
+                "color": "dark-orange",
+                "value": 80
+              },
+              {
+                "color": "dark-yellow",
+                "value": 95
+              },
+              {
+                "color": "dark-green",
+                "value": 99
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 22,
+        "y": 12
+      },
+      "hideTimeOverride": true,
+      "id": 16,
+      "links": [
+        {
+          "title": "S5 Production Completeness (Produced vs Planned)",
+          "url": "/grafana/d/eI1yShRVz/s5-production-completeness-produced-vs-planned?orgId=1&from=now-31h&to=now-7h&var-timeliness=NRTI"
+        }
+      ],
+      "options": {
+        "colorMode": "background_solid",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "/^Result$/",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "10.2.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "observation_time_start",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P6A55C5DC33AFF17F"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "expected",
+              "id": "1",
+              "type": "sum"
+            }
+          ],
+          "query": "mission:S5 AND timeliness : NRTI ",
+          "refId": "expected",
+          "timeField": "observation_time_start"
+        },
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "observation_time_start",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P6A55C5DC33AFF17F"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "value_adjusted",
+              "id": "1",
+              "type": "sum"
+            }
+          ],
+          "query": "mission:S5 AND timeliness : NRTI",
+          "refId": "duration",
+          "timeField": "observation_time_start"
+        }
+      ],
+      "timeFrom": "24h",
+      "timeShift": "7h",
+      "title": "S5",
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "mode": "reduceFields",
+            "reducers": [
+              "sum"
+            ]
+          }
+        },
+        {
+          "id": "concatenate",
+          "options": {}
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "obtained",
+            "binary": {
+              "left": "Sum value_adjusted",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "100"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Result",
+            "binary": {
+              "left": "obtained",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Sum expected"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P4E6B5BC91908CBD9"
+      },
+      "gridPos": {
+        "h": 2,
+        "w": 8,
+        "x": 16,
+        "y": 15
+      },
+      "id": 21,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "<center><p style=\"font-size:18px\">Acquisition Completeness</center></p> ",
+        "mode": "html"
+      },
+      "pluginVersion": "10.2.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P292B19B64C7A8C1B"
+      },
+      "description": "Succesful passes (from EDRS daily reports / Planned passes)\n\nTime period : Yesterday ( between now-48h to now-24h)\n",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 3,
+          "mappings": [
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "index": 0,
+                  "text": "0%"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 80
+              },
+              {
+                "color": "#EAB839",
+                "value": 95
+              },
+              {
+                "color": "dark-green",
+                "value": 99
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 16,
+        "y": 17
+      },
+      "hideTimeOverride": true,
+      "id": 17,
+      "links": [
+        {
+          "title": "Acquisition passes status (from EDRS)",
+          "url": "/grafana/d/KoNYADm4z/acquisition-passes-status-from-edrs?orgId=1&from=now-2d&to=now-1d"
+        }
+      ],
+      "options": {
+        "colorMode": "background_solid",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "/^Result$/",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "pluginVersion": "10.2.0",
+      "targets": [
+        {
+          "alias": "SumTotalCount",
+          "bucketAggs": [
+            {
+              "field": "planned_link_session_start",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P292B19B64C7A8C1B"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "* AND report_name_daily: *",
+          "refId": "A",
+          "timeField": "planned_link_session_start"
+        },
+        {
+          "alias": "SumSuccessCount",
+          "bucketAggs": [
+            {
+              "field": "planned_link_session_start",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P292B19B64C7A8C1B"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "!total_status: \"NOK\" AND report_name_daily: *",
+          "refId": "B",
+          "timeField": "planned_link_session_start"
+        }
+      ],
+      "timeFrom": "1d",
+      "timeShift": "1d",
+      "title": "EDRS",
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "mode": "reduceFields",
+            "reducers": [
+              "sum"
+            ]
+          }
+        },
+        {
+          "id": "concatenate",
+          "options": {}
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "obtained",
+            "binary": {
+              "left": "SumSuccessCount",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "100"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Result",
+            "binary": {
+              "left": "obtained",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "SumTotalCount"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "description": "The percentage of successful passes (from acquisition status published at Cadip, X-Band for S5) / Planned passes\n\nTime period \"Last day\" : now-3h - now-27h (sliding window of 24h)\n",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "index": 0,
+                  "text": "0%"
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-red",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 80
+              },
+              {
+                "color": "yellow",
+                "value": 95
+              },
+              {
+                "color": "dark-green",
+                "value": 99
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 4,
+        "x": 20,
+        "y": 17
+      },
+      "hideTimeOverride": true,
+      "id": 22,
+      "links": [
+        {
+          "title": "Station Acquisition Status (X-Band)",
+          "url": "/grafana/d/GP4Naujnk/station-acquisition-status-x-band?orgId=1&from=now-27h&to=now-3h"
+        },
+        {
+          "title": "Station Acquisition Status (CADIP)",
+          "url": "/grafana/d/zaqHaGu4z/station-acquisition-status-cadip?orgId=1&from=now-27h&to=now-3h"
+        }
+      ],
+      "maxDataPoints": 1,
+      "options": {
+        "colorMode": "background_solid",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "/^result$/",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "pluginVersion": "10.2.0",
+      "targets": [
+        {
+          "alias": "SumTotalCountNonS5",
+          "bucketAggs": [
+            {
+              "field": "planned_data_start",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE0BF01AC3817A56D"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "* AND NOT mission:S5",
+          "refId": "A",
+          "timeField": "planned_data_start"
+        },
+        {
+          "alias": "SumTotalCountS5",
+          "bucketAggs": [
+            {
+              "field": "planned_data_start",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P56531AF06C445A86"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "mission:S5",
+          "refId": "B",
+          "timeField": "planned_data_start"
+        },
+        {
+          "alias": "SumSuccessCountNonS5",
+          "bucketAggs": [
+            {
+              "field": "planned_data_start",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE0BF01AC3817A56D"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "global_status: OK AND NOT mission:S5",
+          "refId": "C",
+          "timeField": "planned_data_start"
+        },
+        {
+          "alias": "SumSuccessCountS5",
+          "bucketAggs": [
+            {
+              "field": "planned_data_start",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P56531AF06C445A86"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "antenna_status: OK AND front_end_status : OK AND delivery_push_status: OK AND mission:S5",
+          "refId": "D",
+          "timeField": "planned_data_start"
+        },
+        {
+          "datasource": {
+            "name": "Expression",
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "$A+$B",
+          "hide": false,
+          "reducer": "sum",
+          "refId": "SumTotalCount",
+          "type": "math"
+        },
+        {
+          "datasource": {
+            "name": "Expression",
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "$C+$D",
+          "hide": false,
+          "reducer": "sum",
+          "refId": "SumSuccessCount",
+          "type": "math"
+        }
+      ],
+      "timeFrom": "24h",
+      "timeShift": "3h",
+      "title": "X-Band",
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "mode": "reduceFields",
+            "reducers": [
+              "sum"
+            ]
+          }
+        },
+        {
+          "id": "concatenate",
+          "options": {}
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "obtained",
+            "binary": {
+              "left": "SumSuccessCount",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "100"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "result",
+            "binary": {
+              "left": "obtained",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "SumTotalCount"
+            },
+            "mode": "binary",
+            "reduce": {
+              "include": [
+                "Total"
+              ],
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "stat"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 38,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "description": "MAAS CDS last main version delivered",
+        "hide": 2,
+        "name": "version",
+        "query": "%version%",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "hide": 2,
+        "name": "deploymentDate",
+        "query": "2024-01-29",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "Acquisition",
+          "value": "Acquisition"
+        },
+        "hide": 2,
+        "includeAll": false,
+        "multi": false,
+        "name": "selected_tag",
+        "options": [
+          {
+            "selected": true,
+            "text": "Acquisition",
+            "value": "Acquisition"
+          },
+          {
+            "selected": false,
+            "text": "Timeliness",
+            "value": "Timeliness"
+          },
+          {
+            "selected": false,
+            "text": "Volume and Count",
+            "value": "Volume and Count"
+          },
+          {
+            "selected": false,
+            "text": "Completeness",
+            "value": "Completeness"
+          },
+          {
+            "selected": false,
+            "text": "System Technical budget",
+            "value": "System Technical budget"
+          },
+          {
+            "selected": false,
+            "text": "Unavailability",
+            "value": "Unavailability"
+          },
+          {
+            "selected": false,
+            "text": "Anomalies",
+            "value": "Anomalies"
+          },
+          {
+            "selected": false,
+            "text": "Monitoring",
+            "value": "Monitoring"
+          }
+        ],
+        "query": "Acquisition,Timeliness,Volume and Count,Completeness,System Technical budget,Unavailability,Anomalies,Monitoring",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "yesoreyeram-infinity-datasource",
+          "uid": "PD0067CAD9A63E081"
+        },
+        "definition": "Infinity- (infinity) json",
+        "hide": 2,
+        "includeAll": true,
+        "multi": true,
+        "name": "product_type_lta",
+        "options": [],
+        "query": {
+          "infinityQuery": {
+            "columns": [
+              {
+                "selector": "_source.product_type",
+                "text": "",
+                "type": "string"
+              }
+            ],
+            "filters": [],
+            "format": "table",
+            "refId": "variable",
+            "root_selector": "hits.hits",
+            "source": "url",
+            "type": "json",
+            "url": "/cds-dataflow-conf/_search?q=level:${product_level_lta:lucene}%20AND%20published_by:PRIP%20AND%20consumed_by:LTA&size=1000",
+            "url_options": {
+              "data": "",
+              "method": "GET"
+            }
+          },
+          "query": "",
+          "queryType": "infinity"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "yesoreyeram-infinity-datasource",
+          "uid": "PD0067CAD9A63E081"
+        },
+        "definition": "Infinity- (infinity) json",
+        "hide": 2,
+        "includeAll": true,
+        "label": "Product Level",
+        "multi": true,
+        "name": "product_level_lta",
+        "options": [],
+        "query": {
+          "infinityQuery": {
+            "columns": [
+              {
+                "selector": "_source.level",
+                "text": "",
+                "type": "string"
+              }
+            ],
+            "filters": [],
+            "format": "table",
+            "refId": "variable",
+            "root_selector": "hits.hits",
+            "source": "url",
+            "type": "json",
+            "url": "/cds-dataflow-conf/_search?q=published_by:PRIP%20AND%20consumed_by:LTA&size=1000",
+            "url_options": {
+              "data": "",
+              "method": "GET"
+            }
+          },
+          "query": "",
+          "queryType": "infinity"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "yesoreyeram-infinity-datasource",
+          "uid": "PD0067CAD9A63E081"
+        },
+        "definition": "Infinity- (infinity) json",
+        "hide": 2,
+        "includeAll": true,
+        "label": "",
+        "multi": true,
+        "name": "product_level_dd",
+        "options": [],
+        "query": {
+          "infinityQuery": {
+            "columns": [
+              {
+                "selector": "_source.level",
+                "text": "",
+                "type": "string"
+              }
+            ],
+            "filters": [],
+            "format": "table",
+            "refId": "variable",
+            "root_selector": "hits.hits",
+            "source": "url",
+            "type": "json",
+            "url": "/cds-dataflow-conf/_search?q=published_by:DA%20AND%20published_by:PRIP&size=1000",
+            "url_options": {
+              "data": "",
+              "method": "GET"
+            }
+          },
+          "query": "",
+          "queryType": "infinity"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "yesoreyeram-infinity-datasource",
+          "uid": "PD0067CAD9A63E081"
+        },
+        "definition": "Infinity- (infinity) json",
+        "hide": 2,
+        "includeAll": true,
+        "multi": true,
+        "name": "product_type_dd",
+        "options": [],
+        "query": {
+          "infinityQuery": {
+            "columns": [
+              {
+                "selector": "_source.product_type",
+                "text": "",
+                "type": "string"
+              }
+            ],
+            "filters": [],
+            "format": "table",
+            "refId": "variable",
+            "root_selector": "hits.hits",
+            "source": "url",
+            "type": "json",
+            "url": "/cds-dataflow-conf/_search?q=level:${product_level_dd:lucene}%20AND%20published_by:DA%20AND%20published_by:PRIP&size=1000",
+            "url_options": {
+              "data": "",
+              "method": "GET"
+            }
+          },
+          "query": "",
+          "queryType": "infinity"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-7d",
+    "to": "now"
+  },
+  "timepicker": {
+    "hidden": true,
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ],
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ],
+    "type": "timepicker"
+  },
+  "timezone": "browser",
+  "title": "Home",
+  "uid": "Uaq0mY57z",
+  "weekStart": ""
+}

@@ -1,0 +1,7 @@
+{
+    "amqp": {
+        "new.raw.data.grafana-usage": {
+            "chunk_size": 512
+        }
+    }
+}

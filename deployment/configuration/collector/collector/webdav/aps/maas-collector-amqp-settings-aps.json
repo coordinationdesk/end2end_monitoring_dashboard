@@ -1,0 +1,7 @@
+{
+    "amqp": {
+        "new.raw.data.aps.product": {
+            "chunk_size": 512
+        }
+    }
+}

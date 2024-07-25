@@ -1,0 +1,1829 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "panels": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PA3CBD0DC9D8FBBE1"
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 24,
+            "x": 0,
+            "y": 41
+          },
+          "id": 3,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "Time reference for this dashboard is : effective_downlink_start\n\nImportant notice : Tables & timelines can only display up to 10 000 entries. Please make use of filters to narrow down the retrieved data and get a more realistic view.",
+            "mode": "markdown"
+          },
+          "pluginVersion": "10.3.1",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [
+                {
+                  "field": "observation_time_start",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "PA3CBD0DC9D8FBBE1"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "",
+              "refId": "A",
+              "timeField": "observation_time_start"
+            }
+          ],
+          "type": "text"
+        }
+      ],
+      "title": "Dashboard Description",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 4,
+      "panels": [],
+      "title": "Datatake Acquisition Overall Statistics",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PE0BF01AC3817A56D"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 4,
+        "x": 0,
+        "y": 2
+      },
+      "id": 5,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.3.1",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "planned_data_start",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE0BF01AC3817A56D"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "global_status: NOK",
+          "refId": "A",
+          "timeField": "planned_data_start"
+        }
+      ],
+      "title": "Datatake Acquisition Failed",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PD12B2F8E29C0613E"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 4,
+        "x": 4,
+        "y": 2
+      },
+      "id": 6,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.3.1",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "execution_time",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PD12B2F8E29C0613E"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "cadip_completeness:0 OR edrs_completeness:0",
+          "refId": "A",
+          "timeField": "execution_time"
+        }
+      ],
+      "title": "HKTM Completeness Issue",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P293BB09C7A4C4C01"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 4,
+        "x": 8,
+        "y": 2
+      },
+      "id": 7,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.3.1",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "effective_downlink_start",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P293BB09C7A4C4C01"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "downlink_duration: [360000 TO *]",
+          "refId": "A",
+          "timeField": "effective_downlink_start"
+        }
+      ],
+      "title": "Datatake Acquisition Delayed (>1h) (\u00e0 refaire)",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PA3CBD0DC9D8FBBE1"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 4,
+        "x": 12,
+        "y": 2
+      },
+      "id": 8,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.3.1",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "observation_time_start",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PA3CBD0DC9D8FBBE1"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "L0__local_percentage: * AND NOT L0__local_percentage: 100",
+          "refId": "A",
+          "timeField": "observation_time_start"
+        }
+      ],
+      "title": "Datatake Incomplete L0 Production",
+      "type": "stat"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 10
+      },
+      "id": 9,
+      "panels": [],
+      "title": "Datatake Acquisition Status Timeline",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Dashboard --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 11
+      },
+      "id": 10,
+      "options": {
+        "colorByField": "global_status",
+        "colors": [
+          {
+            "color": "#F2495C",
+            "text": "NOK"
+          }
+        ],
+        "endField": "Downlink Stop",
+        "labelFields": [
+          "global_status"
+        ],
+        "showYAxis": true,
+        "sortBy": "startTime",
+        "sortOrder": "asc",
+        "startField": "execution_time",
+        "textField": "ground_station"
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Dashboard --"
+          },
+          "panelId": 12,
+          "refId": "A",
+          "withTransforms": true
+        }
+      ],
+      "title": "Datatake Acquisition Overall Statistics (need new index to join everything)",
+      "type": "marcusolsson-gantt-panel"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unitScale": true
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "effective_downlink_stop"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 315
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "effective_downlink_start"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 267
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "effective_downlink_start (lastNotNull)"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 280
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "effective_downlink_start (min)"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 226
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "acquisition_start (min)"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 219
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "acquisition_stop (max)"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 207
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 21
+      },
+      "id": 11,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "10.3.1",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P293BB09C7A4C4C01"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "500"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "mission : $mission AND satellite_unit : $satellite AND downlink_absolute_orbit: $downlink_orbit AND station: $station AND datatake_id: $datatake_id",
+          "refId": "A",
+          "timeField": "effective_downlink_start"
+        },
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PD12B2F8E29C0613E"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "500"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "mission : $mission AND satellite_unit : $satellite",
+          "refId": "B",
+          "timeField": "execution_time"
+        }
+      ],
+      "title": "Datatake Acquisition Status (need new index to join everything)",
+      "transformations": [
+        {
+          "disabled": true,
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "time",
+                "targetField": "effective_downlink_stop"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "acquisition_start"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "acquisition_stop"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "observation_time_start"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "acquisition_absolute_orbit": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "acquisition_relative_orbit": {
+                "aggregations": []
+              },
+              "acquisition_start": {
+                "aggregations": [
+                  "min"
+                ],
+                "operation": "aggregate"
+              },
+              "acquisition_stop": {
+                "aggregations": [
+                  "max"
+                ],
+                "operation": "aggregate"
+              },
+              "datatake_id": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "downlink_absolute_orbit": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "downlink_duration": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "effective_downlink_start": {
+                "aggregations": [
+                  "min"
+                ],
+                "operation": "aggregate"
+              },
+              "effective_downlink_stop": {
+                "aggregations": [
+                  "max"
+                ],
+                "operation": "aggregate"
+              },
+              "highlight": {
+                "aggregations": [
+                  "last"
+                ]
+              },
+              "mission": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "aggregate"
+              },
+              "observation_time_start": {
+                "aggregations": [
+                  "min"
+                ],
+                "operation": "aggregate"
+              },
+              "satellite_unit": {
+                "aggregations": [
+                  "last"
+                ],
+                "operation": "aggregate"
+              },
+              "session_id": {
+                "aggregations": [
+                  "last",
+                  "firstNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "station": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "aggregate"
+              }
+            }
+          }
+        },
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "time",
+                "targetField": "effective_downlink_start (min)"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "effective_downlink_stop (max)"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "acquisition_start (min)"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "acquisition_stop (max)"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "observation_time_start (min)"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {
+              "acquisition_absolute_orbit (lastNotNull)": 3,
+              "acquisition_relative_orbit (lastNotNull)": 7,
+              "acquisition_start (min)": 8,
+              "acquisition_stop (max)": 9,
+              "datatake_id": 4,
+              "downlink_absolute_orbit (lastNotNull)": 10,
+              "downlink_duration (lastNotNull)": 11,
+              "effective_downlink_start (min)": 5,
+              "effective_downlink_stop (max)": 6,
+              "mission (last)": 0,
+              "satellite_unit (last)": 1,
+              "station (lastNotNull)": 2
+            },
+            "renameByName": {
+              "acquisition_absolute_orbit (lastNotNull)": "Absolute Orbit",
+              "effective_downlink_start (min)": "",
+              "mission (last)": "Mission",
+              "satellite_unit (last)": "Satellite",
+              "station (lastNotNull)": "Station"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "description": "This table shall be updated when DSIBs are received for the pass (one DSIB per channel)\n\nupdating effective_downlink start & stop with DSIB time_start & stop (take min/max of two channels)\n\nsetting acquisition transfer time : using both DSIB files. Equal to max_ time_finished(ch1,ch2) -  min_start_time (ch1,ch2). Apply a 3 threshold to the cell : <1h (green), 1h to 3h (yellow), > 3h (red)\n\nset time_finished & Nominal/Retransfered status (see MAAS_CDS-1160)",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "inspect": false
+          },
+          "mappings": [
+            {
+              "options": {
+                "false": {
+                  "color": "green",
+                  "index": 1,
+                  "text": "\u274c"
+                },
+                "true": {
+                  "color": "red",
+                  "index": 0,
+                  "text": "\u2705"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "transparent",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unitScale": true
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Acquisition Transfer Time (m)"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 60
+                    },
+                    {
+                      "color": "red",
+                      "value": 180
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "custom.width",
+                "value": 221
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "retransfer"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-background"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "cadip_completeness"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "0": {
+                        "color": "red",
+                        "index": 1,
+                        "text": "NOK"
+                      },
+                      "1": {
+                        "color": "green",
+                        "index": 0,
+                        "text": "OK"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-background"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 31
+      },
+      "id": 12,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "10.3.1",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PD12B2F8E29C0613E"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "500"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "*",
+          "refId": "A",
+          "timeField": "effective_downlink_start"
+        },
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE0BF01AC3817A56D"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "500"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "*",
+          "refId": "B",
+          "timeField": "planned_data_start"
+        }
+      ],
+      "title": "Join HKTM / CADIP",
+      "transformations": [
+        {
+          "id": "joinByField",
+          "options": {
+            "byField": "session_id",
+            "mode": "outerTabular"
+          }
+        },
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "time",
+                "targetField": "delivery_start"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "delivery_stop"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Acquisition Transfer Time (ms)",
+            "binary": {
+              "left": "delivery_stop",
+              "operator": "-",
+              "right": "delivery_start"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Acquisition Transfer Time (m)",
+            "binary": {
+              "left": "Acquisition Transfer Time (ms)",
+              "operator": "/",
+              "right": "60000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Downlink Stop",
+            "binary": {
+              "left": "execution_time",
+              "right": "300000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "time",
+                "targetField": "Downlink Stop"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "AcquiredTFs": true,
+              "Acquisition Transfer Time (ms)": true,
+              "CorrectedDataTFs": true,
+              "CorrectedTFs": true,
+              "DataTFs": true,
+              "ErrorDataTFs": true,
+              "ErrorTFs": true,
+              "TotalChunks": true,
+              "TotalVolume": true,
+              "UncorrectableDataTFs": true,
+              "UncorrectableTFs": true,
+              "_id 1": true,
+              "_id 2": true,
+              "_index 1": true,
+              "_index 2": true,
+              "_type": true,
+              "_type 2": true,
+              "acquisition_id": true,
+              "antenna_id": true,
+              "antenna_status": true,
+              "channel": true,
+              "delivery_bitrate": true,
+              "delivery_push_status": true,
+              "delivery_start": true,
+              "delivery_stop": true,
+              "downlink_orbit": true,
+              "downlink_start": true,
+              "downlink_status": true,
+              "downlink_stop": true,
+              "downlink_stop_fake": false,
+              "edrs_completeness": true,
+              "fer_data": true,
+              "from_acq_delivery_timeliness": true,
+              "front_end_id": true,
+              "front_end_status": true,
+              "global_status": true,
+              "ground_station 1": false,
+              "ground_station 2": true,
+              "highlight": true,
+              "highlight 2": true,
+              "ingestionTime": true,
+              "interface_name": true,
+              "mission 2": true,
+              "num_channels": true,
+              "planned_data_start": true,
+              "planned_data_stop": true,
+              "production_service_name": true,
+              "production_service_type": true,
+              "publication_date": true,
+              "quality_infos": true,
+              "reportFolder": true,
+              "reportName": true,
+              "satellite_id": true,
+              "session_id_full": true,
+              "sort 1": true,
+              "sort 2": true,
+              "station_unit_id": true,
+              "updateTime": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "AcquiredTFs": 24,
+              "Acquisition Transfer Time (m)": 4,
+              "Acquisition Transfer Time (ms)": 65,
+              "CorrectedDataTFs": 25,
+              "CorrectedTFs": 26,
+              "DataTFs": 27,
+              "Downlink Stop": 8,
+              "ErrorDataTFs": 28,
+              "ErrorTFs": 29,
+              "TotalChunks": 30,
+              "TotalVolume": 31,
+              "UncorrectableDataTFs": 32,
+              "UncorrectableTFs": 33,
+              "_id 1": 9,
+              "_id 2": 34,
+              "_index 1": 10,
+              "_index 2": 35,
+              "_type": 11,
+              "_type 2": 36,
+              "absolute_orbit": 12,
+              "acquisition_id": 37,
+              "antenna_id": 38,
+              "antenna_status": 39,
+              "cadip_completeness": 5,
+              "channel": 13,
+              "delivery_bitrate": 40,
+              "delivery_push_status": 41,
+              "delivery_start": 42,
+              "delivery_stop": 43,
+              "downlink_orbit": 44,
+              "downlink_start": 45,
+              "downlink_status": 46,
+              "downlink_stop": 47,
+              "edrs_completeness": 14,
+              "execution_time": 7,
+              "fer_data": 48,
+              "from_acq_delivery_timeliness": 49,
+              "front_end_id": 50,
+              "front_end_status": 51,
+              "global_status": 52,
+              "ground_station 1": 3,
+              "ground_station 2": 53,
+              "highlight": 15,
+              "highlight 2": 54,
+              "ingestionTime": 16,
+              "interface_name": 17,
+              "mission": 0,
+              "mission 2": 55,
+              "num_channels": 56,
+              "planned_data_start": 23,
+              "planned_data_stop": 57,
+              "production_service_name": 18,
+              "production_service_type": 19,
+              "publication_date": 58,
+              "quality_infos": 59,
+              "reportFolder": 60,
+              "reportName": 20,
+              "retransfer": 6,
+              "satellite_id": 61,
+              "satellite_unit": 1,
+              "session_id": 2,
+              "session_id_full": 21,
+              "sort 1": 22,
+              "sort 2": 62,
+              "station_unit_id": 63,
+              "updateTime": 64
+            },
+            "renameByName": {
+              "cadip_completeness": "",
+              "execution_time": "Downlink Start"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "description": "This table shall be updated when DSIBs are received for the pass (one DSIB per channel)\n\nupdating effective_downlink start & stop with DSIB time_start & stop (take min/max of two channels)\n\nsetting acquisition transfer time : using both DSIB files. Equal to max_ time_finished(ch1,ch2) -  min_start_time (ch1,ch2). Apply a 3 threshold to the cell : <1h (green), 1h to 3h (yellow), > 3h (red)\n\nset time_finished & Nominal/Retransfered status (see MAAS_CDS-1160)",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "purple",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unitScale": true
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Acquisition Transfer Time (m)"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": null
+                    },
+                    {
+                      "color": "yellow",
+                      "value": 60
+                    },
+                    {
+                      "color": "red",
+                      "value": 180
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "custom.width",
+                "value": 221
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "edrs_completeness"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "0": {
+                        "color": "red",
+                        "index": 1,
+                        "text": "KO"
+                      },
+                      "1": {
+                        "color": "yellow",
+                        "index": 0,
+                        "text": "OK"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-background"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 41
+      },
+      "id": 13,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Overall Status"
+          }
+        ]
+      },
+      "pluginVersion": "10.3.1",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PD12B2F8E29C0613E"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "500"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "*",
+          "refId": "A",
+          "timeField": "effective_downlink_start"
+        },
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P292B19B64C7A8C1B"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "500"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "*",
+          "refId": "B",
+          "timeField": "planned_data_start"
+        }
+      ],
+      "title": "Join HKTM / EDRS",
+      "transformations": [
+        {
+          "filter": {
+            "id": "byRefId",
+            "options": "B"
+          },
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "_id": true,
+              "_id 2": true,
+              "_index": true,
+              "_index 2": true,
+              "_type": true,
+              "highlight": true,
+              "mission": true,
+              "mission 2": true
+            },
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "doy": "",
+              "link_session_id": "session_id"
+            }
+          },
+          "topic": "series"
+        },
+        {
+          "id": "joinByField",
+          "options": {
+            "byField": "session_id",
+            "mode": "outerTabular"
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Downlink Stop",
+            "binary": {
+              "left": "execution_time",
+              "right": "300000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "convertFieldType",
+          "options": {}
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "AcquiredTFs": true,
+              "Acquisition Transfer Time (ms)": true,
+              "CorrectedDataTFs": true,
+              "CorrectedTFs": true,
+              "DataTFs": true,
+              "ErrorDataTFs": true,
+              "ErrorTFs": true,
+              "TotalChunks": true,
+              "TotalVolume": true,
+              "UncorrectableDataTFs": true,
+              "UncorrectableTFs": true,
+              "_id": true,
+              "_id 1": true,
+              "_id 2": true,
+              "_index": true,
+              "_index 1": true,
+              "_index 2": true,
+              "_type": true,
+              "_type 2": true,
+              "absolute_orbit": false,
+              "acquisition_id": true,
+              "antenna_id": true,
+              "antenna_status": true,
+              "archived_data_size": true,
+              "cadip_completeness": true,
+              "cadus": true,
+              "channel": true,
+              "dcsu_archive_status": true,
+              "delivery_bitrate": true,
+              "delivery_push_status": true,
+              "delivery_start": false,
+              "delivery_stop": false,
+              "disseminated_data": true,
+              "dissemination_start": true,
+              "dissemination_stop": true,
+              "downlink_orbit": true,
+              "downlink_start": true,
+              "downlink_status": true,
+              "downlink_stop": true,
+              "doy": true,
+              "edte_acquisition_status": true,
+              "fer": true,
+              "fer_data": true,
+              "from_acq_delivery_timeliness": true,
+              "front_end_id": true,
+              "front_end_status": true,
+              "geo_satellite_id": true,
+              "ground_station 2": true,
+              "highlight": true,
+              "highlight 2": true,
+              "ingestionTime": true,
+              "interface_name": true,
+              "mission": false,
+              "mission 2": false,
+              "moc_accept_status": true,
+              "num_channels": true,
+              "planned_link_session_start": true,
+              "planned_link_session_stop": true,
+              "production_service_name": true,
+              "production_service_type": true,
+              "publication_date": true,
+              "quality_infos": true,
+              "reportFolder": true,
+              "reportName": true,
+              "report_name_daily": true,
+              "report_type": true,
+              "satellite_id": true,
+              "session_id_full": true,
+              "sfdap_dissem_status": true,
+              "sort 1": true,
+              "sort 2": true,
+              "spacecraft_execution": true,
+              "station_unit_id": true,
+              "total_status": true,
+              "updateTime": true,
+              "uplink_status": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Downlink Stop": 7,
+              "_id": 42,
+              "_index": 43,
+              "_type": 8,
+              "absolute_orbit": 9,
+              "archived_data_size": 24,
+              "cadip_completeness": 10,
+              "cadus": 25,
+              "channel": 11,
+              "dcsu_archive_status": 26,
+              "disseminated_data": 27,
+              "dissemination_start": 28,
+              "dissemination_stop": 29,
+              "doy": 30,
+              "edrs_completeness": 5,
+              "edte_acquisition_status": 31,
+              "execution_time": 6,
+              "fer": 32,
+              "geo_satellite_id": 33,
+              "ground_station 1": 4,
+              "ground_station 2": 20,
+              "highlight": 12,
+              "ingestionTime": 13,
+              "interface_name": 14,
+              "mission": 0,
+              "moc_accept_status": 34,
+              "planned_link_session_start": 23,
+              "planned_link_session_stop": 35,
+              "production_service_name": 15,
+              "production_service_type": 16,
+              "reportName": 17,
+              "report_name_daily": 36,
+              "report_type": 37,
+              "satellite_id": 2,
+              "satellite_unit": 1,
+              "session_id": 3,
+              "session_id_full": 18,
+              "sfdap_dissem_status": 38,
+              "sort 1": 19,
+              "sort 2": 21,
+              "spacecraft_execution": 39,
+              "total_status": 40,
+              "updateTime": 22,
+              "uplink_status": 41
+            },
+            "renameByName": {
+              "channel": "",
+              "edrs_completeness": "Overall Status",
+              "execution_time": "Downlink Start",
+              "ground_station 1": "",
+              "mission": "mission",
+              "mission 2": "mission"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "S1A"
+          ],
+          "value": [
+            "S1A"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P293BB09C7A4C4C01"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"mission\",\"query\":\"mission: *\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Mission",
+        "multi": true,
+        "name": "mission",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"mission\",\"query\":\"mission: *\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P293BB09C7A4C4C01"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"satellite_unit\",\"query\":\"mission: $mission\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Satellite",
+        "multi": true,
+        "name": "satellite",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"satellite_unit\",\"query\":\"mission: $mission\"}",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "36483"
+          ],
+          "value": [
+            "36483"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P293BB09C7A4C4C01"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"downlink_absolute_orbit\",\"query\":\"mission: $mission AND satellite_unit : $satellite\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Downlink Orbit",
+        "multi": true,
+        "name": "downlink_orbit",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"downlink_absolute_orbit\",\"query\":\"mission: $mission AND satellite_unit : $satellite\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P293BB09C7A4C4C01"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"datatake_id\",\"query\":\"mission: $mission AND satellite_unit : $satellite AND downlink_absolute_orbit:$downlink_orbit\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Datatake ID",
+        "multi": true,
+        "name": "datatake_id",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"datatake_id\",\"query\":\"mission: $mission AND satellite_unit : $satellite AND downlink_absolute_orbit:$downlink_orbit\"}",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "EDRS-A"
+          ],
+          "value": [
+            "EDRS-A"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P293BB09C7A4C4C01"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"station\",\"query\":\"mission: $mission AND satellite_unit : $satellite AND downlink_absolute_orbit:$downlink_orbit AND datatake_id: $datatake_id\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Reception Station",
+        "multi": true,
+        "name": "station",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"station\",\"query\":\"mission: $mission AND satellite_unit : $satellite AND downlink_absolute_orbit:$downlink_orbit AND datatake_id: $datatake_id\"}",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Datatake Acquisition Status",
+  "uid": "e0924cba-86ed-4a43-9f1f-7ae3d8740387",
+  "weekStart": ""
+}

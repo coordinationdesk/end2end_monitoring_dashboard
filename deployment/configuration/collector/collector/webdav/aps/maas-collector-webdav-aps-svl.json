@@ -1,0 +1,141 @@
+{
+    "collectors": [
+        {
+            "class": "WebDAVCollectorConfiguration",
+            "id_field": [
+                "satellite_id",
+                "downlink_orbit",
+                "planned_data_start",
+                "ground_station"
+            ],
+            "routing_key": "new.raw.data.aps.product",
+            "interface_name": "DDP_SGS-Svalbard",
+            "expected_collect_interval": 2160,
+            "file_pattern": "*SVL-DAILY-SENTINEL*.xls*",
+            "directories": [
+                "SENTINEL1/REPORTS/DAILY",
+                "SENTINEL2/REPORTS/DAILY",
+                "SENTINEL3/REPORTS/DAILY"
+            ],
+            "depth": "1",
+            "model": "ApsProduct",
+            "extractor": {
+                "class": "XLSXExtractor",
+                "args": {
+                    "allow_partial": true,
+                    "attr_map": {
+                        "satellite_id": "Satellite",
+                        "mission": "Satellite",
+                        "doy": "DOY",
+                        "downlink_orbit": "Downlink orbit",
+                        "antenna_id": "Antenna ID",
+                        "antenna_status": "Antenna status",
+                        "front_end_id": "Front End ID",
+                        "front_end_status": "Front End status",
+                        "planned_data_start": "Planned Data start",
+                        "planned_data_stop": "Planned Data stop",
+                        "first_frame_start": "First Frame start",
+                        "last_frame_stop": "Last Frame stop",
+                        "delivery_push_status": "Delivery Push status",
+                        "start_delivery": "Start Delivery",
+                        "stop_delivery": "Stop Delivery",
+                        "number_of_chunks": "Number of chunks",
+                        "overall_data_volume": "Overall Data Volume",
+                        "overall_number_of_downlinked_frames": "Overall Number of downlinked frames",
+                        "overall_number_of_bad_downlinked_frames": "Overall Number of bad downlinked frames",
+                        "fer_downlink": "FER_Downlink",
+                        "overall_number_of_data_acquired_frames": "Overall Number of data acquired frames",
+                        "overall_number_of_bad_data_acquired_frames": "Overall Number of bad data acquired frames",
+                        "fer_data": "FER_Data",
+                        "notes": "Notes",
+                        "interface_name": {
+                            "python": "lambda root: 'DDP_SGS-Svalbard'"
+                        },
+                        "production_service_type": {
+                            "python": "lambda root: 'DDP'"
+                        },
+                        "production_service_name": {
+                            "python": "lambda root: 'SGS-Svalbard'"
+                        },
+                        "ground_station": {
+                            "python": "lambda root: 'SGS'"
+                        },
+                        "report_type": {
+                            "python": "lambda root: 'daily'"
+                        }
+                    }
+                },
+                "converter_map": {
+                    "satellite_id": {
+                        "type": "python",
+                        "python": "lambda satellite_id: \"S\"+satellite_id[-2:]"
+                    },
+                    "mission": {
+                        "type": "python",
+                        "python": "lambda mission: \"S\"+mission[-2:][:1]"
+                    },
+                    "downlink_orbit": {
+                        "type": "python",
+                        "python": "lambda downlink_orbit: str(int(downlink_orbit))"
+                    },
+                    "first_frame_start": {
+                        "type": "python",
+                        "python": "lambda date: not isinstance(date, str) and date or (isinstance(date, str) and len(date) and date[0].isdigit()) and date.replace(' ', '') or None"
+                    },
+                    "last_frame_stop": {
+                        "type": "python",
+                        "python": "lambda date: not isinstance(date, str) and date or (isinstance(date, str) and len(date) and date[0].isdigit()) and date.replace(' ', '') or None"
+                    },
+                    "fer_data": {
+                        "type": "python",
+                        "python": "lambda a: isinstance(a, (int, float)) and a or (isinstance(a, str)) and len(a) and a[0].isdigit() and a.replace(',', '.').replace(' ', '') or 0"
+                    },
+                    "number_of_chunks": {
+                        "type": "python",
+                        "python": "lambda a: isinstance(a, (int, float)) and a or (isinstance(a, str)) and len(a) and a[0].isdigit() and a.replace(',', '.').replace(' ', '') or 0"
+                    },
+                    "overall_data_volume": {
+                        "type": "python",
+                        "python": "lambda a: isinstance(a, (int, float)) and a or (isinstance(a, str)) and len(a) and a[0].isdigit() and a.replace(',', '.').replace(' ', '') or 0"
+                    },
+                    "overall_number_of_downlinked_frames": {
+                        "type": "python",
+                        "python": "lambda a: isinstance(a, (int, float)) and a or (isinstance(a, str)) and len(a) and a[0].isdigit() and a.replace(',', '.').replace(' ', '') or 0"
+                    },
+                    "overall_number_of_bad_downlinked_frames": {
+                        "type": "python",
+                        "python": "lambda a: isinstance(a, (int, float)) and a or (isinstance(a, str)) and len(a) and a[0].isdigit() and a.replace(',', '.').replace(' ', '') or 0"
+                    },
+                    "overall_number_of_data_acquired_frames": {
+                        "type": "python",
+                        "python": "lambda a: isinstance(a, (int, float)) and a or (isinstance(a, str)) and len(a) and a[0].isdigit() and a.replace(',', '.').replace(' ', '') or 0"
+                    },
+                    "overall_number_of_bad_data_acquired_frames": {
+                        "type": "python",
+                        "python": "lambda a: isinstance(a, (int, float)) and a or (isinstance(a, str)) and len(a) and a[0].isdigit() and a.replace(',', '.').replace(' ', '') or 0"
+                    },
+                    "fer_downlink": {
+                        "type": "python",
+                        "python": "lambda a: isinstance(a, (int, float)) and a or (isinstance(a, str)) and len(a) and a[0].isdigit() and a.replace(',', '.').replace(' ', '') or 0"
+                    },
+                    "start_delivery": {
+                        "type": "python",
+                        "python": "lambda date: not isinstance(date, str) and date or (isinstance(date, str) and len(date) and date[0].isdigit()) and date.replace(' ', '') or None"
+                    },
+                    "stop_delivery": {
+                        "type": "python",
+                        "python": "lambda date: not isinstance(date, str) and date or (isinstance(date, str) and len(date) and date[0].isdigit()) and date.replace(' ', '') or None"
+                    },
+                    "planned_data_start": {
+                        "type": "python",
+                        "python": "lambda date: not isinstance(date, str) and date or (isinstance(date, str) and len(date) and date[0].isdigit()) and date.replace(' ', '') or None"
+                    },
+                    "planned_data_stop": {
+                        "type": "python",
+                        "python": "lambda date: not isinstance(date, str) and date or (isinstance(date, str) and len(date) and date[0].isdigit()) and date.replace(' ', '') or None"
+                    }
+                }
+            }
+        }
+    ]
+}

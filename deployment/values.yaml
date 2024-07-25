@@ -1,0 +1,816 @@
+###################################
+## Global values overrrides (used also by dependencies)
+###################################
+global:
+  postgresql:
+    #username: customuser
+    password: changeme1
+    #database: customdatabase
+    #repmgrUsername: repmgruser
+    repmgrPassword: changeme2
+    #repmgrDatabase: repmgrdatabase
+    #existingSecret: myExistingSecret
+  pgpool:
+    #adminUsername: adminuser
+    adminPassword: changemeAdmin
+    #existingSecret: myExistingSecret
+  elasticsearch:
+    #externalUrl: using a elasticserach already deployed
+    clientUsername: admin
+    clientPassword: admin
+  grafana:
+    apps: []
+
+###################################
+## Current chart values (for templates in this chart)
+###################################
+
+configurationFolders: []
+
+###################################
+## Dependencies values overrrides
+###################################
+grafana:
+  enabled: false
+  image:
+    tag: 10.4.1
+  serviceAccount:
+    create: true
+  admin:
+    existingSecret: gf-admin-secret
+  envFromSecret: maas-secret
+  resources:
+    requests:
+      cpu: 200m
+      memory: 1Gi
+    limits:
+      cpu: 1
+      memory: 1Gi
+
+  ingress:
+    enabled: false
+    annotations:
+      nginx.ingress.kubernetes.io/affinity: "cookie"
+    hosts:
+      - "{{ .Values.global.domain.grafana }}"
+    path: "/grafana"
+  persistence:
+    enabled: false
+  sidecar:
+    logLevel: ERROR
+    dashboards:
+      enabled: false
+      label: grafana_dashboard
+      folderAnnotation: grafana_dashboard_folder
+      provider:
+        allowUiUpdates: true
+        foldersFromFilesStructure: true
+    datasources:
+      enabled: false
+      # label that the configmaps with datasources are marked with
+      label: grafana_datasource
+  # Image renderer configuration
+  imageRenderer:
+    # Enable the image-renderer deployment & service
+    enabled: true
+    grafanaSubPath: "grafana/"
+    networkPolicy:
+      # Enable a NetworkPolicy to limit inbound traffic to only the created grafana pods
+      limitIngress: false
+      # Enable a NetworkPolicy to limit outbound traffic to only the created grafana pods
+      limitEgress: false
+  dashboardProviders:
+    dashboardproviders.yaml:
+      apiVersion: 1
+      providers:
+        - name: "maas-cds-dashboards"
+          orgId: 1
+          type: file
+          disableDeletion: false
+          allowUiUpdates: false
+          updateIntervalSeconds: 30
+          options:
+            path: /var/lib/grafana/dashboards
+            foldersFromFilesStructure: true
+# $GIT_REPO/maas-collector/tree/develop/charts/collector/values.yaml
+collector-sftp:
+  enabled: false
+  replicaCount: 1
+  collector: sftp
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+  #  limits:
+  #    cpu: 500m
+  #    memory: 128Mi
+  args: ["-v"]
+  config:
+    elasticsearch:
+      secretName: elasticsearch-client-secret #expect content as username: and password and url : keys
+    amqp:
+      secretName: rabbitmq-client-secret #expect content as username: and password and url : keys
+    s3: {}
+  # Expect a configMap with a file named "maas-collector-conf.json"
+  # Default one is the test/conf/maas-collector-conf.json file in maas-collector sources
+  configMap:
+    # Specifies whether a config map should be created
+    create: false
+    # Annotations to add to the config map
+    annotations: {}
+    # The name of the config map to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""
+
+# MUST BE SAME AS collector-sftp but with another inbox (var SFTP_INBOX_ROOT) and -f arg
+collector-sftp-replay:
+  enabled: false
+  replicaCount: 1
+  collector: sftp
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+  #  limits:
+  #    cpu: 500m
+  #    memory: 128Mi
+  args: ["-v"]
+  config:
+    elasticsearch:
+      secretName: elasticsearch-client-secret #expect content as username: and password and url : keys
+    amqp:
+      secretName: rabbitmq-client-secret #expect content as username: and password and url : keys
+  # Expect a configMap with a file named "maas-collector-conf.json"
+  # Default one is the test/conf/maas-collector-conf.json file in maas-collector sources
+  configMap:
+    # Specifies whether a config map should be created
+    create: false
+    # Annotations to add to the config map
+    annotations: {}
+    # The name of the config map to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: "collector-sftp-replay-cfg"
+
+# $GIT_REPO/maas-collector/tree/develop/charts/collector/values.yaml
+collector-webdav:
+  enabled: false
+  replicaCount: 1
+  collector: webdav
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+  #  limits:
+  #    cpu: 500m
+  #    memory: 128Mi
+  args: ["-v"]
+  config:
+    elasticsearch:
+      secretName: elasticsearch-client-secret #expect content as username: and password and url : keys
+    amqp:
+      secretName: rabbitmq-client-secret #expect content as username: and password and url : keys
+  # Expect a configMap with a file named "maas-collector-conf.json"
+  # Default one is the test/conf/maas-collector-conf.json file in maas-collector sources
+  configMap:
+    # Specifies whether a config map should be created
+    create: false
+    # Annotations to add to the config map
+    annotations: {}
+    # The name of the config map to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""
+
+# $GIT_REPO/maas-collector/tree/develop/charts/collector/values.yaml
+collector-odata:
+  enabled: false
+  replicaCount: 1
+  collector: odata
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+  #  limits:
+  #    cpu: 500m
+  #    memory: 128Mi
+  args: ["-v"]
+  config:
+    elasticsearch:
+      secretName: elasticsearch-client-secret #expect content as username: and password and url : keys
+    amqp:
+      secretName: rabbitmq-client-secret #expect content as username: and password and url : keys
+  # Expect a configMap with a file named "maas-collector-conf.json"
+  # Default one is the test/conf/maas-collector-conf.json file in maas-collector sources
+  configMap:
+    # Specifies whether a config map should be created
+    create: false
+    # Annotations to add to the config map
+    annotations: {}
+    # The name of the config map to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""
+
+# $GIT_REPO/maas-collector/tree/develop/charts/collector/values.yaml
+collector-ftp:
+  enabled: false
+  replicaCount: 1
+  collector: ftp
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+  #  limits:
+  #    cpu: 500m
+  #    memory: 128Mi
+  args: ["-v"]
+  config:
+    elasticsearch:
+      secretName: elasticsearch-client-secret #expect content as username: and password and url : keys
+    amqp:
+      secretName: rabbitmq-client-secret #expect content as username: and password and url : keys
+  # Expect a configMap with a file named "maas-collector-conf.json"
+  # Default one is the test/conf/maas-collector-conf.json file in maas-collector sources
+  configMap:
+    # Specifies whether a config map should be created
+    create: false
+    # Annotations to add to the config map
+    annotations: {}
+    # The name of the config map to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""
+
+# $GIT_REPO/maas-collector/tree/develop/charts/collector/values.yaml
+collector-rosftp:
+  enabled: false
+  replicaCount: 1
+  collector: rosftp
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+  #  limits:
+  #    cpu: 500m
+  #    memory: 128Mi
+  args: ["-v"]
+  config:
+    elasticsearch:
+      secretName: elasticsearch-client-secret #expect content as username: and password and url : keys
+    amqp:
+      secretName: rabbitmq-client-secret #expect content as username: and password and url : keys
+  # Expect a configMap with a file named "maas-collector-conf.json"
+  # Default one is the test/conf/maas-collector-conf.json file in maas-collector sources
+  configMap:
+    # Specifies whether a config map should be created
+    create: false
+    # Annotations to add to the config map
+    annotations: {}
+    # The name of the config map to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""
+
+collector-jira:
+  enabled: false
+  replicaCount: 1
+  collector: jirax
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+  #  limits:
+  #    cpu: 500m
+  #    memory: 128Mi
+  args: ["-v"]
+  config:
+    elasticsearch:
+      secretName: elasticsearch-client-secret #expect content as username: and password and url : keys
+    amqp:
+      secretName: rabbitmq-client-secret #expect content as username: and password and url : keys
+  # Expect a configMap with a file named "maas-collector-conf.json"
+  # Default one is the test/conf/maas-collector-conf.json file in maas-collector sources
+  configMap:
+    # Specifies whether a config map should be created
+    create: false
+    # Annotations to add to the config map
+    annotations: {}
+    # The name of the config map to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""
+
+collector-monitor:
+  enabled: false
+  replicaCount: 1
+  collector: monitor
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 256Mi
+  args: ["-v", "-p", "300"]
+  config:
+    elasticsearch:
+      secretName: elasticsearch-client-secret #expect content as username: and password and url : keys
+    amqp:
+      secretName: rabbitmq-client-secret #expect content as username: and password and url : keys
+  # Expect a configMap with a file named "maas-collector-conf.json"
+  # Default one is the test/conf/maas-collector-conf.json file in maas-collector sources
+  configMap:
+    # Specifies whether a config map should be created
+    create: false
+    # Annotations to add to the config map
+    annotations: {}
+    # The name of the config map to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""
+
+collector-mpip:
+  enabled: false
+  replicaCount: 1
+  collector: mpip
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+  #  limits:
+  #    cpu: 500m
+  #    memory: 128Mi
+  args: ["-v"]
+  config:
+    elasticsearch:
+      secretName: elasticsearch-client-secret #expect content as username: and password and url : keys
+    amqp:
+      secretName: rabbitmq-client-secret #expect content as username: and password and url : keys
+  # Expect a configMap with a file named "maas-collector-conf.json"
+  # Default one is the test/conf/maas-collector-conf.json file in maas-collector sources
+  configMap:
+    # Specifies whether a config map should be created
+    create: false
+    # Annotations to add to the config map
+    annotations: {}
+    # The name of the config map to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""
+
+collector-loki:
+  enabled: false
+  replicaCount: 1
+  collector: loki
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+  args: ["-v"]
+  config:
+    elasticsearch:
+      secretName: elasticsearch-client-secret #expect content as username: and password and url : keys
+    amqp:
+      secretName: rabbitmq-client-secret #expect content as username: and password and url : keys
+  # Expect a configMap with a file named "maas-collector-conf.json"
+  # Default one is the test/conf/maas-collector-conf.json file in maas-collector sources
+  configMap:
+    # Specifies whether a config map should be created
+    create: false
+    # Annotations to add to the config map
+    annotations: {}
+    # The name of the config map to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""
+
+##
+# Maas Engine
+# $GIT_REPO/maas-engine/tree/develop/charts/maas-engine/values.yaml
+##
+maas-engine:
+  enabled: false
+  replicaCount: 1
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  config:
+    elasticsearch:
+      secretName: elasticsearch-client-secret #expect content as username: and password and url : keys
+    amqp:
+      secretName: rabbitmq-client-secret #expect content as username: and password and url : keys
+  configMap:
+    amqpFiles:
+      - "configuration/engines/default/amqp.json"
+    modelFiles:
+      - "configuration/engines/default/model.json"
+    moduleFiles:
+      - "configuration/engines/default/modules.json"
+    defaultFiles:
+      - "configuration/engines/default/default.json"
+    loggingFiles:
+      - "configuration/engines/default/logging.json"
+  deployments:
+    - name: cds-only-completeness-s1-s2
+      overWriteValues:
+        replicaCount: 1
+        configMap:
+          amqpFiles:
+            - "configuration/engines/specific/cds-only-completeness-s1-s2.json"
+    - name: cds-only-completeness-s3
+      overWriteValues:
+        replicaCount: 0
+        configMap:
+          name: "cds-only-completeness-s3"
+          fileName: "cds-only-completeness-s3_config.json"
+          content: |-
+            {
+              "amqp": [],
+              "modules": [],
+              "model": "",
+              "defaults": [],
+              "logging": {}
+            }
+
+postgresql-sa:
+  enabled: false
+
+# MAAS core specific values for CDS
+tags:
+  monitoring: false
+  logging: false
+
+.frontAffinity: &frontAffinity
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: env
+                operator: In
+                values:
+                  - front
+
+prometheus-elasticsearch-exporter:
+  enabled: false
+
+skedler:
+  enabled: false
+  conf: {}
+  #nameOverride: skedler
+  image:
+    repository: skedler/reports
+    tag: 6.0.2
+    pullPolicy: IfNotPresent
+  readinessProbe: {}
+  livenessProbe: {}
+  resources: {}
+  #   limits:
+  #     cpu: 100m
+  #     memory: 100Mi
+  #   requests:
+  #     cpu: 50m
+  #     memory: 50Mi
+  ## Node labels for pod assignment
+  ## ref: https://kubernetes.io/docs/user-guide/node-selection/
+  #
+  nodeSelector: {}
+  ## Tolerations for pod assignment
+  ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/
+  ##
+  tolerations: []
+  ## Affinity for pod assignment (evaluated as template)
+  ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+  ##
+  affinity: {}
+  ingress:
+    enabled: false
+    # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
+    # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
+    # ingressClassName: nginx
+    # Values can be templated
+    annotations: {}
+    #   kubernetes.io/ingress.class: nginx
+    #   kubernetes.io/tls-acme: "true"
+    labels: {}
+    path: /
+
+    # pathType is only for k8s >= 1.1=
+    pathType: Prefix
+
+    hosts:
+      - chart-example.local
+    ## Extra paths to prepend to every host configuration. This is useful when working with annotation based services.
+    extraPaths: []
+    # - path: /*
+    #   backend:
+    #     serviceName: ssl-redirect
+    #     servicePort: use-annotation
+    ## Or for k8s > 1.19
+    # - path: /*
+    #   pathType: Prefix
+    #   backend:
+    #     service:
+    #       name: ssl-redirect
+    #       port:
+    #         name: use-annotation
+    tls: []
+    #  - secretName: chart-example-tls
+    #    hosts:
+    #      - chart-example.local
+  service:
+    enabled: true
+    type: ClusterIP
+    port: 3005
+    targetPort: 3005
+    # targetPort: 4181 To be used with a proxy extraContainer
+    annotations: {}
+    labels: {}
+    portName: http
+  ## Enable persistence using Persistent Volume Claims
+  ## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
+  ##
+  persistence:
+    type: pvc
+    enabled: false
+    # storageClassName: default
+    accessModes:
+      - ReadWriteOnce
+    size: 10Gi
+    # annotations: {}
+    finalizers:
+      - kubernetes.io/pvc-protection
+    # selectorLabels: {}
+    ## Sub-directory of the PV to mount. Can be templated.
+    # subPath: ""
+    ## Name of an existing PVC. Can be templated.
+    # existingClaim:
+
+    ## If persistence is not enabled, this allows to mount the
+    ## local storage in-memory to improve performance
+    ##
+    inMemory:
+      enabled: false
+      ## The maximum usage on memory medium EmptyDir would be
+      ## the minimum value between the SizeLimit specified
+      ## here and the sum of memory limits of all containers in a pod
+      ##
+      # sizeLimit: 300Mi
+
+mailhog:
+  enabled: false
+
+# PSQL backup jobs base on cronjob chart dependency
+psqlbackup:
+  enabled: false
+  serviceAccount:
+    create: false
+  image:
+    pullPolicy: IfNotPresent
+    registry: "$DOCKER_REGISTRY"
+    repository: "maas/psql-client-s3"
+    tag: latest
+  jobs:
+    backup-front:
+      schedule: "0 5 * * *"
+
+# https://www.rabbitmq.com/kubernetes/operator/using-operator.html
+rabbitmq:
+  enabled: false
+  replicas: 1
+  resources:
+    requests:
+      cpu: 2
+      memory: 4Gi
+    limits:
+      cpu: 2
+      memory: 4Gi
+  additionalConfig: |
+    cluster_partition_handling = pause_minority
+    vm_memory_high_watermark_paging_ratio = 0.99
+    disk_free_limit.relative = 1.0
+    collect_statistics_interval = 10000
+  persistence:
+    storage: "5Gi"
+  ingress:
+    enabled: false
+replay-odata:
+  enabled: false
+  serviceAccount:
+    create: false
+  image:
+    pullPolicy: IfNotPresent
+    registry: "$DOCKER_REGISTRY"
+    repository: "maas/core/maas-collector"
+    tag: develop
+  customConfigMap: collector-odata-cfg
+  customSecret: collector-credentials
+  jobs:
+    cadip-weekly:
+      schedule: "0 3 * * 3"
+      command: ["/bin/bash", "-c"]
+      env:
+        - name: ES_TIMEOUT
+          value: '600'
+        - name: ES_URL
+          valueFrom:
+            secretKeyRef:
+              name: elasticsearch-client-secret
+              key: url
+        - name: ES_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: elasticsearch-client-secret
+              key: username
+        - name: ES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: elasticsearch-client-secret
+              key: password
+        - name: AMQP_URL
+          valueFrom:
+            secretKeyRef:
+              name: rabbitmq-client-secret
+              key: url
+        - name: AMQP_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: rabbitmq-client-secret
+              key: username
+        - name: AMQP_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: rabbitmq-client-secret
+              key: password
+        - name: AMQP_PRIORITY
+          value: '5'
+        - name: RAWDATA_CONFIG_DIR
+          value: /configMaps/collector-odata-cfg
+        - name: CREDENTIAL_FILE
+          value: /secrets/collector-credentials/maas-api-collector-credentials.local.json
+        - name: REPLAY_SUFFIX
+          value: weekly
+        - name: IGNORE_CERTS_VERIFICATION
+          value: "1"
+      args:
+            - |
+              echo "============== MAAS CADIP WEEKLY ================="
+
+              start_day=$(date --date="last  week - 7 days" +%Y-%m-%dT00:00:00.000Z)
+              today=$(date +%Y-%m-%dT00:00:00.000Z)
+              REPLAY_SUFFIX=$REPLAY_SUFFIX-$(date +%W)
+
+              for interface_name in CADIP_Inuvik_Sessions CADIP_Maspalomas_Sessions CADIP_Matera_Sessions CADIP_Neustrelitz_Sessions CADIP_Svalbard_Sessions
+              do
+                python -m maas_collector.rawdata.cli.odata -v --replay-interface-name ${interface_name} --replay-start-date ${start_day} --replay-end-date ${today}
+              done
+    cadip-monthly:
+      schedule: "0 0 8-14 * 3"
+      command: ["/bin/bash", "-c"]
+      env:
+        - name: ES_TIMEOUT
+          value: '600'
+        - name: ES_URL
+          valueFrom:
+            secretKeyRef:
+              name: elasticsearch-client-secret
+              key: url
+        - name: ES_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: elasticsearch-client-secret
+              key: username
+        - name: ES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: elasticsearch-client-secret
+              key: password
+        - name: AMQP_URL
+          valueFrom:
+            secretKeyRef:
+              name: rabbitmq-client-secret
+              key: url
+        - name: AMQP_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: rabbitmq-client-secret
+              key: username
+        - name: AMQP_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: rabbitmq-client-secret
+              key: password
+        - name: AMQP_PRIORITY
+          value: '5'
+        - name: RAWDATA_CONFIG_DIR
+          value: /configMaps/collector-odata-cfg
+        - name: CREDENTIAL_FILE
+          value: /secrets/collector-credentials/maas-api-collector-credentials.local.json
+        - name: REPLAY_SUFFIX
+          value: monthly
+        - name: IGNORE_CERTS_VERIFICATION
+          value: "1"
+      args:
+            - |
+              echo "============== MAAS CADIP MONTHLY ================="
+
+              start_day=$(date --date="last month" +%Y-%m-01T00:00:00.000Z )
+              today=$(date +%Y-%m-%dT00:00:00.000Z)
+
+              REPLAY_SUFFIX=$REPLAY_SUFFIX-$(date +%m)
+
+              for interface_name in CADIP_Inuvik_Sessions CADIP_Maspalomas_Sessions CADIP_Matera_Sessions CADIP_Neustrelitz_Sessions CADIP_Svalbard_Sessions
+              do
+                python -m maas_collector.rawdata.cli.odata -v --replay-interface-name ${interface_name} --replay-start-date ${start_day} --replay-end-date ${today}
+              done
+
+broom-wagon:
+  enabled: false
+  serviceAccount:
+    create: false
+  image:
+    pullPolicy: IfNotPresent
+    registry: "$DOCKER_REGISTRY"
+    repository: "maas/maas-cds"
+    tag: develop
+  env:
+    - name: ES_URL
+      valueFrom:
+        secretKeyRef:
+          name: elasticsearch-client-secret
+          key: url
+    - name: ES_USERNAME
+      valueFrom:
+        secretKeyRef:
+          name: elasticsearch-client-secret
+          key: username
+    - name: ES_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: elasticsearch-client-secret
+          key: password
+    - name: AMQP_URL
+      valueFrom:
+        secretKeyRef:
+          name: rabbitmq-client-secret
+          key: url
+    - name: AMQP_USERNAME
+      valueFrom:
+        secretKeyRef:
+          name: rabbitmq-client-secret
+          key: username
+    - name: AMQP_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: rabbitmq-client-secret
+          key: password
+    - name: IGNORE_CERTS_VERIFICATION
+      value: "1"
+  jobs:
+    completeness-s1:
+      schedule: "0 */6 * * *"
+      command: ["el_grando_satruman"]
+      args:
+        - -v
+        - --config
+        - /configMaps/engines-collect-cfg/cds-engine-conf.json
+        - --document-class
+        - "CdsDatatakeS1"
+        - --query-string
+        - "sensing_global_percentage:[0 TO 99] AND observation_time_start: [now-7d TO now-2h]"
+        - --routing-key
+        - "compute.cds-datatake"
+        - --chunk-size
+        - "1"
+    completeness-s2:
+      schedule: "0 */6 * * *"
+      command: ["el_grando_satruman"]
+      args:
+        - -v
+        - --config
+        - /configMaps/engines-collect-cfg/cds-engine-conf.json
+        - --document-class
+        - "CdsDatatakeS2"
+        - --query-string
+        - "final_completeness_percentage:[0 TO 99] AND observation_time_start: [now-7d TO now-2h]"
+        - --routing-key
+        - "compute.cds-datatake"
+        - --chunk-size
+        - "1"
+  customConfigMap: engines-collect-cfg
+
+opensearch:
+  enabled: false
+
+opensearch-master:
+  nodeGroup: "master"
+  roles:
+    - master
+  updateStrategy: OnDelete
+
+opensearch-data:
+  nodeGroup: "data"
+  roles:
+    - data
+  updateStrategy: OnDelete
+
+opensearch-client:
+  nodeGroup: "client"
+  roles:
+    - client
+
+cronjobs:
+  enabled: false

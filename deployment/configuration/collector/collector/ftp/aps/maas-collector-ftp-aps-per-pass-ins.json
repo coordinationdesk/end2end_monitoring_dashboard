@@ -1,0 +1,85 @@
+{
+    "collectors": [
+        {
+            "class": "FTPCollectorConfiguration",
+            "id_field": [
+                "satellite_id",
+                "antenna_id",
+                "downlink_orbit",
+                "downlink_start_time"
+            ],
+            "file_pattern": "*_OPER_REP_STNACQ_INS_*.EOF",
+            "routing_key": "",
+            "directories": [
+                "/eds/S2PDGS/CGS-INS/STATION_ACQUISITION_REPORT"
+            ],
+            "interface_name": "AcqPassesStatusEDS_INS",
+            "refresh_interval": 10,
+            "expected_collect_interval": 2160,
+            "model": "ApsPerPass",
+            "extractor": {
+                "class": "XMLExtractor",
+                "args": {
+                    "allow_partial": true,
+                    "attr_map": {
+                        "mission": "Earth_Explorer_Header/Fixed_Header/Mission",
+                        "satellite_id": "Earth_Explorer_Header/Fixed_Header/Mission",
+                        "station_id": "Data_Block/StationAcquisitionReport/StationId",
+                        "acquisition_id": "Data_Block/StationAcquisitionReport/StationDownlinkDetails/Acq_Id",
+                        "antenna_id": "Data_Block/StationAcquisitionReport/StationDownlinkDetails/AntennaId",
+                        "downlink_orbit": "Earth_Explorer_Header/Variable_Header/Downlink_Orbit",
+                        "downlink_start_time": "Data_Block/StationAcquisitionReport/StationDownlinkDetails/DownlinkStartTime",
+                        "downlink_end_time": "Data_Block/StationAcquisitionReport/StationDownlinkDetails/DownlinkEndTime",
+                        "downlink_status": "Data_Block/StationAcquisitionReport/StationDownlinkDetails/DownlinkStatus",
+                        "fer_downlink": "Data_Block/StationAcquisitionReport/StationDownlinkDetails/FEP_Information/FER_Downlink",
+                        "fer_data": "Data_Block/StationAcquisitionReport/StationDownlinkDetails/FEP_Information/FER_Data",
+                        "comments": "Data_Block/StationAcquisitionReport/StationDownlinkDetails/Comments",
+                        "interface_name": {
+                            "python": "lambda c: 'AcqPassesStatusEDS'"
+                        },
+                        "production_service_type": {
+                            "python": "lambda c: 'EDS'"
+                        },
+                        "production_service_name": {
+                            "python": "lambda c: 'CGS'"
+                        }
+                    }
+                },
+                "converter_map": {
+                    "mission": {
+                        "type": "python",
+                        "python": "lambda s: s[0] + s[-2]"
+                    },
+                    "satellite_id": {
+                        "type": "python",
+                        "python": "lambda s: s[0] + s[-2:]"
+                    },
+                    "downlink_orbit": {
+                        "type": "python",
+                        "python": "lambda downlink_orbit: str(downlink_orbit)"
+                    },
+                    "downlink_start_time": {
+                        "type": "python",
+                        "python": "lambda downlink_start_date: downlink_start_date[4:]"
+                    },
+                    "downlink_end_time": {
+                        "type": "python",
+                        "python": "lambda downlink_stop_date: downlink_stop_date[4:]"
+                    },
+                    "fer_data": {
+                        "type": "python",
+                        "python": "lambda a: isinstance(a, (int, float)) and a or (isinstance(a, str)) and len(a) and a[0].isdigit() and a.replace(',', '.').replace(' ', '') or 0"
+                    },
+                    "fer_downlink": {
+                        "type": "python",
+                        "python": "lambda a: isinstance(a, (int, float)) and a or (isinstance(a, str)) and len(a) and a[0].isdigit() and a.replace(',', '.').replace(' ', '') or 0"
+                    },
+                    "station_id": {
+                        "type": "python",
+                        "python": "lambda s: s.replace('_', '')"
+                    }
+                }
+            }
+        }
+    ]
+}

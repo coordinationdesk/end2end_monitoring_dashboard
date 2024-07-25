@@ -1,0 +1,83 @@
+{{ if .Values.skedler.enabled }}
+{{- $name := include "skedler.name" . -}}
+{{- $fullName := include "skedler.fullname" . -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $fullName }}
+  labels:
+    {{- include "skedler.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "skedler.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "skedler.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - name: skedler
+        image: "{{ .Values.skedler.image.repository }}:{{ .Values.skedler.image.tag | default "latest" }}"
+        imagePullPolicy: {{ .Values.skedler.image.pullPolicy }}
+        ports:
+        - name: {{ .Values.skedler.service.portName }}
+          containerPort: {{ .Values.skedler.service.port }}
+          protocol: TCP
+        volumeMounts:
+        - name: skedler-storage
+          mountPath: /var/lib/skedler-xg
+        - name: skedler-config
+          mountPath: /usr/share/skedler-xg/reporting.yml
+          subPath: reporting.yml
+        {{- with .Values.skedler.livenessProbe }}
+        livenessProbe:
+        {{- toYaml . | nindent 10 }}
+        {{- end }}
+        {{- with .Values.skedler.readinessProbe }}
+        readinessProbe:
+        {{- toYaml . | nindent 10 }}
+        {{- end }}
+        {{- if .Values.skedler.lifecycleHooks }}
+        lifecycle: {{ tpl (.Values.skedler.lifecycleHooks | toYaml) . | nindent 10 }}
+        {{- end }}
+        {{- with .Values.skedler.resources }}
+        resources:
+        {{- toYaml . | nindent 10 }}
+        {{- end }}
+      {{- with .Values.skedler.nodeSelector }}
+      nodeSelector:
+      {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.skedler.affinity }}
+      affinity:
+      {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.skedler.tolerations }}
+      tolerations:
+      {{- toYaml . | nindent 8 }}
+      {{- end }}
+      volumes:
+      - name: skedler-config
+        configMap:
+          name: skedler-cfg
+    {{- if and .Values.skedler.persistence.enabled (eq .Values.skedler.persistence.type "pvc") }}
+      - name: skedler-storage
+        persistentVolumeClaim:
+          claimName: {{ tpl (.Values.skedler.persistence.existingClaim | default (include "skedler.fullname" .)) . }}
+    {{- else if and .Values.skedler.persistence.enabled (eq .Values.skedler.persistence.type "statefulset") }}
+    # nothing
+    {{- else }}
+      - name: skedler-storage
+    {{- if .Values.skedler.persistence.inMemory.enabled }}
+        emptyDir:
+          medium: Memory
+    {{- if .Values.skedler.persistence.inMemory.sizeLimit }}
+          sizeLimit: {{ .Values.skedler.persistence.inMemory.sizeLimit }}
+    {{- end -}}
+    {{- else }}
+        emptyDir: {}
+    {{- end -}}
+    {{- end -}}
+{{- end }}

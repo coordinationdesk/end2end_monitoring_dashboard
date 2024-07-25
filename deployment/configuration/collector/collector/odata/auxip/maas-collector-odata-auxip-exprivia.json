@@ -1,0 +1,396 @@
+{
+    "collectors": [
+        {
+            "class": "ODataCollectorConfiguration",
+            "id_field": [
+                "product_id",
+                "interface_name"
+            ],
+            "routing_key": "new.raw.data.auxip-product",
+            "interface_name": "AUXIP_Exprivia",
+            "file_pattern": "AUXIP_Exprivia_*.json",
+            "download_file_pattern": [
+                "*OPER_REP__SUP__*.EOF*",
+                "*MPL_TIMELINE*.tgz"
+            ],
+            "refresh_interval": 10,
+            "expected_collect_interval": 2160,
+            "product_per_page": 1000,
+            "model": "AuxipProduct",
+            "extractor": {
+                "class": "JSONExtractor",
+                "args": {
+                    "attr_map": {
+                        "product_id": "`this`.Id",
+                        "product_name": "`this`.Name",
+                        "content_length": "`this`.ContentLength",
+                        "publication_date": "`this`.PublicationDate",
+                        "start_date": "`this`.ContentDate.Start",
+                        "end_date": "`this`.ContentDate.End",
+                        "origin_date": "`this`.OriginDate",
+                        "modification_date": "`this`.ModificationDate",
+                        "eviction_date": "`this`.EvictionDate",
+                        "interface_name": {
+                            "python": "lambda c: 'AUXIP_Exprivia'"
+                        },
+                        "production_service_type": {
+                            "python": "lambda c: 'AUXIP'"
+                        },
+                        "production_service_name": {
+                            "python": "lambda c: 'Exprivia'"
+                        }
+                    },
+                    "iterate_nodes": "$.value",
+                    "allow_partial": true
+                }
+            }
+        },
+        {
+            "class": "",
+            "id_field": [
+                "file_name",
+                "subsystem",
+                "start_time",
+                "end_time"
+            ],
+            "parent_file_pattern": "*OPER_REP__SUP__*.EOF*",
+            "file_pattern": "*OPER_REP__SUP__*.EOF*",
+            "refresh_interval": 0,
+            "routing_key": "new.raw.data.sat-unavailability-product",
+            "interface_name": "Satellite-Unavailability",
+            "no_credential": true,
+            "model": "SatUnavailabilityProduct",
+            "extractor": {
+                "class": "SatUnavailabilityExtractor"
+            }
+        },
+        {
+            "class": "",
+            "id_field": [
+                "satellite_id",
+                "mission",
+                "datatake_id",
+                "effective_downlink_start",
+                "station",
+                "channel",
+                "reportName"
+            ],
+            "parent_file_pattern": "*S1*MPL_TIMELINE*.tgz",
+            "file_pattern": "*S1*MP_ALL__*.csv",
+            "refresh_interval": 0,
+            "no_credential": true,
+            "routing_key": "",
+            "file_routing_key": "file.raw.data.mp-all-product",
+            "interface_name": "AUXIP",
+            "model": "MpAllProduct",
+            "extractor": {
+                "class": "CSVExtractor",
+                "args": {
+                    "allow_partial": true,
+                    "attr_map": {
+                        "satellite_id": "SatelliteID",
+                        "mission": {
+                            "python": "lambda c: 'S1'"
+                        },
+                        "status": "Status",
+                        "datatake_id": "DatatakeId(dec)",
+                        "effective_downlink_start": "EffectiveDownlinkStart",
+                        "effective_downlink_stop": "EffectiveDownlinkStop",
+                        "downlink_duration": "DownlinkDuration [msec]",
+                        "latency": "Latency [min]",
+                        "station": "CGS",
+                        "timeliness": "Timeliness",
+                        "polarization": "Polarization",
+                        "instrument_mode": "InstrumentMode",
+                        "session_id": "DLSession",
+                        "downlink_polarization": "DownlinkPolarization",
+                        "downlink_absolute_orbit": {
+                            "python": "lambda root: None if root.get('DownlinkAbsoluteOrbit') is None else str(root.get('DownlinkAbsoluteOrbit'))"
+                        },
+                        "acquisition_start": "SensingTimeStart",
+                        "acquisition_duration": "SensingDuration [msec]",
+                        "downlink_execution_time": "DownlinkExecutionTime",
+                        "channel": "Channel",
+                        "interface_name": {
+                            "python": "lambda c: 'S1MissionPlanningALL'"
+                        }
+                    }
+                },
+                "converter_map": {
+                    "session_id": {
+                        "type": "python",
+                        "python": "lambda session_id: session_id.split('-') if '-' in session_id else session_id.split()"
+                    }
+                }
+            }
+        },
+        {
+            "class": "",
+            "id_field": [
+                "satellite_id",
+                "mission",
+                "datatake_id",
+                "effective_downlink_start",
+                "station",
+                "channel",
+                "reportName"
+            ],
+            "parent_file_pattern": "*S2*MPL_TIMELINE*.tgz",
+            "file_pattern": "*S2*MP_ALL__*.csv",
+            "refresh_interval": 0,
+            "no_credential": true,
+            "routing_key": "",
+            "file_routing_key": "file.raw.data.mp-all-product",
+            "interface_name": "AUXIP",
+            "model": "MpAllProduct",
+            "extractor": {
+                "class": "CSVExtractor",
+                "args": {
+                    "allow_partial": true,
+                    "attr_map": {
+                        "satellite_id": "SatelliteID",
+                        "mission": {
+                            "python": "lambda c: 'S2'"
+                        },
+                        "datatake_id": {
+                            "python": "lambda row: row.get('ID') or row.get('AcquisitionID')"
+                        },
+                        "effective_downlink_start": "EffectiveDownlinkStart",
+                        "effective_downlink_stop": "EffectiveDownlinkStop",
+                        "downlink_duration": "DownlinkDuration[msec]",
+                        "acquisition_start": "AcquisitionStart",
+                        "acquisition_stop": "AcquisitionStop",
+                        "acquisition_duration": "AcquisitionDuration[msec]",
+                        "latency": "Latency[min]",
+                        "station": "Station",
+                        "partial": "Partial",
+                        "absolute_orbit": {
+                            "python": "lambda root: None if root.get('AbsoluteOrbit') is None else str(root.get('AbsoluteOrbit'))"
+                        },
+                        "relative_orbit": {
+                            "python": "lambda root: None if root.get('RelativeOrbit') is None else str(root.get('RelativeOrbit'))"
+                        },
+                        "downlink_absolute_orbit": {
+                            "python": "lambda root: None if root.get('DownlinkOrbit') is None else str(root.get('DownlinkOrbit'))"
+                        },
+                        "downlink_polarization": "DownlinkPolarization",
+                        "channel": "Channel",
+                        "number_of_scenes": "Scenes",
+                        "timeliness": "Timeliness",
+                        "interface_name": {
+                            "python": "lambda c: 'S2MissionPlanningALL'"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "class": "",
+            "id_field": [
+                "satellite_id",
+                "datatake_id",
+                "reportName"
+            ],
+            "parent_file_pattern": "*S1*MPL_TIMELINE*.tgz",
+            "file_pattern": "*MP_ACQ__L0_*.csv",
+            "refresh_interval": 0,
+            "no_credential": true,
+            "routing_key": "",
+            "file_routing_key": "file.raw.data.mp-product",
+            "interface_name": "AUXIP",
+            "model": "MpProduct",
+            "extractor": {
+                "class": "CSVExtractor",
+                "args": {
+                    "allow_partial": true,
+                    "attr_map": {
+                        "satellite_id": "SatelliteID",
+                        "datatake_id": "DatatakeId",
+                        "observation_time_start": "ObservationTimeStart",
+                        "observation_duration": "ObservationDuration [msec]",
+                        "l0_sensing_time_start": "L0SensingTimeStart",
+                        "l0_sensing_duration": "L0SensingDuration [msec] ",
+                        "absolute_orbit": {
+                            "python": "lambda root: None if root.get('AbsoluteOrbit') is None else str(root.get('AbsoluteOrbit'))"
+                        },
+                        "relative_orbit": {
+                            "python": "lambda root: None if root.get('RelativeOrbit') is None else str(root.get('RelativeOrbit'))"
+                        },
+                        "polarization": "Polarization",
+                        "instrument_mode": "InstrumentMode",
+                        "instrument_swath": "InstrumentSwath",
+                        "timeliness": "Timeliness",
+                        "interface_name": {
+                            "python": "lambda c: 'S1MissionPlanning'"
+                        },
+                        "production_service_type": {
+                            "python": "lambda c: 'AUXIP'"
+                        },
+                        "production_service_name": {
+                            "python": "lambda c: 'CGS'"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "class": "",
+            "id_field": [
+                "satellite_id",
+                "datatake_id",
+                "reportName"
+            ],
+            "parent_file_pattern": "*S2*MPL_TIMELINE*.tgz",
+            "file_pattern": "*S2*_MP_ACQ__MTL_*.csv",
+            "refresh_interval": 0,
+            "no_credential": true,
+            "routing_key": "",
+            "file_routing_key": "file.raw.data.mp-product",
+            "interface_name": "AUXIP",
+            "model": "MpProduct",
+            "extractor": {
+                "class": "CSVExtractor",
+                "args": {
+                    "allow_partial": true,
+                    "attr_map": {
+                        "satellite_id": "SatelliteID",
+                        "datatake_id": {
+                            "python": "lambda row: row.get('ID') or row.get('AcquisitionID')"
+                        },
+                        "observation_time_start": "ObservationTimeStart",
+                        "observation_time_stop": "ObservationTimeStop",
+                        "observation_duration": "ObservationDuration[msec]",
+                        "number_of_scenes": "NumberOfScenes",
+                        "absolute_orbit": {
+                            "python": "lambda root: None if root.get('AbsoluteOrbit') is None else str(root.get('AbsoluteOrbit'))"
+                        },
+                        "relative_orbit": {
+                            "python": "lambda root: None if root.get('RelativeOrbit') is None else str(root.get('RelativeOrbit'))"
+                        },
+                        "instrument_mode": "InstrumentMode",
+                        "timeliness": "Timeliness",
+                        "interface_name": {
+                            "python": "lambda c: 'S2MissionPlanning'"
+                        },
+                        "production_service_type": {
+                            "python": "lambda c: 'AUXIP'"
+                        },
+                        "production_service_name": {
+                            "python": "lambda c: 'CGS'"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "class": "",
+            "id_field": [
+                "session_id",
+                "satellite_id",
+                "ground_station",
+                "execution_time",
+                "reportName"
+            ],
+            "parent_file_pattern": "*S1*MPL_TIMELINE*.tgz",
+            "file_pattern": "*MP_HKTM_*.csv",
+            "refresh_interval": 0,
+            "no_credential": true,
+            "routing_key": "",
+            "file_routing_key": "file.raw.data.mp-hktm-acquisition-product",
+            "interface_name": "AUXIP",
+            "model": "MpHktmAcquisitionProduct",
+            "extractor": {
+                "class": "CSVExtractor",
+                "args": {
+                    "allow_partial": true,
+                    "attr_map": {
+                        "satellite_id": "SatelliteID",
+                        "session_id": "SessionID",
+                        "absolute_orbit": {
+                            "python": "lambda root: None if root.get('AbsoluteOrbit') is None else str(root.get('AbsoluteOrbit'))"
+                        },
+                        "ground_station": "CGS",
+                        "channel": "channel",
+                        "execution_time": "ExecutionTime",
+                        "interface_name": {
+                            "python": "lambda c: 'S1MissionPlanning'"
+                        },
+                        "production_service_type": {
+                            "python": "lambda c: 'AUXIP'"
+                        },
+                        "production_service_name": {
+                            "python": "lambda c: 'CGS'"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "class": "",
+            "id_field": [
+                "satellite_id",
+                "mission",
+                "effective_downlink_start",
+                "station",
+                "absolute_orbit",
+                "reportName"
+            ],
+            "parent_file_pattern": "*S2*MPL_TIMELINE*.tgz",
+            "file_pattern": "*S2*MP_DWL__*.csv",
+            "refresh_interval": 0,
+            "no_credential": true,
+            "routing_key": "",
+            "file_routing_key": "file.raw.data.mp-hktm-downlink",
+            "interface_name": "AUXIP",
+            "model": "MpHktmDownlink",
+            "extractor": {
+                "class": "CSVExtractor",
+                "args": {
+                    "allow_partial": true,
+                    "attr_map": {
+                        "satellite_id": "Satellite ID",
+                        "mission": {
+                            "python": "lambda c: 'S2'"
+                        },
+                        "datatake_id": {
+                            "python": "lambda row: None if not row.get('AcquisitionID') else row.get('AcquisitionID')"
+                        },
+                        "effective_downlink_start": "EffectiveDownlinkStart",
+                        "effective_downlink_stop": "EffectiveDownlinkStop",
+                        "downlink_start": "DownlinkStart",
+                        "downlink_stop": "DownlinkStop",
+                        "downlink_mode": "DwlMode",
+                        "downlink_duration": {
+                            "python": "lambda row: None if not row.get('DownlinkDuration[msec]') else int(row.get('DownlinkDuration[msec]'))"
+                        },
+                        "acquisition_start": {
+                            "python": "lambda row: None if not row.get('AcquisitionStart') else row.get('AcquisitionStart')"
+                        },
+                        "acquisition_stop": {
+                            "python": "lambda row: None if not row.get('AcquisitionStop') else row.get('AcquisitionStop')"
+                        },
+                        "acquisition_duration": {
+                            "python": "lambda row: None if not row.get('AcquisitionDuration[msec]') else int(row.get('AcquisitionDuration[msec]'))"
+                        },
+                        "station": "Station",
+                        "partial": {
+                            "python": "lambda row: None if not row.get('Partial') else row.get('Partial')"
+                        },
+                        "absolute_orbit": {
+                            "python": "lambda row: None if not row.get('AbsoluteOrbit') else str(row.get('AbsoluteOrbit'))"
+                        },
+                        "latency": {
+                            "python": "lambda row: None if not row.get('Latency[min]') else int(row.get('Latency[min]'))"
+                        },
+                        "number_of_scenes": {
+                            "python": "lambda row: None if not row.get('Scenes') else int(row.get('Scenes'))"
+                        },
+                        "interface_name": {
+                            "python": "lambda c: 'S2MissionPlanning'"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

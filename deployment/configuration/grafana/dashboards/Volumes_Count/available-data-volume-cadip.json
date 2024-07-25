@@ -1,0 +1,1603 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 29,
+      "panels": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 24,
+            "x": 0,
+            "y": 1
+          },
+          "id": 8,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "This dashboard shows volume of data acquired by stations and made available to Production Services through CADIP interface.\n\nThe information displayed was originally taken from Session with Quality Infos at each CADIP station  \n\nTime reference for this dashboard is : planned_data_start\n\nImportant notice : Tables & timelines can only display up to 10 000 entries. Please make use of filters to narrow down the retrieved data and get a more realistic view.",
+            "mode": "markdown"
+          },
+          "pluginVersion": "10.2.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "refId": "A"
+            }
+          ],
+          "type": "text"
+        }
+      ],
+      "title": "Dashboard Description",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 31,
+      "panels": [],
+      "title": "Overview",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PE0BF01AC3817A56D"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "purple",
+                "value": null
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 0,
+        "y": 2
+      },
+      "id": 18,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.4.1",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "planned_data_start",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE0BF01AC3817A56D"
+          },
+          "metrics": [
+            {
+              "field": "TotalVolume",
+              "id": "1",
+              "type": "sum"
+            }
+          ],
+          "query": "satellite_id:$satellite AND mission:$mission AND ground_station:$interface_name",
+          "refId": "DdpProductVolumeQuery",
+          "timeField": "planned_data_start"
+        }
+      ],
+      "title": "Total volume of acquired data",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PE0BF01AC3817A56D"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "orange",
+                "value": null
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 6,
+        "y": 2
+      },
+      "id": 17,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "max"
+          ],
+          "fields": "/^transfer_time_ms$/",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.4.1",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE0BF01AC3817A56D"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "10000"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "satellite_id:$satellite AND mission:$mission AND ground_station:$interface_name",
+          "refId": "DdpProductVolumeQuery",
+          "timeField": "planned_data_start"
+        }
+      ],
+      "title": "Max transfer time ",
+      "transformations": [
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "destinationType": "time",
+                "targetField": "planned_data_stop"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "transfer_time_ms",
+            "binary": {
+              "left": "planned_data_stop",
+              "operator": "-",
+              "reducer": "sum",
+              "right": "planned_data_start"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PE0BF01AC3817A56D"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 12,
+        "y": 2
+      },
+      "id": 32,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "/^transfer_time_ms$/",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.4.1",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE0BF01AC3817A56D"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "10000"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "satellite_id:$satellite AND mission:$mission AND ground_station:$interface_name",
+          "refId": "DdpProductVolumeQuery",
+          "timeField": "planned_data_start"
+        }
+      ],
+      "title": "Average transfer time ",
+      "transformations": [
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "destinationType": "time",
+                "targetField": "planned_data_stop"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "transfer_time_ms",
+            "binary": {
+              "left": "planned_data_stop",
+              "operator": "-",
+              "reducer": "sum",
+              "right": "planned_data_start"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PE0BF01AC3817A56D"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 18,
+        "y": 2
+      },
+      "id": 33,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "min"
+          ],
+          "fields": "/^transfer_time_ms$/",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.4.1",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE0BF01AC3817A56D"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "10000"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "satellite_id:$satellite AND mission:$mission AND ground_station:$interface_name",
+          "refId": "DdpProductVolumeQuery",
+          "timeField": "planned_data_start"
+        }
+      ],
+      "title": "Min transfer time ",
+      "transformations": [
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                "destinationType": "time",
+                "targetField": "planned_data_stop"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "transfer_time_ms",
+            "binary": {
+              "left": "planned_data_stop",
+              "operator": "-",
+              "reducer": "sum",
+              "right": "planned_data_start"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PE0BF01AC3817A56D"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "purple",
+                "value": null
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": [
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "Value"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 7
+      },
+      "id": 22,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [
+            "sum",
+            "max",
+            "mean",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "orientation": "auto",
+        "showValue": "auto",
+        "stacking": "normal",
+        "text": {},
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        },
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 100
+      },
+      "pluginVersion": "8.2.4",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "planned_data_start",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE0BF01AC3817A56D"
+          },
+          "metrics": [
+            {
+              "field": "TotalVolume",
+              "id": "1",
+              "type": "sum"
+            }
+          ],
+          "query": "mission:$mission AND satellite_id:$satellite AND ground_station:$interface_name",
+          "refId": "DdpVolumePerDayQuery",
+          "timeField": "planned_data_start"
+        }
+      ],
+      "title": "Volume of acquired data per day",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "Sum data_size": "Volume per day"
+            }
+          }
+        }
+      ],
+      "type": "barchart"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 17
+      },
+      "id": 21,
+      "panels": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE0BF01AC3817A56D"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "fillOpacity": 80,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineWidth": 1,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "decbytes"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 15,
+            "w": 10,
+            "x": 0,
+            "y": 18
+          },
+          "id": 6,
+          "options": {
+            "barRadius": 0,
+            "barWidth": 0.97,
+            "fullHighlight": false,
+            "groupWidth": 0.7,
+            "legend": {
+              "calcs": [
+                "sum"
+              ],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "orientation": "auto",
+            "showValue": "auto",
+            "stacking": "normal",
+            "text": {},
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            },
+            "xTickLabelRotation": 0,
+            "xTickLabelSpacing": 100
+          },
+          "pluginVersion": "8.2.4",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [
+                {
+                  "field": "ground_station",
+                  "id": "3",
+                  "settings": {
+                    "min_doc_count": "1",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "10"
+                  },
+                  "type": "terms"
+                },
+                {
+                  "field": "planned_data_start",
+                  "id": "2",
+                  "settings": {
+                    "interval": "1d"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "PE0BF01AC3817A56D"
+              },
+              "metrics": [
+                {
+                  "field": "TotalVolume",
+                  "id": "1",
+                  "type": "sum"
+                }
+              ],
+              "query": "mission:$mission AND satellite_id:$satellite AND ground_station:$interface_name",
+              "refId": "DdpVolumePerDayQuery",
+              "timeField": "planned_data_start"
+            }
+          ],
+          "title": "Volume of acquired data per day",
+          "type": "barchart"
+        },
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE0BF01AC3817A56D"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "purple",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "decbytes"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 14,
+            "w": 5,
+            "x": 10,
+            "y": 18
+          },
+          "id": 4,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "sum"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showPercentChange": false,
+            "text": {},
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "10.4.1",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [
+                {
+                  "field": "ground_station",
+                  "id": "3",
+                  "settings": {
+                    "min_doc_count": "1",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "10"
+                  },
+                  "type": "terms"
+                },
+                {
+                  "field": "planned_data_start",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "PE0BF01AC3817A56D"
+              },
+              "metrics": [
+                {
+                  "field": "TotalVolume",
+                  "id": "1",
+                  "type": "sum"
+                }
+              ],
+              "query": "satellite_id:$satellite AND mission:$mission AND ground_station:$interface_name",
+              "refId": "DdpProductVolumeQuery",
+              "timeField": "planned_data_start"
+            }
+          ],
+          "title": "Total volume of acquired data",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE0BF01AC3817A56D"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "orange",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "ms"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 14,
+            "w": 3,
+            "x": 15,
+            "y": 18
+          },
+          "id": 11,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "max"
+              ],
+              "fields": "",
+              "values": true
+            },
+            "showPercentChange": false,
+            "text": {},
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "10.4.1",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "PE0BF01AC3817A56D"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "size": "10000"
+                  },
+                  "type": "raw_data"
+                }
+              ],
+              "query": "satellite_id:$satellite AND mission:$mission AND ground_station:$interface_name",
+              "refId": "A",
+              "timeField": "planned_data_start"
+            }
+          ],
+          "title": "Max transfer time",
+          "transformations": [
+            {
+              "id": "convertFieldType",
+              "options": {
+                "conversions": [
+                  {
+                    "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                    "destinationType": "time",
+                    "targetField": "planned_data_stop"
+                  }
+                ],
+                "fields": {}
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "transfer_time_ms",
+                "binary": {
+                  "left": "planned_data_stop",
+                  "operator": "-",
+                  "reducer": "sum",
+                  "right": "planned_data_start"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                },
+                "replaceFields": false
+              }
+            },
+            {
+              "id": "groupBy",
+              "options": {
+                "fields": {
+                  "ground_station": {
+                    "aggregations": [],
+                    "operation": "groupby"
+                  },
+                  "transfer_time_ms": {
+                    "aggregations": [
+                      "max"
+                    ],
+                    "operation": "aggregate"
+                  }
+                }
+              }
+            }
+          ],
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE0BF01AC3817A56D"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "orange",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "ms"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 14,
+            "w": 3,
+            "x": 18,
+            "y": 18
+          },
+          "id": 34,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "max"
+              ],
+              "fields": "",
+              "values": true
+            },
+            "showPercentChange": false,
+            "text": {},
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "10.4.1",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "PE0BF01AC3817A56D"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "size": "10000"
+                  },
+                  "type": "raw_data"
+                }
+              ],
+              "query": "satellite_id:$satellite AND mission:$mission AND ground_station:$interface_name",
+              "refId": "A",
+              "timeField": "planned_data_start"
+            }
+          ],
+          "title": "Average transfer time",
+          "transformations": [
+            {
+              "id": "convertFieldType",
+              "options": {
+                "conversions": [
+                  {
+                    "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                    "destinationType": "time",
+                    "targetField": "planned_data_stop"
+                  }
+                ],
+                "fields": {}
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "transfer_time_ms",
+                "binary": {
+                  "left": "planned_data_stop",
+                  "operator": "-",
+                  "reducer": "sum",
+                  "right": "planned_data_start"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                },
+                "replaceFields": false
+              }
+            },
+            {
+              "id": "groupBy",
+              "options": {
+                "fields": {
+                  "ground_station": {
+                    "aggregations": [],
+                    "operation": "groupby"
+                  },
+                  "transfer_time_ms": {
+                    "aggregations": [
+                      "mean"
+                    ],
+                    "operation": "aggregate"
+                  }
+                }
+              }
+            }
+          ],
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE0BF01AC3817A56D"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "orange",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "ms"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 14,
+            "w": 3,
+            "x": 21,
+            "y": 18
+          },
+          "id": 35,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "max"
+              ],
+              "fields": "",
+              "values": true
+            },
+            "showPercentChange": false,
+            "text": {},
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "10.4.1",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "PE0BF01AC3817A56D"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "size": "10000"
+                  },
+                  "type": "raw_data"
+                }
+              ],
+              "query": "satellite_id:$satellite AND mission:$mission AND ground_station:$interface_name",
+              "refId": "A",
+              "timeField": "planned_data_start"
+            }
+          ],
+          "title": "Min transfer time",
+          "transformations": [
+            {
+              "id": "convertFieldType",
+              "options": {
+                "conversions": [
+                  {
+                    "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                    "destinationType": "time",
+                    "targetField": "planned_data_stop"
+                  }
+                ],
+                "fields": {}
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "transfer_time_ms",
+                "binary": {
+                  "left": "planned_data_stop",
+                  "operator": "-",
+                  "reducer": "sum",
+                  "right": "planned_data_start"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                },
+                "replaceFields": false
+              }
+            },
+            {
+              "id": "groupBy",
+              "options": {
+                "fields": {
+                  "ground_station": {
+                    "aggregations": [],
+                    "operation": "groupby"
+                  },
+                  "transfer_time_ms": {
+                    "aggregations": [
+                      "min"
+                    ],
+                    "operation": "aggregate"
+                  }
+                }
+              }
+            }
+          ],
+          "type": "stat"
+        }
+      ],
+      "title": "Stats per interface",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 18
+      },
+      "id": 27,
+      "panels": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE0BF01AC3817A56D"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "none"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Transfer Time"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "\u00b5s"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Data Size"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "decbytes"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 15,
+            "w": 24,
+            "x": 0,
+            "y": 19
+          },
+          "id": 23,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true,
+            "sortBy": []
+          },
+          "pluginVersion": "10.4.1",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "PE0BF01AC3817A56D"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "size": "10000"
+                  },
+                  "type": "raw_data"
+                }
+              ],
+              "query": "mission:$mission AND satellite_id:$satellite AND ground_station:$interface_name",
+              "refId": "A",
+              "timeField": "planned_data_start"
+            }
+          ],
+          "title": "Volume of acquired data per day",
+          "transformations": [
+            {
+              "id": "convertFieldType",
+              "options": {
+                "conversions": [
+                  {
+                    "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                    "destinationType": "time",
+                    "targetField": "downlink_start"
+                  },
+                  {
+                    "dateFormat": "YYYY-MM-DD HH:mm:ss",
+                    "destinationType": "time",
+                    "targetField": "downlink_stop"
+                  }
+                ],
+                "fields": {}
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "transfer_time_ms",
+                "binary": {
+                  "left": "downlink_stop",
+                  "operator": "-",
+                  "reducer": "sum",
+                  "right": "downlink_start"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                },
+                "replaceFields": false
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "AcquiredTFs": true,
+                  "CorrectedDataTFs": true,
+                  "CorrectedTFs": true,
+                  "DataTFs": true,
+                  "ErrorDataTFs": true,
+                  "ErrorTFs": true,
+                  "TotalChunks": true,
+                  "UncorrectableDataTFs": true,
+                  "UncorrectableTFs": true,
+                  "_id": true,
+                  "_index": true,
+                  "_type": true,
+                  "acquisition_id": true,
+                  "antenna_id": true,
+                  "antenna_status": true,
+                  "delivery_push_status": true,
+                  "delivery_start": false,
+                  "delivery_stop": false,
+                  "downlink_orbit": true,
+                  "downlink_start": false,
+                  "downlink_status": true,
+                  "front_end_id": true,
+                  "front_end_status": true,
+                  "global_status": true,
+                  "ground_station": false,
+                  "highlight": true,
+                  "interface_name": true,
+                  "num_channels": true,
+                  "planned_data_start": true,
+                  "planned_data_stop": true,
+                  "production_service_type": true,
+                  "publication_date": true,
+                  "quality_infos": true,
+                  "reportFolder": true,
+                  "retransfer": true,
+                  "sort": true,
+                  "station_unit_id": true,
+                  "transfer_time_ms": false,
+                  "updateTime": true
+                },
+                "indexByName": {
+                  "AcquiredTFs": 11,
+                  "CorrectedDataTFs": 12,
+                  "CorrectedTFs": 13,
+                  "DataTFs": 14,
+                  "ErrorDataTFs": 15,
+                  "ErrorTFs": 16,
+                  "TotalChunks": 17,
+                  "TotalVolume": 40,
+                  "UncorrectableDataTFs": 18,
+                  "UncorrectableTFs": 19,
+                  "_id": 6,
+                  "_index": 7,
+                  "_type": 4,
+                  "acquisition_id": 20,
+                  "antenna_id": 21,
+                  "antenna_status": 22,
+                  "delivery_push_status": 23,
+                  "delivery_start": 24,
+                  "delivery_stop": 25,
+                  "downlink_orbit": 26,
+                  "downlink_start": 27,
+                  "downlink_status": 28,
+                  "downlink_stop": 29,
+                  "front_end_id": 30,
+                  "front_end_status": 31,
+                  "global_status": 32,
+                  "ground_station": 2,
+                  "highlight": 5,
+                  "mission": 0,
+                  "num_channels": 33,
+                  "planned_data_start": 10,
+                  "planned_data_stop": 34,
+                  "publication_date": 35,
+                  "quality_infos": 36,
+                  "reportFolder": 37,
+                  "retransfer": 38,
+                  "satellite_id": 1,
+                  "session_id": 3,
+                  "sort": 9,
+                  "station_unit_id": 41,
+                  "transfer_time_ms": 39,
+                  "updateTime": 8
+                },
+                "renameByName": {
+                  "TotalVolume": "Data Size",
+                  "data_size": "Data Size",
+                  "delivery_start": "Delivery Start",
+                  "delivery_stop": "Delivery Stop",
+                  "downlink_start": "Downlink Start",
+                  "downlink_status": "",
+                  "downlink_stop": "Downlink Stop",
+                  "ground_station": "Ground Station",
+                  "mission": "Mission",
+                  "production_service_name": "Service Provider Name",
+                  "satellite_id": "Satellite Unit",
+                  "satellite_unit": "Satellite Unit",
+                  "session_id": "Session ID",
+                  "time_created": "Time Created",
+                  "time_finished": "Time Finished",
+                  "time_start": "Time Start",
+                  "time_stop": "Time Stop",
+                  "transfer_time": "Transfer Time",
+                  "transfer_time_ms": "Transfer Time"
+                }
+              }
+            }
+          ],
+          "type": "table"
+        }
+      ],
+      "title": "CADIP List & Details",
+      "type": "row"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [
+    "Volumes and Count"
+  ],
+  "templating": {
+    "list": [
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "PE0BF01AC3817A56D"
+        },
+        "definition": "{\"find\":\"terms\",\"field\":\"mission\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Mission",
+        "multi": true,
+        "name": "mission",
+        "options": [],
+        "query": "{\"find\":\"terms\",\"field\":\"mission\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "PE0BF01AC3817A56D"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"satellite_id\",  \"query\":\"mission: $mission\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Satellite",
+        "multi": true,
+        "name": "satellite",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"satellite_id\",  \"query\":\"mission: $mission\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "PE0BF01AC3817A56D"
+        },
+        "definition": "{\"find\":\"terms\",\"field\":\"ground_station\",  \"query\":\"mission: $mission AND satellite_id : $satellite\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Ground Station",
+        "multi": true,
+        "name": "interface_name",
+        "options": [],
+        "query": "{\"find\":\"terms\",\"field\":\"ground_station\",  \"query\":\"mission: $mission AND satellite_id : $satellite\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-7d/d",
+    "to": "now/d"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Available Data Volume (CADIP)",
+  "uid": "available-data-volume-cadip",
+  "weekStart": ""
+}

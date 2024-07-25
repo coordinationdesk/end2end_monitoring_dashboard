@@ -1,0 +1,105 @@
+.init-grafana-image: &init-grafana-image localhost:32000/maas/init-grafana:2.4.0
+
+global:
+  elasticsearch:
+    externalUrl: "https://cds-prod-db-client.db.svc.cluster.local:9200"
+  domain:
+    grafana: "omcs.copernicus.eu" # temporary removed to allow acces to grafana with out domain name
+    grafana_path: /grafana # temporary removed to allow acces to grafana with out domain name
+configurationFolders:
+  - skedler
+
+grafana:
+  enabled: true
+  service:
+    enabled: true
+    type: NodePort
+    nodePort: 32080
+  nodeSelector:
+    magnum.openstack.org/role: front
+  sidecar:
+    dashboards:
+      enabled: false
+      provider:
+        allowUiUpdates: false
+  persistence:
+    enabled: false
+    storageClass: cinder-hdd
+  envFromSecrets:
+    - name: grafana-smtp-config
+    - name: maas-secret
+  env:
+  grafana.ini:
+    log.console:
+      format: json
+    server:
+      domain: "{{ .Values.global.domain.grafana }}"
+      root_url: "%(protocol)s://%(domain)s/grafana"
+      serve_from_sub_path: true
+      router_logging: true
+    database:
+      type: postgres
+      host: "cds-prd-front-db-postgresql-sa-hl:5432"
+      name: grafana
+      user: grafana
+    date_formats:
+      use_browser_locale: false
+      default_timezone: UTC
+      default_week_start: monday
+    dashboards:
+      default_home_dashboard_path: /var/lib/grafana/dashboards/home.json
+    metrics:
+      enabled: false
+  plugins:
+    - marcusolsson-gantt-panel
+    - agenty-flowcharting-panel
+    - https://github.com/yesoreyeram/grafana-infinity-datasource/releases/download/v2.4.0/yesoreyeram-infinity-datasource-2.4.0.zip;yesoreyeram-infinity-datasource
+  extraInitContainers:
+    - name: init-grafana
+      image: *init-grafana-image
+      imagePullPolicy: Always
+      env:
+        - name: ELASTIC_URL
+          valueFrom:
+            secretKeyRef:
+              name: elasticsearch-client-secret
+              key: url
+        - name: ELASTIC_USER
+          valueFrom:
+            secretKeyRef:
+              name: elasticsearch-client-secret
+              key: username
+        - name: ELASTIC_USER_PWD
+          valueFrom:
+            secretKeyRef:
+              name: elasticsearch-client-secret
+              key: password
+      volumeMounts:
+        - name: storage
+          mountPath: "/var/lib/grafana"
+        - name: provisioning-datasources
+          mountPath: "/etc/grafana/provisioning/datasources"
+        - name: provisioning-alerting
+          mountPath: "/etc/grafana/provisioning/alerting"
+  extraEmptyDirMounts:
+    - name: provisioning-datasources
+      mountPath: "/etc/grafana/provisioning/datasources"
+    - name: provisioning-alerting
+      mountPath: "/etc/grafana/provisioning/alerting"
+skedler:
+  enabled: true
+  image:
+    tag: "6.0.1"
+  conf:
+    proxyBasePath: /report
+  service:
+    type: NodePort
+    nodePort: 32305
+  nodeSelector:
+    magnum.openstack.org/role: front
+  ingress:
+    enabled: false
+    path: /reports
+  persistence:
+    enabled: true
+    size: 10Gi

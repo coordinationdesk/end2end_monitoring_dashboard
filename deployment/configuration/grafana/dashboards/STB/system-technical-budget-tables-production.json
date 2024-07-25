@@ -1,0 +1,3089 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 51,
+      "panels": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "gridPos": {
+            "h": 19,
+            "w": 24,
+            "x": 0,
+            "y": 1
+          },
+          "id": 44,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "The System Technical Budget Tables - Production is based on\n- the data budget reference document [\\[ESA-EOPG-EOPGC-TN-9\\] CSC Operations – ESA Framework – System Technical Budget.pdf](https://omcs.atlassian.net/wiki/download/attachments/66158618/%5BESA-EOPG-EOPGC-TN-9%5D%20CSC%20Operations%20%E2%80%93%20ESA%20Framework%20%E2%80%93%20System%20Technical%20Budget.pdf?api=v2).\n- the data flow reference document [\\[ESA-EOPG-EOPGC-TN-58\\] CSC GS Data Flow Configuration.pdf](https://omcs.atlassian.net/wiki/download/attachments/66158618/%5BESA-EOPG-EOPGC-TN-58%5D%20CSC%20GS%20Data%20Flow%20Configuration.pdf?api=v2).\n\nData flow document extraction is visible in the [\"Data Flow dashboard\"](./d/MfmL_E4Vz/golden-rules-and-data-flow?orgId=1) \n\n# Data selected\n\nFrom [\\[ESA-EOPG-EOPGC-TN-9\\] CSC Operations – ESA Framework – System Technical Budget.pdf](https://omcs.atlassian.net/wiki/download/attachments/66158618/%5BESA-EOPG-EOPGC-TN-9%5D%20CSC%20Operations%20%E2%80%93%20ESA%20Framework%20%E2%80%93%20System%20Technical%20Budget.pdf?api=v2) document some assuption are made to provide the System Technical Budget dashboards.\n\n\nFor System Technical Budget Tables - Production the data published at PRIP are selected.\n\n-Section Data Preservation data published at PRIP.\n\n**Data collection** are considered as consistent since **01/08/2022**\n\n**Data collection** for **aquisition** are considered as consistent since **15/03/2023**\n\nValues are mean by satellite number in mission. (i.e. S1 1 satellite, S2 mean of 2 satellite, S3 mean of 2 satellite; S5 1 satellite )\n\nRmq : There is today no S5 L0 data published at prip.\n\n# Annexes\n\n## Product type selected\n\nThe table below present how products types are classified in STB level and STB timeliness: \n\n### For panel**System Technical Budget( On Range)**: \n\n|Mission|STB Level|STB Timeliness|Real timeliness|Misc.|Product Type|\n|---|---|---|---|---|---|\n|S1|L0|NTC|NTC||EW_RAW__0A,EW_RAW__0C,EW_RAW__0N,EW_RAW__0S,IW_RAW__0A,IW_RAW__0C,IW_RAW__0N,IW_RAW__0S,RF_RAW,S1_RAW__0A,S1_RAW__0C,S1_RAW__0N,S1_RAW__0S,S2_RAW__0A,S2_RAW__0C,S2_RAW__0N,S2_RAW__0S,S3_RAW__0A,S3_RAW__0C,S3_RAW__0N,S3_RAW__0S,S4_RAW__0A,S4_RAW__0C,S4_RAW__0N,S4_RAW__0S,S5_RAW__0A,S5_RAW__0C,S5_RAW__0N,S5_RAW__0S,S6_RAW__0A,S6_RAW__0C,S6_RAW__0N,S6_RAW__0S,WV_RAW__0A,WV_RAW__0C,WV_RAW__0N,WV_RAW__0S|\n|S1|L0|NRT|NRT,NRT-PT||EW_RAW__0A,EW_RAW__0C,EW_RAW__0N,EW_RAW__0S,IW_RAW__0A,IW_RAW__0C,IW_RAW__0N,IW_RAW__0S|\n|S1|L1|NRT|NRT,NRT-PT||EW_GRDM_1A,EW_GRDM_1S,EW_SLC__1A,EW_SLC__1S,IW_GRDH_1A,IW_GRDH_1S,IW_SLC__1A,IW_SLC__1S|\n|S1|L1|NTC|NTC||EW_GRDM_1A,EW_GRDM_1S,EW_SLC__1A,EW_SLC__1S,IW_GRDH_1A,IW_GRDH_1S,IW_SLC__1A,IW_SLC__1S,S1_GRDH_1A,S1_GRDH_1S,S1_SLC__1A,S1_SLC__1S,S2_GRDH_1A,S2_GRDH_1S,S2_SLC__1A,S2_SLC__1S,S3_GRDH_1A,S3_GRDH_1S,S3_SLC__1A,S3_SLC__1S,S4_GRDH_1A,S4_GRDH_1S,S4_SLC__1A,S4_SLC__1S,S5_GRDH_1A,S5_GRDH_1S,S5_SLC__1A,S5_SLC__1S,S6_GRDH_1A,S6_GRDH_1S,S6_SLC__1A,S6_SLC__1S,WV_SLC__1A,WV_SLC__1S|\n|S1|L2|NTC|NTC||EW_OCN__2A,EW_OCN__2S,IW_OCN__2A,IW_OCN__2S,S1_OCN__2A,S1_OCN__2S,S2_OCN__2A,S2_OCN__2S,S3_OCN__2A,S3_OCN__2S,S4_OCN__2A,S4_OCN__2S,S5_OCN__2A,S5_OCN__2S,S6_OCN__2A,S6_OCN__2S,WV_OCN__2A,WV_OCN__2S|\n|S1|L2|NRT|NRT,NRT-PT||EW_OCN__2A,EW_OCN__2S,IW_OCN__2A,IW_OCN__2S|\n|S2|L0|NTC|NOMINAL||MSI_L0__DS,MSI_L0__GR|\n|S2|L1A|NTC|NOMINAL||MSI_L1A_DS,MSI_L1A_GR|\n|S2|L1B|NTC|NOMINAL||MSI_L1B_DS,MSI_L1B_GR|\n|S2|L1C|NTC|NOMINAL||MSI_L1C___,MSI_L1C_DS,MSI_L1C_TC,MSI_L1C_TL|\n|S2|L2A|NTC|NOMINAL||MSI_L2A___,MSI_L2A_DS,MSI_L2A_TC,MSI_L2A_TL|\n|S3|L0|NTC|NT||OL_0_EFR___,SL_0_SLT___|\n|S3|L0|NRT|NR,AL||DO_0_DOP___,DO_0_NAV___,GN_0_GNS___,MW_0_MWR___,OL_0_CR0___,OL_0_CR1___,OL_0_EFR___,SL_0_SLT___,SR_0_CAL___,SR_0_SRA___,TM_0_HKM___,TM_0_HKM2__,TM_0_NAT___|\n|S3|L0|NRT|ST||SR_0_SRA___|\n|S3|L1|NTC|NT||MW_1_MWR___,OL_1_EFR___,OL_1_ERR___,SL_1_RBT___,SR_1_SRA___,SR_1_SRA_A_,SR_1_SRA_BS,SY_1_MISR__|\n|S3|L1|NRT|NR,AL||MW_1_CAL___,MW_1_MWR___,OL_1_EFR___,OL_1_ERR___,OL_1_RAC___,OL_1_SPC___,SL_1_RBT___,SR_1_CAL___,SR_1_SRA___|\n|S3|L1|NRT|ST||MW_1_MWR___,SR_1_SRA___,SR_1_SRA_A_,SR_1_SRA_BS,SY_1_MISR__|\n|S3|L2|NTC|NT||OL_2_LFR___,OL_2_LRR___,SL_2_FRP___,SL_2_LST___,SR_2_LAN___,SY_2_AOD___,SY_2_SYN___,SY_2_V10___,SY_2_VG1___,SY_2_VGK___,SY_2_VGP___|\n|S3|L2|NRT|NR,AL||OL_2_LFR___,OL_2_LRR___,SL_2_LST___,SR_2_LAN___|\n|S3|L2|NRT|ST||SR_2_LAN___,SY_2_SYN___,SY_2_V10___,SY_2_VG1___,SY_2_VGK___,SY_2_VGP___|\n|S5|L0|NTC|OPER||OPER_L0__ENG_A_,OPER_L0__ODB_1_,OPER_L0__ODB_2_,OPER_L0__ODB_3_,OPER_L0__ODB_4_,OPER_L0__ODB_5_,OPER_L0__ODB_6_,OPER_L0__ODB_7_,OPER_L0__ODB_8_,OPER_L0__SAT_A_|\n|S5|L1|NTC|OFFL||OFFL_L1B_CA_SIR,OFFL_L1B_CA_UVN,OFFL_L1B_ENG_DB,OFFL_L1B_IR_SIR,OFFL_L1B_IR_UVN,OFFL_L1B_RA_BD1,OFFL_L1B_RA_BD2,OFFL_L1B_RA_BD3,OFFL_L1B_RA_BD4,OFFL_L1B_RA_BD5,OFFL_L1B_RA_BD6,OFFL_L1B_RA_BD7,OFFL_L1B_RA_BD8|\n|S5|L1|NRT|NRTI||NRTI_L1B_ENG_DB,NRTI_L1B_RA_BD1,NRTI_L1B_RA_BD2,NRTI_L1B_RA_BD3,NRTI_L1B_RA_BD4,NRTI_L1B_RA_BD5,NRTI_L1B_RA_BD6,NRTI_L1B_RA_BD7,NRTI_L1B_RA_BD8|\n|S5|L2|NTC|OFFL||OFFL_L2__03_TCL,OFFL_L2__AER_AI,OFFL_L2__AER_LH,OFFL_L2__CH4_,OFFL_L2__CLOUD_,OFFL_L2__CO____,OFFL_L2__FRESCO,OFFL_L2__HCHO_,OFFL_L2__NO2___,OFFL_L2__NP_BD3,OFFL_L2__NP_BD6,OFFL_L2__NP_BD7,OFFL_L2__O3____,OFFL_L2__O3__PR,OFFL_L2__SO2___|\n|S5|L2|NRT|NRTI||NRTI_L2__03_TCL,NRTI_L2__AER_AI,NRTI_L2__AER_LH,NRTI_L2__CLOUD_,NRTI_L2__CO____,NRTI_L2__FRESCO,NRTI_L2__HCCO_,NRTI_L2__NO2___,NRTI_L2__O3____,NRTI_L2__O3__PR,NRTI_L2__SO2___|\n\n###Fortheotherspanelinthedashboard: \n\nData cames form System Technical Budget( On Range) panel.\n\n# Dashboard usage\n\nOn left top of the dashboard the mean combobox allow to select mean period: \n- by day: values are divided by the number of seconds in the selected periode divided by the number of seconds in 1 day.\n- by week: values are divided by the number of seconds in the selected periode divided by the number of seconds in 7 day.\n- by month: values are divided by the number of seconds in the selected periode divided by the number of seconds in 30 day.\n- by year: values are divided by the number of seconds in the selected periode divided by the number of seconds in 365 day.\n\nTime reference for this dashboard is: sensing_start_date\n\nImportant notice: Tables & timelines can only display up to 10000 entries. Please make use of filters to narrow down the retrieved data and get a more realistic view.",
+            "mode": "markdown"
+          },
+          "pluginVersion": "10.4.1",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [
+                {
+                  "field": "sensing_start_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "",
+              "refId": "A",
+              "timeField": "sensing_start_date"
+            }
+          ],
+          "title": "Help",
+          "type": "text"
+        }
+      ],
+      "title": "Dashboard description",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 53,
+      "panels": [],
+      "title": "Production",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P9C1AEFD5EC435EE7"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 2
+      },
+      "id": 28,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "service_type"
+          }
+        ]
+      },
+      "pluginVersion": "10.4.1",
+      "targets": [
+        {
+          "alias": "S1_L0_NTC",
+          "bucketAggs": [
+            {
+              "field": "mission",
+              "id": "1",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_level",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "L0",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_timeliness",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "NTC",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "sum"
+            },
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:PRIP )   AND  (  (   ( product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S OR product_type:RF_RAW OR product_type:S1_RAW__0A OR product_type:S1_RAW__0C OR product_type:S1_RAW__0N OR product_type:S1_RAW__0S OR product_type:S2_RAW__0A OR product_type:S2_RAW__0C OR product_type:S2_RAW__0N OR product_type:S2_RAW__0S OR product_type:S3_RAW__0A OR product_type:S3_RAW__0C OR product_type:S3_RAW__0N OR product_type:S3_RAW__0S OR product_type:S4_RAW__0A OR product_type:S4_RAW__0C OR product_type:S4_RAW__0N OR product_type:S4_RAW__0S OR product_type:S5_RAW__0A OR product_type:S5_RAW__0C OR product_type:S5_RAW__0N OR product_type:S5_RAW__0S OR product_type:S6_RAW__0A OR product_type:S6_RAW__0C OR product_type:S6_RAW__0N OR product_type:S6_RAW__0S OR product_type:WV_RAW__0A OR product_type:WV_RAW__0C OR product_type:WV_RAW__0N OR product_type:WV_RAW__0S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1_L0_NTC"
+        },
+        {
+          "alias": "S1_L0_NRT",
+          "bucketAggs": [
+            {
+              "field": "mission",
+              "id": "1",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_level",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "L0",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_timeliness",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "NRT",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "sum"
+            },
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:PRIP )   AND  (  (   ( product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  )  ",
+          "refId": "S1_L0_NRT"
+        },
+        {
+          "alias": "S1_L1_NRT",
+          "bucketAggs": [
+            {
+              "field": "mission",
+              "id": "1",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_level",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "L1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_timeliness",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "NRT",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "sum"
+            },
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:PRIP )   AND  (  (   ( product_type:EW_GRDM_1A OR product_type:EW_GRDM_1S OR product_type:EW_SLC__1A OR product_type:EW_SLC__1S OR product_type:IW_GRDH_1A OR product_type:IW_GRDH_1S OR product_type:IW_SLC__1A OR product_type:IW_SLC__1S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  )  ",
+          "refId": "S1_L1_NRT"
+        },
+        {
+          "alias": "S1_L1_NTC",
+          "bucketAggs": [
+            {
+              "field": "mission",
+              "id": "1",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_level",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "L1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_timeliness",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "NTC",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "sum"
+            },
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:PRIP )   AND  (  (   ( product_type:EW_GRDM_1A OR product_type:EW_GRDM_1S OR product_type:EW_SLC__1A OR product_type:EW_SLC__1S OR product_type:IW_GRDH_1A OR product_type:IW_GRDH_1S OR product_type:IW_SLC__1A OR product_type:IW_SLC__1S OR product_type:S1_GRDH_1A OR product_type:S1_GRDH_1S OR product_type:S1_SLC__1A OR product_type:S1_SLC__1S OR product_type:S2_GRDH_1A OR product_type:S2_GRDH_1S OR product_type:S2_SLC__1A OR product_type:S2_SLC__1S OR product_type:S3_GRDH_1A OR product_type:S3_GRDH_1S OR product_type:S3_SLC__1A OR product_type:S3_SLC__1S OR product_type:S4_GRDH_1A OR product_type:S4_GRDH_1S OR product_type:S4_SLC__1A OR product_type:S4_SLC__1S OR product_type:S5_GRDH_1A OR product_type:S5_GRDH_1S OR product_type:S5_SLC__1A OR product_type:S5_SLC__1S OR product_type:S6_GRDH_1A OR product_type:S6_GRDH_1S OR product_type:S6_SLC__1A OR product_type:S6_SLC__1S OR product_type:WV_SLC__1A OR product_type:WV_SLC__1S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1_L1_NTC"
+        },
+        {
+          "alias": "S1_L2_NTC",
+          "bucketAggs": [
+            {
+              "field": "mission",
+              "id": "1",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_level",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "L2",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_timeliness",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "NTC",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "sum"
+            },
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:PRIP )   AND  (  (   ( product_type:EW_OCN__2A OR product_type:EW_OCN__2S OR product_type:IW_OCN__2A OR product_type:IW_OCN__2S OR product_type:S1_OCN__2A OR product_type:S1_OCN__2S OR product_type:S2_OCN__2A OR product_type:S2_OCN__2S OR product_type:S3_OCN__2A OR product_type:S3_OCN__2S OR product_type:S4_OCN__2A OR product_type:S4_OCN__2S OR product_type:S5_OCN__2A OR product_type:S5_OCN__2S OR product_type:S6_OCN__2A OR product_type:S6_OCN__2S OR product_type:WV_OCN__2A OR product_type:WV_OCN__2S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1_L2_NTC"
+        },
+        {
+          "alias": "S1_L2_NRT",
+          "bucketAggs": [
+            {
+              "field": "mission",
+              "id": "1",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_level",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "L2",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_timeliness",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "NRT",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "sum"
+            },
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:PRIP )   AND  (  (   ( product_type:EW_OCN__2A OR product_type:EW_OCN__2S OR product_type:IW_OCN__2A OR product_type:IW_OCN__2S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  )  ",
+          "refId": "S1_L2_NRT"
+        },
+        {
+          "alias": "S2_L0_NTC",
+          "bucketAggs": [
+            {
+              "field": "mission",
+              "id": "1",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_level",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "L0",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_timeliness",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "NTC",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2)/1099511627776L)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "sum"
+            },
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S2 AND service_type:PRIP )   AND  (  (   ( product_type:MSI_L0__DS OR product_type:MSI_L0__GR ) AND ( timeliness:NOMINAL )  )  )  ",
+          "refId": "S2_L0_NTC"
+        },
+        {
+          "alias": "S2_L1A_NTC",
+          "bucketAggs": [
+            {
+              "field": "mission",
+              "id": "1",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_level",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "L1A",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_timeliness",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "NTC",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2)/1099511627776L)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "sum"
+            },
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S2 AND service_type:PRIP )   AND  (  (   ( product_type:MSI_L1A_DS OR product_type:MSI_L1A_GR ) AND ( timeliness:NOMINAL )  )  )  ",
+          "refId": "S2_L1A_NTC"
+        },
+        {
+          "alias": "S2_L1B_NTC",
+          "bucketAggs": [
+            {
+              "field": "mission",
+              "id": "1",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_level",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "L1B",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_timeliness",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "NTC",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2)/1099511627776L)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "sum"
+            },
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S2 AND service_type:PRIP )   AND  (  (   ( product_type:MSI_L1B_DS OR product_type:MSI_L1B_GR ) AND ( timeliness:NOMINAL )  )  )  ",
+          "refId": "S2_L1B_NTC"
+        },
+        {
+          "alias": "S2_L1C_NTC",
+          "bucketAggs": [
+            {
+              "field": "mission",
+              "id": "1",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_level",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "L1C",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_timeliness",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "NTC",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2)/1099511627776L)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "sum"
+            },
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S2 AND service_type:PRIP )   AND  (  (   ( product_type:MSI_L1C___  OR product_type:MSI_L1C_DS OR product_type:MSI_L1C_TC OR product_type:MSI_L1C_TL ) AND ( timeliness:NOMINAL )  )  )  ",
+          "refId": "S2_L1C_NTC"
+        },
+        {
+          "alias": "S2_L2A_NTC",
+          "bucketAggs": [
+            {
+              "field": "mission",
+              "id": "1",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_level",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "L2A",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_timeliness",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "NTC",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2)/1099511627776L)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "sum"
+            },
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S2 AND service_type:PRIP )   AND  (  (   ( product_type:MSI_L2A___  OR product_type:MSI_L2A_DS OR product_type:MSI_L2A_TC OR product_type:MSI_L2A_TL ) AND ( timeliness:NOMINAL )  )  )  ",
+          "refId": "S2_L2A_NTC"
+        },
+        {
+          "alias": "S3_L0_NTC",
+          "bucketAggs": [
+            {
+              "field": "mission",
+              "id": "1",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_level",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "L0",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_timeliness",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "NTC",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2)/1099511627776L)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "sum"
+            },
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S3 AND service_type:PRIP )   AND  (  (   ( product_type:OL_0_EFR___ OR product_type:SL_0_SLT___ ) AND ( timeliness:NT )  )  )  ",
+          "refId": "S3_L0_NTC"
+        },
+        {
+          "alias": "S3_L0_NRT",
+          "bucketAggs": [
+            {
+              "field": "mission",
+              "id": "1",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_level",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "L0",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_timeliness",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "NRT",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2)/1099511627776L)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "sum"
+            },
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S3 AND service_type:PRIP )   AND  (  (   ( product_type:DO_0_DOP___ OR product_type:DO_0_NAV___ OR product_type:GN_0_GNS___ OR product_type:MW_0_MWR___ OR product_type:OL_0_CR0___ OR product_type:OL_0_CR1___ OR product_type:OL_0_EFR___ OR product_type:SL_0_SLT___ OR product_type:SR_0_CAL___ OR product_type:SR_0_SRA___ OR product_type:TM_0_HKM___ OR product_type:TM_0_HKM2__ OR product_type:TM_0_NAT___ ) AND ( timeliness:NR OR timeliness:AL )  )  OR (   ( product_type:SR_0_SRA___ ) AND ( timeliness:ST )  )  )  ",
+          "refId": "S3_L0_NRT"
+        },
+        {
+          "alias": "S3_L1_NTC",
+          "bucketAggs": [
+            {
+              "field": "mission",
+              "id": "1",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_level",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "L1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_timeliness",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "NTC",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2)/1099511627776L)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "sum"
+            },
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S3 AND service_type:PRIP )   AND  (  (   ( product_type:MW_1_MWR___ OR product_type:OL_1_EFR___ OR product_type:OL_1_ERR___ OR product_type:SL_1_RBT___ OR product_type:SR_1_SRA___ OR product_type:SR_1_SRA_A_ OR product_type:SR_1_SRA_BS OR product_type:SY_1_MISR__ ) AND ( timeliness:NT )  )  )  ",
+          "refId": "S3_L1_NTC"
+        },
+        {
+          "alias": "S3_L1_NRT",
+          "bucketAggs": [
+            {
+              "field": "mission",
+              "id": "1",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_level",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "L1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_timeliness",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "NRT",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2)/1099511627776L)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "sum"
+            },
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S3 AND service_type:PRIP )   AND  (  (   ( product_type:MW_1_CAL___ OR product_type:MW_1_MWR___ OR product_type:OL_1_EFR___ OR product_type:OL_1_ERR___ OR product_type:OL_1_RAC___ OR product_type:OL_1_SPC___ OR product_type:SL_1_RBT___ OR product_type:SR_1_CAL___ OR product_type:SR_1_SRA___ ) AND ( timeliness:NR OR timeliness:AL )  )  OR (   ( product_type:MW_1_MWR___ OR product_type:SR_1_SRA___ OR product_type:SR_1_SRA_A_ OR product_type:SR_1_SRA_BS OR product_type:SY_1_MISR__ ) AND ( timeliness:ST )  )  )  ",
+          "refId": "S3_L1_NRT"
+        },
+        {
+          "alias": "S3_L2_NTC",
+          "bucketAggs": [
+            {
+              "field": "mission",
+              "id": "1",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_level",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "L2",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_timeliness",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "NTC",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2)/1099511627776L)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "sum"
+            },
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S3 AND service_type:PRIP )   AND  (  (   ( product_type:OL_2_LFR___ OR product_type:OL_2_LRR___ OR product_type:SL_2_FRP___ OR product_type:SL_2_LST___ OR product_type:SR_2_LAN___ OR product_type:SY_2_AOD___ OR product_type:SY_2_SYN___ OR product_type:SY_2_V10___ OR product_type:SY_2_VG1___ OR product_type:SY_2_VGK___ OR product_type:SY_2_VGP___ ) AND ( timeliness:NT )  )  )  ",
+          "refId": "S3_L2_NTC"
+        },
+        {
+          "alias": "S3_L2_NRT",
+          "bucketAggs": [
+            {
+              "field": "mission",
+              "id": "1",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_level",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "L2",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_timeliness",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "NRT",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2)/1099511627776L)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "sum"
+            },
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S3 AND service_type:PRIP )   AND  (  (   ( product_type:OL_2_LFR___ OR product_type:OL_2_LRR___ OR product_type:SL_2_LST___ OR product_type:SR_2_LAN___ ) AND ( timeliness:NR OR timeliness:AL )  )  OR (   ( product_type:SR_2_LAN___ OR product_type:SY_2_SYN___ OR product_type:SY_2_V10___ OR product_type:SY_2_VG1___ OR product_type:SY_2_VGK___ OR product_type:SY_2_VGP___ ) AND ( timeliness:ST )  )  )  ",
+          "refId": "S3_L2_NRT"
+        },
+        {
+          "alias": "S5_L0_NTC",
+          "bucketAggs": [
+            {
+              "field": "mission",
+              "id": "1",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_level",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "L0",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_timeliness",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "NTC",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "sum"
+            },
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S5 AND service_type:PRIP )   AND  (  (   ( product_type:OPER_L0__ENG_A_ OR product_type:OPER_L0__ODB_1_ OR product_type:OPER_L0__ODB_2_ OR product_type:OPER_L0__ODB_3_ OR product_type:OPER_L0__ODB_4_ OR product_type:OPER_L0__ODB_5_ OR product_type:OPER_L0__ODB_6_ OR product_type:OPER_L0__ODB_7_ OR product_type:OPER_L0__ODB_8_ OR product_type:OPER_L0__SAT_A_ ) AND ( timeliness:OPER )  )  )  ",
+          "refId": "S5_L0_NTC"
+        },
+        {
+          "alias": "S5_L1_NTC",
+          "bucketAggs": [
+            {
+              "field": "mission",
+              "id": "1",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_level",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "L1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_timeliness",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "NTC",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "sum"
+            },
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S5 AND service_type:PRIP )   AND  (  (   ( product_type:OFFL_L1B_CA_SIR OR product_type:OFFL_L1B_CA_UVN OR product_type:OFFL_L1B_ENG_DB OR product_type:OFFL_L1B_IR_SIR OR product_type:OFFL_L1B_IR_UVN OR product_type:OFFL_L1B_RA_BD1 OR product_type:OFFL_L1B_RA_BD2 OR product_type:OFFL_L1B_RA_BD3 OR product_type:OFFL_L1B_RA_BD4 OR product_type:OFFL_L1B_RA_BD5 OR product_type:OFFL_L1B_RA_BD6 OR product_type:OFFL_L1B_RA_BD7 OR product_type:OFFL_L1B_RA_BD8 ) AND ( timeliness:OFFL )  )  )  ",
+          "refId": "S5_L1_NTC"
+        },
+        {
+          "alias": "S5_L1_NRT",
+          "bucketAggs": [
+            {
+              "field": "mission",
+              "id": "1",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_level",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "L1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_timeliness",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "NRT",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "sum"
+            },
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S5 AND service_type:PRIP )   AND  (  (   ( product_type:NRTI_L1B_ENG_DB OR product_type:NRTI_L1B_RA_BD1 OR product_type:NRTI_L1B_RA_BD2 OR product_type:NRTI_L1B_RA_BD3 OR product_type:NRTI_L1B_RA_BD4 OR product_type:NRTI_L1B_RA_BD5 OR product_type:NRTI_L1B_RA_BD6 OR product_type:NRTI_L1B_RA_BD7 OR product_type:NRTI_L1B_RA_BD8 ) AND ( timeliness:NRTI )  )  )  ",
+          "refId": "S5_L1_NRT"
+        },
+        {
+          "alias": "S5_L2_NTC",
+          "bucketAggs": [
+            {
+              "field": "mission",
+              "id": "1",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_level",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "L2",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_timeliness",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "NTC",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "sum"
+            },
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S5 AND service_type:PRIP )   AND  (  (   ( product_type:OFFL_L2__03_TCL OR product_type:OFFL_L2__AER_AI OR product_type:OFFL_L2__AER_LH OR product_type:OFFL_L2__CH4_ OR product_type:OFFL_L2__CLOUD_ OR product_type:OFFL_L2__CO____ OR product_type:OFFL_L2__FRESCO OR product_type:OFFL_L2__HCHO_ OR product_type:OFFL_L2__NO2___ OR product_type:OFFL_L2__NP_BD3 OR product_type:OFFL_L2__NP_BD6 OR product_type:OFFL_L2__NP_BD7 OR product_type:OFFL_L2__O3____ OR product_type:OFFL_L2__O3__PR OR product_type:OFFL_L2__SO2___ ) AND ( timeliness:OFFL )  )  )  ",
+          "refId": "S5_L2_NTC"
+        },
+        {
+          "alias": "S5_L2_NRT",
+          "bucketAggs": [
+            {
+              "field": "mission",
+              "id": "1",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_level",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "L2",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "stb_timeliness",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "NRT",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "sum"
+            },
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S5 AND service_type:PRIP )   AND  (  (   ( product_type:NRTI_L2__03_TCL OR product_type:NRTI_L2__AER_AI OR product_type:NRTI_L2__AER_LH OR product_type:NRTI_L2__CLOUD_ OR product_type:NRTI_L2__CO____ OR product_type:NRTI_L2__FRESCO OR product_type:NRTI_L2__HCCO_ OR product_type:NRTI_L2__NO2___ OR product_type:NRTI_L2__O3____ OR product_type:NRTI_L2__O3__PR OR product_type:NRTI_L2__SO2___ ) AND ( timeliness:NRTI )  )  )  ",
+          "refId": "S5_L2_NRT"
+        }
+      ],
+      "title": "System Technical Budget (On Range)",
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "dashboard",
+        "uid": "-- Dashboard --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 3
+      },
+      "id": 21,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "10.4.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Dashboard --"
+          },
+          "panelId": 28,
+          "refId": "A"
+        }
+      ],
+      "title": "Produced Volume per Mission (S1, S3, S5) ( in TiB )",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "notEqual",
+                  "options": {
+                    "value": "S2"
+                  }
+                },
+                "fieldName": "mission"
+              }
+            ],
+            "match": "all",
+            "type": "include"
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "stb_level",
+              "reducer": "sum",
+              "right": "stb_timeliness"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "groupingToMatrix",
+          "options": {
+            "columnField": "stb_level  stb_timeliness",
+            "rowField": "mission",
+            "valueField": "Sum"
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "L0_NRT_Total",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "L0NRT"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "L0_NTC_Total",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "L0NTC"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "L1_NRT_Total",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "L1NRT"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "L1_NTC_Total",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "L1NTC"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "L2_NRT_Total",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "L2NRT"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "L2_NTC_Total",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "L2NTC"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "number",
+                "targetField": "L0_NRT_Total"
+              },
+              {
+                "destinationType": "number",
+                "targetField": "L0_NTC_Total"
+              },
+              {
+                "destinationType": "number",
+                "targetField": "L1_NRT_Total"
+              },
+              {
+                "destinationType": "number",
+                "targetField": "L1_NTC_Total"
+              },
+              {
+                "destinationType": "number",
+                "targetField": "L2_NRT_Total"
+              },
+              {
+                "destinationType": "number",
+                "targetField": "L2_NTC_Total"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "L0_NRT_Total",
+                "L0_NTC_Total",
+                "L1_NRT_Total",
+                "L1B_NTC_Total",
+                "L1C_NTC_Total",
+                "L1_NTC_Total",
+                "L2_NRT_Total",
+                "L2A_NTC_Total",
+                "L2_NTC_Total",
+                "AUX_Total"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "AUX_Total": true,
+              "L0 NRT Total": true,
+              "L0 NTC Total": true,
+              "L0_NRT_Total": true,
+              "L0_NTC_Total": true,
+              "L1B_NTC_Total": true,
+              "L1C_NTC_Total": true,
+              "L1_NRT_Total": true,
+              "L1_NTC_Total": true,
+              "L2A_NTC_Total": true,
+              "L2_NRT_Total": true,
+              "L2_NTC_Total": true
+            },
+            "indexByName": {
+              "L0NRT": 8,
+              "L0NTC": 7,
+              "L0_NRT_Total": 0,
+              "L0_NTC_Total": 1,
+              "L1NRT": 10,
+              "L1NTC": 9,
+              "L1_NRT_Total": 2,
+              "L1_NTC_Total": 3,
+              "L2NRT": 12,
+              "L2NTC": 11,
+              "L2_NRT_Total": 4,
+              "L2_NTC_Total": 5,
+              "Total": 13,
+              "mission\\stb_level  stb_timeliness": 6
+            },
+            "renameByName": {
+              "L0NRT": "L0 NRT",
+              "L0NTC": "L0 NTC",
+              "L0_NRT": "L0 NRT",
+              "L0_NRT_Total": "",
+              "L0_NTC": "L0 NTC",
+              "L1NRT": "L1 NRT",
+              "L1NTC": "L1 NTC",
+              "L1_NRT": "L1 NRT",
+              "L1_NTC": "L1 NTC",
+              "L2NRT": "L2 NTR",
+              "L2NTC": "L2 NTC",
+              "L2_NRT": "L2 NRT",
+              "L2_NTC": "L2 NTC",
+              "L__undefined": "AUX",
+              "mission\\product_level  real_timeliness": "Mission",
+              "mission\\product_level  stb_timeliness": "mission",
+              "mission\\stb_level  stb_timeliness": "Mission"
+            }
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "field": "Mission"
+              }
+            ]
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "dashboard",
+        "uid": "-- Dashboard --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 24,
+        "x": 0,
+        "y": 9
+      },
+      "id": 47,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "10.4.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Dashboard --"
+          },
+          "panelId": 28,
+          "refId": "A"
+        }
+      ],
+      "title": "Produced Count per Mission (S1, S3, S5)",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "notEqual",
+                  "options": {
+                    "value": "S2"
+                  }
+                },
+                "fieldName": "mission"
+              }
+            ],
+            "match": "all",
+            "type": "include"
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "stb_level",
+              "reducer": "sum",
+              "right": "stb_timeliness"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "groupingToMatrix",
+          "options": {
+            "columnField": "stb_level  stb_timeliness",
+            "rowField": "mission",
+            "valueField": "Bucket Script"
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "L0_NRT_Total",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "L0NRT"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "L0_NTC_Total",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "L0NTC"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "L1_NRT_Total",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "L1NRT"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "L1_NTC_Total",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "L1NTC"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "L2_NRT_Total",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "L2NRT"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "L2_NTC_Total",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "L2NTC"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "number",
+                "targetField": "L0_NRT_Total"
+              },
+              {
+                "destinationType": "number",
+                "targetField": "L0_NTC_Total"
+              },
+              {
+                "destinationType": "number",
+                "targetField": "L1_NRT_Total"
+              },
+              {
+                "destinationType": "number",
+                "targetField": "L1_NTC_Total"
+              },
+              {
+                "destinationType": "number",
+                "targetField": "L2_NRT_Total"
+              },
+              {
+                "destinationType": "number",
+                "targetField": "L2_NTC_Total"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "L0_NRT_Total",
+                "L0_NTC_Total",
+                "L1_NRT_Total",
+                "L1B_NTC_Total",
+                "L1C_NTC_Total",
+                "L1_NTC_Total",
+                "L2_NRT_Total",
+                "L2A_NTC_Total",
+                "L2_NTC_Total",
+                "AUX_Total"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "AUX_Total": true,
+              "L0 NRT Total": true,
+              "L0 NTC Total": true,
+              "L0_NRT_Total": true,
+              "L0_NTC_Total": true,
+              "L1B_NTC_Total": true,
+              "L1C_NTC_Total": true,
+              "L1_NRT_Total": true,
+              "L1_NTC_Total": true,
+              "L2A_NTC_Total": true,
+              "L2_NRT_Total": true,
+              "L2_NTC_Total": true
+            },
+            "indexByName": {
+              "L0NRT": 8,
+              "L0NTC": 7,
+              "L0_NRT_Total": 0,
+              "L0_NTC_Total": 1,
+              "L1NRT": 10,
+              "L1NTC": 9,
+              "L1_NRT_Total": 2,
+              "L1_NTC_Total": 3,
+              "L2NRT": 12,
+              "L2NTC": 11,
+              "L2_NRT_Total": 4,
+              "L2_NTC_Total": 5,
+              "Total": 13,
+              "mission\\stb_level  stb_timeliness": 6
+            },
+            "renameByName": {
+              "L0NRT": "L0 NRT",
+              "L0NTC": "L0 NTC",
+              "L0_NRT": "L0 NRT",
+              "L0_NRT_Total": "",
+              "L0_NTC": "L0 NTC",
+              "L1NRT": "L1 NRT",
+              "L1NTC": "L1 NTC",
+              "L1_NRT": "L1 NRT",
+              "L1_NTC": "L1 NTC",
+              "L2NRT": "L2 NTR",
+              "L2NTC": "L2 NTC",
+              "L2_NRT": "L2 NRT",
+              "L2_NTC": "L2 NTC",
+              "L__undefined": "AUX",
+              "mission\\product_level  real_timeliness": "Mission",
+              "mission\\product_level  stb_timeliness": "mission",
+              "mission\\stb_level  stb_timeliness": "Mission"
+            }
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "field": "Mission"
+              }
+            ]
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "dashboard",
+        "uid": "-- Dashboard --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 24,
+        "x": 0,
+        "y": 15
+      },
+      "id": 48,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "10.4.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Dashboard --"
+          },
+          "panelId": 28,
+          "refId": "A"
+        }
+      ],
+      "title": "Produced Volume per Mission (S2) ( in TiB )",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "equal",
+                  "options": {
+                    "value": "S2"
+                  }
+                },
+                "fieldName": "mission"
+              }
+            ],
+            "match": "all",
+            "type": "include"
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "stb_level",
+              "reducer": "sum",
+              "right": "stb_timeliness"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "groupingToMatrix",
+          "options": {
+            "columnField": "stb_level  stb_timeliness",
+            "rowField": "mission",
+            "valueField": "Sum"
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "L0_Total",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "L0NTC"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "L1A_Total",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "L1ANTC"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "L1B_Total",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "L1BNTC"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "L1C_Total",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "L1CNTC"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "L2A_Total",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "L2ANTC"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "number",
+                "targetField": "L0_Total"
+              },
+              {
+                "destinationType": "number",
+                "targetField": "L1A_Total"
+              },
+              {
+                "destinationType": "number",
+                "targetField": "L1B_Total"
+              },
+              {
+                "destinationType": "number",
+                "targetField": "L1CNTC"
+              },
+              {
+                "destinationType": "number",
+                "targetField": "L2ANTC"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "L0_Total",
+                "L1A_Total",
+                "L1B_Total",
+                "L1C_Total",
+                "L2A_Total"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "AUX_Total": true,
+              "L0 NRT Total": true,
+              "L0 NTC Total": true,
+              "L0_NRT_Total": true,
+              "L0_NTC_Total": true,
+              "L0_Total": true,
+              "L1A_Total": true,
+              "L1B_NTC_Total": true,
+              "L1B_Total": true,
+              "L1C_NTC_Total": true,
+              "L1C_Total": true,
+              "L1_NRT_Total": true,
+              "L1_NTC_Total": true,
+              "L2A_NTC_Total": true,
+              "L2A_Total": true,
+              "L2_NRT_Total": true,
+              "L2_NTC_Total": true
+            },
+            "indexByName": {
+              "L0NTC": 1,
+              "L0_Total": 6,
+              "L1ANTC": 2,
+              "L1A_Total": 7,
+              "L1BNTC": 3,
+              "L1B_Total": 8,
+              "L1CNTC": 4,
+              "L1C_Total": 9,
+              "L2ANTC": 5,
+              "L2A_Total": 10,
+              "Total": 11,
+              "mission\\stb_level  stb_timeliness": 0
+            },
+            "renameByName": {
+              "L0NRT": "L0 NRT",
+              "L0NTC": "L0",
+              "L0_NRT": "L0 NRT",
+              "L0_NRT_Total": "",
+              "L0_NTC": "L0 NTC",
+              "L1ANTC": "L1A",
+              "L1BNTC": "L1B",
+              "L1CNTC": "L1C",
+              "L1NRT": "L1 NRT",
+              "L1NTC": "L1 NTC",
+              "L1_NRT": "L1 NRT",
+              "L1_NTC": "L1 NTC",
+              "L2ANTC": "L2A",
+              "L2NRT": "L2 NTR",
+              "L2NTC": "L2 NTC",
+              "L2_NRT": "L2 NRT",
+              "L2_NTC": "L2 NTC",
+              "L__undefined": "AUX",
+              "mission\\product_level  real_timeliness": "Mission",
+              "mission\\product_level  stb_timeliness": "mission",
+              "mission\\stb_level  stb_timeliness": "Mission"
+            }
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "field": "Mission"
+              }
+            ]
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "dashboard",
+        "uid": "-- Dashboard --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 24,
+        "x": 0,
+        "y": 19
+      },
+      "id": 49,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "10.4.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Dashboard --"
+          },
+          "panelId": 28,
+          "refId": "A"
+        }
+      ],
+      "title": "Produced Count per Mission (S2)",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "equal",
+                  "options": {
+                    "value": "S2"
+                  }
+                },
+                "fieldName": "mission"
+              }
+            ],
+            "match": "all",
+            "type": "include"
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "stb_level",
+              "reducer": "sum",
+              "right": "stb_timeliness"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "groupingToMatrix",
+          "options": {
+            "columnField": "stb_level  stb_timeliness",
+            "rowField": "mission",
+            "valueField": "Bucket Script"
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "L0_Total",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "L0NTC"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "L1A_Total",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "L1ANTC"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "L1B_Total",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "L1BNTC"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "L1C_Total",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "L1CNTC"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "L2A_Total",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "L2ANTC"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "number",
+                "targetField": "L0_Total"
+              },
+              {
+                "destinationType": "number",
+                "targetField": "L1A_Total"
+              },
+              {
+                "destinationType": "number",
+                "targetField": "L1B_Total"
+              },
+              {
+                "destinationType": "number",
+                "targetField": "L1C_Total"
+              },
+              {
+                "destinationType": "number",
+                "targetField": "L2A_Total"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "L0_Total",
+                "L1A_Total",
+                "L1B_Total",
+                "L1C_Total",
+                "L2A_Total"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "AUX_Total": true,
+              "L0 NRT Total": true,
+              "L0 NTC Total": true,
+              "L0_NRT_Total": true,
+              "L0_NTC_Total": true,
+              "L0_Total": true,
+              "L1A_Total": true,
+              "L1B_NTC_Total": true,
+              "L1B_Total": true,
+              "L1C_NTC_Total": true,
+              "L1C_Total": true,
+              "L1_NRT_Total": true,
+              "L1_NTC_Total": true,
+              "L2A_NTC_Total": true,
+              "L2A_Total": true,
+              "L2_NRT_Total": true,
+              "L2_NTC_Total": true
+            },
+            "indexByName": {
+              "L0NTC": 1,
+              "L0_Total": 6,
+              "L1ANTC": 2,
+              "L1A_Total": 7,
+              "L1BNTC": 3,
+              "L1B_Total": 8,
+              "L1CNTC": 4,
+              "L1C_Total": 9,
+              "L2ANTC": 5,
+              "L2A_Total": 10,
+              "Total": 11,
+              "mission\\stb_level  stb_timeliness": 0
+            },
+            "renameByName": {
+              "L0NRT": "L0 NRT",
+              "L0NTC": "L0",
+              "L0_NRT": "L0 NRT",
+              "L0_NRT_Total": "",
+              "L0_NTC": "L0 NTC",
+              "L1ANTC": "L1A",
+              "L1BNTC": "L1B",
+              "L1CNTC": "L1C",
+              "L1NRT": "L1 NRT",
+              "L1NTC": "L1 NTC",
+              "L1_NRT": "L1 NRT",
+              "L1_NTC": "L1 NTC",
+              "L2ANTC": "L2A",
+              "L2NRT": "L2 NTR",
+              "L2NTC": "L2 NTC",
+              "L2_NRT": "L2 NRT",
+              "L2_NTC": "L2 NTC",
+              "L__undefined": "AUX",
+              "mission\\product_level  real_timeliness": "Mission",
+              "mission\\product_level  stb_timeliness": "mission",
+              "mission\\stb_level  stb_timeliness": "Mission"
+            }
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "field": "Mission"
+              }
+            ]
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [
+    "System Technical budget"
+  ],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "by day",
+          "value": "86400"
+        },
+        "description": "Select mean interval on the period: none (value on the period), by day, by week (day * 7), by month (day * 30), by year (day * 365)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Mean",
+        "multi": false,
+        "name": "mean_period",
+        "options": [
+          {
+            "selected": true,
+            "text": "by day",
+            "value": "86400"
+          },
+          {
+            "selected": false,
+            "text": "by week",
+            "value": "604800"
+          },
+          {
+            "selected": false,
+            "text": "by month",
+            "value": "2592000"
+          },
+          {
+            "selected": false,
+            "text": "by year",
+            "value": "31536000"
+          }
+        ],
+        "query": "by day : 86400, by week : 604800, by month : 2592000, by year : 31536000",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-30d",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "utc",
+  "title": "System Technical Budget Tables - Production",
+  "uid": "ZJm3wDKVz",
+  "weekStart": ""
+}

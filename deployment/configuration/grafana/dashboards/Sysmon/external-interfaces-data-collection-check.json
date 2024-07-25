@@ -1,0 +1,1268 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 21,
+      "panels": [],
+      "title": "Gantt",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PB08DB20EC0898B2C"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "PLATFORM_STATUS (first)"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "0": {
+                        "color": "dark-green",
+                        "index": 1,
+                        "text": "PASS"
+                      }
+                    },
+                    "type": "value"
+                  },
+                  {
+                    "options": {
+                      "from": -999999999999,
+                      "result": {
+                        "color": "dark-yellow",
+                        "index": 0,
+                        "text": "FAIL (Too much products)"
+                      },
+                      "to": -1
+                    },
+                    "type": "range"
+                  },
+                  {
+                    "options": {
+                      "from": 1,
+                      "result": {
+                        "color": "dark-red",
+                        "index": 2,
+                        "text": "FAIL (Missing products)"
+                      },
+                      "to": 9999999999
+                    },
+                    "type": "range"
+                  },
+                  {
+                    "options": {
+                      "match": "null+nan",
+                      "result": {
+                        "color": "#808080",
+                        "index": 3,
+                        "text": "NOT RESPONDING"
+                      }
+                    },
+                    "type": "special"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 15,
+        "w": 12,
+        "x": 0,
+        "y": 1
+      },
+      "id": 30,
+      "options": {
+        "colorByField": "PLATFORM_STATUS (first)",
+        "colors": [
+          {
+            "color": "#37872D",
+            "text": "0"
+          },
+          {
+            "color": "green",
+            "text": "1"
+          },
+          {
+            "color": "#B877D9",
+            "text": "2"
+          }
+        ],
+        "endField": "end_date",
+        "labelFields": [
+          "PLATFORM_STATUS (first)",
+          "check_date (first)"
+        ],
+        "showYAxis": true,
+        "sortBy": "text",
+        "sortOrder": "desc",
+        "startField": "start_date",
+        "textField": "interface_name"
+      },
+      "repeat": "platform",
+      "repeatDirection": "h",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PB08DB20EC0898B2C"
+          },
+          "metrics": [
+            {
+              "hide": false,
+              "id": "1",
+              "settings": {
+                "size": "10000"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "interface_name: $interface",
+          "refId": "A",
+          "timeField": "check_date"
+        }
+      ],
+      "title": "${platform:singlequote} daily status timeline per interface",
+      "transformations": [
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "time",
+                "targetField": "end_date (lastNotNull)"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "start_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "check_date"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "desc": true,
+                "field": "check_date"
+              }
+            ]
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "PLATFORM_STATUS",
+            "binary": {
+              "left": "interface_count",
+              "operator": "-",
+              "reducer": "sum",
+              "right": "${platform}_count"
+            },
+            "mode": "binary",
+            "reduce": {
+              "include": [
+                "prod_count",
+                "interface_count"
+              ],
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "PLATFORM_STATUS": {
+                "aggregations": [
+                  "first"
+                ],
+                "operation": "aggregate"
+              },
+              "check_date": {
+                "aggregations": [
+                  "first"
+                ],
+                "operation": "aggregate"
+              },
+              "end_date": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "interface_count": {
+                "aggregations": [
+                  "first"
+                ],
+                "operation": "aggregate"
+              },
+              "interface_name": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "prod_count": {
+                "aggregations": [
+                  "first"
+                ],
+                "operation": "aggregate"
+              },
+              "start_date": {
+                "aggregations": [],
+                "operation": "groupby"
+              }
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "_id": true,
+              "_index": true,
+              "_type": true,
+              "backupprod_count": true,
+              "check_date": true,
+              "highlight": true,
+              "interface_name": false,
+              "preprod_count": true,
+              "sort": true,
+              "test_status": true
+            },
+            "indexByName": {},
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "marcusolsson-gantt-panel"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PB08DB20EC0898B2C"
+      },
+      "description": "Comparison with daily collected product number on each interface and raw data collected in Maas",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed"
+          },
+          "custom": {
+            "align": "center",
+            "displayMode": "auto",
+            "inspect": false
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "dark-green",
+                  "index": 3
+                },
+                "FAIL": {
+                  "color": "red",
+                  "index": 1
+                },
+                "PASS": {
+                  "color": "green",
+                  "index": 0
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "from": -1000000000,
+                "result": {
+                  "color": "dark-yellow",
+                  "index": 2
+                },
+                "to": -1
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 1,
+                "result": {
+                  "color": "dark-red",
+                  "index": 4
+                },
+                "to": 10000000000000000
+              },
+              "type": "range"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Pre-Prod Delta"
+            },
+            "properties": [
+              {
+                "id": "custom.displayMode",
+                "value": "color-background-solid"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Prod Delta"
+            },
+            "properties": [
+              {
+                "id": "custom.displayMode",
+                "value": "color-background-solid"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Backup-Prod Delta"
+            },
+            "properties": [
+              {
+                "id": "custom.displayMode",
+                "value": "color-background-solid"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Check Date"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 186
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "interface_count (first) (sum)"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 622
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Publication Start Date"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 223
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Publication End Date"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 222
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Expected Count"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 186
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 16
+      },
+      "id": 27,
+      "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Publication Start Date"
+          }
+        ]
+      },
+      "pluginVersion": "9.1.6",
+      "repeatDirection": "v",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PB08DB20EC0898B2C"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "10000"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "interface_name: ${interface}",
+          "refId": "A",
+          "timeField": "start_date"
+        }
+      ],
+      "title": "Daily status",
+      "transformations": [
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "time",
+                "targetField": "end_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "check_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "start_date"
+              },
+              {
+                "destinationType": "number",
+                "targetField": "interface_count"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "desc": true,
+                "field": "check_date"
+              }
+            ]
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "desc": true,
+                "field": "start_date"
+              }
+            ]
+          }
+        },
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "backupprod_count": {
+                "aggregations": [
+                  "first"
+                ],
+                "operation": "aggregate"
+              },
+              "check_date": {
+                "aggregations": [
+                  "first"
+                ],
+                "operation": "aggregate"
+              },
+              "end_date": {
+                "aggregations": [
+                  "first"
+                ],
+                "operation": "aggregate"
+              },
+              "interface_count": {
+                "aggregations": [
+                  "first"
+                ],
+                "operation": "aggregate"
+              },
+              "interface_name": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "preprod_count": {
+                "aggregations": [
+                  "first"
+                ],
+                "operation": "aggregate"
+              },
+              "prod_count": {
+                "aggregations": [
+                  "first"
+                ],
+                "operation": "aggregate"
+              },
+              "start_date": {
+                "aggregations": [],
+                "operation": "groupby"
+              }
+            }
+          }
+        },
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "backupprod_count": {
+                "aggregations": [
+                  "sum"
+                ],
+                "operation": "aggregate"
+              },
+              "backupprod_count (first)": {
+                "aggregations": [
+                  "sum"
+                ],
+                "operation": "aggregate"
+              },
+              "check_date": {
+                "aggregations": [
+                  "firstNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "check_date (first)": {
+                "aggregations": [
+                  "first"
+                ],
+                "operation": "aggregate"
+              },
+              "end_date": {
+                "aggregations": [
+                  "firstNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "end_date (first)": {
+                "aggregations": [
+                  "first"
+                ],
+                "operation": "aggregate"
+              },
+              "interface_count": {
+                "aggregations": [
+                  "sum"
+                ],
+                "operation": "aggregate"
+              },
+              "interface_count (first)": {
+                "aggregations": [
+                  "sum"
+                ],
+                "operation": "aggregate"
+              },
+              "interface_name": {
+                "aggregations": [
+                  "lastNotNull"
+                ]
+              },
+              "preprod_count": {
+                "aggregations": [
+                  "sum"
+                ],
+                "operation": "aggregate"
+              },
+              "preprod_count (first)": {
+                "aggregations": [
+                  "sum"
+                ],
+                "operation": "aggregate"
+              },
+              "prod_count": {
+                "aggregations": [
+                  "sum"
+                ],
+                "operation": "aggregate"
+              },
+              "prod_count (first)": {
+                "aggregations": [
+                  "sum"
+                ],
+                "operation": "aggregate"
+              },
+              "start_date": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "test_status": {
+                "aggregations": [
+                  "firstNotNull"
+                ],
+                "operation": "aggregate"
+              }
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Pre-Prod Delta",
+            "binary": {
+              "left": "interface_count (first) (sum)",
+              "operator": "-",
+              "reducer": "sum",
+              "right": "preprod_count (first) (sum)"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Prod Delta",
+            "binary": {
+              "left": "interface_count (first) (sum)",
+              "operator": "-",
+              "reducer": "sum",
+              "right": "prod_count (first) (sum)"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Backup-Prod Delta",
+            "binary": {
+              "left": "interface_count (first) (sum)",
+              "operator": "-",
+              "reducer": "sum",
+              "right": "backupprod_count (first) (sum)"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "backupprod_count (first) (sum)": true,
+              "interface_count (first) (sum)": false,
+              "preprod_count (first) (sum)": true,
+              "prod_count (first) (sum)": true
+            },
+            "indexByName": {
+              "Backup-Prod Delta": 9,
+              "Pre-Prod Delta": 7,
+              "Prod Delta": 8,
+              "backupprod_count (first) (sum)": 3,
+              "check_date (first) (first)": 2,
+              "end_date (first) (first)": 1,
+              "interface_count (first) (sum)": 4,
+              "preprod_count (first) (sum)": 5,
+              "prod_count (first) (sum)": 6,
+              "start_date": 0
+            },
+            "renameByName": {
+              "check_date (first) (first)": "Check Date",
+              "end_date (first) (first)": "Publication End Date",
+              "interface_count (first) (sum)": "Expected Count",
+              "preprod_count (first) (sum)": "",
+              "start_date": "Publication Start Date"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PB08DB20EC0898B2C"
+      },
+      "description": "Comparison with daily collected product number on each interface and raw data collected in Maas",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed"
+          },
+          "custom": {
+            "align": "center",
+            "displayMode": "auto",
+            "filterable": true,
+            "inspect": false
+          },
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "dark-green",
+                  "index": 3
+                },
+                "FAIL": {
+                  "color": "red",
+                  "index": 1
+                },
+                "PASS": {
+                  "color": "green",
+                  "index": 0
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "from": -1000000000,
+                "result": {
+                  "color": "dark-yellow",
+                  "index": 2
+                },
+                "to": -1
+              },
+              "type": "range"
+            },
+            {
+              "options": {
+                "from": 1,
+                "result": {
+                  "color": "dark-red",
+                  "index": 4
+                },
+                "to": 1000000000
+              },
+              "type": "range"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Pre-Prod Delta"
+            },
+            "properties": [
+              {
+                "id": "custom.displayMode",
+                "value": "color-background-solid"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Prod Delta"
+            },
+            "properties": [
+              {
+                "id": "custom.displayMode",
+                "value": "color-background-solid"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Backup-Prod Delta"
+            },
+            "properties": [
+              {
+                "id": "custom.displayMode",
+                "value": "color-background-solid"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Publication Start Date"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 228
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 14,
+        "w": 24,
+        "x": 0,
+        "y": 24
+      },
+      "id": 28,
+      "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Publication Start Date"
+          }
+        ]
+      },
+      "pluginVersion": "9.1.6",
+      "repeatDirection": "v",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PB08DB20EC0898B2C"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "10000"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "interface_name: ${interface}",
+          "refId": "A",
+          "timeField": "start_date"
+        }
+      ],
+      "title": "Daily status per interface",
+      "transformations": [
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "time",
+                "targetField": "end_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "check_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "start_date"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "desc": true,
+                "field": "check_date"
+              }
+            ]
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "desc": true,
+                "field": "start_date"
+              }
+            ]
+          }
+        },
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "backupprod_count": {
+                "aggregations": [
+                  "firstNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "check_date": {
+                "aggregations": [
+                  "firstNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "end_date": {
+                "aggregations": [
+                  "firstNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "interface_count": {
+                "aggregations": [
+                  "firstNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "interface_name": {
+                "aggregations": [
+                  "lastNotNull"
+                ],
+                "operation": "groupby"
+              },
+              "preprod_count": {
+                "aggregations": [
+                  "firstNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "prod_count": {
+                "aggregations": [
+                  "firstNotNull"
+                ],
+                "operation": "aggregate"
+              },
+              "start_date": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "test_status": {
+                "aggregations": [
+                  "firstNotNull"
+                ],
+                "operation": "aggregate"
+              }
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Pre-Prod Delta",
+            "binary": {
+              "left": "interface_count (firstNotNull)",
+              "operator": "-",
+              "reducer": "sum",
+              "right": "preprod_count (firstNotNull)"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Prod Delta",
+            "binary": {
+              "left": "interface_count (firstNotNull)",
+              "operator": "-",
+              "reducer": "sum",
+              "right": "prod_count (firstNotNull)"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Backup-Prod Delta",
+            "binary": {
+              "left": "interface_count (firstNotNull)",
+              "operator": "-",
+              "reducer": "sum",
+              "right": "backupprod_count (firstNotNull)"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "_id": true,
+              "_index": true,
+              "_type": true,
+              "backupprod_count": false,
+              "backupprod_count (firstNotNull)": true,
+              "backupprod_count (lastNotNull)": true,
+              "check_date": false,
+              "end_date": false,
+              "highlight": true,
+              "interface_count": false,
+              "interface_name": false,
+              "preprod_count (firstNotNull)": true,
+              "preprod_count (lastNotNull)": true,
+              "prod_count": false,
+              "prod_count (firstNotNull)": true,
+              "prod_count (lastNotNull)": true,
+              "sort": true,
+              "test_status (firstNotNull)": false,
+              "test_status (lastNotNull)": true
+            },
+            "indexByName": {
+              "Backup-Prod Delta": 11,
+              "Pre-Prod Delta": 9,
+              "Prod Delta": 10,
+              "backupprod_count (firstNotNull)": 4,
+              "check_date (firstNotNull)": 3,
+              "end_date (firstNotNull)": 1,
+              "interface_count (firstNotNull)": 5,
+              "interface_name": 2,
+              "preprod_count (firstNotNull)": 6,
+              "prod_count (firstNotNull)": 7,
+              "start_date": 0,
+              "test_status (firstNotNull)": 8
+            },
+            "renameByName": {
+              "_id": "",
+              "backupprod_count": "Backup-Prod Platform Count",
+              "backupprod_count (firstNotNull)": "Backup Prod Count",
+              "check_date": "Check Date",
+              "check_date (firstNotNull)": "Check Date",
+              "check_date (lastNotNull)": "Check Date",
+              "end_date": "Publication EndDate",
+              "end_date (firstNotNull)": "Publication End Date",
+              "end_date (lastNotNull)": "Publication End Date",
+              "interface_count": "Expected Count",
+              "interface_count (firstNotNull)": "Expected Count",
+              "interface_count (lastNotNull)": "Expected Count",
+              "interface_name": "Interface Name",
+              "preprod_count": "Pre-Prod Platform Count",
+              "preprod_count (firstNotNull)": "",
+              "prod_count": "Prod platform Count",
+              "start_date": "Publication Start Date",
+              "test_status": "Status"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 37,
+  "style": "dark",
+  "tags": [
+    "Main"
+  ],
+  "templating": {
+    "list": [
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "PB08DB20EC0898B2C"
+        },
+        "definition": "{\"find\":\"terms\",\"field\":\"interface_name.keyword\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Interface",
+        "multi": true,
+        "name": "interface",
+        "options": [],
+        "query": "{\"find\":\"terms\",\"field\":\"interface_name.keyword\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "hide": 0,
+        "includeAll": true,
+        "label": "Platform",
+        "multi": true,
+        "name": "platform",
+        "options": [
+          {
+            "selected": true,
+            "text": "All",
+            "value": "$__all"
+          },
+          {
+            "selected": false,
+            "text": "prod",
+            "value": "prod"
+          },
+          {
+            "selected": false,
+            "text": "backupprod",
+            "value": "backupprod"
+          }
+        ],
+        "query": "prod,backupprod",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-7d/d",
+    "to": "now-1d/d"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "External interfaces Data collection Check",
+  "uid": "B4HThBUnz",
+  "weekStart": ""
+}

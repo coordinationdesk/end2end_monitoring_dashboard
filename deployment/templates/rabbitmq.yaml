@@ -1,0 +1,81 @@
+{{ if .Values.rabbitmq.enabled }}
+# https://www.rabbitmq.com/kubernetes/operator/using-operator.html
+{{ $newdict := . | deepCopy }}
+{{ $_ :=  set $newdict "componentOverrideName" "rabbitmq"}}
+apiVersion: rabbitmq.com/v1beta1
+kind: RabbitmqCluster
+metadata:
+  name: {{ template "maas-cds.fullname" $newdict }}
+  labels:
+{{ include "maas-cds.labels" $newdict | indent 4 }}
+spec:
+  replicas: {{ .Values.rabbitmq.replicas }}
+{{- if .Values.rabbitmq.resources }}
+  resources:  
+{{ $newdict.Values.rabbitmq.resources | toYaml | indent 4 -}}
+{{- end }}
+  rabbitmq:
+{{- if $newdict.Values.rabbitmq.additionalConfig }}
+    additionalConfig: |
+{{ $newdict.Values.rabbitmq.additionalConfig  | indent 5 -}}
+{{- end }}
+{{- if or $newdict.Values.rabbitmq.persistence.storageClassName $newdict.Values.rabbitmq.persistence.storage }}
+  persistence:
+{{- if $newdict.Values.rabbitmq.persistence.storageClassName }}
+    storageClassName: {{ .Values.rabbitmq.persistence.storageClassName }}
+{{- end }}
+{{- if $newdict.Values.rabbitmq.persistence.storage }}
+    storage: {{ $newdict.Values.rabbitmq.persistence.storage }}
+{{- end }}
+{{- end }}
+{{- if $newdict.Values.rabbitmq.additionalSpec }}
+{{ $newdict.Values.rabbitmq.additionalSpec | toYaml | indent 2 -}}
+{{- end }}
+  override:
+    statefulSet:
+      spec:
+        template:
+          spec:
+            containers: []
+            securityContext: {}
+            initContainers:
+            - name: setup-container
+              securityContext: {}
+          {{- with $newdict.Values.rabbitmq.affinity }}
+            affinity: {{ toYaml . | nindent 14 }}
+          {{- end }}
+          {{- if .Values.rabbitmq.tscTopologyKey }}
+            topologySpreadConstraints:
+            - maxSkew: 1
+              topologyKey: "{{ $newdict.Values.rabbitmq.tscTopologyKey }}"
+              whenUnsatisfiable: DoNotSchedule
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/name: {{ include "maas-cds.name" $newdict }}
+          {{- end }}
+{{ if $newdict.Values.rabbitmq.ingress.enabled }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ template "maas-cds.fullname" $newdict }}
+  labels:
+{{ include "maas-cds.labels" $newdict | indent 4 }}
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/backend-protocol: "{{ $newdict.Values.rabbitmq.ingress.protocol| default "HTTP" | upper }}"
+    #nginx.ingress.kubernetes.io/cors-allow-origin: "{{ .Values.global.domain.grafana }}"
+spec:
+  rules:
+  - host: "{{ $newdict.Values.rabbitmq.ingress.host }}"
+    http:
+      paths:
+      - path: "{{ $newdict.Values.rabbitmq.ingress.path }}/(.*)"
+        pathType: Prefix
+        backend:
+          service:
+            name: "{{ $newdict.Release.Name }}-rabbitmq"
+            port:
+              number: 15672
+{{- end }}
+{{- end }}

@@ -1,0 +1,2955 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 30,
+      "panels": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 24,
+            "x": 0,
+            "y": 1
+          },
+          "id": 32,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "This dashboard features the Anomaly correlation follow-up\n\nThe information displayed was originally taken from Ticket at JIRA ESA CAMS  \n\nInformation is available for the following missions: S1, S2, S3 and S5\n\nInformation is displayed through the following panels:\n\n- Number of observation issue linked to an anomaly\n\nTime reference for this dashboard is : observation_time_start\n\nImportant notice : Tables & timelines can only display up to 10 000 entries. Please make use of filters to narrow down the retrieved data and get a more realistic view.",
+            "mode": "markdown"
+          },
+          "pluginVersion": "10.3.1",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [
+                {
+                  "field": "sensing_start_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "",
+              "refId": "A",
+              "timeField": "sensing_start_date"
+            }
+          ],
+          "type": "text"
+        }
+      ],
+      "title": "Dashboard Description",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 4,
+      "panels": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PA3CBD0DC9D8FBBE1"
+          },
+          "description": "Datatake with completeness under $dt_threshold%",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "light-red",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "none",
+              "unitScale": true
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Sum"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "percent"
+                  },
+                  {
+                    "id": "displayName",
+                    "value": "Completeness"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 8,
+            "x": 0,
+            "y": 2
+          },
+          "id": 12,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "sum"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showPercentChange": false,
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "10.3.1",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [
+                {
+                  "field": "observation_time_start",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto",
+                    "min_doc_count": "0",
+                    "timeZone": "utc",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "PA3CBD0DC9D8FBBE1"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "sensing_global_percentage: [0 TO $dt_threshold]",
+              "refId": "A",
+              "timeField": "observation_time_start"
+            }
+          ],
+          "title": "Number of observation completeness issue",
+          "transformations": [],
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PA3CBD0DC9D8FBBE1"
+          },
+          "description": "Datatake with completeness under $dt_threshold% with linked anomaly ",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "light-red",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "none",
+              "unitScale": true
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Sum"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "percent"
+                  },
+                  {
+                    "id": "displayName",
+                    "value": "Completeness"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 8,
+            "x": 8,
+            "y": 2
+          },
+          "id": 13,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "sum"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showPercentChange": false,
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "10.3.1",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [
+                {
+                  "field": "observation_time_start",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto",
+                    "min_doc_count": "0",
+                    "timeZone": "utc",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "PA3CBD0DC9D8FBBE1"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "sensing_global_percentage: [0 TO $dt_threshold] AND cams_tickets: * ",
+              "refId": "A",
+              "timeField": "observation_time_start"
+            }
+          ],
+          "title": "Number of observation completeness issue linked to an anomaly",
+          "transformations": [],
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PA3CBD0DC9D8FBBE1"
+          },
+          "description": "Percentage of datatake under $dt_threshold% with linked anomaly",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "max": 1,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "light-red",
+                    "value": null
+                  },
+                  {
+                    "color": "orange",
+                    "value": 0.9
+                  },
+                  {
+                    "color": "green",
+                    "value": 1
+                  }
+                ]
+              },
+              "unit": "percentunit",
+              "unitScale": true
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 8,
+            "x": 16,
+            "y": 2
+          },
+          "id": 14,
+          "options": {
+            "minVizHeight": 75,
+            "minVizWidth": 75,
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "sum"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showThresholdLabels": false,
+            "showThresholdMarkers": true,
+            "sizing": "auto"
+          },
+          "pluginVersion": "10.3.1",
+          "targets": [
+            {
+              "alias": "AllDatatake",
+              "bucketAggs": [
+                {
+                  "field": "observation_time_start",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto",
+                    "min_doc_count": "0",
+                    "timeZone": "utc",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "PA3CBD0DC9D8FBBE1"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "sensing_global_percentage: [0 TO $dt_threshold]",
+              "refId": "AllDatatake",
+              "timeField": "observation_time_start"
+            },
+            {
+              "alias": "DatatakeWithAnomaly",
+              "bucketAggs": [
+                {
+                  "field": "observation_time_start",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto",
+                    "min_doc_count": "0",
+                    "timeZone": "utc",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "PA3CBD0DC9D8FBBE1"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "sensing_global_percentage: [0 TO $dt_threshold] AND cams_tickets: *",
+              "refId": "DatatakeWithAnomaly",
+              "timeField": "observation_time_start"
+            }
+          ],
+          "title": "Observation completeness anomaly correlation ratio",
+          "transformations": [
+            {
+              "id": "reduce",
+              "options": {
+                "includeTimeField": true,
+                "mode": "reduceFields",
+                "reducers": [
+                  "sum"
+                ]
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "Percentage",
+                "binary": {
+                  "left": "DatatakeWithAnomaly",
+                  "operator": "/",
+                  "reducer": "sum",
+                  "right": "AllDatatake"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                },
+                "replaceFields": true
+              }
+            }
+          ],
+          "type": "gauge"
+        },
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PA3CBD0DC9D8FBBE1"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "center",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "filterable": true,
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "light-red",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "none",
+              "unitScale": true
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "CAMS Ticket"
+                },
+                "properties": [
+                  {
+                    "id": "links",
+                    "value": [
+                      {
+                        "targetBlank": true,
+                        "title": "Open CAMS Ticket",
+                        "url": "https://esa-cams.atlassian.net/browse/${__value.raw}"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Completeness"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "percent"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 11,
+            "w": 24,
+            "x": 0,
+            "y": 7
+          },
+          "id": 2,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "enablePagination": true,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true,
+            "sortBy": [
+              {
+                "desc": true,
+                "displayName": "ticketlink"
+              }
+            ]
+          },
+          "pluginVersion": "10.3.1",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "PA3CBD0DC9D8FBBE1"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "size": "10000"
+                  },
+                  "type": "raw_data"
+                }
+              ],
+              "query": "sensing_global_percentage: [0 TO $dt_threshold] AND cams_tickets: *",
+              "refId": "A",
+              "timeField": "observation_time_start"
+            }
+          ],
+          "title": "CAMS anomaly correlation",
+          "transformations": [
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {},
+                "indexByName": {},
+                "renameByName": {
+                  "datatake_id": "Datatake ID",
+                  "last_attached_ticket": "Ticket ",
+                  "last_attached_ticket_url": "",
+                  "sensing_global_percentage": "Completeness"
+                }
+              }
+            },
+            {
+              "id": "renameByRegex",
+              "options": {
+                "regex": "(.*_.*)",
+                "renamePattern": "hidden"
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "hidden": true,
+                  "highlight": true,
+                  "key": true,
+                  "mission": true,
+                  "name": true,
+                  "polarization": true,
+                  "sort": true,
+                  "timeliness": true,
+                  "updateTime": true
+                },
+                "indexByName": {
+                  "Completeness": 5,
+                  "Datatake ID": 2,
+                  "Ticket ": 6,
+                  "hidden": 1,
+                  "highlight": 3,
+                  "key": 4,
+                  "mission": 0,
+                  "name": 7,
+                  "polarization": 8,
+                  "sort": 9,
+                  "timeliness": 10,
+                  "updateTime": 11
+                },
+                "renameByName": {
+                  "Ticket ": "CAMS Ticket",
+                  "mission": "Mission"
+                }
+              }
+            }
+          ],
+          "type": "table"
+        }
+      ],
+      "title": "S1",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 2
+      },
+      "id": 6,
+      "panels": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PA3CBD0DC9D8FBBE1"
+          },
+          "gridPos": {
+            "h": 1,
+            "w": 24,
+            "x": 0,
+            "y": 3
+          },
+          "id": 47,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "",
+            "mode": "markdown"
+          },
+          "pluginVersion": "10.3.1",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [
+                {
+                  "field": "observation_time_start",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "PA3CBD0DC9D8FBBE1"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "",
+              "refId": "A",
+              "timeField": "observation_time_start"
+            }
+          ],
+          "title": "Note: Only for Timeliness NOMINAL",
+          "type": "text"
+        },
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PA3CBD0DC9D8FBBE1"
+          },
+          "description": "Datatake with completeness under $dt_threshold%",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "light-red",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "none",
+              "unitScale": true
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Sum"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "percent"
+                  },
+                  {
+                    "id": "displayName",
+                    "value": "Completeness"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 8,
+            "x": 0,
+            "y": 4
+          },
+          "id": 15,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "sum"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showPercentChange": false,
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "10.3.1",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [
+                {
+                  "field": "observation_time_start",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto",
+                    "min_doc_count": "0",
+                    "timeZone": "utc",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "PA3CBD0DC9D8FBBE1"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "final_completeness_percentage: [0 TO $dt_threshold] AND timeliness: NOMINAL ",
+              "refId": "A",
+              "timeField": "observation_time_start"
+            }
+          ],
+          "title": "Number of observation completeness issue",
+          "transformations": [],
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PA3CBD0DC9D8FBBE1"
+          },
+          "description": "Datatake with completeness under $dt_threshold% with linked anomaly ",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "light-red",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "none",
+              "unitScale": true
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Sum"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "percent"
+                  },
+                  {
+                    "id": "displayName",
+                    "value": "Completeness"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 8,
+            "x": 8,
+            "y": 4
+          },
+          "id": 16,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "sum"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showPercentChange": false,
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "10.3.1",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [
+                {
+                  "field": "observation_time_start",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto",
+                    "min_doc_count": "0",
+                    "timeZone": "utc",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "PA3CBD0DC9D8FBBE1"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "final_completeness_percentage: [0 TO $dt_threshold] AND cams_tickets: * AND timeliness: NOMINAL ",
+              "refId": "A",
+              "timeField": "observation_time_start"
+            }
+          ],
+          "title": "Number of observation completeness issue linked to an anomaly",
+          "transformations": [],
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PA3CBD0DC9D8FBBE1"
+          },
+          "description": "Percentage of datatake under $dt_threshold% with linked anomaly",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "max": 1,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "light-red",
+                    "value": null
+                  },
+                  {
+                    "color": "orange",
+                    "value": 0.9
+                  },
+                  {
+                    "color": "green",
+                    "value": 1
+                  }
+                ]
+              },
+              "unit": "percentunit",
+              "unitScale": true
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Percentage"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "percentunit"
+                  },
+                  {
+                    "id": "displayName",
+                    "value": "Completeness"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 8,
+            "x": 16,
+            "y": 4
+          },
+          "id": 17,
+          "options": {
+            "minVizHeight": 75,
+            "minVizWidth": 75,
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "sum"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showThresholdLabels": false,
+            "showThresholdMarkers": true,
+            "sizing": "auto"
+          },
+          "pluginVersion": "10.3.1",
+          "targets": [
+            {
+              "alias": "AllDatatake",
+              "bucketAggs": [
+                {
+                  "field": "observation_time_start",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto",
+                    "min_doc_count": "0",
+                    "timeZone": "utc",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "PA3CBD0DC9D8FBBE1"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "final_completeness_percentage: [0 TO $dt_threshold] AND timeliness: NOMINAL ",
+              "refId": "AllDatatake",
+              "timeField": "observation_time_start"
+            },
+            {
+              "alias": "DatatakeWithAnomaly",
+              "bucketAggs": [
+                {
+                  "field": "observation_time_start",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto",
+                    "min_doc_count": "0",
+                    "timeZone": "utc",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "PA3CBD0DC9D8FBBE1"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "final_completeness_percentage: [0 TO $dt_threshold] AND cams_tickets: * AND timeliness: NOMINAL ",
+              "refId": "DatatakeWithAnomaly",
+              "timeField": "observation_time_start"
+            }
+          ],
+          "title": "Observation completeness anomaly correlation ratio",
+          "transformations": [
+            {
+              "id": "reduce",
+              "options": {
+                "includeTimeField": true,
+                "mode": "reduceFields",
+                "reducers": [
+                  "sum"
+                ]
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "Percentage",
+                "binary": {
+                  "left": "DatatakeWithAnomaly",
+                  "operator": "/",
+                  "reducer": "sum",
+                  "right": "AllDatatake"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                },
+                "replaceFields": true
+              }
+            }
+          ],
+          "type": "gauge"
+        },
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PA3CBD0DC9D8FBBE1"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "center",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "filterable": true,
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "light-red",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "none",
+              "unitScale": true
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "CAMS Ticket"
+                },
+                "properties": [
+                  {
+                    "id": "links",
+                    "value": [
+                      {
+                        "targetBlank": true,
+                        "title": "Open CAMS Ticket",
+                        "url": "https://esa-cams.atlassian.net/browse/${__value.raw}"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Completeness"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "percent"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 11,
+            "w": 24,
+            "x": 0,
+            "y": 9
+          },
+          "id": 42,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "enablePagination": true,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true,
+            "sortBy": [
+              {
+                "desc": true,
+                "displayName": "ticketlink"
+              }
+            ]
+          },
+          "pluginVersion": "10.3.1",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "PA3CBD0DC9D8FBBE1"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "size": "10000"
+                  },
+                  "type": "raw_data"
+                }
+              ],
+              "query": "final_completeness_percentage: [0 TO $dt_threshold] AND cams_tickets: * AND timeliness: NOMINAL ",
+              "refId": "A",
+              "timeField": "observation_time_start"
+            }
+          ],
+          "title": "CAMS anomaly correlation",
+          "transformations": [
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {},
+                "indexByName": {},
+                "renameByName": {
+                  "datatake_id": "Datatake ID",
+                  "final_completeness_percentage": "Completeness",
+                  "last_attached_ticket": "Ticket ",
+                  "last_attached_ticket_url": "",
+                  "sensing_global_percentage": "Completeness percentage "
+                }
+              }
+            },
+            {
+              "id": "renameByRegex",
+              "options": {
+                "regex": "(.*_.*)",
+                "renamePattern": "hidden"
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "hidden": true,
+                  "highlight": true,
+                  "key": true,
+                  "mission": true,
+                  "name": true,
+                  "polarization": true,
+                  "sort": true,
+                  "timeliness": true,
+                  "updateTime": true
+                },
+                "indexByName": {
+                  "Completeness": 3,
+                  "Datatake ID": 2,
+                  "Ticket ": 6,
+                  "hidden": 1,
+                  "highlight": 4,
+                  "key": 5,
+                  "mission": 0,
+                  "name": 7,
+                  "sort": 8,
+                  "timeliness": 9,
+                  "updateTime": 10
+                },
+                "renameByName": {
+                  "Ticket ": "CAMS Ticket",
+                  "mission": "Mission"
+                }
+              }
+            }
+          ],
+          "type": "table"
+        }
+      ],
+      "title": "S2",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 3
+      },
+      "id": 8,
+      "panels": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P067F7001DCF53170"
+          },
+          "description": "Datatake with completeness under $dt_threshold%",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "light-red",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "none",
+              "unitScale": true
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Sum"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "percent"
+                  },
+                  {
+                    "id": "displayName",
+                    "value": "Completeness"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 8,
+            "x": 0,
+            "y": 4
+          },
+          "id": 33,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "count"
+              ],
+              "fields": "/^Sum value_adjusted \\* 100 / Sum expected$/",
+              "values": false
+            },
+            "showPercentChange": false,
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "10.3.1",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [
+                {
+                  "field": "datatake_id",
+                  "id": "3",
+                  "settings": {
+                    "min_doc_count": "1",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "10000"
+                  },
+                  "type": "terms"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P067F7001DCF53170"
+              },
+              "metrics": [
+                {
+                  "field": "value_adjusted",
+                  "id": "1",
+                  "type": "sum"
+                },
+                {
+                  "field": "expected",
+                  "id": "4",
+                  "type": "sum"
+                }
+              ],
+              "query": "",
+              "refId": "sum_sensing",
+              "timeField": "observation_time_start"
+            }
+          ],
+          "title": "Number of observation completeness issue",
+          "transformations": [
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "",
+                "binary": {
+                  "left": "Sum value_adjusted",
+                  "operator": "*",
+                  "reducer": "sum",
+                  "right": "100"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                },
+                "replaceFields": false
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "binary": {
+                  "left": "Sum value_adjusted * 100",
+                  "operator": "/",
+                  "reducer": "sum",
+                  "right": "Sum expected"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "filterByValue",
+              "options": {
+                "filters": [
+                  {
+                    "config": {
+                      "id": "lowerOrEqual",
+                      "options": {
+                        "value": 92
+                      }
+                    },
+                    "fieldName": "Sum value_adjusted * 100 / Sum expected"
+                  }
+                ],
+                "match": "any",
+                "type": "include"
+              }
+            }
+          ],
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P067F7001DCF53170"
+          },
+          "description": "Datatake with completeness under $dt_threshold%",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "noValue": "0",
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "light-red",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "none",
+              "unitScale": true
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Sum"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "percent"
+                  },
+                  {
+                    "id": "displayName",
+                    "value": "Completeness"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 8,
+            "x": 8,
+            "y": 4
+          },
+          "id": 34,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "count"
+              ],
+              "fields": "/^Sum value_adjusted \\* 100 / Sum expected$/",
+              "values": false
+            },
+            "showPercentChange": false,
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "10.3.1",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [
+                {
+                  "field": "datatake_id",
+                  "id": "3",
+                  "settings": {
+                    "min_doc_count": "1",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "1000"
+                  },
+                  "type": "terms"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P067F7001DCF53170"
+              },
+              "metrics": [
+                {
+                  "field": "value_adjusted",
+                  "id": "1",
+                  "type": "sum"
+                },
+                {
+                  "field": "expected",
+                  "id": "4",
+                  "type": "sum"
+                }
+              ],
+              "query": "last_attached_ticket : *",
+              "refId": "sum_sensing",
+              "timeField": "observation_time_start"
+            }
+          ],
+          "title": "Number of observation completeness issue linked to an anomaly",
+          "transformations": [
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "",
+                "binary": {
+                  "left": "Sum value_adjusted",
+                  "operator": "*",
+                  "reducer": "sum",
+                  "right": "100"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                },
+                "replaceFields": false
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "binary": {
+                  "left": "Sum value_adjusted * 100",
+                  "operator": "/",
+                  "reducer": "sum",
+                  "right": "Sum expected"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "filterByValue",
+              "options": {
+                "filters": [
+                  {
+                    "config": {
+                      "id": "lowerOrEqual",
+                      "options": {
+                        "value": 92
+                      }
+                    },
+                    "fieldName": "Sum value_adjusted * 100 / Sum expected"
+                  }
+                ],
+                "match": "any",
+                "type": "include"
+              }
+            }
+          ],
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "description": "Percentage of datatake under $dt_threshold% with linked anomaly",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "max": 1,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "light-red",
+                    "value": null
+                  },
+                  {
+                    "color": "orange",
+                    "value": 0.9
+                  },
+                  {
+                    "color": "green",
+                    "value": 1
+                  }
+                ]
+              },
+              "unit": "percentunit",
+              "unitScale": true
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 8,
+            "x": 16,
+            "y": 4
+          },
+          "id": 41,
+          "options": {
+            "minVizHeight": 75,
+            "minVizWidth": 75,
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [],
+              "fields": "/.*/",
+              "values": true
+            },
+            "showThresholdLabels": false,
+            "showThresholdMarkers": true,
+            "sizing": "auto"
+          },
+          "pluginVersion": "10.3.1",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [
+                {
+                  "field": "datatake_id",
+                  "id": "2",
+                  "settings": {
+                    "min_doc_count": "1",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "10000"
+                  },
+                  "type": "terms"
+                },
+                {
+                  "field": "with_anom",
+                  "id": "8",
+                  "settings": {
+                    "min_doc_count": "1",
+                    "missing": "1",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "0"
+                  },
+                  "type": "terms"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P067F7001DCF53170"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "field": "expected",
+                  "id": "5",
+                  "type": "sum"
+                },
+                {
+                  "field": "value_adjusted",
+                  "id": "6",
+                  "type": "sum"
+                }
+              ],
+              "query": "datatake_id:* AND last_attached_ticket: * ",
+              "refId": "ALL_DT_WITH_ANOM",
+              "timeField": "observation_time_start"
+            },
+            {
+              "alias": "",
+              "bucketAggs": [
+                {
+                  "field": "datatake_id",
+                  "id": "2",
+                  "settings": {
+                    "min_doc_count": "1",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "10000"
+                  },
+                  "type": "terms"
+                },
+                {
+                  "field": "with_anom",
+                  "id": "8",
+                  "settings": {
+                    "min_doc_count": "1",
+                    "missing": "0",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "0"
+                  },
+                  "type": "terms"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P067F7001DCF53170"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "field": "expected",
+                  "id": "5",
+                  "type": "sum"
+                },
+                {
+                  "field": "value_adjusted",
+                  "id": "6",
+                  "type": "sum"
+                },
+                {
+                  "field": "datatake_id",
+                  "id": "7",
+                  "type": "cardinality"
+                }
+              ],
+              "query": "datatake_id:* AND expected : { 0 TO * ]",
+              "refId": "ALL_DT",
+              "timeField": "observation_time_start"
+            }
+          ],
+          "title": "Observation completeness anomaly correlation ratio",
+          "transformations": [
+            {
+              "id": "merge",
+              "options": {}
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "completeness",
+                "binary": {
+                  "left": "Sum value_adjusted",
+                  "operator": "/",
+                  "reducer": "sum",
+                  "right": "Sum expected"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                },
+                "replaceFields": false
+              }
+            },
+            {
+              "id": "filterByValue",
+              "options": {
+                "filters": [
+                  {
+                    "config": {
+                      "id": "greaterOrEqual",
+                      "options": {
+                        "value": 0.92
+                      }
+                    },
+                    "fieldName": "completeness"
+                  }
+                ],
+                "match": "any",
+                "type": "exclude"
+              }
+            },
+            {
+              "id": "convertFieldType",
+              "options": {
+                "conversions": [
+                  {
+                    "destinationType": "number",
+                    "targetField": "with_anom"
+                  }
+                ],
+                "fields": {}
+              }
+            },
+            {
+              "id": "reduce",
+              "options": {
+                "includeTimeField": false,
+                "mode": "reduceFields",
+                "reducers": [
+                  "sum"
+                ]
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "Sum expected": true,
+                  "Sum value_adjusted": true,
+                  "completeness": true
+                },
+                "indexByName": {},
+                "renameByName": {}
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "Ratio",
+                "binary": {
+                  "left": "with_anom",
+                  "operator": "/",
+                  "reducer": "sum",
+                  "right": "Unique Count"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                },
+                "replaceFields": true
+              }
+            }
+          ],
+          "type": "gauge"
+        },
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P067F7001DCF53170"
+          },
+          "description": "Datatake with completeness under $dt_threshold%",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "center",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "light-red",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "none",
+              "unitScale": true
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Completeness"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "percentunit"
+                  },
+                  {
+                    "id": "displayName",
+                    "value": "Completeness"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "CAMS Ticket "
+                },
+                "properties": [
+                  {
+                    "id": "links",
+                    "value": [
+                      {
+                        "targetBlank": true,
+                        "title": "Jira CAMS Ticket",
+                        "url": "https://esa-cams.atlassian.net/browse/${__value.raw}"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 24,
+            "x": 0,
+            "y": 9
+          },
+          "id": 45,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true
+          },
+          "pluginVersion": "10.3.1",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [
+                {
+                  "field": "datatake_id",
+                  "id": "3",
+                  "settings": {
+                    "min_doc_count": "1",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "0"
+                  },
+                  "type": "terms"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P067F7001DCF53170"
+              },
+              "metrics": [
+                {
+                  "field": "value_adjusted",
+                  "id": "1",
+                  "type": "sum"
+                },
+                {
+                  "field": "expected",
+                  "id": "4",
+                  "type": "sum"
+                }
+              ],
+              "query": "cams_tickets : *",
+              "refId": "sum_sensing",
+              "timeField": "observation_time_start"
+            },
+            {
+              "alias": "",
+              "bucketAggs": [],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P067F7001DCF53170"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "size": "10000"
+                  },
+                  "type": "raw_data"
+                }
+              ],
+              "query": "cams_tickets : *",
+              "refId": "A",
+              "timeField": "observation_time_start"
+            }
+          ],
+          "title": "CAMS anomaly correlation",
+          "transformations": [
+            {
+              "id": "merge",
+              "options": {}
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "completeness",
+                "binary": {
+                  "left": "Sum value_adjusted",
+                  "operator": "/",
+                  "reducer": "sum",
+                  "right": "Sum expected"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "filterByValue",
+              "options": {
+                "filters": [
+                  {
+                    "config": {
+                      "id": "isNull",
+                      "options": {}
+                    },
+                    "fieldName": "Sum value_adjusted"
+                  },
+                  {
+                    "config": {
+                      "id": "greater",
+                      "options": {
+                        "value": 0.92
+                      }
+                    },
+                    "fieldName": "completeness"
+                  }
+                ],
+                "match": "any",
+                "type": "exclude"
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {},
+                "indexByName": {},
+                "renameByName": {
+                  "Sum expected": "hidden",
+                  "Sum value_adjusted": "hidden",
+                  "_id": "hidden",
+                  "_index": "hidden",
+                  "_type": "hidden",
+                  "absolute_orbit": "hidden",
+                  "cams_description": "hidden",
+                  "cams_origin": "hidden",
+                  "cams_tickets": "hidden",
+                  "expected": "hidden",
+                  "highlight": "hidden",
+                  "key": "hidden",
+                  "last_attached_ticket": "",
+                  "last_attached_ticket_url": "hidden",
+                  "mission": "hidden",
+                  "observation_time_start": "hidden",
+                  "observation_time_stop": "hidden",
+                  "percentage": "hidden",
+                  "product_level": "hidden",
+                  "product_type": "hidden",
+                  "satellite_unit": "hidden",
+                  "slice_expected": "hidden",
+                  "slice_value": "hidden",
+                  "sort": "hidden",
+                  "status": "hidden",
+                  "timeliness": "hidden",
+                  "updateTime": "hidden",
+                  "value": "hidden",
+                  "value_adjusted": "hidden"
+                }
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "Sum expected": false,
+                  "Sum value_adjusted": false,
+                  "Sum value_adjusted * 100": true,
+                  "hidden": true
+                },
+                "indexByName": {
+                  "completeness": 1,
+                  "datatake_id": 0,
+                  "hidden": 3,
+                  "last_attached_ticket": 2
+                },
+                "renameByName": {
+                  "Sum value_adjusted * 100 / Sum expected": "Completeness",
+                  "completeness": "Completeness",
+                  "completenss": "Completeness",
+                  "datatake_id": "Datatake ID",
+                  "last_attached_ticket": "CAMS Ticket ",
+                  "ticketlink": "CAMS Ticket"
+                }
+              }
+            }
+          ],
+          "type": "table"
+        }
+      ],
+      "title": "S3",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 4
+      },
+      "id": 10,
+      "panels": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P6A55C5DC33AFF17F"
+          },
+          "description": "Datatake with completeness under $dt_threshold%",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "light-red",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "none",
+              "unitScale": true
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Sum"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "percent"
+                  },
+                  {
+                    "id": "displayName",
+                    "value": "Completeness"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 8,
+            "x": 0,
+            "y": 5
+          },
+          "id": 37,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "count"
+              ],
+              "fields": "/^Sum value_adjusted / Sum expected$/",
+              "values": false
+            },
+            "showPercentChange": false,
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "10.3.1",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [
+                {
+                  "field": "datatake_id",
+                  "id": "3",
+                  "settings": {
+                    "min_doc_count": "1",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "10000"
+                  },
+                  "type": "terms"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P6A55C5DC33AFF17F"
+              },
+              "metrics": [
+                {
+                  "field": "value_adjusted",
+                  "id": "1",
+                  "type": "sum"
+                },
+                {
+                  "field": "expected",
+                  "id": "4",
+                  "type": "sum"
+                }
+              ],
+              "query": "",
+              "refId": "sum_sensing",
+              "timeField": "observation_time_start"
+            }
+          ],
+          "title": "Number of observation completeness issue",
+          "transformations": [
+            {
+              "id": "calculateField",
+              "options": {
+                "binary": {
+                  "left": "Sum value_adjusted",
+                  "operator": "/",
+                  "reducer": "sum",
+                  "right": "Sum expected"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "filterByValue",
+              "options": {
+                "filters": [
+                  {
+                    "config": {
+                      "id": "lowerOrEqual",
+                      "options": {
+                        "value": 0.92
+                      }
+                    },
+                    "fieldName": "Sum value_adjusted / Sum expected"
+                  }
+                ],
+                "match": "any",
+                "type": "include"
+              }
+            }
+          ],
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P6A55C5DC33AFF17F"
+          },
+          "description": "Datatake with completeness under $dt_threshold%",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "noValue": "0",
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "light-red",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "none",
+              "unitScale": true
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Sum"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "percent"
+                  },
+                  {
+                    "id": "displayName",
+                    "value": "Completeness"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 8,
+            "x": 8,
+            "y": 5
+          },
+          "id": 38,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "count"
+              ],
+              "fields": "/^Sum value_adjusted \\* 100 / Sum expected$/",
+              "values": false
+            },
+            "showPercentChange": false,
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "10.3.1",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [
+                {
+                  "field": "datatake_id",
+                  "id": "3",
+                  "settings": {
+                    "min_doc_count": "1",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "0"
+                  },
+                  "type": "terms"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P6A55C5DC33AFF17F"
+              },
+              "metrics": [
+                {
+                  "field": "value_adjusted",
+                  "id": "1",
+                  "type": "sum"
+                },
+                {
+                  "field": "expected",
+                  "id": "4",
+                  "type": "sum"
+                }
+              ],
+              "query": "last_attached_ticket:*",
+              "refId": "sum_sensing",
+              "timeField": "observation_time_start"
+            }
+          ],
+          "title": "Number of observation completeness issue linked to an anomaly",
+          "transformations": [
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "",
+                "binary": {
+                  "left": "Sum value_adjusted",
+                  "operator": "*",
+                  "reducer": "sum",
+                  "right": "100"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                },
+                "replaceFields": false
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "binary": {
+                  "left": "Sum value_adjusted * 100",
+                  "operator": "/",
+                  "reducer": "sum",
+                  "right": "Sum expected"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "filterByValue",
+              "options": {
+                "filters": [
+                  {
+                    "config": {
+                      "id": "lowerOrEqual",
+                      "options": {
+                        "value": 92
+                      }
+                    },
+                    "fieldName": "Sum value_adjusted * 100 / Sum expected"
+                  }
+                ],
+                "match": "any",
+                "type": "include"
+              }
+            }
+          ],
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "description": "Percentage of datatake under $dt_threshold% with linked anomaly",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "max": 1,
+              "min": 0,
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "light-red",
+                    "value": null
+                  },
+                  {
+                    "color": "orange",
+                    "value": 0.9
+                  },
+                  {
+                    "color": "green",
+                    "value": 1
+                  }
+                ]
+              },
+              "unit": "percentunit",
+              "unitScale": true
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 8,
+            "x": 16,
+            "y": 5
+          },
+          "id": 43,
+          "options": {
+            "minVizHeight": 75,
+            "minVizWidth": 75,
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [],
+              "fields": "/.*/",
+              "values": true
+            },
+            "showThresholdLabels": false,
+            "showThresholdMarkers": true,
+            "sizing": "auto"
+          },
+          "pluginVersion": "10.3.1",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [
+                {
+                  "field": "datatake_id",
+                  "id": "2",
+                  "settings": {
+                    "min_doc_count": "1",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "10000"
+                  },
+                  "type": "terms"
+                },
+                {
+                  "field": "with_anom",
+                  "id": "8",
+                  "settings": {
+                    "min_doc_count": "1",
+                    "missing": "1",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "0"
+                  },
+                  "type": "terms"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P6A55C5DC33AFF17F"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "field": "expected",
+                  "id": "5",
+                  "type": "sum"
+                },
+                {
+                  "field": "value_adjusted",
+                  "id": "6",
+                  "type": "sum"
+                }
+              ],
+              "query": "datatake_id:* AND last_attached_ticket: * ",
+              "refId": "ALL_DT_WITH_ANOM",
+              "timeField": "observation_time_start"
+            },
+            {
+              "alias": "",
+              "bucketAggs": [
+                {
+                  "field": "datatake_id",
+                  "id": "2",
+                  "settings": {
+                    "min_doc_count": "1",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "10000"
+                  },
+                  "type": "terms"
+                },
+                {
+                  "field": "with_anom",
+                  "id": "8",
+                  "settings": {
+                    "min_doc_count": "1",
+                    "missing": "0",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "0"
+                  },
+                  "type": "terms"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P6A55C5DC33AFF17F"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "field": "expected",
+                  "id": "5",
+                  "type": "sum"
+                },
+                {
+                  "field": "value_adjusted",
+                  "id": "6",
+                  "type": "sum"
+                },
+                {
+                  "field": "datatake_id",
+                  "id": "7",
+                  "type": "cardinality"
+                }
+              ],
+              "query": "datatake_id:*",
+              "refId": "ALL_DT",
+              "timeField": "observation_time_start"
+            }
+          ],
+          "title": "Observation completeness anomaly correlation ratio",
+          "transformations": [
+            {
+              "id": "merge",
+              "options": {}
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "completeness",
+                "binary": {
+                  "left": "Sum value_adjusted",
+                  "operator": "/",
+                  "reducer": "sum",
+                  "right": "Sum expected"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                },
+                "replaceFields": false
+              }
+            },
+            {
+              "id": "filterByValue",
+              "options": {
+                "filters": [
+                  {
+                    "config": {
+                      "id": "greaterOrEqual",
+                      "options": {
+                        "value": 0.92
+                      }
+                    },
+                    "fieldName": "completeness"
+                  }
+                ],
+                "match": "any",
+                "type": "exclude"
+              }
+            },
+            {
+              "id": "convertFieldType",
+              "options": {
+                "conversions": [
+                  {
+                    "destinationType": "number",
+                    "targetField": "with_anom"
+                  }
+                ],
+                "fields": {}
+              }
+            },
+            {
+              "id": "reduce",
+              "options": {
+                "includeTimeField": false,
+                "mode": "reduceFields",
+                "reducers": [
+                  "sum"
+                ]
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "Sum expected": true,
+                  "Sum value_adjusted": true,
+                  "completeness": true
+                },
+                "indexByName": {},
+                "renameByName": {}
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "Ratio",
+                "binary": {
+                  "left": "with_anom",
+                  "operator": "/",
+                  "reducer": "sum",
+                  "right": "Unique Count"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                },
+                "replaceFields": true
+              }
+            }
+          ],
+          "type": "gauge"
+        },
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P6A55C5DC33AFF17F"
+          },
+          "description": "Datatake with completeness under $dt_threshold%",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "center",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "light-red",
+                    "value": null
+                  }
+                ]
+              },
+              "unit": "none",
+              "unitScale": true
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Completeness"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "percentunit"
+                  },
+                  {
+                    "id": "displayName",
+                    "value": "Completeness"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "CAMS Ticket "
+                },
+                "properties": [
+                  {
+                    "id": "links",
+                    "value": [
+                      {
+                        "targetBlank": true,
+                        "title": "Jira CAMS Ticket",
+                        "url": "https://esa-cams.atlassian.net/browse/${__value.raw}"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 9,
+            "w": 24,
+            "x": 0,
+            "y": 10
+          },
+          "id": 46,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true
+          },
+          "pluginVersion": "10.3.1",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [
+                {
+                  "field": "datatake_id",
+                  "id": "3",
+                  "settings": {
+                    "min_doc_count": "1",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "0"
+                  },
+                  "type": "terms"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P6A55C5DC33AFF17F"
+              },
+              "metrics": [
+                {
+                  "field": "value_adjusted",
+                  "id": "1",
+                  "type": "sum"
+                },
+                {
+                  "field": "expected",
+                  "id": "4",
+                  "type": "sum"
+                }
+              ],
+              "query": "cams_tickets : *",
+              "refId": "sum_sensing",
+              "timeField": "observation_time_start"
+            },
+            {
+              "alias": "",
+              "bucketAggs": [],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P6A55C5DC33AFF17F"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "size": "10000"
+                  },
+                  "type": "raw_data"
+                }
+              ],
+              "query": "cams_tickets : *",
+              "refId": "A",
+              "timeField": "observation_time_start"
+            }
+          ],
+          "title": "CAMS anomaly correlation",
+          "transformations": [
+            {
+              "id": "merge",
+              "options": {}
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "completeness",
+                "binary": {
+                  "left": "Sum value_adjusted",
+                  "operator": "/",
+                  "reducer": "sum",
+                  "right": "Sum expected"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "filterByValue",
+              "options": {
+                "filters": [
+                  {
+                    "config": {
+                      "id": "isNull",
+                      "options": {}
+                    },
+                    "fieldName": "Sum value_adjusted"
+                  },
+                  {
+                    "config": {
+                      "id": "greater",
+                      "options": {
+                        "value": 0.92
+                      }
+                    },
+                    "fieldName": "completeness"
+                  }
+                ],
+                "match": "any",
+                "type": "exclude"
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {},
+                "indexByName": {},
+                "renameByName": {
+                  "Sum expected": "hidden",
+                  "Sum value_adjusted": "hidden",
+                  "_id": "hidden",
+                  "_index": "hidden",
+                  "_type": "hidden",
+                  "absolute_orbit": "hidden",
+                  "cams_description": "hidden",
+                  "cams_origin": "hidden",
+                  "cams_tickets": "hidden",
+                  "expected": "hidden",
+                  "highlight": "hidden",
+                  "key": "hidden",
+                  "last_attached_ticket": "",
+                  "last_attached_ticket_url": "hidden",
+                  "mission": "hidden",
+                  "observation_time_start": "hidden",
+                  "observation_time_stop": "hidden",
+                  "percentage": "hidden",
+                  "product_level": "hidden",
+                  "product_type": "hidden",
+                  "satellite_unit": "hidden",
+                  "slice_expected": "hidden",
+                  "slice_value": "hidden",
+                  "sort": "hidden",
+                  "status": "hidden",
+                  "timeliness": "hidden",
+                  "updateTime": "hidden",
+                  "value": "hidden",
+                  "value_adjusted": "hidden"
+                }
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "Sum expected": false,
+                  "Sum value_adjusted": false,
+                  "Sum value_adjusted * 100": true,
+                  "hidden": true
+                },
+                "indexByName": {
+                  "completeness": 1,
+                  "datatake_id": 0,
+                  "hidden": 3,
+                  "last_attached_ticket": 2
+                },
+                "renameByName": {
+                  "Sum value_adjusted * 100 / Sum expected": "Completeness",
+                  "completeness": "Completeness",
+                  "completenss": "Completeness",
+                  "datatake_id": "Datatake ID",
+                  "last_attached_ticket": "CAMS Ticket ",
+                  "ticketlink": "CAMS Ticket"
+                }
+              }
+            }
+          ],
+          "type": "table"
+        }
+      ],
+      "title": "S5",
+      "type": "row"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [
+    "Anomalies_"
+  ],
+  "templating": {
+    "list": [
+      {
+        "description": "Dynamic for S1/S2 need to adjust logic for s3/s5",
+        "hide": 2,
+        "label": "dt_threshold",
+        "name": "dt_threshold",
+        "query": "92",
+        "skipUrlSync": false,
+        "type": "constant"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-7d",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Anomaly correlation follow-up",
+  "uid": "cDsbRok4z",
+  "weekStart": ""
+}

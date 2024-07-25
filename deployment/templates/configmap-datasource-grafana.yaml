@@ -1,0 +1,11 @@
+{{ if .Values.grafana.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-grafana-datasources
+  labels:
+    grafana_datasource: "1"
+{{ include "maas-cds.labels" . | indent 4 }}
+data:
+{{ tpl ((.Files.Glob "configuration/datasources/*.yaml" ).AsConfig | indent 2 ) . }}
+{{ end }}

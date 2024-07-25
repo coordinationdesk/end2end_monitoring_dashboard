@@ -1,0 +1,116 @@
+{
+    "models": [
+        {
+            "index": "raw-data-aps-edrs",
+            "name": "ApsEdrs",
+            "fields": [
+                {
+                    "name": "link_session_id",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "geo_satellite_id",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "satellite_id",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "mission",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "doy",
+                    "type": "Integer"
+                },
+                {
+                    "name": "planned_link_session_start",
+                    "type": "Date"
+                },
+                {
+                    "name": "planned_link_session_stop",
+                    "type": "Date"
+                },
+                {
+                    "name": "moc_accept_status",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "uplink_status",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "spacecraft_execution",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "edte_acquisition_status",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "dcsu_archive_status",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "sfdap_dissem_status",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "total_status",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "ground_station",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "dissemination_start",
+                    "type": "Date"
+                },
+                {
+                    "name": "dissemination_stop",
+                    "type": "Date"
+                },
+                {
+                    "name": "cadus",
+                    "type": "Long"
+                },
+                {
+                    "name": "fer",
+                    "type": "Long"
+                },
+                {
+                    "name": "archived_data_size",
+                    "type": "Float"
+                },
+                {
+                    "name": "disseminated_data",
+                    "type": "Float"
+                },
+                {
+                    "name": "notes",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "interface_name",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "production_service_type",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "production_service_name",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "report_type",
+                    "type": "Keyword"
+                }
+            ],
+            "partition_field": "ingestionTime",
+            "partition_format": "product"
+        }
+    ]
+}

@@ -1,0 +1,937 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 7,
+      "panels": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "gridPos": {
+            "h": 3,
+            "w": 24,
+            "x": 0,
+            "y": 1
+          },
+          "id": 6,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "This dashboard features information on:\n\nDetailed list of origin dates for a specific product from Product Inventory Dashboard\nTime reference for this dashboard is : sensing_start_date\n\nImportant notice : Tables & timelines can only display up to 10 000 entries. Please make use of filters to narrow down the retrieved data and get a more realistic view.",
+            "mode": "markdown"
+          },
+          "pluginVersion": "10.0.2",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [
+                {
+                  "field": "sensing_start_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "",
+              "refId": "A",
+              "timeField": "sensing_start_date"
+            }
+          ],
+          "title": "Dashboard Description",
+          "type": "text"
+        }
+      ],
+      "title": "Dashboard Description",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 5,
+      "panels": [],
+      "title": "Origin Dates Overview",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P9C1AEFD5EC435EE7"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": false,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 0,
+        "y": 2
+      },
+      "id": 4,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": true,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "10.0.2",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "500"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "service_type: PRIP",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "PRIP",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {
+              "_id": 2,
+              "_index": 3,
+              "_type": 4,
+              "content_length": 5,
+              "datatake_id": 6,
+              "eviction_date": 7,
+              "from_sensing_timeliness": 8,
+              "highlight": 9,
+              "key": 10,
+              "mission": 11,
+              "name": 12,
+              "origin_date": 13,
+              "product_level": 14,
+              "product_type": 15,
+              "product_uuid": 16,
+              "publication_date": 17,
+              "satellite_unit": 18,
+              "sensing_duration": 19,
+              "sensing_end_date": 20,
+              "sensing_start_date": 0,
+              "service_id": 1,
+              "service_type": 21,
+              "sort": 22,
+              "timeliness": 23,
+              "transfer_timeliness": 24,
+              "updateTime": 25
+            },
+            "renameByName": {
+              "origin_date": "Origin Date ",
+              "satellite_unit": "",
+              "sensing_end_date": "",
+              "service_id": "Service ID "
+            }
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "([a-z,_].*)",
+            "renamePattern": "HIDDEN"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "HIDDEN": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "HIDDEN": "",
+              "Origin Date ": "",
+              "Service ID ": ""
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P9C1AEFD5EC435EE7"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": false,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 2
+      },
+      "id": 2,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": true,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "10.0.2",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "500"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "service_type: AUXIP",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "AUXIP",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "_id": true,
+              "_id 1": true,
+              "_id 2": true,
+              "_id 3": true,
+              "_id 4": true,
+              "_index": true,
+              "_index 1": true,
+              "_index 2": true,
+              "_index 3": true,
+              "_index 4": true,
+              "_type": true,
+              "_type 1": true,
+              "_type 2": true,
+              "_type 3": true,
+              "_type 4": true,
+              "absolute_orbit": true,
+              "collection_number": true,
+              "content_length": true,
+              "content_length 1": true,
+              "content_length 2": true,
+              "content_length 3": true,
+              "content_length 4": true,
+              "creation_date": true,
+              "datatake_id": true,
+              "end_date 1": true,
+              "end_date 2": true,
+              "end_date 3": true,
+              "eviction_date": true,
+              "eviction_date 1": true,
+              "eviction_date 2": true,
+              "eviction_date 3": true,
+              "eviction_date 4": true,
+              "footprint": true,
+              "from_sensing_timeliness": true,
+              "highlight": true,
+              "highlight 1": true,
+              "highlight 2": true,
+              "highlight 3": true,
+              "highlight 4": true,
+              "ingestionTime": true,
+              "ingestion_date": true,
+              "instrument_mode": true,
+              "interface_name 1": true,
+              "interface_name 2": true,
+              "interface_name 3": true,
+              "key": true,
+              "mission": true,
+              "modification_date": true,
+              "modification_date 1": true,
+              "modification_date 2": true,
+              "modification_date 3": true,
+              "name": true,
+              "origin_date 1": false,
+              "polarization": true,
+              "processor_version": true,
+              "product_class": true,
+              "product_id 1": true,
+              "product_id 2": true,
+              "product_id 3": true,
+              "product_level": true,
+              "product_name 1": false,
+              "product_name 2": true,
+              "product_name 3": true,
+              "product_type": true,
+              "product_uuid": true,
+              "production_service_name 1": true,
+              "production_service_name 2": true,
+              "production_service_name 3": true,
+              "production_service_type 1": true,
+              "production_service_type 2": true,
+              "production_service_type 3": true,
+              "publication_date": true,
+              "publication_date 1": true,
+              "publication_date 2": true,
+              "publication_date 3": true,
+              "publication_date 4": true,
+              "reportFolder 1": true,
+              "reportFolder 2": true,
+              "reportFolder 3": true,
+              "reportName 1": true,
+              "reportName 2": true,
+              "reportName 3": true,
+              "satellite_unit": true,
+              "sensing_duration": true,
+              "sensing_end_date": true,
+              "sensing_start_date": true,
+              "service_id": false,
+              "service_type": true,
+              "site_center": true,
+              "sort": true,
+              "sort 1": true,
+              "sort 2": true,
+              "sort 3": true,
+              "sort 4": true,
+              "start_date 1": true,
+              "start_date 2": true,
+              "start_date 3": true,
+              "timeliness": true,
+              "transfer_timeliness": true,
+              "updateTime": true
+            },
+            "indexByName": {
+              "_id": 17,
+              "_index": 18,
+              "_type": 19,
+              "content_length": 20,
+              "eviction_date": 21,
+              "from_sensing_timeliness": 3,
+              "highlight": 22,
+              "key": 4,
+              "mission": 5,
+              "name": 6,
+              "origin_date": 1,
+              "product_level": 7,
+              "product_type": 8,
+              "product_uuid": 9,
+              "publication_date": 23,
+              "satellite_unit": 10,
+              "sensing_duration": 11,
+              "sensing_end_date": 12,
+              "sensing_start_date": 2,
+              "service_id": 0,
+              "service_type": 13,
+              "sort": 24,
+              "timeliness": 14,
+              "transfer_timeliness": 15,
+              "updateTime": 16
+            },
+            "renameByName": {
+              "origin_date": "Origin Date",
+              "origin_date 1": "Origin Date PRIP",
+              "origin_date 2": "Origine Date LTA",
+              "origin_date 3": "Origin Date Publication",
+              "origin_date 4": "Origin Date Auxip",
+              "product_name 1": "Product Name PRIP",
+              "service_id": "Service ID"
+            }
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "([a-z,_].*)",
+            "renamePattern": "HIDDEN"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {}
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P9C1AEFD5EC435EE7"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": false,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "id": 1,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": true,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "10.0.2",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "500"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "service_type: LTA",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "LTA",
+      "transformations": [
+        {
+          "id": "concatenate",
+          "options": {
+            "frameNameLabel": "frame",
+            "frameNameMode": "label"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "_id": true,
+              "_id 1": true,
+              "_id 2": true,
+              "_id 3": true,
+              "_id 4": true,
+              "_index": true,
+              "_index 1": true,
+              "_index 2": true,
+              "_index 3": true,
+              "_index 4": true,
+              "_type": true,
+              "_type 1": true,
+              "_type 2": true,
+              "_type 3": true,
+              "_type 4": true,
+              "absolute_orbit": true,
+              "collection_number": true,
+              "content_length": true,
+              "content_length 1": true,
+              "content_length 2": true,
+              "content_length 3": true,
+              "content_length 4": true,
+              "creation_date": true,
+              "datatake_id": true,
+              "end_date 1": true,
+              "end_date 2": true,
+              "end_date 3": true,
+              "eviction_date": true,
+              "eviction_date 1": true,
+              "eviction_date 2": true,
+              "eviction_date 3": true,
+              "eviction_date 4": true,
+              "footprint": true,
+              "from_sensing_timeliness": true,
+              "highlight": true,
+              "highlight 1": true,
+              "highlight 2": true,
+              "highlight 3": true,
+              "highlight 4": true,
+              "ingestionTime": true,
+              "ingestion_date": true,
+              "instrument_mode": true,
+              "interface_name 1": true,
+              "interface_name 2": true,
+              "interface_name 3": true,
+              "key": true,
+              "mission": true,
+              "modification_date": true,
+              "modification_date 1": true,
+              "modification_date 2": true,
+              "modification_date 3": true,
+              "name": true,
+              "origin_date 1": false,
+              "polarization": true,
+              "processor_version": true,
+              "product_class": true,
+              "product_id 1": true,
+              "product_id 2": true,
+              "product_id 3": true,
+              "product_level": true,
+              "product_name 1": false,
+              "product_name 2": true,
+              "product_name 3": true,
+              "product_type": true,
+              "product_uuid": true,
+              "production_service_name 1": true,
+              "production_service_name 2": true,
+              "production_service_name 3": true,
+              "production_service_type 1": true,
+              "production_service_type 2": true,
+              "production_service_type 3": true,
+              "publication_date": true,
+              "publication_date 1": true,
+              "publication_date 2": true,
+              "publication_date 3": true,
+              "publication_date 4": true,
+              "reportFolder 1": true,
+              "reportFolder 2": true,
+              "reportFolder 3": true,
+              "reportName 1": true,
+              "reportName 2": true,
+              "reportName 3": true,
+              "satellite_unit": true,
+              "sensing_duration": true,
+              "sensing_end_date": true,
+              "sensing_start_date": true,
+              "service_id": false,
+              "service_type": true,
+              "site_center": true,
+              "sort": true,
+              "sort 1": true,
+              "sort 2": true,
+              "sort 3": true,
+              "sort 4": true,
+              "start_date 1": true,
+              "start_date 2": true,
+              "start_date 3": true,
+              "timeliness": true,
+              "transfer_timeliness": true,
+              "updateTime": true
+            },
+            "indexByName": {
+              "_id 1": 6,
+              "_id 2": 22,
+              "_id 3": 40,
+              "_id 4": 57,
+              "_index 1": 7,
+              "_index 2": 23,
+              "_index 3": 41,
+              "_index 4": 58,
+              "_type 1": 8,
+              "_type 2": 24,
+              "_type 3": 42,
+              "_type 4": 59,
+              "absolute_orbit": 60,
+              "collection_number": 61,
+              "content_length 1": 9,
+              "content_length 2": 25,
+              "content_length 3": 43,
+              "content_length 4": 62,
+              "datatake_id": 63,
+              "end_date 1": 10,
+              "end_date 2": 26,
+              "end_date 3": 44,
+              "eviction_date 1": 11,
+              "eviction_date 2": 27,
+              "eviction_date 3": 64,
+              "eviction_date 4": 87,
+              "from_sensing_timeliness": 65,
+              "highlight 1": 12,
+              "highlight 2": 28,
+              "highlight 3": 45,
+              "highlight 4": 66,
+              "ingestionTime": 5,
+              "instrument_mode": 67,
+              "interface_name 1": 13,
+              "interface_name 2": 29,
+              "interface_name 3": 46,
+              "key": 68,
+              "mission": 69,
+              "modification_date 1": 39,
+              "modification_date 2": 47,
+              "name": 70,
+              "origin_date 1": 0,
+              "origin_date 2": 2,
+              "origin_date 3": 3,
+              "origin_date 4": 4,
+              "polarization": 71,
+              "processor_version": 72,
+              "product_class": 73,
+              "product_id 1": 14,
+              "product_id 2": 30,
+              "product_id 3": 48,
+              "product_level": 74,
+              "product_name 1": 1,
+              "product_name 2": 31,
+              "product_name 3": 49,
+              "product_type": 75,
+              "product_uuid": 76,
+              "production_service_name 1": 15,
+              "production_service_name 2": 32,
+              "production_service_name 3": 50,
+              "production_service_type 1": 16,
+              "production_service_type 2": 33,
+              "production_service_type 3": 51,
+              "publication_date 1": 17,
+              "publication_date 2": 34,
+              "publication_date 3": 77,
+              "publication_date 4": 88,
+              "reportFolder 1": 18,
+              "reportFolder 2": 35,
+              "reportFolder 3": 52,
+              "reportName 1": 19,
+              "reportName 2": 36,
+              "reportName 3": 53,
+              "satellite_unit": 78,
+              "sensing_duration": 79,
+              "sensing_end_date": 80,
+              "sensing_start_date": 56,
+              "service_id": 81,
+              "service_type": 82,
+              "site_center": 89,
+              "sort 1": 20,
+              "sort 2": 37,
+              "sort 3": 54,
+              "sort 4": 83,
+              "start_date 1": 21,
+              "start_date 2": 38,
+              "start_date 3": 55,
+              "timeliness": 84,
+              "transfer_timeliness": 85,
+              "updateTime": 86
+            },
+            "renameByName": {
+              "origin_date": "Origin Date",
+              "origin_date 1": "Origin Date PRIP",
+              "origin_date 2": "Origine Date LTA",
+              "origin_date 3": "Origin Date Publication",
+              "origin_date 4": "Origin Date Auxip",
+              "product_name 1": "Product Name PRIP",
+              "service_id": "Service ID"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P9C1AEFD5EC435EE7"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": false,
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 16
+      },
+      "id": 3,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": true,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "10.0.2",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "10000"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Publication",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "origin_date": "Origin Date",
+              "service_id": "Service ID"
+            }
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "([a-z,_].*)",
+            "renamePattern": "HIDDEN"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "HIDDEN": true
+            },
+            "indexByName": {
+              "HIDDEN": 0,
+              "Origin Date": 2,
+              "Service ID": 1
+            },
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [
+    "Debug"
+  ],
+  "templating": {
+    "list": [
+      {
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P9C1AEFD5EC435EE7"
+        },
+        "filters": [
+          {
+            "condition": "",
+            "key": "name",
+            "operator": "=",
+            "value": "S3A_TM_0_NAT____20230801T230854_20230802T005057_20230802T010611_6122_101_358______PS1_O_AL_004.SEN3.zip"
+          }
+        ],
+        "hide": 0,
+        "label": "Filter",
+        "name": "filter",
+        "skipUrlSync": false,
+        "type": "adhoc"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Product Inventory - Origin Date",
+  "uid": "bbf187f7-7fcf-4000-b225-738cb7b88ffc",
+  "weekStart": ""
+}

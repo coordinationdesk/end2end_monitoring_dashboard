@@ -1,0 +1,114 @@
+nameOverride: ""
+fullnameOverride: ""
+
+image:
+  registry: docker.io
+  repository: busybox
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: latest
+
+imagePullSecrets: []
+
+# will create a kubernetes.io/dockerconfigjson secret
+# and add it to imagePullSecrets
+# i.e.
+# AUTH=$( echo -n "$REGISTRY_USER:$REGISTRY_PASS" | base64 )
+# DOCKER_CONFIG_JSON=$(echo -n '{ "auths": { "${REGISTRY_URL}": { "auth": "${AUTH}" } } }' | base64 | tr -d \"\n\")
+# dockerConfigJson: $DOCKER_CONFIG_JSON
+
+secrets: {}
+#  # strings and file contents are automatically base64 encoded
+#  ssh-creds:
+#    data:
+#      ssh.key: "ssh-rsa AAAAB3N.....uFo42 your@key.comment"
+#    files:
+#      id-rsa.pub: ci/files/id-rsa.pub
+
+# a global custom configMap that is mounted in every job
+customConfigMap:
+
+# global configMaps from string or files
+configMaps: {}
+#  # name of the configMap
+#  config:
+#    data:
+#      # everything below is uses "as-is" in the configMap
+#      config.ini: |-
+#        # config
+#        [global]
+#          mykey = value
+#      cert.key: "<base64 encoded certificate>"
+#  scripts:
+#    data:
+#      start.sh: |-
+#        #!/bin/sh
+#        trap 'echo "quitting"' QUIT
+#    # from files: requires files to be in the chart directory!
+#    # it's easier to use separate yaml files
+#    # see https://github.com/helm/helm/issues/3276#issuecomment-353066972
+#    files:
+#      example.sh: ci/files/example.sh
+
+# environment variables for all jobs
+env: []
+
+jobs: {}
+#  test:
+#    schedule: "*/5 * * * *"
+#    command:
+#      - /bin/sh
+#      - -c
+#    args:
+#      - echo "foo"; ps fauxwww
+#    image:
+#      repository: alpine
+#    # see https://github.com/kubernetes/kubernetes/issues/74848#issuecomment-475178355
+#    # restartPolicy: Never
+#    # startingDeadlineSeconds: 60
+#    # activeDeadlineSeconds: 60
+#    # backoffLimit: 3
+#    # completions: 3
+#    # parallelism: 1
+#    # ttlSecondsAfterFinished: 60
+#    # suspend: false
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances cronjobs run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

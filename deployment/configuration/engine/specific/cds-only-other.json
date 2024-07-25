@@ -1,0 +1,208 @@
+{
+    "amqp": [
+        {
+            "name": "collect-exchange",
+            "queues": []
+        },
+        {
+            "name": "etl-exchange",
+            "queues": [
+                {
+                    "name": "etl-new.cds-datatake-s1-product",
+                    "routing_key": "new.cds-datatake-s1-product",
+                    "events": [
+                        {
+                            "id": "COMPUTE_DATATAKE_RELATED",
+                            "target_model": "CdsProduct"
+                        },
+                        {
+                            "id": "CORRELATE_ACQUISITIONS",
+                            "send_reports": false,
+                            "chunk_size": 128,
+                            "source_type": "CdsDatatake"
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-update.cds-datatake-s1-product",
+                    "routing_key": "update.cds-datatake-s1-product",
+                    "events": [
+                        {
+                            "id": "COMPUTE_DATATAKE_RELATED",
+                            "target_model": "CdsProduct"
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-new.cds-datatake-s1-publication",
+                    "routing_key": "new.cds-datatake-s1-publication",
+                    "events": [
+                        {
+                            "id": "COMPUTE_DATATAKE_RELATED",
+                            "target_model": "CdsPublication",
+                            "send_reports": false
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-update.cds-datatake-s1-publication",
+                    "routing_key": "update.cds-datatake-s1-publication",
+                    "events": [
+                        {
+                            "id": "COMPUTE_DATATAKE_RELATED",
+                            "target_model": "CdsPublication",
+                            "send_reports": false
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-new.cds-datatake-s2-product",
+                    "routing_key": "new.cds-datatake-s2-product",
+                    "events": [
+                        {
+                            "id": "COMPUTE_DATATAKE_RELATED",
+                            "target_model": "CdsProduct"
+                        },
+                        {
+                            "id": "CORRELATE_ACQUISITIONS",
+                            "send_reports": false,
+                            "chunk_size": 128,
+                            "source_type": "CdsDatatake"
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-update.cds-datatake-s2-product",
+                    "routing_key": "update.cds-datatake-s2-product",
+                    "events": [
+                        {
+                            "id": "COMPUTE_DATATAKE_RELATED",
+                            "target_model": "CdsProduct"
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-new.cds-datatake-s2-publication",
+                    "routing_key": "new.cds-datatake-s2-publication",
+                    "events": [
+                        {
+                            "id": "COMPUTE_DATATAKE_RELATED",
+                            "target_model": "CdsPublication",
+                            "send_reports": false
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-update.cds-datatake-s2-publication",
+                    "routing_key": "update.cds-datatake-s2-publication",
+                    "events": [
+                        {
+                            "id": "COMPUTE_DATATAKE_RELATED",
+                            "target_model": "CdsPublication",
+                            "send_reports": false
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-new.container-dd-product",
+                    "routing_key": "new.container-dd-product",
+                    "events": [
+                        {
+                            "id": "COMPUTE_CONTAINER_RELATED",
+                            "target_model": "DdProduct",
+                            "send_reports": false
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-new.container-products",
+                    "routing_key": "new.container-products",
+                    "events": [
+                        {
+                            "id": "COMPUTE_CONTAINER_PRODUCTS",
+                            "send_reports": false
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-new.cds-interface-product-deletion",
+                    "routing_key": "new.cds-interface-product-deletion",
+                    "events": [
+                        {
+                            "id": "CONSOLIDATE_DELETION",
+                            "send_reports": false
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-update.cds-interface-product-deletion",
+                    "routing_key": "update.cds-interface-product-deletion",
+                    "events": [
+                        {
+                            "id": "CONSOLIDATE_DELETION",
+                            "send_reports": false
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-new.cds-edrs-acquisition-pass-status",
+                    "routing_key": "new.cds-edrs-acquisition-pass-status",
+                    "events": [
+                        {
+                            "id": "CORRELATE_ACQUISITIONS",
+                            "send_reports": false,
+                            "chunk_size": 128,
+                            "source_type": "CdsEdrsAcquisitionPassStatus"
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-new.cds-cadip-acquisition-pass-status",
+                    "routing_key": "new.cds-cadip-acquisition-pass-status",
+                    "events": [
+                        {
+                            "id": "CORRELATE_ACQUISITIONS",
+                            "send_reports": false,
+                            "chunk_size": 128,
+                            "source_type": "CdsCadipAcquisitionPassStatus"
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-update.cds-edrs-acquisition-pass-status",
+                    "routing_key": "update.cds-edrs-acquisition-pass-status",
+                    "events": [
+                        {
+                            "id": "CORRELATE_ACQUISITIONS",
+                            "send_reports": false,
+                            "chunk_size": 128,
+                            "source_type": "CdsEdrsAcquisitionPassStatus"
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-update.cds-cadip-acquisition-pass-status",
+                    "routing_key": "update.cds-cadip-acquisition-pass-status",
+                    "events": [
+                        {
+                            "id": "CORRELATE_ACQUISITIONS",
+                            "send_reports": false,
+                            "chunk_size": 128,
+                            "source_type": "CdsCadipAcquisitionPassStatus"
+                        }
+                    ]
+                },
+                {
+                    "name": "collect-file.raw.data.databudget",
+                    "routing_key": "file.raw.data.databudget",
+                    "events": [
+                        {
+                            "id": "CONSOLIDATE_DATABUDGET",
+                            "send_reports": false
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

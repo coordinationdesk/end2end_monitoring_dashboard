@@ -1,0 +1,64 @@
+{
+    "models": [
+        {
+            "index": "raw-data-aps-file",
+            "name": "ApsFile",
+            "fields": [
+                {
+                    "name": "reportFolder",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "session_id",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "name",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "channel",
+                    "type": "Long"
+                },
+                {
+                    "name": "block_number",
+                    "type": "Long"
+                },
+                {
+                    "name": "final_block",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "publication_date",
+                    "type": "Date"
+                },
+                {
+                    "name": "eviction_date",
+                    "type": "Date"
+                },
+                {
+                    "name": "size",
+                    "type": "Long"
+                },
+                {
+                    "name": "retransfer",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "interface_name",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "production_service_type",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "production_service_name",
+                    "type": "Keyword"
+                }
+            ],
+            "partition_field": "ingestionTime",
+            "partition_format": "static"
+        }
+    ]
+}

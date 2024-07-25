@@ -1,0 +1,56 @@
+{
+    "models": [
+        {
+            "index": "raw-data-databudget",
+            "name": "Databudget",
+            "fields": [
+                {
+                    "name": "reportFolder",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "type",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "num_day",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "level",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "timeliness",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "produced",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "archived",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "disseminated",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "volume_day",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "mission",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "version",
+                    "type": "Keyword"
+                }
+            ],
+            "partition_field": "ingestionTime",
+            "partition_format": "conf"
+        }
+    ]
+}

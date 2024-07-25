@@ -1,0 +1,1 @@
+This folder is used to provide files to be ingested

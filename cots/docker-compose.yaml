@@ -1,0 +1,51 @@
+version: '3'
+services:
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: omcs-rabbitmq
+    network_mode: host
+    volumes:
+      - rabbitmq-etc:/etc/rabbitmq/
+      - rabbitmq-data:/var/lib/rabbitmq/
+      - rabbitmq-logs:/var/log/rabbitmq/
+    # ports:
+    #   - ${AMQP_PORT}:5672
+    #   - ${AMQP_IHM_PORT}:15672
+
+  es-node:
+    image: opensearchproject/opensearch:2.10.0
+    container_name: omcs-es-node
+    network_mode: host
+    environment:
+      - discovery.type=single-node
+    volumes:
+      - odfe-data:/usr/share/elasticsearch/data
+    # ports:
+    #   - ${ES_PORT}:9200
+    #   - 9600:9600
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: omcs-grafana
+    network_mode: host
+    environment:
+      GF_SECURITY_DISABLE_INITIAL_ADMIN_CREATION: "true"
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: "Admin"
+      GF_AUTH_DISABLE_SIGNOUT_MENU: "true"
+      GF_AUTH_DISABLE_LOGIN_FORM: "true"
+      GF_INSTALL_PLUGINS: "yesoreyeram-infinity-datasource"
+    # ports:
+    #   - ${GRF_PORT}:3000
+    volumes:
+      - ./deployment/configuration/grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
+      - ./deployment/configuration/grafana/datasources:/etc/grafana/provisioning/datasources
+      - ./deployment/configuration/grafana/dashboards:/var/lib/grafana/dashboards
+
+
+
+volumes:
+  rabbitmq-etc:
+  rabbitmq-data:
+  rabbitmq-logs:
+  odfe-data:

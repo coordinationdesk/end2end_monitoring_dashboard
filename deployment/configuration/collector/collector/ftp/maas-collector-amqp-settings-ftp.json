@@ -1,0 +1,13 @@
+{
+    "amqp": {
+        "file.raw.data.mp-product": {
+            "chunk_size": 1
+        },
+        "file.raw.data.mp-all-product": {
+            "chunk_size": 1
+        },
+        "new.raw.data.ddp-data-available": {
+            "chunk_size": 512
+        }
+    }
+}

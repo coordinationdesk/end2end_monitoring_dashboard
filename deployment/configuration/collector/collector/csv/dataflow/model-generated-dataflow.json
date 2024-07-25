@@ -1,0 +1,56 @@
+{
+    "models": [
+        {
+            "index": "cds-dataflow",
+            "name": "CdsDataflow",
+            "fields": [
+                {
+                    "name": "product_type",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "mission",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "level",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "origin_level",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "instrument",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "mode",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "type",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "groups",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "published_by",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "consumed_by",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "ingestionTime",
+                    "type": "Date"
+                }
+            ],
+            "partition_field": "ingestionTime",
+            "partition_format": "conf"
+        }
+    ]
+}

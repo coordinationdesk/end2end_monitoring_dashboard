@@ -1,0 +1,9 @@
+nodeSelector:
+  magnum.openstack.org/role: front
+persistence:
+  enabled: true
+  size: 500Gi
+  storageClass: cinder-hdd
+resources:
+  limits:
+    cpu: 1

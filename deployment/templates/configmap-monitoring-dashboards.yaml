@@ -1,0 +1,23 @@
+{{ $main_dict := . | deepCopy }}
+{{ if .Values.tags.monitoring }}
+{{- $project_path := printf "configuration/monitoring/dashboards/" -}}
+{{- $conf_path := printf "configuration/monitoring/dashboards/**.json" -}}
+{{- range $path, $bytes  := $.Files.Glob $conf_path }}
+{{- $fileid := $path | replace $project_path "" | replace ".json" "" | replace "_" "-" | replace "/" "-" | lower }}
+{{- $folder := base (dir $path) }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ $main_dict.Release.Name }}-dashb-{{ $fileid }}
+  labels:
+    grafana_dashboard: "1"
+{{ include "maas-cds.labels" $main_dict | indent 4 }}
+{{- if ne $folder "dashboards" }}
+  annotations:
+    grafana_dashboard_folder: "/tmp/dashboards/{{ $folder }}"
+{{- end }}
+data:
+{{ ($.Files.Glob $path).AsConfig | indent 2 }}
+---
+{{- end }}
+{{- end }}

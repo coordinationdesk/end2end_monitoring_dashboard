@@ -1,0 +1,52 @@
+{{ if and .Values.skedler.enabled .Values.skedler.service.enabled }}
+{{- $name := include "skedler.name" . -}}
+{{- $fullName := include "skedler.fullname" . -}} 
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $fullName }}
+  labels:
+    {{- include "skedler.labels" . | nindent 4 }}
+{{- if .Values.skedler.service.labels }}
+{{ toYaml .Values.skedler.service.labels | indent 4 }}
+{{- end }}
+{{- with .Values.skedler.service.annotations }}
+  annotations:
+{{ toYaml . | indent 4 }}
+{{- end }}
+spec:
+{{- if (or (eq .Values.skedler.service.type "ClusterIP") (empty .Values.skedler.service.type)) }}
+  type: ClusterIP
+  {{- if .Values.skedler.service.clusterIP }}
+  clusterIP: {{ .Values.skedler.service.clusterIP }}
+  {{end}}
+{{- else if eq .Values.skedler.service.type "LoadBalancer" }}
+  type: {{ .Values.skedler.service.type }}
+  {{- if .Values.skedler.service.loadBalancerIP }}
+  loadBalancerIP: {{ .Values.skedler.service.loadBalancerIP }}
+  {{- end }}
+  {{- if .Values.skedler.service.loadBalancerSourceRanges }}
+  loadBalancerSourceRanges:
+{{ toYaml .Values.skedler.service.loadBalancerSourceRanges | indent 4 }}
+  {{- end -}}
+{{- else }}
+  type: {{ .Values.skedler.service.type }}
+{{- end }}
+{{- if .Values.skedler.service.externalIPs }}
+  externalIPs:
+{{ toYaml .Values.skedler.service.externalIPs | indent 4 }}
+{{- end }}
+  ports:
+    - name: {{ .Values.skedler.service.portName }}
+      port: {{ .Values.skedler.service.port }}
+      protocol: TCP
+      targetPort: {{ .Values.skedler.service.targetPort }}
+{{ if (and (eq .Values.skedler.service.type "NodePort") (not (empty .Values.skedler.service.nodePort))) }}
+      nodePort: {{.Values.skedler.service.nodePort}}
+{{ end }}
+  {{- if .Values.extraExposePorts }}
+  {{- tpl (toYaml .Values.extraExposePorts) . | indent 4 }}
+  {{- end }}
+  selector:
+    {{- include "skedler.selectorLabels" . | nindent 4 }}
+{{ end }}

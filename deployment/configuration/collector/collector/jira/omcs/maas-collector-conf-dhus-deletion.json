@@ -1,0 +1,86 @@
+{
+    "collectors": [
+        {
+            "id_field": [
+                "product_name",
+                "reportName"
+            ],
+            "routing_key": "new.raw.data.product-deletion",
+            "interface_name": "DHUS_Deletion_CSV",
+            "file_pattern": "*DHUS_*_DelList*.csv",
+            "model": "ProductDeletion",
+            "extractor": {
+                "class": "CSVExtractor",
+                "args": {
+                    "attr_map": [
+                        "product_name",
+                        {
+                            "field": "interface_type",
+                            "python": "lambda c: 'DD'"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "id_field": [
+                "product_name",
+                "reportName"
+            ],
+            "routing_key": "new.raw.data.product-deletion",
+            "interface_name": "DHUS_Deletion_XLSX",
+            "file_pattern": "*DHUS_*_DelList*.xlsx",
+            "model": "ProductDeletion",
+            "extractor": {
+                "class": "XLSXExtractor",
+                "args": {
+                    "attr_map": [
+                        "product_name",
+                        {
+                            "field": "interface_type",
+                            "python": "lambda c: 'DD'"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "class": "JiraExtendedCollectorConfiguration",
+            "id_field": "key",
+            "routing_key": "new.raw.data.deletion-issue",
+            "jql_query": "(project = OMCS OR project = SOA) AND issuetype = \"Datahub deletion\" AND updated > {date_criteria} AND status in (Closed, \"TO BE VERIFIED\") ORDER BY updated ASC",
+            "interface_name": "Jira_OMCS_Deletion_DHUS",
+            "file_pattern": "Jira_OMCS_Deletion_DHUS_*.json",
+            "model": "DeletionIssue",
+            "attachement_prefix": true,
+            "ingest_attachements": true,
+            "extractor": {
+                "class": "JSONExtractor",
+                "args": {
+                    "attr_map": {
+                        "key": "`this`.key",
+                        "deletion_date": "`this`.fields.customfield_10114",
+                        "deletion_cause": "`this`.fields.customfield_10118.value",
+                        "deletion_interfaces": {
+                            "python": "lambda c: [x['value'] for x in c['fields']['customfield_10116']] if c['fields']['customfield_10116'] is not None else ['DHUS']"
+                        },
+                        "reportName": "`this`.self",
+                        "interface_name": {
+                            "python": "lambda c: 'Jira_OMCS_Deletion_DHUS'"
+                        },
+                        "interface_type": {
+                            "python": "lambda c: 'DD'"
+                        }
+                    },
+                    "iterate_nodes": "$.issues",
+                    "allow_partial": true
+                }
+            }
+        }
+    ],
+    "amqp": {
+        "new.raw.data.product-deletion": {
+            "chunk_size": 128
+        }
+    }
+}

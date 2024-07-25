@@ -1,0 +1,108 @@
+{
+    "models": [
+        {
+            "index": "raw-data-mp-hktm-downlink",
+            "name": "MpHktmDownlink",
+            "fields": [
+                {
+                    "name": "reportFolder",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "satellite_id",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "mission",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "datatake_id",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "x_on",
+                    "type": "Date"
+                },
+                {
+                    "name": "x_off",
+                    "type": "Date"
+                },
+                {
+                    "name": "effective_downlink_start",
+                    "type": "Date"
+                },
+                {
+                    "name": "effective_downlink_stop",
+                    "type": "Date"
+                },
+                {
+                    "name": "downlink_mode",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "downlink_start",
+                    "type": "Date"
+                },
+                {
+                    "name": "downlink_stop",
+                    "type": "Date"
+                },
+                {
+                    "name": "downlink_duration",
+                    "type": "Long"
+                },
+                {
+                    "name": "latency",
+                    "type": "Long"
+                },
+                {
+                    "name": "station",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "downlink_absolute_orbit",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "relative_orbit",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "absolute_orbit",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "partial",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "interface_name",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "acquisition_start",
+                    "type": "Date"
+                },
+                {
+                    "name": "acquisition_stop",
+                    "type": "Date"
+                },
+                {
+                    "name": "acquisition_duration",
+                    "type": "Long"
+                },
+                {
+                    "name": "number_of_scenes",
+                    "type": "Long"
+                },
+                {
+                    "name": "downlink_execution_time",
+                    "type": "Date"
+                }
+            ],
+            "partition_field": "ingestionTime",
+            "partition_format": "static"
+        }
+    ]
+}

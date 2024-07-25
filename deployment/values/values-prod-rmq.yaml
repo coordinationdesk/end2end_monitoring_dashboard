@@ -1,0 +1,17 @@
+rabbitmq:
+  enabled: true
+  replicas: 1
+  tscTopologyKey: "kubernetes.io/hostname"
+  storageClassName: ""
+  persistence:
+    storage: "10Gi"
+  resources:
+    requests:
+      cpu: 1
+      memory: 2Gi
+    limits:
+      cpu: 1
+      memory: 2Gi
+  affinity:
+  ingress:
+    enabled: false

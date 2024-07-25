@@ -1,0 +1,60 @@
+{{/*
+For multideployment the template iterates on <deployments>
+  deployment.overWriteValues are merged in main values
+  deployment.name is added to merged values
+  as is merged values could be used for deployment generation.
+*/}}
+{{ if and (index .Values "maas-engine") (and (index .Values "maas-engine").enabled (index .Values "maas-engine").deployments ) }}
+{{ $main_dict := . | deepCopy }}
+{{- range $deployment  := (index .Values "maas-engine").deployments}}
+{{ $overWritedValues := $deployment.overWriteValues | default dict }}
+{{ $mergedValues := $main_dict | deepCopy }}
+{{ $_ := set $mergedValues "Values" (deepCopy (index $main_dict.Values "maas-engine") | merge $overWritedValues) }}
+{{ $_ := set $mergedValues "deploymentName" $deployment.name }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  # Convention is engine configuration config map named using <deployment name>-cfg
+  name: "{{- include "maas-engine.configMapName" $mergedValues}}"
+  labels:
+    {{- include "maas-engine.labels" $mergedValues | nindent 4 }}
+data:
+{{- if and $mergedValues.Values.configMap.fileName $mergedValues.Values.configMap.content}}
+{{ $mergedValues.Values.configMap.fileName | indent 2}}: |-
+{{ $mergedValues.Values.configMap.content | indent 4 -}}
+{{- else}}
+{{- if $mergedValues.Values.configMap.amqpFiles}}
+{{- range $conf_path := $mergedValues.Values.configMap.amqpFiles }}
+{{ base $conf_path | indent 2}}: |-
+{{ $mergedValues.Files.Get $conf_path | indent 4 -}}
+{{- end }}
+{{- end }}
+{{- if $mergedValues.Values.configMap.modelFiles}}
+{{- range $conf_path := $mergedValues.Values.configMap.modelFiles }}
+{{ base $conf_path | indent 2}}: |-
+{{ $mergedValues.Files.Get $conf_path | indent 4 -}}
+{{- end }}
+{{- end }}
+{{- if $mergedValues.Values.configMap.moduleFiles}}
+{{- range $conf_path := $mergedValues.Values.configMap.moduleFiles }}
+{{ base $conf_path | indent 2}}: |-
+{{ $mergedValues.Files.Get $conf_path | indent 4 -}}
+{{- end }}
+{{- end }}
+{{- if $mergedValues.Values.configMap.defaultFiles}}
+{{- range $conf_path := $mergedValues.Values.configMap.defaultFiles }}
+{{ base $conf_path | indent 2}}: |-
+{{ $mergedValues.Files.Get $conf_path | indent 4 -}}
+{{- end }}
+{{- end }}
+{{- if $mergedValues.Values.configMap.loggingFiles}}
+{{- range $conf_path := $mergedValues.Values.configMap.loggingFiles }}
+{{ base $conf_path | indent 2}}: |-
+{{ $mergedValues.Files.Get $conf_path | indent 4 -}}
+{{- end }}
+{{- end }}
+{{- end }}
+
+{{ end }}
+{{ end }}

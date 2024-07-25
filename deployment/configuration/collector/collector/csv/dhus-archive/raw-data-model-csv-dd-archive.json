@@ -1,0 +1,36 @@
+{
+    "models": [
+        {
+            "index": "raw-data-dd-archive",
+            "name": "DdArchive",
+            "fields": [
+                {
+                    "name": "product_id",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "product_name",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "content_length",
+                    "type": "Long"
+                },
+                {
+                    "name": "ingestion_date",
+                    "type": "Date"
+                },
+                {
+                    "name": "start_date",
+                    "type": "Date"
+                },
+                {
+                    "name": "end_date",
+                    "type": "Date"
+                }
+            ],
+            "partition_field": "ingestion_date",
+            "partition_format": "%Y"
+        }
+    ]
+}

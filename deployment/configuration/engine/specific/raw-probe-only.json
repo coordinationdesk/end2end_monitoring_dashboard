@@ -1,0 +1,24 @@
+{
+    "amqp": [
+        {
+            "name": "collect-exchange",
+            "queues": [
+                {
+                    "name": "collect-new.raw.data.interface-probe",
+                    "routing_key": "new.raw.data.interface-probe",
+                    "events": [
+                        {
+                            "id": "CONSOLIDATE_INTERFACE_STATUS",
+                            "send_reports": false,
+                            "refresh_interval_seconds": 1500
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "etl-exchange",
+            "queues": []
+        }
+    ]
+}

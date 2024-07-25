@@ -1,0 +1,46 @@
+{
+    "collectors": [
+        {
+            "class": "ODataCollectorConfiguration",
+            "id_field": [
+                "product_id",
+                "interface_name"
+            ],
+            "routing_key": "new.raw.data.lta-product",
+            "interface_name": "LTA_Exprivia_S1",
+            "file_pattern": "LTA_Exprivia_S1_*.json",
+            "refresh_interval": 10,
+            "expected_collect_interval": 2160,
+            "product_per_page": 1000,
+            "disable_insecure_request_warning": true,
+            "model": "LtaProduct",
+            "extractor": {
+                "class": "JSONExtractor",
+                "args": {
+                    "attr_map": {
+                        "product_id": "`this`.Id",
+                        "product_name": "`this`.Name",
+                        "content_length": "`this`.ContentLength",
+                        "publication_date": "`this`.PublicationDate",
+                        "start_date": "`this`.ContentDate.Start",
+                        "end_date": "`this`.ContentDate.End",
+                        "origin_date": "`this`.OriginDate",
+                        "modification_date": "`this`.ModificationDate",
+                        "eviction_date": "`this`.EvictionDate",
+                        "interface_name": {
+                            "python": "lambda c: 'LTA_Exprivia_S1'"
+                        },
+                        "production_service_type": {
+                            "python": "lambda c: 'LTA'"
+                        },
+                        "production_service_name": {
+                            "python": "lambda c: 'Exprivia'"
+                        }
+                    },
+                    "iterate_nodes": "$.value",
+                    "allow_partial": true
+                }
+            }
+        }
+    ]
+}

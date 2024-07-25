@@ -1,0 +1,3160 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 10,
+      "panels": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "gridPos": {
+            "h": 19,
+            "w": 24,
+            "x": 0,
+            "y": 1
+          },
+          "id": 11,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "The System Technical Budget Schematic View - S3 is based on\n- the data budget reference document [\\[ESA-EOPG-EOPGC-TN-9\\] CSC Operations – ESA Framework – System Technical Budget.pdf](https://omcs.atlassian.net/wiki/download/attachments/66158618/%5BESA-EOPG-EOPGC-TN-9%5D%20CSC%20Operations%20%E2%80%93%20ESA%20Framework%20%E2%80%93%20System%20Technical%20Budget.pdf?api=v2).\n- the data flow reference document [\\[ESA-EOPG-EOPGC-TN-58\\] CSC GS Data Flow Configuration.pdf](https://omcs.atlassian.net/wiki/download/attachments/66158618/%5BESA-EOPG-EOPGC-TN-58%5D%20CSC%20GS%20Data%20Flow%20Configuration.pdf?api=v2).\n\nData flow document extraction is visible in the [\"Data Flow dashboard\"](./d/MfmL_E4Vz/golden-rules-and-data-flow?orgId=1) \n\n# Data selected\n\nFrom [\\[ESA-EOPG-EOPGC-TN-9\\] CSC Operations – ESA Framework – System Technical Budget.pdf](https://omcs.atlassian.net/wiki/download/attachments/66158618/%5BESA-EOPG-EOPGC-TN-9%5D%20CSC%20Operations%20%E2%80%93%20ESA%20Framework%20%E2%80%93%20System%20Technical%20Budget.pdf?api=v2) document some assuption are made to provide the System Technical Budget dashboards.\n\nFor System Technical Budget Schematic View - S3 the data published at PRIP, LTA or DD and DSIB files are selected.\n- Section Data Aquisition data from DSIB files.\n- Section Data Production data published at PRIP.\n- Section Data Preservation data published at LTA.\n- Section Data Distribution data published at DD.\n\n**Data collection** are considered as consistent since **01/08/2022**\n\n**Data collection** for **aquisition** are considered as consistent since **15/03/2023**\n\nValues are mean by satellite number in mission. ( i.e. S1 1 satellite, S2 mean of 2 satellite, S3 mean of 2 satellite; S5 1 satellite )\n\nFor S1, S2, S3 values are mean of the 4 LTA, for S5 values came from S5P_DLR.\n\nRmq: There is today no S5 L0 data published at prip.\n# Annexes\n\n## Product type selected\n\nThe tables below present how products types are classified in STB level and STB timeliness:\n\n### For panel **Yearly Overall Data Flow S3 SATELLITE**:\n\n| Mission | STB Level | STB Timeliness | Real timeliness | Misc.          | Product Type                                                                                                                                                                                                                                                                                                                                     |\n| ------- | --------- | -------------- | --------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |\n| S3      |           |                | NR, AL          | ACQ VOL        | DO_0_DOP___, DO_0_NAV___, GN_0_GNS___, MW_0_MWR___, MW_1_CAL___, MW_1_MWR___, OL_0_CR0___, OL_0_CR1___, OL_0_EFR___, OL_1_EFR___, OL_1_ERR___, OL_1_RAC___, OL_1_SPC___, OL_2_LFR___, OL_2_LRR___, SL_0_SLT___, SL_1_RBT___, SL_2_LST___, SR_0_CAL___, SR_0_SRA___, SR_1_CAL___, SR_1_SRA___, SR_2_LAN___, TM_0_HKM___, TM_0_HKM2__, TM_0_NAT___ |\n| S3      |           |                | NT              | ACQ VOL        | MW_1_MWR___, OL_0_EFR___, OL_1_EFR___, OL_1_ERR___, OL_2_LFR___, OL_2_LRR___, SL_0_SLT___, SL_1_RBT___, SL_2_FRP___, SL_2_LST___, SR_1_SRA___, SR_1_SRA_A_, SR_1_SRA_BS, SR_2_LAN___, SY_1_MISR__, SY_2_AOD___, SY_2_SYN___, SY_2_V10___, SY_2_VG1___, SY_2_VGK___, SY_2_VGP___                                                                  |\n| S3      |           |                | ST              | ACQ VOL        | MW_1_MWR___, SR_0_SRA___, SR_1_SRA___, SR_1_SRA_A_, SR_1_SRA_BS, SR_2_LAN___, SY_1_MISR__, SY_2_SYN___, SY_2_V10___, SY_2_VG1___, SY_2_VGK___, SY_2_VGP___                                                                                                                                                                                       |\n| S3      |           |                | NR, AL          | ACQ COUNT      | DO_0_DOP___, DO_0_NAV___, GN_0_GNS___, MW_0_MWR___, MW_1_CAL___, MW_1_MWR___, OL_0_CR0___, OL_0_CR1___, OL_0_EFR___, OL_1_EFR___, OL_1_ERR___, OL_1_RAC___, OL_1_SPC___, OL_2_LFR___, OL_2_LRR___, SL_0_SLT___, SL_1_RBT___, SL_2_LST___, SR_0_CAL___, SR_0_SRA___, SR_1_CAL___, SR_1_SRA___, SR_2_LAN___, TM_0_HKM___, TM_0_HKM2__, TM_0_NAT___ |\n| S3      |           |                | NT              | ACQ COUNT      | MW_1_MWR___, OL_0_EFR___, OL_1_EFR___, OL_1_ERR___, OL_2_LFR___, OL_2_LRR___, SL_0_SLT___, SL_1_RBT___, SL_2_FRP___, SL_2_LST___, SR_1_SRA___, SR_1_SRA_A_, SR_1_SRA_BS, SR_2_LAN___, SY_1_MISR__, SY_2_AOD___, SY_2_SYN___, SY_2_V10___, SY_2_VG1___, SY_2_VGK___, SY_2_VGP___                                                                  |\n| S3      |           |                | ST              | ACQ COUNT      | MW_1_MWR___, SR_0_SRA___, SR_1_SRA___, SR_1_SRA_A_, SR_1_SRA_BS, SR_2_LAN___, SY_1_MISR__, SY_2_SYN___, SY_2_V10___, SY_2_VG1___, SY_2_VGK___, SY_2_VGP___                                                                                                                                                                                       |\n| S3      | L0        | NRT            | NR, AL          | PROD STC VOL   | DO_0_DOP___, DO_0_NAV___, GN_0_GNS___, MW_0_MWR___, OL_0_CR0___, OL_0_CR1___, OL_0_EFR___, SL_0_SLT___, SR_0_CAL___, SR_0_SRA___, TM_0_HKM___, TM_0_HKM2__, TM_0_NAT___                                                                                                                                                                          |\n| S3      | L0        | NRT            | ST              | PROD STC VOL   | SR_0_SRA___                                                                                                                                                                                                                                                                                                                                      |\n| S3      | L0        | NRT            | NR, AL          | PROD STC COUNT | DO_0_DOP___, DO_0_NAV___, GN_0_GNS___, MW_0_MWR___, OL_0_CR0___, OL_0_CR1___, OL_0_EFR___, SL_0_SLT___, SR_0_CAL___, SR_0_SRA___, TM_0_HKM___, TM_0_HKM2__, TM_0_NAT___                                                                                                                                                                          |\n| S3      | L0        | NRT            | ST              | PROD STC COUNT | SR_0_SRA___                                                                                                                                                                                                                                                                                                                                      |\n| S3      | L0        | NTC            | NT              | PROD VOL       | OL_0_EFR___, SL_0_SLT___                                                                                                                                                                                                                                                                                                                         |\n| S3      | L0        | NTC            | NT              | PROD COUNT     | OL_0_EFR___, SL_0_SLT___                                                                                                                                                                                                                                                                                                                         |\n| S3      | L1        | NRT            | NR, AL          | PROD STC VOL   | MW_1_CAL___, MW_1_MWR___, OL_1_EFR___, OL_1_ERR___, OL_1_RAC___, OL_1_SPC___, SL_1_RBT___, SR_1_CAL___, SR_1_SRA___                                                                                                                                                                                                                              |\n| S3      | L1        | NRT            | ST              | PROD STC VOL   | MW_1_MWR___, SR_1_SRA___, SR_1_SRA_A_, SR_1_SRA_BS, SY_1_MISR__                                                                                                                                                                                                                                                                                  |\n| S3      | L1        | NRT            | NR, AL          | PROD STC COUNT | MW_1_CAL___, MW_1_MWR___, OL_1_EFR___, OL_1_ERR___, OL_1_RAC___, OL_1_SPC___, SL_1_RBT___, SR_1_CAL___, SR_1_SRA___                                                                                                                                                                                                                              |\n| S3      | L1        | NRT            | ST              | PROD STC COUNT | MW_1_MWR___, SR_1_SRA___, SR_1_SRA_A_, SR_1_SRA_BS, SY_1_MISR__                                                                                                                                                                                                                                                                                  |\n| S3      | L2        | NRT            | NR, AL          | PROD STC VOL   | OL_2_LFR___, OL_2_LRR___, SL_2_LST___, SR_2_LAN___                                                                                                                                                                                                                                                                                               |\n| S3      | L2        | NRT            | ST              | PROD STC VOL   | SR_2_LAN___, SY_2_SYN___, SY_2_V10___, SY_2_VG1___, SY_2_VGK___, SY_2_VGP___                                                                                                                                                                                                                                                                     |\n| S3      | L2        | NRT            | NR, AL          | PROD STC COUNT | OL_2_LFR___, OL_2_LRR___, SL_2_LST___, SR_2_LAN___                                                                                                                                                                                                                                                                                               |\n| S3      | L2        | NRT            | ST              | PROD STC COUNT | SR_2_LAN___, SY_2_SYN___, SY_2_V10___, SY_2_VG1___, SY_2_VGK___, SY_2_VGP___                                                                                                                                                                                                                                                                     |\n| S3      | L1        | NTC            | NT              | PROD VOL       | MW_1_MWR___, OL_1_EFR___, OL_1_ERR___, SL_1_RBT___, SR_1_SRA___, SR_1_SRA_A_, SR_1_SRA_BS, SY_1_MISR__                                                                                                                                                                                                                                           |\n| S3      | L1        | NTC            | NT              | PROD COUNT     | MW_1_MWR___, OL_1_EFR___, OL_1_ERR___, SL_1_RBT___, SR_1_SRA___, SR_1_SRA_A_, SR_1_SRA_BS, SY_1_MISR__                                                                                                                                                                                                                                           |\n| S3      | L2        | NTC            | NT              | PROD VOL       | OL_2_LFR___, OL_2_LRR___, SL_2_FRP___, SL_2_LST___, SR_2_LAN___, SY_2_AOD___, SY_2_SYN___, SY_2_V10___, SY_2_VG1___, SY_2_VGK___, SY_2_VGP___                                                                                                                                                                                                    |\n| S3      | L2        | NTC            | NT              | PROD COUNT     | OL_2_LFR___, OL_2_LRR___, SL_2_FRP___, SL_2_LST___, SR_2_LAN___, SY_2_AOD___, SY_2_SYN___, SY_2_V10___, SY_2_VG1___, SY_2_VGK___, SY_2_VGP___                                                                                                                                                                                                    |\n| S3      |           |                | NR, AL          | PROD TOT VOL   | DO_0_DOP___, DO_0_NAV___, GN_0_GNS___, MW_0_MWR___, MW_1_CAL___, MW_1_MWR___, OL_0_CR0___, OL_0_CR1___, OL_0_EFR___, OL_1_EFR___, OL_1_ERR___, OL_1_RAC___, OL_1_SPC___, OL_2_LFR___, OL_2_LRR___, SL_0_SLT___, SL_1_RBT___, SL_2_LST___, SR_0_CAL___, SR_0_SRA___, SR_1_CAL___, SR_1_SRA___, SR_2_LAN___, TM_0_HKM___, TM_0_HKM2__, TM_0_NAT___ |\n| S3      |           |                | NT              | PROD TOT VOL   | MW_1_MWR___, OL_0_EFR___, OL_1_EFR___, OL_1_ERR___, OL_2_LFR___, OL_2_LRR___, SL_0_SLT___, SL_1_RBT___, SL_2_FRP___, SL_2_LST___, SR_1_SRA___, SR_1_SRA_A_, SR_1_SRA_BS, SR_2_LAN___, SY_1_MISR__, SY_2_AOD___, SY_2_SYN___, SY_2_V10___, SY_2_VG1___, SY_2_VGK___, SY_2_VGP___                                                                  |\n| S3      |           |                | ST              | PROD TOT VOL   | MW_1_MWR___, SR_0_SRA___, SR_1_SRA___, SR_1_SRA_A_, SR_1_SRA_BS, SR_2_LAN___, SY_1_MISR__, SY_2_SYN___, SY_2_V10___, SY_2_VG1___, SY_2_VGK___, SY_2_VGP___                                                                                                                                                                                       |\n| S3      |           |                | NR, AL          | PROD TOT COUNT | DO_0_DOP___, DO_0_NAV___, GN_0_GNS___, MW_0_MWR___, MW_1_CAL___, MW_1_MWR___, OL_0_CR0___, OL_0_CR1___, OL_0_EFR___, OL_1_EFR___, OL_1_ERR___, OL_1_RAC___, OL_1_SPC___, OL_2_LFR___, OL_2_LRR___, SL_0_SLT___, SL_1_RBT___, SL_2_LST___, SR_0_CAL___, SR_0_SRA___, SR_1_CAL___, SR_1_SRA___, SR_2_LAN___, TM_0_HKM___, TM_0_HKM2__, TM_0_NAT___ |\n| S3      |           |                | NT              | PROD TOT COUNT | MW_1_MWR___, OL_0_EFR___, OL_1_EFR___, OL_1_ERR___, OL_2_LFR___, OL_2_LRR___, SL_0_SLT___, SL_1_RBT___, SL_2_FRP___, SL_2_LST___, SR_1_SRA___, SR_1_SRA_A_, SR_1_SRA_BS, SR_2_LAN___, SY_1_MISR__, SY_2_AOD___, SY_2_SYN___, SY_2_V10___, SY_2_VG1___, SY_2_VGK___, SY_2_VGP___                                                                  |\n| S3      |           |                | ST              | PROD TOT COUNT | MW_1_MWR___, SR_0_SRA___, SR_1_SRA___, SR_1_SRA_A_, SR_1_SRA_BS, SR_2_LAN___, SY_1_MISR__, SY_2_SYN___, SY_2_V10___, SY_2_VG1___, SY_2_VGK___, SY_2_VGP___                                                                                                                                                                                       |\n| S3      | L0        | NRT            | NR, AL          | LTA VOL        | DO_0_DOP___, DO_0_NAV___, GN_0_GNS___, MW_0_MWR___, OL_0_CR0___, OL_0_CR1___, OL_0_EFR___, SL_0_SLT___, SR_0_CAL___, SR_0_SRA___, TM_0_HKM___, TM_0_HKM2__, TM_0_NAT___                                                                                                                                                                          |\n| S3      | L0        | NRT            | ST              | LTA VOL        | SR_0_SRA___                                                                                                                                                                                                                                                                                                                                      |\n| S3      | L0        | NRT            | NR, AL          | LTA COUNT      | DO_0_DOP___, DO_0_NAV___, GN_0_GNS___, MW_0_MWR___, OL_0_CR0___, OL_0_CR1___, OL_0_EFR___, SL_0_SLT___, SR_0_CAL___, SR_0_SRA___, TM_0_HKM___, TM_0_HKM2__, TM_0_NAT___                                                                                                                                                                          |\n| S3      | L0        | NRT            | ST              | LTA COUNT      | SR_0_SRA___                                                                                                                                                                                                                                                                                                                                      |\n| S3      | L1        |                | NR, AL          | DD VOL         | MW_1_CAL___, MW_1_MWR___, OL_1_EFR___, OL_1_ERR___, OL_1_RAC___, OL_1_SPC___, SL_1_RBT___, SR_1_CAL___, SR_1_SRA___                                                                                                                                                                                                                              |\n| S3      | L1        |                | NT              | DD VOL         | MW_1_MWR___, OL_1_EFR___, OL_1_ERR___, SL_1_RBT___, SR_1_SRA___, SR_1_SRA_A_, SR_1_SRA_BS, SY_1_MISR__                                                                                                                                                                                                                                           |\n| S3      | L1        |                | ST              | DD VOL         | MW_1_MWR___, SR_1_SRA___, SR_1_SRA_A_, SR_1_SRA_BS, SY_1_MISR__                                                                                                                                                                                                                                                                                  |\n| S3      | L1        |                | NR, AL          | DD COUNT       | MW_1_CAL___, MW_1_MWR___, OL_1_EFR___, OL_1_ERR___, OL_1_RAC___, OL_1_SPC___, SL_1_RBT___, SR_1_CAL___, SR_1_SRA___                                                                                                                                                                                                                              |\n| S3      | L1        |                | NT              | DD COUNT       | MW_1_MWR___, OL_1_EFR___, OL_1_ERR___, SL_1_RBT___, SR_1_SRA___, SR_1_SRA_A_, SR_1_SRA_BS, SY_1_MISR__                                                                                                                                                                                                                                           |\n| S3      | L1        |                | ST              | DD COUNT       | MW_1_MWR___, SR_1_SRA___, SR_1_SRA_A_, SR_1_SRA_BS, SY_1_MISR__                                                                                                                                                                                                                                                                                  |\n| S3      | L2        |                | NR, AL          | DD VOL         | OL_2_LFR___, OL_2_LRR___, SL_2_LST___, SR_2_LAN___                                                                                                                                                                                                                                                                                               |\n| S3      | L2        |                | NT              | DD VOL         | OL_2_LFR___, OL_2_LRR___, SL_2_FRP___, SL_2_LST___, SR_2_LAN___, SY_2_AOD___, SY_2_SYN___, SY_2_V10___, SY_2_VG1___, SY_2_VGK___, SY_2_VGP___                                                                                                                                                                                                    |\n| S3      | L2        |                | ST              | DD VOL         | SR_2_LAN___, SY_2_SYN___, SY_2_V10___, SY_2_VG1___, SY_2_VGK___, SY_2_VGP___                                                                                                                                                                                                                                                                     |\n| S3      | L2        |                | NR, AL          | DD COUNT       | OL_2_LFR___, OL_2_LRR___, SL_2_LST___, SR_2_LAN___                                                                                                                                                                                                                                                                                               |\n| S3      | L2        |                | NT              | DD COUNT       | OL_2_LFR___, OL_2_LRR___, SL_2_FRP___, SL_2_LST___, SR_2_LAN___, SY_2_AOD___, SY_2_SYN___, SY_2_V10___, SY_2_VG1___, SY_2_VGK___, SY_2_VGP___                                                                                                                                                                                                    |\n| S3      | L2        |                | ST              | DD COUNT       | SR_2_LAN___, SY_2_SYN___, SY_2_V10___, SY_2_VG1___, SY_2_VGK___, SY_2_VGP___                                                                                                                                                                                                                                                                     |\n| S3      |           |                | NR, AL          | DD TOT VOL     | DO_0_DOP___, DO_0_NAV___, GN_0_GNS___, MW_0_MWR___, MW_1_CAL___, MW_1_MWR___, OL_0_CR0___, OL_0_CR1___, OL_0_EFR___, OL_1_EFR___, OL_1_ERR___, OL_1_RAC___, OL_1_SPC___, OL_2_LFR___, OL_2_LRR___, SL_0_SLT___, SL_1_RBT___, SL_2_LST___, SR_0_CAL___, SR_0_SRA___, SR_1_CAL___, SR_1_SRA___, SR_2_LAN___, TM_0_HKM___, TM_0_HKM2__, TM_0_NAT___ |\n| S3      |           |                | NT              | DD TOT VOL     | MW_1_MWR___, OL_0_EFR___, OL_1_EFR___, OL_1_ERR___, OL_2_LFR___, OL_2_LRR___, SL_0_SLT___, SL_1_RBT___, SL_2_FRP___, SL_2_LST___, SR_1_SRA___, SR_1_SRA_A_, SR_1_SRA_BS, SR_2_LAN___, SY_1_MISR__, SY_2_AOD___, SY_2_SYN___, SY_2_V10___, SY_2_VG1___, SY_2_VGK___, SY_2_VGP___                                                                  |\n| S3      |           |                | ST              | DD TOT VOL     | MW_1_MWR___, SR_0_SRA___, SR_1_SRA___, SR_1_SRA_A_, SR_1_SRA_BS, SR_2_LAN___, SY_1_MISR__, SY_2_SYN___, SY_2_V10___, SY_2_VG1___, SY_2_VGK___, SY_2_VGP___                                                                                                                                                                                       |\n| S3      |           |                | NR, AL          | DD TOT COUNT   | DO_0_DOP___, DO_0_NAV___, GN_0_GNS___, MW_0_MWR___, MW_1_CAL___, MW_1_MWR___, OL_0_CR0___, OL_0_CR1___, OL_0_EFR___, OL_1_EFR___, OL_1_ERR___, OL_1_RAC___, OL_1_SPC___, OL_2_LFR___, OL_2_LRR___, SL_0_SLT___, SL_1_RBT___, SL_2_LST___, SR_0_CAL___, SR_0_SRA___, SR_1_CAL___, SR_1_SRA___, SR_2_LAN___, TM_0_HKM___, TM_0_HKM2__, TM_0_NAT___ |\n| S3      |           |                | NT              | DD TOT COUNT   | MW_1_MWR___, OL_0_EFR___, OL_1_EFR___, OL_1_ERR___, OL_2_LFR___, OL_2_LRR___, SL_0_SLT___, SL_1_RBT___, SL_2_FRP___, SL_2_LST___, SR_1_SRA___, SR_1_SRA_A_, SR_1_SRA_BS, SR_2_LAN___, SY_1_MISR__, SY_2_AOD___, SY_2_SYN___, SY_2_V10___, SY_2_VG1___, SY_2_VGK___, SY_2_VGP___                                                                  |\n| S3      |           |                | ST              | DD TOT COUNT   | MW_1_MWR___, SR_0_SRA___, SR_1_SRA___, SR_1_SRA_A_, SR_1_SRA_BS, SR_2_LAN___, SY_1_MISR__, SY_2_SYN___, SY_2_V10___, SY_2_VG1___, SY_2_VGK___, SY_2_VGP___                                                                                                                                                                                       |\n| S3      | L1        |                | NR, AL          | DL VOL         | MW_1_CAL___, MW_1_MWR___, OL_1_EFR___, OL_1_ERR___, OL_1_RAC___, OL_1_SPC___, SL_1_RBT___, SR_1_CAL___, SR_1_SRA___                                                                                                                                                                                                                              |\n| S3      | L1        |                | NT              | DL VOL         | MW_1_MWR___, OL_1_EFR___, OL_1_ERR___, SL_1_RBT___, SR_1_SRA___, SR_1_SRA_A_, SR_1_SRA_BS, SY_1_MISR__                                                                                                                                                                                                                                           |\n| S3      | L1        |                | ST              | DL VOL         | MW_1_MWR___, SR_1_SRA___, SR_1_SRA_A_, SR_1_SRA_BS, SY_1_MISR__                                                                                                                                                                                                                                                                                  |\n| S3      | L1        |                | NR, AL          | DL COUNT       | MW_1_CAL___, MW_1_MWR___, OL_1_EFR___, OL_1_ERR___, OL_1_RAC___, OL_1_SPC___, SL_1_RBT___, SR_1_CAL___, SR_1_SRA___                                                                                                                                                                                                                              |\n| S3      | L1        |                | NT              | DL COUNT       | MW_1_MWR___, OL_1_EFR___, OL_1_ERR___, SL_1_RBT___, SR_1_SRA___, SR_1_SRA_A_, SR_1_SRA_BS, SY_1_MISR__                                                                                                                                                                                                                                           |\n| S3      | L1        |                | ST              | DL COUNT       | MW_1_MWR___, SR_1_SRA___, SR_1_SRA_A_, SR_1_SRA_BS, SY_1_MISR__                                                                                                                                                                                                                                                                                  |\n| S3      | L2        |                | NR, AL          | DL VOL         | OL_2_LFR___, OL_2_LRR___, SL_2_LST___, SR_2_LAN___                                                                                                                                                                                                                                                                                               |\n| S3      | L2        |                | NT              | DL VOL         | OL_2_LFR___, OL_2_LRR___, SL_2_FRP___, SL_2_LST___, SR_2_LAN___, SY_2_AOD___, SY_2_SYN___, SY_2_V10___, SY_2_VG1___, SY_2_VGK___, SY_2_VGP___                                                                                                                                                                                                    |\n| S3      | L2        |                | ST              | DL VOL         | SR_2_LAN___, SY_2_SYN___, SY_2_V10___, SY_2_VG1___, SY_2_VGK___, SY_2_VGP___                                                                                                                                                                                                                                                                     |\n| S3      | L2        |                | NR, AL          | DL COUNT       | OL_2_LFR___, OL_2_LRR___, SL_2_LST___, SR_2_LAN___                                                                                                                                                                                                                                                                                               |\n| S3      | L2        |                | NT              | DL COUNT       | OL_2_LFR___, OL_2_LRR___, SL_2_FRP___, SL_2_LST___, SR_2_LAN___, SY_2_AOD___, SY_2_SYN___, SY_2_V10___, SY_2_VG1___, SY_2_VGK___, SY_2_VGP___                                                                                                                                                                                                    |\n| S3      | L2        |                | ST              | DL COUNT       | SR_2_LAN___, SY_2_SYN___, SY_2_V10___, SY_2_VG1___, SY_2_VGK___, SY_2_VGP___                                                                                                                                                                                                                                                                     |\n| S3      |           |                | NR, AL          | DL TOT VOL     | DO_0_DOP___, DO_0_NAV___, GN_0_GNS___, MW_0_MWR___, MW_1_CAL___, MW_1_MWR___, OL_0_CR0___, OL_0_CR1___, OL_0_EFR___, OL_1_EFR___, OL_1_ERR___, OL_1_RAC___, OL_1_SPC___, OL_2_LFR___, OL_2_LRR___, SL_0_SLT___, SL_1_RBT___, SL_2_LST___, SR_0_CAL___, SR_0_SRA___, SR_1_CAL___, SR_1_SRA___, SR_2_LAN___, TM_0_HKM___, TM_0_HKM2__, TM_0_NAT___ |\n| S3      |           |                | NT              | DL TOT VOL     | MW_1_MWR___, OL_0_EFR___, OL_1_EFR___, OL_1_ERR___, OL_2_LFR___, OL_2_LRR___, SL_0_SLT___, SL_1_RBT___, SL_2_FRP___, SL_2_LST___, SR_1_SRA___, SR_1_SRA_A_, SR_1_SRA_BS, SR_2_LAN___, SY_1_MISR__, SY_2_AOD___, SY_2_SYN___, SY_2_V10___, SY_2_VG1___, SY_2_VGK___, SY_2_VGP___                                                                  |\n| S3      |           |                | ST              | DL TOT VOL     | MW_1_MWR___, SR_0_SRA___, SR_1_SRA___, SR_1_SRA_A_, SR_1_SRA_BS, SR_2_LAN___, SY_1_MISR__, SY_2_SYN___, SY_2_V10___, SY_2_VG1___, SY_2_VGK___, SY_2_VGP___                                                                                                                                                                                       |\n| S3      |           |                | NR, AL          | DL TOT COUNT   | DO_0_DOP___, DO_0_NAV___, GN_0_GNS___, MW_0_MWR___, MW_1_CAL___, MW_1_MWR___, OL_0_CR0___, OL_0_CR1___, OL_0_EFR___, OL_1_EFR___, OL_1_ERR___, OL_1_RAC___, OL_1_SPC___, OL_2_LFR___, OL_2_LRR___, SL_0_SLT___, SL_1_RBT___, SL_2_LST___, SR_0_CAL___, SR_0_SRA___, SR_1_CAL___, SR_1_SRA___, SR_2_LAN___, TM_0_HKM___, TM_0_HKM2__, TM_0_NAT___ |\n| S3      |           |                | NT              | DL TOT COUNT   | MW_1_MWR___, OL_0_EFR___, OL_1_EFR___, OL_1_ERR___, OL_2_LFR___, OL_2_LRR___, SL_0_SLT___, SL_1_RBT___, SL_2_FRP___, SL_2_LST___, SR_1_SRA___, SR_1_SRA_A_, SR_1_SRA_BS, SR_2_LAN___, SY_1_MISR__, SY_2_AOD___, SY_2_SYN___, SY_2_V10___, SY_2_VG1___, SY_2_VGK___, SY_2_VGP___                                                                  |\n| S3      |           |                | ST              | DL TOT COUNT   | MW_1_MWR___, SR_0_SRA___, SR_1_SRA___, SR_1_SRA_A_, SR_1_SRA_BS, SR_2_LAN___, SY_1_MISR__, SY_2_SYN___, SY_2_V10___, SY_2_VG1___, SY_2_VGK___, SY_2_VGP___                                                                                                                                                                                       |\n\n Time reference for this dashboard is: sensing_start_date\n\nImportant notice: Tables & timelines can only display up to 10 000 entries. Please make use of filters to narrow down the retrieved data and get a more realistic view.",
+            "mode": "markdown"
+          },
+          "pluginVersion": "10.4.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "refId": "A"
+            }
+          ],
+          "title": "Help",
+          "type": "text"
+        }
+      ],
+      "title": "Dashboard description",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 120,
+      "panels": [],
+      "title": "Schematic View - S3",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "-- Mixed --"
+      },
+      "description": "",
+      "flowchartsData": {
+        "flowcharts": [
+          {
+            "allowDrawio": false,
+            "bgColor": "#305496",
+            "center": true,
+            "csv": "## See more information for the syntax at https://drawio-app.com/import-from-csv-to-drawio/\n##\n## Example CSV. Use ## for comments and # for configuration.\n## The following names are reserved and should not be used (or ignored):\n## id, tooltip, placeholder(s), link and label (see below)\n##\n#\n## Node label with placeholders and HTML.\n## Default is '%name_of_first_column%'.\n#\n# label: %name%<br><i style=\"color:gray;\">%position%</i><br><a href=\"mailto:%email%\">Email</a>\n#\n## Node style (placeholders are replaced once).\n## Default is the current style for nodes.\n#\n# style: label;image=%image%;whiteSpace=wrap;html=1;rounded=1;fillColor=%fill%;strokeColor=%stroke%;\n#\n## Parent style for nodes with child nodes (placeholders are replaced once).\n#\n# parentstyle: swimlane;whiteSpace=wrap;html=1;childLayout=stackLayout;horizontal=1;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;\n#\n## Optional column name that contains a reference to a named style in styles.\n## Default is the current style for nodes.\n#\n# stylename: -\n#\n## JSON for named styles of the form {\"name\": \"style\", \"name\": \"style\"} where style is a cell style with\n## placeholders that are replaced once.\n#\n# styles: -\n#\n## Optional column name that contains a reference to a named label in labels.\n## Default is the current label.\n#\n# labelname: -\n#\n## JSON for named labels of the form {\"name\": \"label\", \"name\": \"label\"} where label is a cell label with\n## placeholders.\n#\n# labels: -\n#\n## Uses the given column name as the identity for cells (updates existing cells).\n## Default is no identity (empty value or -).\n#\n# identity: -\n#\n## Uses the given column name as the parent reference for cells. Default is no parent (empty or -).\n## The identity above is used for resolving the reference so it must be specified.\n#\n# parent: -\n#\n## Adds a prefix to the identity of cells to make sure they do not collide with existing cells (whose\n## IDs are numbers from 0..n, sometimes with a GUID prefix in the context of realtime collaboration).\n## Default is csvimport-.\n#\n# namespace: csvimport-\n#\n## Connections between rows (\"from\": source colum, \"to\": target column).\n## Label, style and invert are optional. Defaults are '', current style and false.\n## If placeholders are used in the style, they are replaced with data from the source.\n## An optional placeholders can be set to target to use data from the target instead.\n## In addition to label, an optional fromlabel and tolabel can be used to name the column\n## that contains the text for the label in the edges source or target (invert ignored).\n## The label is concatenated in the form fromlabel + label + tolabel if all are defined.\n## The target column may contain a comma-separated list of values.\n## Multiple connect entries are allowed.\n#\n# connect: {\"from\": \"manager\", \"to\": \"name\", \"invert\": true, \"label\": \"manages\", \\\n#          \"style\": \"curved=1;endArrow=blockThin;endFill=1;fontSize=11;\"}\n# connect: {\"from\": \"refs\", \"to\": \"id\", \"style\": \"curved=1;fontSize=11;\"}\n#\n## Node x-coordinate. Possible value is a column name. Default is empty. Layouts will\n## override this value.\n#\n# left: \n#\n## Node y-coordinate. Possible value is a column name. Default is empty. Layouts will\n## override this value.\n#\n# top: \n#\n## Node width. Possible value is a number (in px), auto or an @ sign followed by a column\n## name that contains the value for the width. Default is auto.\n#\n# width: auto\n#\n## Node height. Possible value is a number (in px), auto or an @ sign followed by a column\n## name that contains the value for the height. Default is auto.\n#\n# height: auto\n#\n## Padding for autosize. Default is 0.\n#\n# padding: -12\n#\n## Comma-separated list of ignored columns for metadata. (These can be\n## used for connections and styles but will not be added as metadata.)\n#\n# ignore: id,image,fill,stroke,refs,manager\n#\n## Column to be renamed to link attribute (used as link).\n#\n# link: url\n#\n## Spacing between nodes. Default is 40.\n#\n# nodespacing: 40\n#\n## Spacing between levels of hierarchical layouts. Default is 100.\n#\n# levelspacing: 100\n#\n## Spacing between parallel edges. Default is 40. Use 0 to disable.\n#\n# edgespacing: 40\n#\n## Name or JSON of layout. Possible values are auto, none, verticaltree, horizontaltree,\n## verticalflow, horizontalflow, organic, circle or a JSON string as used in Layout, Apply.\n## Default is auto.\n#\n# layout: auto\n#\n## ---- CSV below this line. First line are column names. ----\nname,position,id,location,manager,email,fill,stroke,refs,url,image\nEvan Miller,CFO,emi,Office 1,,me@example.com,#dae8fc,#6c8ebf,,https://www.draw.io,https://cdn3.iconfinder.com/data/icons/user-avatars-1/512/users-9-2-128.png\nEdward Morrison,Brand Manager,emo,Office 2,Evan Miller,me@example.com,#d5e8d4,#82b366,,https://www.draw.io,https://cdn3.iconfinder.com/data/icons/user-avatars-1/512/users-10-3-128.png\nRon Donovan,System Admin,rdo,Office 3,Evan Miller,me@example.com,#d5e8d4,#82b366,\"emo,tva\",https://www.draw.io,https://cdn3.iconfinder.com/data/icons/user-avatars-1/512/users-2-128.png\nTessa Valet,HR Director,tva,Office 4,Evan Miller,me@example.com,#d5e8d4,#82b366,,https://www.draw.io,https://cdn3.iconfinder.com/data/icons/user-avatars-1/512/users-3-128.png\n",
+            "download": false,
+            "editorTheme": "dark",
+            "editorUrl": "https://www.draw.io",
+            "enableAnim": true,
+            "grid": false,
+            "lock": true,
+            "name": "Main",
+            "scale": true,
+            "tooltip": true,
+            "type": "xml",
+            "url": "http://<YourUrl>/<Your XML/drawio file/api>",
+            "xml": "<mxfile host=\"app.diagrams.net\" modified=\"2023-07-18T13:04:45.587Z\" agent=\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36\" etag=\"nqwMbRY6MQrbAEcLHDGp\" version=\"21.6.2\" type=\"device\"><diagram id=\"QOhO1NDirt5yqIP-OLgL\" name=\"Page-1\">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</diagram></mxfile>",
+            "zoom": "100%"
+          }
+        ]
+      },
+      "format": "short",
+      "graphId": "flowchart_121",
+      "gridPos": {
+        "h": 23,
+        "w": 24,
+        "x": 0,
+        "y": 2
+      },
+      "id": 121,
+      "newFlag": false,
+      "rulesData": {
+        "rulesData": [
+          {
+            "aggregation": "total",
+            "alias": "S3_ACQ_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 1,
+            "overlayIcon": false,
+            "pattern": "S3_ACQ_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S3_ACQ_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S3_ACQ_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 2,
+            "overlayIcon": false,
+            "pattern": "S3_ACQ_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S3_ACQ_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S3_PROD_L0_NRT_STC_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 3,
+            "overlayIcon": false,
+            "pattern": "S3_PROD_L0_NRT_STC_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S3_PROD_L0_NRT_STC_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S3_PROD_L0_NRT_STC_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 4,
+            "overlayIcon": false,
+            "pattern": "S3_PROD_L0_NRT_STC_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S3_PROD_L0_NRT_STC_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S3_PROD_L0_NTC_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 5,
+            "overlayIcon": false,
+            "pattern": "S3_PROD_L0_NTC_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S3_PROD_L0_NTC_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S3_PROD_L0_NTC_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 6,
+            "overlayIcon": false,
+            "pattern": "S3_PROD_L0_NTC_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S3_PROD_L0_NTC_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S3_PROD_L1_NRT_STC_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 7,
+            "overlayIcon": false,
+            "pattern": "S3_PROD_L1_NRT_STC_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S3_PROD_L1_NRT_STC_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S3_PROD_L1_NRT_STC_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 8,
+            "overlayIcon": false,
+            "pattern": "S3_PROD_L1_NRT_STC_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S3_PROD_L1_NRT_STC_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S3_PROD_L2_NRT_STC_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 9,
+            "overlayIcon": false,
+            "pattern": "S3_PROD_L2_NRT_STC_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S3_PROD_L2_NRT_STC_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S3_PROD_L2_NRT_STC_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 10,
+            "overlayIcon": false,
+            "pattern": "S3_PROD_L2_NRT_STC_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S3_PROD_L2_NRT_STC_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S3_PROD_L1_NTC_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 11,
+            "overlayIcon": false,
+            "pattern": "S3_PROD_L1_NTC_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S3_PROD_L1_NTC_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S3_PROD_L1_NTC_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 12,
+            "overlayIcon": false,
+            "pattern": "S3_PROD_L1_NTC_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S3_PROD_L1_NTC_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S3_PROD_L2_NTC_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 13,
+            "overlayIcon": false,
+            "pattern": "S3_PROD_L2_NTC_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S3_PROD_L2_NTC_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S3_PROD_L2_NTC_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 14,
+            "overlayIcon": false,
+            "pattern": "S3_PROD_L2_NTC_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S3_PROD_L2_NTC_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S3_PROD_TOT_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 15,
+            "overlayIcon": false,
+            "pattern": "S3_PROD_TOT_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S3_PROD_TOT_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S3_PROD_TOT_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 16,
+            "overlayIcon": false,
+            "pattern": "S3_PROD_TOT_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S3_PROD_TOT_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S3_LTA_L0_NRT_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 17,
+            "overlayIcon": false,
+            "pattern": "S3_LTA_L0_NRT_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S3_LTA_L0_NRT_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S3_LTA_L0_NRT_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 18,
+            "overlayIcon": false,
+            "pattern": "S3_LTA_L0_NRT_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S3_LTA_L0_NRT_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S3_DD_L1_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 19,
+            "overlayIcon": false,
+            "pattern": "S3_DD_L1_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S3_DD_L1_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S3_DD_L1_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 20,
+            "overlayIcon": false,
+            "pattern": "S3_DD_L1_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S3_DD_L1_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S3_DD_L2_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 21,
+            "overlayIcon": false,
+            "pattern": "S3_DD_L2_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S3_DD_L2_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S3_DD_L2_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 22,
+            "overlayIcon": false,
+            "pattern": "S3_DD_L2_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S3_DD_L2_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S3_DD_TOT_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 23,
+            "overlayIcon": false,
+            "pattern": "S3_DD_TOT_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S3_DD_TOT_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S3_DD_TOT_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 24,
+            "overlayIcon": false,
+            "pattern": "S3_DD_TOT_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S3_DD_TOT_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S3_DL_L1_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 25,
+            "overlayIcon": false,
+            "pattern": "S3_DL_L1_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S3_DL_L1_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S3_DL_L1_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 26,
+            "overlayIcon": false,
+            "pattern": "S3_DL_L1_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S3_DL_L1_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S3_DL_L2_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 27,
+            "overlayIcon": false,
+            "pattern": "S3_DL_L2_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S3_DL_L2_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S3_DL_L2_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 28,
+            "overlayIcon": false,
+            "pattern": "S3_DL_L2_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S3_DL_L2_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S3_DL_TOT_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 29,
+            "overlayIcon": false,
+            "pattern": "S3_DL_TOT_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S3_DL_TOT_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S3_DL_TOT_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 30,
+            "overlayIcon": false,
+            "pattern": "S3_DL_TOT_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S3_DL_TOT_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          }
+        ]
+      },
+      "targets": [
+        {
+          "alias": "S3_ACQ_VOL",
+          "bucketAggs": [
+            {
+              "field": "time_created",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P7A7ACE4A571C05C7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "data_size",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "mission:S3",
+          "refId": "S3_ACQ_VOL",
+          "timeField": "time_created"
+        },
+        {
+          "alias": "S3_ACQ_COUNT",
+          "bucketAggs": [
+            {
+              "field": "time_created",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P7A7ACE4A571C05C7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "mission:S3",
+          "refId": "S3_ACQ_COUNT",
+          "timeField": "time_created"
+        },
+        {
+          "alias": "S3_PROD_L0_NRT_STC_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S3 AND service_type:PRIP )   AND  (  (   ( product_type:DO_0_DOP___ OR product_type:DO_0_NAV___ OR product_type:GN_0_GNS___ OR product_type:MW_0_MWR___ OR product_type:OL_0_CR0___ OR product_type:OL_0_CR1___ OR product_type:OL_0_EFR___ OR product_type:SL_0_SLT___ OR product_type:SR_0_CAL___ OR product_type:SR_0_SRA___ OR product_type:TM_0_HKM___ OR product_type:TM_0_HKM2__ OR product_type:TM_0_NAT___ ) AND ( timeliness:NR OR timeliness:AL )  )  OR (   ( product_type:SR_0_SRA___ ) AND ( timeliness:ST )  )  )  ",
+          "refId": "S3_PROD_L0_NRT_STC_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S3_PROD_L0_NRT_STC_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S3 AND service_type:PRIP )   AND  (  (   ( product_type:DO_0_DOP___ OR product_type:DO_0_NAV___ OR product_type:GN_0_GNS___ OR product_type:MW_0_MWR___ OR product_type:OL_0_CR0___ OR product_type:OL_0_CR1___ OR product_type:OL_0_EFR___ OR product_type:SL_0_SLT___ OR product_type:SR_0_CAL___ OR product_type:SR_0_SRA___ OR product_type:TM_0_HKM___ OR product_type:TM_0_HKM2__ OR product_type:TM_0_NAT___ ) AND ( timeliness:NR OR timeliness:AL )  )  OR (   ( product_type:SR_0_SRA___ ) AND ( timeliness:ST )  )  )  ",
+          "refId": "S3_PROD_L0_NRT_STC_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S3_PROD_L0_NTC_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S3 AND service_type:PRIP )   AND  (  (   ( product_type:OL_0_EFR___ OR product_type:SL_0_SLT___ ) AND ( timeliness:NT )  )  )  ",
+          "refId": "S3_PROD_L0_NTC_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S3_PROD_L0_NTC_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S3 AND service_type:PRIP )   AND  (  (   ( product_type:OL_0_EFR___ OR product_type:SL_0_SLT___ ) AND ( timeliness:NT )  )  )  ",
+          "refId": "S3_PROD_L0_NTC_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S3_PROD_L1_NRT_STC_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S3 AND service_type:PRIP )   AND  (  (   ( product_type:MW_1_CAL___ OR product_type:MW_1_MWR___ OR product_type:OL_1_EFR___ OR product_type:OL_1_ERR___ OR product_type:OL_1_RAC___ OR product_type:OL_1_SPC___ OR product_type:SL_1_RBT___ OR product_type:SR_1_CAL___ OR product_type:SR_1_SRA___ ) AND ( timeliness:NR OR timeliness:AL )  )  OR (   ( product_type:MW_1_MWR___ OR product_type:SR_1_SRA___ OR product_type:SR_1_SRA_A_ OR product_type:SR_1_SRA_BS OR product_type:SY_1_MISR__ ) AND ( timeliness:ST )  )  )  ",
+          "refId": "S3_PROD_L1_NRT_STC_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S3_PROD_L1_NRT_STC_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S3 AND service_type:PRIP )   AND  (  (   ( product_type:MW_1_CAL___ OR product_type:MW_1_MWR___ OR product_type:OL_1_EFR___ OR product_type:OL_1_ERR___ OR product_type:OL_1_RAC___ OR product_type:OL_1_SPC___ OR product_type:SL_1_RBT___ OR product_type:SR_1_CAL___ OR product_type:SR_1_SRA___ ) AND ( timeliness:NR OR timeliness:AL )  )  OR (   ( product_type:MW_1_MWR___ OR product_type:SR_1_SRA___ OR product_type:SR_1_SRA_A_ OR product_type:SR_1_SRA_BS OR product_type:SY_1_MISR__ ) AND ( timeliness:ST )  )  )  ",
+          "refId": "S3_PROD_L1_NRT_STC_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S3_PROD_L2_NRT_STC_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S3 AND service_type:PRIP )   AND  (  (   ( product_type:OL_2_LFR___ OR product_type:OL_2_LRR___ OR product_type:SL_2_LST___ OR product_type:SR_2_LAN___ ) AND ( timeliness:NR OR timeliness:AL )  )  OR (   ( product_type:SR_2_LAN___ OR product_type:SY_2_SYN___ OR product_type:SY_2_V10___ OR product_type:SY_2_VG1___ OR product_type:SY_2_VGK___ OR product_type:SY_2_VGP___ ) AND ( timeliness:ST )  )  )  ",
+          "refId": "S3_PROD_L2_NRT_STC_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S3_PROD_L2_NRT_STC_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S3 AND service_type:PRIP )   AND  (  (   ( product_type:OL_2_LFR___ OR product_type:OL_2_LRR___ OR product_type:SL_2_LST___ OR product_type:SR_2_LAN___ ) AND ( timeliness:NR OR timeliness:AL )  )  OR (   ( product_type:SR_2_LAN___ OR product_type:SY_2_SYN___ OR product_type:SY_2_V10___ OR product_type:SY_2_VG1___ OR product_type:SY_2_VGK___ OR product_type:SY_2_VGP___ ) AND ( timeliness:ST )  )  )  ",
+          "refId": "S3_PROD_L2_NRT_STC_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S3_PROD_L1_NTC_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S3 AND service_type:PRIP )   AND  (  (   ( product_type:MW_1_MWR___ OR product_type:OL_1_EFR___ OR product_type:OL_1_ERR___ OR product_type:SL_1_RBT___ OR product_type:SR_1_SRA___ OR product_type:SR_1_SRA_A_ OR product_type:SR_1_SRA_BS OR product_type:SY_1_MISR__ ) AND ( timeliness:NT )  )  )  ",
+          "refId": "S3_PROD_L1_NTC_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S3_PROD_L1_NTC_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S3 AND service_type:PRIP )   AND  (  (   ( product_type:MW_1_MWR___ OR product_type:OL_1_EFR___ OR product_type:OL_1_ERR___ OR product_type:SL_1_RBT___ OR product_type:SR_1_SRA___ OR product_type:SR_1_SRA_A_ OR product_type:SR_1_SRA_BS OR product_type:SY_1_MISR__ ) AND ( timeliness:NT )  )  )  ",
+          "refId": "S3_PROD_L1_NTC_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S3_PROD_L2_NTC_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S3 AND service_type:PRIP )   AND  (  (   ( product_type:OL_2_LFR___ OR product_type:OL_2_LRR___ OR product_type:SL_2_FRP___ OR product_type:SL_2_LST___ OR product_type:SR_2_LAN___ OR product_type:SY_2_AOD___ OR product_type:SY_2_SYN___ OR product_type:SY_2_V10___ OR product_type:SY_2_VG1___ OR product_type:SY_2_VGK___ OR product_type:SY_2_VGP___ ) AND ( timeliness:NT )  )  )  ",
+          "refId": "S3_PROD_L2_NTC_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S3_PROD_L2_NTC_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S3 AND service_type:PRIP )   AND  (  (   ( product_type:OL_2_LFR___ OR product_type:OL_2_LRR___ OR product_type:SL_2_FRP___ OR product_type:SL_2_LST___ OR product_type:SR_2_LAN___ OR product_type:SY_2_AOD___ OR product_type:SY_2_SYN___ OR product_type:SY_2_V10___ OR product_type:SY_2_VG1___ OR product_type:SY_2_VGK___ OR product_type:SY_2_VGP___ ) AND ( timeliness:NT )  )  )  ",
+          "refId": "S3_PROD_L2_NTC_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S3_PROD_TOT_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S3 AND service_type:PRIP )   AND  (  (   ( product_type:DO_0_DOP___ OR product_type:DO_0_NAV___ OR product_type:GN_0_GNS___ OR product_type:MW_0_MWR___ OR product_type:MW_1_CAL___ OR product_type:MW_1_MWR___ OR product_type:OL_0_CR0___ OR product_type:OL_0_CR1___ OR product_type:OL_0_EFR___ OR product_type:OL_1_EFR___ OR product_type:OL_1_ERR___ OR product_type:OL_1_RAC___ OR product_type:OL_1_SPC___ OR product_type:OL_2_LFR___ OR product_type:OL_2_LRR___ OR product_type:SL_0_SLT___ OR product_type:SL_1_RBT___ OR product_type:SL_2_LST___ OR product_type:SR_0_CAL___ OR product_type:SR_0_SRA___ OR product_type:SR_1_CAL___ OR product_type:SR_1_SRA___ OR product_type:SR_2_LAN___ OR product_type:TM_0_HKM___ OR product_type:TM_0_HKM2__ OR product_type:TM_0_NAT___ ) AND ( timeliness:NR OR timeliness:AL )  )  OR (   ( product_type:MW_1_MWR___ OR product_type:OL_0_EFR___ OR product_type:OL_1_EFR___ OR product_type:OL_1_ERR___ OR product_type:OL_2_LFR___ OR product_type:OL_2_LRR___ OR product_type:SL_0_SLT___ OR product_type:SL_1_RBT___ OR product_type:SL_2_FRP___ OR product_type:SL_2_LST___ OR product_type:SR_1_SRA___ OR product_type:SR_1_SRA_A_ OR product_type:SR_1_SRA_BS OR product_type:SR_2_LAN___ OR product_type:SY_1_MISR__ OR product_type:SY_2_AOD___ OR product_type:SY_2_SYN___ OR product_type:SY_2_V10___ OR product_type:SY_2_VG1___ OR product_type:SY_2_VGK___ OR product_type:SY_2_VGP___ ) AND ( timeliness:NT )  )  OR (   ( product_type:MW_1_MWR___ OR product_type:SR_0_SRA___ OR product_type:SR_1_SRA___ OR product_type:SR_1_SRA_A_ OR product_type:SR_1_SRA_BS OR product_type:SR_2_LAN___ OR product_type:SY_1_MISR__ OR product_type:SY_2_SYN___ OR product_type:SY_2_V10___ OR product_type:SY_2_VG1___ OR product_type:SY_2_VGK___ OR product_type:SY_2_VGP___ ) AND ( timeliness:ST )  )  )  ",
+          "refId": "S3_PROD_TOT_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S3_PROD_TOT_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S3 AND service_type:PRIP )   AND  (  (   ( product_type:DO_0_DOP___ OR product_type:DO_0_NAV___ OR product_type:GN_0_GNS___ OR product_type:MW_0_MWR___ OR product_type:MW_1_CAL___ OR product_type:MW_1_MWR___ OR product_type:OL_0_CR0___ OR product_type:OL_0_CR1___ OR product_type:OL_0_EFR___ OR product_type:OL_1_EFR___ OR product_type:OL_1_ERR___ OR product_type:OL_1_RAC___ OR product_type:OL_1_SPC___ OR product_type:OL_2_LFR___ OR product_type:OL_2_LRR___ OR product_type:SL_0_SLT___ OR product_type:SL_1_RBT___ OR product_type:SL_2_LST___ OR product_type:SR_0_CAL___ OR product_type:SR_0_SRA___ OR product_type:SR_1_CAL___ OR product_type:SR_1_SRA___ OR product_type:SR_2_LAN___ OR product_type:TM_0_HKM___ OR product_type:TM_0_HKM2__ OR product_type:TM_0_NAT___ ) AND ( timeliness:NR OR timeliness:AL )  )  OR (   ( product_type:MW_1_MWR___ OR product_type:OL_0_EFR___ OR product_type:OL_1_EFR___ OR product_type:OL_1_ERR___ OR product_type:OL_2_LFR___ OR product_type:OL_2_LRR___ OR product_type:SL_0_SLT___ OR product_type:SL_1_RBT___ OR product_type:SL_2_FRP___ OR product_type:SL_2_LST___ OR product_type:SR_1_SRA___ OR product_type:SR_1_SRA_A_ OR product_type:SR_1_SRA_BS OR product_type:SR_2_LAN___ OR product_type:SY_1_MISR__ OR product_type:SY_2_AOD___ OR product_type:SY_2_SYN___ OR product_type:SY_2_V10___ OR product_type:SY_2_VG1___ OR product_type:SY_2_VGK___ OR product_type:SY_2_VGP___ ) AND ( timeliness:NT )  )  OR (   ( product_type:MW_1_MWR___ OR product_type:SR_0_SRA___ OR product_type:SR_1_SRA___ OR product_type:SR_1_SRA_A_ OR product_type:SR_1_SRA_BS OR product_type:SR_2_LAN___ OR product_type:SY_1_MISR__ OR product_type:SY_2_SYN___ OR product_type:SY_2_V10___ OR product_type:SY_2_VG1___ OR product_type:SY_2_VGK___ OR product_type:SY_2_VGP___ ) AND ( timeliness:ST )  )  )  ",
+          "refId": "S3_PROD_TOT_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S3_LTA_L0_NRT_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/8)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S3 AND service_type:LTA )   AND  (  (   ( product_type:DO_0_DOP___ OR product_type:DO_0_NAV___ OR product_type:GN_0_GNS___ OR product_type:MW_0_MWR___ OR product_type:OL_0_CR0___ OR product_type:OL_0_CR1___ OR product_type:OL_0_EFR___ OR product_type:SL_0_SLT___ OR product_type:SR_0_CAL___ OR product_type:SR_0_SRA___ OR product_type:TM_0_HKM___ OR product_type:TM_0_HKM2__ OR product_type:TM_0_NAT___ ) AND ( timeliness:NR OR timeliness:AL )  )  OR (   ( product_type:SR_0_SRA___ ) AND ( timeliness:ST )  )  )  ",
+          "refId": "S3_LTA_L0_NRT_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S3_LTA_L0_NRT_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/8)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S3 AND service_type:LTA )   AND  (  (   ( product_type:DO_0_DOP___ OR product_type:DO_0_NAV___ OR product_type:GN_0_GNS___ OR product_type:MW_0_MWR___ OR product_type:OL_0_CR0___ OR product_type:OL_0_CR1___ OR product_type:OL_0_EFR___ OR product_type:SL_0_SLT___ OR product_type:SR_0_CAL___ OR product_type:SR_0_SRA___ OR product_type:TM_0_HKM___ OR product_type:TM_0_HKM2__ OR product_type:TM_0_NAT___ ) AND ( timeliness:NR OR timeliness:AL )  )  OR (   ( product_type:SR_0_SRA___ ) AND ( timeliness:ST )  )  )  ",
+          "refId": "S3_LTA_L0_NRT_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S3_DD_L1_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S3 AND service_type:DD )   AND  (  (   ( product_type:MW_1_CAL___ OR product_type:MW_1_MWR___ OR product_type:OL_1_EFR___ OR product_type:OL_1_ERR___ OR product_type:OL_1_RAC___ OR product_type:OL_1_SPC___ OR product_type:SL_1_RBT___ OR product_type:SR_1_CAL___ OR product_type:SR_1_SRA___ ) AND ( timeliness:NR OR timeliness:AL )  )  OR (   ( product_type:MW_1_MWR___ OR product_type:OL_1_EFR___ OR product_type:OL_1_ERR___ OR product_type:SL_1_RBT___ OR product_type:SR_1_SRA___ OR product_type:SR_1_SRA_A_ OR product_type:SR_1_SRA_BS OR product_type:SY_1_MISR__ ) AND ( timeliness:NT )  )  OR (   ( product_type:MW_1_MWR___ OR product_type:SR_1_SRA___ OR product_type:SR_1_SRA_A_ OR product_type:SR_1_SRA_BS OR product_type:SY_1_MISR__ ) AND ( timeliness:ST )  )  )  ",
+          "refId": "S3_DD_L1_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S3_DD_L1_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S3 AND service_type:DD )   AND  (  (   ( product_type:MW_1_CAL___ OR product_type:MW_1_MWR___ OR product_type:OL_1_EFR___ OR product_type:OL_1_ERR___ OR product_type:OL_1_RAC___ OR product_type:OL_1_SPC___ OR product_type:SL_1_RBT___ OR product_type:SR_1_CAL___ OR product_type:SR_1_SRA___ ) AND ( timeliness:NR OR timeliness:AL )  )  OR (   ( product_type:MW_1_MWR___ OR product_type:OL_1_EFR___ OR product_type:OL_1_ERR___ OR product_type:SL_1_RBT___ OR product_type:SR_1_SRA___ OR product_type:SR_1_SRA_A_ OR product_type:SR_1_SRA_BS OR product_type:SY_1_MISR__ ) AND ( timeliness:NT )  )  OR (   ( product_type:MW_1_MWR___ OR product_type:SR_1_SRA___ OR product_type:SR_1_SRA_A_ OR product_type:SR_1_SRA_BS OR product_type:SY_1_MISR__ ) AND ( timeliness:ST )  )  )  ",
+          "refId": "S3_DD_L1_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S3_DD_L2_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S3 AND service_type:DD )   AND  (  (   ( product_type:OL_2_LFR___ OR product_type:OL_2_LRR___ OR product_type:SL_2_LST___ OR product_type:SR_2_LAN___ ) AND ( timeliness:NR OR timeliness:AL )  )  OR (   ( product_type:OL_2_LFR___ OR product_type:OL_2_LRR___ OR product_type:SL_2_FRP___ OR product_type:SL_2_LST___ OR product_type:SR_2_LAN___ OR product_type:SY_2_AOD___ OR product_type:SY_2_SYN___ OR product_type:SY_2_V10___ OR product_type:SY_2_VG1___ OR product_type:SY_2_VGK___ OR product_type:SY_2_VGP___ ) AND ( timeliness:NT )  )  OR (   ( product_type:SR_2_LAN___ OR product_type:SY_2_SYN___ OR product_type:SY_2_V10___ OR product_type:SY_2_VG1___ OR product_type:SY_2_VGK___ OR product_type:SY_2_VGP___ ) AND ( timeliness:ST )  )  )  ",
+          "refId": "S3_DD_L2_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S3_DD_L2_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S3 AND service_type:DD )   AND  (  (   ( product_type:OL_2_LFR___ OR product_type:OL_2_LRR___ OR product_type:SL_2_LST___ OR product_type:SR_2_LAN___ ) AND ( timeliness:NR OR timeliness:AL )  )  OR (   ( product_type:OL_2_LFR___ OR product_type:OL_2_LRR___ OR product_type:SL_2_FRP___ OR product_type:SL_2_LST___ OR product_type:SR_2_LAN___ OR product_type:SY_2_AOD___ OR product_type:SY_2_SYN___ OR product_type:SY_2_V10___ OR product_type:SY_2_VG1___ OR product_type:SY_2_VGK___ OR product_type:SY_2_VGP___ ) AND ( timeliness:NT )  )  OR (   ( product_type:SR_2_LAN___ OR product_type:SY_2_SYN___ OR product_type:SY_2_V10___ OR product_type:SY_2_VG1___ OR product_type:SY_2_VGK___ OR product_type:SY_2_VGP___ ) AND ( timeliness:ST )  )  )  ",
+          "refId": "S3_DD_L2_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S3_DD_TOT_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S3 AND service_type:DD )   AND  (  (   ( product_type:DO_0_DOP___ OR product_type:DO_0_NAV___ OR product_type:GN_0_GNS___ OR product_type:MW_0_MWR___ OR product_type:MW_1_CAL___ OR product_type:MW_1_MWR___ OR product_type:OL_0_CR0___ OR product_type:OL_0_CR1___ OR product_type:OL_0_EFR___ OR product_type:OL_1_EFR___ OR product_type:OL_1_ERR___ OR product_type:OL_1_RAC___ OR product_type:OL_1_SPC___ OR product_type:OL_2_LFR___ OR product_type:OL_2_LRR___ OR product_type:SL_0_SLT___ OR product_type:SL_1_RBT___ OR product_type:SL_2_LST___ OR product_type:SR_0_CAL___ OR product_type:SR_0_SRA___ OR product_type:SR_1_CAL___ OR product_type:SR_1_SRA___ OR product_type:SR_2_LAN___ OR product_type:TM_0_HKM___ OR product_type:TM_0_HKM2__ OR product_type:TM_0_NAT___ ) AND ( timeliness:NR OR timeliness:AL )  )  OR (   ( product_type:MW_1_MWR___ OR product_type:OL_0_EFR___ OR product_type:OL_1_EFR___ OR product_type:OL_1_ERR___ OR product_type:OL_2_LFR___ OR product_type:OL_2_LRR___ OR product_type:SL_0_SLT___ OR product_type:SL_1_RBT___ OR product_type:SL_2_FRP___ OR product_type:SL_2_LST___ OR product_type:SR_1_SRA___ OR product_type:SR_1_SRA_A_ OR product_type:SR_1_SRA_BS OR product_type:SR_2_LAN___ OR product_type:SY_1_MISR__ OR product_type:SY_2_AOD___ OR product_type:SY_2_SYN___ OR product_type:SY_2_V10___ OR product_type:SY_2_VG1___ OR product_type:SY_2_VGK___ OR product_type:SY_2_VGP___ ) AND ( timeliness:NT )  )  OR (   ( product_type:MW_1_MWR___ OR product_type:SR_0_SRA___ OR product_type:SR_1_SRA___ OR product_type:SR_1_SRA_A_ OR product_type:SR_1_SRA_BS OR product_type:SR_2_LAN___ OR product_type:SY_1_MISR__ OR product_type:SY_2_SYN___ OR product_type:SY_2_V10___ OR product_type:SY_2_VG1___ OR product_type:SY_2_VGK___ OR product_type:SY_2_VGP___ ) AND ( timeliness:ST )  )  )  ",
+          "refId": "S3_DD_TOT_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S3_DD_TOT_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S3 AND service_type:DD )   AND  (  (   ( product_type:DO_0_DOP___ OR product_type:DO_0_NAV___ OR product_type:GN_0_GNS___ OR product_type:MW_0_MWR___ OR product_type:MW_1_CAL___ OR product_type:MW_1_MWR___ OR product_type:OL_0_CR0___ OR product_type:OL_0_CR1___ OR product_type:OL_0_EFR___ OR product_type:OL_1_EFR___ OR product_type:OL_1_ERR___ OR product_type:OL_1_RAC___ OR product_type:OL_1_SPC___ OR product_type:OL_2_LFR___ OR product_type:OL_2_LRR___ OR product_type:SL_0_SLT___ OR product_type:SL_1_RBT___ OR product_type:SL_2_LST___ OR product_type:SR_0_CAL___ OR product_type:SR_0_SRA___ OR product_type:SR_1_CAL___ OR product_type:SR_1_SRA___ OR product_type:SR_2_LAN___ OR product_type:TM_0_HKM___ OR product_type:TM_0_HKM2__ OR product_type:TM_0_NAT___ ) AND ( timeliness:NR OR timeliness:AL )  )  OR (   ( product_type:MW_1_MWR___ OR product_type:OL_0_EFR___ OR product_type:OL_1_EFR___ OR product_type:OL_1_ERR___ OR product_type:OL_2_LFR___ OR product_type:OL_2_LRR___ OR product_type:SL_0_SLT___ OR product_type:SL_1_RBT___ OR product_type:SL_2_FRP___ OR product_type:SL_2_LST___ OR product_type:SR_1_SRA___ OR product_type:SR_1_SRA_A_ OR product_type:SR_1_SRA_BS OR product_type:SR_2_LAN___ OR product_type:SY_1_MISR__ OR product_type:SY_2_AOD___ OR product_type:SY_2_SYN___ OR product_type:SY_2_V10___ OR product_type:SY_2_VG1___ OR product_type:SY_2_VGK___ OR product_type:SY_2_VGP___ ) AND ( timeliness:NT )  )  OR (   ( product_type:MW_1_MWR___ OR product_type:SR_0_SRA___ OR product_type:SR_1_SRA___ OR product_type:SR_1_SRA_A_ OR product_type:SR_1_SRA_BS OR product_type:SR_2_LAN___ OR product_type:SY_1_MISR__ OR product_type:SY_2_SYN___ OR product_type:SY_2_V10___ OR product_type:SY_2_VG1___ OR product_type:SY_2_VGK___ OR product_type:SY_2_VGP___ ) AND ( timeliness:ST )  )  )  ",
+          "refId": "S3_DD_TOT_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S3_DL_L1_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "mission:S3 AND service_type:DL AND product_level:L1_ AND ( ( product_type:SY* OR ( timeliness:NR OR timeliness:ST OR timeliness:AL ) ) OR ( NOT product_type:SY* AND ( timeliness:NN OR timeliness:SN ) ) )",
+          "refId": "S3_DL_L1_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S3_DL_L1_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "mission:S3 AND service_type:DL AND product_level:L1_ AND ( ( product_type:SY* OR ( timeliness:NR OR timeliness:ST OR timeliness:AL ) ) OR ( NOT product_type:SY* AND ( timeliness:NN OR timeliness:SN ) ) )",
+          "refId": "S3_DL_L1_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S3_DL_L2_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "mission:S3 AND service_type:DL AND product_level:L2_ AND ( ( product_type:SY* OR ( timeliness:NR OR timeliness:ST OR timeliness:AL ) ) OR ( NOT product_type:SY* AND ( timeliness:NN OR timeliness:SN ) ) )",
+          "refId": "S3_DL_L2_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S3_DL_L2_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "mission:S3 AND service_type:DL AND product_level:L2_ AND ( ( product_type:SY* OR ( timeliness:NR OR timeliness:ST OR timeliness:AL ) ) OR ( NOT product_type:SY* AND ( timeliness:NN OR timeliness:SN ) ) )",
+          "refId": "S3_DL_L2_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S3_DL_TOT_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "mission:S3 AND service_type:DL AND ( product_level:L1_ OR product_level:L2_ ) AND ( ( product_type:SY* OR ( timeliness:NR OR timeliness:ST OR timeliness:AL ) ) OR ( NOT product_type:SY* AND ( timeliness:NN OR timeliness:SN ) ) )",
+          "refId": "S3_DL_TOT_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S3_DL_TOT_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "mission:S3 AND service_type:DL AND ( product_level:L1_ OR product_level:L2_ ) AND ( ( product_type:SY* OR ( timeliness:NR OR timeliness:ST OR timeliness:AL ) ) OR ( NOT product_type:SY* AND ( timeliness:NN OR timeliness:SN ) ) )",
+          "refId": "S3_DL_TOT_COUNT",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Yearly Overall Data Flow S3 SATELLITE",
+      "transparent": true,
+      "type": "agenty-flowcharting-panel",
+      "valueName": "current",
+      "version": "0.9.0"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [
+    "System Technical budget"
+  ],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-1y",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "utc",
+  "title": "System Technical Budget Schematic View - S3",
+  "uid": "-sLXQDFVk",
+  "weekStart": ""
+}

@@ -1,0 +1,64 @@
+{
+    "collectors": [
+        {
+            "class": "ODataCollectorConfiguration",
+            "id_field": [
+                "session_id",
+                "retransfer"
+            ],
+            "routing_key": "new.raw.data.aps-session",
+            "interface_name": "CADIP_Inuvik_Sessions",
+            "file_pattern": "CADIP_Inuvik_Sessions_*.json",
+            "odata_entities": "Sessions",
+            "odata_query_filter": "PublicationDate ge {publication_start_date} and PublicationDate lt {publication_end_date}",
+            "odata_start_offset": 60,
+            "refresh_interval": 10,
+            "max_time_window": 60,
+            "expected_collect_interval": 2160,
+            "product_per_page": 1000,
+            "disable_insecure_request_warning": true,
+            "custom_query_suffix": "&$expand=QualityInfo",
+            "model": "ApsSession",
+            "extractor": {
+                "class": "JSONExtractor",
+                "args": {
+                    "attr_map": {
+                        "session_id": "`this`.SessionId",
+                        "num_channels": "`this`.NumChannels",
+                        "satellite_id": "`this`.Satellite",
+                        "publication_date": "`this`.PublicationDate",
+                        "station_unit_id": "`this`.StationUnitId",
+                        "acquisition_id": "`this`.AcquisitionId",
+                        "downlink_orbit": "`this`.DownlinkOrbit",
+                        "antenna_id": "`this`.AntennaId",
+                        "antenna_status": "`this`.AntennaStatusOK",
+                        "front_end_id": "`this`.FrontEndId",
+                        "retransfer": "`this`.Retransfer",
+                        "front_end_status": "`this`.FrontEndStatusOK",
+                        "planned_data_start": "`this`.PlannedDataStart",
+                        "planned_data_stop": "`this`.PlannedDataStop",
+                        "downlink_start": "`this`.DownlinkStart",
+                        "downlink_stop": "`this`.DownlinkStop",
+                        "downlink_status": "`this`.DownlinkStatusOK",
+                        "delivery_push_status": "`this`.DeliveryPushOK",
+                        "ground_station": {
+                            "python": "lambda c: 'INS'"
+                        },
+                        "interface_name": {
+                            "python": "lambda c: 'CADIP_Inuvik_Sessions'"
+                        },
+                        "production_service_type": {
+                            "python": "lambda c: 'CADIP'"
+                        },
+                        "production_service_name": {
+                            "python": "lambda c: 'Inuvik'"
+                        },
+                        "quality_infos": "`this`.QualityInfo"
+                    },
+                    "iterate_nodes": "$.value",
+                    "allow_partial": true
+                }
+            }
+        }
+    ]
+}
