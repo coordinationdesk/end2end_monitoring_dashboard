@@ -1,0 +1,76 @@
+{
+    "models": [
+        {
+            "index": "raw-data-sat-unavailability-product",
+            "name": "SatUnavailabilityProduct",
+            "fields": [
+                {
+                    "name": "file_name",
+                    "type": "Text"
+                },
+                {
+                    "name": "mission",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "unavailability_reference",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "unavailability_type",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "subsystem",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "start_time",
+                    "type": "Text"
+                },
+                {
+                    "name": "start_orbit",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "start_anx_offset",
+                    "type": "Integer"
+                },
+                {
+                    "name": "end_time",
+                    "type": "Text"
+                },
+                {
+                    "name": "end_orbit",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "end_anx_offset",
+                    "type": "Integer"
+                },
+                {
+                    "name": "type",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "comment",
+                    "type": "Text"
+                },
+                {
+                    "name": "interface_name",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "production_service_type",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "production_service_name",
+                    "type": "Keyword"
+                }
+            ],
+            "partition_field": "ingestionTime",
+            "partition_format": "static"
+        }
+    ]
+}

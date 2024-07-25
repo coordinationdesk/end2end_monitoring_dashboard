@@ -1,0 +1,15 @@
+{{ if .Values.configurationFolders }}
+{{ $main_dict := . | deepCopy }}
+{{- range $path  := .Values.configurationFolders }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ $path | replace "/" "-" }}-cfg
+  labels:
+    {{- include "maas-cds.labels" $main_dict | nindent 4 }}
+data:
+{{- $conf_path := printf "configuration/%s/**.*" $path -}}
+{{- tpl (($main_dict.Files.Glob $conf_path).AsConfig | nindent 2 ) $main_dict }}
+{{- end }}
+{{- end }}

@@ -1,0 +1,151 @@
+{{- $api_version := include "common.capabilities.cronjob.apiVersion" . }}
+{{- $chart_name := include "cronjobs.fullname" . }}
+{{- $chart_labels := include "cronjobs.labels" . }}
+{{- $chart_selector_labels := include "cronjobs.selectorLabels" . }}
+{{- $service_account_name := include "cronjobs.serviceAccountName" . }}
+{{- $registry := .Values.image.registry }}
+{{- $tag := .Values.image.tag | default .Chart.AppVersion }}
+{{- $image_pull_secrets := .Values.imagePullSecrets }}
+
+{{- range $name, $job := .Values.jobs }}
+{{- $image := print $registry "/" $.Values.image.repository ":" $tag }}
+{{- if .image }}
+  {{- $image = print (default $registry .image.registry) "/" .image.repository ":" (default $tag .image.tag) }}
+{{- end }}
+{{- $env := $.Values.env }}
+{{- if .env }}
+  {{- $env = concat $env .env }}
+{{- end }}
+{{- $checksum := toYaml . | sha256sum | trunc 20 | quote }}
+---
+apiVersion: {{ $api_version }}
+kind: CronJob
+metadata:
+  name: {{ $chart_name }}-{{ $name }}
+  labels:
+    {{- $chart_labels | nindent 4 }}
+  annotations:
+    values/checksum: {{ $checksum }}
+spec:
+  concurrencyPolicy: {{ default "Forbid" .concurrencyPolicy }}
+  failedJobsHistoryLimit: {{ default 1 .failedJobsHistoryLimit }}
+  successfulJobsHistoryLimit: {{ default 1 .successfulJobsHistoryLimit }}
+  schedule: {{ .schedule | quote }}
+  {{- if and (semverCompare ">=1.27.0" $.Capabilities.KubeVersion.Version) .timeZone }}
+  timeZone: {{ .timeZone }}
+  {{- end }}
+  {{- if .suspend }}
+  suspend: {{ .suspend }}
+  {{- end }}
+  {{- if .startingDeadlineSeconds }}
+  startingDeadlineSeconds: {{ .startingDeadlineSeconds }}
+  {{- end }}
+  jobTemplate:
+    metadata:
+    spec:
+      {{- if .activeDeadlineSeconds }}
+      activeDeadlineSeconds: {{ .activeDeadlineSeconds }}
+      {{- end }}
+      {{- if .backoffLimit }}
+      backoffLimit: {{ .backoffLimit }}
+      {{- end }}
+      {{- if .completions }}
+      completions: {{ .completions }}
+      {{- end }}
+      {{- if .parallelism }}
+      parallelism: {{ .parallelism }}
+      {{- end }}
+      {{- if .ttlSecondsAfterFinished }}
+      ttlSecondsAfterFinished: {{ .ttlSecondsAfterFinished }}
+      {{- end}}
+      template:
+        metadata:
+          {{- with .podAnnotations }}
+          annotations:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          labels:
+            {{- $chart_selector_labels | nindent 12 }}
+        spec:
+          restartPolicy: {{ default "Never" .restartPolicy }}
+          imagePullSecrets:
+          {{- with default $image_pull_secrets .imagePullSecrets }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- if $.Values.dockerConfigJson }}
+            - name: {{ $chart_name }}-registry
+          {{- end }}
+          {{- if or $.Values.serviceAccount.create $.Values.serviceAccount.name }}
+          serviceAccountName: {{ $service_account_name }}
+          {{- end }}
+          securityContext:
+            {{- toYaml $.Values.podSecurityContext | nindent 12 }}
+          containers:
+            - name: {{ $name }}
+              securityContext:
+                {{- toYaml $.Values.securityContext | nindent 16 }}
+              image: {{ $image }}
+              imagePullPolicy: {{ $.Values.image.pullPolicy }}
+              {{- if .command }}
+              command:
+                {{- toYaml .command | nindent 16 }}
+              {{- end }}
+              {{- with .args }}
+              args:
+                {{- toYaml . | nindent 16 }}
+              {{- end }}
+              env:
+                {{- toYaml $env | nindent 16 }}
+              resources:
+                {{- toYaml $.Values.resources | nindent 16 }}
+              volumeMounts:
+                {{- if $.Values.customConfigMap }}
+                - mountPath: /configMaps/{{ $.Values.customConfigMap }}
+                  name: {{ $.Values.customConfigMap }}
+                {{- end }}
+                {{- if $.Values.customSecret }}
+                - mountPath: /secrets/{{ $.Values.customSecret }}
+                  name: {{ $.Values.customSecret }}
+                {{- end }}
+                {{- range $name, $map := $.Values.configMaps }}
+                - mountPath: /configMaps/{{ $name }}
+                  name: {{ $name }}
+                {{- end }}
+                {{- range $name, $secret := $.Values.secrets }}
+                - mountPath: /secrets/{{ $name }}
+                  name: {{ $name }}
+                {{- end }}
+          {{- with $.Values.nodeSelector }}
+          nodeSelector:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with $.Values.affinity }}
+          affinity:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with $.Values.tolerations }}
+          tolerations:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          volumes:
+            {{- if $.Values.customConfigMap }}
+            - name: {{ $.Values.customConfigMap }}
+              configMap:
+                name: {{ $.Values.customConfigMap }}
+            {{- end }}
+            {{- if $.Values.customSecret }}
+            - name: {{ $.Values.customSecret }}
+              secret:
+                secretName: {{ $.Values.customSecret }}
+            {{- end }}
+            {{- range $name, $map := $.Values.configMaps }}
+            - name: {{ $name }}
+              configMap:
+                name: {{ print $chart_name "-" $name }}
+            {{- end }}
+            {{- range $name, $secret := $.Values.secrets }}
+            - name: {{ $name }}
+              secret:
+                secretName: {{ print $chart_name "-" $name }}
+            {{- end }}
+  {{- end }}

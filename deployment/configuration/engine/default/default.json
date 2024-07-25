@@ -1,0 +1,410 @@
+{
+    "defaults": [
+        {
+            "id": [
+                "CONSOLIDATE_DD_PRODUCT",
+                "CONSOLIDATE_PRODUCT",
+                "COMPUTE_CONTAINER_PRODUCTS",
+                "COMPUTE_CONTAINER_RELATED",
+                "MISSING_CONSOLIDATION"
+            ],
+            "dd_attrs": {
+                "DHUS": {
+                    "raw_data_model": "DdProduct",
+                    "publication_date": "ddip_publication_date",
+                    "from_prip_timeliness": "from_prip_ddip_timeliness",
+                    "product_name": "ddip_name",
+                    "container_id": "ddip_id",
+                    "container_name": "ddip_container_name"
+                },
+                "DAS": {
+                    "raw_data_model": "DasProduct",
+                    "publication_date": "dddas_publication_date",
+                    "from_prip_timeliness": "from_prip_dddas_timeliness",
+                    "product_name": "dddas_name",
+                    "container_id": "dddas_id",
+                    "container_name": "dddas_container_name"
+                },
+                "CREODIAS": {
+                    "raw_data_model": "CreodiasProduct",
+                    "publication_date": "ddcreodias_publication_date",
+                    "from_prip_timeliness": "from_prip_ddcreodias_timeliness",
+                    "product_name": "ddcreodias_name",
+                    "container_id": "ddcreodias_id",
+                    "container_name": "ddcreodias_container_name"
+                }
+            }
+        },
+        {
+            "id": "CONSOLIDATE_DATATAKE",
+            "send_reports": true
+        },
+        {
+            "id": "CONSOLIDATE_PUBLICATION",
+            "send_reports": false,
+            "min_doi": null
+        },
+        {
+            "id": "CONSOLIDATE_PRODUCT",
+            "send_reports": false,
+            "min_doi": null,
+            "container_rk": "new.container-products"
+        },
+        {
+            "id": "COMPUTE_COMPLETENESS",
+            "send_reports": false,
+            "completeness_tolerance": {
+                "S1": {
+                    "local": {
+                        "WV_.*0.": -759000,
+                        "WV_.*1.": -13500000,
+                        "WV_.*2.": -12843000,
+                        "Z.*0.": -1000000,
+                        "S.*0.": -1000000,
+                        "S.*1.": -2400000,
+                        "S.*2.": -2000000,
+                        "EW_.*0.": -135000,
+                        "EW_.*1.": 230000,
+                        "IW_.*0.": -512000,
+                        "IW_.*1.": 150000
+                    },
+                    "slice": {
+                        "IW_OCN__2.": -7400000,
+                        "EW_OCN__2.": -8200000,
+                        "EW_SLC__1.": -8200000
+                    }
+                }
+            },
+            "generate_missing_periods": true,
+            "missing_periods_maximal_offset": {
+                "S1": {
+                    "local": {
+                        "WV_.*0.": 6000000,
+                        "S.*0.": 6000000,
+                        "EW_.*0.": 6000000,
+                        "IW_.*0.": 6000000
+                    }
+                },
+                "S2": {
+                    "local": {
+                        "MSI_L0__DS": 10000000
+                    }
+                }
+            }
+        },
+        {
+            "id": "COMPUTE_S3_COMPLETENESS",
+            "completeness_tolerance": {
+                "S3": {
+                    "local": {
+                        "SR_1_LAN_RD": -180000000,
+                        "DO_0_(DOP|NAV)___|GN_0_GNS___|MW_0_MWR___": -180000000,
+                        "SL_(0_SLT___|1_RBT___|2_(FRP___|LST___))": -240000000,
+                        "SR_(0_SRA___|1_SRA_(__|A_|BS))": -540000000,
+                        "TM_0_(HKM(___|2__)|NAT___)|MW_1_(CAL___|MWR___)": -180000000,
+                        "OL_(0_EFR___|1_E(FR___|RR___)|2_L(FR___|RR___))": 0,
+                        "SY_(1_MISR__|2_(AOD___|SYN___|VG(K___|P___)))": 0
+                    }
+                }
+            }
+        },
+        {
+            "id": "COMPUTE_S5_COMPLETENESS",
+            "completeness_tolerance": {
+                "S5": {
+                    "local": {
+                        "OPER_L0__(ENG_A_|ODB_[1-8]_|SAT_A)": -180000000,
+                        "NRTI_L1B_(ENG_DB|RA_BD[1-8])": -180000000,
+                        "NRTI_L2__(AER_AI|AER_LH|CLOUD_|CO____|FRESCO|HCHO__|NO2___|O3__PR|O3____|SO2___)": -180000000,
+                        "OFFL_L1B_(ENG_DB|RA_BD[1-8])": -180000000,
+                        "OFFL_L2__(AER_AI|AER_LH|CH4___|CLOUD_|CO____|FRESCO|HCHO__|NO2___|NP_BD(3|6|7)|O3__PR|O3____|SO2___)": -180000000
+                    }
+                }
+            }
+        },
+        {
+            "id": "CONSOLIDATE_DELETION",
+            "send_reports": false,
+            "interface_dict": {
+                "werum": "Werum",
+                "exprivia": "Exprivia",
+                "acri": "Acri",
+                "cloudferro": "CloudFerro",
+                "dlr": "S5P_DLR"
+            }
+        },
+        {
+            "id": "CONSOLIDATE_DATABUDGET",
+            "regex_replace_to_perform": [
+                {
+                    "mission": "S1",
+                    "field": "type",
+                    "text": " \\(AUX_ECE\\)",
+                    "replacement": ""
+                },
+                {
+                    "mission": "S1",
+                    "field": "timeliness",
+                    "text": "^_$",
+                    "replacement": "UNDERSCORE"
+                },
+                {
+                    "mission": "S2",
+                    "field": "type",
+                    "text": " \\(EUP\\)",
+                    "replacement": ""
+                },
+                {
+                    "mission": "S1",
+                    "field": "type",
+                    "text": "\\(SH/SV/DH/DV\\)",
+                    "replacement": ""
+                },
+                {
+                    "mission": "S1",
+                    "field": "type",
+                    "text": "\\(SH/SV\\)",
+                    "replacement": ""
+                }
+            ],
+            "override_value_dict": [
+                {
+                    "mission": "S1",
+                    "selector_field": "type",
+                    "selector_value": "S[1..6]_ETA__AX",
+                    "override_field": "timeliness",
+                    "override_value": "A"
+                },
+                {
+                    "mission": "S1",
+                    "selector_field": "type",
+                    "selector_value": "IW_ETA__AX",
+                    "override_field": "timeliness",
+                    "override_value": "A"
+                },
+                {
+                    "mission": "S1",
+                    "selector_field": "type",
+                    "selector_value": "EW_ETA__AX",
+                    "override_field": "timeliness",
+                    "override_value": "A"
+                },
+                {
+                    "mission": "S5",
+                    "selector_field": "type",
+                    "selector_value": "OFFL_L1B_IR_UVN",
+                    "override_field": "level",
+                    "override_value": "L1"
+                },
+                {
+                    "mission": "S5",
+                    "selector_field": "type",
+                    "selector_value": "OFFL_L2__HCCO_",
+                    "override_field": "type",
+                    "override_value": "OFFL_L2__HCHO_"
+                }
+            ],
+            "timeliness_lut": {
+                "S3": {
+                    "NTC": [
+                        "NT"
+                    ],
+                    "NRT": [
+                        "NR",
+                        "AL"
+                    ],
+                    "STC": [
+                        "ST"
+                    ],
+                    "AUX": [
+                        "SN",
+                        "NS",
+                        "NN",
+                        "_"
+                    ]
+                },
+                "S1": {
+                    "NTC": [
+                        "NT",
+                        "NTC",
+                        "OPER",
+                        "OFFL",
+                        "NOMINAL"
+                    ],
+                    "NRT": [
+                        "NRT",
+                        "NRT-PT"
+                    ],
+                    "UNDERSCORE": [
+                        "_"
+                    ],
+                    "A": [
+                        "NRT-PT",
+                        "NTC",
+                        "NRT",
+                        "_"
+                    ],
+                    "AUX": [
+                        "_"
+                    ]
+                },
+                "S5": {
+                    "NTC": [
+                        "OPER",
+                        "OFFL"
+                    ],
+                    "AUX": [
+                        "_"
+                    ],
+                    "NRT": [
+                        "NRTI"
+                    ]
+                },
+                "S2": {
+                    "AUX": [
+                        "AUX"
+                    ],
+                    "NTC": [
+                        "NOMINAL",
+                        "NOT_RECORDING"
+                    ],
+                    "UNDERSCORE": [
+                        "_"
+                    ]
+                }
+            },
+            "mission": [
+                "S1",
+                "S2",
+                "S3",
+                "S5"
+            ],
+            "service_type": [
+                "produced",
+                "archived",
+                "disseminated"
+            ],
+            "level_to_ignore": [
+                "_"
+            ]
+        },
+        {
+            "id": "CONSOLIDATE_GRAFANA_USAGE",
+            "dashboard_id_dict": {
+                "a16ecf18-a868-4f8f-b9ae-102c54bb2fb3": "Acquisition CADIP : Session & Files",
+                "b0599561-f3cd-4abe-a831-3fd0e8f46a4b": "Acquisition CADIP : Session & Files Copy",
+                "eGpMgWU4k": "Acquisition passes status ( from EDRS) Copy",
+                "KoNYADm4z": "Acquisition passes status (from EDRS)",
+                "RIn0sd37z": "Acquisition Planned Downlinks",
+                "T10bd0h4z": "Acquisition Planned Downlinks Copy",
+                "ArGraZm4kgdfg-beta": "Acquisition Timeliness",
+                "ArGraZm4kgdfg": "Acquisition Timeliness",
+                "adg-completeness_test": "ADG Completeness (vs external providers)",
+                "adg-completeness": "ADG Completeness (vs external providers)",
+                "LYiLzXw8k": "ADG Timeliness",
+                "ge4c83X4k": "Alert Check",
+                "cDsbRok4z": "Anomaly correlation follow-up",
+                "fix-cDsbRok4z": "Anomaly correlation follow-up v2",
+                "Tu2Z2MuVk": "Anomaly correlation follow-up v2 Copy",
+                "MxhCdfbnz": "AUXIP-LTA Completeness",
+                "ae161631-ec00-4999-a942-b601956d6998": "AUXIP-MPCIP Completeness",
+                "available-data-volume-cadip": "Available Data Volume (CADIP)",
+                "NKq_TCtnz": "Available Data Volume (XBIP / EDRS)",
+                "Mdz6grTVk": "Available Data Volume (XBIP / EDRS) with details",
+                "j-DkP4Cnz": "CAMS issue list",
+                "bb81ca3d-b682-40b5-a1d7-5d5ccc7b2213": "CAMS issue list (tmp fixed)",
+                "i7JSHQEnk": "Consolidation Deltas",
+                "7J0p62_nk": "Data Collection monitoring",
+                "kxPZhRa7z": "Data Consolidation monitoring",
+                "pozxESHVz": "Data flow test",
+                "yDEHKjS4k": "DD Completeness",
+                "d9690bb2-f8fb-4b79-98a8-6b01426bf17b": "DD Completeness (Manual Parameter Selection)",
+                "yDEHKjS4k-backup": "DD Completeness (Old for DHUS)",
+                "ede54e59-bc3d-4e34-bcaf-8b95adf31358": "DD Timeliness",
+                "B4HThBUnz": "External interfaces Data collection Check",
+                "MfmL_E4Vz": "Golden rules & Data flow",
+                "c4617bff-5c08-452f-b180-17540748b0aa": "Golden rules & Data flow Copy",
+                "Uaq0mY57z": "Home",
+                "Uaq0mY57z-beta": "Home",
+                "2HYb8OL4k": "Home general 2",
+                "F58sJjg4k": "Interface monitoring Global view",
+                "e47e1d44-8037-4695-b94c-a7db69626f77": "Investigation : LTA alignement",
+                "b8dbdc3b-e20c-4085-8e9e-e640f1ace931": "Investigation Spike Publiciation",
+                "fcd80751-254b-4933-9f3d-588eb26028a9": "LTA Alignement",
+                "e282be52-6f43-4074-b3fc-6b2a1d3e5907": "LTA Alignement Global View",
+                "fcd80751-254b-4933-9f3d-live": "LTA Alignement Monitoring",
+                "dbc476c1-67f5-4d5e-a415-9ef6cc2e4300": "LTA Alignement Monitoring Copy",
+                "b1e315de-7e11-423d-9012-c34064270cdb": "LTA Collect Monitoring",
+                "KnP3Me7Vk": "LTA Completeness",
+                "3ACUSzDVz": "LTA Completeness Copy",
+                "d84c3b66-b20a-42f4-b4a3-4fe20bf35354": "LTA Replay Collect Monitoring",
+                "f36f5bb3-6465-4a54-a35b-9ce4c0838ea6": "LTA Timeliness",
+                "BYUqN6PVz": "LTA Usage",
+                "20BTwF04z": "Monitoring Operation",
+                "ODRp3_Q7k": "PRIP-DD Completeness",
+                "YfrPYWsnk": "PRIP-DD Completeness (product count)",
+                "XxhCdfanz": "PRIP-LTA Completeness",
+                "XxhCdfanz-test": "PRIP-LTA Completeness",
+                "jCljKui4z": "PRIP-LTA Completeness (All LTA)",
+                "ZrsG86xnl": "PRIP-LTA Timeliness",
+                "Y3J7bXAVz": "PRIP-LTA Timeliness (TTE updated for OMCS-878)",
+                "bbf187f7-7fcf-4000-b225-738cb7b88ffc": "Product Inventory - Origin Date",
+                "K-JTm_57k": "Products Data Volume and Count",
+                "wAz0kHcnk": "Products Detailed View (Count Volume and List)",
+                "qVUJ80h4k": "Products Detailed View (Count Volume and List) by PublicationDate",
+                "c11ac345-a84f-4cb6-a78c-41d6c095e204": "Products Detailed View (Count Volume and List) Dev",
+                "zASfw_wnk_edit_anthony": "Products Inventory",
+                "zASfw_wnk": "Products Inventory",
+                "M-gCISB4k": "Products Inventory Copy TTE",
+                "c3300d44-f11f-45b9-8be4-d8c6e6596e37": "retransfer",
+                "d28763bc-9ffe-44b7-924b-2540c47282dd": "S1 Completeness Deep",
+                "sStGi_ynz": "S1 Datatake Completeness (Produced vs Planned)",
+                "239nDaQnk": "S1 E2E Timeliness (Disseminated from Sensing)",
+                "ArGraZm4k": "S1 E2E Timeliness (Production from Sensing)",
+                "9_6v0ss7z": "S1 Production Completeness (Produced vs Planned)",
+                "QvDgsro4k": "S1 Production Completeness (Produced vs Planned) Old CAMs link",
+                "FPDas6_Vk": "S1 Production Completeness (Produced vs Planned) with Origin",
+                "bff04f5a-f495-45ca-8755-205d2dc46042": "S1 Timeliness (Nico 1196)",
+                "sStGi_ymz": "S2 Datatake Completeness (Produced vs Planned)",
+                "LYiLzXw7k": "S2 E2E Timeliness (Disseminated from Sensing)",
+                "_G89-WmVz": "S2 E2E Timeliness (Production from Sensing)",
+                "9_6v0ss8z": "S2 Production Completeness (Produced vs Planned)",
+                "b33f858b-0bd4-4db3-9c02-ec8edcdd42e5": "S2 Timeliness (Nico 1196)",
+                "a1a65138-f7b0-4af3-98f8-a2db4b562744": "S2 Timeliness (Nico 1196) Copy",
+                "tStGj_ynz": "S3 Datatake Completeness (Produced vs Planned)",
+                "QyIDnuQ7k": "S3 E2E Timeliness (Disseminated from Sensing)",
+                "d5XUaWiVk": "S3 E2E Timeliness (Production from Sensing)",
+                "T_6v1ss8z": "S3 Production Completeness (Produced vs Planned)",
+                "3lDUD2gVz": "S5 Datatake Completeness (Produced vs Planned)",
+                "LYq4MSC7z": "S5 E2E Timeliness (Disseminated from Sensing)",
+                "LPt_-Wm4k": "S5 E2E Timeliness (Production from Sensing)",
+                "eI1yShRVz": "S5 Production Completeness (Produced vs Planned)",
+                "ba0f09e4-4c93-4d36-b319-cf218b371bc2": "S5p-tempdd",
+                "FJ9XE528k": "Satellite Unavailability Reports",
+                "FJ9XE528k-test": "Satellite Unavailability Reports",
+                "CdIGZab7azazaz": "Services Timeliness & Production time",
+                "jcrvwxJVz": "Services Timeliness & Production time Copy",
+                "zaqHaGu4z": "Station Acquisition Status (CADIP)",
+                "y7tck1D4k-fix": "Station Acquisition Status (EDS)",
+                "y7tck1D4k": "Station Acquisition Status (EDS)",
+                "GP4Naujnk-fix": "Station Acquisition Status (X-Band)",
+                "GP4Naujnk": "Station Acquisition Status (X-Band)",
+                "gv_zUQd4k": "Station Acquisition Status (X-Band) with filtering",
+                "6EM0vcK4z": "System Technical Budget Diagrams",
+                "WKS0gh54k": "System Technical Budget Diagrams Mockup",
+                "N9YlQDKVk": "System Technical Budget Schematic View - S1",
+                "SIMuwDKVz": "System Technical Budget Schematic View - S2",
+                "-sLXQDFVk": "System Technical Budget Schematic View - S3",
+                "C-S9wvFVk": "System Technical Budget Schematic View - S5",
+                "9jt42U2Vz": "System Technical Budget Table - Acquisition",
+                "nRlrQvKVk": "System Technical Budget Tables - Archiving",
+                "b12f2829-572b-47d6-97cc-d7ef09569278": "System Technical Budget Tables - Dissemination",
+                "2sDjwvFVz": "System Technical Budget Tables - Dissemination",
+                "ZJm3wDKVz": "System Technical Budget Tables - Production",
+                "b8a513fa-8bb5-4f99-9b91-c3747e58f22f": "tempTestNico",
+                "a9049245-3e58-4f6a-9f4c-6b8af2709e4f": "Test Anthony",
+                "f8d240f0-5a15-47f2-a2dd-0fff145c9dd7": "testnico"
+            }
+        }
+    ]
+}

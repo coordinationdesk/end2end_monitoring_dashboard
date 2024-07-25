@@ -1,0 +1,85 @@
+{
+    "collectors": [
+        {
+            "id_field": [
+                "product_name",
+                "reportName"
+            ],
+            "routing_key": "new.raw.data.product-deletion",
+            "interface_name": "LTA_Deletion_CSV",
+            "file_pattern": "*LTA_*_DelList*.csv",
+            "model": "ProductDeletion",
+            "extractor": {
+                "class": "CSVExtractor",
+                "args": {
+                    "attr_map": [
+                        "product_name",
+                        {
+                            "field": "interface_type",
+                            "python": "lambda c: 'LTA'"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "id_field": [
+                "product_name",
+                "reportName"
+            ],
+            "routing_key": "new.raw.data.product-deletion",
+            "interface_name": "LTA_Deletion_XLSX",
+            "file_pattern": "*LTA_*_DelList*.xlsx",
+            "model": "ProductDeletion",
+            "extractor": {
+                "class": "XLSXExtractor",
+                "args": {
+                    "attr_map": [
+                        "product_name",
+                        {
+                            "field": "interface_type",
+                            "python": "lambda c: 'LTA'"
+                        }
+                    ],
+                    "data_row_offset": 0
+                }
+            }
+        },
+        {
+            "class": "JiraExtendedCollectorConfiguration",
+            "id_field": "key",
+            "routing_key": "new.raw.data.deletion-issue",
+            "jql_query": "(project = OMCS OR project = SOA) AND issuetype = \"LTA deletion\" AND updated > {date_criteria} AND status in (Closed, \"TO BE VERIFIED\") ORDER BY updated ASC",
+            "interface_name": "Jira_OMCS_Deletion_LTA",
+            "file_pattern": "Jira_OMCS_Deletion_LTA_*.json",
+            "model": "DeletionIssue",
+            "attachement_prefix": true,
+            "ingest_attachements": true,
+            "extractor": {
+                "class": "JSONExtractor",
+                "args": {
+                    "attr_map": {
+                        "key": "`this`.key",
+                        "deletion_interfaces": "`this`.fields.customfield_10098[:].value",
+                        "deletion_date": "`this`.fields.customfield_10114",
+                        "deletion_cause": "`this`.fields.customfield_10115",
+                        "reportName": "`this`.self",
+                        "interface_name": {
+                            "python": "lambda c: 'Jira_OMCS_Deletion_LTA'"
+                        },
+                        "interface_type": {
+                            "python": "lambda c: 'LTA'"
+                        }
+                    },
+                    "iterate_nodes": "$.issues",
+                    "allow_partial": true
+                }
+            }
+        }
+    ],
+    "amqp": {
+        "new.raw.data.product-deletion": {
+            "chunk_size": 128
+        }
+    }
+}

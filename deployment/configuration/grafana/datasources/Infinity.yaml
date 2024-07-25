@@ -1,0 +1,21 @@
+apiVersion: 1
+datasources:
+- name: Infinity
+  type: yesoreyeram-infinity-datasource
+  access: proxy
+  url: 'https://omcs-es-node:9200'
+  database: ''
+  basicAuth: true
+  isDefault: false
+  jsonData:
+    allowedHosts:
+    - 'https://omcs-es-node:9200'
+    auth_method: basicAuth
+    global_queries: []
+    oauthPassThru: false
+    secureQueryName1: ''
+    tlsSkipVerify: true
+  editable: true
+  basicAuthUser: 'admin'
+  secureJsonData:
+    basicAuthPassword: 'admin'

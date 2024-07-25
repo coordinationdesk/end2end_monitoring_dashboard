@@ -1,0 +1,48 @@
+{
+    "models": [
+        {
+            "index": "raw-data-metrics-product",
+            "name": "MetricsProduct",
+            "fields": [
+                {
+                    "name": "reportFolder",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "name",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "Date"
+                },
+                {
+                    "name": "metric_type",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "counter",
+                    "type": "Long"
+                },
+                {
+                    "name": "interface_name",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "production_service_type",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "production_service_name",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "modification_date",
+                    "type": "Date"
+                }
+            ],
+            "partition_field": "ingestionTime",
+            "partition_format": "%Y"
+        }
+    ]
+}

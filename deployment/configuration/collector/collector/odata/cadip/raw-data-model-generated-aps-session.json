@@ -1,0 +1,108 @@
+{
+    "models": [
+        {
+            "index": "raw-data-aps-session",
+            "name": "ApsSession",
+            "fields": [
+                {
+                    "name": "reportFolder",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "session_id",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "num_channels",
+                    "type": "Long"
+                },
+                {
+                    "name": "satellite_id",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "ground_station",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "station_unit_id",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "acquisition_id",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "publication_date",
+                    "type": "Date"
+                },
+                {
+                    "name": "downlink_orbit",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "antenna_id",
+                    "type": "Text"
+                },
+                {
+                    "name": "antenna_status",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "front_end_id",
+                    "type": "Text"
+                },
+                {
+                    "name": "retransfer",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "front_end_status",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "planned_data_start",
+                    "type": "Date"
+                },
+                {
+                    "name": "planned_data_stop",
+                    "type": "Date"
+                },
+                {
+                    "name": "downlink_start",
+                    "type": "Date"
+                },
+                {
+                    "name": "downlink_stop",
+                    "type": "Date"
+                },
+                {
+                    "name": "downlink_status",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "delivery_push_status",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "interface_name",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "production_service_type",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "production_service_name",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "quality_infos",
+                    "type": "Object"
+                }
+            ],
+            "partition_field": "ingestionTime",
+            "partition_format": "static"
+        }
+    ]
+}

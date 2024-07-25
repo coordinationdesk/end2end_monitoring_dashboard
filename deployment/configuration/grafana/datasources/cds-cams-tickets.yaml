@@ -1,0 +1,17 @@
+apiVersion: 1
+datasources:
+- name: cds-cams-tickets
+  type: elasticsearch
+  access: proxy
+  url: 'https://omcs-es-node:9200'
+  database: cds-cams-tickets
+  basicAuth: true
+  isDefault: false
+  jsonData:
+    esVersion: 7.10.0
+    timeField: created
+    tlsSkipVerify: true
+  editable: true
+  basicAuthUser: 'admin'
+  secureJsonData:
+    basicAuthPassword: 'admin'

@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: maas-engines-cli
+  namespace: esa-csc-prd-cce-omcs-etl
+spec:
+  containers:
+    - name: maas-engines-cli
+      image: localhost:32000/maas/cds/maas-cds:release-2-0-0
+      imagePullPolicy: Always
+      command: ["sleep", "infinity"]
+      env:
+        - name: ES_URL
+          valueFrom:
+            secretKeyRef:
+              name: elasticsearch-client-secret
+              key: url
+        - name: ES_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: elasticsearch-client-secret
+              key: username
+        - name: ES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: elasticsearch-client-secret
+              key: password
+        - name: ES_TIMEOUT
+          value: "72000"
+        - name: AMQP_URL
+          valueFrom:
+            secretKeyRef:
+              name: rabbitmq-client-secret
+              key: url
+        - name: AMQP_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: rabbitmq-client-secret
+              key: username
+        - name: AMQP_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: rabbitmq-client-secret
+              key: password

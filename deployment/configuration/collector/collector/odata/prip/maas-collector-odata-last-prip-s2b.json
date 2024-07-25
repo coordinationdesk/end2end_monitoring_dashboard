@@ -1,0 +1,53 @@
+{
+    "collectors": [
+        {
+            "class": "ODataCollectorConfiguration",
+            "id_field": [
+                "product_id",
+                "interface_name"
+            ],
+            "routing_key": "new.raw.data.prip-product",
+            "interface_name": "PRIP_S2B_CAPGEMINI",
+            "file_pattern": "PRIP_S2B_CAPGEMINI_*.json",
+            "refresh_interval": 10,
+            "expected_collect_interval": 2160,
+            "product_per_page": 1000,
+            "model": "PripProduct",
+            "custom_query_suffix": "&$expand=Attributes",
+            "extractor": {
+                "class": "JSONExtractorExtended",
+                "args": {
+                    "attr_map": {
+                        "product_id": "`this`.Id",
+                        "product_name": "`this`.Name",
+                        "content_length": "`this`.ContentLength",
+                        "publication_date": "`this`.PublicationDate",
+                        "start_date": "`this`.ContentDate.Start",
+                        "end_date": "`this`.ContentDate.End",
+                        "origin_date": "`this`.OriginDate",
+                        "modification_date": "`this`.ModificationDate",
+                        "eviction_date": "`this`.EvictionDate",
+                        "footprint": {
+                            "python": "lambda c: c['GeoFootprint'] if c['Name'][9:19] == 'MSI_L1C_DS' else None"
+                        },
+                        "interface_name": {
+                            "python": "lambda c: 'PRIP_S2B_CAPGEMINI'"
+                        },
+                        "production_service_type": {
+                            "python": "lambda c: 'PRIP'"
+                        },
+                        "production_service_name": {
+                            "python": "lambda c: 'S2B-CAPGEMINI'"
+                        },
+                        "product_group_id": "`this`.Attributes[?Name=='productGroupId'].Value",
+                        "datastrip_id": "`this`.Attributes[?Name=='datastripId'].Value",
+                        "quality_status": "`this`.Attributes[?Name=='qualityStatus'].Value",
+                        "cloud_cover": "`this`.Attributes[?Name=='cloudCover'].Value"
+                    },
+                    "iterate_nodes": "$.value",
+                    "allow_partial": true
+                }
+            }
+        }
+    ]
+}

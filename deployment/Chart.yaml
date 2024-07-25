@@ -1,0 +1,175 @@
+apiVersion: v2
+name: maas-cds
+description: A Helm chart for deploying MAAS for CDS project
+
+# A chart can be either an 'application' or a 'library' chart.
+#
+# Application charts are a collection of templates that can be packaged into versioned archives
+# to be deployed.
+#
+# Library charts provide useful utilities or functions for the chart developer. They're included as
+# a dependency of application charts to inject those utilities and functions into the rendering
+# pipeline. Library charts do not define any templates and therefore cannot be deployed.
+type: application
+
+# This is the chart version. This version number should be incremented each time you make changes
+# to the chart and its templates, including the app version.
+# Versions are expected to follow Semantic Versioning (https://semver.org/)
+# ⚠️This version is automatically replaced by the tag on a tag pipeline build
+# ⚠️ Keep -beta exension to have the latest release on develop and preprod.
+version: "2.5.0-beta"
+
+# This is the version number of the application being deployed. This version number should be
+# incremented each time you make changes to the application. Versions are not expected to
+# follow Semantic Versioning. They should reflect the version the application is using.
+# It is recommended to use it with quotes.
+# ⚠️This version is automatically replaced by the tag on a tag pipeline build
+appVersion: "2.5.0-beta"
+
+icon: https://www.telespazio.com/o/leonardocompany-theme/images/favicon.ico
+
+#
+# HELP
+# - name: compute-engine # NAME OF THE CHART
+#   version: "1.1.0" # VERSION OF THE CHART
+#   repository: "@tpzfr-develop" # REPO WHERE IS THE CHART
+#   condition: compute-engine.enabled # VALUES THAT WILL ENABLE OR THE CHART DEPLOYMENT
+#
+
+#
+# ADD REPO tpzfr-develop :
+# helm repo add tpzfr-develop http://tpzf-central-repository.telespazio.corp:8081/repository/maas-helm-develop --username maas --password <PASSWORD> (in keepass)
+#
+
+#
+# ADD REPO tpzfr-develop :
+# helm repo add tpzfr-develop http://tpzf-central-repository.telespazio.corp:8081/repository/maas-helm --username maas --password <PASSWORD> (in keepass)
+#
+
+dependencies:
+  # Main document database to store all data used in dashboards
+  - name: opensearch
+    version: "2.15.0"
+    repository: "https://opensearch-project.github.io/helm-charts/"
+    condition: opensearch.enabled
+    alias: opensearch-master
+  - name: opensearch
+    version: "2.15.0"
+    repository: "https://opensearch-project.github.io/helm-charts/"
+    condition: opensearch.enabled
+    alias: opensearch-data
+  - name: opensearch
+    version: "2.15.0"
+    repository: "https://opensearch-project.github.io/helm-charts/"
+    condition: opensearch.enabled
+    alias: opensearch-client
+  # Main front of MAAS providing dashboards
+  - name: grafana
+    version: "7.3.7"
+    repository: "https://grafana.github.io/helm-charts"
+    condition: grafana.enabled
+  # Maas Engine
+  - name: maas-engine
+    version: "2.2.2"
+    repository: "@tpzfr"
+    condition: maas-engine.enabled
+  # Collectors
+  # Collector odata
+  - name: collector
+    version: "3.0.0"
+    repository: "@tpzfr"
+    condition: collector-odata.enabled
+    alias: collector-odata
+  # Collector sftp
+  - name: collector
+    version: "3.0.0"
+    repository: "@tpzfr"
+    condition: collector-sftp.enabled
+    alias: collector-sftp
+  # Collector sftp replay
+  - name: collector
+    version: "3.0.0"
+    repository: "@tpzfr"
+    condition: collector-sftp-replay.enabled
+    alias: collector-sftp-replay
+  # Collector webdav
+  - name: collector
+    version: "3.0.0"
+    repository: "@tpzfr"
+    condition: collector-webdav.enabled
+    alias: collector-webdav
+  # Collector ftp
+  - name: collector
+    version: "3.0.0"
+    repository: "@tpzfr"
+    condition: collector-ftp.enabled
+    alias: collector-ftp
+  # Collector jira
+  - name: collector
+    version: "3.0.0"
+    repository: "@tpzfr"
+    condition: collector-jira.enabled
+    alias: collector-jira
+  # Collector rosftp
+  - name: collector
+    version: "3.0.0"
+    repository: "@tpzfr"
+    condition: collector-rosftp.enabled
+    alias: collector-rosftp
+  # Collector monitoring
+  - name: collector
+    version: "3.0.0"
+    repository: "@tpzfr"
+    condition: collector-monitor.enabled
+    alias: collector-monitor
+  # Collector mpip
+  - name: collector
+    version: "3.0.0"
+    repository: "@tpzfr"
+    condition: collector-mpip.enabled
+    alias: collector-mpip
+  # Collector loki
+  - name: collector
+    version: "3.0.0"
+    repository: "@tpzfr"
+    condition: collector-loki.enabled
+    alias: collector-loki
+  # Standalone SQL database for grafana
+  - name: postgresql
+    version: "11.1.8"
+    # repository: "https://charts.bitnami.com/bitnami"
+    condition: postgresql-sa.enabled
+    alias: postgresql-sa
+  # generic cronjobs
+  # https://artifacthub.io/packages/helm/drpsychick/cronjobs
+  # https://github.com/SickHub/charts/tree/gh-pages/sickhub/cronjobs#views
+  # https://github.com/SickHub/charts/tree/gh-pages/sickhub/cronjobs
+  - name: cronjobs
+    version: "0.1.3"
+    condition: cronjobs.enabled
+  - name: cronjobs
+    version: "0.1.3"
+    condition: psqlbackup.enabled
+    alias: psqlbackup
+  - name: cronjobs
+    version: "0.1.3"
+    condition: broom-wagon.enabled
+    alias: broom-wagon
+  - name: cronjobs
+    version: "0.1.3"
+    condition: replay-odata.enabled
+    alias: replay-odata
+
+  # https://artifacthub.io/packages/helm/prometheus-community/prometheus-elasticsearch-exporter
+  - name: prometheus-elasticsearch-exporter
+    version: "4.12.0"
+    repository: "https://prometheus-community.github.io/helm-charts"
+    condition: prometheus-elasticsearch-exporter.enabled
+
+  # Doc here https://artifacthub.io/packages/helm/codecentric/mailhog
+  # Mail endpoint, Only for tests
+  - name: mailhog
+    version: "5.0.7"
+    repository: "https://codecentric.github.io/helm-charts"
+    condition: mailhog.enabled
+

@@ -1,0 +1,958 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": true,
+      "tags": [],
+      "targetBlank": false,
+      "title": "S1 Preset",
+      "tooltip": "",
+      "type": "link",
+      "url": "/grafana/d/jCljKui4z/prip-lta-completeness-all-lta?orgId=1&var-mission=S1&var-satellite=All&var-timeliness=All&var-product_level=All&var-product_type=S1_RAW__0S&var-product_type=S2_RAW__0S&var-product_type=S3_RAW__0S&var-product_type=S4_RAW__0S&var-product_type=S5_RAW__0S&var-product_type=S6_RAW__0S&var-product_type=S1_RAW__0C&var-product_type=S2_RAW__0C&var-product_type=S3_RAW__0C&var-product_type=S4_RAW__0C&var-product_type=S5_RAW__0C&var-product_type=S6_RAW__0C&var-product_type=S1_RAW__0N&var-product_type=S2_RAW__0N&var-product_type=S3_RAW__0N&var-product_type=S4_RAW__0N&var-product_type=S5_RAW__0N&var-product_type=S6_RAW__0N&var-product_type=S1_RAW__0A&var-product_type=S2_RAW__0A&var-product_type=S3_RAW__0A&var-product_type=S4_RAW__0A&var-product_type=S5_RAW__0A&var-product_type=S6_RAW__0A&var-product_type=IW_RAW__0S&var-product_type=IW_RAW__0C&var-product_type=IW_RAW__0N&var-product_type=IW_RAW__0A&var-product_type=EW_RAW__0S&var-product_type=EW_RAW__0C&var-product_type=EW_RAW__0N&var-product_type=EW_RAW__0A&var-product_type=WV_RAW__0S&var-product_type=WV_RAW__0A&var-product_type=WV_RAW__0C&var-product_type=WV_RAW__0N&var-product_type=RF_RAW__0S&var-product_type=EN_RAW__0S&var-product_type=N1_RAW__0S&var-product_type=N2_RAW__0S&var-product_type=N3_RAW__0S&var-product_type=N4_RAW__0S&var-product_type=N5_RAW__0S&var-product_type=N6_RAW__0S&var-product_type=Z1_RAW__0S&var-product_type=Z2_RAW__0S&var-product_type=Z3_RAW__0S&var-product_type=Z4_RAW__0S&var-product_type=Z5_RAW__0S&var-product_type=Z6_RAW__0S&var-product_type=Z7_RAW__0S&var-product_type=ZI_RAW__0S&var-product_type=ZW_RAW__0S&var-product_type=GP_RAW__0_&var-product_type=HK_RAW__0_&var-product_type=AMH_ERRMAT&var-product_type=AMV_ERRMAT"
+    },
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": true,
+      "tags": [],
+      "targetBlank": false,
+      "title": "S2 Preset",
+      "tooltip": "",
+      "type": "link",
+      "url": "/grafana/d/jCljKui4z/prip-lta-completeness-all-lta?orgId=1&var-mission=S2&var-satellite=All&var-timeliness=All&var-product_level=All&var-product_type=MSI_L0__DS&var-product_type=MSI_L0__GR&var-product_type=PRD_HKTM__&var-product_type=AUX_SADATA"
+    },
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": true,
+      "tags": [],
+      "targetBlank": false,
+      "title": "S3 Preset",
+      "tooltip": "",
+      "type": "link",
+      "url": "/grafana/d/jCljKui4z/prip-lta-completeness-all-lta?orgId=1&var-mission=S3&var-satellite=All&var-timeliness=All&var-product_level=All&var-product_type=DO_0_DOP___&var-product_type=DO_0_NAV___&var-product_type=GN_0_GNS___&var-product_type=MW_0_MWR___&var-product_type=MW_1_CAL___&var-product_type=OL_0_CR0___&var-product_type=OL_0_CR1___&var-product_type=OL_0_EFR___&var-product_type=OL_1_RAC___&var-product_type=OL_1_SPC___&var-product_type=SL_0_SLT___&var-product_type=SR_0_SRA___&var-product_type=SR_0_CAL___&var-product_type=SR_1_CAL___&var-product_type=TM_0_HKM___&var-product_type=TM_0_HKM2__&var-product_type=TM_0_NAT___&var-product_type=SR_1_CA1LAX&var-product_type=SR_1_CA1SAX&var-product_type=SR_1_CA2KAX&var-product_type=SR_1_CA2CAX&var-product_type=MW_1_NIR_AX&var-product_type=MW_1_DNB_AX&var-product_type=MW_1_MON_AX&var-product_type=SL_1_VSC_AX"
+    },
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": true,
+      "tags": [],
+      "targetBlank": false,
+      "title": "S5 Preset",
+      "tooltip": "",
+      "type": "link",
+      "url": "/grafana/d/jCljKui4z/prip-lta-completeness-all-lta?orgId=1&var-mission=S5&var-satellite=All&var-timeliness=All&var-product_type=NRTI_L0__ENG_A_&var-product_type=OFFL_L0__ENG_A_&var-product_type=OPER_L0__ENG_A_&var-product_type=NRTI_L0__ODB_1_&var-product_type=OFFL_L0__ODB_1_&var-product_type=OPER_L0__ODB_1_&var-product_type=NRTI_L0__ODB_2_&var-product_type=OFFL_L0__ODB_2_&var-product_type=OPER_L0__ODB_2_&var-product_type=NRTI_L0__ODB_3_&var-product_type=OFFL_L0__ODB_3_&var-product_type=OPER_L0__ODB_3_&var-product_type=NRTI_L0__ODB_4_&var-product_type=OFFL_L0__ODB_4_&var-product_type=OPER_L0__ODB_4_&var-product_type=NRTI_L0__ODB_5_&var-product_type=OFFL_L0__ODB_5_&var-product_type=OPER_L0__ODB_5_&var-product_type=NRTI_L0__ODB_6_&var-product_type=OFFL_L0__ODB_6_&var-product_type=OPER_L0__ODB_6_&var-product_type=NRTI_L0__ODB_7_&var-product_type=OFFL_L0__ODB_7_&var-product_type=OPER_L0__ODB_7_&var-product_type=NRTI_L0__ODB_8_&var-product_type=OFFL_L0__ODB_8_&var-product_type=OPER_L0__ODB_8_&var-product_type=NRTI_L0__PDQ___&var-product_type=OFFL_L0__PDQ___&var-product_type=OPER_L0__PDQ___&var-product_type=NRTI_L0__SAT_A_&var-product_type=OFFL_L0__SAT_A_&var-product_type=OPER_L0__SAT_A_&var-product_type=NRTI_L1B_CA_SIR&var-product_type=OFFL_L1B_CA_SIR&var-product_type=OPER_L1B_CA_SIR&var-product_type=NRTI_L1B_CA_UVN&var-product_type=OFFL_L1B_CA_UVN&var-product_type=OPER_L1B_CA_UVN&var-product_type=NRTI_L1B_ENG_DB&var-product_type=OFFL_L1B_ENG_DB&var-product_type=OPER_L1B_ENG_DB&var-product_type=NRTI_L1B_IR_SIR&var-product_type=OFFL_L1B_IR_SIR&var-product_type=OPER_L1B_IR_SIR&var-product_type=NRTI_L1B_IR_UVN&var-product_type=OFFL_L1B_IR_UVN&var-product_type=OPER_L1B_IR_UVN&var-product_type=NRTI_L1B_RA_BD1&var-product_type=OFFL_L1B_RA_BD1&var-product_type=OPER_L1B_RA_BD1&var-product_type=NRTI_L1B_RA_BD2&var-product_type=OFFL_L1B_RA_BD2&var-product_type=OPER_L1B_RA_BD2&var-product_type=NRTI_L1B_RA_BD3&var-product_type=OFFL_L1B_RA_BD3&var-product_type=OPER_L1B_RA_BD3&var-product_type=NRTI_L1B_RA_BD4&var-product_type=OFFL_L1B_RA_BD4&var-product_type=OPER_L1B_RA_BD4&var-product_type=NRTI_L1B_RA_BD5&var-product_type=OFFL_L1B_RA_BD5&var-product_type=OPER_L1B_RA_BD5&var-product_type=NRTI_L1B_RA_BD6&var-product_type=OFFL_L1B_RA_BD6&var-product_type=OPER_L1B_RA_BD6&var-product_type=NRTI_L1B_RA_BD7&var-product_type=OFFL_L1B_RA_BD7&var-product_type=OPER_L1B_RA_BD7&var-product_type=NRTI_L1B_RA_BD8&var-product_type=OFFL_L1B_RA_BD8&var-product_type=OPER_L1B_RA_BD8&var-product_type=NRTI_L2__AER_AI&var-product_type=OFFL_L2__AER_AI&var-product_type=OPER_L2__AER_AI&var-product_type=NRTI_L2__AER_LH&var-product_type=OFFL_L2__AER_LH&var-product_type=OPER_L2__AER_LH&var-product_type=NRTI_L2__CH4___&var-product_type=OFFL_L2__CH4___&var-product_type=OPER_L2__CH4___&var-product_type=NRTI_L2__CLOUD_&var-product_type=OFFL_L2__CLOUD_&var-product_type=OPER_L2__CLOUD_&var-product_type=NRTI_L2__CO____&var-product_type=OFFL_L2__CO____&var-product_type=OPER_L2__CO____&var-product_type=NRTI_L2__HCHO__&var-product_type=OFFL_L2__HCHO__&var-product_type=OPER_L2__HCHO__&var-product_type=NRTI_L2__NO2___&var-product_type=OFFL_L2__NO2___&var-product_type=OPER_L2__NO2___&var-product_type=NRTI_L2__NP_BD3&var-product_type=OFFL_L2__NP_BD3&var-product_type=OPER_L2__NP_BD3&var-product_type=NRTI_L2__NP_BD6&var-product_type=OFFL_L2__NP_BD6&var-product_type=OPER_L2__NP_BD6&var-product_type=NRTI_L2__NP_BD7&var-product_type=OFFL_L2__NP_BD7&var-product_type=OPER_L2__NP_BD7&var-product_type=NRTI_L2__O3____&var-product_type=OFFL_L2__O3____&var-product_type=OPER_L2__O3____&var-product_type=NRTI_L2__O3__PR&var-product_type=OFFL_L2__O3__PR&var-product_type=OPER_L2__O3__PR&var-product_type=NRTI_L2__O3_TCL&var-product_type=OFFL_L2__O3_TCL&var-product_type=OPER_L2__O3_TCL&var-product_type=NRTI_L2__SO2___&var-product_type=OFFL_L2__SO2___&var-product_type=OPER_L2__SO2___&var-product_type=NRTI_ICM_CA_SIR&var-product_type=OFFL_ICM_CA_SIR&var-product_type=OPER_ICM_CA_SIR&var-product_type=NRTI_ICM_CA_UVN&var-product_type=OFFL_ICM_CA_UVN&var-product_type=OPER_ICM_CA_UVN&var-product_type=NRTI_ICM_CKDSIR&var-product_type=OFFL_ICM_CKDSIR&var-product_type=OPER_ICM_CKDSIR&var-product_type=NRTI_ICM_CKDUVN&var-product_type=OFFL_ICM_CKDUVN&var-product_type=OPER_ICM_CKDUVN&var-product_type=NRTI_AUX_BGHCHO&var-product_type=OFFL_AUX_BGHCHO&var-product_type=OPER_AUX_BGHCHO&var-product_type=NRTI_AUX_BGSO2_&var-product_type=OFFL_AUX_BGSO2_&var-product_type=OPER_AUX_BGSO2_&var-product_type=NRTI_AUX_BGO3__&var-product_type=OFFL_AUX_BGO3__&var-product_type=OPER_AUX_BGO3__&var-product_type=NRTI_AUX_BGCLD_&var-product_type=OFFL_AUX_BGCLD_&var-product_type=OPER_AUX_BGCLD_&var-product_type=NRTI_AUX_CTMCH4&var-product_type=OFFL_AUX_CTMCH4&var-product_type=OPER_AUX_CTMCH4&var-product_type=NRTI_AUX_CTM_CO&var-product_type=OFFL_AUX_CTM_CO&var-product_type=OPER_AUX_CTM_CO&var-product_type=NRTI_AUX_CTMFCT&var-product_type=OFFL_AUX_CTMFCT&var-product_type=OPER_AUX_CTMFCT&var-product_type=NRTI_AUX_CTMANA&var-product_type=OFFL_AUX_CTMANA&var-product_type=OPER_AUX_CTMANA&var-product_type=NRTI_AUX_NISE&var-product_type=OFFL_AUX_NISE&var-product_type=OPER_AUX_NISE&var-product_type=NRTI_AUX_MET_2D&var-product_type=OFFL_AUX_MET_2D&var-product_type=OPER_AUX_MET_2D&var-product_type=NRTI_AUX_MET_QP&var-product_type=OFFL_AUX_MET_QP&var-product_type=OPER_AUX_MET_QP&var-product_type=NRTI_AUX_MET_TP&var-product_type=OFFL_AUX_MET_TP&var-product_type=OPER_AUX_MET_TP&var-product_type=NRTI_AUX_IERS_B&var-product_type=OFFL_AUX_IERS_B&var-product_type=OPER_AUX_IERS_B&var-product_type=NRTI_AUX_IERS_C&var-product_type=OFFL_AUX_IERS_C&var-product_type=OPER_AUX_IERS_C&var-product_type=NRTI_AUX_ISRF&var-product_type=OFFL_AUX_ISRF&var-product_type=OPER_AUX_ISRF&var-product_type=NRTI_AUX_L1_CKD&var-product_type=OFFL_AUX_L1_CKD&var-product_type=OPER_AUX_L1_CKD&var-product_type=NRTI_AUX_O3_M&var-product_type=OFFL_AUX_O3_M&var-product_type=OPER_AUX_O3_M"
+    }
+  ],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 69,
+      "panels": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "description": "",
+          "gridPos": {
+            "h": 11,
+            "w": 24,
+            "x": 0,
+            "y": 1
+          },
+          "id": 59,
+          "options": {
+            "content": "This dashboard features a comparison between product published at the following interfaces:\n - PRIP;\n - LTA.\n\nDiscrepancies are displayed through the following indicators:\n - Total missing product count;\n - Missed products over time;\n - Pie chart view of product status;\n - Detailed list of missing products.\n\nInformation is available for each mission and each PRIP/LTA managed by OMCS.\n\nTips:\n - Annotations are available on time series;\n - Mission to consider can be selected in the upper bar.\n\nThe information displayed was originally taken from Product at PRIP LTA  \n\nTime reference for this dashboard is : sensing_start_date\n\nImportant notice : Tables & timelines can only display up to 10 000 entries. Please make use of filters to narrow down the retrieved data and get a more realistic view.",
+            "mode": "markdown"
+          },
+          "pluginVersion": "9.0.3",
+          "type": "text"
+        }
+      ],
+      "title": "Dashboard Description",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 67,
+      "panels": [],
+      "repeat": "lta",
+      "repeatDirection": "h",
+      "title": "PRIP-LTA Completeness ($lta)",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P4E6B5BC91908CBD9"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 0,
+        "y": 2
+      },
+      "id": 4,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.3.1",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "metrics": [
+            {
+              "hide": false,
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "satellite_unit : $satellite AND mission: $mission AND timeliness:$timeliness AND product_level:$product_level AND product_type:$product_type AND prip_id: *",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Products Published by PRIP",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "description": "Total Archived Products by LTA and also published @PRIP",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 6,
+        "y": 2
+      },
+      "id": 54,
+      "links": [
+        {
+          "targetBlank": true,
+          "title": "Detailed Dashboard",
+          "url": "/grafana/d/XxhCdfanz/prip-lta-completeness?var-lta=${lta:queryparam}"
+        }
+      ],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.3.1",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "satellite_unit : $satellite AND mission: $mission AND timeliness:$timeliness AND product_level:$product_level AND product_type:$product_type AND prip_id: * AND (LTA_${lta}_is_published: true OR LTA_${lta}_S1_is_published: true OR LTA_${lta}_S2_is_published: true OR LTA_${lta}_S3_is_published: true )",
+          "refId": "B",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Products Archived by LTA",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "description": "Published @PRIP but NOT @LTA",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 11,
+        "y": 2
+      },
+      "id": 8,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.3.1",
+      "targets": [
+        {
+          "alias": "Archived",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "\nsatellite_unit : $satellite AND mission: $mission AND timeliness:$timeliness AND product_level:$product_level AND product_type:$product_type  AND prip_id: * AND (LTA_${lta}_is_published: true OR LTA_${lta}_S1_is_published: true OR LTA_${lta}_S2_is_published: true OR LTA_${lta}_S3_is_published: true )\n",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "Published",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "satellite_unit : $satellite AND mission: $mission AND timeliness:$timeliness AND product_level:$product_level AND product_type:$product_type AND prip_id: *",
+          "refId": "B",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Not Archived Products",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "Published",
+              "operator": "-",
+              "reducer": "sum",
+              "right": "Archived"
+            },
+            "mode": "binary",
+            "reduce": {
+              "include": [],
+              "reducer": "diff"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P4E6B5BC91908CBD9"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": [],
+          "unit": "none",
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 8,
+        "x": 16,
+        "y": 2
+      },
+      "id": 63,
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "values": [
+            "percent",
+            "value"
+          ]
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "alias": "Archived",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "1"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "satellite_unit : $satellite AND mission: $mission AND timeliness:$timeliness AND product_level:$product_level AND product_type:$product_type  AND prip_id: * AND (LTA_${lta}_is_published: true OR LTA_${lta}_S1_is_published: true OR LTA_${lta}_S2_is_published: true OR LTA_${lta}_S3_is_published: true )",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "Not Archived",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "1"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "satellite_unit : $satellite AND mission: $mission AND timeliness:$timeliness AND product_level:$product_level AND product_type:$product_type  AND prip_id: * AND NOT (LTA_${lta}_is_published: true OR LTA_${lta}_S1_is_published: true OR LTA_${lta}_S2_is_published: true OR LTA_${lta}_S3_is_published: true )",
+          "refId": "B",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Percentage of Archived products LTA",
+      "transformations": [],
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P4E6B5BC91908CBD9"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unitScale": true
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Time"
+            },
+            "properties": [
+              {
+                "id": "custom.axisLabel",
+                "value": "Sensing Time"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Not Archived"
+            },
+            "properties": [
+              {
+                "id": "custom.axisLabel",
+                "value": "Product Count"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 16,
+        "x": 0,
+        "y": 6
+      },
+      "id": 57,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "alias": "Not Archived",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "satellite_unit : $satellite AND mission: $mission AND timeliness:$timeliness AND product_level:$product_level AND product_type:$product_type  AND prip_id: * AND NOT (LTA_${lta}_is_published: true OR LTA_${lta}_S1_is_published: true OR LTA_${lta}_S2_is_published: true OR LTA_${lta}_S3_is_published: true )",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "Archived",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "hide": true,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "satellite_unit : $satellite AND mission: $mission AND timeliness:$timeliness AND product_level:$product_level AND product_type:$product_type  AND prip_id: * AND (LTA_${lta}_is_published: true OR LTA_${lta}_S1_is_published: true OR LTA_${lta}_S2_is_published: true OR LTA_${lta}_S3_is_published: true )",
+          "refId": "B",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Not Archived products over time",
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": "S1",
+          "value": "S1"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "Mission",
+        "multi": false,
+        "name": "mission",
+        "options": [
+          {
+            "selected": true,
+            "text": "S1",
+            "value": "S1"
+          },
+          {
+            "selected": false,
+            "text": "S2",
+            "value": "S2"
+          },
+          {
+            "selected": false,
+            "text": "S3",
+            "value": "S3"
+          },
+          {
+            "selected": false,
+            "text": "S5",
+            "value": "S5"
+          }
+        ],
+        "query": "S1,S2,S3,S5",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P9C1AEFD5EC435EE7"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"satellite_unit\",\"query\":\"mission: ${mission}\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Satellite",
+        "multi": true,
+        "name": "satellite",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"satellite_unit\",\"query\":\"mission: ${mission}\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P9C1AEFD5EC435EE7"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"product_level\",\"query\":\"mission: ${mission}\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Level",
+        "multi": true,
+        "name": "product_level",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"product_level\",\"query\":\"mission: ${mission}\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P4E6B5BC91908CBD9"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"timeliness\",\"query\":\"mission: ${mission}\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Category",
+        "multi": true,
+        "name": "timeliness",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"timeliness\",\"query\":\"mission: ${mission}\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "EW_RAW__0A",
+            "EW_RAW__0C",
+            "EW_RAW__0N",
+            "EW_RAW__0S",
+            "GP_RAW__0_",
+            "HK_RAW__0_",
+            "IW_RAW__0A",
+            "IW_RAW__0C",
+            "IW_RAW__0N",
+            "IW_RAW__0S",
+            "RF_RAW__0S",
+            "S3_RAW__0A",
+            "S3_RAW__0C",
+            "S3_RAW__0N",
+            "S3_RAW__0S",
+            "S4_RAW__0A",
+            "S4_RAW__0C",
+            "S4_RAW__0N",
+            "S4_RAW__0S",
+            "S5_RAW__0A",
+            "S5_RAW__0C",
+            "S5_RAW__0N",
+            "S5_RAW__0S",
+            "WV_RAW__0A",
+            "WV_RAW__0C",
+            "WV_RAW__0N",
+            "WV_RAW__0S"
+          ],
+          "value": [
+            "EW_RAW__0A",
+            "EW_RAW__0C",
+            "EW_RAW__0N",
+            "EW_RAW__0S",
+            "GP_RAW__0_",
+            "HK_RAW__0_",
+            "IW_RAW__0A",
+            "IW_RAW__0C",
+            "IW_RAW__0N",
+            "IW_RAW__0S",
+            "RF_RAW__0S",
+            "S3_RAW__0A",
+            "S3_RAW__0C",
+            "S3_RAW__0N",
+            "S3_RAW__0S",
+            "S4_RAW__0A",
+            "S4_RAW__0C",
+            "S4_RAW__0N",
+            "S4_RAW__0S",
+            "S5_RAW__0A",
+            "S5_RAW__0C",
+            "S5_RAW__0N",
+            "S5_RAW__0S",
+            "WV_RAW__0A",
+            "WV_RAW__0C",
+            "WV_RAW__0N",
+            "WV_RAW__0S"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P9C1AEFD5EC435EE7"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"product_type\",\"query\":\"mission: ${mission} AND product_level:${product_level}\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Product Type",
+        "multi": true,
+        "name": "product_type",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"product_type\",\"query\":\"mission: ${mission} AND product_level:${product_level}\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P4E6B5BC91908CBD9"
+        },
+        "filters": [],
+        "hide": 0,
+        "label": "Ad-Hoc filter",
+        "name": "Filter",
+        "skipUrlSync": false,
+        "type": "adhoc"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P9C1AEFD5EC435EE7"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"service_id\", \"query\": \"service_type: LTA  AND mission:$mission\"}",
+        "hide": 2,
+        "includeAll": true,
+        "label": "",
+        "multi": false,
+        "name": "lta",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"service_id\", \"query\": \"service_type: LTA  AND mission:$mission\"}",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-7d",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "utc",
+  "title": "PRIP-LTA Completeness (All LTA)",
+  "uid": "jCljKui4z",
+  "weekStart": ""
+}

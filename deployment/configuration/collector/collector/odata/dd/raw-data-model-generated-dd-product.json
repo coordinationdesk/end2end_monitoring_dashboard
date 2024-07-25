@@ -1,0 +1,56 @@
+{
+    "models": [
+        {
+            "index": "raw-data-dd-product",
+            "name": "DdProduct",
+            "fields": [
+                {
+                    "name": "product_id",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "product_name",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "content_length",
+                    "type": "Long"
+                },
+                {
+                    "name": "creation_date",
+                    "type": "Date"
+                },
+                {
+                    "name": "ingestion_date",
+                    "type": "Date"
+                },
+                {
+                    "name": "modification_date",
+                    "type": "Date"
+                },
+                {
+                    "name": "start_date",
+                    "type": "Date"
+                },
+                {
+                    "name": "end_date",
+                    "type": "Date"
+                },
+                {
+                    "name": "interface_name",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "production_service_type",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "production_service_name",
+                    "type": "Keyword"
+                }
+            ],
+            "partition_field": "ingestionTime",
+            "partition_format": "%Y"
+        }
+    ]
+}

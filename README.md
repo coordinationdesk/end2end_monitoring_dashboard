@@ -1,13 +1,13 @@
 # Omcs Installation and running
 
-Omcs is a complete solution for monitoring process, it's based on microservices to collect, compute and display monitoring information.
+Omcs is a complete solution for monitoring process, it's based on microservices to collect, compute and display monitoring informations.
 It uses several components:
 
 - Elasticsearch (Opendistro) for data storage.
 - Grafana for data display.
 - RabbitMq for communication between components.
 - MAAS-Collector for data collection.
-- MAAS-CDS (based on MAAS-Engine) for data computation.
+- MAAS-CDS ( based on MAAS-Engine) for data computation
 
 It depends on Python:
 
@@ -27,23 +27,28 @@ cd ./end2end_monitoring_dashboard
 ### Folder organization
 
 - ${WORK_DIR}
-	- data
-		- reports
-	- deployment 
-		- charts
-		- configuration
-			- grafana
-			- engines
-			- collector
-				- collector
-				- credentials
-		- templates
-		- values
-	- modules
-		- maas-cds
-  		- maas-collector
-  		- maas-engine
-  		- maas-model
+  - cots
+  - data
+    - reports
+  - deployment
+    - charts
+    - configuration
+      - collector
+      - credentials
+      - engine
+      - grafana
+    - docs
+    - templates
+    - values
+  - docs
+  - logs
+  - modules
+    -build
+    - maas-cds
+      - maas-collector
+      - maas-engine
+      - maas-model
+  - scripts
 
 ### Environement preparation
 
@@ -53,6 +58,9 @@ Environement variables needed:
 
 - PYTHON_VERSION="3.11"
 - WORK_DIR="PATH/TO/THE/PROJECT/FOLDER"
+- LOGS_DIR="PATH/TO/THE/LOGS"
+- VENV_NAME="phyton virtual environement name (omcs-venv)
+- VENV_PATH="="PATH/TO/THE/VENV"
 - ES_USERNAME="the user name for opensearch access"
 - ES_PASSWORD="the user password for opensearch access"
 - ES_PORT="the opensearch port"
@@ -63,26 +71,35 @@ Environement variables needed:
 - AMQP_URL="the rabbitmq url"
 - AMQP_IHM_PORT="the rabbitmq http monitoring port"
 - GRF_PORT="the grafana port"
-- HEALTHCHECK_HOSTNAME="Ports for health check" 
-- INITDB_HEALTH_PORT="Ports for health check" 
-- ENGINE_HEALTH_PORT="Ports for health check" 
-- COLLECTOR_HEALTH_PORT="Ports for health check" 
+- HEALTHCHECK_HOSTNAME="Ports for health check"
+- INITDB_HEALTH_PORT="Ports for health check"
+- ENGINE_HEALTH_PORT="Ports for health check"
+- COLLECTOR_HEALTH_PORT="Ports for health check"
 
-Or update env.sh file and source it.
+Update env.sh file with your values and source it.
 
 ```bash
-source env.sh
+source ./scripts/env.sh
 ```
 
-### Cots
+All needed variables will be sourced and displayed in order to be checked.
 
-All cots are used as docker containers and could be organized in a docker-compose file:
+As already mentionned, scripts use Python. It will be usefull to create and source a python virtual environement.
+
+```bash
+python3.11 -m venv "${VENV_PATH}"
+source ${VENV_PATH}/bin/activate
+```
+
+### Cots used
+
+All COTS are used as docker containers and could be organized in a docker-compose file:
 
 ```bash
 cat ${WORK_DIR}/docker-compose.yaml
 ```
 
-To launch cots use `docker-compose`commands:
+To launch COTS use `docker-compose`commands:
 
 ```bash
 docker-compose -f ${WORK_DIR}/docker-compose.yaml up -d
@@ -90,9 +107,9 @@ docker-compose -f ${WORK_DIR}/docker-compose.yaml up -d
 
 ### maas components
 
-Maas components are python modules encapsulated in docker containers.
+Maas components are Python modules encapsulated in docker containers.
 
-Python modules wheel could be retrieved in [releases](https://github.com/coordinationdesk/end2end_monitoring_dashboard/releases), or build from modules sources.
+Python module "wheels" files (.whl) could be retrieved in [releases](https://github.com/coordinationdesk/end2end_monitoring_dashboard/releases), or built from module sources.
 
 Docker containers are built using docker builds and DockerFile.
 
@@ -101,17 +118,19 @@ Docker containers are built using docker builds and DockerFile.
 
 #### Get wheel from release
 
-From [releases](https://github.com/coordinationdesk/end2end_monitoring_dashboard/releases) download wheel files (*.whl) into ./modules/build/<module_name>/.
+From [releases](https://github.com/coordinationdesk/end2end_monitoring_dashboard/releases) download wheel files (*.whl) into ./modules/build/<module_name>/module.whl .
 
-Jump to step : [Build docker images](./README.md#build-docker-images).
+ex : cp maas_cds-1.0.0-py2.py3-none-any.whl ./modules/build/maas_cds/maas_cds-1.0.0-py2.py3-none-any.whl
 
-Or adapt and use the given script.
+Then jump to step : [Build docker images](./README.md#build-docker-images).
+
+To build them by yourself adapt and use the given scripts.
 
 #### build from modules sources
 
-Maas components are python modules, they should be built and installed using pip.
+Maas components are Python modules. They should be built and installed using pip.
 
-First python 3.11 and pip should be installed on the destination server.
+First, install Python 3.11; pip should be installed on the destination server.
 
 Define a virtual env for maas components.
 
@@ -120,7 +139,7 @@ python${PYTHON_VERSION} -m venv ${WORK_DIR}/omcs-venv-${PYTHON_VERSION}
 source ${WORK_DIR}/omcs-venv-${PYTHON_VERSION}/bin/activate
 ```
 
-Install locally maas components and python modules using pip.
+- Either, install locally Maas components Python modules using pip.
 
 ```bash
 pip install -e ${WORK_DIR}/maas-model/
@@ -129,13 +148,13 @@ pip install -e ${WORK_DIR}/maas-collector/
 pip install -e ${WORK_DIR}/maas-cds/
 ```
 
-Or adapt and use use the given script.
+Or adapt and use use given script.
 
 ```bash
-./local_install.sh
+${WORK_DIR}/scripts/local_install.sh
 ```
 
-To build wheel uses tox command:
+To build python "wheel" files use tox command:
 
 ```bash
 tox -c ${WORK_DIR}/maas-model/tox.ini -e build
@@ -144,28 +163,27 @@ tox -c ${WORK_DIR}/maas-collector/tox.ini -e build
 tox -c ${WORK_DIR}/maas-cds/tox.ini -e build
 ```
 
-Or adapt and use the given script.
+Or adapt and use use given script.
 
 ```bash
-./build_modules.sh
+${WORK_DIR}/scripts/build_modules.sh
 ```
 
 #### Build docker images
 
-To build docker images, use docker build commands.
-To get git tag version, use git command:
+To build docker images use docker build commands.
+To get git tag version use git command:
 
 ```bash
 docker build -t "maas-collector:${COLLECTOR_TAG_VERSION}" -f "${WORK_DIR}/modules/Dockerfile.maas-collector" ./modules
 docker build -t "maas-cds:${CDS_TAG_VERSION}" -f "${WORK_DIR}/modules/Dockerfile.maas-cds" ./modules
 ```
 
-Or adapt and use the given script.
+Or adapt and use use given script.
 
 ```bash
-./docker_build.sh
+${WORK_DIR}/scripts/build_dockers.sh
 ```
-
 
 ## Configure MAAS
 
@@ -175,7 +193,7 @@ Some configuration should be set for MAAS usage:
 
 Dashboards and datasources should be set for Grafana.
 
-They are delivered in the github.
+They are delivered on the Github.
 
 You could find them in the following folder:
 
@@ -185,9 +203,9 @@ ls -al ${WORK_DIR}/deployment/configuration/grafana
 
 ### MAAS-engine
 
-The maas engine needs configuration. It is omcs specific configuration.
+The maas engine need configuration this omcs specific configuration.
 
-It is delivered in the github.
+They are delivered in the github.
 
 You could find them in the following folder:
 
@@ -197,11 +215,11 @@ ls -al ${WORK_DIR}/deployment/configuration/engines/cds-engine-conf.json
 
 ### MAAS-collector
 
-The maas engine needs configuration. It is omcs specific configuration.
+The maas engine need configuration this omcs specific configuration.
 
-It is delivered in the github.
+They are delivered in the github.
 
-You could find them in the following folder:
+You could find them in following folder:
 
 ```bash
 ls -al ${WORK_DIR}/deployment/configuration/collector/
@@ -209,9 +227,10 @@ ls -al ${WORK_DIR}/deployment/configuration/collector/
 
 ### Credentials
 
-The maas collector needs to collect external interfaces and credential files.
+The Maas-collector needs to collect external interfaces credentials.
 
-They are not deliverded in github, however, a sample file is delivered. Correct values should be set in this file:
+They are not deliverded in Github, only a sample file is provided. 
+Please note that correct values should be set:
 
 ```bash
 ls -al ${WORK_DIR}/deployment/configuration/credentials/maas-api-collector-credentials.json
@@ -219,30 +238,29 @@ ls -al ${WORK_DIR}/deployment/configuration/credentials/maas-api-collector-crede
 
 ## Launch MAAS
 
-### Cots
+### Start COTS
 
-To start the application cots, use docker-compose command:
+To start the application COTS use docker-compose command:
 
 ```bash
 docker-compose -f ${WORK_DIR}/docker-compose.yaml up -d
 ```
 
-Service could be found here:
+The service could be found here:
 
 - [elasticsearch](https://localhost:9200) (admin:admin)
 - [rabbitmq](http://localhost:15672) (guest:guest)
 - [grafana](http://localhost:3000)
 
-
-Check that db is running with the following cmd: 
+Check that the database is running with the following cmd:
 
 ```bash
 curl -k https://<user_name>:<user_passwd>@localhost:${ES_PORT}/"
 ```
 
-### Init the database (only at first launch):
+### Init the database (only at first launch)
 
-The database init is launched using a simple shell command. See documentation for needed args.
+The database init is launched using a simple shell command. See the documentation for needed arguments.
 
 ```bash
 TZ=UTC maas_migrate -v --es-ignore-certs-verification True -r ${WORK_DIR}/maas-cds/resources/ --install all &
@@ -252,7 +270,8 @@ TZ=UTC maas_migrate -v --es-ignore-certs-verification True -r ${WORK_DIR}/maas-c
 
 #### from local install
 
-The engine is launched using a simple shell command. See documentation for needed args. It will consolidate data on collect events.
+The engine is launched using a simple shell command. See the documentation for needed arguments.
+There will be consolidated data on collect events.
 
 ```bash
 TZ=UTC python -m maas_engine -v --es-ignore-certs-verification True -c ${WORK_DIR}/deployment/configuration/engines/cds-engine-conf.json -f --healthcheck-port ${ENGINE_HEALTH_PORT}
@@ -274,16 +293,16 @@ docker run -it --rm -v "${PWD}/deployment/configuration/:/conf" \
 -e "AMQP_USERNAME=${AMQP_USERNAME}" \
 -e "AMQP_PASSWORD=${AMQP_PASSWORD}" \
 --network host \
-maas-cds:3.5.1  maas_engine -v --es-ignore-certs-verification True -c "/conf/engine/cds-engine-conf.json"
+maas-cds:${CDS_TAG_VERSION}  maas_engine -v --es-ignore-certs-verification True -c "/conf/engine/cds-engine-conf.json"
 ```
 
 ### Collector
 
-The collector is launched using a simple shell command. See documentation for needed args.
+The collector is launched using a simple shell command. See the documentation for needed arguments.
 
 #### Collect in local folder
 
-Using reports as files on the local filesystem, the collector will retrieve, report and collect them.
+Using reports as files on local filesystem, the collector will retrieve reports and collect them.
 
 ```bash
 TZ=UTC python -m maas_collector.rawdata.cli.filesystem -v --es-ignore-certs-verification True -d ${WORK_DIR}/deployment/configuration/collector/ --healthcheck-port ${COLLECTOR_HEALTH_PORT} ${WORK_DIR}/data/reports -p 0 -f
@@ -291,13 +310,13 @@ TZ=UTC python -m maas_collector.rawdata.cli.filesystem -v --es-ignore-certs-veri
 
 #### Collect external services
 
-Using several external api, here odata, the collector will query the service and collect responses.
+Using severals external api here odata the collector will query the service and collect responces.
 
 ```bash
 TZ=UTC python -m maas_collector.rawdata.cli.odata -v --es-ignore-certs-verification True -d ${WORK_DIR}/deployment/configuration/collector/ --healthcheck-port ${COLLECTOR_HEALTH_PORT} --credential-file ${WORK_DIR}/deployment/configuration/credentials/maas-api-collector-credentials.json -p 0 -f &
 ```
 
-#### Collect locally using docker image
+#### Collect locally using a docker image
 
 You can use a docker run command to launch maas-collector:
 
@@ -314,5 +333,10 @@ docker run -it --rm -v "${PWD}/data/:/data" \
 -e "AMQP_USERNAME=${AMQP_USERNAME}" \
 -e "AMQP_PASSWORD=${AMQP_PASSWORD}" \
 --network host \
-maas-collector:3.5.1 maas_collector.rawdata.cli.filesystem -v --es-ignore-certs-verification True -d ${WORK_DIR}/deployment/configuration/collector/ -f "/data"
+maas-collector:${COLLECTOR_TAG_VERSION} maas_collector.rawdata.cli.filesystem -v --es-ignore-certs-verification True -d "/conf/collector/" -f "/data"
 ```
+
+## Deployment
+
+Omcs could be deployed on the "cloud". To do it, you will be guided by reading the [deployment](./deployment/docs/deployment.md) documentation.
+

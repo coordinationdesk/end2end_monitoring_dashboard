@@ -1,0 +1,52 @@
+{
+    "models": [
+        {
+            "index": "raw-data-mp-hktm-acquisition-product",
+            "name": "MpHktmAcquisitionProduct",
+            "fields": [
+                {
+                    "name": "reportFolder",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "satellite_id",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "absolute_orbit",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "channel",
+                    "type": "Long"
+                },
+                {
+                    "name": "session_id",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "ground_station",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "execution_time",
+                    "type": "Date"
+                },
+                {
+                    "name": "interface_name",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "production_service_type",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "production_service_name",
+                    "type": "Keyword"
+                }
+            ],
+            "partition_field": "ingestionTime",
+            "partition_format": "static"
+        }
+    ]
+}

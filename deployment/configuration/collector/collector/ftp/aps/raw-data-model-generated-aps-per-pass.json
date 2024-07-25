@@ -1,0 +1,72 @@
+{
+    "models": [
+        {
+            "index": "raw-data-aps-per-pass",
+            "name": "ApsPerPass",
+            "fields": [
+                {
+                    "name": "mission",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "satellite_id",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "station_id",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "antenna_id",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "acquisition_id",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "downlink_start_time",
+                    "type": "Date"
+                },
+                {
+                    "name": "downlink_end_time",
+                    "type": "Date"
+                },
+                {
+                    "name": "downlink_status",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "downlink_orbit",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "comments",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "fer_downlink",
+                    "type": "Float"
+                },
+                {
+                    "name": "fer_data",
+                    "type": "Float"
+                },
+                {
+                    "name": "interface_name",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "production_service_type",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "production_service_name",
+                    "type": "Keyword"
+                }
+            ],
+            "partition_field": "ingestionTime",
+            "partition_format": "static"
+        }
+    ]
+}

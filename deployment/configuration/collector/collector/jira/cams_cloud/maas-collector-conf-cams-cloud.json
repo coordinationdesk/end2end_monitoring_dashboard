@@ -1,0 +1,106 @@
+{
+    "collectors": [
+        {
+            "class": "JiraExtendedCollectorConfiguration",
+            "id_field": "key",
+            "routing_key": "new.raw.data.cams-ticket",
+            "jql_query": "project = \"GSANOM\" and type = \"CAMS Anomaly Report\" and updated > {date_criteria} ORDER BY updated ASC",
+            "interface_name": "Jira_CAMS_Cloud_Tickets",
+            "file_pattern": "Jira_CAMS_Cloud_Tickets*.json",
+            "model": "CamsCloudTickets",
+            "extractor": {
+                "class": "JSONExtractor",
+                "args": {
+                    "attr_map": {
+                        "affected_systems": "`this`.fields.customfield_10248[:].value",
+                        "addressed_entities": "`this`.fields.customfield_10104[:].value",
+                        "assigned_element": "`this`.fields.customfield_10253[:].name",
+                        "created": "`this`.fields.created",
+                        "criticality": "`this`.fields.customfield_10270[:].value",
+                        "entity": "`this`.fields.customfield_10263.name",
+                        "environment": "`this`.fields.environment",
+                        "esa_group": "`this`.fields.customfield_10067[:].value",
+                        "involved_entities": "`this`.fields.customfield_10253[:].name",
+                        "key": "`this`.key",
+                        "linked_issues": "`this`.fields.issuelinks[:].inwardIssue.key",
+                        "occurence_date": "`this`.fields.customfield_10277",
+                        "originating_entity": "`this`.fields.customfield_10265.name",
+                        "reporter": "`this`.fields.reporter.displayName",
+                        "review_board_dispositions": "`this`.fields.customfield_10251",
+                        "status": "`this`.fields.status.name",
+                        "title": "`this`.fields.summary",
+                        "updated": "`this`.fields.updated",
+                        "urgency": "`this`.fields.customfield_10271[:].value",
+                        "reportName": "`this`.self",
+                        "interface_name": {
+                            "python": "lambda c: 'Jira_CAMS_Cloud_Tickets'"
+                        }
+                    },
+                    "iterate_nodes": "$.issues",
+                    "allow_partial": true
+                }
+            }
+        },
+        {
+            "class": "JiraExtendedCollectorConfiguration",
+            "id_field": "key",
+            "no_probe": true,
+            "routing_key": "new.raw.data.anomaly-correlation",
+            "jql_query": "project = \"AN\" and type = AnomCorrelation and updated > {date_criteria} ORDER BY updated ASC",
+            "interface_name": "Jira_CAMS_Cloud_Anomaly_Correlation",
+            "file_pattern": "Jira_CAMS_Cloud_Anomaly_Correlation*.json",
+            "model": "CamsCloudAnomalyCorrelation",
+            "extractor": {
+                "class": "JSONExtractor",
+                "args": {
+                    "attr_map": {
+                        "created": "`this`.fields.created",
+                        "description": "`this`.fields.description",
+                        "impacted_passes": "`this`.fields.customfield_10238",
+                        "impacted_observations": "`this`.fields.customfield_10237",
+                        "issue": {
+                            "type": "python",
+                            "python": "lambda c: c['fields']['issuelinks'][0].get('outwardIssue', c['fields']['issuelinks'][0].get('inwardIssue', {'key': 'NO ISSUE FOUND'}))['key']"
+                        },
+                        "key": "`this`.key",
+                        "origin": "`this`.fields.customfield_10226.value",
+                        "products": "`this`.fields.customfield_10239",
+                        "summary": "`this`.fields.summary",
+                        "sattelite_unit": "`this`.fields.customfield_10242[:].value",
+                        "station_type": "`this`.fields.customfield_10225.value",
+                        "station": "`this`.fields.customfield_10225.child.value",
+                        "status": "`this`.fields.status.name",
+                        "title": "`this`.fields.summary",
+                        "updated": "`this`.fields.updated",
+                        "urgency": "`this`.fields.customfield_10153[:].value",
+                        "reportName": "`this`.self",
+                        "interface_name": {
+                            "python": "lambda c: 'Jira_CAMS_Cloud_Anomaly_Correlation'"
+                        }
+                    },
+                    "iterate_nodes": "$.issues",
+                    "allow_partial": true
+                },
+                "converter_map": {
+                    "impacted_passes": {
+                        "type": "python",
+                        "python": "lambda impacted_passes: impacted_passes.split(';') if ';' in impacted_passes else impacted_passes.split()"
+                    },
+                    "impacted_observations": {
+                        "type": "python",
+                        "python": "lambda impacted_observations: impacted_observations.split(';') if ';' in impacted_observations else impacted_observations.split()"
+                    },
+                    "products": {
+                        "type": "python",
+                        "python": "lambda products: products.split(';') if ';' in products else products.split()"
+                    }
+                }
+            }
+        }
+    ],
+    "amqp": {
+        "new.raw.data.cams-ticket": {
+            "chunk_size": 128
+        }
+    }
+}

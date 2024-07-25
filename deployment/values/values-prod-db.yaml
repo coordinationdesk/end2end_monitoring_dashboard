@@ -1,0 +1,117 @@
+
+.opensearch-commons: &opensearch-commons
+  clusterName: cds-prod-db
+  # The service that non master groups will try to connect to when joining the cluster
+  # This should be set to clusterName + "-" + nodeGroup for your master group
+  masterService: "cds-prod-db-master"
+  securityConfig:
+    enabled: true
+    path: "/usr/share/opensearch/config/opensearch-security"
+    # internalUsersSecret: "internalusers"
+    # rolesSecret: "roles"
+    # rolesMappingSecret: "rolesmapping"
+  rbac:
+    create: false
+  extraEnvs:
+    - name: DISABLE_INSTALL_DEMO_CONFIG
+      value: "true"
+  sysctlInit:
+    enabled: true
+  secretMounts:
+    - name: opensearch-cert-node1
+      secretName: opensearch-ssl
+      path: /usr/share/opensearch/config/node1.pem
+      subPath: node1.pem
+      defaultMode: 0600
+
+    - name: opensearch-cert-node1-key
+      secretName: opensearch-ssl
+      path: /usr/share/opensearch/config/node1-key.pem
+      subPath: node1-key.pem
+      defaultMode: 0600
+
+    - name: opensearch-root-ca
+      secretName: opensearch-ssl
+      path: /usr/share/opensearch/config/root-ca.pem
+      subPath: root-ca.pem
+      defaultMode: 0600
+  config:
+    opensearch.yml: |   
+      plugins:
+        security:
+          allow_unsafe_democertificates: false
+          allow_default_init_securityindex: true
+          ssl:
+            transport:
+              pemcert_filepath: node1.pem
+              pemkey_filepath: node1-key.pem
+              pemtrustedcas_filepath: root-ca.pem
+              enforce_hostname_verification: false
+            http:
+              enabled: true
+              pemcert_filepath: node1.pem
+              pemkey_filepath: node1-key.pem
+              pemtrustedcas_filepath: root-ca.pem
+          authcz:
+            admin_dn:
+              - 'CN=adminCN,OU=EEEE,O=DDDDDDD,L=CCCCCCC,ST=BBBBBBB,C=AA'
+          nodes_dn:
+            - 'CN=node1CN,OU=EEEE,O=DDDDDDD,L=CCCCCCC,ST=BBBBBBB,C=AA'
+
+global:
+  # globals fo elasticsearch
+  clusterName: cds-prod
+  psp:
+    create: false
+  rbac:
+    enabled: false
+
+postgres:
+  enabled: false
+
+
+opensearch:
+  enabled: true
+  
+opensearch-master:
+  <<: *opensearch-commons
+  replicas: 3
+
+  extraEnvs:
+  - name: DISABLE_INSTALL_DEMO_CONFIG
+    value: "true"
+  persistence:
+    enabled: true
+    storageClass: local-path
+    size: 10Gi
+  opensearchJavaOpts: "-Xmx1g -Xms1g"
+  resources:
+    limits:
+      memory: 2Gi
+    requests:
+      memory: 2Gi
+
+opensearch-data:
+  <<: *opensearch-commons
+  replicas: 1
+  persistence:
+    enabled: true
+    storageClass: local-path
+    size: 10Gi
+  opensearchJavaOpts: "-Xms1g -Xmx1g"
+  resources:
+    limits:
+      cpu: 2
+      memory: 2Gi
+    requests:
+      memory: 2Gi
+
+opensearch-client:
+  <<: *opensearch-commons
+  persistence:
+    enabled: false
+  replicas: 1
+  opensearchJavaOpts: "-Xms1g -Xmx1g"
+  resources:
+    limits:
+      memory: 2Gi

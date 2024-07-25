@@ -1,0 +1,64 @@
+{
+    "collectors": [
+        {
+            "class": "JiraExtendedCollectorConfiguration",
+            "id_field": "key",
+            "routing_key": "",
+            "jql_query": "project = \"OR\" AND issuetype in (\"Sentinel-1 Operations Report\", \"Sentinel-2 Operations Report\") AND status = Delivered AND updated > {date_criteria} ORDER BY updated ASC",
+            "interface_name": "Jira_EDRS",
+            "ingest_attachements": true
+        },
+        {
+            "class": "",
+            "id_field": [
+                "link_session_id",
+                "ground_station"
+            ],
+            "file_pattern": "EDRS*DOR*.xlsx",
+            "routing_key": "new.raw.data.aps.edrs",
+            "interface_name": "EDRS-APS",
+            "expected_collect_interval": 1800,
+            "model": "ApsEdrs",
+            "extractor": {
+                "class": "EDRSApsExtractor"
+            }
+        },
+        {
+            "class": "",
+            "id_field": [
+                "link_session_id",
+                "ground_station",
+                "report_type"
+            ],
+            "file_pattern": "EDRS*WOR*.xlsx",
+            "routing_key": "new.raw.data.aps.edrs",
+            "interface_name": "EDRS-APS-WOR",
+            "expected_collect_interval": 14400,
+            "model": "ApsEdrs",
+            "extractor": {
+                "class": "EDRSApsExtractor"
+            }
+        },
+        {
+            "class": "",
+            "id_field": [
+                "link_session_id",
+                "ground_station",
+                "report_type"
+            ],
+            "file_pattern": "EDRS*MOR*.xlsx",
+            "routing_key": "new.raw.data.aps.edrs",
+            "interface_name": "EDRS-APS-MOR",
+            "expected_collect_interval": 64800,
+            "model": "ApsEdrs",
+            "extractor": {
+                "class": "EDRSApsExtractor"
+            }
+        }
+    ],
+    "amqp": {
+        "new.raw.data.aps.edrs": {
+            "chunk_size": 512
+        }
+    }
+}

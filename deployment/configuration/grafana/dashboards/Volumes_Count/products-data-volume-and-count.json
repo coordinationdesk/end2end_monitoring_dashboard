@@ -1,0 +1,957 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 2,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 37,
+      "panels": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 24,
+            "x": 0,
+            "y": 1
+          },
+          "id": 33,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "This dashboard features statistics on:\n - Product Count (number of individual products published);\n - Data Volume (size of all the products published).\n\nStatistics are available for each interface managed by OMCS.\n\nThe information displayed was originally taken from Product at PRIP LTA DD AUXIP  \n\nTime reference for this dashboard is : sensing_start_date\n\nImportant notice : Tables & timelines can only display up to 10 000 entries. Please make use of filters to narrow down the retrieved data and get a more realistic view.",
+            "mode": "markdown"
+          },
+          "pluginVersion": "10.3.1",
+          "type": "text"
+        }
+      ],
+      "title": "Dashboard Description",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 35,
+      "panels": [],
+      "title": "Products Data Volume and Count",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "blue",
+            "mode": "palette-classic"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 19,
+        "w": 4,
+        "x": 0,
+        "y": 2
+      },
+      "id": 19,
+      "maxPerRow": 3,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.4.1",
+      "repeat": "datasource",
+      "repeatDirection": "h",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "service_type",
+              "id": "4",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "service_id",
+              "id": "5",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "sensing_start_date",
+              "id": "3",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "satellite_unit : $satellite AND mission: $mission AND service_type : $service_type AND service_id : $service_id AND product_level : $product_level AND product_type:$product_type AND timeliness: $timeliness",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Count",
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "labelsToFields": true,
+            "mode": "seriesToRows",
+            "reducers": []
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "blue",
+            "mode": "palette-classic"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 19,
+        "w": 4,
+        "x": 4,
+        "y": 2
+      },
+      "id": 29,
+      "maxPerRow": 3,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.4.1",
+      "repeatDirection": "h",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "service_type",
+              "id": "4",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "service_id",
+              "id": "5",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "sensing_start_date",
+              "id": "3",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "type": "sum"
+            }
+          ],
+          "query": "satellite_unit : $satellite AND mission: $mission AND service_type : $service_type AND service_id : $service_id AND product_level : $product_level AND product_type:$product_type AND timeliness: $timeliness ",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Volume",
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "labelsToFields": true,
+            "mode": "seriesToRows",
+            "reducers": []
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "Product Count",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 19,
+            "gradientMode": "hue",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Time"
+            },
+            "properties": [
+              {
+                "id": "custom.axisLabel",
+                "value": "Sensing Time"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 16,
+        "x": 8,
+        "y": 2
+      },
+      "id": 30,
+      "options": {
+        "legend": {
+          "calcs": [
+            "sum"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "sortBy": "Last",
+          "sortDesc": false
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.2.2",
+      "repeatDirection": "h",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "service_type",
+              "id": "4",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "service_id",
+              "id": "5",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "sensing_start_date",
+              "id": "3",
+              "settings": {
+                "interval": "1d",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "satellite_unit : $satellite AND mission: $mission AND service_type : $service_type AND service_id : $service_id AND product_level : $product_level AND product_type:$product_type AND timeliness: $timeliness",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Count per day",
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "labelsToFields": true,
+            "mode": "seriesToRows",
+            "reducers": []
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {}
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "blue",
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "Volume",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 5,
+            "gradientMode": "hue",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Time"
+            },
+            "properties": [
+              {
+                "id": "custom.axisLabel",
+                "value": "Sensing Time"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 16,
+        "x": 8,
+        "y": 12
+      },
+      "id": 31,
+      "options": {
+        "legend": {
+          "calcs": [
+            "sum"
+          ],
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.2.2",
+      "repeatDirection": "h",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "service_type",
+              "id": "4",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "service_id",
+              "id": "5",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "sensing_start_date",
+              "id": "3",
+              "settings": {
+                "interval": "1d",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "type": "sum"
+            }
+          ],
+          "query": "satellite_unit : $satellite AND mission: $mission AND service_type : $service_type AND service_id : $service_id AND product_level : $product_level AND product_type:$product_type AND timeliness: $timeliness AND timeliness: $timeliness",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "production_service",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "start_date",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PEA18F349EA3C1266"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "type": "sum"
+            }
+          ],
+          "query": "interface_name: $interface_name AND production_service: $production_serviceLTA AND satellite: $satellite AND mission: $mission  AND processing_level: $processing_level AND product_type:$product_type AND timeliness: $timeliness",
+          "refId": "B",
+          "timeField": "publication_date"
+        },
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "production_service",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "1",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "start_date",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P1E15E5090AA52157"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "type": "sum"
+            }
+          ],
+          "query": "interface_name: $interface_name AND production_service: $production_servicePRIP AND satellite: $satellite AND mission: $mission  AND processing_level: $processing_level AND product_type:$product_type AND timeliness: $timeliness",
+          "refId": "C",
+          "timeField": "publication_date"
+        }
+      ],
+      "title": "Volume per day",
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "labelsToFields": true,
+            "mode": "seriesToRows",
+            "reducers": []
+          }
+        }
+      ],
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [
+    "Volumes and Count"
+  ],
+  "templating": {
+    "list": [
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "S1"
+          ],
+          "value": [
+            "S1"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P9C1AEFD5EC435EE7"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"mission\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Mission",
+        "multi": true,
+        "name": "mission",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"mission\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P9C1AEFD5EC435EE7"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"satellite_unit\",  \"query\":\"mission: $mission\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Satellite",
+        "multi": true,
+        "name": "satellite",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"satellite_unit\",  \"query\":\"mission: $mission\"}",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P9C1AEFD5EC435EE7"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"timeliness\",\"query\":\"mission: ${mission}\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Category",
+        "multi": true,
+        "name": "timeliness",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"timeliness\",\"query\":\"mission: ${mission}\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P9C1AEFD5EC435EE7"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"product_level\",  \"query\":\"mission: $mission AND satellite_unit : $satellite\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Level",
+        "multi": true,
+        "name": "product_level",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"product_level\",  \"query\":\"mission: $mission AND satellite_unit : $satellite\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P9C1AEFD5EC435EE7"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"service_type\",  \"query\":\"mission: $mission AND satellite_unit : $satellite\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Service Type",
+        "multi": true,
+        "name": "service_type",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"service_type\",  \"query\":\"mission: $mission AND satellite_unit : $satellite\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P9C1AEFD5EC435EE7"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"service_id\",  \"query\":\"mission: $mission AND satellite_unit : $satellite AND service_type: $service_type\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Service Id",
+        "multi": true,
+        "name": "service_id",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"service_id\",  \"query\":\"mission: $mission AND satellite_unit : $satellite AND service_type: $service_type\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P9C1AEFD5EC435EE7"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"product_type\",\"query\":\"mission: ${mission} AND product_level:${product_level} AND service_type:${service_type}\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Product Type",
+        "multi": true,
+        "name": "product_type",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"product_type\",\"query\":\"mission: ${mission} AND product_level:${product_level} AND service_type:${service_type}\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P9C1AEFD5EC435EE7"
+        },
+        "filters": [],
+        "hide": 0,
+        "label": "Ad-Hoc filter",
+        "name": "Filter",
+        "skipUrlSync": false,
+        "type": "adhoc"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-7d",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "utc",
+  "title": "Products Data Volume and Count",
+  "uid": "K-JTm_57k",
+  "weekStart": ""
+}

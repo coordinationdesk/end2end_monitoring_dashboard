@@ -1,0 +1,44 @@
+{
+    "models": [
+        {
+            "index": "raw-data-interface-probe",
+            "name": "InterfaceProbe",
+            "fields": [
+                {
+                    "name": "probe_time_start",
+                    "type": "Date"
+                },
+                {
+                    "name": "probe_time_stop",
+                    "type": "Date"
+                },
+                {
+                    "name": "probe_duration",
+                    "type": "Float"
+                },
+                {
+                    "name": "status",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "interface_name",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "details",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "status_code",
+                    "type": "Integer"
+                },
+                {
+                    "name": "most_recent_modification_date",
+                    "type": "Date"
+                }
+            ],
+            "partition_field": "ingestionTime",
+            "partition_format": "monitoring"
+        }
+    ]
+}

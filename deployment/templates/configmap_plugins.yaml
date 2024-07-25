@@ -1,0 +1,10 @@
+{{ if or .Values.grafana.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-plugins
+  labels:
+{{ include "maas-cds.labels" . | indent 4 }}
+data:
+{{ tpl ((.Files.Glob "configuration/plugins/*.yaml").AsConfig | indent 2 ) . }}
+{{ end }}

@@ -1,0 +1,40 @@
+{
+    "collectors": [
+        {
+            "class": "LokiCollectorConfiguration",
+            "id_field": [
+                "access_date",
+                "interface_name",
+                "user"
+            ],
+            "routing_key": "new.raw.data.grafana-usage",
+            "interface_name": "Grafana_Usage_Prod",
+            "file_pattern": "Grafana_Usage_Prod_*.json",
+            "refresh_interval": 30,
+            "no_probe": true,
+            "expected_collect_interval": 10080,
+            "max_time_window": 30,
+            "query": "{job=\"esa-csc-prd-cce-omcs-front/grafana\"} |json |__error__=`` |line_format \"{{.log}}\" | json |  msg=\"Request Completed\" | path =~ \"/api/dashboards/home|/api/dashboards/uid/.*\"",
+            "query_limit": 5000,
+            "query_prefix": "/loki/api/v1/query_range",
+            "model": "GrafanaUsage",
+            "product_url": "http://loki-stack.monitoring.svc.cluster.local:3100",
+            "protocol_version": "v1",
+            "extractor": {
+                "class": "JSONExtractor",
+                "args": {
+                    "attr_map": {
+                        "user": "`this`.stream.uname",
+                        "access_date": "`this`.stream.t",
+                        "dashboard": "`this`.stream.path",
+                        "interface_name": {
+                            "python": "lambda c: 'Grafana_Usage_Prod'"
+                        }
+                    },
+                    "iterate_nodes": "$.data.result",
+                    "allow_partial": true
+                }
+            }
+        }
+    ]
+}

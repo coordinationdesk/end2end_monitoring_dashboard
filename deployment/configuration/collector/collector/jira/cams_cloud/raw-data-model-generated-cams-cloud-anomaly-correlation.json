@@ -1,0 +1,80 @@
+{
+    "models": [
+        {
+            "index": "raw-data-cams-cloud-anomaly-correlation",
+            "name": "CamsCloudAnomalyCorrelation",
+            "fields": [
+                {
+                    "name": "interface_name",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "reportFolder",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "key",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "title",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "status",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "created",
+                    "type": "Date"
+                },
+                {
+                    "name": "updated",
+                    "type": "Date"
+                },
+                {
+                    "name": "issue",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "summary",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "description",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "station_type",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "station",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "impacted_passes",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "impacted_observations",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "origin",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "satellite_unit",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "products",
+                    "type": "Keyword"
+                }
+            ],
+            "partition_field": "ingestionTime",
+            "partition_format": "static"
+        }
+    ]
+}

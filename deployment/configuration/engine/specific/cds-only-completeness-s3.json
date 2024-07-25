@@ -1,0 +1,27 @@
+{
+    "amqp": [
+        {
+            "name": "collect-exchange",
+            "queues": []
+        },
+        {
+            "name": "etl-exchange",
+            "queues": [
+                {
+                    "name": "etl-new.cds-product-s3",
+                    "routing_key": "new.cds-product-s3",
+                    "events": [
+                        "COMPUTE_S3_COMPLETENESS"
+                    ]
+                },
+                {
+                    "name": "etl-update.cds-product-s3",
+                    "routing_key": "update.cds-product-s3",
+                    "events": [
+                        "COMPUTE_S3_COMPLETENESS"
+                    ]
+                }
+            ]
+        }
+    ]
+}

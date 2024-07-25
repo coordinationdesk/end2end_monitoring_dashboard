@@ -1,0 +1,81 @@
+{
+    "collectors": [
+        {
+            "class": "FileCollectorConfiguration",
+            "id_field": [
+                "type",
+                "mission",
+                "version",
+                "timeliness",
+                "level"
+            ],
+            "file_routing_key": "file.raw.data.databudget",
+            "routing_key": "",
+            "interface_name": "Databudget",
+            "file_pattern": "Databudget_v*.csv",
+            "model": "Databudget",
+            "no_probe": true,
+            "extractor": {
+                "class": "CSVExtractor",
+                "args": {
+                    "attr_map": {
+                        "type": "TYPE",
+                        "num_day": "#Num/day",
+                        "level": "Level",
+                        "timeliness": "Timeliness",
+                        "produced": "P",
+                        "archived": "A",
+                        "disseminated": "D",
+                        "volume_day": "Volume per day [GB]",
+                        "mission": "Mission",
+                        "version": "Version"
+                    }
+                }
+            }
+        },
+        {
+            "class": "FileCollectorConfiguration",
+            "id_field": [
+                "type",
+                "mission",
+                "version",
+                "timeliness",
+                "level"
+            ],
+            "file_routing_key": "file.raw.data.databudget",
+            "routing_key": "",
+            "interface_name": "Databudget",
+            "file_pattern": "DatabudgetAUX_v*.csv",
+            "model": "Databudget",
+            "no_probe": true,
+            "extractor": {
+                "class": "CSVExtractor",
+                "args": {
+                    "attr_map": {
+                        "type": "TYPE",
+                        "num_day": "#Num/day",
+                        "level": {
+                            "type": "python",
+                            "python": "lambda c: 'AUX'"
+                        },
+                        "timeliness": {
+                            "type": "python",
+                            "python": "lambda c: 'AUX'"
+                        },
+                        "produced": "P",
+                        "archived": "A",
+                        "disseminated": "D",
+                        "volume_day": "Volume per day [GB]",
+                        "mission": "Mission",
+                        "version": "Version"
+                    }
+                }
+            }
+        }
+    ],
+    "amqp": {
+        "new.raw.data.databudget": {
+            "chunk_size": 1024
+        }
+    }
+}

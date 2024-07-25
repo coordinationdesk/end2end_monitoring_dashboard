@@ -1,0 +1,26 @@
+{
+    "collectors": [
+        {
+            "class": "FileCollectorConfiguration",
+            "id_field": "product_id",
+            "routing_key": "new.raw.data.dd-archive",
+            "interface_name": "DD_ARCHIVE",
+            "no_probe": true,
+            "file_pattern": "*_OPENHUB_catalogue_*.csv",
+            "model": "DdArchive",
+            "extractor": {
+                "class": "CSVExtractor",
+                "args": {
+                    "attr_map": {
+                        "product_id": "Id",
+                        "product_name": "Name",
+                        "content_length": "ContentLength",
+                        "ingestion_date": "IngestionDate",
+                        "start_date": "ContentDate:Start",
+                        "end_date": "ContentDate:End"
+                    }
+                }
+            }
+        }
+    ]
+}

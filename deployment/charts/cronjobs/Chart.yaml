@@ -1,0 +1,26 @@
+annotations:
+  artifacthub.io/links: |
+    - name: Image source
+      url: https://github.com/docker-library/busybox
+    - name: Image DockerHub
+      url: https://hub.docker.com/_/busybox
+apiVersion: v2
+appVersion: latest
+dependencies:
+- name: common
+  repository: https://charts.bitnami.com/bitnami
+  version: 2.0.1
+description: A generic helm cronjob chart for kubernetes
+home: https://github.com/SickHub
+icon: https://raw.githubusercontent.com/SickHub/charts/master/sickhub/cronjobs/icon.png
+keywords:
+- cronjob
+maintainers:
+- email: drpsychick@drsick.net
+  name: SickHub
+  url: https://github.com/SickHub
+name: cronjobs
+sources:
+- https://github.com/SickHub/charts
+type: application
+version: 0.1.3

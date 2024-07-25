@@ -1,0 +1,7 @@
+{
+    "modules": [
+        "maas_cds.engines.reports",
+        "maas_cds.engines.compute",
+        "maas_cds.engines.operations"
+    ]
+}

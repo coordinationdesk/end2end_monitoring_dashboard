@@ -1,0 +1,607 @@
+configurationFolders:
+  - collector/ftp
+  - collector/odata
+  - collector/mpip
+  - collector/webdav
+  - collector
+  - collector/jira
+  - collector/rosftp
+  - engines/collect
+  - collector/loki/lokiprod
+
+# Versions of collector and maas-cds
+.collector-version: &collector-version 3.5.0
+.engine-version: &engine-version 2.4.0
+
+##
+# Collector OData
+##
+collector-odata:
+  enabled: true
+  replicaCount: 1
+  nodeSelector:
+    magnum.openstack.org/role: etl
+  image:
+    repository: localhost:32000/maas/maas-collector
+    tag: *collector-version
+  resources:
+    requests:
+      cpu: 500m
+      memory: 256Mi
+    limits:
+      cpu: 1
+      memory: 2Gi
+  args:
+    - -v
+    - -p
+    - "900"
+  addEnvs:
+    # Backups
+    - name: BACKUP_ENABLED
+      value: "1"
+    - name: BACKUP_HOSTNAME
+      valueFrom:
+        secretKeyRef:
+          name: etl-secrets
+          key: BACKUP_HOSTNAME
+    - name: BACKUP_PORT
+      valueFrom:
+        secretKeyRef:
+          name: etl-secrets
+          key: BACKUP_PORT
+    - name: BACKUP_USERNAME
+      valueFrom:
+        secretKeyRef:
+          name: etl-secrets
+          key: BACKUP_USERNAME
+    - name: BACKUP_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: etl-secrets
+          key: BACKUP_PASSWORD
+    - name: BACKUP_DIR
+      value: "/files/MAAS/BACKUP/ODATA"
+    - name: BACKUP_CALENDAR_TREE
+      value: "1"
+    - name: BACKUP_GZIP
+      value: "1"
+  config:
+    conf:
+      secretName: collector-credentials
+      secretFileName: maas-api-collector-credentials.local.json
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 10
+    targetCPUUtilizationPercentage: 80
+  configMap:
+    name: "collector-odata-cfg"
+
+##
+# Collector WebDAV
+##
+collector-webdav:
+  enabled: true
+  replicaCount: 1
+  nodeSelector:
+    magnum.openstack.org/role: etl
+  image:
+    repository: localhost:32000/maas/maas-collector
+    tag: *collector-version
+  resources:
+    requests:
+      cpu: 250m
+      memory: 256Mi
+    limits:
+      cpu: 1
+      memory: 1Gi
+  args:
+    - -v
+    - -p
+    - "900"
+  addEnvs:
+    # Backups
+    - name: BACKUP_ENABLED
+      value: "1"
+    - name: BACKUP_HOSTNAME
+      valueFrom:
+        secretKeyRef:
+          name: etl-secrets
+          key: BACKUP_HOSTNAME
+    - name: BACKUP_PORT
+      valueFrom:
+        secretKeyRef:
+          name: etl-secrets
+          key: BACKUP_PORT
+    - name: BACKUP_USERNAME
+      valueFrom:
+        secretKeyRef:
+          name: etl-secrets
+          key: BACKUP_USERNAME
+    - name: BACKUP_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: etl-secrets
+          key: BACKUP_PASSWORD
+    - name: BACKUP_DIR
+      value: "/files/MAAS/BACKUP/WEBDAV"
+    - name: BACKUP_CALENDAR_TREE
+      value: "1"
+    - name: BACKUP_GZIP
+      value: "1"
+  config:
+    conf:
+      secretName: collector-credentials
+      secretFileName: maas-api-collector-credentials.local.json
+  configMap:
+    name: "collector-webdav-cfg"
+##
+# Collector SFTP
+##
+collector-sftp:
+  enabled: true
+  replicaCount: 1
+  nodeSelector:
+    magnum.openstack.org/role: etl
+  image:
+    repository: localhost:32000/maas/maas-collector
+    tag: *collector-version
+  # Container Args
+  resources:
+    requests:
+      cpu: 500m
+      memory: 256Mi
+    limits:
+      cpu: 1
+      memory: 2Gi
+  args:
+    - -v
+    - -f
+    - -p
+    - "120"
+    - REPRO/
+    - DATAFLOW/
+  addEnvs:
+    - name: SFTP_HOSTNAME
+      value: "192.168.2.170"
+    - name: SFTP_PORT
+      value: "22"
+    - name: SFTP_INBOX_ROOT
+      value: "/files/MAAS/INBOX/"
+    - name: SFTP_INGESTED_DIR
+      value: "/files/MAAS/BACKUP/SFTP/"
+    - name: SFTP_REJECTED_DIR
+      value: "/files/MAAS/REJECTED/"
+    # load from secrets
+    - name: SFTP_USERNAME
+      valueFrom:
+        secretKeyRef:
+          name: etl-secrets
+          key: SFTP_USERNAME
+    - name: SFTP_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: etl-secrets
+          key: SFTP_PASSWORD
+  configMap:
+    name: "collector-cfg"
+
+collector-ftp:
+  enabled: true
+  replicaCount: 1
+  nodeSelector:
+    magnum.openstack.org/role: etl
+  image:
+    repository: localhost:32000/maas/maas-collector
+    tag: *collector-version
+  resources:
+    requests:
+      cpu: 500m
+      memory: 256Mi
+    limits:
+      cpu: 1
+      memory: 2Gi
+  args:
+    - -v
+  addEnvs:
+    # Backups of backup
+    - name: BACKUP_ENABLED
+      value: "1"
+    - name: BACKUP_HOSTNAME
+      valueFrom:
+        secretKeyRef:
+          name: etl-secrets
+          key: BACKUP_HOSTNAME
+    - name: BACKUP_PORT
+      valueFrom:
+        secretKeyRef:
+          name: etl-secrets
+          key: BACKUP_PORT
+    - name: BACKUP_USERNAME
+      valueFrom:
+        secretKeyRef:
+          name: etl-secrets
+          key: BACKUP_USERNAME
+    - name: BACKUP_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: etl-secrets
+          key: BACKUP_PASSWORD
+    - name: BACKUP_DIR
+      value: "/files/MAAS/BACKUP/FTP"
+    - name: BACKUP_CALENDAR_TREE
+      value: "1"
+    - name: BACKUP_GZIP
+      value: "1"
+  # Expect a configMap with a file named "maas-collector-conf.json"
+  configMap:
+    name: "collector-ftp-cfg"
+  config:
+    conf:
+      secretName: collector-credentials
+      secretFileName: maas-api-collector-credentials.local.json
+
+##
+# Collector Jira
+##
+collector-jira:
+  enabled: true
+  replicaCount: 1
+  nodeSelector:
+    magnum.openstack.org/role: etl
+  image:
+    repository: localhost:32000/maas/maas-collector
+    tag: *collector-version
+  args:
+    - -v
+    - -p
+    - "900"
+  addEnvs:
+    # Backups of backup
+    - name: BACKUP_ENABLED
+      value: "1"
+    - name: BACKUP_HOSTNAME
+      valueFrom:
+        secretKeyRef:
+          name: etl-secrets
+          key: BACKUP_HOSTNAME
+    - name: BACKUP_PORT
+      valueFrom:
+        secretKeyRef:
+          name: etl-secrets
+          key: BACKUP_PORT
+    - name: BACKUP_USERNAME
+      valueFrom:
+        secretKeyRef:
+          name: etl-secrets
+          key: BACKUP_USERNAME
+    - name: BACKUP_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: etl-secrets
+          key: BACKUP_PASSWORD
+    - name: BACKUP_DIR
+      value: "/files/MAAS/BACKUP/JIRA"
+    - name: BACKUP_CALENDAR_TREE
+      value: "1"
+    - name: BACKUP_GZIP
+      value: "1"
+  config:
+    conf:
+      secretName: collector-credentials
+      secretFileName: maas-api-collector-credentials.local.json
+  configMap:
+    name: "collector-jira-cfg"
+
+##
+# Collector Read Only SFTP
+##
+collector-rosftp:
+  enabled: true
+  replicaCount: 1
+  nodeSelector:
+    magnum.openstack.org/role: etl
+  image:
+    repository: localhost:32000/maas/maas-collector
+    tag: *collector-version
+  # Container Args
+  resources:
+    requests:
+      cpu: 500m
+      memory: 256Mi
+    limits:
+      cpu: 1
+      memory: 1Gi
+  args:
+    - -v
+    - -p
+    - "60"
+  addEnvs:
+    # Backups of backup
+    - name: BACKUP_ENABLED
+      value: "1"
+    - name: BACKUP_HOSTNAME
+      valueFrom:
+        secretKeyRef:
+          name: etl-secrets
+          key: BACKUP_HOSTNAME
+    - name: BACKUP_PORT
+      valueFrom:
+        secretKeyRef:
+          name: etl-secrets
+          key: BACKUP_PORT
+    - name: BACKUP_USERNAME
+      valueFrom:
+        secretKeyRef:
+          name: etl-secrets
+          key: BACKUP_USERNAME
+    - name: BACKUP_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: etl-secrets
+          key: BACKUP_PASSWORD
+    - name: BACKUP_DIR
+      value: "/files/MAAS/BACKUP/SFTP"
+    - name: BACKUP_CALENDAR_TREE
+      value: "1"
+    - name: BACKUP_GZIP
+      value: "1"
+  config:
+    conf:
+      secretName: collector-credentials
+      secretFileName: maas-api-collector-credentials.local.json
+  configMap:
+    name: "collector-rosftp-cfg"
+
+##
+# Collector monitoring
+##
+collector-monitor:
+  enabled: true
+  replicaCount: 1
+  nodeSelector:
+    magnum.openstack.org/role: etl
+  image:
+    repository: localhost:32000/maas/maas-collector
+    tag: *collector-version
+  # Container Args
+  args:
+    - -v
+    - -p
+    - "300"
+    - --monitoring-interface-name
+    - OMCS_Monitoring
+  addEnvs:
+    # Backups of backup
+    - name: BACKUP_ENABLED
+      value: "1"
+    - name: BACKUP_HOSTNAME
+      valueFrom:
+        secretKeyRef:
+          name: etl-secrets
+          key: BACKUP_HOSTNAME
+    - name: BACKUP_PORT
+      valueFrom:
+        secretKeyRef:
+          name: etl-secrets
+          key: BACKUP_PORT
+    - name: BACKUP_USERNAME
+      valueFrom:
+        secretKeyRef:
+          name: etl-secrets
+          key: BACKUP_USERNAME
+    - name: BACKUP_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: etl-secrets
+          key: BACKUP_PASSWORD
+    - name: BACKUP_DIR
+      value: "/files/MAAS/BACKUP/MON"
+    - name: BACKUP_CALENDAR_TREE
+      value: "1"
+    - name: BACKUP_GZIP
+      value: "1"
+  config:
+    conf:
+      secretName: collector-credentials
+      secretFileName: maas-api-collector-credentials.local.json
+  configMap:
+    name: "collector-cfg"
+
+##
+# Collector MPIP
+##
+collector-mpip:
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: localhost:32000/maas/maas-collector
+    tag: *collector-version
+  resources:
+    requests:
+      cpu: 500m
+      memory: 256Mi
+    limits:
+      cpu: 1
+      memory: 1Gi
+  args:
+    - -v
+    - -p
+    - "15"
+  addEnvs:
+    # Backups of backup
+    - name: BACKUP_ENABLED
+      value: "1"
+    - name: BACKUP_HOSTNAME
+      valueFrom:
+        secretKeyRef:
+          name: etl-secrets
+          key: BACKUP_HOSTNAME
+    - name: BACKUP_PORT
+      valueFrom:
+        secretKeyRef:
+          name: etl-secrets
+          key: BACKUP_PORT
+    - name: BACKUP_USERNAME
+      valueFrom:
+        secretKeyRef:
+          name: etl-secrets
+          key: BACKUP_USERNAME
+    - name: BACKUP_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: etl-secrets
+          key: BACKUP_PASSWORD
+    - name: BACKUP_DIR
+      value: "/files/MAAS/BACKUP/MPIP"
+    - name: BACKUP_CALENDAR_TREE
+      value: "1"
+    - name: BACKUP_GZIP
+      value: "1"
+  config:
+    conf:
+      secretName: collector-credentials
+      secretFileName: maas-api-collector-credentials.local.json
+  configMap:
+    name: "collector-mpip-cfg"
+
+###
+# Collector Loki
+##
+collector-loki:
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: localhost:32000/maas/maas-collector
+    tag: *collector-version
+  resources:
+    requests:
+      cpu: 500m
+      memory: 256Mi
+    limits:
+      cpu: 1
+      memory: 1Gi
+  args:
+    - -v
+    - -p
+    - "900"
+  addEnvs:
+    # Backups of backup
+    - name: BACKUP_ENABLED
+      value: "1"
+    - name: BACKUP_HOSTNAME
+      valueFrom:
+        secretKeyRef:
+          name: etl-secrets
+          key: BACKUP_HOSTNAME
+    - name: BACKUP_PORT
+      valueFrom:
+        secretKeyRef:
+          name: etl-secrets
+          key: BACKUP_PORT
+    - name: BACKUP_USERNAME
+      valueFrom:
+        secretKeyRef:
+          name: etl-secrets
+          key: BACKUP_USERNAME
+    - name: BACKUP_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: etl-secrets
+          key: BACKUP_PASSWORD
+    - name: BACKUP_DIR
+      value: "/files/MAAS/BACKUP/LOKI"
+    - name: BACKUP_CALENDAR_TREE
+      value: "1"
+    - name: BACKUP_GZIP
+      value: "1"
+  config:
+    conf:
+      secretName: collector-credentials
+      secretFileName: maas-api-collector-credentials.local.json
+  # Expect a configMap with a file named "maas-collector-conf.json"
+  # Default one is the test/conf/maas-collector-conf.json file in maas-collector sources
+  configMap:
+    name: "collector-loki-lokiprod-cfg"
+
+##
+# Maas Engine collect
+##
+maas-engine:
+  enabled: true
+  nodeSelector:
+    magnum.openstack.org/role: etl
+  replicaCount: 0
+  resources:
+    requests:
+      cpu: 250m
+      memory: 256Mi
+    limits:
+      cpu: 500
+      memory: 1Gi
+  image:
+    repository: localhost:32000/maas/maas-cds
+    tag: *engine-version
+  configMap:
+    amqpFiles:
+      - "configuration/engines/default/amqp.json"
+    modelFiles:
+      - "configuration/engines/default/model.json"
+    moduleFiles:
+      - "configuration/engines/default/modules.json"
+    defaultFiles:
+      - "configuration/engines/default/default.json"
+    loggingFiles:
+      - "configuration/engines/default/logging.json"
+  addEnvs:
+  deployments:
+    - name: cds-only-completeness-s1-s2 # Maas Engine cds only completeness s1 s2
+      overWriteValues:
+        replicaCount: 1
+        configMap:
+          amqpFiles:
+            - "configuration/engines/specific/cds-only-completeness-s1-s2.json"
+    - name: cds-only-completeness-s5 # Maas Engine cds only completeness s5
+      overWriteValues:
+        replicaCount: 1
+        configMap:
+          amqpFiles:
+            - "configuration/engines/specific/cds-only-completeness-s5.json"
+    - name: raw-only-dd # Maas Engine raw only dd
+      overWriteValues:
+        replicaCount: 1
+        configMap:
+          amqpFiles:
+            - "configuration/engines/specific/raw-only-dd.json"
+    - name: raw-only-other # Maas Engine raw only other
+      overWriteValues:
+        replicaCount: 1
+        configMap:
+          amqpFiles:
+            - "configuration/engines/specific/raw-only-other.json"
+            - "configuration/engines/specific/raw-only-grafana-usage.json"
+    - name: cds-only-completeness-s3 # Maas Engine cds only completeness s3
+      overWriteValues:
+        replicaCount: 1
+        configMap:
+          amqpFiles:
+            - "configuration/engines/specific/cds-only-completeness-s3.json"
+    - name: cds-only-other # Maas Engine cds only other
+      overWriteValues:
+        replicaCount: 1
+        configMap:
+          amqpFiles:
+            - "configuration/engines/specific/cds-only-other.json"
+    - name: raw-only-lta # Maas Engine raw only lta
+      overWriteValues:
+        replicaCount: 1
+        configMap:
+          amqpFiles:
+            - "configuration/engines/specific/raw-only-lta.json"
+    - name: raw-only-prip # Maas Engine raw only prip
+      overWriteValues:
+        replicaCount: 1
+        configMap:
+          amqpFiles:
+            - "configuration/engines/specific/raw-only-prip.json"
+

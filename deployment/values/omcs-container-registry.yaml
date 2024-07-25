@@ -1,0 +1,9 @@
+persistence:
+  enabled: true
+  size: 2Gi
+resources:
+  limits:
+    cpu: 200m
+service:
+  nodePort: 32000
+  type: NodePort

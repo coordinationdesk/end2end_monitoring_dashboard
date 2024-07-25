@@ -1,0 +1,96 @@
+{
+    "models": [
+        {
+            "index": "raw-data-cams-cloud-tickets",
+            "name": "CamsCloudTickets",
+            "fields": [
+                {
+                    "name": "affected_systems",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "addressed_entities",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "assigned_element",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "created",
+                    "type": "Date"
+                },
+                {
+                    "name": "criticality",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "entity",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "environment",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "esa_group",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "involved_entities",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "key",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "linked_issues",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "occurence_date",
+                    "type": "Date"
+                },
+                {
+                    "name": "originating_entity",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "reporter",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "review_board_dispositions",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "status",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "title",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "updated",
+                    "type": "Date"
+                },
+                {
+                    "name": "urgency",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "reportFolder",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "interface_name",
+                    "type": "Keyword"
+                }
+            ],
+            "partition_field": "created",
+            "partition_format": "static"
+        }
+    ]
+}

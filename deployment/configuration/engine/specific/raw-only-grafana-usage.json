@@ -1,0 +1,23 @@
+{
+    "amqp": [
+        {
+            "name": "collect-exchange",
+            "queues": [
+                {
+                    "name": "collect-new.raw.data.grafana-usage",
+                    "routing_key": "new.raw.data.grafana-usage",
+                    "events": [
+                        {
+                            "id": "CONSOLIDATE_GRAFANA_USAGE",
+                            "target_model": "CdsGrafanaUsage"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "etl-exchange",
+            "queues": []
+        }
+    ]
+}

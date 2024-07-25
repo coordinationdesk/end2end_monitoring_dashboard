@@ -1,0 +1,48 @@
+{
+    "models": [
+        {
+            "index": "raw-data-ddp-data-available",
+            "name": "DdpDataAvailable",
+            "fields": [
+                {
+                    "name": "session_id",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "time_start",
+                    "type": "Date"
+                },
+                {
+                    "name": "time_stop",
+                    "type": "Date"
+                },
+                {
+                    "name": "time_created",
+                    "type": "Date"
+                },
+                {
+                    "name": "time_finished",
+                    "type": "Date"
+                },
+                {
+                    "name": "data_size",
+                    "type": "Long"
+                },
+                {
+                    "name": "interface_name",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "production_service_type",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "production_service_name",
+                    "type": "Keyword"
+                }
+            ],
+            "partition_field": "time_created",
+            "partition_format": "static"
+        }
+    ]
+}

@@ -1,0 +1,20 @@
+apiVersion: 1
+datasources:
+- name: cds-publication-sensing-alias
+  type: elasticsearch
+  access: proxy
+  url: 'https://omcs-es-node:9200'
+  database: ''
+  basicAuth: true
+  isDefault: false
+  jsonData:
+    includeFrozen: false
+    index: cds-publication
+    oauthPassThru: false
+    sigV4Auth: false
+    timeField: sensing_start_date
+    tlsSkipVerify: true
+  editable: true
+  basicAuthUser: 'admin'
+  secureJsonData:
+    basicAuthPassword: 'admin'

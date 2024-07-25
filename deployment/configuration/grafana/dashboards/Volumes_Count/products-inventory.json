@@ -1,0 +1,830 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 63,
+      "panels": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "description": "",
+          "gridPos": {
+            "h": 5,
+            "w": 24,
+            "x": 0,
+            "y": 1
+          },
+          "id": 59,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "This dashboard features information on:\n - Detailed list of published products and date of publication on each interface.\n\nThe information displayed was originally taken from Product at PRIP LTA DD AUXIP  \n\nTime reference for this dashboard is : sensing_start_date\n\nImportant notice : Tables & timelines can only display up to 10 000 entries. Please make use of filters to narrow down the retrieved data and get a more realistic view.",
+            "mode": "markdown"
+          },
+          "pluginVersion": "10.4.1",
+          "type": "text"
+        }
+      ],
+      "title": "Dashboard Description",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 61,
+      "panels": [],
+      "title": "Product Inventory",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P4E6B5BC91908CBD9"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": true
+          },
+          "mappings": [
+            {
+              "options": {
+                "true": {
+                  "index": 0,
+                  "text": "\u2714\ufe0f"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "name"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 635
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sensing_start_date"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 199
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sensing_end_date"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 198
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "datatake_id"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 104
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "absolute_orbit"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 117
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CAMs Link"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Jira CAMS",
+                    "url": "https://esa-cams.atlassian.net/browse/${__value.raw}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Name"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 639
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "LTA_Acri_deletion_date"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 181
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Name"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "title": "",
+                    "url": "d/bbf187f7-7fcf-4000-b225-738cb7b88ffc/product-inventory-origin-date?orgId=1&from=now-2y&to=now%2B2y&var-filter=name%7C%3D%7C\ufeff${__data.fields[\"name\"]}"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 22,
+        "w": 24,
+        "x": 0,
+        "y": 2
+      },
+      "id": 14,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "LTA CloudFerro Deleted"
+          }
+        ]
+      },
+      "pluginVersion": "10.4.1",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "10000"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "mission: $mission AND satellite_unit : $satellite AND timeliness:$timeliness AND product_level:$product_level AND product_type:$product_type",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Inventory of products",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "LTA Del. Ticket",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "LTA_CloudFerro_deletion_issue",
+                "LTA_Exprivia_deletion_issue",
+                "LTA_Werum_deletion_issue",
+                "LTA_Exprivia_S1_deletion_issue"
+              ],
+              "reducer": "firstNotNull"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "LTA Del. Cause",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "LTA_Acri_deletion_cause",
+                "LTA_CloudFerro_deletion_cause",
+                "LTA_Exprivia_deletion_cause",
+                "LTA_Werum_deletion_cause",
+                "LTA_Exprivia_S1_deletion_cause"
+              ],
+              "reducer": "firstNotNull"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "LTA Deletion",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "LTA_Acri_deletion_date",
+                "LTA_CloudFerro_deletion_date",
+                "LTA_Exprivia_deletion_date",
+                "LTA_Werum_deletion_date",
+                "LTA_Exprivia_S1_deletion_date"
+              ],
+              "reducer": "firstNotNull"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "LTA EXPRIVIA Publication",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "LTA_Exprivia_S1_publication_date",
+                "LTA_Exprivia_S2_publication_date",
+                "LTA_Exprivia_S3_publication_date"
+              ],
+              "reducer": "firstNotNull"
+            }
+          }
+        },
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "time",
+                "targetField": "sensing_start_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "sensing_end_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "prip_publication_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "auxip_publication_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "dddas_publication_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "ddip_publication_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "LTA_CloudFerro_publication_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "LTA_Exprivia_S1_publication_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "LTA_Exprivia_S2_publication_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "LTA_Exprivia_S3_publication_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "LTA_Werum_publication_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "LTA_Acri_publication_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "LTA EXPRIVIA Publication"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "LTA_Acri_deletion_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "LTA_CloudFerro_deletion_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "LTA_Exprivia_S2_deletion_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "LTA_Exprivia_deletion_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "LTA_Werum_deletion_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "LTA Deletion"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "LTA_S5P_DLR_publication_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "LTA EXPRIVIA Publication"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "DD_DHUS_is_deleted": true,
+              "LTA_Acri_deletion_cause": true,
+              "LTA_Acri_deletion_date": true,
+              "LTA_Acri_deletion_issue": true,
+              "LTA_Acri_is_published": true,
+              "LTA_CloudFerro_deletion_cause": true,
+              "LTA_CloudFerro_deletion_date": true,
+              "LTA_CloudFerro_deletion_issue": true,
+              "LTA_CloudFerro_is_published": true,
+              "LTA_Exprivia_S1_deletion_cause": true,
+              "LTA_Exprivia_S1_deletion_date": true,
+              "LTA_Exprivia_S1_deletion_issue": true,
+              "LTA_Exprivia_S1_is_published": true,
+              "LTA_Exprivia_S1_publication_date": true,
+              "LTA_Exprivia_S2_deletion_cause": true,
+              "LTA_Exprivia_S2_deletion_date": true,
+              "LTA_Exprivia_S2_deletion_issue": true,
+              "LTA_Exprivia_S2_is_published": true,
+              "LTA_Exprivia_S2_publication_date": true,
+              "LTA_Exprivia_S3_is_published": true,
+              "LTA_Exprivia_S3_publication_date": true,
+              "LTA_Exprivia_deletion_cause": true,
+              "LTA_Exprivia_deletion_date": true,
+              "LTA_Exprivia_deletion_issue": true,
+              "LTA_Exprivia_is_deleted": true,
+              "LTA_S5P_DLR_is_published": true,
+              "LTA_Werum_deletion_cause": true,
+              "LTA_Werum_deletion_date": true,
+              "LTA_Werum_deletion_issue": true,
+              "LTA_Werum_is_published": true,
+              "_id": true,
+              "_index": true,
+              "_type": true,
+              "auxip_id": true,
+              "auxip_publication_date": false,
+              "cams_tickets": true,
+              "collection_number": true,
+              "dddas_container_name": true,
+              "dddas_id": true,
+              "dddas_name": true,
+              "ddip_container_name": true,
+              "ddip_id": true,
+              "ddip_name": true,
+              "detector_id": true,
+              "expected_lta_number": true,
+              "expected_tiles": true,
+              "from_prip_dddas_timeliness": true,
+              "from_prip_ddip_timeliness": true,
+              "highlight": true,
+              "instrument_mode": true,
+              "key": true,
+              "last_attached_ticket": false,
+              "last_attached_ticket_url": true,
+              "mission": true,
+              "nb_dd_deleted": true,
+              "nb_lta_deleted": true,
+              "nb_lta_served": true,
+              "polarization": true,
+              "prip_id": true,
+              "prip_publication_date": false,
+              "prip_service": true,
+              "processor_version": true,
+              "product_class": true,
+              "product_discriminator_date": true,
+              "product_level": true,
+              "product_type": false,
+              "satellite_unit": false,
+              "sensing_duration": true,
+              "site_center": true,
+              "sort": true,
+              "tile_number": true,
+              "timeliness": true,
+              "updateTime": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "DD_DHUS_deletion_cause": 39,
+              "DD_DHUS_deletion_date": 40,
+              "DD_DHUS_deletion_issue": 38,
+              "DD_DHUS_is_deleted": 41,
+              "LTA Del. Cause": 43,
+              "LTA Del. Ticket": 42,
+              "LTA Deletion": 44,
+              "LTA EXPRIVIA Publication": 26,
+              "LTA_Acri_deletion_cause": 45,
+              "LTA_Acri_deletion_date": 46,
+              "LTA_Acri_deletion_issue": 47,
+              "LTA_Acri_is_deleted": 48,
+              "LTA_Acri_is_published": 20,
+              "LTA_Acri_publication_date": 23,
+              "LTA_CloudFerro_deletion_cause": 49,
+              "LTA_CloudFerro_deletion_date": 50,
+              "LTA_CloudFerro_deletion_issue": 51,
+              "LTA_CloudFerro_is_deleted": 52,
+              "LTA_CloudFerro_is_published": 37,
+              "LTA_CloudFerro_publication_date": 28,
+              "LTA_Exprivia_S1_deletion_cause": 53,
+              "LTA_Exprivia_S1_deletion_date": 54,
+              "LTA_Exprivia_S1_deletion_issue": 55,
+              "LTA_Exprivia_S1_is_deleted": 56,
+              "LTA_Exprivia_S1_is_published": 32,
+              "LTA_Exprivia_S1_publication_date": 27,
+              "LTA_Exprivia_deletion_cause": 57,
+              "LTA_Exprivia_deletion_date": 58,
+              "LTA_Exprivia_deletion_issue": 59,
+              "LTA_Exprivia_is_deleted": 60,
+              "LTA_Werum_deletion_cause": 61,
+              "LTA_Werum_deletion_date": 62,
+              "LTA_Werum_deletion_issue": 63,
+              "LTA_Werum_is_deleted": 64,
+              "LTA_Werum_is_published": 24,
+              "LTA_Werum_publication_date": 25,
+              "OCN_coverage_percentage": 67,
+              "_id": 29,
+              "_index": 30,
+              "_type": 31,
+              "absolute_orbit": 6,
+              "datatake_id": 5,
+              "ddip_name": 22,
+              "ddip_publication_date": 21,
+              "expected_lta_number": 8,
+              "from_prip_ddip_timeliness": 33,
+              "highlight": 9,
+              "instrument_mode": 34,
+              "key": 10,
+              "mission": 11,
+              "name": 4,
+              "nb_dd_deleted": 65,
+              "nb_lta_deleted": 66,
+              "nb_lta_served": 19,
+              "polarization": 35,
+              "prip_id": 12,
+              "prip_publication_date": 13,
+              "prip_service": 14,
+              "product_class": 36,
+              "product_level": 7,
+              "product_type": 3,
+              "satellite_unit": 2,
+              "sensing_duration": 15,
+              "sensing_end_date": 1,
+              "sensing_start_date": 0,
+              "sort": 16,
+              "timeliness": 17,
+              "updateTime": 18
+            },
+            "renameByName": {
+              "DD_DHUS_deletion_cause": "DHUS Del. Cause",
+              "DD_DHUS_deletion_date": "DHUS Deletion",
+              "DD_DHUS_deletion_issue": "DHUS Del. Ticket",
+              "DD_DHUS_is_deleted": "DHUS Deleted",
+              "LTA EXPRIVIA Publication": "LTA EXPRIVIA Publication",
+              "LTA_Acri_is_deleted": "LTA ACRI Deleted",
+              "LTA_Acri_publication_date": "LTA ACRI Publication",
+              "LTA_CloudFerro_is_deleted": "LTA CloudFerro Deleted",
+              "LTA_CloudFerro_publication_date": "LTA Cloudferro Publication",
+              "LTA_Exprivia_S1_is_deleted": "LTA EXPRIVIA Deleted",
+              "LTA_Exprivia_S1_publication_date": "LTA EXPRIVIA S1 Publication",
+              "LTA_Exprivia_S2_is_deleted": "LTA Exprivia S2 Deleted",
+              "LTA_Exprivia_S2_publication_date": "LTA EXPRIVIA S2 Publication",
+              "LTA_Exprivia_S3_publication_date": "LTA EXPRIVIA S3 Publication",
+              "LTA_Exprivia_is_deleted": "LTA Exprivia Deleted",
+              "LTA_S5P_DLR_publication_date": "LTA S5P DLR Publication",
+              "LTA_Werum_is_deleted": "LTA Werum Deleted",
+              "LTA_Werum_publication_date": "LTA WERUM Publication",
+              "OCN_coverage_percentage": "OCN Coverage %",
+              "SLC_coverage_percentage": "SLC Coverage %",
+              "_id": "",
+              "absolute_orbit": "Absolute Orbit",
+              "auxip_id": "",
+              "auxip_publication_date": "AUXIP Publication",
+              "cams_description": "CAMs Desc.",
+              "cams_origin": "CAMs Origin",
+              "datastrip_id": "Datastrip ID",
+              "datatake_id": "Datatake ID",
+              "dddas_name": "DAS Name",
+              "dddas_publication_date": "DAS Publication",
+              "ddip_name": "DHUS Name",
+              "ddip_publication_date": "DHUS Publication",
+              "last_attached_ticket": "CAMs Link",
+              "mission": "",
+              "name": "Name",
+              "nb_lta_served": "Nb LTA served",
+              "prip_publication_date": "PRIP Publication",
+              "product_group_id": "Product Group ID",
+              "product_level": "Level",
+              "product_type": "Product Type",
+              "satellite_unit": "Satellite",
+              "sensing_duration": "Sensing duration",
+              "sensing_end_date": "Sensing Stop",
+              "sensing_start_date": "Sensing Start",
+              "timeliness": "Category"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [
+    "Volumes and Count"
+  ],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P4E6B5BC91908CBD9"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"mission\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Mission",
+        "multi": true,
+        "name": "mission",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"mission\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P4E6B5BC91908CBD9"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"satellite_unit\",\"query\":\"mission: ${mission}\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Satellite",
+        "multi": true,
+        "name": "satellite",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"satellite_unit\",\"query\":\"mission: ${mission}\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P4E6B5BC91908CBD9"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"timeliness\",\"query\":\"mission: ${mission}\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Category",
+        "multi": true,
+        "name": "timeliness",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"timeliness\",\"query\":\"mission: ${mission}\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P9C1AEFD5EC435EE7"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"product_level\",\"query\":\"mission: ${mission} AND satellite_unit:$satellite AND timeliness:$timeliness\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Level",
+        "multi": true,
+        "name": "product_level",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"product_level\",\"query\":\"mission: ${mission} AND satellite_unit:$satellite AND timeliness:$timeliness\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P9C1AEFD5EC435EE7"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"product_type\",\"query\":\"mission: ${mission} AND satellite_unit:$satellite AND product_level:${product_level} AND timeliness:$timeliness\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Product Type",
+        "multi": true,
+        "name": "product_type",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"product_type\",\"query\":\"mission: ${mission} AND satellite_unit:$satellite AND product_level:${product_level} AND timeliness:$timeliness\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P4E6B5BC91908CBD9"
+        },
+        "filters": [],
+        "hide": 0,
+        "label": "Ad-Hoc filter",
+        "name": "Filter",
+        "skipUrlSync": false,
+        "type": "adhoc"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-1d/d",
+    "to": "now-1d/d"
+  },
+  "timepicker": {},
+  "timezone": "utc",
+  "title": "Products Inventory",
+  "uid": "zASfw_wnk",
+  "weekStart": ""
+}

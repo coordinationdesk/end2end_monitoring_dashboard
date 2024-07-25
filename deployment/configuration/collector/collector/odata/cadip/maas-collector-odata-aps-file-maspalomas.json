@@ -1,0 +1,50 @@
+{
+    "collectors": [
+        {
+            "class": "ODataCollectorConfiguration",
+            "id_field": [
+                "session_id",
+                "name",
+                "channel",
+                "retransfer"
+            ],
+            "routing_key": "",
+            "interface_name": "CADIP_Maspalomas_Files",
+            "file_pattern": "CADIP_Maspalomas_Files_*.json",
+            "odata_entities": "Files",
+            "odata_query_filter": "PublicationDate ge {publication_start_date} and PublicationDate lt {publication_end_date}",
+            "refresh_interval": 10,
+            "expected_collect_interval": 2160,
+            "product_per_page": 1000,
+            "no_probe": true,
+            "model": "ApsFile",
+            "extractor": {
+                "class": "JSONExtractor",
+                "args": {
+                    "attr_map": {
+                        "session_id": "`this`.SessionId",
+                        "name": "`this`.Name",
+                        "channel": "`this`.Channel",
+                        "block_number": "`this`.BlockNumber",
+                        "final_block": "`this`.FinalBlock",
+                        "publication_date": "`this`.PublicationDate",
+                        "eviction_date": "`this`.EvictionDate",
+                        "size": "`this`.Size",
+                        "retransfer": "`this`.Retransfer",
+                        "interface_name": {
+                            "python": "lambda c: 'CADIP_Maspalomas_Files'"
+                        },
+                        "production_service_type": {
+                            "python": "lambda c: 'CADIP'"
+                        },
+                        "production_service_name": {
+                            "python": "lambda c: 'Maspalomas'"
+                        }
+                    },
+                    "iterate_nodes": "$.value",
+                    "allow_partial": true
+                }
+            }
+        }
+    ]
+}

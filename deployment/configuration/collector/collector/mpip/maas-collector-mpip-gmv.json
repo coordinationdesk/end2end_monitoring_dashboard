@@ -1,0 +1,39 @@
+{
+    "collectors": [
+        {
+            "class": "MpipCollectorConfiguration",
+            "id_field": [
+                "product_name",
+                "interface_name"
+            ],
+            "routing_key": "",
+            "interface_name": "MPIP_GMV",
+            "file_pattern": "MPIP_GMV_*.json",
+            "refresh_interval": 10,
+            "expected_collect_interval": 2160,
+            "model": "MpipProduct",
+            "extractor": {
+                "class": "JSONExtractor",
+                "args": {
+                    "attr_map": {
+                        "product_name": "`this`.filename",
+                        "ingestion_date": "`this`.ingestionDate",
+                        "validity_start_time": "`this`.validityStartTime",
+                        "validity_stop_time": "`this`.validityStopTime",
+                        "interface_name": {
+                            "python": "lambda c: 'MPIP_GMV'"
+                        },
+                        "production_service_type": {
+                            "python": "lambda c: 'MPIP'"
+                        },
+                        "production_service_name": {
+                            "python": "lambda c: 'GMV'"
+                        }
+                    },
+                    "iterate_nodes": "$.value",
+                    "allow_partial": true
+                }
+            }
+        }
+    ]
+}

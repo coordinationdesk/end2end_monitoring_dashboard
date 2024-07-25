@@ -1,0 +1,47 @@
+{
+    "collectors": [
+        {
+            "class": "ODataCollectorConfiguration",
+            "id_field": [
+                "name",
+                "timestamp",
+                "interface_name"
+            ],
+            "date_attr": "timestamp",
+            "routing_key": "new.raw.data.metrics-product",
+            "interface_name": "metrics_LTA_Exprivia_S2",
+            "file_pattern": "metrics_LTA_Exprivia_S2_*.json",
+            "refresh_interval": 10,
+            "expected_collect_interval": 2160,
+            "product_per_page": 1000,
+            "odata_entities": "Metrics",
+            "odata_query_filter": "startswith(Name, 'Archived')",
+            "odata_query_order_by": "Timestamp",
+            "disable_insecure_request_warning": true,
+            "model": "MetricsProduct",
+            "no_probe": true,
+            "extractor": {
+                "class": "JSONExtractor",
+                "args": {
+                    "attr_map": {
+                        "name": "`this`.Name",
+                        "timestamp": "`this`.Timestamp",
+                        "metric_type": "`this`.MetricType",
+                        "counter": "`this`.Counter",
+                        "interface_name": {
+                            "python": "lambda c: 'metrics_LTA_Exprivia_S2'"
+                        },
+                        "production_service_type": {
+                            "python": "lambda c: 'LTA'"
+                        },
+                        "production_service_name": {
+                            "python": "lambda c: 'Exprivia'"
+                        }
+                    },
+                    "iterate_nodes": "$.value",
+                    "allow_partial": true
+                }
+            }
+        }
+    ]
+}

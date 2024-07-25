@@ -1,0 +1,67 @@
+{
+    "collectors": [
+        {
+            "class": "InterfaceMonitorCollectorConfiguration",
+            "id_field": [
+                "interface_name",
+                "probe_time_start"
+            ],
+            "routing_key": "new.raw.data.interface-probe",
+            "interface_name": "OMCS_Monitoring",
+            "file_pattern": "MAAS-Monitoring-*.json",
+            "extra_http_probes": [
+                {
+                    "interface_name": "OMCS_Public_Dashboard",
+                    "url": "https://operations.dashboard.copernicus.eu/index.html"
+                },
+                {
+                    "interface_name": "OMCS_Technical_Dashboard",
+                    "url": "https://omcs.copernicus.eu/grafana/api/health"
+                },
+                {
+                    "interface_name": "MPS_Dashboard",
+                    "url": "https://inta-dashboard.inta.es/login"
+                },
+                {
+                    "interface_name": "SVL_Dashboard",
+                    "url": "https://grafana-external-capp.victoriousglacier-1f7d60fd.westeurope.azurecontainerapps.io/login"
+                },
+                {
+                    "interface_name": "NSG_Dashboard",
+                    "url": "https://eg37235.psmanaged.com/grafana"
+                },
+                {
+                    "interface_name": "MTI_Dashboard",
+                    "url": "https://dashboard-cadip.e-geos.earth/login"
+                },
+                {
+                    "interface_name": "INS_Dashboard",
+                    "url": "https://ddp2.sscspace.com/dashboard/login"
+                }
+            ],
+            "refresh_interval": 0,
+            "model": "InterfaceProbe",
+            "extractor": {
+                "class": "JSONExtractor",
+                "args": {
+                    "iterate_nodes": "$.results",
+                    "attr_map": {
+                        "probe_time_start": "`this`.probe_time_start",
+                        "probe_time_stop": "`this`.probe_time_end",
+                        "probe_duration": "`this`.probe_duration",
+                        "interface_name": "`this`.interface_name",
+                        "status": "`this`.status",
+                        "status_code": "`this`.status_code",
+                        "details": "`this`.details",
+                        "most_recent_modification_date": "`this`.most_recent_modification_date"
+                    }
+                }
+            }
+        }
+    ],
+    "amqp": {
+        "new.raw.data.interface-probe": {
+            "chunk_size": 1
+        }
+    }
+}

@@ -1,0 +1,28 @@
+{
+    "amqp": {
+        "new.raw.data.prip-product": {
+            "chunk_size": 512
+        },
+        "new.raw.data.new-prip-product": {
+            "chunk_size": 512
+        },
+        "new.raw.data.lta-product": {
+            "chunk_size": 512
+        },
+        "new.raw.data.dd-product": {
+            "chunk_size": 512
+        },
+        "new.raw.data.auxip-product": {
+            "chunk_size": 128
+        },
+        "new.raw.data.metrics-product": {
+            "chunk_size": 1024
+        },
+        "new.raw.data.mpcip-product": {
+            "chunk_size": 512
+        },
+        "new.raw.data.aps-session": {
+            "chunk_size": 512
+        }
+    }
+}

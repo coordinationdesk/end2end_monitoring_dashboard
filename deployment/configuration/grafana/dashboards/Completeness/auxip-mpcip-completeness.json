@@ -1,0 +1,2035 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 72,
+      "panels": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "description": "",
+          "gridPos": {
+            "h": 10,
+            "w": 24,
+            "x": 0,
+            "y": 1
+          },
+          "id": 59,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "This dashboard features a comparison between product published at the following interfaces:\n - AUXIP\n - MPCIP\n\nDiscrepancies are displayed through the following indicators:\n - Total missing product count;\n - Missed products over time;\n - Pie chart view of product status;\n - Detailed list of missing products.\n\nInformation is available for each mission and each AUXIP/MPCIP managed by OMCS.\n\nTips:\n - Annotations are available on time series;\n - Mission and LTA service to consider can be selected in the upper bar.\n\nThe information displayed was originally taken from Product at AUXIP MPCIP  \n\nTime reference for this dashboard is : sensing_start_date\n\nImportant notice : Tables & timelines can only display up to 10 000 entries. Please make use of filters to narrow down the retrieved data and get a more realistic view.",
+            "mode": "markdown"
+          },
+          "pluginVersion": "10.3.1",
+          "type": "text"
+        }
+      ],
+      "title": "Dashboard Description",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 70,
+      "panels": [],
+      "title": "AUXIP-MPCIP Completeness",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P4E6B5BC91908CBD9"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 0,
+        "y": 2
+      },
+      "id": 4,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.3.1",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "metrics": [
+            {
+              "hide": false,
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "satellite_unit : $satellite AND mission: $mission AND timeliness:$timeliness AND product_level:$product_level AND product_type:$product_type AND auxip_id: *",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Products Published by AUXIP",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P4E6B5BC91908CBD9"
+      },
+      "description": "Total Archived Products by MPCIP and also published @AUXIP",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 6,
+        "y": 2
+      },
+      "id": 54,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.3.1",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "satellite_unit : $satellite AND mission: $mission AND timeliness:$timeliness AND product_level:$product_level AND product_type:$product_type AND auxip_id: * AND MPCIP_${mpcip}_is_published: true",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Products Archived by MPCIP",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P4E6B5BC91908CBD9"
+      },
+      "description": "Published @AUXIP but NOT @MPCIP",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 11,
+        "y": 2
+      },
+      "id": 8,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {},
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "10.3.1",
+      "targets": [
+        {
+          "alias": "Archived",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "satellite_unit : $satellite AND mission: $mission AND timeliness:$timeliness AND product_level:$product_level AND product_type:$product_type AND auxip_id: * AND MPCIP_${mpcip}_is_published: *\n",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "Published",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "satellite_unit : $satellite AND mission: $mission AND timeliness:$timeliness AND product_level:$product_level AND product_type:$product_type AND auxip_id: *",
+          "refId": "B",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Not Archived Products",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "Published",
+              "operator": "-",
+              "reducer": "sum",
+              "right": "Archived"
+            },
+            "mode": "binary",
+            "reduce": {
+              "include": [],
+              "reducer": "diff"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P4E6B5BC91908CBD9"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": [],
+          "unit": "none",
+          "unitScale": true
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 8,
+        "x": 16,
+        "y": 2
+      },
+      "id": 63,
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "values": [
+            "percent",
+            "value"
+          ]
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "alias": "Archived",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "1"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "satellite_unit : $satellite AND mission: $mission AND timeliness:$timeliness AND product_level:$product_level AND product_type:$product_type  AND auxip_id: * AND MPCIP_${mpcip}_is_published: true ",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "Not Archived",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "1"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "satellite_unit : $satellite AND mission: $mission AND timeliness:$timeliness AND product_level:$product_level AND product_type:$product_type  AND auxip_id: * AND NOT MPCIP_${mpcip}_is_published: true",
+          "refId": "B",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Percentage of Archived products MPCIP",
+      "transformations": [],
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P4E6B5BC91908CBD9"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unitScale": true
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Time"
+            },
+            "properties": [
+              {
+                "id": "custom.axisLabel",
+                "value": "Sensing Time"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Not Archived"
+            },
+            "properties": [
+              {
+                "id": "custom.axisLabel",
+                "value": "Product Count"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 16,
+        "x": 0,
+        "y": 6
+      },
+      "id": 57,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "alias": "Not Archived",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "satellite_unit : $satellite AND mission: $mission AND timeliness:$timeliness AND product_level:$product_level AND product_type:$product_type  AND auxip_id : * AND NOT MPCIP_${mpcip}_is_published: true ",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "Archived",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "hide": true,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "satellite_unit : $satellite AND mission: $mission AND timeliness:$timeliness AND product_level:$product_level AND product_type:$product_type  AND auxip_id: * AND MPCIP_${mpcip}_is_published: true ",
+          "refId": "B",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Not Archived products over time",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P4E6B5BC91908CBD9"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "inspect": true
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unitScale": true
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "name"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 859
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sensing_start_date"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 186
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CAMs Link"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "title": "",
+                    "url": "https://esa-cams.atlassian.net/browse/${__value.raw}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "auxip_publication_date"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 196
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 13
+      },
+      "id": 14,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "10.3.1",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "10000"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "satellite_unit : $satellite AND mission: $mission AND timeliness:$timeliness AND product_level:$product_level AND product_type:$product_type AND auxip_id: * AND NOT MPCIP_${mpcip}_is_published: true ",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Not Archived Products List",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "LTA_Acri_is_published": true,
+              "LTA_Acri_publication_date": true,
+              "LTA_CloudFerro_is_published": true,
+              "LTA_CloudFerro_publication_date": true,
+              "LTA_Exprivia_S1_is_published": true,
+              "LTA_Exprivia_S1_publication_date": true,
+              "LTA_Exprivia_S2_is_published": true,
+              "LTA_Exprivia_S2_publication_date": true,
+              "LTA_Exprivia_S3_is_published": true,
+              "LTA_Exprivia_S3_publication_date": true,
+              "LTA_LTA_Acri_is_published": true,
+              "LTA_LTA_Acri_publication_date": true,
+              "LTA_LTA_CloudFerro_is_published": true,
+              "LTA_LTA_CloudFerro_publication_date": true,
+              "LTA_LTA_Exprivia_S1_is_published": true,
+              "LTA_LTA_Exprivia_S1_publication_date": true,
+              "LTA_LTA_Exprivia_S2_is_published": true,
+              "LTA_LTA_Exprivia_S2_publication_date": true,
+              "LTA_LTA_Exprivia_S3_is_published": true,
+              "LTA_LTA_Exprivia_S3_publication_date": true,
+              "LTA_LTA_Werum_is_published": true,
+              "LTA_LTA_Werum_publication_date": true,
+              "LTA_Werum_is_published": true,
+              "LTA_Werum_publication_date": true,
+              "OCN_coverage_percentage": true,
+              "SLC_coverage_percentage": true,
+              "_id": true,
+              "_index": true,
+              "_type": true,
+              "absolute_orbit": true,
+              "cams_tickets": true,
+              "content_length": true,
+              "dddas_name": true,
+              "dddas_publication_date": true,
+              "ddip_name": true,
+              "ddip_publication_date": true,
+              "detector_id": true,
+              "expected_lta_number": true,
+              "from_prip_dddas_timeliness": true,
+              "from_prip_ddip_timeliness": true,
+              "highlight": true,
+              "key": true,
+              "last_attached_ticket": false,
+              "last_attached_ticket_url": true,
+              "mission": true,
+              "nb_lta_served": true,
+              "polarization": true,
+              "prip_id": true,
+              "prip_publication_date": true,
+              "prip_service": true,
+              "product_class": true,
+              "sensing_duration": true,
+              "sensing_end_date": true,
+              "site_center": true,
+              "sort": true,
+              "updateTime": true
+            },
+            "indexByName": {
+              "LTA_CloudFerro_is_published": 4,
+              "LTA_CloudFerro_publication_date": 5,
+              "LTA_Exprivia_S1_is_published": 6,
+              "LTA_Exprivia_S1_publication_date": 7,
+              "LTA_Werum_is_published": 28,
+              "LTA_Werum_publication_date": 29,
+              "OCN_coverage_percentage": 30,
+              "SLC_coverage_percentage": 38,
+              "_id": 8,
+              "_index": 9,
+              "_type": 10,
+              "absolute_orbit": 13,
+              "cams_description": 37,
+              "cams_origin": 36,
+              "cams_tickets": 31,
+              "datatake_id": 14,
+              "expected_lta_number": 25,
+              "highlight": 15,
+              "instrument_mode": 16,
+              "key": 17,
+              "last_attached_ticket": 35,
+              "last_attached_ticket_url": 34,
+              "mission": 3,
+              "name": 1,
+              "nb_lta_served": 26,
+              "polarization": 18,
+              "prip_id": 12,
+              "prip_publication_date": 19,
+              "prip_service": 32,
+              "product_class": 20,
+              "product_level": 11,
+              "product_type": 21,
+              "satellite_unit": 2,
+              "sensing_duration": 22,
+              "sensing_end_date": 23,
+              "sensing_start_date": 0,
+              "sort": 24,
+              "timeliness": 33,
+              "updateTime": 27
+            },
+            "renameByName": {
+              "cams_description": "CAMs Description",
+              "cams_origin": "CAMs Origin",
+              "last_attached_ticket": "CAMs Link",
+              "last_attached_ticket_url": ""
+            }
+          }
+        },
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "dateFormat": "",
+                "destinationType": "time",
+                "targetField": "sensing_start_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "prip_publication_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "LTA_Werum_publication_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "sensing_end_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "updateTime"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "LTA_Werum_publication_date"
+              }
+            ],
+            "fields": {}
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "collapsed": true,
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 23
+      },
+      "id": 61,
+      "panels": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "axisSoftMin": 0,
+                "fillOpacity": 80,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineWidth": 1,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              },
+              "unitScale": true
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Total"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "green",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 18,
+            "w": 24,
+            "x": 0,
+            "y": 3
+          },
+          "id": 53,
+          "options": {
+            "barRadius": 0,
+            "barWidth": 0.97,
+            "fullHighlight": false,
+            "groupWidth": 0.7,
+            "legend": {
+              "calcs": [
+                "sum"
+              ],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "orientation": "horizontal",
+            "showValue": "always",
+            "stacking": "none",
+            "text": {},
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            },
+            "xTickLabelRotation": 0,
+            "xTickLabelSpacing": 0
+          },
+          "targets": [
+            {
+              "alias": "Archived",
+              "bucketAggs": [
+                {
+                  "field": "mission",
+                  "id": "2",
+                  "settings": {
+                    "min_doc_count": "1",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "0"
+                  },
+                  "type": "terms"
+                },
+                {
+                  "field": "product_type",
+                  "id": "3",
+                  "settings": {
+                    "min_doc_count": "1",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "0"
+                  },
+                  "type": "terms"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "satellite_unit : $satellite AND mission: $mission AND timeliness:$timeliness AND product_level:$product_level AND product_type:$product_type AND MPCIP_${mpcip}_is_published: true ",
+              "refId": "A",
+              "timeField": "sensing_start_date"
+            }
+          ],
+          "title": "Archived products per product type",
+          "transformations": [
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "group",
+                "mode": "reduceRow",
+                "reduce": {
+                  "include": [
+                    "product_type",
+                    "mission"
+                  ],
+                  "reducer": "allValues"
+                }
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "mission": true,
+                  "product_type": true
+                },
+                "indexByName": {
+                  "Count": 3,
+                  "group": 2,
+                  "mission": 0,
+                  "product_type": 1
+                },
+                "renameByName": {}
+              }
+            },
+            {
+              "id": "convertFieldType",
+              "options": {
+                "conversions": [
+                  {
+                    "destinationType": "string",
+                    "targetField": "group"
+                  }
+                ],
+                "fields": {}
+              }
+            }
+          ],
+          "type": "barchart"
+        },
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "description": "Total Archived Products by MPCIP and also published @AUXIP",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "filterable": true,
+                "inspect": true
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              },
+              "unitScale": true
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "CAMs Link"
+                },
+                "properties": [
+                  {
+                    "id": "links",
+                    "value": [
+                      {
+                        "title": "",
+                        "url": "https://esa-cams.atlassian.net/browse/${__value.raw}"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 24,
+            "x": 0,
+            "y": 21
+          },
+          "id": 66,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true
+          },
+          "pluginVersion": "10.3.1",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [],
+              "datasource": {
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "size": "10000"
+                  },
+                  "type": "raw_data"
+                }
+              ],
+              "query": "satellite_unit : $satellite AND mission: $mission AND timeliness:$timeliness AND product_level:$product_level AND product_type:$product_type AND auxip_id: * AND MPCIP_${mpcip}_is_published: true ",
+              "refId": "B",
+              "timeField": "sensing_start_date"
+            }
+          ],
+          "title": "List of Archived Products",
+          "transformations": [
+            {
+              "id": "convertFieldType",
+              "options": {
+                "conversions": [
+                  {
+                    "dateFormat": "",
+                    "destinationType": "time",
+                    "targetField": "sensing_start_date"
+                  },
+                  {
+                    "destinationType": "time",
+                    "targetField": "LTA_Acri_publication_date"
+                  },
+                  {
+                    "destinationType": "time",
+                    "targetField": "LTA_CloudFerro_publication_date"
+                  },
+                  {
+                    "destinationType": "time",
+                    "targetField": "LTA_Exprivia_S1_publication_date"
+                  },
+                  {
+                    "destinationType": "time",
+                    "targetField": "LTA_Werum_publication_date"
+                  },
+                  {
+                    "destinationType": "time",
+                    "targetField": "ddip_publication_date"
+                  },
+                  {
+                    "destinationType": "time",
+                    "targetField": "prip_publication_date"
+                  },
+                  {
+                    "destinationType": "time",
+                    "targetField": "sensing_end_date"
+                  },
+                  {
+                    "destinationType": "time",
+                    "targetField": "updateTime"
+                  }
+                ],
+                "fields": {}
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "cams_tickets": true,
+                  "last_attached_ticket": false,
+                  "last_attached_ticket_url": true
+                },
+                "indexByName": {
+                  "DD_DHUS_deletion_cause": 44,
+                  "DD_DHUS_deletion_date": 45,
+                  "DD_DHUS_deletion_issue": 46,
+                  "DD_DHUS_is_deleted": 47,
+                  "LTA_Acri_is_published": 1,
+                  "LTA_Acri_publication_date": 2,
+                  "LTA_CloudFerro_is_published": 3,
+                  "LTA_CloudFerro_publication_date": 4,
+                  "LTA_Exprivia_S1_is_published": 5,
+                  "LTA_Exprivia_S1_publication_date": 6,
+                  "LTA_Werum_is_published": 7,
+                  "LTA_Werum_publication_date": 8,
+                  "OCN_coverage_percentage": 9,
+                  "SLC_coverage_percentage": 10,
+                  "_id": 11,
+                  "_index": 12,
+                  "_type": 13,
+                  "absolute_orbit": 14,
+                  "cams_description": 43,
+                  "cams_origin": 42,
+                  "cams_tickets": 15,
+                  "datatake_id": 16,
+                  "ddip_name": 17,
+                  "ddip_publication_date": 18,
+                  "expected_lta_number": 19,
+                  "from_prip_ddip_timeliness": 20,
+                  "highlight": 21,
+                  "instrument_mode": 22,
+                  "key": 23,
+                  "last_attached_ticket": 41,
+                  "last_attached_ticket_url": 40,
+                  "mission": 24,
+                  "name": 25,
+                  "nb_dd_deleted": 48,
+                  "nb_lta_served": 26,
+                  "polarization": 27,
+                  "prip_id": 28,
+                  "prip_publication_date": 29,
+                  "prip_service": 30,
+                  "product_class": 31,
+                  "product_level": 32,
+                  "product_type": 33,
+                  "satellite_unit": 34,
+                  "sensing_duration": 35,
+                  "sensing_end_date": 36,
+                  "sensing_start_date": 0,
+                  "sort": 37,
+                  "timeliness": 38,
+                  "updateTime": 39
+                },
+                "renameByName": {
+                  "cams_description": "CAMs Description",
+                  "cams_origin": "CAMs Origin",
+                  "last_attached_ticket": "CAMs Link",
+                  "last_attached_ticket_url": ""
+                }
+              }
+            }
+          ],
+          "type": "table"
+        }
+      ],
+      "title": "Archived products details",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 24
+      },
+      "id": 68,
+      "panels": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "axisSoftMin": 0,
+                "fillOpacity": 80,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineWidth": 1,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              },
+              "unitScale": true
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Total"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "green",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 24,
+            "x": 0,
+            "y": 4
+          },
+          "id": 55,
+          "options": {
+            "barRadius": 0,
+            "barWidth": 0.97,
+            "fullHighlight": false,
+            "groupWidth": 0.7,
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "orientation": "horizontal",
+            "showValue": "auto",
+            "stacking": "none",
+            "text": {},
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            },
+            "xTickLabelRotation": 0,
+            "xTickLabelSpacing": 0
+          },
+          "targets": [
+            {
+              "alias": "Archived",
+              "bucketAggs": [
+                {
+                  "field": "mission",
+                  "id": "2",
+                  "settings": {
+                    "min_doc_count": "1",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "0"
+                  },
+                  "type": "terms"
+                },
+                {
+                  "field": "product_type",
+                  "id": "3",
+                  "settings": {
+                    "min_doc_count": "1",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "0"
+                  },
+                  "type": "terms"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "satellite_unit : $satellite AND mission: $mission AND timeliness:$timeliness AND NOT (product_level:$product_level AND product_type:$product_type) AND MPCIP_${mpcip}_is_published: true ",
+              "refId": "A",
+              "timeField": "sensing_start_date"
+            }
+          ],
+          "title": "Archived products- types not currently selected by dashboard filter",
+          "transformations": [
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "group",
+                "mode": "reduceRow",
+                "reduce": {
+                  "include": [
+                    "product_type",
+                    "mission"
+                  ],
+                  "reducer": "allValues"
+                }
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "mission": true,
+                  "product_type": true
+                },
+                "indexByName": {
+                  "Count": 3,
+                  "group": 2,
+                  "mission": 0,
+                  "product_type": 1
+                },
+                "renameByName": {}
+              }
+            },
+            {
+              "id": "convertFieldType",
+              "options": {
+                "conversions": [
+                  {
+                    "destinationType": "string",
+                    "targetField": "group"
+                  }
+                ],
+                "fields": {}
+              }
+            }
+          ],
+          "type": "barchart"
+        },
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "filterable": true,
+                "inspect": true
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              },
+              "unitScale": true
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Total"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "fixedColor": "green",
+                      "mode": "fixed"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "name"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 490
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "expected_lta_number"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 64
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "nb_lta_served"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 80
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "LTA_Acri_is_published"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 75
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "LTA_CloudFerro_is_published"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 98
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "LTA_Exprivia_S1_is_published"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 110
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "LTA_Werum_is_published"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 91
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "CAMs Link"
+                },
+                "properties": [
+                  {
+                    "id": "links",
+                    "value": [
+                      {
+                        "title": "",
+                        "url": "https://esa-cams.atlassian.net/browse/${__value.raw}"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 24,
+            "x": 0,
+            "y": 11
+          },
+          "id": 65,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true,
+            "sortBy": []
+          },
+          "pluginVersion": "10.3.1",
+          "targets": [
+            {
+              "alias": "Archived",
+              "bucketAggs": [],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "size": "10000"
+                  },
+                  "type": "raw_data"
+                }
+              ],
+              "query": "satellite_unit : $satellite AND mission: $mission AND timeliness:$timeliness AND NOT (product_level:$product_level AND product_type:$product_type) AND MPCIP_${mpcip}_is_published: true ",
+              "refId": "A",
+              "timeField": "sensing_start_date"
+            }
+          ],
+          "title": "List of Archived products not currently selected by dashboard filter",
+          "transformations": [
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "LTA_Acri_publication_date": true,
+                  "LTA_CloudFerro_publication_date": true,
+                  "LTA_Exprivia_S1_publication_date": true,
+                  "LTA_Werum_publication_date": true,
+                  "_id": true,
+                  "_index": true,
+                  "_type": true,
+                  "cams_tickets": true,
+                  "key": true,
+                  "last_attached_ticket_url": true,
+                  "mission": true,
+                  "prip_id": true,
+                  "prip_publication_date": true,
+                  "satellite_unit": true,
+                  "sensing_duration": true,
+                  "sensing_end_date": true,
+                  "sort": true,
+                  "updateTime": true
+                },
+                "indexByName": {
+                  "LTA_Acri_is_published": 4,
+                  "LTA_Acri_publication_date": 5,
+                  "LTA_CloudFerro_is_published": 6,
+                  "LTA_CloudFerro_publication_date": 7,
+                  "LTA_Exprivia_S1_is_published": 8,
+                  "LTA_Exprivia_S1_publication_date": 9,
+                  "LTA_Werum_is_published": 10,
+                  "LTA_Werum_publication_date": 11,
+                  "_id": 12,
+                  "_index": 13,
+                  "_type": 14,
+                  "auxip_id": 25,
+                  "auxip_publication_date": 26,
+                  "cams_description": 32,
+                  "cams_origin": 31,
+                  "cams_tickets": 27,
+                  "expected_lta_number": 2,
+                  "highlight": 15,
+                  "key": 16,
+                  "last_attached_ticket": 30,
+                  "last_attached_ticket_url": 28,
+                  "mission": 17,
+                  "name": 1,
+                  "nb_lta_served": 3,
+                  "product_level": 18,
+                  "product_type": 19,
+                  "satellite_unit": 20,
+                  "sensing_duration": 21,
+                  "sensing_end_date": 22,
+                  "sensing_start_date": 0,
+                  "sort": 23,
+                  "timeliness": 29,
+                  "updateTime": 24
+                },
+                "renameByName": {
+                  "cams_description": "CAMs Description",
+                  "cams_origin": "CAMs Origin",
+                  "last_attached_ticket": "CAMs Link"
+                }
+              }
+            },
+            {
+              "id": "convertFieldType",
+              "options": {
+                "conversions": [
+                  {
+                    "dateFormat": "",
+                    "destinationType": "time",
+                    "targetField": "sensing_start_date"
+                  },
+                  {
+                    "destinationType": "time",
+                    "targetField": "auxip_publication_date"
+                  }
+                ],
+                "fields": {}
+              }
+            }
+          ],
+          "type": "table"
+        }
+      ],
+      "title": "Archived products not currently filtered by current dashboard filter",
+      "type": "row"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [
+    "Completeness"
+  ],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P4E6B5BC91908CBD9"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"mission\",\"query\":\"*\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Mission",
+        "multi": true,
+        "name": "mission",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"mission\",\"query\":\"*\"}",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P9C1AEFD5EC435EE7"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"satellite_unit\",\"query\":\"mission: ${mission}\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Satellite",
+        "multi": true,
+        "name": "satellite",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"satellite_unit\",\"query\":\"mission: ${mission}\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P4E6B5BC91908CBD9"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"timeliness\",\"query\":\"mission: ${mission}\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Category",
+        "multi": true,
+        "name": "timeliness",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"timeliness\",\"query\":\"mission: ${mission}\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P9C1AEFD5EC435EE7"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"product_level\",\"query\":\"mission: ${mission}\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Level",
+        "multi": true,
+        "name": "product_level",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"product_level\",\"query\":\"mission: ${mission}\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P9C1AEFD5EC435EE7"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"product_type\",\"query\":\"mission: ${mission} AND product_level:${product_level}\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Product Type",
+        "multi": true,
+        "name": "product_type",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"product_type\",\"query\":\"mission: ${mission} AND product_level:${product_level}\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "isNone": true,
+          "selected": true,
+          "text": "None",
+          "value": ""
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P9C1AEFD5EC435EE7"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"service_id\", \"query\": \"service_type: MPCIP\"}",
+        "hide": 2,
+        "includeAll": false,
+        "label": "MPCIP Service",
+        "multi": false,
+        "name": "_mpcip",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"service_id\", \"query\": \"service_type: MPCIP\"}",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "Acri",
+          "value": "Acri"
+        },
+        "hide": 2,
+        "includeAll": false,
+        "label": "MPCIP Service",
+        "multi": false,
+        "name": "mpcip",
+        "options": [
+          {
+            "selected": true,
+            "text": "Acri",
+            "value": "Acri"
+          }
+        ],
+        "query": "Acri",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P4E6B5BC91908CBD9"
+        },
+        "filters": [],
+        "hide": 0,
+        "label": "Ad-Hoc filter",
+        "name": "Filter",
+        "skipUrlSync": false,
+        "type": "adhoc"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-8d/d",
+    "to": "now-1d/d"
+  },
+  "timepicker": {},
+  "timezone": "utc",
+  "title": "AUXIP-MPCIP Completeness",
+  "uid": "ae161631-ec00-4999-a942-b601956d6998",
+  "weekStart": ""
+}

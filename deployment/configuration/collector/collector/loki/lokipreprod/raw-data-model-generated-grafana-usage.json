@@ -1,0 +1,28 @@
+{
+    "models": [
+        {
+            "index": "raw-data-grafana-usage",
+            "name": "GrafanaUsage",
+            "fields": [
+                {
+                    "name": "access_date",
+                    "type": "Date"
+                },
+                {
+                    "name": "user",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "interface_name",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "dashboard",
+                    "type": "Keyword"
+                }
+            ],
+            "partition_field": "ingestionTime",
+            "partition_format": "%Y-%m"
+        }
+    ]
+}

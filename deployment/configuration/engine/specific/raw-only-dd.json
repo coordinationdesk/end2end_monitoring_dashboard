@@ -1,0 +1,37 @@
+{
+    "amqp": [
+        {
+            "name": "collect-exchange",
+            "queues": [
+                {
+                    "name": "collect-new.raw.data.dd-product",
+                    "routing_key": "new.raw.data.dd-product",
+                    "events": [
+                        "CONSOLIDATE_PUBLICATION",
+                        {
+                            "id": "CONSOLIDATE_DD_PRODUCT",
+                            "output_rk": "new.container-dd-product",
+                            "send_reports": true,
+                            "container_chunk_size": 128
+                        }
+                    ]
+                },
+                {
+                    "name": "collect-new.raw.data.dd-archive",
+                    "routing_key": "new.raw.data.dd-archive",
+                    "events": [
+                        {
+                            "id": "CONSOLIDATE_DD_PRODUCT",
+                            "send_reports": false
+                        },
+                        "CONSOLIDATE_PUBLICATION"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "etl-exchange",
+            "queues": []
+        }
+    ]
+}

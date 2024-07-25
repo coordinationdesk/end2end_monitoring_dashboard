@@ -1,0 +1,128 @@
+{
+    "models": [
+        {
+            "index": "raw-data-aps-product",
+            "name": "ApsProduct",
+            "fields": [
+                {
+                    "name": "satellite_id",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "mission",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "doy",
+                    "type": "Integer"
+                },
+                {
+                    "name": "downlink_orbit",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "antenna_id",
+                    "type": "Text"
+                },
+                {
+                    "name": "antenna_status",
+                    "type": "Text"
+                },
+                {
+                    "name": "front_end_id",
+                    "type": "Text"
+                },
+                {
+                    "name": "front_end_status",
+                    "type": "Text"
+                },
+                {
+                    "name": "planned_data_start",
+                    "type": "Date"
+                },
+                {
+                    "name": "planned_data_stop",
+                    "type": "Date"
+                },
+                {
+                    "name": "first_frame_start",
+                    "type": "Date"
+                },
+                {
+                    "name": "last_frame_stop",
+                    "type": "Date"
+                },
+                {
+                    "name": "delivery_push_status",
+                    "type": "Text"
+                },
+                {
+                    "name": "start_delivery",
+                    "type": "Date"
+                },
+                {
+                    "name": "stop_delivery",
+                    "type": "Date"
+                },
+                {
+                    "name": "number_of_chunks",
+                    "type": "Integer"
+                },
+                {
+                    "name": "overall_data_volume",
+                    "type": "Long"
+                },
+                {
+                    "name": "overall_number_of_downlinked_frames",
+                    "type": "Long"
+                },
+                {
+                    "name": "overall_number_of_bad_downlinked_frames",
+                    "type": "Long"
+                },
+                {
+                    "name": "fer_downlink",
+                    "type": "Float"
+                },
+                {
+                    "name": "overall_number_of_data_acquired_frames",
+                    "type": "Long"
+                },
+                {
+                    "name": "overall_number_of_bad_data_acquired_frames",
+                    "type": "Long"
+                },
+                {
+                    "name": "fer_data",
+                    "type": "Float"
+                },
+                {
+                    "name": "notes",
+                    "type": "Text"
+                },
+                {
+                    "name": "interface_name",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "production_service_type",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "production_service_name",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "ground_station",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "report_type",
+                    "type": "Keyword"
+                }
+            ],
+            "partition_field": "ingestionTime",
+            "partition_format": "static"
+        }
+    ]
+}

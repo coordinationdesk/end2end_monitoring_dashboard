@@ -1,0 +1,52 @@
+
+.s3SecretName: &s3SecretName s3-secrets
+
+postgresql-sa:
+  enabled: true
+  primary:
+    extraEnvVarsSecret: maas-secret
+    initdb:
+      scripts:
+        setup-grafana.sql: |
+          \set pass `echo "$GF_DATABASE_PASSWORD"`
+          CREATE DATABASE grafana;
+          CREATE USER grafana WITH PASSWORD :'pass';
+          ALTER DATABASE grafana OWNER TO grafana;
+
+psqlbackup:
+  enabled: true
+  nodeSelector: 
+    magnum.openstack.org/role: front
+  image:
+    registry: "localhost:32000"
+    repository: "maas/psql-client-s3"
+    tag: latest
+  env:
+    - name: LABEL
+      value: cds-prd
+    - name: KEEP_FILES_NUMBER
+      value: "30"
+    - name: DBHOSTNAME
+      value: cds-prd-front-db-postgresql-sa.front
+    - name: DBUSERNAME
+      value: postgres
+    - name: PGPASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: cds-prd-front-db-postgresql-sa
+          key: postgres-password
+    - name: S3_ENDPOINT
+      valueFrom:
+        secretKeyRef:
+          name: *s3SecretName
+          key: S3_ENDPOINT
+    - name: S3_KEY_ID
+      valueFrom:
+        secretKeyRef:
+          name: *s3SecretName
+          key: S3_KEY_ID
+    - name: S3_ACCESS_KEY
+      valueFrom:
+        secretKeyRef:
+          name: *s3SecretName
+          key: S3_ACCESS_KEY

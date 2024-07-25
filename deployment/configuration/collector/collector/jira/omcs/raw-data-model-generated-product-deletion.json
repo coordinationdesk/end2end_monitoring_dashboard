@@ -1,0 +1,20 @@
+{
+    "models": [
+        {
+            "index": "raw-data-product-deletion",
+            "name": "ProductDeletion",
+            "fields": [
+                {
+                    "name": "product_name",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "interface_type",
+                    "type": "Keyword"
+                }
+            ],
+            "partition_field": "ingestionTime",
+            "partition_format": "static"
+        }
+    ]
+}
