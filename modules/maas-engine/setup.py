@@ -1,5 +1,5 @@
 """
-    Setup file for maas-engine.
+    Setup file for maas-cds.
     Use setup.cfg to configure your project.
 
     This file was generated with PyScaffold 4.4.
@@ -10,7 +10,7 @@ from setuptools import setup
 
 if __name__ == "__main__":
     try:
-        setup(use_scm_version={"version_scheme": "no-guess-dev"})
+        setup(use_scm_version={"version_scheme": "no-guess-dev"},version="2.2.2")
     except:  # noqa
         print(
             "\n\nAn error occurred while building the project, "

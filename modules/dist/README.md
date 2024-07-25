@@ -1,1 +1,0 @@
-This folder is the maas modules build folder.
