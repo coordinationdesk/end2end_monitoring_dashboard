@@ -85,7 +85,8 @@ Grafana also allows you to use many datasources other than OpenSearch
 
 ### Detailled data flow from collect to engine
 
-![Collect Topology And Engine](collect-topology)
+![Collect Topology And Engine][collect-topology]
+
 [collect-topology]: assets/collect-topology.png "Collect topology"
 
 ### MaaS Class
@@ -96,7 +97,7 @@ Grafana also allows you to use many datasources other than OpenSearch
 
 ### Processing Chain Draw
 
-![Processing Chain Draw](processing-chain-abstract)
+![Processing Chain Draw][processing-chain-abstract]
 
 [processing-chain-abstract]: assets/processing-chain-abstract.png "Processing Chain Abstract"
 
