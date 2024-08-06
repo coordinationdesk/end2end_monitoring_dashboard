@@ -10,7 +10,7 @@ It provides specifics dashboards to monitor Copernicus Sentinel productions.
 
 In your web browser go to Omcs url : https://omcs.copernicus.eu/grafana.
 
-![Omcs loging page](../assets/omcs_loging.png)
+![Omcs loging page](assets/omcs_loging.png)
 
 Use your credentials to connect.
 
@@ -18,18 +18,18 @@ Use your credentials to connect.
 
 You are now connected to the OMCS home page:
 
-![Omcs home page](../assets/omcs_home.png)
+![Omcs home page](assets/omcs_home.png)
 
 You can find in this page some sections like Home link, Breadcrumb, Menu ...
 
-![Omcs home page](../assets/omcs_home_explained.png)
+![Omcs home page](assets/omcs_home_explained.png)
 
-- ![](../assets/grafana_icon.png)Home link, to go to omcs home page (visible on all omcs pages)
-- ![](../assets/search_tool.png)Global search bar, providing links to graphana resources like dashboard, help, ... 
-- ![](../assets/help.png)Grafana help link.
-- ![](../assets/news.png)Grafana news link.
-- ![](../assets/user.png)User menu link.
-- ![](../assets/menu.png)Menu buton, display Grafana menu.
+- ![](assets/grafana_icon.png)Home link, to go to omcs home page (visible on all omcs pages)
+- ![](assets/search_tool.png)Global search bar, providing links to graphana resources like dashboard, help, ... 
+- ![](assets/help.png)Grafana help link.
+- ![](assets/news.png)Grafana news link.
+- ![](assets/user.png)User menu link.
+- ![](assets/menu.png)Menu buton, display Grafana menu.
 - Bread crum bar.
 - Release informations (release date, version).
 - Omcs dashboards menu, links to main topics dashboards lists.
@@ -40,7 +40,7 @@ You can find in this page some sections like Home link, Breadcrumb, Menu ...
 
 The menu provider is the Grafana standard menu.
 
-![Omcs menu](../assets/omcs_menu.png)
+![Omcs menu](assets/omcs_menu.png)
 
 It provides services to:
 
@@ -71,7 +71,7 @@ Details are provided chapter **OMCS Dashboard Description**.
 
 The figure below presents an Omcs dashboard:
 
-![Omcs dashboard](../assets/dashboard_usage.png)
+![Omcs dashboard](assets/dashboard_usage.png)
 
 Omcs dashboards presents generally some tools bars, filters selectors, the Grafana time selector, dashboard description.
 
@@ -84,7 +84,7 @@ From top to bottom:
 
 The figure below presents the same Omcs dashboard explained:
 
-![Omcs dashboard explained](../assets/dashboard_usage_explained.png)
+![Omcs dashboard explained](assets/dashboard_usage_explained.png)
 
 ## Dashboards Panels and Datasources
 
@@ -100,11 +100,11 @@ This section present a quick description of the time selector, a complete descri
 Datasources have a time reference field, times selection filter the queries on this time field.
 It provides samrts function to select time range, time zoom and refreshing dashboard on time changes.
 
-![Time selector](../assets/time_selection.png)
+![Time selector](assets/time_selection.png)
 
 Clicking on Time seletion part will display an avanced tool to set time range.
 
-![Time selector tools](../assets/time_selection_expended.png)
+![Time selector tools](assets/time_selection_expended.png)
 
 ## Filters selector usage
 
@@ -112,35 +112,35 @@ This section presents a quick description of the filter selector, a complete des
 
 The figure below presents a Filters selector bar, in this case there is a set of filters (that could be linked to others) and the Ad-Hoc filter .
 
-![Filters selector bar](../assets/grafana_filter_bar.png)
+![Filters selector bar](assets/grafana_filter_bar.png)
 ### Specifics filters usage.
 
 Use the drop down box to select values filtereds.
 
 Drop down box:
 
-![](../assets/grafana_filter_conf_0.png)
+![](assets/grafana_filter_conf_0.png)
 
 Drop down box selected:
 
-![](../assets/grafana_filter_conf_1.png)
+![](assets/grafana_filter_conf_1.png)
 
 Expresion filter:
 
-![](../assets/grafana_filter_conf_2.png)
+![](assets/grafana_filter_conf_2.png)
 
 Multiples selection:
 
-![](../assets/grafana_filter_conf_3.png)
+![](assets/grafana_filter_conf_3.png)
 
 Specifics filters could be chained, ie some filterings selection could reduce the set of values disponibles in others selectors.
 In this exemple the list of ***Product types*** displayed depends on selected ***Product Level***,***Satellite*** and ***Mission*** .
 
-![](../assets/grafana_filter_conf_chained_1.png)
+![](assets/grafana_filter_conf_chained_1.png)
 
-![](../assets/grafana_filter_conf_chained_1.png)
+![](assets/grafana_filter_conf_chained_1.png)
 
-![](../assets/grafana_filter_conf_chained_2.png)
+![](assets/grafana_filter_conf_chained_2.png)
 
 ### Ad-hoc filter usage. 
 
@@ -149,20 +149,20 @@ You  cans set a serie of Ad-Hoc filters by clicking on the + sign.
 
 Add Ad-Hoc filter:
 
-![](../assets/grafana_filter_ad_hoc_conf_0.png)
+![](assets/grafana_filter_ad_hoc_conf_0.png)
 
 Allow selection of query results fields:
 
-![](../assets/grafana_filter_ad_hoc_conf_1.png)
+![](assets/grafana_filter_ad_hoc_conf_1.png)
 
 Allow selection of opperators:
 
-![](../assets/grafana_filter_ad_hoc_conf_2.png)
+![](assets/grafana_filter_ad_hoc_conf_2.png)
 
 Allow set of selecteds values:
 
-![](../assets/grafana_filter_ad_hoc_conf_3.png)
+![](assets/grafana_filter_ad_hoc_conf_3.png)
 
 Ad-Hoc filter setted:
 
-![](../assets/grafana_filter_ad_hoc_conf_4.png)
+![](assets/grafana_filter_ad_hoc_conf_4.png)
