@@ -1,6 +1,6 @@
 # `CSVExtractor`
 
-```eval_rst
+```{eval-rst}
 :class:`maas_collector.rawdata.extractors.CsvExtractor`
 ` uses the :py:mod:`csv` module of the python standard library to read dictionnary from csv files.
 ```

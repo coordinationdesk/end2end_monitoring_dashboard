@@ -1,0 +1,1798 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 10,
+      "panels": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "gridPos": {
+            "h": 19,
+            "w": 24,
+            "x": 0,
+            "y": 1
+          },
+          "id": 11,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "The System Technical Budget Schematic View - S1 is based on \n\n\n\n- the data budget reference document [\\[ESA-EOPG-EOPGC-TN-9\\] CSC Operations \u2013 ESA Framework \u2013 System Technical Budget.pdf](https://omcs.atlassian.net/wiki/download/attachments/66158618/%5BESA-EOPG-EOPGC-TN-9%5D%20CSC%20Operations%20%E2%80%93%20ESA%20Framework%20%E2%80%93%20System%20Technical%20Budget.pdf?api=v2).\n\n\n\n- the data flow reference document [\\[ESA-EOPG-EOPGC-TN-58\\] CSC GS Data Flow Configuration.pdf](https://omcs.atlassian.net/wiki/download/attachments/66158618/%5BESA-EOPG-EOPGC-TN-58%5D%20CSC%20GS%20Data%20Flow%20Configuration.pdf?api=v2).\n\n\n\nData flow document extraction is visible in the [\"Data Flow dashboard\"](./d/MfmL_E4Vz/golden-rules-and-data-flow?orgId=1) \n\n\n\n# Data selected\n\n\n\nFrom [\\[ESA-EOPG-EOPGC-TN-9\\] CSC Operations \u2013 ESA Framework \u2013 System Technical Budget.pdf](https://omcs.atlassian.net/wiki/download/attachments/66158618/%5BESA-EOPG-EOPGC-TN-9%5D%20CSC%20Operations%20%E2%80%93%20ESA%20Framework%20%E2%80%93%20System%20Technical%20Budget.pdf?api=v2) document some assuption are made to provide the System Technical Budget dashboards.\n\n\n\nFor System Technical Budget Schematic View - S1 the data published at PRIP, LTA or DD and DSIB files are selected.\n\n\n\n - Section Data Aquisition data from DSIB files.\n\n - Section Data Production data published at PRIP.\n\n - Section Data Preservation data published at LTA.\n\n - Section Data Distribution data published at DD.\n\n\n\n**Data collection** are considered as consistent since **01/08/2022**\n\n**Data collection** for **aquisition** are considered as consistent since **15/03/2023**\n\n\n\nValues are mean by satellite number in mission. (i.e. S1 1 satellite, S2 mean of 2 satellite, S3 mean of 2 satellite; S5 1 satellite )\n\n\n\nFor S1, S2, S3 values are mean of the 4 LTA, for S5 values came from S5P_DLR.\n\n\n\nRmq : There is today no S5 L0 data published at prip.\n\n\n\n# Annexes\n\n\n\n## Product type selected\n\n\n\nThe tables below present how products types are classified in STB level and STB timeliness:\n\n\n\n### For panel **Yearly Overall Data Flow S1 SATELLITE**:\n\n\n\n|Mission|STB Level|STB Timeliness|Real timeliness|Misc.|Product Type|\n|---|---|---|---|---|---|\n|S1|||NRT,NRT-PT|ACQ VOL|EW_GRDM_1A, EW_GRDM_1S, EW_OCN__2A, EW_OCN__2S, EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_OCN__2A, IW_OCN__2S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, IW_SLC__1A, IW_SLC__1S|\n|S1|||NTC|ACQ VOL|EW_GRDM_1A, EW_GRDM_1S, EW_OCN__2A, EW_OCN__2S, EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_OCN__2A, IW_OCN__2S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, IW_SLC__1A, IW_SLC__1S, RF_RAW, S1_GRDH_1A, S1_GRDH_1S, S1_OCN__2A, S1_OCN__2S, S1_RAW__0A, S1_RAW__0C, S1_RAW__0N, S1_RAW__0S, S1_SLC__1A, S1_SLC__1S, S2_GRDH_1A, S2_GRDH_1S, S2_OCN__2A, S2_OCN__2S, S2_RAW__0A, S2_RAW__0C, S2_RAW__0N, S2_RAW__0S, S2_SLC__1A, S2_SLC__1S, S3_GRDH_1A, S3_GRDH_1S, S3_OCN__2A, S3_OCN__2S, S3_RAW__0A, S3_RAW__0C, S3_RAW__0N, S3_RAW__0S, S3_SLC__1A, S3_SLC__1S, S4_GRDH_1A, S4_GRDH_1S, S4_OCN__2A, S4_OCN__2S, S4_RAW__0A, S4_RAW__0C, S4_RAW__0N, S4_RAW__0S, S4_SLC__1A, S4_SLC__1S, S5_GRDH_1A, S5_GRDH_1S, S5_OCN__2A, S5_OCN__2S, S5_RAW__0A, S5_RAW__0C, S5_RAW__0N, S5_RAW__0S, S5_SLC__1A, S5_SLC__1S, S6_GRDH_1A, S6_GRDH_1S, S6_OCN__2A, S6_OCN__2S, S6_RAW__0A, S6_RAW__0C, S6_RAW__0N, S6_RAW__0S, S6_SLC__1A, S6_SLC__1S, WV_OCN__2A, WV_OCN__2S, WV_RAW__0A, WV_RAW__0C, WV_RAW__0N, WV_RAW__0S, WV_SLC__1A, WV_SLC__1S|\n|S1|||NRT,NRT-PT|ACQ COUNT|EW_GRDM_1A, EW_GRDM_1S, EW_OCN__2A, EW_OCN__2S, EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_OCN__2A, IW_OCN__2S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, IW_SLC__1A, IW_SLC__1S|\n|S1|||NTC|ACQ COUNT|EW_GRDM_1A, EW_GRDM_1S, EW_OCN__2A, EW_OCN__2S, EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_OCN__2A, IW_OCN__2S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, IW_SLC__1A, IW_SLC__1S, RF_RAW, S1_GRDH_1A, S1_GRDH_1S, S1_OCN__2A, S1_OCN__2S, S1_RAW__0A, S1_RAW__0C, S1_RAW__0N, S1_RAW__0S, S1_SLC__1A, S1_SLC__1S, S2_GRDH_1A, S2_GRDH_1S, S2_OCN__2A, S2_OCN__2S, S2_RAW__0A, S2_RAW__0C, S2_RAW__0N, S2_RAW__0S, S2_SLC__1A, S2_SLC__1S, S3_GRDH_1A, S3_GRDH_1S, S3_OCN__2A, S3_OCN__2S, S3_RAW__0A, S3_RAW__0C, S3_RAW__0N, S3_RAW__0S, S3_SLC__1A, S3_SLC__1S, S4_GRDH_1A, S4_GRDH_1S, S4_OCN__2A, S4_OCN__2S, S4_RAW__0A, S4_RAW__0C, S4_RAW__0N, S4_RAW__0S, S4_SLC__1A, S4_SLC__1S, S5_GRDH_1A, S5_GRDH_1S, S5_OCN__2A, S5_OCN__2S, S5_RAW__0A, S5_RAW__0C, S5_RAW__0N, S5_RAW__0S, S5_SLC__1A, S5_SLC__1S, S6_GRDH_1A, S6_GRDH_1S, S6_OCN__2A, S6_OCN__2S, S6_RAW__0A, S6_RAW__0C, S6_RAW__0N, S6_RAW__0S, S6_SLC__1A, S6_SLC__1S, WV_OCN__2A, WV_OCN__2S, WV_RAW__0A, WV_RAW__0C, WV_RAW__0N, WV_RAW__0S, WV_SLC__1A, WV_SLC__1S|\n|S1|L0|NRT|NRT,NRT-PT|PROD VOL|EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S|\n|S1|L0|NRT|NRT,NRT-PT|PROD COUNT|EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S|\n|S1|L1|NRT|NRT,NRT-PT|PROD VOL|EW_GRDM_1A, EW_GRDM_1S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_SLC__1A, IW_SLC__1S|\n|S1|L1|NRT|NRT,NRT-PT|PROD COUNT|EW_GRDM_1A, EW_GRDM_1S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_SLC__1A, IW_SLC__1S|\n|S1|L0|NTC|NTC|PROD VOL|EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, RF_RAW, S1_RAW__0A, S1_RAW__0C, S1_RAW__0N, S1_RAW__0S, S2_RAW__0A, S2_RAW__0C, S2_RAW__0N, S2_RAW__0S, S3_RAW__0A, S3_RAW__0C, S3_RAW__0N, S3_RAW__0S, S4_RAW__0A, S4_RAW__0C, S4_RAW__0N, S4_RAW__0S, S5_RAW__0A, S5_RAW__0C, S5_RAW__0N, S5_RAW__0S, S6_RAW__0A, S6_RAW__0C, S6_RAW__0N, S6_RAW__0S, WV_RAW__0A, WV_RAW__0C, WV_RAW__0N, WV_RAW__0S|\n|S1|L0|NTC|NTC|PROD COUNT|EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, RF_RAW, S1_RAW__0A, S1_RAW__0C, S1_RAW__0N, S1_RAW__0S, S2_RAW__0A, S2_RAW__0C, S2_RAW__0N, S2_RAW__0S, S3_RAW__0A, S3_RAW__0C, S3_RAW__0N, S3_RAW__0S, S4_RAW__0A, S4_RAW__0C, S4_RAW__0N, S4_RAW__0S, S5_RAW__0A, S5_RAW__0C, S5_RAW__0N, S5_RAW__0S, S6_RAW__0A, S6_RAW__0C, S6_RAW__0N, S6_RAW__0S, WV_RAW__0A, WV_RAW__0C, WV_RAW__0N, WV_RAW__0S|\n|S1|L1|NTC|NTC|PROD VOL|EW_GRDM_1A, EW_GRDM_1S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_SLC__1A, IW_SLC__1S, S1_GRDH_1A, S1_GRDH_1S, S1_SLC__1A, S1_SLC__1S, S2_GRDH_1A, S2_GRDH_1S, S2_SLC__1A, S2_SLC__1S, S3_GRDH_1A, S3_GRDH_1S, S3_SLC__1A, S3_SLC__1S, S4_GRDH_1A, S4_GRDH_1S, S4_SLC__1A, S4_SLC__1S, S5_GRDH_1A, S5_GRDH_1S, S5_SLC__1A, S5_SLC__1S, S6_GRDH_1A, S6_GRDH_1S, S6_SLC__1A, S6_SLC__1S, WV_SLC__1A, WV_SLC__1S|\n|S1|L1|NTC|NTC|PROD COUNT|EW_GRDM_1A, EW_GRDM_1S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_SLC__1A, IW_SLC__1S, S1_GRDH_1A, S1_GRDH_1S, S1_SLC__1A, S1_SLC__1S, S2_GRDH_1A, S2_GRDH_1S, S2_SLC__1A, S2_SLC__1S, S3_GRDH_1A, S3_GRDH_1S, S3_SLC__1A, S3_SLC__1S, S4_GRDH_1A, S4_GRDH_1S, S4_SLC__1A, S4_SLC__1S, S5_GRDH_1A, S5_GRDH_1S, S5_SLC__1A, S5_SLC__1S, S6_GRDH_1A, S6_GRDH_1S, S6_SLC__1A, S6_SLC__1S, WV_SLC__1A, WV_SLC__1S|\n|S1|L2|NRT|NRT,NRT-PT|PROD VOL|EW_OCN__2A, EW_OCN__2S, IW_OCN__2A, IW_OCN__2S|\n|S1|L2|NRT|NRT,NRT-PT|PROD COUNT|EW_OCN__2A, EW_OCN__2S, IW_OCN__2A, IW_OCN__2S|\n|S1|L2|NTC|NTC|PROD VOL|EW_OCN__2A, EW_OCN__2S, IW_OCN__2A, IW_OCN__2S, S1_OCN__2A, S1_OCN__2S, S2_OCN__2A, S2_OCN__2S, S3_OCN__2A, S3_OCN__2S, S4_OCN__2A, S4_OCN__2S, S5_OCN__2A, S5_OCN__2S, S6_OCN__2A, S6_OCN__2S, WV_OCN__2A, WV_OCN__2S|\n|S1|L2|NTC|NTC|PROD COUNT|EW_OCN__2A, EW_OCN__2S, IW_OCN__2A, IW_OCN__2S, S1_OCN__2A, S1_OCN__2S, S2_OCN__2A, S2_OCN__2S, S3_OCN__2A, S3_OCN__2S, S4_OCN__2A, S4_OCN__2S, S5_OCN__2A, S5_OCN__2S, S6_OCN__2A, S6_OCN__2S, WV_OCN__2A, WV_OCN__2S|\n|S1||NRT-NTC|NRT,NRT-PT|PROD TOT VOL|EW_GRDM_1A, EW_GRDM_1S, EW_OCN__2A, EW_OCN__2S, EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_OCN__2A, IW_OCN__2S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, IW_SLC__1A, IW_SLC__1S|\n|S1||NRT-NTC|NTC|PROD TOT VOL|EW_GRDM_1A, EW_GRDM_1S, EW_OCN__2A, EW_OCN__2S, EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_OCN__2A, IW_OCN__2S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, IW_SLC__1A, IW_SLC__1S, RF_RAW, S1_GRDH_1A, S1_GRDH_1S, S1_OCN__2A, S1_OCN__2S, S1_RAW__0A, S1_RAW__0C, S1_RAW__0N, S1_RAW__0S, S1_SLC__1A, S1_SLC__1S, S2_GRDH_1A, S2_GRDH_1S, S2_OCN__2A, S2_OCN__2S, S2_RAW__0A, S2_RAW__0C, S2_RAW__0N, S2_RAW__0S, S2_SLC__1A, S2_SLC__1S, S3_GRDH_1A, S3_GRDH_1S, S3_OCN__2A, S3_OCN__2S, S3_RAW__0A, S3_RAW__0C, S3_RAW__0N, S3_RAW__0S, S3_SLC__1A, S3_SLC__1S, S4_GRDH_1A, S4_GRDH_1S, S4_OCN__2A, S4_OCN__2S, S4_RAW__0A, S4_RAW__0C, S4_RAW__0N, S4_RAW__0S, S4_SLC__1A, S4_SLC__1S, S5_GRDH_1A, S5_GRDH_1S, S5_OCN__2A, S5_OCN__2S, S5_RAW__0A, S5_RAW__0C, S5_RAW__0N, S5_RAW__0S, S5_SLC__1A, S5_SLC__1S, S6_GRDH_1A, S6_GRDH_1S, S6_OCN__2A, S6_OCN__2S, S6_RAW__0A, S6_RAW__0C, S6_RAW__0N, S6_RAW__0S, S6_SLC__1A, S6_SLC__1S, WV_OCN__2A, WV_OCN__2S, WV_RAW__0A, WV_RAW__0C, WV_RAW__0N, WV_RAW__0S, WV_SLC__1A, WV_SLC__1S|\n|S1||NRT-NTC|NRT,NRT-PT|PROD TOT COUNT|EW_GRDM_1A, EW_GRDM_1S, EW_OCN__2A, EW_OCN__2S, EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_OCN__2A, IW_OCN__2S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, IW_SLC__1A, IW_SLC__1S|\n|S1||NRT-NTC|NTC|PROD TOT COUNT|EW_GRDM_1A, EW_GRDM_1S, EW_OCN__2A, EW_OCN__2S, EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_OCN__2A, IW_OCN__2S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, IW_SLC__1A, IW_SLC__1S, RF_RAW, S1_GRDH_1A, S1_GRDH_1S, S1_OCN__2A, S1_OCN__2S, S1_RAW__0A, S1_RAW__0C, S1_RAW__0N, S1_RAW__0S, S1_SLC__1A, S1_SLC__1S, S2_GRDH_1A, S2_GRDH_1S, S2_OCN__2A, S2_OCN__2S, S2_RAW__0A, S2_RAW__0C, S2_RAW__0N, S2_RAW__0S, S2_SLC__1A, S2_SLC__1S, S3_GRDH_1A, S3_GRDH_1S, S3_OCN__2A, S3_OCN__2S, S3_RAW__0A, S3_RAW__0C, S3_RAW__0N, S3_RAW__0S, S3_SLC__1A, S3_SLC__1S, S4_GRDH_1A, S4_GRDH_1S, S4_OCN__2A, S4_OCN__2S, S4_RAW__0A, S4_RAW__0C, S4_RAW__0N, S4_RAW__0S, S4_SLC__1A, S4_SLC__1S, S5_GRDH_1A, S5_GRDH_1S, S5_OCN__2A, S5_OCN__2S, S5_RAW__0A, S5_RAW__0C, S5_RAW__0N, S5_RAW__0S, S5_SLC__1A, S5_SLC__1S, S6_GRDH_1A, S6_GRDH_1S, S6_OCN__2A, S6_OCN__2S, S6_RAW__0A, S6_RAW__0C, S6_RAW__0N, S6_RAW__0S, S6_SLC__1A, S6_SLC__1S, WV_OCN__2A, WV_OCN__2S, WV_RAW__0A, WV_RAW__0C, WV_RAW__0N, WV_RAW__0S, WV_SLC__1A, WV_SLC__1S|\n|S1|L0|NRT-NTC|NRT,NRT-PT|LTA VOL|EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S|\n|S1|L0|NRT-NTC|NTC|LTA VOL|EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, RF_RAW, S1_RAW__0A, S1_RAW__0C, S1_RAW__0N, S1_RAW__0S, S2_RAW__0A, S2_RAW__0C, S2_RAW__0N, S2_RAW__0S, S3_RAW__0A, S3_RAW__0C, S3_RAW__0N, S3_RAW__0S, S4_RAW__0A, S4_RAW__0C, S4_RAW__0N, S4_RAW__0S, S5_RAW__0A, S5_RAW__0C, S5_RAW__0N, S5_RAW__0S, S6_RAW__0A, S6_RAW__0C, S6_RAW__0N, S6_RAW__0S, WV_RAW__0A, WV_RAW__0C, WV_RAW__0N, WV_RAW__0S|\n|S1|L0|NRT-NTC|NRT,NRT-PT|LTA COUNT|EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S|\n|S1|L0|NRT-NTC|NTC|LTA COUNT|EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, RF_RAW, S1_RAW__0A, S1_RAW__0C, S1_RAW__0N, S1_RAW__0S, S2_RAW__0A, S2_RAW__0C, S2_RAW__0N, S2_RAW__0S, S3_RAW__0A, S3_RAW__0C, S3_RAW__0N, S3_RAW__0S, S4_RAW__0A, S4_RAW__0C, S4_RAW__0N, S4_RAW__0S, S5_RAW__0A, S5_RAW__0C, S5_RAW__0N, S5_RAW__0S, S6_RAW__0A, S6_RAW__0C, S6_RAW__0N, S6_RAW__0S, WV_RAW__0A, WV_RAW__0C, WV_RAW__0N, WV_RAW__0S|\n|S1|L0|NRT-NTC|NRT,NRT-PT|DD VOL|EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S|\n|S1|L0|NRT-NTC|NTC|DD VOL|EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, RF_RAW, S1_RAW__0A, S1_RAW__0C, S1_RAW__0N, S1_RAW__0S, S2_RAW__0A, S2_RAW__0C, S2_RAW__0N, S2_RAW__0S, S3_RAW__0A, S3_RAW__0C, S3_RAW__0N, S3_RAW__0S, S4_RAW__0A, S4_RAW__0C, S4_RAW__0N, S4_RAW__0S, S5_RAW__0A, S5_RAW__0C, S5_RAW__0N, S5_RAW__0S, S6_RAW__0A, S6_RAW__0C, S6_RAW__0N, S6_RAW__0S, WV_RAW__0A, WV_RAW__0C, WV_RAW__0N, WV_RAW__0S|\n|S1|L0|NRT-NTC|NRT,NRT-PT|DD COUNT|EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S|\n|S1|L0|NRT-NTC|NTC|DD COUNT|EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, RF_RAW, S1_RAW__0A, S1_RAW__0C, S1_RAW__0N, S1_RAW__0S, S2_RAW__0A, S2_RAW__0C, S2_RAW__0N, S2_RAW__0S, S3_RAW__0A, S3_RAW__0C, S3_RAW__0N, S3_RAW__0S, S4_RAW__0A, S4_RAW__0C, S4_RAW__0N, S4_RAW__0S, S5_RAW__0A, S5_RAW__0C, S5_RAW__0N, S5_RAW__0S, S6_RAW__0A, S6_RAW__0C, S6_RAW__0N, S6_RAW__0S, WV_RAW__0A, WV_RAW__0C, WV_RAW__0N, WV_RAW__0S|\n|S1|L1|NRT-NTC|NRT,NRT-PT|DD VOL|EW_GRDM_1A, EW_GRDM_1S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_SLC__1A, IW_SLC__1S|\n|S1|L1|NRT-NTC|NTC|DD VOL|EW_GRDM_1A, EW_GRDM_1S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_SLC__1A, IW_SLC__1S, S1_GRDH_1A, S1_GRDH_1S, S1_SLC__1A, S1_SLC__1S, S2_GRDH_1A, S2_GRDH_1S, S2_SLC__1A, S2_SLC__1S, S3_GRDH_1A, S3_GRDH_1S, S3_SLC__1A, S3_SLC__1S, S4_GRDH_1A, S4_GRDH_1S, S4_SLC__1A, S4_SLC__1S, S5_GRDH_1A, S5_GRDH_1S, S5_SLC__1A, S5_SLC__1S, S6_GRDH_1A, S6_GRDH_1S, S6_SLC__1A, S6_SLC__1S, WV_SLC__1A, WV_SLC__1S|\n|S1|L1|NRT-NTC|NRT,NRT-PT|DD COUNT|EW_GRDM_1A, EW_GRDM_1S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_SLC__1A, IW_SLC__1S|\n|S1|L1|NRT-NTC|NTC|DD COUNT|EW_GRDM_1A, EW_GRDM_1S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_SLC__1A, IW_SLC__1S, S1_GRDH_1A, S1_GRDH_1S, S1_SLC__1A, S1_SLC__1S, S2_GRDH_1A, S2_GRDH_1S, S2_SLC__1A, S2_SLC__1S, S3_GRDH_1A, S3_GRDH_1S, S3_SLC__1A, S3_SLC__1S, S4_GRDH_1A, S4_GRDH_1S, S4_SLC__1A, S4_SLC__1S, S5_GRDH_1A, S5_GRDH_1S, S5_SLC__1A, S5_SLC__1S, S6_GRDH_1A, S6_GRDH_1S, S6_SLC__1A, S6_SLC__1S, WV_SLC__1A, WV_SLC__1S|\n|S1|L2|NRT-NTC|NRT,NRT-PT|DD VOL|EW_OCN__2A, EW_OCN__2S, IW_OCN__2A, IW_OCN__2S|\n|S1|L2|NRT-NTC|NTC|DD VOL|EW_OCN__2A, EW_OCN__2S, IW_OCN__2A, IW_OCN__2S, S1_OCN__2A, S1_OCN__2S, S2_OCN__2A, S2_OCN__2S, S3_OCN__2A, S3_OCN__2S, S4_OCN__2A, S4_OCN__2S, S5_OCN__2A, S5_OCN__2S, S6_OCN__2A, S6_OCN__2S, WV_OCN__2A, WV_OCN__2S|\n|S1|L2|NRT-NTC|NRT,NRT-PT|DD COUNT|EW_OCN__2A, EW_OCN__2S, IW_OCN__2A, IW_OCN__2S|\n|S1|L2|NRT-NTC|NTC|DD COUNT|EW_OCN__2A, EW_OCN__2S, IW_OCN__2A, IW_OCN__2S, S1_OCN__2A, S1_OCN__2S, S2_OCN__2A, S2_OCN__2S, S3_OCN__2A, S3_OCN__2S, S4_OCN__2A, S4_OCN__2S, S5_OCN__2A, S5_OCN__2S, S6_OCN__2A, S6_OCN__2S, WV_OCN__2A, WV_OCN__2S|\n|S1||NRT-NTC|NRT,NRT-PT|DD TOT VOL|EW_GRDM_1A, EW_GRDM_1S, EW_OCN__2A, EW_OCN__2S, EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_OCN__2A, IW_OCN__2S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, IW_SLC__1A, IW_SLC__1S|\n|S1||NRT-NTC|NTC|DD TOT VOL|EW_GRDM_1A, EW_GRDM_1S, EW_OCN__2A, EW_OCN__2S, EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_OCN__2A, IW_OCN__2S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, IW_SLC__1A, IW_SLC__1S, RF_RAW, S1_GRDH_1A, S1_GRDH_1S, S1_OCN__2A, S1_OCN__2S, S1_RAW__0A, S1_RAW__0C, S1_RAW__0N, S1_RAW__0S, S1_SLC__1A, S1_SLC__1S, S2_GRDH_1A, S2_GRDH_1S, S2_OCN__2A, S2_OCN__2S, S2_RAW__0A, S2_RAW__0C, S2_RAW__0N, S2_RAW__0S, S2_SLC__1A, S2_SLC__1S, S3_GRDH_1A, S3_GRDH_1S, S3_OCN__2A, S3_OCN__2S, S3_RAW__0A, S3_RAW__0C, S3_RAW__0N, S3_RAW__0S, S3_SLC__1A, S3_SLC__1S, S4_GRDH_1A, S4_GRDH_1S, S4_OCN__2A, S4_OCN__2S, S4_RAW__0A, S4_RAW__0C, S4_RAW__0N, S4_RAW__0S, S4_SLC__1A, S4_SLC__1S, S5_GRDH_1A, S5_GRDH_1S, S5_OCN__2A, S5_OCN__2S, S5_RAW__0A, S5_RAW__0C, S5_RAW__0N, S5_RAW__0S, S5_SLC__1A, S5_SLC__1S, S6_GRDH_1A, S6_GRDH_1S, S6_OCN__2A, S6_OCN__2S, S6_RAW__0A, S6_RAW__0C, S6_RAW__0N, S6_RAW__0S, S6_SLC__1A, S6_SLC__1S, WV_OCN__2A, WV_OCN__2S, WV_RAW__0A, WV_RAW__0C, WV_RAW__0N, WV_RAW__0S, WV_SLC__1A, WV_SLC__1S|\n|S1||NRT-NTC|NRT,NRT-PT|DD TOT COUNT|EW_GRDM_1A, EW_GRDM_1S, EW_OCN__2A, EW_OCN__2S, EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_OCN__2A, IW_OCN__2S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, IW_SLC__1A, IW_SLC__1S|\n|S1||NRT-NTC|NTC|DD TOT COUNT|EW_GRDM_1A, EW_GRDM_1S, EW_OCN__2A, EW_OCN__2S, EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_OCN__2A, IW_OCN__2S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, IW_SLC__1A, IW_SLC__1S, RF_RAW, S1_GRDH_1A, S1_GRDH_1S, S1_OCN__2A, S1_OCN__2S, S1_RAW__0A, S1_RAW__0C, S1_RAW__0N, S1_RAW__0S, S1_SLC__1A, S1_SLC__1S, S2_GRDH_1A, S2_GRDH_1S, S2_OCN__2A, S2_OCN__2S, S2_RAW__0A, S2_RAW__0C, S2_RAW__0N, S2_RAW__0S, S2_SLC__1A, S2_SLC__1S, S3_GRDH_1A, S3_GRDH_1S, S3_OCN__2A, S3_OCN__2S, S3_RAW__0A, S3_RAW__0C, S3_RAW__0N, S3_RAW__0S, S3_SLC__1A, S3_SLC__1S, S4_GRDH_1A, S4_GRDH_1S, S4_OCN__2A, S4_OCN__2S, S4_RAW__0A, S4_RAW__0C, S4_RAW__0N, S4_RAW__0S, S4_SLC__1A, S4_SLC__1S, S5_GRDH_1A, S5_GRDH_1S, S5_OCN__2A, S5_OCN__2S, S5_RAW__0A, S5_RAW__0C, S5_RAW__0N, S5_RAW__0S, S5_SLC__1A, S5_SLC__1S, S6_GRDH_1A, S6_GRDH_1S, S6_OCN__2A, S6_OCN__2S, S6_RAW__0A, S6_RAW__0C, S6_RAW__0N, S6_RAW__0S, S6_SLC__1A, S6_SLC__1S, WV_OCN__2A, WV_OCN__2S, WV_RAW__0A, WV_RAW__0C, WV_RAW__0N, WV_RAW__0S, WV_SLC__1A, WV_SLC__1S|\n|S1|L0|NRT-NTC|NRT,NRT-PT|DL VOL|EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S|\n|S1|L0|NRT-NTC|NTC|DL VOL|EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, RF_RAW, S1_RAW__0A, S1_RAW__0C, S1_RAW__0N, S1_RAW__0S, S2_RAW__0A, S2_RAW__0C, S2_RAW__0N, S2_RAW__0S, S3_RAW__0A, S3_RAW__0C, S3_RAW__0N, S3_RAW__0S, S4_RAW__0A, S4_RAW__0C, S4_RAW__0N, S4_RAW__0S, S5_RAW__0A, S5_RAW__0C, S5_RAW__0N, S5_RAW__0S, S6_RAW__0A, S6_RAW__0C, S6_RAW__0N, S6_RAW__0S, WV_RAW__0A, WV_RAW__0C, WV_RAW__0N, WV_RAW__0S|\n|S1|L0|NRT-NTC|NRT,NRT-PT|DL COUNT|EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S|\n|S1|L0|NRT-NTC|NTC|DL COUNT|EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, RF_RAW, S1_RAW__0A, S1_RAW__0C, S1_RAW__0N, S1_RAW__0S, S2_RAW__0A, S2_RAW__0C, S2_RAW__0N, S2_RAW__0S, S3_RAW__0A, S3_RAW__0C, S3_RAW__0N, S3_RAW__0S, S4_RAW__0A, S4_RAW__0C, S4_RAW__0N, S4_RAW__0S, S5_RAW__0A, S5_RAW__0C, S5_RAW__0N, S5_RAW__0S, S6_RAW__0A, S6_RAW__0C, S6_RAW__0N, S6_RAW__0S, WV_RAW__0A, WV_RAW__0C, WV_RAW__0N, WV_RAW__0S|\n|S1|L1|NRT-NTC|NRT,NRT-PT|DL VOL|EW_GRDM_1A, EW_GRDM_1S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_SLC__1A, IW_SLC__1S|\n|S1|L1|NRT-NTC|NTC|DL VOL|EW_GRDM_1A, EW_GRDM_1S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_SLC__1A, IW_SLC__1S, S1_GRDH_1A, S1_GRDH_1S, S1_SLC__1A, S1_SLC__1S, S2_GRDH_1A, S2_GRDH_1S, S2_SLC__1A, S2_SLC__1S, S3_GRDH_1A, S3_GRDH_1S, S3_SLC__1A, S3_SLC__1S, S4_GRDH_1A, S4_GRDH_1S, S4_SLC__1A, S4_SLC__1S, S5_GRDH_1A, S5_GRDH_1S, S5_SLC__1A, S5_SLC__1S, S6_GRDH_1A, S6_GRDH_1S, S6_SLC__1A, S6_SLC__1S, WV_SLC__1A, WV_SLC__1S|\n|S1|L1|NRT-NTC|NRT,NRT-PT|DL COUNT|EW_GRDM_1A, EW_GRDM_1S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_SLC__1A, IW_SLC__1S|\n|S1|L1|NRT-NTC|NTC|DL COUNT|EW_GRDM_1A, EW_GRDM_1S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_SLC__1A, IW_SLC__1S, S1_GRDH_1A, S1_GRDH_1S, S1_SLC__1A, S1_SLC__1S, S2_GRDH_1A, S2_GRDH_1S, S2_SLC__1A, S2_SLC__1S, S3_GRDH_1A, S3_GRDH_1S, S3_SLC__1A, S3_SLC__1S, S4_GRDH_1A, S4_GRDH_1S, S4_SLC__1A, S4_SLC__1S, S5_GRDH_1A, S5_GRDH_1S, S5_SLC__1A, S5_SLC__1S, S6_GRDH_1A, S6_GRDH_1S, S6_SLC__1A, S6_SLC__1S, WV_SLC__1A, WV_SLC__1S|\n|S1|L2|NRT-NTC|NRT,NRT-PT|DL VOL|EW_OCN__2A, EW_OCN__2S, IW_OCN__2A, IW_OCN__2S|\n|S1|L2|NRT-NTC|NTC|DL VOL|EW_OCN__2A, EW_OCN__2S, IW_OCN__2A, IW_OCN__2S, S1_OCN__2A, S1_OCN__2S, S2_OCN__2A, S2_OCN__2S, S3_OCN__2A, S3_OCN__2S, S4_OCN__2A, S4_OCN__2S, S5_OCN__2A, S5_OCN__2S, S6_OCN__2A, S6_OCN__2S, WV_OCN__2A, WV_OCN__2S|\n|S1|L2|NRT-NTC|NRT,NRT-PT|DL COUNT|EW_OCN__2A, EW_OCN__2S, IW_OCN__2A, IW_OCN__2S|\n|S1|L2|NRT-NTC|NTC|DL COUNT|EW_OCN__2A, EW_OCN__2S, IW_OCN__2A, IW_OCN__2S, S1_OCN__2A, S1_OCN__2S, S2_OCN__2A, S2_OCN__2S, S3_OCN__2A, S3_OCN__2S, S4_OCN__2A, S4_OCN__2S, S5_OCN__2A, S5_OCN__2S, S6_OCN__2A, S6_OCN__2S, WV_OCN__2A, WV_OCN__2S|\n|S1||NRT-NTC|NRT,NRT-PT|DL TOT VOL|EW_GRDM_1A, EW_GRDM_1S, EW_OCN__2A, EW_OCN__2S, EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_OCN__2A, IW_OCN__2S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, IW_SLC__1A, IW_SLC__1S|\n|S1||NRT-NTC|NTC|DL TOT VOL|EW_GRDM_1A, EW_GRDM_1S, EW_OCN__2A, EW_OCN__2S, EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_OCN__2A, IW_OCN__2S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, IW_SLC__1A, IW_SLC__1S, RF_RAW, S1_GRDH_1A, S1_GRDH_1S, S1_OCN__2A, S1_OCN__2S, S1_RAW__0A, S1_RAW__0C, S1_RAW__0N, S1_RAW__0S, S1_SLC__1A, S1_SLC__1S, S2_GRDH_1A, S2_GRDH_1S, S2_OCN__2A, S2_OCN__2S, S2_RAW__0A, S2_RAW__0C, S2_RAW__0N, S2_RAW__0S, S2_SLC__1A, S2_SLC__1S, S3_GRDH_1A, S3_GRDH_1S, S3_OCN__2A, S3_OCN__2S, S3_RAW__0A, S3_RAW__0C, S3_RAW__0N, S3_RAW__0S, S3_SLC__1A, S3_SLC__1S, S4_GRDH_1A, S4_GRDH_1S, S4_OCN__2A, S4_OCN__2S, S4_RAW__0A, S4_RAW__0C, S4_RAW__0N, S4_RAW__0S, S4_SLC__1A, S4_SLC__1S, S5_GRDH_1A, S5_GRDH_1S, S5_OCN__2A, S5_OCN__2S, S5_RAW__0A, S5_RAW__0C, S5_RAW__0N, S5_RAW__0S, S5_SLC__1A, S5_SLC__1S, S6_GRDH_1A, S6_GRDH_1S, S6_OCN__2A, S6_OCN__2S, S6_RAW__0A, S6_RAW__0C, S6_RAW__0N, S6_RAW__0S, S6_SLC__1A, S6_SLC__1S, WV_OCN__2A, WV_OCN__2S, WV_RAW__0A, WV_RAW__0C, WV_RAW__0N, WV_RAW__0S, WV_SLC__1A, WV_SLC__1S|\n|S1||NRT-NTC|NRT,NRT-PT|DL TOT COUNT|EW_GRDM_1A, EW_GRDM_1S, EW_OCN__2A, EW_OCN__2S, EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_OCN__2A, IW_OCN__2S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, IW_SLC__1A, IW_SLC__1S|\n|S1||NRT-NTC|NTC|DL TOT COUNT|EW_GRDM_1A, EW_GRDM_1S, EW_OCN__2A, EW_OCN__2S, EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_OCN__2A, IW_OCN__2S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, IW_SLC__1A, IW_SLC__1S, RF_RAW, S1_GRDH_1A, S1_GRDH_1S, S1_OCN__2A, S1_OCN__2S, S1_RAW__0A, S1_RAW__0C, S1_RAW__0N, S1_RAW__0S, S1_SLC__1A, S1_SLC__1S, S2_GRDH_1A, S2_GRDH_1S, S2_OCN__2A, S2_OCN__2S, S2_RAW__0A, S2_RAW__0C, S2_RAW__0N, S2_RAW__0S, S2_SLC__1A, S2_SLC__1S, S3_GRDH_1A, S3_GRDH_1S, S3_OCN__2A, S3_OCN__2S, S3_RAW__0A, S3_RAW__0C, S3_RAW__0N, S3_RAW__0S, S3_SLC__1A, S3_SLC__1S, S4_GRDH_1A, S4_GRDH_1S, S4_OCN__2A, S4_OCN__2S, S4_RAW__0A, S4_RAW__0C, S4_RAW__0N, S4_RAW__0S, S4_SLC__1A, S4_SLC__1S, S5_GRDH_1A, S5_GRDH_1S, S5_OCN__2A, S5_OCN__2S, S5_RAW__0A, S5_RAW__0C, S5_RAW__0N, S5_RAW__0S, S5_SLC__1A, S5_SLC__1S, S6_GRDH_1A, S6_GRDH_1S, S6_OCN__2A, S6_OCN__2S, S6_RAW__0A, S6_RAW__0C, S6_RAW__0N, S6_RAW__0S, S6_SLC__1A, S6_SLC__1S, WV_OCN__2A, WV_OCN__2S, WV_RAW__0A, WV_RAW__0C, WV_RAW__0N, WV_RAW__0S, WV_SLC__1A, WV_SLC__1S|\n\n\n\nTime reference fot this dashboard is : sensing_start_date\n\nImportant notice : Tables & timelines can only display up to 10 000 entries. Please make use of filters to narrow down the retrieved data and get a more realistic view.",
+            "mode": "markdown"
+          },
+          "pluginVersion": "10.4.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "refId": "A"
+            }
+          ],
+          "title": "Help",
+          "type": "text"
+        }
+      ],
+      "title": "Dashboard description",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 120,
+      "panels": [],
+      "title": "Schematic View - S1",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 23,
+        "w": 24,
+        "x": 0,
+        "y": 2
+      },
+      "id": 121,
+      "options": {
+        "infinitePan": false,
+        "inlineEditing": true,
+        "panZoom": false,
+        "root": {
+          "background": {
+            "color": {
+              "fixed": "blue"
+            }
+          },
+          "border": {
+            "color": {
+              "fixed": "dark-green"
+            },
+            "width": 0
+          },
+          "constraint": {
+            "horizontal": "left",
+            "vertical": "top"
+          },
+          "elements": [
+            {
+              "background": {
+                "color": {
+                  "fixed": "super-light-blue"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "PRIP",
+              "placement": {
+                "height": 195,
+                "left": 256,
+                "top": 347,
+                "width": 676
+              },
+              "type": "cloud"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "light-blue"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "LTA",
+              "placement": {
+                "height": 465,
+                "left": 957,
+                "top": 39,
+                "width": 422
+              },
+              "type": "cloud"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#6065eb"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "orange"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "DD",
+              "placement": {
+                "height": 326,
+                "left": 238,
+                "top": 21,
+                "width": 694
+              },
+              "type": "cloud"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "super-light-orange"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#bf5e0e"
+                },
+                "width": 3
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "ACQ",
+              "placement": {
+                "height": 51,
+                "left": 372,
+                "top": 419,
+                "width": 127
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "super-light-orange"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#bf5e0e"
+                },
+                "width": 3
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 5",
+              "placement": {
+                "height": 51,
+                "left": 372,
+                "top": 177,
+                "width": 127
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "super-light-orange"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#bf5e0e"
+                },
+                "width": 3
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 6",
+              "placement": {
+                "height": 51,
+                "left": 372,
+                "top": 97,
+                "width": 127
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "super-light-orange"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#bf5e0e"
+                },
+                "width": 3
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 7",
+              "placement": {
+                "height": 51,
+                "left": 1104,
+                "top": 177,
+                "width": 127
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#2ae9e3"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#308196"
+                },
+                "width": 3
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 8",
+              "placement": {
+                "height": 51,
+                "left": 1104,
+                "top": 246,
+                "width": 127
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#2ae9e3"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#308196"
+                },
+                "width": 3
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 9",
+              "placement": {
+                "height": 51,
+                "left": 543,
+                "top": 98,
+                "width": 127
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#2ae9e3"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#308196"
+                },
+                "width": 3
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 10",
+              "placement": {
+                "height": 51,
+                "left": 543,
+                "top": 184,
+                "width": 127
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#2ae9e3"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#308196"
+                },
+                "width": 3
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 11",
+              "placement": {
+                "height": 51,
+                "left": 543,
+                "top": 419,
+                "width": 127
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#e4a7ee"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "purple"
+                },
+                "width": 3
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 12",
+              "placement": {
+                "height": 51,
+                "left": 714,
+                "top": 98,
+                "width": 127
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#e4a7ee"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "purple"
+                },
+                "width": 3
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 13",
+              "placement": {
+                "height": 51,
+                "left": 714,
+                "top": 178,
+                "width": 127
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#e4a7ee"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "purple"
+                },
+                "width": 3
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 14",
+              "placement": {
+                "height": 51,
+                "left": 1104,
+                "top": 315,
+                "width": 127
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#dbdbdb"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#a6a6a6"
+                },
+                "width": 3
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 15",
+              "placement": {
+                "height": 51,
+                "left": 1104,
+                "top": 404,
+                "width": 127
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#dbdbdb"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#a6a6a6"
+                },
+                "width": 3
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 16",
+              "placement": {
+                "height": 51,
+                "left": 633,
+                "top": 259,
+                "width": 127
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#e4a7ee"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "purple"
+                },
+                "width": 3
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 17",
+              "placement": {
+                "height": 51,
+                "left": 714,
+                "top": 419,
+                "width": 127
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "transparent"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#ffffff"
+                },
+                "size": 30,
+                "text": {
+                  "fixed": "Data Production"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 18",
+              "placement": {
+                "height": 50,
+                "left": 401,
+                "top": 39,
+                "width": 252
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "transparent"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#ffffff"
+                },
+                "size": 30,
+                "text": {
+                  "fixed": "Data Preservation"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 19",
+              "placement": {
+                "height": 50,
+                "left": 390,
+                "top": 358,
+                "width": 306
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "transparent"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#ffffff"
+                },
+                "size": 30,
+                "text": {
+                  "fixed": "Data Distribution"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 20",
+              "placement": {
+                "height": 50,
+                "left": 1015,
+                "top": 116,
+                "width": 306
+              },
+              "type": "text"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "super-light-green"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "semi-dark-green"
+                },
+                "width": 3
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "valign": "middle"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "Element 21",
+              "placement": {
+                "height": 51,
+                "left": 86,
+                "top": 98,
+                "width": 127
+              },
+              "type": "rectangle"
+            }
+          ],
+          "name": "Element 1718745837518",
+          "placement": {
+            "height": 100,
+            "left": 0,
+            "rotation": 0,
+            "top": 0,
+            "width": 100
+          },
+          "type": "frame"
+        },
+        "showAdvancedTypes": true
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "alias": "S1_ACQ_VOL",
+          "bucketAggs": [
+            {
+              "field": "time_created",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P7A7ACE4A571C05C7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "data_size",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "mission:S1",
+          "refId": "S1_ACQ_VOL",
+          "timeField": "time_created"
+        },
+        {
+          "alias": "S1_ACQ_COUNT",
+          "bucketAggs": [
+            {
+              "field": "time_created",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P7A7ACE4A571C05C7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "mission:S1",
+          "refId": "S1_ACQ_COUNT",
+          "timeField": "time_created"
+        },
+        {
+          "alias": "S1_PROD_L0_NRT_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:PRIP )   AND  (  (   ( product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  )  ",
+          "refId": "S1_PROD_L0_NRT_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_PROD_L0_NRT_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:PRIP )   AND  (  (   ( product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  )  ",
+          "refId": "S1_PROD_L0_NRT_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_PROD_L1_NRT_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:PRIP )   AND  (  (   ( product_type:EW_GRDM_1A OR product_type:EW_GRDM_1S OR product_type:EW_SLC__1A OR product_type:EW_SLC__1S OR product_type:IW_GRDH_1A OR product_type:IW_GRDH_1S OR product_type:IW_SLC__1A OR product_type:IW_SLC__1S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  )  ",
+          "refId": "S1_PROD_L1_NRT_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_PROD_L1_NRT_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:PRIP )   AND  (  (   ( product_type:EW_GRDM_1A OR product_type:EW_GRDM_1S OR product_type:EW_SLC__1A OR product_type:EW_SLC__1S OR product_type:IW_GRDH_1A OR product_type:IW_GRDH_1S OR product_type:IW_SLC__1A OR product_type:IW_SLC__1S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  )  ",
+          "refId": "S1_PROD_L1_NRT_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_PROD_L0_NTC_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:PRIP )   AND  (  (   ( product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S OR product_type:RF_RAW OR product_type:S1_RAW__0A OR product_type:S1_RAW__0C OR product_type:S1_RAW__0N OR product_type:S1_RAW__0S OR product_type:S2_RAW__0A OR product_type:S2_RAW__0C OR product_type:S2_RAW__0N OR product_type:S2_RAW__0S OR product_type:S3_RAW__0A OR product_type:S3_RAW__0C OR product_type:S3_RAW__0N OR product_type:S3_RAW__0S OR product_type:S4_RAW__0A OR product_type:S4_RAW__0C OR product_type:S4_RAW__0N OR product_type:S4_RAW__0S OR product_type:S5_RAW__0A OR product_type:S5_RAW__0C OR product_type:S5_RAW__0N OR product_type:S5_RAW__0S OR product_type:S6_RAW__0A OR product_type:S6_RAW__0C OR product_type:S6_RAW__0N OR product_type:S6_RAW__0S OR product_type:WV_RAW__0A OR product_type:WV_RAW__0C OR product_type:WV_RAW__0N OR product_type:WV_RAW__0S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1_PROD_L0_NTC_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_PROD_L0_NTC_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:PRIP )   AND  (  (   ( product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S OR product_type:RF_RAW OR product_type:S1_RAW__0A OR product_type:S1_RAW__0C OR product_type:S1_RAW__0N OR product_type:S1_RAW__0S OR product_type:S2_RAW__0A OR product_type:S2_RAW__0C OR product_type:S2_RAW__0N OR product_type:S2_RAW__0S OR product_type:S3_RAW__0A OR product_type:S3_RAW__0C OR product_type:S3_RAW__0N OR product_type:S3_RAW__0S OR product_type:S4_RAW__0A OR product_type:S4_RAW__0C OR product_type:S4_RAW__0N OR product_type:S4_RAW__0S OR product_type:S5_RAW__0A OR product_type:S5_RAW__0C OR product_type:S5_RAW__0N OR product_type:S5_RAW__0S OR product_type:S6_RAW__0A OR product_type:S6_RAW__0C OR product_type:S6_RAW__0N OR product_type:S6_RAW__0S OR product_type:WV_RAW__0A OR product_type:WV_RAW__0C OR product_type:WV_RAW__0N OR product_type:WV_RAW__0S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1_PROD_L0_NTC_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_PROD_L1_NTC_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:PRIP )   AND  (  (   ( product_type:EW_GRDM_1A OR product_type:EW_GRDM_1S OR product_type:EW_SLC__1A OR product_type:EW_SLC__1S OR product_type:IW_GRDH_1A OR product_type:IW_GRDH_1S OR product_type:IW_SLC__1A OR product_type:IW_SLC__1S OR product_type:S1_GRDH_1A OR product_type:S1_GRDH_1S OR product_type:S1_SLC__1A OR product_type:S1_SLC__1S OR product_type:S2_GRDH_1A OR product_type:S2_GRDH_1S OR product_type:S2_SLC__1A OR product_type:S2_SLC__1S OR product_type:S3_GRDH_1A OR product_type:S3_GRDH_1S OR product_type:S3_SLC__1A OR product_type:S3_SLC__1S OR product_type:S4_GRDH_1A OR product_type:S4_GRDH_1S OR product_type:S4_SLC__1A OR product_type:S4_SLC__1S OR product_type:S5_GRDH_1A OR product_type:S5_GRDH_1S OR product_type:S5_SLC__1A OR product_type:S5_SLC__1S OR product_type:S6_GRDH_1A OR product_type:S6_GRDH_1S OR product_type:S6_SLC__1A OR product_type:S6_SLC__1S OR product_type:WV_SLC__1A OR product_type:WV_SLC__1S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1_PROD_L1_NTC_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_PROD_L1_NTC_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:PRIP )   AND  (  (   ( product_type:EW_GRDM_1A OR product_type:EW_GRDM_1S OR product_type:EW_SLC__1A OR product_type:EW_SLC__1S OR product_type:IW_GRDH_1A OR product_type:IW_GRDH_1S OR product_type:IW_SLC__1A OR product_type:IW_SLC__1S OR product_type:S1_GRDH_1A OR product_type:S1_GRDH_1S OR product_type:S1_SLC__1A OR product_type:S1_SLC__1S OR product_type:S2_GRDH_1A OR product_type:S2_GRDH_1S OR product_type:S2_SLC__1A OR product_type:S2_SLC__1S OR product_type:S3_GRDH_1A OR product_type:S3_GRDH_1S OR product_type:S3_SLC__1A OR product_type:S3_SLC__1S OR product_type:S4_GRDH_1A OR product_type:S4_GRDH_1S OR product_type:S4_SLC__1A OR product_type:S4_SLC__1S OR product_type:S5_GRDH_1A OR product_type:S5_GRDH_1S OR product_type:S5_SLC__1A OR product_type:S5_SLC__1S OR product_type:S6_GRDH_1A OR product_type:S6_GRDH_1S OR product_type:S6_SLC__1A OR product_type:S6_SLC__1S OR product_type:WV_SLC__1A OR product_type:WV_SLC__1S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1_PROD_L1_NTC_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_PROD_L2_NRT_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:PRIP )   AND  (  (   ( product_type:EW_OCN__2A OR product_type:EW_OCN__2S OR product_type:IW_OCN__2A OR product_type:IW_OCN__2S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  )  ",
+          "refId": "S1_PROD_L2_NRT_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_PROD_L2_NRT_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:PRIP )   AND  (  (   ( product_type:EW_OCN__2A OR product_type:EW_OCN__2S OR product_type:IW_OCN__2A OR product_type:IW_OCN__2S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  )  ",
+          "refId": "S1_PROD_L2_NRT_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_PROD_L2_NTC_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:PRIP )   AND  (  (   ( product_type:EW_OCN__2A OR product_type:EW_OCN__2S OR product_type:IW_OCN__2A OR product_type:IW_OCN__2S OR product_type:S1_OCN__2A OR product_type:S1_OCN__2S OR product_type:S2_OCN__2A OR product_type:S2_OCN__2S OR product_type:S3_OCN__2A OR product_type:S3_OCN__2S OR product_type:S4_OCN__2A OR product_type:S4_OCN__2S OR product_type:S5_OCN__2A OR product_type:S5_OCN__2S OR product_type:S6_OCN__2A OR product_type:S6_OCN__2S OR product_type:WV_OCN__2A OR product_type:WV_OCN__2S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1_PROD_L2_NTC_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_PROD_L2_NTC_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:PRIP )   AND  (  (   ( product_type:EW_OCN__2A OR product_type:EW_OCN__2S OR product_type:IW_OCN__2A OR product_type:IW_OCN__2S OR product_type:S1_OCN__2A OR product_type:S1_OCN__2S OR product_type:S2_OCN__2A OR product_type:S2_OCN__2S OR product_type:S3_OCN__2A OR product_type:S3_OCN__2S OR product_type:S4_OCN__2A OR product_type:S4_OCN__2S OR product_type:S5_OCN__2A OR product_type:S5_OCN__2S OR product_type:S6_OCN__2A OR product_type:S6_OCN__2S OR product_type:WV_OCN__2A OR product_type:WV_OCN__2S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1_PROD_L2_NTC_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_PROD_TOT_NRT_NTC_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:PRIP )   AND  (  (   ( product_type:EW_GRDM_1A OR product_type:EW_GRDM_1S OR product_type:EW_OCN__2A OR product_type:EW_OCN__2S OR product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:EW_SLC__1A OR product_type:EW_SLC__1S OR product_type:IW_GRDH_1A OR product_type:IW_GRDH_1S OR product_type:IW_OCN__2A OR product_type:IW_OCN__2S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S OR product_type:IW_SLC__1A OR product_type:IW_SLC__1S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  OR (   ( product_type:EW_GRDM_1A OR product_type:EW_GRDM_1S OR product_type:EW_OCN__2A OR product_type:EW_OCN__2S OR product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:EW_SLC__1A OR product_type:EW_SLC__1S OR product_type:IW_GRDH_1A OR product_type:IW_GRDH_1S OR product_type:IW_OCN__2A OR product_type:IW_OCN__2S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S OR product_type:IW_SLC__1A OR product_type:IW_SLC__1S OR product_type:RF_RAW OR product_type:S1_GRDH_1A OR product_type:S1_GRDH_1S OR product_type:S1_OCN__2A OR product_type:S1_OCN__2S OR product_type:S1_RAW__0A OR product_type:S1_RAW__0C OR product_type:S1_RAW__0N OR product_type:S1_RAW__0S OR product_type:S1_SLC__1A OR product_type:S1_SLC__1S OR product_type:S2_GRDH_1A OR product_type:S2_GRDH_1S OR product_type:S2_OCN__2A OR product_type:S2_OCN__2S OR product_type:S2_RAW__0A OR product_type:S2_RAW__0C OR product_type:S2_RAW__0N OR product_type:S2_RAW__0S OR product_type:S2_SLC__1A OR product_type:S2_SLC__1S OR product_type:S3_GRDH_1A OR product_type:S3_GRDH_1S OR product_type:S3_OCN__2A OR product_type:S3_OCN__2S OR product_type:S3_RAW__0A OR product_type:S3_RAW__0C OR product_type:S3_RAW__0N OR product_type:S3_RAW__0S OR product_type:S3_SLC__1A OR product_type:S3_SLC__1S OR product_type:S4_GRDH_1A OR product_type:S4_GRDH_1S OR product_type:S4_OCN__2A OR product_type:S4_OCN__2S OR product_type:S4_RAW__0A OR product_type:S4_RAW__0C OR product_type:S4_RAW__0N OR product_type:S4_RAW__0S OR product_type:S4_SLC__1A OR product_type:S4_SLC__1S OR product_type:S5_GRDH_1A OR product_type:S5_GRDH_1S OR product_type:S5_OCN__2A OR product_type:S5_OCN__2S OR product_type:S5_RAW__0A OR product_type:S5_RAW__0C OR product_type:S5_RAW__0N OR product_type:S5_RAW__0S OR product_type:S5_SLC__1A OR product_type:S5_SLC__1S OR product_type:S6_GRDH_1A OR product_type:S6_GRDH_1S OR product_type:S6_OCN__2A OR product_type:S6_OCN__2S OR product_type:S6_RAW__0A OR product_type:S6_RAW__0C OR product_type:S6_RAW__0N OR product_type:S6_RAW__0S OR product_type:S6_SLC__1A OR product_type:S6_SLC__1S OR product_type:WV_OCN__2A OR product_type:WV_OCN__2S OR product_type:WV_RAW__0A OR product_type:WV_RAW__0C OR product_type:WV_RAW__0N OR product_type:WV_RAW__0S OR product_type:WV_SLC__1A OR product_type:WV_SLC__1S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1_PROD_TOT_NRT_NTC_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_PROD_TOT_NRT_NTC_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:PRIP )   AND  (  (   ( product_type:EW_GRDM_1A OR product_type:EW_GRDM_1S OR product_type:EW_OCN__2A OR product_type:EW_OCN__2S OR product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:EW_SLC__1A OR product_type:EW_SLC__1S OR product_type:IW_GRDH_1A OR product_type:IW_GRDH_1S OR product_type:IW_OCN__2A OR product_type:IW_OCN__2S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S OR product_type:IW_SLC__1A OR product_type:IW_SLC__1S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  OR (   ( product_type:EW_GRDM_1A OR product_type:EW_GRDM_1S OR product_type:EW_OCN__2A OR product_type:EW_OCN__2S OR product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:EW_SLC__1A OR product_type:EW_SLC__1S OR product_type:IW_GRDH_1A OR product_type:IW_GRDH_1S OR product_type:IW_OCN__2A OR product_type:IW_OCN__2S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S OR product_type:IW_SLC__1A OR product_type:IW_SLC__1S OR product_type:RF_RAW OR product_type:S1_GRDH_1A OR product_type:S1_GRDH_1S OR product_type:S1_OCN__2A OR product_type:S1_OCN__2S OR product_type:S1_RAW__0A OR product_type:S1_RAW__0C OR product_type:S1_RAW__0N OR product_type:S1_RAW__0S OR product_type:S1_SLC__1A OR product_type:S1_SLC__1S OR product_type:S2_GRDH_1A OR product_type:S2_GRDH_1S OR product_type:S2_OCN__2A OR product_type:S2_OCN__2S OR product_type:S2_RAW__0A OR product_type:S2_RAW__0C OR product_type:S2_RAW__0N OR product_type:S2_RAW__0S OR product_type:S2_SLC__1A OR product_type:S2_SLC__1S OR product_type:S3_GRDH_1A OR product_type:S3_GRDH_1S OR product_type:S3_OCN__2A OR product_type:S3_OCN__2S OR product_type:S3_RAW__0A OR product_type:S3_RAW__0C OR product_type:S3_RAW__0N OR product_type:S3_RAW__0S OR product_type:S3_SLC__1A OR product_type:S3_SLC__1S OR product_type:S4_GRDH_1A OR product_type:S4_GRDH_1S OR product_type:S4_OCN__2A OR product_type:S4_OCN__2S OR product_type:S4_RAW__0A OR product_type:S4_RAW__0C OR product_type:S4_RAW__0N OR product_type:S4_RAW__0S OR product_type:S4_SLC__1A OR product_type:S4_SLC__1S OR product_type:S5_GRDH_1A OR product_type:S5_GRDH_1S OR product_type:S5_OCN__2A OR product_type:S5_OCN__2S OR product_type:S5_RAW__0A OR product_type:S5_RAW__0C OR product_type:S5_RAW__0N OR product_type:S5_RAW__0S OR product_type:S5_SLC__1A OR product_type:S5_SLC__1S OR product_type:S6_GRDH_1A OR product_type:S6_GRDH_1S OR product_type:S6_OCN__2A OR product_type:S6_OCN__2S OR product_type:S6_RAW__0A OR product_type:S6_RAW__0C OR product_type:S6_RAW__0N OR product_type:S6_RAW__0S OR product_type:S6_SLC__1A OR product_type:S6_SLC__1S OR product_type:WV_OCN__2A OR product_type:WV_OCN__2S OR product_type:WV_RAW__0A OR product_type:WV_RAW__0C OR product_type:WV_RAW__0N OR product_type:WV_RAW__0S OR product_type:WV_SLC__1A OR product_type:WV_SLC__1S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1_PROD_TOT_NRT_NTC_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_LTA_L0_NRT_NTC_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/4)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:LTA )   AND  (  (   ( product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  OR (   ( product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S OR product_type:RF_RAW OR product_type:S1_RAW__0A OR product_type:S1_RAW__0C OR product_type:S1_RAW__0N OR product_type:S1_RAW__0S OR product_type:S2_RAW__0A OR product_type:S2_RAW__0C OR product_type:S2_RAW__0N OR product_type:S2_RAW__0S OR product_type:S3_RAW__0A OR product_type:S3_RAW__0C OR product_type:S3_RAW__0N OR product_type:S3_RAW__0S OR product_type:S4_RAW__0A OR product_type:S4_RAW__0C OR product_type:S4_RAW__0N OR product_type:S4_RAW__0S OR product_type:S5_RAW__0A OR product_type:S5_RAW__0C OR product_type:S5_RAW__0N OR product_type:S5_RAW__0S OR product_type:S6_RAW__0A OR product_type:S6_RAW__0C OR product_type:S6_RAW__0N OR product_type:S6_RAW__0S OR product_type:WV_RAW__0A OR product_type:WV_RAW__0C OR product_type:WV_RAW__0N OR product_type:WV_RAW__0S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1_LTA_L0_NRT_NTC_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_LTA_L0_NRT_NTC_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/4)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:LTA )   AND  (  (   ( product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  OR (   ( product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S OR product_type:RF_RAW OR product_type:S1_RAW__0A OR product_type:S1_RAW__0C OR product_type:S1_RAW__0N OR product_type:S1_RAW__0S OR product_type:S2_RAW__0A OR product_type:S2_RAW__0C OR product_type:S2_RAW__0N OR product_type:S2_RAW__0S OR product_type:S3_RAW__0A OR product_type:S3_RAW__0C OR product_type:S3_RAW__0N OR product_type:S3_RAW__0S OR product_type:S4_RAW__0A OR product_type:S4_RAW__0C OR product_type:S4_RAW__0N OR product_type:S4_RAW__0S OR product_type:S5_RAW__0A OR product_type:S5_RAW__0C OR product_type:S5_RAW__0N OR product_type:S5_RAW__0S OR product_type:S6_RAW__0A OR product_type:S6_RAW__0C OR product_type:S6_RAW__0N OR product_type:S6_RAW__0S OR product_type:WV_RAW__0A OR product_type:WV_RAW__0C OR product_type:WV_RAW__0N OR product_type:WV_RAW__0S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1_LTA_L0_NRT_NTC_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_DD_L0_NRT_NTC_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:DD )   AND  (  (   ( product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  OR (   ( product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S OR product_type:RF_RAW OR product_type:S1_RAW__0A OR product_type:S1_RAW__0C OR product_type:S1_RAW__0N OR product_type:S1_RAW__0S OR product_type:S2_RAW__0A OR product_type:S2_RAW__0C OR product_type:S2_RAW__0N OR product_type:S2_RAW__0S OR product_type:S3_RAW__0A OR product_type:S3_RAW__0C OR product_type:S3_RAW__0N OR product_type:S3_RAW__0S OR product_type:S4_RAW__0A OR product_type:S4_RAW__0C OR product_type:S4_RAW__0N OR product_type:S4_RAW__0S OR product_type:S5_RAW__0A OR product_type:S5_RAW__0C OR product_type:S5_RAW__0N OR product_type:S5_RAW__0S OR product_type:S6_RAW__0A OR product_type:S6_RAW__0C OR product_type:S6_RAW__0N OR product_type:S6_RAW__0S OR product_type:WV_RAW__0A OR product_type:WV_RAW__0C OR product_type:WV_RAW__0N OR product_type:WV_RAW__0S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1_DD_L0_NRT_NTC_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_DD_L0_NRT_NTC_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:DD )   AND  (  (   ( product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  OR (   ( product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S OR product_type:RF_RAW OR product_type:S1_RAW__0A OR product_type:S1_RAW__0C OR product_type:S1_RAW__0N OR product_type:S1_RAW__0S OR product_type:S2_RAW__0A OR product_type:S2_RAW__0C OR product_type:S2_RAW__0N OR product_type:S2_RAW__0S OR product_type:S3_RAW__0A OR product_type:S3_RAW__0C OR product_type:S3_RAW__0N OR product_type:S3_RAW__0S OR product_type:S4_RAW__0A OR product_type:S4_RAW__0C OR product_type:S4_RAW__0N OR product_type:S4_RAW__0S OR product_type:S5_RAW__0A OR product_type:S5_RAW__0C OR product_type:S5_RAW__0N OR product_type:S5_RAW__0S OR product_type:S6_RAW__0A OR product_type:S6_RAW__0C OR product_type:S6_RAW__0N OR product_type:S6_RAW__0S OR product_type:WV_RAW__0A OR product_type:WV_RAW__0C OR product_type:WV_RAW__0N OR product_type:WV_RAW__0S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1_DD_L0_NRT_NTC_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_DD_L1_NRT_NTC_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:DD )   AND  (  (   ( product_type:EW_GRDM_1A OR product_type:EW_GRDM_1S OR product_type:EW_SLC__1A OR product_type:EW_SLC__1S OR product_type:IW_GRDH_1A OR product_type:IW_GRDH_1S OR product_type:IW_SLC__1A OR product_type:IW_SLC__1S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  OR (   ( product_type:EW_GRDM_1A OR product_type:EW_GRDM_1S OR product_type:EW_SLC__1A OR product_type:EW_SLC__1S OR product_type:IW_GRDH_1A OR product_type:IW_GRDH_1S OR product_type:IW_SLC__1A OR product_type:IW_SLC__1S OR product_type:S1_GRDH_1A OR product_type:S1_GRDH_1S OR product_type:S1_SLC__1A OR product_type:S1_SLC__1S OR product_type:S2_GRDH_1A OR product_type:S2_GRDH_1S OR product_type:S2_SLC__1A OR product_type:S2_SLC__1S OR product_type:S3_GRDH_1A OR product_type:S3_GRDH_1S OR product_type:S3_SLC__1A OR product_type:S3_SLC__1S OR product_type:S4_GRDH_1A OR product_type:S4_GRDH_1S OR product_type:S4_SLC__1A OR product_type:S4_SLC__1S OR product_type:S5_GRDH_1A OR product_type:S5_GRDH_1S OR product_type:S5_SLC__1A OR product_type:S5_SLC__1S OR product_type:S6_GRDH_1A OR product_type:S6_GRDH_1S OR product_type:S6_SLC__1A OR product_type:S6_SLC__1S OR product_type:WV_SLC__1A OR product_type:WV_SLC__1S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1_DD_L1_NRT_NTC_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_DD_L1_NRT_NTC_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:DD )   AND  (  (   ( product_type:EW_GRDM_1A OR product_type:EW_GRDM_1S OR product_type:EW_SLC__1A OR product_type:EW_SLC__1S OR product_type:IW_GRDH_1A OR product_type:IW_GRDH_1S OR product_type:IW_SLC__1A OR product_type:IW_SLC__1S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  OR (   ( product_type:EW_GRDM_1A OR product_type:EW_GRDM_1S OR product_type:EW_SLC__1A OR product_type:EW_SLC__1S OR product_type:IW_GRDH_1A OR product_type:IW_GRDH_1S OR product_type:IW_SLC__1A OR product_type:IW_SLC__1S OR product_type:S1_GRDH_1A OR product_type:S1_GRDH_1S OR product_type:S1_SLC__1A OR product_type:S1_SLC__1S OR product_type:S2_GRDH_1A OR product_type:S2_GRDH_1S OR product_type:S2_SLC__1A OR product_type:S2_SLC__1S OR product_type:S3_GRDH_1A OR product_type:S3_GRDH_1S OR product_type:S3_SLC__1A OR product_type:S3_SLC__1S OR product_type:S4_GRDH_1A OR product_type:S4_GRDH_1S OR product_type:S4_SLC__1A OR product_type:S4_SLC__1S OR product_type:S5_GRDH_1A OR product_type:S5_GRDH_1S OR product_type:S5_SLC__1A OR product_type:S5_SLC__1S OR product_type:S6_GRDH_1A OR product_type:S6_GRDH_1S OR product_type:S6_SLC__1A OR product_type:S6_SLC__1S OR product_type:WV_SLC__1A OR product_type:WV_SLC__1S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1_DD_L1_NRT_NTC_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_DD_L2_NRT_NTC_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:DD )   AND  (  (   ( product_type:EW_OCN__2A OR product_type:EW_OCN__2S OR product_type:IW_OCN__2A OR product_type:IW_OCN__2S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  OR (   ( product_type:EW_OCN__2A OR product_type:EW_OCN__2S OR product_type:IW_OCN__2A OR product_type:IW_OCN__2S OR product_type:S1_OCN__2A OR product_type:S1_OCN__2S OR product_type:S2_OCN__2A OR product_type:S2_OCN__2S OR product_type:S3_OCN__2A OR product_type:S3_OCN__2S OR product_type:S4_OCN__2A OR product_type:S4_OCN__2S OR product_type:S5_OCN__2A OR product_type:S5_OCN__2S OR product_type:S6_OCN__2A OR product_type:S6_OCN__2S OR product_type:WV_OCN__2A OR product_type:WV_OCN__2S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1_DD_L2_NRT_NTC_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_DD_L2_NRT_NTC_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:DD )   AND  (  (   ( product_type:EW_OCN__2A OR product_type:EW_OCN__2S OR product_type:IW_OCN__2A OR product_type:IW_OCN__2S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  OR (   ( product_type:EW_OCN__2A OR product_type:EW_OCN__2S OR product_type:IW_OCN__2A OR product_type:IW_OCN__2S OR product_type:S1_OCN__2A OR product_type:S1_OCN__2S OR product_type:S2_OCN__2A OR product_type:S2_OCN__2S OR product_type:S3_OCN__2A OR product_type:S3_OCN__2S OR product_type:S4_OCN__2A OR product_type:S4_OCN__2S OR product_type:S5_OCN__2A OR product_type:S5_OCN__2S OR product_type:S6_OCN__2A OR product_type:S6_OCN__2S OR product_type:WV_OCN__2A OR product_type:WV_OCN__2S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1_DD_L2_NRT_NTC_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_DD_TOT_NRT_NTC_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:DD )   AND  (  (   ( product_type:EW_GRDM_1A OR product_type:EW_GRDM_1S OR product_type:EW_OCN__2A OR product_type:EW_OCN__2S OR product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:EW_SLC__1A OR product_type:EW_SLC__1S OR product_type:IW_GRDH_1A OR product_type:IW_GRDH_1S OR product_type:IW_OCN__2A OR product_type:IW_OCN__2S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S OR product_type:IW_SLC__1A OR product_type:IW_SLC__1S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  OR (   ( product_type:EW_GRDM_1A OR product_type:EW_GRDM_1S OR product_type:EW_OCN__2A OR product_type:EW_OCN__2S OR product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:EW_SLC__1A OR product_type:EW_SLC__1S OR product_type:IW_GRDH_1A OR product_type:IW_GRDH_1S OR product_type:IW_OCN__2A OR product_type:IW_OCN__2S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S OR product_type:IW_SLC__1A OR product_type:IW_SLC__1S OR product_type:RF_RAW OR product_type:S1_GRDH_1A OR product_type:S1_GRDH_1S OR product_type:S1_OCN__2A OR product_type:S1_OCN__2S OR product_type:S1_RAW__0A OR product_type:S1_RAW__0C OR product_type:S1_RAW__0N OR product_type:S1_RAW__0S OR product_type:S1_SLC__1A OR product_type:S1_SLC__1S OR product_type:S2_GRDH_1A OR product_type:S2_GRDH_1S OR product_type:S2_OCN__2A OR product_type:S2_OCN__2S OR product_type:S2_RAW__0A OR product_type:S2_RAW__0C OR product_type:S2_RAW__0N OR product_type:S2_RAW__0S OR product_type:S2_SLC__1A OR product_type:S2_SLC__1S OR product_type:S3_GRDH_1A OR product_type:S3_GRDH_1S OR product_type:S3_OCN__2A OR product_type:S3_OCN__2S OR product_type:S3_RAW__0A OR product_type:S3_RAW__0C OR product_type:S3_RAW__0N OR product_type:S3_RAW__0S OR product_type:S3_SLC__1A OR product_type:S3_SLC__1S OR product_type:S4_GRDH_1A OR product_type:S4_GRDH_1S OR product_type:S4_OCN__2A OR product_type:S4_OCN__2S OR product_type:S4_RAW__0A OR product_type:S4_RAW__0C OR product_type:S4_RAW__0N OR product_type:S4_RAW__0S OR product_type:S4_SLC__1A OR product_type:S4_SLC__1S OR product_type:S5_GRDH_1A OR product_type:S5_GRDH_1S OR product_type:S5_OCN__2A OR product_type:S5_OCN__2S OR product_type:S5_RAW__0A OR product_type:S5_RAW__0C OR product_type:S5_RAW__0N OR product_type:S5_RAW__0S OR product_type:S5_SLC__1A OR product_type:S5_SLC__1S OR product_type:S6_GRDH_1A OR product_type:S6_GRDH_1S OR product_type:S6_OCN__2A OR product_type:S6_OCN__2S OR product_type:S6_RAW__0A OR product_type:S6_RAW__0C OR product_type:S6_RAW__0N OR product_type:S6_RAW__0S OR product_type:S6_SLC__1A OR product_type:S6_SLC__1S OR product_type:WV_OCN__2A OR product_type:WV_OCN__2S OR product_type:WV_RAW__0A OR product_type:WV_RAW__0C OR product_type:WV_RAW__0N OR product_type:WV_RAW__0S OR product_type:WV_SLC__1A OR product_type:WV_SLC__1S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1_DD_TOT_NRT_NTC_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_DD_TOT_NRT_NTC_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:DD )   AND  (  (   ( product_type:EW_GRDM_1A OR product_type:EW_GRDM_1S OR product_type:EW_OCN__2A OR product_type:EW_OCN__2S OR product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:EW_SLC__1A OR product_type:EW_SLC__1S OR product_type:IW_GRDH_1A OR product_type:IW_GRDH_1S OR product_type:IW_OCN__2A OR product_type:IW_OCN__2S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S OR product_type:IW_SLC__1A OR product_type:IW_SLC__1S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  OR (   ( product_type:EW_GRDM_1A OR product_type:EW_GRDM_1S OR product_type:EW_OCN__2A OR product_type:EW_OCN__2S OR product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:EW_SLC__1A OR product_type:EW_SLC__1S OR product_type:IW_GRDH_1A OR product_type:IW_GRDH_1S OR product_type:IW_OCN__2A OR product_type:IW_OCN__2S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S OR product_type:IW_SLC__1A OR product_type:IW_SLC__1S OR product_type:RF_RAW OR product_type:S1_GRDH_1A OR product_type:S1_GRDH_1S OR product_type:S1_OCN__2A OR product_type:S1_OCN__2S OR product_type:S1_RAW__0A OR product_type:S1_RAW__0C OR product_type:S1_RAW__0N OR product_type:S1_RAW__0S OR product_type:S1_SLC__1A OR product_type:S1_SLC__1S OR product_type:S2_GRDH_1A OR product_type:S2_GRDH_1S OR product_type:S2_OCN__2A OR product_type:S2_OCN__2S OR product_type:S2_RAW__0A OR product_type:S2_RAW__0C OR product_type:S2_RAW__0N OR product_type:S2_RAW__0S OR product_type:S2_SLC__1A OR product_type:S2_SLC__1S OR product_type:S3_GRDH_1A OR product_type:S3_GRDH_1S OR product_type:S3_OCN__2A OR product_type:S3_OCN__2S OR product_type:S3_RAW__0A OR product_type:S3_RAW__0C OR product_type:S3_RAW__0N OR product_type:S3_RAW__0S OR product_type:S3_SLC__1A OR product_type:S3_SLC__1S OR product_type:S4_GRDH_1A OR product_type:S4_GRDH_1S OR product_type:S4_OCN__2A OR product_type:S4_OCN__2S OR product_type:S4_RAW__0A OR product_type:S4_RAW__0C OR product_type:S4_RAW__0N OR product_type:S4_RAW__0S OR product_type:S4_SLC__1A OR product_type:S4_SLC__1S OR product_type:S5_GRDH_1A OR product_type:S5_GRDH_1S OR product_type:S5_OCN__2A OR product_type:S5_OCN__2S OR product_type:S5_RAW__0A OR product_type:S5_RAW__0C OR product_type:S5_RAW__0N OR product_type:S5_RAW__0S OR product_type:S5_SLC__1A OR product_type:S5_SLC__1S OR product_type:S6_GRDH_1A OR product_type:S6_GRDH_1S OR product_type:S6_OCN__2A OR product_type:S6_OCN__2S OR product_type:S6_RAW__0A OR product_type:S6_RAW__0C OR product_type:S6_RAW__0N OR product_type:S6_RAW__0S OR product_type:S6_SLC__1A OR product_type:S6_SLC__1S OR product_type:WV_OCN__2A OR product_type:WV_OCN__2S OR product_type:WV_RAW__0A OR product_type:WV_RAW__0C OR product_type:WV_RAW__0N OR product_type:WV_RAW__0S OR product_type:WV_SLC__1A OR product_type:WV_SLC__1S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1_DD_TOT_NRT_NTC_COUNT",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Yearly Overall Data Flow S1 SATELLITE",
+      "transparent": true,
+      "type": "canvas"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-12h",
+    "to": "now"
+  },
+  "timeRangeUpdatedDuringEditOrView": false,
+  "timepicker": {},
+  "timezone": "utc",
+  "title": "Prev - System Technical Budget Schematic View - S1",
+  "uid": "N9YlQDKVk",
+  "weekStart": ""
+}

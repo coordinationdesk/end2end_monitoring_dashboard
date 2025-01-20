@@ -1,19 +1,19 @@
 # `XMLExtractor`
 
-```eval_rst
+```{eval-rst}
 :class:`maas_collector.rawdata.extractor.XMLExtractor` uses the :py:mod:`xml.etree.ElementTree` module of the python standard library, so it inherits some limitations of the `xpath` implementation of this module, typically ancestors cannot be selected and requires specific extractor implementation (hopefully easy to create with few lines of code, see :class:`maas_collector.rawdata.extractor.ProductExtractor`).
 ```
 
 ## Basic usage
 
-`XMLExtractor` requires a `attr_map` object as argument. The keys of this object are model field names and the values can be:
+`XMLExtractor` requires an `attr_map` object as argument. The keys of this object are model field names and the values can be:
 
 - a single string: the text content of the xpath selected node will be extracted
 - an object to select a node attribute or to evaluate some python
 
 ## Text node content
 
-Text node content is selected with a XPath expression as value of an attribute map:
+Text node content is selected with an XPath expression as value of an attribute map:
 
 ```json
 {
@@ -74,7 +74,7 @@ The extractor will extract the following object:
 
 Python `elementree` module does not allow the usage of `@` in XPath expressions, but attributes are still accessible in the python node object.
 
-To extract the value of an attribute, provide a configuration object with a `attr` key whose value is the name of the node attribute, with an optional `path` key describing the path of the node with a XPath expression. This `path` key is omitted to extract root node attribute.
+To extract the value of an attribute, provide a configuration object with an `attr` key whose value is the name of the node attribute, with an optional `path` key describing, using an XPath expression, the node path. This `path` key is omitted to extract the root node attribute.
 
 ```json
 {
@@ -175,7 +175,7 @@ The extractor will extract the following object:
 
 ## Multiple model instances in one document
 
-When there are many instances to extract and not a single, XMLExtractor has the `iterate_node` argument that provides a XPath expression returning a list of nodes. The attribute map will be applied for each of this node to create different instances.
+When there are many instances to extract and not only a single one, XMLExtractor has the `iterate_node` argument that provides an XPath expression returning a list of nodes. The attribute map will be applied for each of these nodes to create different instances.
 
 Given this configuration:
 

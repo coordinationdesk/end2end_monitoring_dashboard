@@ -30,6 +30,8 @@ from maas_collector.rawdata.collector.lokicollector import LokiCollector
 
 from maas_collector.rawdata.collector.mpipcollector import MpipCollector
 
+from maas_collector.rawdata.collector.s3collector import S3Collector
+
 # Duck typing: if it has a CONFIG_CLASS class attribute, then I would say it is a
 # collector class
 _CONFIG_TO_COLLECTOR_DICT = {

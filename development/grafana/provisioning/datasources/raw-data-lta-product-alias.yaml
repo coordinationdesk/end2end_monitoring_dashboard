@@ -1,0 +1,17 @@
+apiVersion: 1
+datasources:
+- name: raw-data-lta-product-alias
+  type: elasticsearch
+  access: proxy
+  url: ${ES_URL}
+  database: raw-data-lta-product
+  basicAuth: true
+  isDefault: false
+  jsonData:
+    esVersion: 7.10.0
+    timeField: ingestionTime
+    tlsSkipVerify: true
+  editable: true
+  basicAuthUser: ${ES_USERNAME}
+  secureJsonData:
+    basicAuthPassword: ${ES_PASSWORD}

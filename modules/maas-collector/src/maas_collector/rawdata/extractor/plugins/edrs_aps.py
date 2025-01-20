@@ -1,6 +1,7 @@
 """
 A custom extractor for EDRS Acquisition Passes Status
 """
+
 import datetime
 import os
 import re
@@ -45,7 +46,7 @@ class EDRSApsExtractor(BaseExtractor):
 
         if isinstance(date_cell.value, str):
             # Look like '52-1 / 2023-2024 or '52-1 / 2023
-            match = re.search(r"20\d{2}", date_cell.value) 
+            match = re.search(r"20\d{2}", date_cell.value)
 
             if not match:
                 raise ValueError(
@@ -75,6 +76,8 @@ class EDRSApsExtractor(BaseExtractor):
                 "Temptation to guess date from "
                 f"{date_cell.value} ({date_cell.ctypes}) failed"
             )
+
+        self.logger.debug("Extracted base date is %s", self._base_date)
 
         # the index of the row where effective data starts
         start_index = None
@@ -160,6 +163,7 @@ class EDRSApsExtractor(BaseExtractor):
             self._base_date = datetime.datetime(
                 year=self._base_date.year + 1, month=1, day=1
             )
+            self.logger.info("Detect change of year: %s - %s", self._doy, doy)
 
         self._doy = doy
 

@@ -1,4 +1,5 @@
 """Generate mdoel definition for maas-collector"""
+
 import json
 import logging
 import sys

@@ -1,0 +1,4349 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "This dashboard show statistics about S2 datatake production completeness (produced vs planned)",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": true,
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 171,
+      "panels": [
+        {
+          "gridPos": {
+            "h": 11,
+            "w": 24,
+            "x": 0,
+            "y": 1
+          },
+          "id": 64,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "This dashboard features Completeness computation on a single datatake of S2 mission.\r\n\r\nComparison is done between the following:\r\n - Mission Planning (MP): Planned products;\r\n - PRIP: Produced products.\r\n\r\nTL / TC expected products are determined by intersection of footprints taken from MSI_L1C_DS.\r\n\r\nExpected Granules (MSI_L0__GR) are based on the number of scene of the level multiplied per 12. (TODO: use MSI_??_DS).\r\n\r\nL0_DS products expected duration are based on Observation Duration taken from MP.\r\nL1B_DS, L1C_DS and L2A products expected duration are based on Observation Duration of MP minus 2*3,608s (duration of one scene).\r\n\r\nFinally, if scene count is inferior to 3, L0 products are the only ones expected.\r\n\r\nTips:\r\n - Best approach is to start in Production Completeness dashboard and select one datatake to explore from there;\r\n - Satellite to consider can be selected in the upper bar.\n\nThe information displayed was originally taken from Product at PRIP and MP ACQ at AUXIP  \n\nTime reference for this dashboard is : observation_time_start\n\nImportant notice : Tables & timelines can only display up to 10 000 entries. Please make use of filters to narrow down the retrieved data and get a more realistic view.",
+            "mode": "markdown"
+          },
+          "pluginVersion": "11.0.0",
+          "type": "text"
+        }
+      ],
+      "title": "Dashboard Description",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 2,
+      "panels": [],
+      "title": "Datatake Completeness Overview",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PA3CBD0DC9D8FBBE1"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": false,
+            "inspect": false
+          },
+          "links": [],
+          "mappings": [
+            {
+              "options": {
+                "Complete": {
+                  "color": "green",
+                  "index": 2
+                },
+                "Missing": {
+                  "color": "purple",
+                  "index": 1
+                },
+                "Partial": {
+                  "color": "orange",
+                  "index": 0
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "color": "transparent",
+                  "index": 3
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "purple",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 0.001
+              },
+              {
+                "color": "#EAB839",
+                "value": 99
+              },
+              {
+                "color": "super-light-green",
+                "value": 99.8
+              },
+              {
+                "color": "dark-green",
+                "value": 100
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Sensing Start"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 200
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Sensing Stop"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 205
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Completeness %"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Datatake ID"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 140
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CAMS Link"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Jira CAMS",
+                    "url": "https://esa-cams.atlassian.net/browse/${__value.raw}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Observation duration (us)"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 209
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Absolute Orbit"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 157
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Instrument Mode"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 161
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Timeliness"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 168
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Nb of scenes"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 192
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 24,
+        "x": 0,
+        "y": 2
+      },
+      "id": 44,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Datatake ID"
+          }
+        ]
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PA3CBD0DC9D8FBBE1"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "10000"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "mission:$mission AND satellite_unit: $satellite AND timeliness : $timeliness AND instrument_mode : $instrument_mode AND absolute_orbit : $absolute_orbit AND datatake_id : $datatake_id",
+          "refId": "A",
+          "timeField": "observation_time_start"
+        }
+      ],
+      "title": "Datatake overall information & Completeness",
+      "transformations": [
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "string",
+                "targetField": "datatake_id"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "observation_time_start"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "observation_time_stop"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "DS_global_expected": false,
+              "DS_global_percentage": false,
+              "DS_global_status": false,
+              "DS_global_value": false,
+              "DS_global_value_adjusted": false,
+              "EW_GRDM_1A_local_expected": true,
+              "EW_GRDM_1A_local_percentage": true,
+              "EW_GRDM_1A_local_status": true,
+              "EW_GRDM_1A_local_value": true,
+              "EW_GRDM_1A_local_value_adjusted": true,
+              "EW_GRDM_1A_products_completeness_percentage": true,
+              "EW_GRDM_1A_products_completeness_status": true,
+              "EW_GRDM_1A_products_sensing_duration": true,
+              "EW_GRDM_1A_products_sensing_duration_adjusted": true,
+              "EW_GRDM_1A_total_expected_sensing": true,
+              "EW_GRDM_1S_local_expected": true,
+              "EW_GRDM_1S_local_percentage": true,
+              "EW_GRDM_1S_local_status": true,
+              "EW_GRDM_1S_local_value": true,
+              "EW_GRDM_1S_local_value_adjusted": true,
+              "EW_GRDM_1S_products_completeness_percentage": true,
+              "EW_GRDM_1S_products_completeness_status": true,
+              "EW_GRDM_1S_products_sensing_duration": true,
+              "EW_GRDM_1S_products_sensing_duration_adjusted": true,
+              "EW_GRDM_1S_total_expected_sensing": true,
+              "EW_OCN__2A_local_expected": true,
+              "EW_OCN__2A_local_percentage": true,
+              "EW_OCN__2A_local_status": true,
+              "EW_OCN__2A_local_value": true,
+              "EW_OCN__2A_local_value_adjusted": true,
+              "EW_OCN__2A_products_completeness_percentage": true,
+              "EW_OCN__2A_products_completeness_status": true,
+              "EW_OCN__2A_products_sensing_duration": true,
+              "EW_OCN__2A_products_sensing_duration_adjusted": true,
+              "EW_OCN__2A_total_expected_sensing": true,
+              "EW_OCN__2S_local_expected": true,
+              "EW_OCN__2S_local_percentage": true,
+              "EW_OCN__2S_local_status": true,
+              "EW_OCN__2S_local_value": true,
+              "EW_OCN__2S_local_value_adjusted": true,
+              "EW_OCN__2S_products_completeness_percentage": true,
+              "EW_OCN__2S_products_completeness_status": true,
+              "EW_OCN__2S_products_sensing_duration": true,
+              "EW_OCN__2S_products_sensing_duration_adjusted": true,
+              "EW_OCN__2S_total_expected_sensing": true,
+              "EW_RAW__0A_local_expected": true,
+              "EW_RAW__0A_local_percentage": true,
+              "EW_RAW__0A_local_status": true,
+              "EW_RAW__0A_local_value": true,
+              "EW_RAW__0A_local_value_adjusted": true,
+              "EW_RAW__0A_products_completeness_percentage": true,
+              "EW_RAW__0A_products_completeness_status": true,
+              "EW_RAW__0A_products_sensing_duration": true,
+              "EW_RAW__0A_products_sensing_duration_adjusted": true,
+              "EW_RAW__0A_total_expected_sensing": true,
+              "EW_RAW__0C_local_expected": true,
+              "EW_RAW__0C_local_percentage": true,
+              "EW_RAW__0C_local_status": true,
+              "EW_RAW__0C_local_value": true,
+              "EW_RAW__0C_local_value_adjusted": true,
+              "EW_RAW__0C_products_completeness_percentage": true,
+              "EW_RAW__0C_products_completeness_status": true,
+              "EW_RAW__0C_products_sensing_duration": true,
+              "EW_RAW__0C_products_sensing_duration_adjusted": true,
+              "EW_RAW__0C_total_expected_sensing": true,
+              "EW_RAW__0N_local_expected": true,
+              "EW_RAW__0N_local_percentage": true,
+              "EW_RAW__0N_local_status": true,
+              "EW_RAW__0N_local_value": true,
+              "EW_RAW__0N_local_value_adjusted": true,
+              "EW_RAW__0N_products_completeness_percentage": true,
+              "EW_RAW__0N_products_completeness_status": true,
+              "EW_RAW__0N_products_sensing_duration": true,
+              "EW_RAW__0N_products_sensing_duration_adjusted": true,
+              "EW_RAW__0N_total_expected_sensing": true,
+              "EW_RAW__0S_local_expected": true,
+              "EW_RAW__0S_local_percentage": true,
+              "EW_RAW__0S_local_status": true,
+              "EW_RAW__0S_local_value": true,
+              "EW_RAW__0S_local_value_adjusted": true,
+              "EW_RAW__0S_products_completeness_percentage": true,
+              "EW_RAW__0S_products_completeness_status": true,
+              "EW_RAW__0S_products_sensing_duration": true,
+              "EW_RAW__0S_products_sensing_duration_adjusted": true,
+              "EW_RAW__0S_total_expected_sensing": true,
+              "EW_SLC__1A_local_expected": true,
+              "EW_SLC__1A_local_percentage": true,
+              "EW_SLC__1A_local_status": true,
+              "EW_SLC__1A_local_value": true,
+              "EW_SLC__1A_local_value_adjusted": true,
+              "EW_SLC__1A_products_completeness_percentage": true,
+              "EW_SLC__1A_products_completeness_status": true,
+              "EW_SLC__1A_products_sensing_duration": true,
+              "EW_SLC__1A_products_sensing_duration_adjusted": true,
+              "EW_SLC__1A_total_expected_sensing": true,
+              "EW_SLC__1S_local_expected": true,
+              "EW_SLC__1S_local_percentage": true,
+              "EW_SLC__1S_local_status": true,
+              "EW_SLC__1S_local_value": true,
+              "EW_SLC__1S_local_value_adjusted": true,
+              "EW_SLC__1S_products_completeness_percentage": true,
+              "EW_SLC__1S_products_completeness_status": true,
+              "EW_SLC__1S_products_sensing_duration": true,
+              "EW_SLC__1S_products_sensing_duration_adjusted": true,
+              "EW_SLC__1S_total_expected_sensing": true,
+              "GR_global_expected": false,
+              "GR_global_percentage": false,
+              "GR_global_status": false,
+              "GR_global_value": false,
+              "GR_global_value_adjusted": false,
+              "IW_GRDH_1A_local_expected": true,
+              "IW_GRDH_1A_local_percentage": true,
+              "IW_GRDH_1A_local_status": true,
+              "IW_GRDH_1A_local_value": true,
+              "IW_GRDH_1A_local_value_adjusted": true,
+              "IW_GRDH_1A_products_completeness_percentage": true,
+              "IW_GRDH_1A_products_completeness_status": true,
+              "IW_GRDH_1A_products_sensing_duration": true,
+              "IW_GRDH_1A_products_sensing_duration_adjusted": true,
+              "IW_GRDH_1A_total_expected_sensing": true,
+              "IW_GRDH_1S_local_expected": true,
+              "IW_GRDH_1S_local_percentage": true,
+              "IW_GRDH_1S_local_status": true,
+              "IW_GRDH_1S_local_value": true,
+              "IW_GRDH_1S_local_value_adjusted": true,
+              "IW_GRDH_1S_products_completeness_percentage": true,
+              "IW_GRDH_1S_products_completeness_status": true,
+              "IW_GRDH_1S_products_sensing_duration": true,
+              "IW_GRDH_1S_products_sensing_duration_adjusted": true,
+              "IW_GRDH_1S_total_expected_sensing": true,
+              "IW_OCN__2A_local_expected": true,
+              "IW_OCN__2A_local_percentage": true,
+              "IW_OCN__2A_local_status": true,
+              "IW_OCN__2A_local_value": true,
+              "IW_OCN__2A_local_value_adjusted": true,
+              "IW_OCN__2A_products_completeness_percentage": true,
+              "IW_OCN__2A_products_completeness_status": true,
+              "IW_OCN__2A_products_sensing_duration": true,
+              "IW_OCN__2A_products_sensing_duration_adjusted": true,
+              "IW_OCN__2A_total_expected_sensing": true,
+              "IW_OCN__2S_local_expected": true,
+              "IW_OCN__2S_local_percentage": true,
+              "IW_OCN__2S_local_status": true,
+              "IW_OCN__2S_local_value": true,
+              "IW_OCN__2S_local_value_adjusted": true,
+              "IW_OCN__2S_products_completeness_percentage": true,
+              "IW_OCN__2S_products_completeness_status": true,
+              "IW_OCN__2S_products_sensing_duration": true,
+              "IW_OCN__2S_products_sensing_duration_adjusted": true,
+              "IW_OCN__2S_total_expected_sensing": true,
+              "IW_RAW__0A_local_expected": true,
+              "IW_RAW__0A_local_percentage": true,
+              "IW_RAW__0A_local_status": true,
+              "IW_RAW__0A_local_value": true,
+              "IW_RAW__0A_local_value_adjusted": true,
+              "IW_RAW__0A_products_completeness_percentage": true,
+              "IW_RAW__0A_products_completeness_status": true,
+              "IW_RAW__0A_products_sensing_duration": true,
+              "IW_RAW__0A_products_sensing_duration_adjusted": true,
+              "IW_RAW__0A_total_expected_sensing": true,
+              "IW_RAW__0C_local_expected": true,
+              "IW_RAW__0C_local_percentage": true,
+              "IW_RAW__0C_local_status": true,
+              "IW_RAW__0C_local_value": true,
+              "IW_RAW__0C_local_value_adjusted": true,
+              "IW_RAW__0C_products_completeness_percentage": true,
+              "IW_RAW__0C_products_completeness_status": true,
+              "IW_RAW__0C_products_sensing_duration": true,
+              "IW_RAW__0C_products_sensing_duration_adjusted": true,
+              "IW_RAW__0C_total_expected_sensing": true,
+              "IW_RAW__0N_local_expected": true,
+              "IW_RAW__0N_local_percentage": true,
+              "IW_RAW__0N_local_status": true,
+              "IW_RAW__0N_local_value": true,
+              "IW_RAW__0N_local_value_adjusted": true,
+              "IW_RAW__0N_products_completeness_percentage": true,
+              "IW_RAW__0N_products_completeness_status": true,
+              "IW_RAW__0N_products_sensing_duration": true,
+              "IW_RAW__0N_products_sensing_duration_adjusted": true,
+              "IW_RAW__0N_total_expected_sensing": true,
+              "IW_RAW__0S_local_expected": true,
+              "IW_RAW__0S_local_percentage": true,
+              "IW_RAW__0S_local_status": true,
+              "IW_RAW__0S_local_value": true,
+              "IW_RAW__0S_local_value_adjusted": true,
+              "IW_RAW__0S_products_completeness_percentage": true,
+              "IW_RAW__0S_products_completeness_status": true,
+              "IW_RAW__0S_products_sensing_duration": true,
+              "IW_RAW__0S_products_sensing_duration_adjusted": true,
+              "IW_RAW__0S_total_expected_sensing": true,
+              "IW_SLC__1A_local_expected": true,
+              "IW_SLC__1A_local_percentage": true,
+              "IW_SLC__1A_local_status": true,
+              "IW_SLC__1A_local_value": true,
+              "IW_SLC__1A_local_value_adjusted": true,
+              "IW_SLC__1A_products_completeness_percentage": true,
+              "IW_SLC__1A_products_completeness_status": true,
+              "IW_SLC__1A_products_sensing_duration": true,
+              "IW_SLC__1A_products_sensing_duration_adjusted": true,
+              "IW_SLC__1A_total_expected_sensing": true,
+              "IW_SLC__1S_local_expected": true,
+              "IW_SLC__1S_local_percentage": true,
+              "IW_SLC__1S_local_status": true,
+              "IW_SLC__1S_local_value": true,
+              "IW_SLC__1S_local_value_adjusted": true,
+              "IW_SLC__1S_products_completeness_percentage": true,
+              "IW_SLC__1S_products_completeness_status": true,
+              "IW_SLC__1S_products_sensing_duration": true,
+              "IW_SLC__1S_products_sensing_duration_adjusted": true,
+              "IW_SLC__1S_total_expected_sensing": true,
+              "L0__local_expected": false,
+              "L0__local_percentage": false,
+              "L0__local_status": true,
+              "L0__local_value": false,
+              "L1A_local_expected": true,
+              "L1A_local_percentage": true,
+              "L1A_local_status": true,
+              "L1A_local_value": true,
+              "L1B_local_expected": false,
+              "L1B_local_percentage": false,
+              "L1B_local_status": false,
+              "L1B_local_value": false,
+              "L1C_local_expected": false,
+              "L1C_local_percentage": false,
+              "L1C_local_status": false,
+              "L1C_local_value": false,
+              "L2A_local_expected": false,
+              "L2A_local_percentage": false,
+              "L2A_local_status": false,
+              "L2A_local_value": false,
+              "MSI_L0__DS_local_expected": false,
+              "MSI_L0__DS_local_percentage": false,
+              "MSI_L0__DS_local_status": false,
+              "MSI_L0__DS_local_value": false,
+              "MSI_L0__DS_local_value_adjusted": false,
+              "MSI_L0__GR_local_expected": false,
+              "MSI_L0__GR_local_percentage": false,
+              "MSI_L0__GR_local_status": false,
+              "MSI_L0__GR_local_value": false,
+              "MSI_L0__GR_local_value_adjusted": false,
+              "MSI_L1A_DS_local_expected": true,
+              "MSI_L1A_DS_local_percentage": true,
+              "MSI_L1A_DS_local_status": true,
+              "MSI_L1A_DS_local_value": true,
+              "MSI_L1A_DS_local_value_adjusted": true,
+              "MSI_L1A_GR_local_expected": true,
+              "MSI_L1A_GR_local_percentage": true,
+              "MSI_L1A_GR_local_status": true,
+              "MSI_L1A_GR_local_value": true,
+              "MSI_L1A_GR_local_value_adjusted": true,
+              "MSI_L1B_DS_local_expected": false,
+              "MSI_L1B_DS_local_percentage": false,
+              "MSI_L1B_DS_local_status": false,
+              "MSI_L1B_DS_local_value": false,
+              "MSI_L1B_DS_local_value_adjusted": false,
+              "MSI_L1B_GR_local_expected": false,
+              "MSI_L1B_GR_local_percentage": false,
+              "MSI_L1B_GR_local_status": false,
+              "MSI_L1B_GR_local_value": false,
+              "MSI_L1B_GR_local_value_adjusted": false,
+              "MSI_L1C_DS_local_expected": false,
+              "MSI_L1C_DS_local_percentage": false,
+              "MSI_L1C_DS_local_status": false,
+              "MSI_L1C_DS_local_value": false,
+              "MSI_L1C_DS_local_value_adjusted": false,
+              "MSI_L1C_TC_local_expected": true,
+              "MSI_L1C_TC_local_percentage": true,
+              "MSI_L1C_TC_local_status": true,
+              "MSI_L1C_TC_local_value": true,
+              "MSI_L1C_TC_local_value_adjusted": true,
+              "MSI_L1C_TL_local_expected": true,
+              "MSI_L1C_TL_local_percentage": true,
+              "MSI_L1C_TL_local_status": true,
+              "MSI_L1C_TL_local_value": true,
+              "MSI_L1C_TL_local_value_adjusted": true,
+              "MSI_L2A_DS_local_expected": false,
+              "MSI_L2A_DS_local_percentage": false,
+              "MSI_L2A_DS_local_status": false,
+              "MSI_L2A_DS_local_value": false,
+              "MSI_L2A_DS_local_value_adjusted": false,
+              "MSI_L2A_TC_local_expected": true,
+              "MSI_L2A_TC_local_percentage": true,
+              "MSI_L2A_TC_local_status": true,
+              "MSI_L2A_TC_local_value": false,
+              "MSI_L2A_TC_local_value_adjusted": true,
+              "MSI_L2A_TL_local_expected": true,
+              "MSI_L2A_TL_local_percentage": true,
+              "MSI_L2A_TL_local_status": true,
+              "MSI_L2A_TL_local_value": false,
+              "MSI_L2A_TL_local_value_adjusted": true,
+              "RF_RAW__0S_local_expected": true,
+              "RF_RAW__0S_local_percentage": true,
+              "RF_RAW__0S_local_status": true,
+              "RF_RAW__0S_local_value": true,
+              "RF_RAW__0S_local_value_adjusted": true,
+              "S1_GRDH_1A_local_expected": true,
+              "S1_GRDH_1A_local_percentage": true,
+              "S1_GRDH_1A_local_status": true,
+              "S1_GRDH_1A_local_value": true,
+              "S1_GRDH_1A_local_value_adjusted": true,
+              "S1_GRDH_1S_local_expected": true,
+              "S1_GRDH_1S_local_percentage": true,
+              "S1_GRDH_1S_local_status": true,
+              "S1_GRDH_1S_local_value": true,
+              "S1_GRDH_1S_local_value_adjusted": true,
+              "S1_OCN__2A_local_expected": true,
+              "S1_OCN__2A_local_percentage": true,
+              "S1_OCN__2A_local_status": true,
+              "S1_OCN__2A_local_value": true,
+              "S1_OCN__2A_local_value_adjusted": true,
+              "S1_OCN__2S_local_expected": true,
+              "S1_OCN__2S_local_percentage": true,
+              "S1_OCN__2S_local_status": true,
+              "S1_OCN__2S_local_value": true,
+              "S1_OCN__2S_local_value_adjusted": true,
+              "S1_RAW__0A_local_expected": true,
+              "S1_RAW__0A_local_percentage": true,
+              "S1_RAW__0A_local_status": true,
+              "S1_RAW__0A_local_value": true,
+              "S1_RAW__0A_local_value_adjusted": true,
+              "S1_RAW__0C_local_expected": true,
+              "S1_RAW__0C_local_percentage": true,
+              "S1_RAW__0C_local_status": true,
+              "S1_RAW__0C_local_value": true,
+              "S1_RAW__0C_local_value_adjusted": true,
+              "S1_RAW__0N_local_expected": true,
+              "S1_RAW__0N_local_percentage": true,
+              "S1_RAW__0N_local_status": true,
+              "S1_RAW__0N_local_value": true,
+              "S1_RAW__0N_local_value_adjusted": true,
+              "S1_RAW__0S_local_expected": true,
+              "S1_RAW__0S_local_percentage": true,
+              "S1_RAW__0S_local_status": true,
+              "S1_RAW__0S_local_value": true,
+              "S1_RAW__0S_local_value_adjusted": true,
+              "S1_SLC__1A_local_expected": true,
+              "S1_SLC__1A_local_percentage": true,
+              "S1_SLC__1A_local_status": true,
+              "S1_SLC__1A_local_value": true,
+              "S1_SLC__1A_local_value_adjusted": true,
+              "S1_SLC__1S_local_expected": true,
+              "S1_SLC__1S_local_percentage": true,
+              "S1_SLC__1S_local_status": true,
+              "S1_SLC__1S_local_value": true,
+              "S1_SLC__1S_local_value_adjusted": true,
+              "S2_GRDH_1A_local_expected": true,
+              "S2_GRDH_1A_local_percentage": true,
+              "S2_GRDH_1A_local_status": true,
+              "S2_GRDH_1A_local_value": true,
+              "S2_GRDH_1A_local_value_adjusted": true,
+              "S2_GRDH_1S_local_expected": true,
+              "S2_GRDH_1S_local_percentage": true,
+              "S2_GRDH_1S_local_status": true,
+              "S2_GRDH_1S_local_value": true,
+              "S2_GRDH_1S_local_value_adjusted": true,
+              "S2_OCN__2A_local_expected": true,
+              "S2_OCN__2A_local_percentage": true,
+              "S2_OCN__2A_local_status": true,
+              "S2_OCN__2A_local_value": true,
+              "S2_OCN__2A_local_value_adjusted": true,
+              "S2_OCN__2S_local_expected": true,
+              "S2_OCN__2S_local_percentage": true,
+              "S2_OCN__2S_local_status": true,
+              "S2_OCN__2S_local_value": true,
+              "S2_OCN__2S_local_value_adjusted": true,
+              "S2_RAW__0A_local_expected": true,
+              "S2_RAW__0A_local_percentage": true,
+              "S2_RAW__0A_local_status": true,
+              "S2_RAW__0A_local_value": true,
+              "S2_RAW__0A_local_value_adjusted": true,
+              "S2_RAW__0C_local_expected": true,
+              "S2_RAW__0C_local_percentage": true,
+              "S2_RAW__0C_local_status": true,
+              "S2_RAW__0C_local_value": true,
+              "S2_RAW__0C_local_value_adjusted": true,
+              "S2_RAW__0N_local_expected": true,
+              "S2_RAW__0N_local_percentage": true,
+              "S2_RAW__0N_local_status": true,
+              "S2_RAW__0N_local_value": true,
+              "S2_RAW__0N_local_value_adjusted": true,
+              "S2_RAW__0S_local_expected": true,
+              "S2_RAW__0S_local_percentage": true,
+              "S2_RAW__0S_local_status": true,
+              "S2_RAW__0S_local_value": true,
+              "S2_RAW__0S_local_value_adjusted": true,
+              "S2_SLC__1A_local_expected": true,
+              "S2_SLC__1A_local_percentage": true,
+              "S2_SLC__1A_local_status": true,
+              "S2_SLC__1A_local_value": true,
+              "S2_SLC__1A_local_value_adjusted": true,
+              "S2_SLC__1S_local_expected": true,
+              "S2_SLC__1S_local_percentage": true,
+              "S2_SLC__1S_local_status": true,
+              "S2_SLC__1S_local_value": true,
+              "S2_SLC__1S_local_value_adjusted": true,
+              "S3_GRDH_1A_local_expected": true,
+              "S3_GRDH_1A_local_percentage": true,
+              "S3_GRDH_1A_local_status": true,
+              "S3_GRDH_1A_local_value": true,
+              "S3_GRDH_1A_local_value_adjusted": true,
+              "S3_GRDH_1S_local_expected": true,
+              "S3_GRDH_1S_local_percentage": true,
+              "S3_GRDH_1S_local_status": true,
+              "S3_GRDH_1S_local_value": true,
+              "S3_GRDH_1S_local_value_adjusted": true,
+              "S3_OCN__2A_local_expected": true,
+              "S3_OCN__2A_local_percentage": true,
+              "S3_OCN__2A_local_status": true,
+              "S3_OCN__2A_local_value": true,
+              "S3_OCN__2A_local_value_adjusted": true,
+              "S3_OCN__2S_local_expected": true,
+              "S3_OCN__2S_local_percentage": true,
+              "S3_OCN__2S_local_status": true,
+              "S3_OCN__2S_local_value": true,
+              "S3_OCN__2S_local_value_adjusted": true,
+              "S3_RAW__0A_local_expected": true,
+              "S3_RAW__0A_local_percentage": true,
+              "S3_RAW__0A_local_status": true,
+              "S3_RAW__0A_local_value": true,
+              "S3_RAW__0A_local_value_adjusted": true,
+              "S3_RAW__0C_local_expected": true,
+              "S3_RAW__0C_local_percentage": true,
+              "S3_RAW__0C_local_status": true,
+              "S3_RAW__0C_local_value": true,
+              "S3_RAW__0C_local_value_adjusted": true,
+              "S3_RAW__0N_local_expected": true,
+              "S3_RAW__0N_local_percentage": true,
+              "S3_RAW__0N_local_status": true,
+              "S3_RAW__0N_local_value": true,
+              "S3_RAW__0N_local_value_adjusted": true,
+              "S3_RAW__0S_local_expected": true,
+              "S3_RAW__0S_local_percentage": true,
+              "S3_RAW__0S_local_status": true,
+              "S3_RAW__0S_local_value": true,
+              "S3_RAW__0S_local_value_adjusted": true,
+              "S3_SLC__1A_local_expected": true,
+              "S3_SLC__1A_local_percentage": true,
+              "S3_SLC__1A_local_status": true,
+              "S3_SLC__1A_local_value": true,
+              "S3_SLC__1A_local_value_adjusted": true,
+              "S3_SLC__1S_local_expected": true,
+              "S3_SLC__1S_local_percentage": true,
+              "S3_SLC__1S_local_status": true,
+              "S3_SLC__1S_local_value": true,
+              "S3_SLC__1S_local_value_adjusted": true,
+              "S4_GRDH_1A_local_expected": true,
+              "S4_GRDH_1A_local_percentage": true,
+              "S4_GRDH_1A_local_status": true,
+              "S4_GRDH_1A_local_value": true,
+              "S4_GRDH_1A_local_value_adjusted": true,
+              "S4_GRDH_1S_local_expected": true,
+              "S4_GRDH_1S_local_percentage": true,
+              "S4_GRDH_1S_local_status": true,
+              "S4_GRDH_1S_local_value": true,
+              "S4_GRDH_1S_local_value_adjusted": true,
+              "S4_OCN__2A_local_expected": true,
+              "S4_OCN__2A_local_percentage": true,
+              "S4_OCN__2A_local_status": true,
+              "S4_OCN__2A_local_value": true,
+              "S4_OCN__2A_local_value_adjusted": true,
+              "S4_OCN__2S_local_expected": true,
+              "S4_OCN__2S_local_percentage": true,
+              "S4_OCN__2S_local_status": true,
+              "S4_OCN__2S_local_value": true,
+              "S4_OCN__2S_local_value_adjusted": true,
+              "S4_RAW__0A_local_expected": true,
+              "S4_RAW__0A_local_percentage": true,
+              "S4_RAW__0A_local_status": true,
+              "S4_RAW__0A_local_value": true,
+              "S4_RAW__0A_local_value_adjusted": true,
+              "S4_RAW__0C_local_expected": true,
+              "S4_RAW__0C_local_percentage": true,
+              "S4_RAW__0C_local_status": true,
+              "S4_RAW__0C_local_value": true,
+              "S4_RAW__0C_local_value_adjusted": true,
+              "S4_RAW__0N_local_expected": true,
+              "S4_RAW__0N_local_percentage": true,
+              "S4_RAW__0N_local_status": true,
+              "S4_RAW__0N_local_value": true,
+              "S4_RAW__0N_local_value_adjusted": true,
+              "S4_RAW__0S_local_expected": true,
+              "S4_RAW__0S_local_percentage": true,
+              "S4_RAW__0S_local_status": true,
+              "S4_RAW__0S_local_value": true,
+              "S4_RAW__0S_local_value_adjusted": true,
+              "S4_SLC__1A_local_expected": true,
+              "S4_SLC__1A_local_percentage": true,
+              "S4_SLC__1A_local_status": true,
+              "S4_SLC__1A_local_value": true,
+              "S4_SLC__1A_local_value_adjusted": true,
+              "S4_SLC__1S_local_expected": true,
+              "S4_SLC__1S_local_percentage": true,
+              "S4_SLC__1S_local_status": true,
+              "S4_SLC__1S_local_value": true,
+              "S4_SLC__1S_local_value_adjusted": true,
+              "S5_GRDH_1A_local_expected": true,
+              "S5_GRDH_1A_local_percentage": true,
+              "S5_GRDH_1A_local_status": true,
+              "S5_GRDH_1A_local_value": true,
+              "S5_GRDH_1A_local_value_adjusted": true,
+              "S5_GRDH_1S_local_expected": true,
+              "S5_GRDH_1S_local_percentage": true,
+              "S5_GRDH_1S_local_status": true,
+              "S5_GRDH_1S_local_value": true,
+              "S5_GRDH_1S_local_value_adjusted": true,
+              "S5_OCN__2A_local_expected": true,
+              "S5_OCN__2A_local_percentage": true,
+              "S5_OCN__2A_local_status": true,
+              "S5_OCN__2A_local_value": true,
+              "S5_OCN__2A_local_value_adjusted": true,
+              "S5_OCN__2S_local_expected": true,
+              "S5_OCN__2S_local_percentage": true,
+              "S5_OCN__2S_local_status": true,
+              "S5_OCN__2S_local_value": true,
+              "S5_OCN__2S_local_value_adjusted": true,
+              "S5_RAW__0A_local_expected": true,
+              "S5_RAW__0A_local_percentage": true,
+              "S5_RAW__0A_local_status": true,
+              "S5_RAW__0A_local_value": true,
+              "S5_RAW__0A_local_value_adjusted": true,
+              "S5_RAW__0C_local_expected": true,
+              "S5_RAW__0C_local_percentage": true,
+              "S5_RAW__0C_local_status": true,
+              "S5_RAW__0C_local_value": true,
+              "S5_RAW__0C_local_value_adjusted": true,
+              "S5_RAW__0N_local_expected": true,
+              "S5_RAW__0N_local_percentage": true,
+              "S5_RAW__0N_local_status": true,
+              "S5_RAW__0N_local_value": true,
+              "S5_RAW__0N_local_value_adjusted": true,
+              "S5_RAW__0S_local_expected": true,
+              "S5_RAW__0S_local_percentage": true,
+              "S5_RAW__0S_local_status": true,
+              "S5_RAW__0S_local_value": true,
+              "S5_RAW__0S_local_value_adjusted": true,
+              "S5_SLC__1A_local_expected": true,
+              "S5_SLC__1A_local_percentage": true,
+              "S5_SLC__1A_local_status": true,
+              "S5_SLC__1A_local_value": true,
+              "S5_SLC__1A_local_value_adjusted": true,
+              "S5_SLC__1S_local_expected": true,
+              "S5_SLC__1S_local_percentage": true,
+              "S5_SLC__1S_local_status": true,
+              "S5_SLC__1S_local_value": true,
+              "S5_SLC__1S_local_value_adjusted": true,
+              "S6_GRDH_1A_local_expected": true,
+              "S6_GRDH_1A_local_percentage": true,
+              "S6_GRDH_1A_local_status": true,
+              "S6_GRDH_1A_local_value": true,
+              "S6_GRDH_1A_local_value_adjusted": true,
+              "S6_GRDH_1S_local_expected": true,
+              "S6_GRDH_1S_local_percentage": true,
+              "S6_GRDH_1S_local_status": true,
+              "S6_GRDH_1S_local_value": true,
+              "S6_GRDH_1S_local_value_adjusted": true,
+              "S6_OCN__2A_local_expected": true,
+              "S6_OCN__2A_local_percentage": true,
+              "S6_OCN__2A_local_status": true,
+              "S6_OCN__2A_local_value": true,
+              "S6_OCN__2A_local_value_adjusted": true,
+              "S6_OCN__2S_local_expected": true,
+              "S6_OCN__2S_local_percentage": true,
+              "S6_OCN__2S_local_status": true,
+              "S6_OCN__2S_local_value": true,
+              "S6_OCN__2S_local_value_adjusted": true,
+              "S6_RAW__0A_local_expected": true,
+              "S6_RAW__0A_local_percentage": true,
+              "S6_RAW__0A_local_status": true,
+              "S6_RAW__0A_local_value": true,
+              "S6_RAW__0A_local_value_adjusted": true,
+              "S6_RAW__0C_local_expected": true,
+              "S6_RAW__0C_local_percentage": true,
+              "S6_RAW__0C_local_status": true,
+              "S6_RAW__0C_local_value": true,
+              "S6_RAW__0C_local_value_adjusted": true,
+              "S6_RAW__0N_local_expected": true,
+              "S6_RAW__0N_local_percentage": true,
+              "S6_RAW__0N_local_status": true,
+              "S6_RAW__0N_local_value": true,
+              "S6_RAW__0N_local_value_adjusted": true,
+              "S6_RAW__0S_local_expected": true,
+              "S6_RAW__0S_local_percentage": true,
+              "S6_RAW__0S_local_status": true,
+              "S6_RAW__0S_local_value": true,
+              "S6_RAW__0S_local_value_adjusted": true,
+              "S6_SLC__1A_local_expected": true,
+              "S6_SLC__1A_local_percentage": true,
+              "S6_SLC__1A_local_status": true,
+              "S6_SLC__1A_local_value": true,
+              "S6_SLC__1A_local_value_adjusted": true,
+              "S6_SLC__1S_local_expected": true,
+              "S6_SLC__1S_local_percentage": true,
+              "S6_SLC__1S_local_status": true,
+              "S6_SLC__1S_local_value": true,
+              "S6_SLC__1S_local_value_adjusted": true,
+              "SM_GRDH_1A_local_expected": true,
+              "SM_GRDH_1A_local_percentage": true,
+              "SM_GRDH_1A_local_status": true,
+              "SM_GRDH_1A_local_value": true,
+              "SM_GRDH_1A_local_value_adjusted": true,
+              "SM_GRDH_1S_local_expected": true,
+              "SM_GRDH_1S_local_percentage": true,
+              "SM_GRDH_1S_local_status": true,
+              "SM_GRDH_1S_local_value": true,
+              "SM_GRDH_1S_local_value_adjusted": true,
+              "SM_OCN__2A_local_expected": true,
+              "SM_OCN__2A_local_percentage": true,
+              "SM_OCN__2A_local_status": true,
+              "SM_OCN__2A_local_value": true,
+              "SM_OCN__2A_local_value_adjusted": true,
+              "SM_OCN__2S_local_expected": true,
+              "SM_OCN__2S_local_percentage": true,
+              "SM_OCN__2S_local_status": true,
+              "SM_OCN__2S_local_value": true,
+              "SM_OCN__2S_local_value_adjusted": true,
+              "SM_RAW__0A_local_expected": true,
+              "SM_RAW__0A_local_percentage": true,
+              "SM_RAW__0A_local_status": true,
+              "SM_RAW__0A_local_value": true,
+              "SM_RAW__0A_local_value_adjusted": true,
+              "SM_RAW__0C_local_expected": true,
+              "SM_RAW__0C_local_percentage": true,
+              "SM_RAW__0C_local_status": true,
+              "SM_RAW__0C_local_value": true,
+              "SM_RAW__0C_local_value_adjusted": true,
+              "SM_RAW__0N_local_expected": true,
+              "SM_RAW__0N_local_percentage": true,
+              "SM_RAW__0N_local_status": true,
+              "SM_RAW__0N_local_value": true,
+              "SM_RAW__0N_local_value_adjusted": true,
+              "SM_RAW__0S_local_expected": true,
+              "SM_RAW__0S_local_percentage": true,
+              "SM_RAW__0S_local_status": true,
+              "SM_RAW__0S_local_value": true,
+              "SM_RAW__0S_local_value_adjusted": true,
+              "SM_SLC__1A_local_expected": true,
+              "SM_SLC__1A_local_percentage": true,
+              "SM_SLC__1A_local_status": true,
+              "SM_SLC__1A_local_value": true,
+              "SM_SLC__1A_local_value_adjusted": true,
+              "SM_SLC__1S_local_expected": true,
+              "SM_SLC__1S_local_percentage": true,
+              "SM_SLC__1S_local_status": true,
+              "SM_SLC__1S_local_value": true,
+              "SM_SLC__1S_local_value_adjusted": true,
+              "TC_global_expected": true,
+              "TC_global_percentage": true,
+              "TC_global_status": true,
+              "TC_global_value": true,
+              "TC_global_value_adjusted": true,
+              "TL_global_expected": true,
+              "TL_global_percentage": true,
+              "TL_global_status": true,
+              "TL_global_value": true,
+              "TL_global_value_adjusted": true,
+              "WV_OCN__2A_local_expected": true,
+              "WV_OCN__2A_local_percentage": true,
+              "WV_OCN__2A_local_status": true,
+              "WV_OCN__2A_local_value": true,
+              "WV_OCN__2A_local_value_adjusted": true,
+              "WV_OCN__2S_local_expected": true,
+              "WV_OCN__2S_local_percentage": true,
+              "WV_OCN__2S_local_status": true,
+              "WV_OCN__2S_local_value": true,
+              "WV_OCN__2S_local_value_adjusted": true,
+              "WV_RAW__0A_local_expected": true,
+              "WV_RAW__0A_local_percentage": true,
+              "WV_RAW__0A_local_status": true,
+              "WV_RAW__0A_local_value": true,
+              "WV_RAW__0A_local_value_adjusted": true,
+              "WV_RAW__0C_local_expected": true,
+              "WV_RAW__0C_local_percentage": true,
+              "WV_RAW__0C_local_status": true,
+              "WV_RAW__0C_local_value": true,
+              "WV_RAW__0C_local_value_adjusted": true,
+              "WV_RAW__0N_local_expected": true,
+              "WV_RAW__0N_local_percentage": true,
+              "WV_RAW__0N_local_status": true,
+              "WV_RAW__0N_local_value": true,
+              "WV_RAW__0N_local_value_adjusted": true,
+              "WV_RAW__0S_local_expected": true,
+              "WV_RAW__0S_local_percentage": true,
+              "WV_RAW__0S_local_status": true,
+              "WV_RAW__0S_local_value": true,
+              "WV_RAW__0S_local_value_adjusted": true,
+              "WV_SLC__1A_local_expected": true,
+              "WV_SLC__1A_local_percentage": true,
+              "WV_SLC__1A_local_status": true,
+              "WV_SLC__1A_local_value": true,
+              "WV_SLC__1A_local_value_adjusted": true,
+              "WV_SLC__1S_local_expected": true,
+              "WV_SLC__1S_local_percentage": true,
+              "WV_SLC__1S_local_status": true,
+              "WV_SLC__1S_local_value": true,
+              "WV_SLC__1S_local_value_adjusted": true,
+              "_id": true,
+              "_index": true,
+              "_type": true,
+              "application_date": false,
+              "cams_descriptions": true,
+              "cams_origin": true,
+              "cams_tickets": true,
+              "final_completeness_expected": false,
+              "final_completeness_status": false,
+              "final_completeness_value": false,
+              "highlight": true,
+              "instrument_swath": true,
+              "key": true,
+              "l0_sensing_duration": true,
+              "l0_sensing_time_start": true,
+              "l0_sensing_time_stop": true,
+              "missing_periods": false,
+              "mission": true,
+              "name": true,
+              "number_of_scenes": false,
+              "observation_duration": false,
+              "polarization": true,
+              "relative_orbit": false,
+              "satellite_unit": false,
+              "sensing_global_expected": true,
+              "sensing_global_status": true,
+              "sensing_global_value": true,
+              "sensing_global_value_adjusted": true,
+              "sort": true,
+              "updateTime": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "DS_global_expected": 22,
+              "DS_global_percentage": 23,
+              "DS_global_status": 24,
+              "DS_global_value": 25,
+              "DS_global_value_adjusted": 26,
+              "GR_global_expected": 27,
+              "GR_global_percentage": 28,
+              "GR_global_status": 29,
+              "GR_global_value": 30,
+              "GR_global_value_adjusted": 31,
+              "L0__local_expected": 32,
+              "L0__local_percentage": 33,
+              "L0__local_status": 34,
+              "L0__local_value": 35,
+              "L1B_local_expected": 36,
+              "L1B_local_percentage": 37,
+              "L1B_local_status": 38,
+              "L1B_local_value": 39,
+              "L1C_local_expected": 40,
+              "L1C_local_percentage": 41,
+              "L1C_local_status": 42,
+              "L1C_local_value": 43,
+              "L2A_local_expected": 44,
+              "L2A_local_percentage": 45,
+              "L2A_local_status": 46,
+              "L2A_local_value": 47,
+              "MSI_L0__DS_local_expected": 48,
+              "MSI_L0__DS_local_percentage": 49,
+              "MSI_L0__DS_local_status": 50,
+              "MSI_L0__DS_local_value": 51,
+              "MSI_L0__DS_local_value_adjusted": 52,
+              "MSI_L0__GR_local_expected": 53,
+              "MSI_L0__GR_local_percentage": 54,
+              "MSI_L0__GR_local_status": 55,
+              "MSI_L0__GR_local_value": 56,
+              "MSI_L0__GR_local_value_adjusted": 57,
+              "MSI_L1B_DS_local_expected": 58,
+              "MSI_L1B_DS_local_percentage": 59,
+              "MSI_L1B_DS_local_status": 60,
+              "MSI_L1B_DS_local_value": 61,
+              "MSI_L1B_DS_local_value_adjusted": 62,
+              "MSI_L1B_GR_local_expected": 63,
+              "MSI_L1B_GR_local_percentage": 64,
+              "MSI_L1B_GR_local_status": 65,
+              "MSI_L1B_GR_local_value": 66,
+              "MSI_L1B_GR_local_value_adjusted": 67,
+              "MSI_L1C_DS_local_expected": 68,
+              "MSI_L1C_DS_local_percentage": 69,
+              "MSI_L1C_DS_local_status": 70,
+              "MSI_L1C_DS_local_value": 71,
+              "MSI_L1C_DS_local_value_adjusted": 72,
+              "MSI_L2A_DS_local_expected": 73,
+              "MSI_L2A_DS_local_percentage": 74,
+              "MSI_L2A_DS_local_status": 75,
+              "MSI_L2A_DS_local_value": 76,
+              "MSI_L2A_DS_local_value_adjusted": 77,
+              "_id": 11,
+              "_index": 12,
+              "_type": 13,
+              "absolute_orbit": 5,
+              "application_date": 14,
+              "datatake_id": 4,
+              "final_completeness_expected": 3,
+              "final_completeness_percentage": 9,
+              "final_completeness_status": 78,
+              "final_completeness_value": 79,
+              "highlight": 15,
+              "instrument_mode": 6,
+              "key": 16,
+              "missing_periods": 80,
+              "mission": 17,
+              "name": 18,
+              "number_of_expected_tiles": 81,
+              "number_of_scenes": 8,
+              "observation_duration": 2,
+              "observation_time_start": 0,
+              "observation_time_stop": 1,
+              "relative_orbit": 19,
+              "satellite_unit": 10,
+              "sort": 20,
+              "timeliness": 7,
+              "updateTime": 21
+            },
+            "renameByName": {
+              "absolute_orbit": "Absolute Orbit",
+              "cams_descriptions": "CAMS Description",
+              "cams_origin": "CAMS Origin",
+              "cams_tickets": "CAMS Tickets",
+              "datatake_id": "Datatake ID",
+              "final_completeness_expected": "",
+              "final_completeness_percentage": "Completeness %",
+              "instrument_mode": "Instrument Mode",
+              "number_of_expected_tiles": "Expected Tiles Number",
+              "number_of_scenes": "Nb of scenes",
+              "observation_duration": "Observation duration (us)",
+              "observation_time_start": "Sensing Start",
+              "observation_time_stop": "Sensing Stop",
+              "polarization": "Polarization",
+              "sensing_global_expected": "",
+              "sensing_global_percentage": "Completeness %",
+              "sensing_global_status": "Completeness",
+              "timeliness": "Timeliness"
+            }
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": ".*_.*",
+            "renamePattern": "HIDDEN"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "HIDDEN": true
+            },
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PA3CBD0DC9D8FBBE1"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": false,
+            "inspect": true
+          },
+          "links": [],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CAMs Link"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Jira CAMS",
+                    "url": "https://esa-cams.atlassian.net/browse/${__value.raw}"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 24,
+        "x": 0,
+        "y": 6
+      },
+      "id": 184,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Datatake ID"
+          }
+        ]
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PA3CBD0DC9D8FBBE1"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "10000"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "mission:$mission AND satellite_unit: $satellite AND timeliness : $timeliness AND instrument_mode : $instrument_mode AND absolute_orbit : $absolute_orbit AND datatake_id : $datatake_id AND cams_tickets: *",
+          "refId": "A",
+          "timeField": "observation_time_start"
+        }
+      ],
+      "title": "Datatake anomalies",
+      "transformations": [
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "string",
+                "targetField": "datatake_id"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "observation_time_start"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "observation_time_stop"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "DS_global_expected": "",
+              "cams_description": "CAMs Description",
+              "cams_origin": "CAMs Origin",
+              "cams_tickets": "",
+              "last_attached_ticket": "CAMs Link"
+            }
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "[^\\s]+",
+            "renamePattern": "HIDE"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "HIDE": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "CAMs Description": 3,
+              "CAMs Link": 1,
+              "CAMs Origin": 2,
+              "HIDE": 0
+            },
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PA3CBD0DC9D8FBBE1"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "mode": "basic",
+              "type": "color-background"
+            },
+            "filterable": false,
+            "inspect": false
+          },
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "purple",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 0.001
+              },
+              {
+                "color": "#EAB839",
+                "value": 99
+              },
+              {
+                "color": "super-light-green",
+                "value": 99.8
+              },
+              {
+                "color": "dark-green",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 24,
+        "x": 0,
+        "y": 10
+      },
+      "id": 167,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PA3CBD0DC9D8FBBE1"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "10000"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "mission:$mission AND satellite_unit: $satellite AND timeliness : $timeliness AND instrument_mode : $instrument_mode AND absolute_orbit : $absolute_orbit AND datatake_id : $datatake_id",
+          "refId": "A",
+          "timeField": "observation_time_start"
+        }
+      ],
+      "title": "per Product Level Completeness",
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "datatake_id",
+                "EW_GRDM_1A_local_percentage",
+                "EW_GRDM_1S_local_percentage",
+                "EW_OCN__2A_local_percentage",
+                "EW_OCN__2S_local_percentage",
+                "EW_RAW__0A_local_percentage",
+                "EW_RAW__0C_local_percentage",
+                "EW_RAW__0N_local_percentage",
+                "EW_RAW__0S_local_percentage",
+                "EW_SLC__1A_local_percentage",
+                "EW_SLC__1S_local_percentage",
+                "IW_GRDH_1A_local_percentage",
+                "IW_GRDH_1S_local_percentage",
+                "IW_OCN__2A_local_percentage",
+                "IW_OCN__2S_local_percentage",
+                "IW_RAW__0A_local_percentage",
+                "IW_RAW__0C_local_percentage",
+                "IW_RAW__0N_local_percentage",
+                "IW_RAW__0S_local_percentage",
+                "IW_SLC__1A_local_percentage",
+                "IW_SLC__1S_local_percentage",
+                "RF_RAW__0S_local_percentage",
+                "WV_OCN__2A_local_percentage",
+                "WV_OCN__2S_local_percentage",
+                "WV_RAW__0A_local_percentage",
+                "WV_RAW__0C_local_percentage",
+                "WV_RAW__0N_local_percentage",
+                "WV_RAW__0S_local_percentage",
+                "WV_SLC__1A_local_percentage",
+                "WV_SLC__1S_local_percentage",
+                "instrument_mode"
+              ],
+              "pattern": ".*_local_percentage"
+            }
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "(.*)_local_percentage",
+            "renamePattern": "$1"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "EW_GRDM_1A_local_status": true,
+              "EW_GRDM_1A_local_value": true,
+              "MSI_L0__DS": true,
+              "MSI_L0__GR": true,
+              "MSI_L1B_DS": true,
+              "MSI_L1B_GR": true,
+              "MSI_L1C_DS": true,
+              "MSI_L1C_TC": true,
+              "MSI_L1C_TL": true,
+              "MSI_L2A_DS": true,
+              "MSI_L2A_TC": true,
+              "MSI_L2A_TL": true,
+              "datatake_id": true,
+              "instrument_mode": true,
+              "observation_time_start": true
+            },
+            "indexByName": {
+              "EW_GRDM_1A_local_expected": 4,
+              "EW_GRDM_1A_local_percentage": 3,
+              "EW_GRDM_1A_local_status": 6,
+              "EW_GRDM_1A_local_value": 7,
+              "EW_GRDM_1A_local_value_adjusted": 5,
+              "EW_GRDM_1S_local_expected": 8,
+              "EW_GRDM_1S_local_percentage": 9,
+              "EW_GRDM_1S_local_status": 10,
+              "EW_GRDM_1S_local_value": 11,
+              "EW_GRDM_1S_local_value_adjusted": 12,
+              "EW_OCN__2A_local_expected": 13,
+              "EW_OCN__2A_local_percentage": 14,
+              "EW_OCN__2A_local_status": 15,
+              "EW_OCN__2A_local_value": 16,
+              "EW_OCN__2A_local_value_adjusted": 17,
+              "EW_OCN__2S_local_expected": 18,
+              "EW_OCN__2S_local_percentage": 19,
+              "EW_OCN__2S_local_status": 20,
+              "EW_OCN__2S_local_value": 21,
+              "EW_OCN__2S_local_value_adjusted": 22,
+              "EW_RAW__0A_local_expected": 23,
+              "EW_RAW__0A_local_percentage": 24,
+              "EW_RAW__0A_local_status": 25,
+              "EW_RAW__0A_local_value": 26,
+              "EW_RAW__0A_local_value_adjusted": 27,
+              "EW_RAW__0C_local_expected": 28,
+              "EW_RAW__0C_local_percentage": 29,
+              "EW_RAW__0C_local_status": 30,
+              "EW_RAW__0C_local_value": 31,
+              "EW_RAW__0C_local_value_adjusted": 32,
+              "EW_RAW__0N_local_expected": 33,
+              "EW_RAW__0N_local_percentage": 34,
+              "EW_RAW__0N_local_status": 35,
+              "EW_RAW__0N_local_value": 36,
+              "EW_RAW__0N_local_value_adjusted": 37,
+              "EW_RAW__0S_local_expected": 38,
+              "EW_RAW__0S_local_percentage": 39,
+              "EW_RAW__0S_local_status": 40,
+              "EW_RAW__0S_local_value": 41,
+              "EW_RAW__0S_local_value_adjusted": 42,
+              "EW_SLC__1A_local_expected": 43,
+              "EW_SLC__1A_local_percentage": 44,
+              "EW_SLC__1A_local_status": 45,
+              "EW_SLC__1A_local_value": 46,
+              "EW_SLC__1A_local_value_adjusted": 47,
+              "EW_SLC__1S_local_expected": 48,
+              "EW_SLC__1S_local_percentage": 49,
+              "EW_SLC__1S_local_status": 50,
+              "EW_SLC__1S_local_value": 51,
+              "EW_SLC__1S_local_value_adjusted": 52,
+              "IW_GRDH_1A_local_expected": 53,
+              "IW_GRDH_1A_local_percentage": 54,
+              "IW_GRDH_1A_local_status": 55,
+              "IW_GRDH_1A_local_value": 56,
+              "IW_GRDH_1A_local_value_adjusted": 57,
+              "IW_GRDH_1S_local_expected": 58,
+              "IW_GRDH_1S_local_percentage": 59,
+              "IW_GRDH_1S_local_status": 60,
+              "IW_GRDH_1S_local_value": 61,
+              "IW_GRDH_1S_local_value_adjusted": 62,
+              "IW_OCN__2A_local_expected": 63,
+              "IW_OCN__2A_local_percentage": 64,
+              "IW_OCN__2A_local_status": 65,
+              "IW_OCN__2A_local_value": 66,
+              "IW_OCN__2A_local_value_adjusted": 67,
+              "IW_OCN__2S_local_expected": 68,
+              "IW_OCN__2S_local_percentage": 69,
+              "IW_OCN__2S_local_status": 70,
+              "IW_OCN__2S_local_value": 71,
+              "IW_OCN__2S_local_value_adjusted": 72,
+              "IW_RAW__0A_local_expected": 73,
+              "IW_RAW__0A_local_percentage": 74,
+              "IW_RAW__0A_local_status": 75,
+              "IW_RAW__0A_local_value": 76,
+              "IW_RAW__0A_local_value_adjusted": 77,
+              "IW_RAW__0C_local_expected": 78,
+              "IW_RAW__0C_local_percentage": 79,
+              "IW_RAW__0C_local_status": 80,
+              "IW_RAW__0C_local_value": 81,
+              "IW_RAW__0C_local_value_adjusted": 82,
+              "IW_RAW__0N_local_expected": 83,
+              "IW_RAW__0N_local_percentage": 84,
+              "IW_RAW__0N_local_status": 85,
+              "IW_RAW__0N_local_value": 86,
+              "IW_RAW__0N_local_value_adjusted": 87,
+              "IW_RAW__0S_local_expected": 88,
+              "IW_RAW__0S_local_percentage": 89,
+              "IW_RAW__0S_local_status": 90,
+              "IW_RAW__0S_local_value": 91,
+              "IW_RAW__0S_local_value_adjusted": 92,
+              "IW_SLC__1A_local_expected": 93,
+              "IW_SLC__1A_local_percentage": 94,
+              "IW_SLC__1A_local_status": 95,
+              "IW_SLC__1A_local_value": 96,
+              "IW_SLC__1A_local_value_adjusted": 97,
+              "IW_SLC__1S_local_expected": 98,
+              "IW_SLC__1S_local_percentage": 99,
+              "IW_SLC__1S_local_status": 100,
+              "IW_SLC__1S_local_value": 101,
+              "IW_SLC__1S_local_value_adjusted": 102,
+              "RF_RAW__0S_local_expected": 103,
+              "RF_RAW__0S_local_percentage": 104,
+              "RF_RAW__0S_local_status": 105,
+              "RF_RAW__0S_local_value": 106,
+              "RF_RAW__0S_local_value_adjusted": 107,
+              "WV_OCN__2A_local_expected": 108,
+              "WV_OCN__2A_local_percentage": 109,
+              "WV_OCN__2A_local_status": 110,
+              "WV_OCN__2A_local_value": 111,
+              "WV_OCN__2A_local_value_adjusted": 112,
+              "WV_OCN__2S_local_expected": 113,
+              "WV_OCN__2S_local_percentage": 114,
+              "WV_OCN__2S_local_status": 115,
+              "WV_OCN__2S_local_value": 116,
+              "WV_OCN__2S_local_value_adjusted": 117,
+              "WV_RAW__0A_local_expected": 118,
+              "WV_RAW__0A_local_percentage": 119,
+              "WV_RAW__0A_local_status": 120,
+              "WV_RAW__0A_local_value": 121,
+              "WV_RAW__0A_local_value_adjusted": 122,
+              "WV_RAW__0C_local_expected": 123,
+              "WV_RAW__0C_local_percentage": 124,
+              "WV_RAW__0C_local_status": 125,
+              "WV_RAW__0C_local_value": 126,
+              "WV_RAW__0C_local_value_adjusted": 127,
+              "WV_RAW__0N_local_expected": 128,
+              "WV_RAW__0N_local_percentage": 129,
+              "WV_RAW__0N_local_status": 130,
+              "WV_RAW__0N_local_value": 131,
+              "WV_RAW__0N_local_value_adjusted": 132,
+              "WV_RAW__0S_local_expected": 133,
+              "WV_RAW__0S_local_percentage": 134,
+              "WV_RAW__0S_local_status": 135,
+              "WV_RAW__0S_local_value": 136,
+              "WV_RAW__0S_local_value_adjusted": 137,
+              "WV_SLC__1A_local_expected": 138,
+              "WV_SLC__1A_local_percentage": 139,
+              "WV_SLC__1A_local_status": 140,
+              "WV_SLC__1A_local_value": 141,
+              "WV_SLC__1A_local_value_adjusted": 142,
+              "WV_SLC__1S_local_expected": 143,
+              "WV_SLC__1S_local_percentage": 144,
+              "WV_SLC__1S_local_status": 145,
+              "WV_SLC__1S_local_value": 146,
+              "WV_SLC__1S_local_value_adjusted": 147,
+              "_id": 148,
+              "_index": 149,
+              "_type": 150,
+              "absolute_orbit": 151,
+              "application_date": 152,
+              "datatake_id": 0,
+              "highlight": 153,
+              "instrument_mode": 1,
+              "instrument_swath": 154,
+              "key": 155,
+              "l0_sensing_duration": 156,
+              "l0_sensing_time_start": 157,
+              "l0_sensing_time_stop": 158,
+              "mission": 159,
+              "name": 160,
+              "observation_duration": 161,
+              "observation_time_start": 2,
+              "observation_time_stop": 162,
+              "polarization": 163,
+              "relative_orbit": 164,
+              "satellite_unit": 165,
+              "sensing_global_expected": 166,
+              "sensing_global_percentage": 167,
+              "sensing_global_status": 168,
+              "sensing_global_value": 169,
+              "sensing_global_value_adjusted": 170,
+              "sort": 171,
+              "timeliness": 172,
+              "updateTime": 173
+            },
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PA3CBD0DC9D8FBBE1"
+      },
+      "description": "Be aware that TL TC values depends on recieved DS,  that means that we could have 100% of completeness for TL TC and DS 25% so TL TC are 100% complete for recieved DS but only 25% of expected DS.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "mode": "basic",
+              "type": "color-background"
+            },
+            "filterable": false,
+            "inspect": false
+          },
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "purple",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 0.001
+              },
+              {
+                "color": "#EAB839",
+                "value": 99
+              },
+              {
+                "color": "super-light-green",
+                "value": 99.8
+              },
+              {
+                "color": "dark-green",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 24,
+        "x": 0,
+        "y": 14
+      },
+      "id": 175,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PA3CBD0DC9D8FBBE1"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "10000"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "mission:$mission AND satellite_unit: $satellite AND timeliness : $timeliness AND instrument_mode : $instrument_mode AND absolute_orbit : $absolute_orbit AND datatake_id : $datatake_id",
+          "refId": "A",
+          "timeField": "observation_time_start"
+        }
+      ],
+      "title": "per Product type completeness",
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": {
+              "names": [
+                "datatake_id",
+                "EW_GRDM_1A_local_percentage",
+                "EW_GRDM_1S_local_percentage",
+                "EW_OCN__2A_local_percentage",
+                "EW_OCN__2S_local_percentage",
+                "EW_RAW__0A_local_percentage",
+                "EW_RAW__0C_local_percentage",
+                "EW_RAW__0N_local_percentage",
+                "EW_RAW__0S_local_percentage",
+                "EW_SLC__1A_local_percentage",
+                "EW_SLC__1S_local_percentage",
+                "IW_GRDH_1A_local_percentage",
+                "IW_GRDH_1S_local_percentage",
+                "IW_OCN__2A_local_percentage",
+                "IW_OCN__2S_local_percentage",
+                "IW_RAW__0A_local_percentage",
+                "IW_RAW__0C_local_percentage",
+                "IW_RAW__0N_local_percentage",
+                "IW_RAW__0S_local_percentage",
+                "IW_SLC__1A_local_percentage",
+                "IW_SLC__1S_local_percentage",
+                "RF_RAW__0S_local_percentage",
+                "WV_OCN__2A_local_percentage",
+                "WV_OCN__2S_local_percentage",
+                "WV_RAW__0A_local_percentage",
+                "WV_RAW__0C_local_percentage",
+                "WV_RAW__0N_local_percentage",
+                "WV_RAW__0S_local_percentage",
+                "WV_SLC__1A_local_percentage",
+                "WV_SLC__1S_local_percentage",
+                "instrument_mode"
+              ],
+              "pattern": ".*_local_percentage"
+            }
+          }
+        },
+        {
+          "id": "renameByRegex",
+          "options": {
+            "regex": "(.*)_local_percentage",
+            "renamePattern": "$1"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "EW_GRDM_1A_local_status": true,
+              "EW_GRDM_1A_local_value": true,
+              "L0_": true,
+              "L1B": true,
+              "L1C": true,
+              "L2A": true,
+              "datatake_id": true,
+              "instrument_mode": true,
+              "observation_time_start": true
+            },
+            "indexByName": {
+              "EW_GRDM_1A_local_expected": 4,
+              "EW_GRDM_1A_local_percentage": 3,
+              "EW_GRDM_1A_local_status": 6,
+              "EW_GRDM_1A_local_value": 7,
+              "EW_GRDM_1A_local_value_adjusted": 5,
+              "EW_GRDM_1S_local_expected": 8,
+              "EW_GRDM_1S_local_percentage": 9,
+              "EW_GRDM_1S_local_status": 10,
+              "EW_GRDM_1S_local_value": 11,
+              "EW_GRDM_1S_local_value_adjusted": 12,
+              "EW_OCN__2A_local_expected": 13,
+              "EW_OCN__2A_local_percentage": 14,
+              "EW_OCN__2A_local_status": 15,
+              "EW_OCN__2A_local_value": 16,
+              "EW_OCN__2A_local_value_adjusted": 17,
+              "EW_OCN__2S_local_expected": 18,
+              "EW_OCN__2S_local_percentage": 19,
+              "EW_OCN__2S_local_status": 20,
+              "EW_OCN__2S_local_value": 21,
+              "EW_OCN__2S_local_value_adjusted": 22,
+              "EW_RAW__0A_local_expected": 23,
+              "EW_RAW__0A_local_percentage": 24,
+              "EW_RAW__0A_local_status": 25,
+              "EW_RAW__0A_local_value": 26,
+              "EW_RAW__0A_local_value_adjusted": 27,
+              "EW_RAW__0C_local_expected": 28,
+              "EW_RAW__0C_local_percentage": 29,
+              "EW_RAW__0C_local_status": 30,
+              "EW_RAW__0C_local_value": 31,
+              "EW_RAW__0C_local_value_adjusted": 32,
+              "EW_RAW__0N_local_expected": 33,
+              "EW_RAW__0N_local_percentage": 34,
+              "EW_RAW__0N_local_status": 35,
+              "EW_RAW__0N_local_value": 36,
+              "EW_RAW__0N_local_value_adjusted": 37,
+              "EW_RAW__0S_local_expected": 38,
+              "EW_RAW__0S_local_percentage": 39,
+              "EW_RAW__0S_local_status": 40,
+              "EW_RAW__0S_local_value": 41,
+              "EW_RAW__0S_local_value_adjusted": 42,
+              "EW_SLC__1A_local_expected": 43,
+              "EW_SLC__1A_local_percentage": 44,
+              "EW_SLC__1A_local_status": 45,
+              "EW_SLC__1A_local_value": 46,
+              "EW_SLC__1A_local_value_adjusted": 47,
+              "EW_SLC__1S_local_expected": 48,
+              "EW_SLC__1S_local_percentage": 49,
+              "EW_SLC__1S_local_status": 50,
+              "EW_SLC__1S_local_value": 51,
+              "EW_SLC__1S_local_value_adjusted": 52,
+              "IW_GRDH_1A_local_expected": 53,
+              "IW_GRDH_1A_local_percentage": 54,
+              "IW_GRDH_1A_local_status": 55,
+              "IW_GRDH_1A_local_value": 56,
+              "IW_GRDH_1A_local_value_adjusted": 57,
+              "IW_GRDH_1S_local_expected": 58,
+              "IW_GRDH_1S_local_percentage": 59,
+              "IW_GRDH_1S_local_status": 60,
+              "IW_GRDH_1S_local_value": 61,
+              "IW_GRDH_1S_local_value_adjusted": 62,
+              "IW_OCN__2A_local_expected": 63,
+              "IW_OCN__2A_local_percentage": 64,
+              "IW_OCN__2A_local_status": 65,
+              "IW_OCN__2A_local_value": 66,
+              "IW_OCN__2A_local_value_adjusted": 67,
+              "IW_OCN__2S_local_expected": 68,
+              "IW_OCN__2S_local_percentage": 69,
+              "IW_OCN__2S_local_status": 70,
+              "IW_OCN__2S_local_value": 71,
+              "IW_OCN__2S_local_value_adjusted": 72,
+              "IW_RAW__0A_local_expected": 73,
+              "IW_RAW__0A_local_percentage": 74,
+              "IW_RAW__0A_local_status": 75,
+              "IW_RAW__0A_local_value": 76,
+              "IW_RAW__0A_local_value_adjusted": 77,
+              "IW_RAW__0C_local_expected": 78,
+              "IW_RAW__0C_local_percentage": 79,
+              "IW_RAW__0C_local_status": 80,
+              "IW_RAW__0C_local_value": 81,
+              "IW_RAW__0C_local_value_adjusted": 82,
+              "IW_RAW__0N_local_expected": 83,
+              "IW_RAW__0N_local_percentage": 84,
+              "IW_RAW__0N_local_status": 85,
+              "IW_RAW__0N_local_value": 86,
+              "IW_RAW__0N_local_value_adjusted": 87,
+              "IW_RAW__0S_local_expected": 88,
+              "IW_RAW__0S_local_percentage": 89,
+              "IW_RAW__0S_local_status": 90,
+              "IW_RAW__0S_local_value": 91,
+              "IW_RAW__0S_local_value_adjusted": 92,
+              "IW_SLC__1A_local_expected": 93,
+              "IW_SLC__1A_local_percentage": 94,
+              "IW_SLC__1A_local_status": 95,
+              "IW_SLC__1A_local_value": 96,
+              "IW_SLC__1A_local_value_adjusted": 97,
+              "IW_SLC__1S_local_expected": 98,
+              "IW_SLC__1S_local_percentage": 99,
+              "IW_SLC__1S_local_status": 100,
+              "IW_SLC__1S_local_value": 101,
+              "IW_SLC__1S_local_value_adjusted": 102,
+              "RF_RAW__0S_local_expected": 103,
+              "RF_RAW__0S_local_percentage": 104,
+              "RF_RAW__0S_local_status": 105,
+              "RF_RAW__0S_local_value": 106,
+              "RF_RAW__0S_local_value_adjusted": 107,
+              "WV_OCN__2A_local_expected": 108,
+              "WV_OCN__2A_local_percentage": 109,
+              "WV_OCN__2A_local_status": 110,
+              "WV_OCN__2A_local_value": 111,
+              "WV_OCN__2A_local_value_adjusted": 112,
+              "WV_OCN__2S_local_expected": 113,
+              "WV_OCN__2S_local_percentage": 114,
+              "WV_OCN__2S_local_status": 115,
+              "WV_OCN__2S_local_value": 116,
+              "WV_OCN__2S_local_value_adjusted": 117,
+              "WV_RAW__0A_local_expected": 118,
+              "WV_RAW__0A_local_percentage": 119,
+              "WV_RAW__0A_local_status": 120,
+              "WV_RAW__0A_local_value": 121,
+              "WV_RAW__0A_local_value_adjusted": 122,
+              "WV_RAW__0C_local_expected": 123,
+              "WV_RAW__0C_local_percentage": 124,
+              "WV_RAW__0C_local_status": 125,
+              "WV_RAW__0C_local_value": 126,
+              "WV_RAW__0C_local_value_adjusted": 127,
+              "WV_RAW__0N_local_expected": 128,
+              "WV_RAW__0N_local_percentage": 129,
+              "WV_RAW__0N_local_status": 130,
+              "WV_RAW__0N_local_value": 131,
+              "WV_RAW__0N_local_value_adjusted": 132,
+              "WV_RAW__0S_local_expected": 133,
+              "WV_RAW__0S_local_percentage": 134,
+              "WV_RAW__0S_local_status": 135,
+              "WV_RAW__0S_local_value": 136,
+              "WV_RAW__0S_local_value_adjusted": 137,
+              "WV_SLC__1A_local_expected": 138,
+              "WV_SLC__1A_local_percentage": 139,
+              "WV_SLC__1A_local_status": 140,
+              "WV_SLC__1A_local_value": 141,
+              "WV_SLC__1A_local_value_adjusted": 142,
+              "WV_SLC__1S_local_expected": 143,
+              "WV_SLC__1S_local_percentage": 144,
+              "WV_SLC__1S_local_status": 145,
+              "WV_SLC__1S_local_value": 146,
+              "WV_SLC__1S_local_value_adjusted": 147,
+              "_id": 148,
+              "_index": 149,
+              "_type": 150,
+              "absolute_orbit": 151,
+              "application_date": 152,
+              "datatake_id": 0,
+              "highlight": 153,
+              "instrument_mode": 1,
+              "instrument_swath": 154,
+              "key": 155,
+              "l0_sensing_duration": 156,
+              "l0_sensing_time_start": 157,
+              "l0_sensing_time_stop": 158,
+              "mission": 159,
+              "name": 160,
+              "observation_duration": 161,
+              "observation_time_start": 2,
+              "observation_time_stop": 162,
+              "polarization": 163,
+              "relative_orbit": 164,
+              "satellite_unit": 165,
+              "sensing_global_expected": 166,
+              "sensing_global_percentage": 167,
+              "sensing_global_status": 168,
+              "sensing_global_value": 169,
+              "sensing_global_value_adjusted": 170,
+              "sort": 171,
+              "timeliness": 172,
+              "updateTime": 173
+            },
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "collapsed": true,
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 18
+      },
+      "id": 174,
+      "panels": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PA3CBD0DC9D8FBBE1"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "links": [
+                {
+                  "targetBlank": true,
+                  "title": "Datatake Completeness",
+                  "url": "d/c_N96Qs7k/s1-datatake-completeness?orgId=1&var-datatake_id=${__data.fields.datatake_id}&${__url_time_range}"
+                }
+              ],
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "purple",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 0.001
+                  },
+                  {
+                    "color": "light-yellow",
+                    "value": 99
+                  },
+                  {
+                    "color": "super-light-green",
+                    "value": 99.8
+                  },
+                  {
+                    "color": "dark-green",
+                    "value": 100
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 24,
+            "x": 0,
+            "y": 19
+          },
+          "id": 38,
+          "options": {
+            "colorByField": "final_completeness_percentage",
+            "endField": "observation_time_stop",
+            "experiments": {
+              "enabled": false,
+              "lockToExtents": false
+            },
+            "labelFields": [
+              "datatake_id",
+              "instrument_mode",
+              "observation_time_start",
+              "observation_time_stop",
+              "sensing_global_percentage"
+            ],
+            "showYAxis": true,
+            "sortBy": "startTime",
+            "sortOrder": "asc",
+            "startField": "observation_time_start",
+            "textField": "datatake_id"
+          },
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "PA3CBD0DC9D8FBBE1"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "size": "10000"
+                  },
+                  "type": "raw_data"
+                }
+              ],
+              "query": "mission:$mission AND satellite_unit: $satellite AND timeliness : $timeliness AND instrument_mode : $instrument_mode AND absolute_orbit : $absolute_orbit AND datatake_id : $datatake_id",
+              "refId": "timelineNRT",
+              "timeField": "observation_time_start"
+            }
+          ],
+          "title": "Datatake Timeline and Overall Completeness",
+          "transformations": [
+            {
+              "id": "convertFieldType",
+              "options": {
+                "conversions": [
+                  {
+                    "destinationType": "time",
+                    "targetField": "observation_time_start"
+                  },
+                  {
+                    "destinationType": "time",
+                    "targetField": "observation_time_stop"
+                  }
+                ],
+                "fields": {}
+              }
+            }
+          ],
+          "type": "marcusolsson-gantt-panel"
+        },
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "fixedColor": "light-blue",
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 24,
+            "x": 0,
+            "y": 24
+          },
+          "id": 169,
+          "options": {
+            "colorByField": "name",
+            "colors": [
+              {
+                "color": "#B877D9",
+                "text": "Missing Product"
+              },
+              {
+                "color": "#73BF69",
+                "text": ""
+              }
+            ],
+            "endField": "sensing_end_date",
+            "labelFields": [
+              "sensing_start_date",
+              "sensing_end_date",
+              "name"
+            ],
+            "showYAxis": true,
+            "sortBy": "text",
+            "sortOrder": "asc",
+            "startField": "sensing_start_date",
+            "textField": "product_type"
+          },
+          "pluginVersion": "8.3.6",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "size": "10000"
+                  },
+                  "type": "raw_data"
+                }
+              ],
+              "query": "mission:$mission AND satellite_unit: $satellite AND datatake_id : $datatake_id AND prip_publication_date:*  AND product_level:$product_level AND product_type:$product_type",
+              "refId": "A",
+              "timeField": "sensing_start_date"
+            },
+            {
+              "columns": [],
+              "datasource": {
+                "type": "yesoreyeram-infinity-datasource",
+                "uid": "PD0067CAD9A63E081"
+              },
+              "filters": [],
+              "format": "table",
+              "global_query_id": "",
+              "hide": false,
+              "json_options": {
+                "root_is_not_array": false
+              },
+              "parser": "simple",
+              "refId": "B",
+              "root_selector": "_source.missing_periods",
+              "source": "url",
+              "type": "json",
+              "url": "/cds-datatake/_doc/${satellite}-${datatake_id}",
+              "url_options": {
+                "data": "",
+                "method": "GET"
+              }
+            }
+          ],
+          "title": "Datatake Products Timeline (grouped by product type)",
+          "transformations": [
+            {
+              "id": "convertFieldType",
+              "options": {
+                "conversions": [
+                  {
+                    "destinationType": "time",
+                    "targetField": "sensing_start_date"
+                  },
+                  {
+                    "destinationType": "time",
+                    "targetField": "sensing_end_date"
+                  }
+                ],
+                "fields": {}
+              }
+            },
+            {
+              "id": "merge",
+              "options": {}
+            }
+          ],
+          "type": "marcusolsson-gantt-panel"
+        },
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PA3CBD0DC9D8FBBE1"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 24,
+            "x": 0,
+            "y": 32
+          },
+          "id": 186,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true
+          },
+          "pluginVersion": "11.0.0",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "PA3CBD0DC9D8FBBE1"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "size": "10000"
+                  },
+                  "type": "raw_data"
+                }
+              ],
+              "query": "mission:$mission AND satellite_unit: $satellite AND timeliness : $timeliness AND instrument_mode : $instrument_mode AND absolute_orbit : $absolute_orbit AND datatake_id : $datatake_id AND missing_periods: *",
+              "refId": "A",
+              "timeField": "observation_time_start"
+            }
+          ],
+          "title": "Missing Periods",
+          "transformations": [
+            {
+              "id": "extractFields",
+              "options": {
+                "replace": true,
+                "source": "missing_periods"
+              }
+            },
+            {
+              "id": "extractFields",
+              "options": {
+                "format": "json",
+                "replace": true,
+                "source": "0"
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {},
+                "indexByName": {},
+                "renameByName": {
+                  "duration": "Missing Duration",
+                  "product_type": "Product Type",
+                  "sensing_end_date": "Sensing Stop",
+                  "sensing_start_date": "Sensing Start "
+                }
+              }
+            }
+          ],
+          "type": "table"
+        }
+      ],
+      "title": "Datatake & Products Timelines",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 19
+      },
+      "id": 187,
+      "panels": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 2,
+            "x": 0,
+            "y": 20
+          },
+          "id": 194,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "area",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "sum"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showPercentChange": false,
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "11.0.0",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [
+                {
+                  "field": "sensing_start_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "mission:$mission AND satellite_unit: $satellite AND datatake_id : $datatake_id AND prip_publication_date:*  AND product_level:$product_level AND product_type:*DS",
+              "refId": "A",
+              "timeField": "sensing_start_date"
+            }
+          ],
+          "title": "Number of DS",
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 4,
+            "x": 2,
+            "y": 20
+          },
+          "id": 195,
+          "options": {
+            "displayMode": "gradient",
+            "maxVizHeight": 300,
+            "minVizHeight": 16,
+            "minVizWidth": 8,
+            "namePlacement": "auto",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "lastNotNull"
+              ],
+              "fields": "",
+              "values": true
+            },
+            "showUnfilled": true,
+            "sizing": "auto",
+            "valueMode": "color"
+          },
+          "pluginVersion": "11.0.0",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [
+                {
+                  "field": "product_level",
+                  "id": "2",
+                  "settings": {
+                    "min_doc_count": "1",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "10"
+                  },
+                  "type": "terms"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "mission:$mission AND satellite_unit: $satellite AND datatake_id : $datatake_id AND prip_publication_date:*  AND product_level:$product_level AND product_type: MSI*DS AND prip_id: *",
+              "refId": "A",
+              "timeField": "sensing_start_date"
+            }
+          ],
+          "title": "Number of DS per level",
+          "type": "bargauge"
+        },
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PA3CBD0DC9D8FBBE1"
+          },
+          "description": "You can inspect to get all datastrip id",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "json-view"
+                },
+                "inspect": true
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Datatastrip IDs"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 579
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 18,
+            "x": 6,
+            "y": 20
+          },
+          "id": 192,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true,
+            "sortBy": []
+          },
+          "pluginVersion": "11.0.0",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "PA3CBD0DC9D8FBBE1"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "size": "500"
+                  },
+                  "type": "raw_data"
+                }
+              ],
+              "query": "mission:$mission AND satellite_unit: $satellite AND timeliness : $timeliness AND instrument_mode : $instrument_mode AND absolute_orbit : $absolute_orbit AND datatake_id : $datatake_id",
+              "refId": "A",
+              "timeField": "observation_time_start"
+            }
+          ],
+          "title": "Product Group And Datastrip ID",
+          "transformations": [
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {},
+                "includeByName": {},
+                "indexByName": {},
+                "renameByName": {
+                  "datastrip_ids": "Datastrip IDs",
+                  "product_group_ids": "Product Group IDs"
+                }
+              }
+            },
+            {
+              "id": "renameByRegex",
+              "options": {
+                "regex": "[^\\s]+",
+                "renamePattern": "HIDE"
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "HIDE": true
+                },
+                "includeByName": {},
+                "indexByName": {},
+                "renameByName": {}
+              }
+            },
+            {
+              "id": "rowsToFields",
+              "options": {
+                "mappings": [
+                  {
+                    "fieldName": "Product Group IDs",
+                    "handlerKey": "field.name"
+                  },
+                  {
+                    "fieldName": "Datastrip IDs",
+                    "handlerKey": "field.value"
+                  }
+                ]
+              }
+            }
+          ],
+          "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 24,
+            "x": 0,
+            "y": 24
+          },
+          "id": 193,
+          "options": {
+            "displayMode": "gradient",
+            "maxVizHeight": 300,
+            "minVizHeight": 0,
+            "minVizWidth": 8,
+            "namePlacement": "left",
+            "orientation": "horizontal",
+            "reduceOptions": {
+              "calcs": [
+                "sum"
+              ],
+              "fields": "",
+              "values": true
+            },
+            "showUnfilled": true,
+            "sizing": "manual",
+            "text": {
+              "titleSize": 10,
+              "valueSize": 20
+            },
+            "valueMode": "color"
+          },
+          "pluginVersion": "11.0.0",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [
+                {
+                  "field": "datastrip_id",
+                  "id": "2",
+                  "settings": {
+                    "min_doc_count": "1",
+                    "order": "desc",
+                    "orderBy": "_term",
+                    "size": "0"
+                  },
+                  "type": "terms"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "mission:$mission AND satellite_unit: $satellite AND datatake_id : $datatake_id AND prip_publication_date:*  AND product_level:$product_level AND product_type:$product_type",
+              "refId": "A",
+              "timeField": "sensing_start_date"
+            }
+          ],
+          "title": "Number of product per datastrip id",
+          "type": "bargauge"
+        }
+      ],
+      "title": "Datatake: Extra indicator",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 20
+      },
+      "id": 68,
+      "panels": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "filterable": true,
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Sensing Start Date"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 186
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Sensing End Date"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 190
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Name"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 842
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "PRIP Publication Date"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 218
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "product_group_id"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 316
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 11,
+            "w": 24,
+            "x": 0,
+            "y": 21
+          },
+          "id": 172,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": true,
+              "enablePagination": true,
+              "fields": "",
+              "reducer": [
+                "count"
+              ],
+              "show": true
+            },
+            "showHeader": true,
+            "sortBy": [
+              {
+                "desc": false,
+                "displayName": "Type"
+              }
+            ]
+          },
+          "pluginVersion": "11.0.0",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "size": "10000"
+                  },
+                  "type": "raw_data"
+                }
+              ],
+              "query": "mission:$mission AND satellite_unit: $satellite AND datatake_id : $datatake_id AND prip_publication_date:*  AND product_level:$product_level AND product_type:$product_type",
+              "refId": "A",
+              "timeField": "sensing_start_date"
+            }
+          ],
+          "title": "Datatake Products published at PRIP",
+          "transformations": [
+            {
+              "id": "convertFieldType",
+              "options": {
+                "conversions": [
+                  {
+                    "destinationType": "time",
+                    "targetField": "sensing_start_date"
+                  },
+                  {
+                    "destinationType": "time",
+                    "targetField": "sensing_end_date"
+                  },
+                  {
+                    "destinationType": "time",
+                    "targetField": "prip_publication_date"
+                  }
+                ],
+                "fields": {}
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "LTA_Acri_is_published": true,
+                  "LTA_Acri_publication_date": true,
+                  "LTA_CloudFerro_is_published": true,
+                  "LTA_CloudFerro_publication_date": true,
+                  "LTA_Exprivia_S1_is_published": true,
+                  "LTA_Exprivia_S1_publication_date": true,
+                  "LTA_Exprivia_S2_is_published": true,
+                  "LTA_Exprivia_S2_publication_date": true,
+                  "LTA_Werum_is_published": true,
+                  "LTA_Werum_publication_date": true,
+                  "_id": true,
+                  "_index": true,
+                  "_type": true,
+                  "absolute_orbit": true,
+                  "datastrip_id": false,
+                  "datatake_id": true,
+                  "ddip_publication_date": true,
+                  "expected_lta_number": true,
+                  "highlight": true,
+                  "instrument_mode": true,
+                  "key": true,
+                  "mission": true,
+                  "nb_lta_served": true,
+                  "polarization": true,
+                  "prip_id": true,
+                  "prip_publication_date": false,
+                  "prip_service": true,
+                  "satellite_unit": true,
+                  "sensing_duration": false,
+                  "site_center": true,
+                  "sort": true,
+                  "timeliness": true,
+                  "updateTime": true
+                },
+                "includeByName": {},
+                "indexByName": {
+                  "LTA_Acri_is_published": 15,
+                  "LTA_Acri_publication_date": 16,
+                  "LTA_CloudFerro_is_published": 17,
+                  "LTA_CloudFerro_publication_date": 18,
+                  "LTA_Exprivia_S2_is_published": 31,
+                  "LTA_Exprivia_S2_publication_date": 32,
+                  "LTA_Werum_is_published": 19,
+                  "LTA_Werum_publication_date": 20,
+                  "_id": 21,
+                  "_index": 22,
+                  "_type": 23,
+                  "absolute_orbit": 8,
+                  "cloud_cover": 35,
+                  "content_length": 36,
+                  "datastrip_id": 13,
+                  "datatake_id": 9,
+                  "dddas_container_name": 37,
+                  "dddas_id": 38,
+                  "dddas_publication_date": 39,
+                  "detector_id": 40,
+                  "expected_lta_number": 24,
+                  "expected_tiles": 41,
+                  "from_prip_dddas_timeliness": 42,
+                  "highlight": 25,
+                  "instrument_mode": 10,
+                  "key": 26,
+                  "mission": 0,
+                  "name": 7,
+                  "nb_datatake_document_that_match": 43,
+                  "nb_lta_served": 27,
+                  "prip_id": 28,
+                  "prip_publication_date": 12,
+                  "prip_service": 33,
+                  "product_discriminator_date": 44,
+                  "product_group_id": 14,
+                  "product_level": 5,
+                  "product_type": 6,
+                  "quality_status": 45,
+                  "satellite_unit": 1,
+                  "sensing_duration": 4,
+                  "sensing_end_date": 3,
+                  "sensing_start_date": 2,
+                  "site_center": 34,
+                  "sort": 29,
+                  "tile_number": 46,
+                  "timeliness": 11,
+                  "updateTime": 30
+                },
+                "renameByName": {
+                  "name": "Name",
+                  "prip_publication_date": "PRIP Publication Date",
+                  "product_class": "Class",
+                  "product_level": "Level",
+                  "product_type": "Type",
+                  "satellite_unit": "Satellite",
+                  "sensing_duration": "Sensing duration (us)",
+                  "sensing_end_date": "Sensing End Date",
+                  "sensing_start_date": "Sensing Start Date"
+                }
+              }
+            }
+          ],
+          "type": "table"
+        }
+      ],
+      "title": "Datatake product list",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 21
+      },
+      "id": 179,
+      "panels": [
+        {
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "PD0067CAD9A63E081"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "filterable": true,
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "application_date"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 190
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "acquisition_start"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 173
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "effective_downlink_start"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Effective Downlink Start"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 215
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Effective Downlink Stop"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 201
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 24,
+            "x": 0,
+            "y": 22
+          },
+          "id": 177,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true,
+            "sortBy": []
+          },
+          "pluginVersion": "11.0.0",
+          "targets": [
+            {
+              "columns": [],
+              "datasource": {
+                "type": "yesoreyeram-infinity-datasource",
+                "uid": "PD0067CAD9A63E081"
+              },
+              "filters": [],
+              "format": "table",
+              "global_query_id": "",
+              "refId": "A",
+              "root_selector": "hits.hits",
+              "source": "url",
+              "type": "json",
+              "url": "/cds-downlink-datatake/_search?q=datatake_id:${datatake_id}%20AND%20satellite_unit:${satellite}&size=1000",
+              "url_options": {
+                "data": "",
+                "method": "GET"
+              }
+            }
+          ],
+          "title": "Planned downlinks",
+          "transformations": [
+            {
+              "id": "extractFields",
+              "options": {
+                "format": "json",
+                "replace": true,
+                "source": "_source"
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "acquisition_start": true,
+                  "application_date": true,
+                  "channel": false,
+                  "downlink_polarization": false,
+                  "latency": true,
+                  "mission": false,
+                  "reportName": true,
+                  "updateTime": true
+                },
+                "indexByName": {
+                  "acquisition_start": 13,
+                  "application_date": 10,
+                  "channel": 8,
+                  "datatake_id": 2,
+                  "downlink_absolute_orbit": 4,
+                  "downlink_duration": 7,
+                  "downlink_polarization": 9,
+                  "effective_downlink_start": 5,
+                  "effective_downlink_stop": 6,
+                  "latency": 11,
+                  "mission": 0,
+                  "reportName": 12,
+                  "satellite_unit": 1,
+                  "station": 3,
+                  "updateTime": 14
+                },
+                "renameByName": {
+                  "acquisition_start": "Effective Downlink Start",
+                  "channel": "Channel",
+                  "datatake_id": "Datatake ID",
+                  "downlink_absolute_orbit": "Downlink Absolute Orbit",
+                  "downlink_duration": "Downlink Duration",
+                  "downlink_polarization": "Polarization",
+                  "effective_downlink_start": "Effective Downlink Start",
+                  "effective_downlink_stop": "Effective Downlink Stop",
+                  "mission": "Mission",
+                  "satellite_unit": "Satellite",
+                  "station": "Station"
+                }
+              }
+            }
+          ],
+          "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "PD0067CAD9A63E081"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "center",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "filterable": true,
+                "inspect": false
+              },
+              "mappings": [
+                {
+                  "options": {
+                    "0OKOKOK": {
+                      "color": "dark-green",
+                      "index": 1,
+                      "text": "OK"
+                    },
+                    "NA": {
+                      "color": "transparent",
+                      "index": 3,
+                      "text": "-"
+                    },
+                    "OK": {
+                      "color": "dark-green",
+                      "index": 0,
+                      "text": "OK"
+                    },
+                    "true": {
+                      "color": "dark-green",
+                      "index": 4,
+                      "text": "OK"
+                    }
+                  },
+                  "type": "value"
+                },
+                {
+                  "options": {
+                    "pattern": ".*NOK.*",
+                    "result": {
+                      "color": "red",
+                      "index": 2,
+                      "text": "KO"
+                    }
+                  },
+                  "type": "regex"
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Antenna Status"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "basic",
+                      "type": "color-background"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Delivery Status"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "basic",
+                      "type": "color-background"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Front End Status"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "basic",
+                      "type": "color-background"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Status"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "basic",
+                      "type": "color-background"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 24,
+            "x": 0,
+            "y": 29
+          },
+          "id": 181,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true,
+            "sortBy": []
+          },
+          "pluginVersion": "11.0.0",
+          "targets": [
+            {
+              "columns": [],
+              "datasource": {
+                "type": "yesoreyeram-infinity-datasource",
+                "uid": "PD0067CAD9A63E081"
+              },
+              "filters": [],
+              "format": "table",
+              "global_query_id": "raw-data-aps-product",
+              "refId": "A",
+              "root_selector": "hits.hits",
+              "source": "url",
+              "type": "json",
+              "url": "/cds-cadip-acquisition-pass-status/_search?q=satellite_id:${satellite}%20AND%20downlink_orbit:${downlink_orbit:lucene}%20AND ground_station:${station:lucene}&size=1000",
+              "url_options": {
+                "body_content_type": "text/plain",
+                "body_type": "raw",
+                "data": "",
+                "method": "GET"
+              }
+            }
+          ],
+          "title": "Acquisition status x-Band",
+          "transformations": [
+            {
+              "id": "extractFields",
+              "options": {
+                "format": "json",
+                "replace": true,
+                "source": "_source"
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "AcquiredTFs": true,
+                  "CorrectedDataTFs": true,
+                  "CorrectedTFs": true,
+                  "DataTFs": true,
+                  "ErrorDataTFs": true,
+                  "ErrorTFs": true,
+                  "TotalChunks": true,
+                  "TotalVolume": true,
+                  "UncorrectableDataTFs": true,
+                  "UncorrectableTFs": true,
+                  "acquisition_id": true,
+                  "delivery_start": true,
+                  "delivery_stop": true,
+                  "downlink_orbit": false,
+                  "downlink_start": true,
+                  "downlink_status": true,
+                  "downlink_stop": true,
+                  "fer_data": true,
+                  "fer_downlink": true,
+                  "first_frame_start": true,
+                  "front_end_id": false,
+                  "global_status": false,
+                  "ground_station": true,
+                  "ingestionTime": true,
+                  "interface_name": false,
+                  "last_frame_stop": true,
+                  "num_channels": true,
+                  "number_of_chunks": true,
+                  "overall_data_volume": true,
+                  "overall_number_of_bad_data_acquired_frames": true,
+                  "overall_number_of_bad_downlinked_frames": true,
+                  "overall_number_of_data_acquired_frames": true,
+                  "overall_number_of_downlinked_frames": true,
+                  "planned_data_start": true,
+                  "planned_data_stop": true,
+                  "production_service_name": true,
+                  "production_service_type": true,
+                  "publication_date": true,
+                  "quality_infos": true,
+                  "reportFolder": true,
+                  "reportName": true,
+                  "retransfer": true,
+                  "session_id": true,
+                  "start_delivery": false,
+                  "station_unit_id": true,
+                  "stop_delivery": false,
+                  "updateTime": true
+                },
+                "indexByName": {
+                  "AcquiredTFs": 11,
+                  "CorrectedDataTFs": 12,
+                  "CorrectedTFs": 13,
+                  "DataTFs": 14,
+                  "ErrorDataTFs": 15,
+                  "ErrorTFs": 16,
+                  "TotalChunks": 17,
+                  "TotalVolume": 18,
+                  "UncorrectableDataTFs": 19,
+                  "UncorrectableTFs": 20,
+                  "acquisition_id": 21,
+                  "antenna_id": 4,
+                  "antenna_status": 5,
+                  "delivery_push_status": 6,
+                  "delivery_start": 22,
+                  "delivery_stop": 23,
+                  "downlink_orbit": 3,
+                  "downlink_start": 24,
+                  "downlink_status": 25,
+                  "downlink_stop": 26,
+                  "front_end_id": 8,
+                  "front_end_status": 7,
+                  "global_status": 0,
+                  "ground_station": 27,
+                  "mission": 1,
+                  "num_channels": 28,
+                  "planned_data_start": 9,
+                  "planned_data_stop": 10,
+                  "publication_date": 29,
+                  "quality_infos": 30,
+                  "reportFolder": 31,
+                  "retransfer": 32,
+                  "satellite_id": 2,
+                  "session_id": 33,
+                  "station_unit_id": 34,
+                  "updateTime": 35
+                },
+                "renameByName": {
+                  "Status": "Status",
+                  "antenna_id": "Antenna",
+                  "antenna_status": "Antenna Status",
+                  "delivery_push_status": "Delivery Status",
+                  "downlink_orbit": "Downlink Orbit",
+                  "doy": "Day of year",
+                  "front_end_status": "Front End Status",
+                  "global_status": "Status",
+                  "interface_name": "Reception Station",
+                  "mission": "Mission",
+                  "satellite_id": "Satellite"
+                }
+              }
+            },
+            {
+              "id": "sortBy",
+              "options": {
+                "fields": {},
+                "sort": [
+                  {
+                    "desc": false,
+                    "field": "Downlink Orbit"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "renameByRegex",
+              "options": {
+                "regex": "([a-z,_].*)",
+                "renamePattern": "HIDDEN"
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "HIDDEN": true
+                },
+                "indexByName": {},
+                "renameByName": {}
+              }
+            }
+          ],
+          "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "PD0067CAD9A63E081"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "center",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "filterable": true,
+                "inspect": false
+              },
+              "mappings": [
+                {
+                  "options": {
+                    "NA": {
+                      "color": "transparent",
+                      "index": 2,
+                      "text": "-"
+                    },
+                    "NOK": {
+                      "color": "red",
+                      "index": 1,
+                      "text": "KO"
+                    },
+                    "OK": {
+                      "color": "dark-green",
+                      "index": 0
+                    }
+                  },
+                  "type": "value"
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "dissemination_start"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 192
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "dissemination_stop"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 200
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "total_status"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "basic",
+                      "type": "color-background"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "moc_accept_status"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "basic",
+                      "type": "color-background"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "uplink_status"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "basic",
+                      "type": "color-background"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "spacecraft_execution"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "basic",
+                      "type": "color-background"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "sfdap_dissem_status"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "basic",
+                      "type": "color-background"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 24,
+            "x": 0,
+            "y": 37
+          },
+          "id": 183,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true,
+            "sortBy": []
+          },
+          "pluginVersion": "11.0.0",
+          "targets": [
+            {
+              "columns": [],
+              "datasource": {
+                "type": "yesoreyeram-infinity-datasource",
+                "uid": "PD0067CAD9A63E081"
+              },
+              "filters": [],
+              "format": "table",
+              "global_query_id": "raw-data-aps-edrs-product",
+              "refId": "A",
+              "root_selector": "hits.hits",
+              "source": "url",
+              "type": "json",
+              "url": "/cds-edrs-acquisition-pass-status/_search?q=satellite_id:${satellite}%20AND%20geo_satellite_id:${station:lucene}%20AND%20planned_link_session_start:[0 TO ${effective_downlink_start}]%20AND%20planned_link_session_stop:[${effective_downlink_stop} TO *]",
+              "url_options": {
+                "data": "",
+                "method": "GET"
+              }
+            }
+          ],
+          "title": "Acquisition status EDRS",
+          "transformations": [
+            {
+              "id": "extractFields",
+              "options": {
+                "format": "json",
+                "replace": true,
+                "source": "_source"
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "ingestionTime": true,
+                  "interface_name": true,
+                  "mission": true,
+                  "production_service_name": true,
+                  "production_service_type": true,
+                  "reportName": true
+                },
+                "indexByName": {
+                  "archived_data_size": 11,
+                  "cadus": 10,
+                  "dcsu_archive_status": 9,
+                  "disseminated_data": 12,
+                  "dissemination_start": 16,
+                  "dissemination_stop": 17,
+                  "doy": 0,
+                  "edte_acquisition_status": 18,
+                  "fer": 13,
+                  "geo_satellite_id": 2,
+                  "ground_station": 19,
+                  "ingestionTime": 20,
+                  "interface_name": 21,
+                  "link_session_id": 3,
+                  "mission": 22,
+                  "moc_accept_status": 5,
+                  "planned_link_session_start": 14,
+                  "planned_link_session_stop": 15,
+                  "production_service_name": 23,
+                  "production_service_type": 24,
+                  "reportName": 25,
+                  "satellite_id": 1,
+                  "sfdap_dissem_status": 8,
+                  "spacecraft_execution": 7,
+                  "total_status": 4,
+                  "uplink_status": 6
+                },
+                "renameByName": {
+                  "archived_data_size": "",
+                  "doy": "Day of year",
+                  "geo_satellite_id": "Station",
+                  "link_session_id": "Link session",
+                  "planned_link_session_start": "Planned session start",
+                  "planned_link_session_stop": "Planned session stop",
+                  "satellite_id": "Satellite"
+                }
+              }
+            }
+          ],
+          "type": "table"
+        }
+      ],
+      "title": "Downlinks information",
+      "type": "row"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [
+    "Completeness"
+  ],
+  "templating": {
+    "list": [
+      {
+        "hide": 2,
+        "label": "Mission",
+        "name": "mission",
+        "query": "S2",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": false,
+          "text": "S2A",
+          "value": "S2A"
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "PA3CBD0DC9D8FBBE1"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"satellite_unit\",\"query\":\"mission: $mission\"}",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Satellite",
+        "multi": false,
+        "name": "satellite",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"satellite_unit\",\"query\":\"mission: $mission\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "PA3CBD0DC9D8FBBE1"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"timeliness\",\"query\":\"mission: $mission AND satellite_unit : $satellite AND absolute_orbit:$absolute_orbit\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Category",
+        "multi": true,
+        "name": "timeliness",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"timeliness\",\"query\":\"mission: $mission AND satellite_unit : $satellite AND absolute_orbit:$absolute_orbit\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P4E6B5BC91908CBD9"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"product_level\",\"query\":\"mission: $mission AND satellite_unit : $satellite AND absolute_orbit:$absolute_orbit AND timeliness:$timeliness AND instrument_mode:$instrument_mode AND datatake_id:$datatake_id\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Level",
+        "multi": true,
+        "name": "product_level",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"product_level\",\"query\":\"mission: $mission AND satellite_unit : $satellite AND absolute_orbit:$absolute_orbit AND timeliness:$timeliness AND instrument_mode:$instrument_mode AND datatake_id:$datatake_id\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P4E6B5BC91908CBD9"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"product_type\",\"query\":\"mission: $mission AND satellite_unit : $satellite AND absolute_orbit:$absolute_orbit AND timeliness:$timeliness AND instrument_mode:$instrument_mode AND datatake_id:$datatake_id AND product_level:$product_level\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Product Type",
+        "multi": true,
+        "name": "product_type",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"product_type\",\"query\":\"mission: $mission AND satellite_unit : $satellite AND absolute_orbit:$absolute_orbit AND timeliness:$timeliness AND instrument_mode:$instrument_mode AND datatake_id:$datatake_id AND product_level:$product_level\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "PA3CBD0DC9D8FBBE1"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"absolute_orbit\",\"query\":\"mission: $mission AND satellite_unit : $satellite\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Absolute Orbit",
+        "multi": true,
+        "name": "absolute_orbit",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"absolute_orbit\",\"query\":\"mission: $mission AND satellite_unit : $satellite\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "PA3CBD0DC9D8FBBE1"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"instrument_mode\",\"query\":\"mission: $mission AND satellite_unit : $satellite AND absolute_orbit:$absolute_orbit AND timeliness:$timeliness\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Instrument Mode",
+        "multi": true,
+        "name": "instrument_mode",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"instrument_mode\",\"query\":\"mission: $mission AND satellite_unit : $satellite AND absolute_orbit:$absolute_orbit AND timeliness:$timeliness\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": false,
+          "text": "45484-1",
+          "value": "45484-1"
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "PA3CBD0DC9D8FBBE1"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"datatake_id\",\"query\":\"mission: $mission AND satellite_unit : $satellite AND absolute_orbit:$absolute_orbit AND timeliness:$timeliness AND instrument_mode:$instrument_mode \"}",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Datatake Id",
+        "multi": false,
+        "name": "datatake_id",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"datatake_id\",\"query\":\"mission: $mission AND satellite_unit : $satellite AND absolute_orbit:$absolute_orbit AND timeliness:$timeliness AND instrument_mode:$instrument_mode \"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "",
+        "current": {
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "yesoreyeram-infinity-datasource",
+          "uid": "PD0067CAD9A63E081"
+        },
+        "definition": "Infinity- (infinity) json",
+        "hide": 2,
+        "includeAll": true,
+        "label": "Downlink orbit",
+        "multi": true,
+        "name": "downlink_orbit",
+        "options": [],
+        "query": {
+          "infinityQuery": {
+            "columns": [
+              {
+                "selector": "_source.downlink_absolute_orbit",
+                "text": "",
+                "type": "string"
+              }
+            ],
+            "filters": [],
+            "format": "table",
+            "refId": "variable",
+            "root_selector": "hits.hits",
+            "source": "url",
+            "type": "json",
+            "url": "/cds-downlink-datatake/_search?q=datatake_id:${datatake_id}%20AND%20satellite_unit:${satellite}&size=1000",
+            "url_options": {
+              "data": "",
+              "method": "GET"
+            }
+          },
+          "query": "",
+          "queryType": "infinity"
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "yesoreyeram-infinity-datasource",
+          "uid": "PD0067CAD9A63E081"
+        },
+        "definition": "Infinity- (infinity) json",
+        "hide": 2,
+        "includeAll": true,
+        "label": "Station",
+        "multi": true,
+        "name": "station",
+        "options": [],
+        "query": {
+          "infinityQuery": {
+            "columns": [
+              {
+                "selector": "_source.station",
+                "text": "",
+                "type": "string"
+              }
+            ],
+            "filters": [],
+            "format": "table",
+            "refId": "variable",
+            "root_selector": "hits.hits",
+            "source": "url",
+            "type": "json",
+            "url": "/cds-downlink-datatake/_search?q=datatake_id:${datatake_id} AND satellite_unit:${satellite}&size=1000",
+            "url_options": {
+              "data": "",
+              "method": "GET"
+            }
+          },
+          "query": "",
+          "queryType": "infinity"
+        },
+        "refresh": 1,
+        "regex": "/([^_]+)/g",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "",
+        "current": {
+          "selected": false,
+          "text": "2024-03-07T22:12:11.644Z",
+          "value": "2024-03-07T22:12:11.644Z"
+        },
+        "datasource": {
+          "type": "yesoreyeram-infinity-datasource",
+          "uid": "PD0067CAD9A63E081"
+        },
+        "definition": "Infinity- (infinity) json",
+        "hide": 2,
+        "includeAll": false,
+        "label": "Effective_downlink_start",
+        "multi": true,
+        "name": "effective_downlink_start",
+        "options": [],
+        "query": {
+          "infinityQuery": {
+            "columns": [
+              {
+                "selector": "effective_downlink_start",
+                "text": "",
+                "type": "string"
+              }
+            ],
+            "filters": [],
+            "format": "table",
+            "parser": "simple",
+            "refId": "variable",
+            "root_selector": "hits.hits[0]._source",
+            "source": "url",
+            "type": "json",
+            "uql": "parse-json",
+            "url": "/cds-downlink-datatake/_search?q=datatake_id:${datatake_id} AND satellite_unit:${satellite} AND mission:${mission}&size=1000",
+            "url_options": {
+              "data": "",
+              "method": "GET"
+            }
+          },
+          "query": "",
+          "queryType": "infinity"
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 4,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "2024-03-07T22:22:49.231Z",
+          "value": "2024-03-07T22:22:49.231Z"
+        },
+        "datasource": {
+          "type": "yesoreyeram-infinity-datasource",
+          "uid": "PD0067CAD9A63E081"
+        },
+        "definition": "Infinity- (infinity) json",
+        "hide": 2,
+        "includeAll": false,
+        "label": "Effective_downlink_stop",
+        "multi": true,
+        "name": "effective_downlink_stop",
+        "options": [],
+        "query": {
+          "infinityQuery": {
+            "columns": [
+              {
+                "selector": "effective_downlink_stop",
+                "text": "",
+                "type": "string"
+              }
+            ],
+            "filters": [],
+            "format": "table",
+            "refId": "variable",
+            "root_selector": "hits.hits[0]._source",
+            "source": "url",
+            "type": "json",
+            "url": "/cds-downlink-datatake/_search?q=datatake_id:${datatake_id} AND satellite_unit:${satellite} AND mission:${mission}&size=1000",
+            "url_options": {
+              "data": "",
+              "method": "GET"
+            }
+          },
+          "query": "",
+          "queryType": "infinity"
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 3,
+        "type": "query"
+      },
+      {
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "PA3CBD0DC9D8FBBE1"
+        },
+        "filters": [],
+        "hide": 0,
+        "name": "Filters",
+        "skipUrlSync": false,
+        "type": "adhoc"
+      }
+    ]
+  },
+  "time": {
+    "from": "2024-03-07T18:59:35.360Z",
+    "to": "2024-03-07T19:17:27.683Z"
+  },
+  "timeRangeUpdatedDuringEditOrView": false,
+  "timepicker": {},
+  "timezone": "utc",
+  "title": "S2 Datatake Completeness (Produced vs Planned)",
+  "uid": "sStGi_ymz",
+  "weekStart": ""
+}

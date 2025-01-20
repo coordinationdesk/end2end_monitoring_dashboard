@@ -27,6 +27,7 @@ cd ./end2end_monitoring_dashboard
 ### Folder organization
 
 - ${WORK_DIR}
+  - development
   - cots
   - data
     - reports

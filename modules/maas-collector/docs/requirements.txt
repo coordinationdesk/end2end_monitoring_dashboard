@@ -2,6 +2,8 @@
 # To build the module reference correctly, make sure every external package
 # under `install_requires` in `setup.cfg` is also listed here!
 # sphinx_rtd_theme
-recommonmark
-sphinx==6.0.0
-
+# recommonmark
+myst-parser
+sphinx==7.2.6
+sphinx-rtd-theme
+# sphinx-markdown-tables

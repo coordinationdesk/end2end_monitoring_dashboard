@@ -1,0 +1,3359 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 10,
+      "panels": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "gridPos": {
+            "h": 19,
+            "w": 24,
+            "x": 0,
+            "y": 1
+          },
+          "id": 11,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "The System Technical Budget Schematic View - S5 is based on \n\n\n\n- the data budget reference document [\\[ESA-EOPG-EOPGC-TN-9\\] CSC Operations \u2013 ESA Framework \u2013 System Technical Budget.pdf](https://omcs.atlassian.net/wiki/download/attachments/66158618/%5BESA-EOPG-EOPGC-TN-9%5D%20CSC%20Operations%20%E2%80%93%20ESA%20Framework%20%E2%80%93%20System%20Technical%20Budget.pdf?api=v2).\n\n\n\n- the data flow reference document [\\[ESA-EOPG-EOPGC-TN-58\\] CSC GS Data Flow Configuration.pdf](https://omcs.atlassian.net/wiki/download/attachments/66158618/%5BESA-EOPG-EOPGC-TN-58%5D%20CSC%20GS%20Data%20Flow%20Configuration.pdf?api=v2).\n\n\n\nData flow document extraction is visible in the [\"Data Flow dashboard\"](./d/MfmL_E4Vz/golden-rules-and-data-flow?orgId=1) \n\n\n\n# Data selected\n\n\n\nFrom [\\[ESA-EOPG-EOPGC-TN-9\\] CSC Operations \u2013 ESA Framework \u2013 System Technical Budget.pdf](https://omcs.atlassian.net/wiki/download/attachments/66158618/%5BESA-EOPG-EOPGC-TN-9%5D%20CSC%20Operations%20%E2%80%93%20ESA%20Framework%20%E2%80%93%20System%20Technical%20Budget.pdf?api=v2) document some assuption are made to provide the System Technical Budget dashboards.\na\n\n\nFor System Technical Budget Schematic View - S5 the data published at PRIP, LTA or DD and DSIB files are selected.\n\n\n\n - Section Data Aquisition data from DSIB files.\n\n - Section Data Production data published at PRIP.\n\n - Section Data Preservation data published at LTA.\n\n - Section Data Distribution data published at DD.\n\n\n\n\n**Data collection** are considered as consistent since **01/08/2022**\n\n**Data collection** for **aquisition** are considered as consistent since **15/03/2023**\n\n\n\nValues are mean by satellite number in mission. (i.e. S1 1 satellite, S2 mean of 2 satellite, S3 mean of 2 satellite; S5 1 satellite )\n\n\n\nFor S1, S2, S3 values are mean of the 4 LTA, for S5 values came from S5P_DLR.\n\n\n\nRmq : There is today no S5 L0 data published at prip.\n\n\n\n# Annexes\n\n\n\n## Product type selected\n\n\n\nThe tables below present how products types are classified in STB level and STB timeliness:\n\n\n\n### For panel **Yearly Overall Data Flow S5 SATELLITE**:\n\n\n\n|Mission|STB Level|STB Timeliness|Real timeliness|Misc.|Product Type|\n|---|---|---|---|---|---|\n|S5|||NRTI|ACQ VOL|NRTI_L1B_ENG_DB, NRTI_L1B_RA_BD1, NRTI_L1B_RA_BD2, NRTI_L1B_RA_BD3, NRTI_L1B_RA_BD4, NRTI_L1B_RA_BD5, NRTI_L1B_RA_BD6, NRTI_L1B_RA_BD7, NRTI_L1B_RA_BD8, NRTI_L2__03_TCL, NRTI_L2__AER_AI, NRTI_L2__AER_LH, NRTI_L2__CLOUD_, NRTI_L2__CO____, NRTI_L2__FRESCO, NRTI_L2__HCCO_, NRTI_L2__NO2___, NRTI_L2__O3____, NRTI_L2__O3__PR, NRTI_L2__SO2___|\n|S5|||OFFL|ACQ VOL|OFFL_L1B_CA_SIR, OFFL_L1B_CA_UVN, OFFL_L1B_ENG_DB, OFFL_L1B_IR_SIR, OFFL_L1B_IR_UVN, OFFL_L1B_RA_BD1, OFFL_L1B_RA_BD2, OFFL_L1B_RA_BD3, OFFL_L1B_RA_BD4, OFFL_L1B_RA_BD5, OFFL_L1B_RA_BD6, OFFL_L1B_RA_BD7, OFFL_L1B_RA_BD8, OFFL_L2__03_TCL, OFFL_L2__AER_AI, OFFL_L2__AER_LH, OFFL_L2__CH4_, OFFL_L2__CLOUD_, OFFL_L2__CO____, OFFL_L2__FRESCO, OFFL_L2__HCHO_, OFFL_L2__NO2___, OFFL_L2__NP_BD3, OFFL_L2__NP_BD6, OFFL_L2__NP_BD7, OFFL_L2__O3____, OFFL_L2__O3__PR, OFFL_L2__SO2___|\n|S5|||OPER|ACQ VOL|OPER_L0__ENG_A_, OPER_L0__ODB_1_, OPER_L0__ODB_2_, OPER_L0__ODB_3_, OPER_L0__ODB_4_, OPER_L0__ODB_5_, OPER_L0__ODB_6_, OPER_L0__ODB_7_, OPER_L0__ODB_8_, OPER_L0__SAT_A_|\n|S5|||NRTI|ACQ COUNT|NRTI_L1B_ENG_DB, NRTI_L1B_RA_BD1, NRTI_L1B_RA_BD2, NRTI_L1B_RA_BD3, NRTI_L1B_RA_BD4, NRTI_L1B_RA_BD5, NRTI_L1B_RA_BD6, NRTI_L1B_RA_BD7, NRTI_L1B_RA_BD8, NRTI_L2__03_TCL, NRTI_L2__AER_AI, NRTI_L2__AER_LH, NRTI_L2__CLOUD_, NRTI_L2__CO____, NRTI_L2__FRESCO, NRTI_L2__HCCO_, NRTI_L2__NO2___, NRTI_L2__O3____, NRTI_L2__O3__PR, NRTI_L2__SO2___|\n|S5|||OFFL|ACQ COUNT|OFFL_L1B_CA_SIR, OFFL_L1B_CA_UVN, OFFL_L1B_ENG_DB, OFFL_L1B_IR_SIR, OFFL_L1B_IR_UVN, OFFL_L1B_RA_BD1, OFFL_L1B_RA_BD2, OFFL_L1B_RA_BD3, OFFL_L1B_RA_BD4, OFFL_L1B_RA_BD5, OFFL_L1B_RA_BD6, OFFL_L1B_RA_BD7, OFFL_L1B_RA_BD8, OFFL_L2__03_TCL, OFFL_L2__AER_AI, OFFL_L2__AER_LH, OFFL_L2__CH4_, OFFL_L2__CLOUD_, OFFL_L2__CO____, OFFL_L2__FRESCO, OFFL_L2__HCHO_, OFFL_L2__NO2___, OFFL_L2__NP_BD3, OFFL_L2__NP_BD6, OFFL_L2__NP_BD7, OFFL_L2__O3____, OFFL_L2__O3__PR, OFFL_L2__SO2___|\n|S5|||OPER|ACQ COUNT|OPER_L0__ENG_A_, OPER_L0__ODB_1_, OPER_L0__ODB_2_, OPER_L0__ODB_3_, OPER_L0__ODB_4_, OPER_L0__ODB_5_, OPER_L0__ODB_6_, OPER_L0__ODB_7_, OPER_L0__ODB_8_, OPER_L0__SAT_A_|\n|S5|L0|NRT-NTC|OPER|PROD VOL|OPER_L0__ENG_A_, OPER_L0__ODB_1_, OPER_L0__ODB_2_, OPER_L0__ODB_3_, OPER_L0__ODB_4_, OPER_L0__ODB_5_, OPER_L0__ODB_6_, OPER_L0__ODB_7_, OPER_L0__ODB_8_, OPER_L0__SAT_A_|\n|S5|L0|NRT-NTC|OPER|PROD COUNT|OPER_L0__ENG_A_, OPER_L0__ODB_1_, OPER_L0__ODB_2_, OPER_L0__ODB_3_, OPER_L0__ODB_4_, OPER_L0__ODB_5_, OPER_L0__ODB_6_, OPER_L0__ODB_7_, OPER_L0__ODB_8_, OPER_L0__SAT_A_|\n|S5|L1|NRT|NRTI|PROD VOL|NRTI_L1B_ENG_DB, NRTI_L1B_RA_BD1, NRTI_L1B_RA_BD2, NRTI_L1B_RA_BD3, NRTI_L1B_RA_BD4, NRTI_L1B_RA_BD5, NRTI_L1B_RA_BD6, NRTI_L1B_RA_BD7, NRTI_L1B_RA_BD8|\n|S5|L1|NRT|NRTI|PROD COUNT|NRTI_L1B_ENG_DB, NRTI_L1B_RA_BD1, NRTI_L1B_RA_BD2, NRTI_L1B_RA_BD3, NRTI_L1B_RA_BD4, NRTI_L1B_RA_BD5, NRTI_L1B_RA_BD6, NRTI_L1B_RA_BD7, NRTI_L1B_RA_BD8|\n|S5|L1|NTC|OFFL|PROD VOL|OFFL_L1B_CA_SIR, OFFL_L1B_CA_UVN, OFFL_L1B_ENG_DB, OFFL_L1B_IR_SIR, OFFL_L1B_IR_UVN, OFFL_L1B_RA_BD1, OFFL_L1B_RA_BD2, OFFL_L1B_RA_BD3, OFFL_L1B_RA_BD4, OFFL_L1B_RA_BD5, OFFL_L1B_RA_BD6, OFFL_L1B_RA_BD7, OFFL_L1B_RA_BD8|\n|S5|L1|NTC|OFFL|PROD COUNT|OFFL_L1B_CA_SIR, OFFL_L1B_CA_UVN, OFFL_L1B_ENG_DB, OFFL_L1B_IR_SIR, OFFL_L1B_IR_UVN, OFFL_L1B_RA_BD1, OFFL_L1B_RA_BD2, OFFL_L1B_RA_BD3, OFFL_L1B_RA_BD4, OFFL_L1B_RA_BD5, OFFL_L1B_RA_BD6, OFFL_L1B_RA_BD7, OFFL_L1B_RA_BD8|\n|S5|L2|NRT|NRTI|PROD VOL|NRTI_L2__03_TCL, NRTI_L2__AER_AI, NRTI_L2__AER_LH, NRTI_L2__CLOUD_, NRTI_L2__CO____, NRTI_L2__FRESCO, NRTI_L2__HCCO_, NRTI_L2__NO2___, NRTI_L2__O3____, NRTI_L2__O3__PR, NRTI_L2__SO2___|\n|S5|L2|NRT|NRTI|PROD COUNT|NRTI_L2__03_TCL, NRTI_L2__AER_AI, NRTI_L2__AER_LH, NRTI_L2__CLOUD_, NRTI_L2__CO____, NRTI_L2__FRESCO, NRTI_L2__HCCO_, NRTI_L2__NO2___, NRTI_L2__O3____, NRTI_L2__O3__PR, NRTI_L2__SO2___|\n|S5|L2|NTC|OFFL|PROD VOL|OFFL_L2__03_TCL, OFFL_L2__AER_AI, OFFL_L2__AER_LH, OFFL_L2__CH4_, OFFL_L2__CLOUD_, OFFL_L2__CO____, OFFL_L2__FRESCO, OFFL_L2__HCHO_, OFFL_L2__NO2___, OFFL_L2__NP_BD3, OFFL_L2__NP_BD6, OFFL_L2__NP_BD7, OFFL_L2__O3____, OFFL_L2__O3__PR, OFFL_L2__SO2___|\n|S5|L2|NTC|OFFL|PROD COUNT|OFFL_L2__03_TCL, OFFL_L2__AER_AI, OFFL_L2__AER_LH, OFFL_L2__CH4_, OFFL_L2__CLOUD_, OFFL_L2__CO____, OFFL_L2__FRESCO, OFFL_L2__HCHO_, OFFL_L2__NO2___, OFFL_L2__NP_BD3, OFFL_L2__NP_BD6, OFFL_L2__NP_BD7, OFFL_L2__O3____, OFFL_L2__O3__PR, OFFL_L2__SO2___|\n|S5|L0||OPER|LTA VOL|OPER_L0__ENG_A_, OPER_L0__ODB_1_, OPER_L0__ODB_2_, OPER_L0__ODB_3_, OPER_L0__ODB_4_, OPER_L0__ODB_5_, OPER_L0__ODB_6_, OPER_L0__ODB_7_, OPER_L0__ODB_8_, OPER_L0__SAT_A_|\n|S5|L0||OPER|LTA COUNT|OPER_L0__ENG_A_, OPER_L0__ODB_1_, OPER_L0__ODB_2_, OPER_L0__ODB_3_, OPER_L0__ODB_4_, OPER_L0__ODB_5_, OPER_L0__ODB_6_, OPER_L0__ODB_7_, OPER_L0__ODB_8_, OPER_L0__SAT_A_|\n|S5|L1||NRTI|LTA VOL|NRTI_L1B_ENG_DB, NRTI_L1B_RA_BD1, NRTI_L1B_RA_BD2, NRTI_L1B_RA_BD3, NRTI_L1B_RA_BD4, NRTI_L1B_RA_BD5, NRTI_L1B_RA_BD6, NRTI_L1B_RA_BD7, NRTI_L1B_RA_BD8|\n|S5|L1||OFFL|LTA VOL|OFFL_L1B_CA_SIR, OFFL_L1B_CA_UVN, OFFL_L1B_ENG_DB, OFFL_L1B_IR_SIR, OFFL_L1B_IR_UVN, OFFL_L1B_RA_BD1, OFFL_L1B_RA_BD2, OFFL_L1B_RA_BD3, OFFL_L1B_RA_BD4, OFFL_L1B_RA_BD5, OFFL_L1B_RA_BD6, OFFL_L1B_RA_BD7, OFFL_L1B_RA_BD8|\n|S5|L1||NRTI|LTA COUNT|NRTI_L1B_ENG_DB, NRTI_L1B_RA_BD1, NRTI_L1B_RA_BD2, NRTI_L1B_RA_BD3, NRTI_L1B_RA_BD4, NRTI_L1B_RA_BD5, NRTI_L1B_RA_BD6, NRTI_L1B_RA_BD7, NRTI_L1B_RA_BD8|\n|S5|L1||OFFL|LTA COUNT|OFFL_L1B_CA_SIR, OFFL_L1B_CA_UVN, OFFL_L1B_ENG_DB, OFFL_L1B_IR_SIR, OFFL_L1B_IR_UVN, OFFL_L1B_RA_BD1, OFFL_L1B_RA_BD2, OFFL_L1B_RA_BD3, OFFL_L1B_RA_BD4, OFFL_L1B_RA_BD5, OFFL_L1B_RA_BD6, OFFL_L1B_RA_BD7, OFFL_L1B_RA_BD8|\n|S5|L2||NRTI|LTA VOL|NRTI_L2__03_TCL, NRTI_L2__AER_AI, NRTI_L2__AER_LH, NRTI_L2__CLOUD_, NRTI_L2__CO____, NRTI_L2__FRESCO, NRTI_L2__HCCO_, NRTI_L2__NO2___, NRTI_L2__O3____, NRTI_L2__O3__PR, NRTI_L2__SO2___|\n|S5|L2||OFFL|LTA VOL|OFFL_L2__03_TCL, OFFL_L2__AER_AI, OFFL_L2__AER_LH, OFFL_L2__CH4_, OFFL_L2__CLOUD_, OFFL_L2__CO____, OFFL_L2__FRESCO, OFFL_L2__HCHO_, OFFL_L2__NO2___, OFFL_L2__NP_BD3, OFFL_L2__NP_BD6, OFFL_L2__NP_BD7, OFFL_L2__O3____, OFFL_L2__O3__PR, OFFL_L2__SO2___|\n|S5|L2||NRTI|LTA COUNT|NRTI_L2__03_TCL, NRTI_L2__AER_AI, NRTI_L2__AER_LH, NRTI_L2__CLOUD_, NRTI_L2__CO____, NRTI_L2__FRESCO, NRTI_L2__HCCO_, NRTI_L2__NO2___, NRTI_L2__O3____, NRTI_L2__O3__PR, NRTI_L2__SO2___|\n|S5|L2||OFFL|LTA COUNT|OFFL_L2__03_TCL, OFFL_L2__AER_AI, OFFL_L2__AER_LH, OFFL_L2__CH4_, OFFL_L2__CLOUD_, OFFL_L2__CO____, OFFL_L2__FRESCO, OFFL_L2__HCHO_, OFFL_L2__NO2___, OFFL_L2__NP_BD3, OFFL_L2__NP_BD6, OFFL_L2__NP_BD7, OFFL_L2__O3____, OFFL_L2__O3__PR, OFFL_L2__SO2___|\n|S5|||NRTI|LTA TOT VOL|NRTI_L1B_ENG_DB, NRTI_L1B_RA_BD1, NRTI_L1B_RA_BD2, NRTI_L1B_RA_BD3, NRTI_L1B_RA_BD4, NRTI_L1B_RA_BD5, NRTI_L1B_RA_BD6, NRTI_L1B_RA_BD7, NRTI_L1B_RA_BD8, NRTI_L2__03_TCL, NRTI_L2__AER_AI, NRTI_L2__AER_LH, NRTI_L2__CLOUD_, NRTI_L2__CO____, NRTI_L2__FRESCO, NRTI_L2__HCCO_, NRTI_L2__NO2___, NRTI_L2__O3____, NRTI_L2__O3__PR, NRTI_L2__SO2___|\n|S5|||OFFL|LTA TOT VOL|OFFL_L1B_CA_SIR, OFFL_L1B_CA_UVN, OFFL_L1B_ENG_DB, OFFL_L1B_IR_SIR, OFFL_L1B_IR_UVN, OFFL_L1B_RA_BD1, OFFL_L1B_RA_BD2, OFFL_L1B_RA_BD3, OFFL_L1B_RA_BD4, OFFL_L1B_RA_BD5, OFFL_L1B_RA_BD6, OFFL_L1B_RA_BD7, OFFL_L1B_RA_BD8, OFFL_L2__03_TCL, OFFL_L2__AER_AI, OFFL_L2__AER_LH, OFFL_L2__CH4_, OFFL_L2__CLOUD_, OFFL_L2__CO____, OFFL_L2__FRESCO, OFFL_L2__HCHO_, OFFL_L2__NO2___, OFFL_L2__NP_BD3, OFFL_L2__NP_BD6, OFFL_L2__NP_BD7, OFFL_L2__O3____, OFFL_L2__O3__PR, OFFL_L2__SO2___|\n|S5|||OPER|LTA TOT VOL|OPER_L0__ENG_A_, OPER_L0__ODB_1_, OPER_L0__ODB_2_, OPER_L0__ODB_3_, OPER_L0__ODB_4_, OPER_L0__ODB_5_, OPER_L0__ODB_6_, OPER_L0__ODB_7_, OPER_L0__ODB_8_, OPER_L0__SAT_A_|\n|S5|||NRTI|LTA TOT COUNT|NRTI_L1B_ENG_DB, NRTI_L1B_RA_BD1, NRTI_L1B_RA_BD2, NRTI_L1B_RA_BD3, NRTI_L1B_RA_BD4, NRTI_L1B_RA_BD5, NRTI_L1B_RA_BD6, NRTI_L1B_RA_BD7, NRTI_L1B_RA_BD8, NRTI_L2__03_TCL, NRTI_L2__AER_AI, NRTI_L2__AER_LH, NRTI_L2__CLOUD_, NRTI_L2__CO____, NRTI_L2__FRESCO, NRTI_L2__HCCO_, NRTI_L2__NO2___, NRTI_L2__O3____, NRTI_L2__O3__PR, NRTI_L2__SO2___|\n|S5|||OFFL|LTA TOT COUNT|OFFL_L1B_CA_SIR, OFFL_L1B_CA_UVN, OFFL_L1B_ENG_DB, OFFL_L1B_IR_SIR, OFFL_L1B_IR_UVN, OFFL_L1B_RA_BD1, OFFL_L1B_RA_BD2, OFFL_L1B_RA_BD3, OFFL_L1B_RA_BD4, OFFL_L1B_RA_BD5, OFFL_L1B_RA_BD6, OFFL_L1B_RA_BD7, OFFL_L1B_RA_BD8, OFFL_L2__03_TCL, OFFL_L2__AER_AI, OFFL_L2__AER_LH, OFFL_L2__CH4_, OFFL_L2__CLOUD_, OFFL_L2__CO____, OFFL_L2__FRESCO, OFFL_L2__HCHO_, OFFL_L2__NO2___, OFFL_L2__NP_BD3, OFFL_L2__NP_BD6, OFFL_L2__NP_BD7, OFFL_L2__O3____, OFFL_L2__O3__PR, OFFL_L2__SO2___|\n|S5|||OPER|LTA TOT COUNT|OPER_L0__ENG_A_, OPER_L0__ODB_1_, OPER_L0__ODB_2_, OPER_L0__ODB_3_, OPER_L0__ODB_4_, OPER_L0__ODB_5_, OPER_L0__ODB_6_, OPER_L0__ODB_7_, OPER_L0__ODB_8_, OPER_L0__SAT_A_|\n|S5|L1||NRTI|DD VOL|NRTI_L1B_ENG_DB, NRTI_L1B_RA_BD1, NRTI_L1B_RA_BD2, NRTI_L1B_RA_BD3, NRTI_L1B_RA_BD4, NRTI_L1B_RA_BD5, NRTI_L1B_RA_BD6, NRTI_L1B_RA_BD7, NRTI_L1B_RA_BD8|\n|S5|L1||OFFL|DD VOL|OFFL_L1B_CA_SIR, OFFL_L1B_CA_UVN, OFFL_L1B_ENG_DB, OFFL_L1B_IR_SIR, OFFL_L1B_IR_UVN, OFFL_L1B_RA_BD1, OFFL_L1B_RA_BD2, OFFL_L1B_RA_BD3, OFFL_L1B_RA_BD4, OFFL_L1B_RA_BD5, OFFL_L1B_RA_BD6, OFFL_L1B_RA_BD7, OFFL_L1B_RA_BD8|\n|S5|L1||NRTI|DD COUNT|NRTI_L1B_ENG_DB, NRTI_L1B_RA_BD1, NRTI_L1B_RA_BD2, NRTI_L1B_RA_BD3, NRTI_L1B_RA_BD4, NRTI_L1B_RA_BD5, NRTI_L1B_RA_BD6, NRTI_L1B_RA_BD7, NRTI_L1B_RA_BD8|\n|S5|L1||OFFL|DD COUNT|OFFL_L1B_CA_SIR, OFFL_L1B_CA_UVN, OFFL_L1B_ENG_DB, OFFL_L1B_IR_SIR, OFFL_L1B_IR_UVN, OFFL_L1B_RA_BD1, OFFL_L1B_RA_BD2, OFFL_L1B_RA_BD3, OFFL_L1B_RA_BD4, OFFL_L1B_RA_BD5, OFFL_L1B_RA_BD6, OFFL_L1B_RA_BD7, OFFL_L1B_RA_BD8|\n|S5|L2||NRTI|DD VOL|NRTI_L2__03_TCL, NRTI_L2__AER_AI, NRTI_L2__AER_LH, NRTI_L2__CLOUD_, NRTI_L2__CO____, NRTI_L2__FRESCO, NRTI_L2__HCCO_, NRTI_L2__NO2___, NRTI_L2__O3____, NRTI_L2__O3__PR, NRTI_L2__SO2___|\n|S5|L2||OFFL|DD VOL|OFFL_L2__03_TCL, OFFL_L2__AER_AI, OFFL_L2__AER_LH, OFFL_L2__CH4_, OFFL_L2__CLOUD_, OFFL_L2__CO____, OFFL_L2__FRESCO, OFFL_L2__HCHO_, OFFL_L2__NO2___, OFFL_L2__NP_BD3, OFFL_L2__NP_BD6, OFFL_L2__NP_BD7, OFFL_L2__O3____, OFFL_L2__O3__PR, OFFL_L2__SO2___|\n|S5|L2||NRTI|DD COUNT|NRTI_L2__03_TCL, NRTI_L2__AER_AI, NRTI_L2__AER_LH, NRTI_L2__CLOUD_, NRTI_L2__CO____, NRTI_L2__FRESCO, NRTI_L2__HCCO_, NRTI_L2__NO2___, NRTI_L2__O3____, NRTI_L2__O3__PR, NRTI_L2__SO2___|\n|S5|L2||OFFL|DD COUNT|OFFL_L2__03_TCL, OFFL_L2__AER_AI, OFFL_L2__AER_LH, OFFL_L2__CH4_, OFFL_L2__CLOUD_, OFFL_L2__CO____, OFFL_L2__FRESCO, OFFL_L2__HCHO_, OFFL_L2__NO2___, OFFL_L2__NP_BD3, OFFL_L2__NP_BD6, OFFL_L2__NP_BD7, OFFL_L2__O3____, OFFL_L2__O3__PR, OFFL_L2__SO2___|\n|S5|||NRTI|DD TOT VOL|NRTI_L1B_ENG_DB, NRTI_L1B_RA_BD1, NRTI_L1B_RA_BD2, NRTI_L1B_RA_BD3, NRTI_L1B_RA_BD4, NRTI_L1B_RA_BD5, NRTI_L1B_RA_BD6, NRTI_L1B_RA_BD7, NRTI_L1B_RA_BD8, NRTI_L2__03_TCL, NRTI_L2__AER_AI, NRTI_L2__AER_LH, NRTI_L2__CLOUD_, NRTI_L2__CO____, NRTI_L2__FRESCO, NRTI_L2__HCCO_, NRTI_L2__NO2___, NRTI_L2__O3____, NRTI_L2__O3__PR, NRTI_L2__SO2___|\n|S5|||OFFL|DD TOT VOL|OFFL_L1B_CA_SIR, OFFL_L1B_CA_UVN, OFFL_L1B_ENG_DB, OFFL_L1B_IR_SIR, OFFL_L1B_IR_UVN, OFFL_L1B_RA_BD1, OFFL_L1B_RA_BD2, OFFL_L1B_RA_BD3, OFFL_L1B_RA_BD4, OFFL_L1B_RA_BD5, OFFL_L1B_RA_BD6, OFFL_L1B_RA_BD7, OFFL_L1B_RA_BD8, OFFL_L2__03_TCL, OFFL_L2__AER_AI, OFFL_L2__AER_LH, OFFL_L2__CH4_, OFFL_L2__CLOUD_, OFFL_L2__CO____, OFFL_L2__FRESCO, OFFL_L2__HCHO_, OFFL_L2__NO2___, OFFL_L2__NP_BD3, OFFL_L2__NP_BD6, OFFL_L2__NP_BD7, OFFL_L2__O3____, OFFL_L2__O3__PR, OFFL_L2__SO2___|\n|S5|||OPER|DD TOT VOL|OPER_L0__ENG_A_, OPER_L0__ODB_1_, OPER_L0__ODB_2_, OPER_L0__ODB_3_, OPER_L0__ODB_4_, OPER_L0__ODB_5_, OPER_L0__ODB_6_, OPER_L0__ODB_7_, OPER_L0__ODB_8_, OPER_L0__SAT_A_|\n|S5|||NRTI|DD TOT COUNT|NRTI_L1B_ENG_DB, NRTI_L1B_RA_BD1, NRTI_L1B_RA_BD2, NRTI_L1B_RA_BD3, NRTI_L1B_RA_BD4, NRTI_L1B_RA_BD5, NRTI_L1B_RA_BD6, NRTI_L1B_RA_BD7, NRTI_L1B_RA_BD8, NRTI_L2__03_TCL, NRTI_L2__AER_AI, NRTI_L2__AER_LH, NRTI_L2__CLOUD_, NRTI_L2__CO____, NRTI_L2__FRESCO, NRTI_L2__HCCO_, NRTI_L2__NO2___, NRTI_L2__O3____, NRTI_L2__O3__PR, NRTI_L2__SO2___|\n|S5|||OFFL|DD TOT COUNT|OFFL_L1B_CA_SIR, OFFL_L1B_CA_UVN, OFFL_L1B_ENG_DB, OFFL_L1B_IR_SIR, OFFL_L1B_IR_UVN, OFFL_L1B_RA_BD1, OFFL_L1B_RA_BD2, OFFL_L1B_RA_BD3, OFFL_L1B_RA_BD4, OFFL_L1B_RA_BD5, OFFL_L1B_RA_BD6, OFFL_L1B_RA_BD7, OFFL_L1B_RA_BD8, OFFL_L2__03_TCL, OFFL_L2__AER_AI, OFFL_L2__AER_LH, OFFL_L2__CH4_, OFFL_L2__CLOUD_, OFFL_L2__CO____, OFFL_L2__FRESCO, OFFL_L2__HCHO_, OFFL_L2__NO2___, OFFL_L2__NP_BD3, OFFL_L2__NP_BD6, OFFL_L2__NP_BD7, OFFL_L2__O3____, OFFL_L2__O3__PR, OFFL_L2__SO2___|\n|S5|||OPER|DD TOT COUNT|OPER_L0__ENG_A_, OPER_L0__ODB_1_, OPER_L0__ODB_2_, OPER_L0__ODB_3_, OPER_L0__ODB_4_, OPER_L0__ODB_5_, OPER_L0__ODB_6_, OPER_L0__ODB_7_, OPER_L0__ODB_8_, OPER_L0__SAT_A_|\n|S5|L1||NRTI|DL VOL|NRTI_L1B_ENG_DB, NRTI_L1B_RA_BD1, NRTI_L1B_RA_BD2, NRTI_L1B_RA_BD3, NRTI_L1B_RA_BD4, NRTI_L1B_RA_BD5, NRTI_L1B_RA_BD6, NRTI_L1B_RA_BD7, NRTI_L1B_RA_BD8|\n|S5|L1||OFFL|DL VOL|OFFL_L1B_CA_SIR, OFFL_L1B_CA_UVN, OFFL_L1B_ENG_DB, OFFL_L1B_IR_SIR, OFFL_L1B_IR_UVN, OFFL_L1B_RA_BD1, OFFL_L1B_RA_BD2, OFFL_L1B_RA_BD3, OFFL_L1B_RA_BD4, OFFL_L1B_RA_BD5, OFFL_L1B_RA_BD6, OFFL_L1B_RA_BD7, OFFL_L1B_RA_BD8|\n|S5|L1||NRTI|DL COUNT|NRTI_L1B_ENG_DB, NRTI_L1B_RA_BD1, NRTI_L1B_RA_BD2, NRTI_L1B_RA_BD3, NRTI_L1B_RA_BD4, NRTI_L1B_RA_BD5, NRTI_L1B_RA_BD6, NRTI_L1B_RA_BD7, NRTI_L1B_RA_BD8|\n|S5|L1||OFFL|DL COUNT|OFFL_L1B_CA_SIR, OFFL_L1B_CA_UVN, OFFL_L1B_ENG_DB, OFFL_L1B_IR_SIR, OFFL_L1B_IR_UVN, OFFL_L1B_RA_BD1, OFFL_L1B_RA_BD2, OFFL_L1B_RA_BD3, OFFL_L1B_RA_BD4, OFFL_L1B_RA_BD5, OFFL_L1B_RA_BD6, OFFL_L1B_RA_BD7, OFFL_L1B_RA_BD8|\n|S5|L2||NRTI|DL VOL|NRTI_L2__03_TCL, NRTI_L2__AER_AI, NRTI_L2__AER_LH, NRTI_L2__CLOUD_, NRTI_L2__CO____, NRTI_L2__FRESCO, NRTI_L2__HCCO_, NRTI_L2__NO2___, NRTI_L2__O3____, NRTI_L2__O3__PR, NRTI_L2__SO2___|\n|S5|L2||OFFL|DL VOL|OFFL_L2__03_TCL, OFFL_L2__AER_AI, OFFL_L2__AER_LH, OFFL_L2__CH4_, OFFL_L2__CLOUD_, OFFL_L2__CO____, OFFL_L2__FRESCO, OFFL_L2__HCHO_, OFFL_L2__NO2___, OFFL_L2__NP_BD3, OFFL_L2__NP_BD6, OFFL_L2__NP_BD7, OFFL_L2__O3____, OFFL_L2__O3__PR, OFFL_L2__SO2___|\n|S5|L2||NRTI|DL COUNT|NRTI_L2__03_TCL, NRTI_L2__AER_AI, NRTI_L2__AER_LH, NRTI_L2__CLOUD_, NRTI_L2__CO____, NRTI_L2__FRESCO, NRTI_L2__HCCO_, NRTI_L2__NO2___, NRTI_L2__O3____, NRTI_L2__O3__PR, NRTI_L2__SO2___|\n|S5|L2||OFFL|DL COUNT|OFFL_L2__03_TCL, OFFL_L2__AER_AI, OFFL_L2__AER_LH, OFFL_L2__CH4_, OFFL_L2__CLOUD_, OFFL_L2__CO____, OFFL_L2__FRESCO, OFFL_L2__HCHO_, OFFL_L2__NO2___, OFFL_L2__NP_BD3, OFFL_L2__NP_BD6, OFFL_L2__NP_BD7, OFFL_L2__O3____, OFFL_L2__O3__PR, OFFL_L2__SO2___|\n|S5|||NRTI|Dl TOT VOL|NRTI_L1B_ENG_DB, NRTI_L1B_RA_BD1, NRTI_L1B_RA_BD2, NRTI_L1B_RA_BD3, NRTI_L1B_RA_BD4, NRTI_L1B_RA_BD5, NRTI_L1B_RA_BD6, NRTI_L1B_RA_BD7, NRTI_L1B_RA_BD8, NRTI_L2__03_TCL, NRTI_L2__AER_AI, NRTI_L2__AER_LH, NRTI_L2__CLOUD_, NRTI_L2__CO____, NRTI_L2__FRESCO, NRTI_L2__HCCO_, NRTI_L2__NO2___, NRTI_L2__O3____, NRTI_L2__O3__PR, NRTI_L2__SO2___|\n|S5|||OFFL|Dl TOT VOL|OFFL_L1B_CA_SIR, OFFL_L1B_CA_UVN, OFFL_L1B_ENG_DB, OFFL_L1B_IR_SIR, OFFL_L1B_IR_UVN, OFFL_L1B_RA_BD1, OFFL_L1B_RA_BD2, OFFL_L1B_RA_BD3, OFFL_L1B_RA_BD4, OFFL_L1B_RA_BD5, OFFL_L1B_RA_BD6, OFFL_L1B_RA_BD7, OFFL_L1B_RA_BD8, OFFL_L2__03_TCL, OFFL_L2__AER_AI, OFFL_L2__AER_LH, OFFL_L2__CH4_, OFFL_L2__CLOUD_, OFFL_L2__CO____, OFFL_L2__FRESCO, OFFL_L2__HCHO_, OFFL_L2__NO2___, OFFL_L2__NP_BD3, OFFL_L2__NP_BD6, OFFL_L2__NP_BD7, OFFL_L2__O3____, OFFL_L2__O3__PR, OFFL_L2__SO2___|\n|S5|||OPER|Dl TOT VOL|OPER_L0__ENG_A_, OPER_L0__ODB_1_, OPER_L0__ODB_2_, OPER_L0__ODB_3_, OPER_L0__ODB_4_, OPER_L0__ODB_5_, OPER_L0__ODB_6_, OPER_L0__ODB_7_, OPER_L0__ODB_8_, OPER_L0__SAT_A_|\n|S5|||NRTI|Dl TOT COUNT|NRTI_L1B_ENG_DB, NRTI_L1B_RA_BD1, NRTI_L1B_RA_BD2, NRTI_L1B_RA_BD3, NRTI_L1B_RA_BD4, NRTI_L1B_RA_BD5, NRTI_L1B_RA_BD6, NRTI_L1B_RA_BD7, NRTI_L1B_RA_BD8, NRTI_L2__03_TCL, NRTI_L2__AER_AI, NRTI_L2__AER_LH, NRTI_L2__CLOUD_, NRTI_L2__CO____, NRTI_L2__FRESCO, NRTI_L2__HCCO_, NRTI_L2__NO2___, NRTI_L2__O3____, NRTI_L2__O3__PR, NRTI_L2__SO2___|\n|S5|||OFFL|Dl TOT COUNT|OFFL_L1B_CA_SIR, OFFL_L1B_CA_UVN, OFFL_L1B_ENG_DB, OFFL_L1B_IR_SIR, OFFL_L1B_IR_UVN, OFFL_L1B_RA_BD1, OFFL_L1B_RA_BD2, OFFL_L1B_RA_BD3, OFFL_L1B_RA_BD4, OFFL_L1B_RA_BD5, OFFL_L1B_RA_BD6, OFFL_L1B_RA_BD7, OFFL_L1B_RA_BD8, OFFL_L2__03_TCL, OFFL_L2__AER_AI, OFFL_L2__AER_LH, OFFL_L2__CH4_, OFFL_L2__CLOUD_, OFFL_L2__CO____, OFFL_L2__FRESCO, OFFL_L2__HCHO_, OFFL_L2__NO2___, OFFL_L2__NP_BD3, OFFL_L2__NP_BD6, OFFL_L2__NP_BD7, OFFL_L2__O3____, OFFL_L2__O3__PR, OFFL_L2__SO2___|\n|S5|||OPER|Dl TOT COUNT|OPER_L0__ENG_A_, OPER_L0__ODB_1_, OPER_L0__ODB_2_, OPER_L0__ODB_3_, OPER_L0__ODB_4_, OPER_L0__ODB_5_, OPER_L0__ODB_6_, OPER_L0__ODB_7_, OPER_L0__ODB_8_, OPER_L0__SAT_A_|\n\n\nTime reference for this dashboard is : sensing_start_date\n\nImportant notice : Tables & timelines can only display up to 10 000 entries. Please make use of filters to narrow down the retrieved data and get a more realistic view.",
+            "mode": "markdown"
+          },
+          "pluginVersion": "10.4.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "refId": "A"
+            }
+          ],
+          "title": "Help",
+          "type": "text"
+        }
+      ],
+      "title": "Dashboard description",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 120,
+      "panels": [],
+      "title": "Schematic View - S5",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "-- Mixed --"
+      },
+      "description": "",
+      "flowchartsData": {
+        "flowcharts": [
+          {
+            "allowDrawio": false,
+            "bgColor": "#305496",
+            "center": true,
+            "csv": "## See more information for the syntax at https://drawio-app.com/import-from-csv-to-drawio/\n##\n## Example CSV. Use ## for comments and # for configuration.\n## The following names are reserved and should not be used (or ignored):\n## id, tooltip, placeholder(s), link and label (see below)\n##\n#\n## Node label with placeholders and HTML.\n## Default is '%name_of_first_column%'.\n#\n# label: %name%<br><i style=\"color:gray;\">%position%</i><br><a href=\"mailto:%email%\">Email</a>\n#\n## Node style (placeholders are replaced once).\n## Default is the current style for nodes.\n#\n# style: label;image=%image%;whiteSpace=wrap;html=1;rounded=1;fillColor=%fill%;strokeColor=%stroke%;\n#\n## Parent style for nodes with child nodes (placeholders are replaced once).\n#\n# parentstyle: swimlane;whiteSpace=wrap;html=1;childLayout=stackLayout;horizontal=1;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;\n#\n## Optional column name that contains a reference to a named style in styles.\n## Default is the current style for nodes.\n#\n# stylename: -\n#\n## JSON for named styles of the form {\"name\": \"style\", \"name\": \"style\"} where style is a cell style with\n## placeholders that are replaced once.\n#\n# styles: -\n#\n## Optional column name that contains a reference to a named label in labels.\n## Default is the current label.\n#\n# labelname: -\n#\n## JSON for named labels of the form {\"name\": \"label\", \"name\": \"label\"} where label is a cell label with\n## placeholders.\n#\n# labels: -\n#\n## Uses the given column name as the identity for cells (updates existing cells).\n## Default is no identity (empty value or -).\n#\n# identity: -\n#\n## Uses the given column name as the parent reference for cells. Default is no parent (empty or -).\n## The identity above is used for resolving the reference so it must be specified.\n#\n# parent: -\n#\n## Adds a prefix to the identity of cells to make sure they do not collide with existing cells (whose\n## IDs are numbers from 0..n, sometimes with a GUID prefix in the context of realtime collaboration).\n## Default is csvimport-.\n#\n# namespace: csvimport-\n#\n## Connections between rows (\"from\": source colum, \"to\": target column).\n## Label, style and invert are optional. Defaults are '', current style and false.\n## If placeholders are used in the style, they are replaced with data from the source.\n## An optional placeholders can be set to target to use data from the target instead.\n## In addition to label, an optional fromlabel and tolabel can be used to name the column\n## that contains the text for the label in the edges source or target (invert ignored).\n## The label is concatenated in the form fromlabel + label + tolabel if all are defined.\n## The target column may contain a comma-separated list of values.\n## Multiple connect entries are allowed.\n#\n# connect: {\"from\": \"manager\", \"to\": \"name\", \"invert\": true, \"label\": \"manages\", \\\n#          \"style\": \"curved=1;endArrow=blockThin;endFill=1;fontSize=11;\"}\n# connect: {\"from\": \"refs\", \"to\": \"id\", \"style\": \"curved=1;fontSize=11;\"}\n#\n## Node x-coordinate. Possible value is a column name. Default is empty. Layouts will\n## override this value.\n#\n# left: \n#\n## Node y-coordinate. Possible value is a column name. Default is empty. Layouts will\n## override this value.\n#\n# top: \n#\n## Node width. Possible value is a number (in px), auto or an @ sign followed by a column\n## name that contains the value for the width. Default is auto.\n#\n# width: auto\n#\n## Node height. Possible value is a number (in px), auto or an @ sign followed by a column\n## name that contains the value for the height. Default is auto.\n#\n# height: auto\n#\n## Padding for autosize. Default is 0.\n#\n# padding: -12\n#\n## Comma-separated list of ignored columns for metadata. (These can be\n## used for connections and styles but will not be added as metadata.)\n#\n# ignore: id,image,fill,stroke,refs,manager\n#\n## Column to be renamed to link attribute (used as link).\n#\n# link: url\n#\n## Spacing between nodes. Default is 40.\n#\n# nodespacing: 40\n#\n## Spacing between levels of hierarchical layouts. Default is 100.\n#\n# levelspacing: 100\n#\n## Spacing between parallel edges. Default is 40. Use 0 to disable.\n#\n# edgespacing: 40\n#\n## Name or JSON of layout. Possible values are auto, none, verticaltree, horizontaltree,\n## verticalflow, horizontalflow, organic, circle or a JSON string as used in Layout, Apply.\n## Default is auto.\n#\n# layout: auto\n#\n## ---- CSV below this line. First line are column names. ----\nname,position,id,location,manager,email,fill,stroke,refs,url,image\nEvan Miller,CFO,emi,Office 1,,me@example.com,#dae8fc,#6c8ebf,,https://www.draw.io,https://cdn3.iconfinder.com/data/icons/user-avatars-1/512/users-9-2-128.png\nEdward Morrison,Brand Manager,emo,Office 2,Evan Miller,me@example.com,#d5e8d4,#82b366,,https://www.draw.io,https://cdn3.iconfinder.com/data/icons/user-avatars-1/512/users-10-3-128.png\nRon Donovan,System Admin,rdo,Office 3,Evan Miller,me@example.com,#d5e8d4,#82b366,\"emo,tva\",https://www.draw.io,https://cdn3.iconfinder.com/data/icons/user-avatars-1/512/users-2-128.png\nTessa Valet,HR Director,tva,Office 4,Evan Miller,me@example.com,#d5e8d4,#82b366,,https://www.draw.io,https://cdn3.iconfinder.com/data/icons/user-avatars-1/512/users-3-128.png\n",
+            "download": false,
+            "editorTheme": "dark",
+            "editorUrl": "https://www.draw.io",
+            "enableAnim": true,
+            "grid": false,
+            "lock": true,
+            "name": "Main",
+            "scale": true,
+            "tooltip": true,
+            "type": "xml",
+            "url": "http://<YourUrl>/<Your XML/drawio file/api>",
+            "xml": "<mxfile host=\"app.diagrams.net\" modified=\"2023-07-18T13:06:32.483Z\" agent=\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36\" etag=\"-Aw2S9xqtzmMxrrDHNfl\" version=\"21.6.2\" type=\"device\"><diagram id=\"KkWFMYtArX11onEwPvEW\" name=\"Page-1\">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</diagram></mxfile>",
+            "zoom": "100%"
+          }
+        ]
+      },
+      "format": "short",
+      "graphId": "flowchart_121",
+      "gridPos": {
+        "h": 23,
+        "w": 24,
+        "x": 0,
+        "y": 2
+      },
+      "id": 121,
+      "newFlag": false,
+      "rulesData": {
+        "rulesData": [
+          {
+            "aggregation": "total",
+            "alias": "S5_ACQ_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 1,
+            "overlayIcon": false,
+            "pattern": "S5_ACQ_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S5_ACQ_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S5_ACQ_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 2,
+            "overlayIcon": false,
+            "pattern": "S5_ACQ_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S5_ACQ_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S5_PROD_L0_NTC_NRT_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 3,
+            "overlayIcon": false,
+            "pattern": "S5_PROD_L0_NTC_NRT_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S5_PROD_L0_NTC_NRT_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S5_PROD_L0_NTC_NRT_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 4,
+            "overlayIcon": false,
+            "pattern": "S5_PROD_L0_NTC_NRT_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S5_PROD_L0_NTC_NRT_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S5_PROD_L1_NRT_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 5,
+            "overlayIcon": false,
+            "pattern": "S5_PROD_L1_NRT_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S5_PROD_L1_NRT_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S5_PROD_L1_NRT_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 6,
+            "overlayIcon": false,
+            "pattern": "S5_PROD_L1_NRT_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S5_PROD_L1_NRT_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S5_PROD_L1_NTC_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 7,
+            "overlayIcon": false,
+            "pattern": "S5_PROD_L1_NTC_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S5_PROD_L1_NTC_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S5_PROD_L1_NTC_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 8,
+            "overlayIcon": false,
+            "pattern": "S5_PROD_L1_NTC_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S5_PROD_L1_NTC_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S5_PROD_L2_NRT_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 9,
+            "overlayIcon": false,
+            "pattern": "S5_PROD_L2_NRT_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S5_PROD_L2_NRT_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S5_PROD_L2_NRT_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 10,
+            "overlayIcon": false,
+            "pattern": "S5_PROD_L2_NRT_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S5_PROD_L2_NRT_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S5_PROD_L2_NTC_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 11,
+            "overlayIcon": false,
+            "pattern": "S5_PROD_L2_NTC_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S5_PROD_L2_NTC_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S5_PROD_L2_NTC_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 12,
+            "overlayIcon": false,
+            "pattern": "S5_PROD_L2_NTC_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S5_PROD_L2_NTC_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S5_LTA_L0_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 13,
+            "overlayIcon": false,
+            "pattern": "S5_LTA_L0_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S5_LTA_L0_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S5_LTA_L0_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 14,
+            "overlayIcon": false,
+            "pattern": "S5_LTA_L0_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S5_LTA_L0_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S5_LTA_L1_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 15,
+            "overlayIcon": false,
+            "pattern": "S5_LTA_L1_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S5_LTA_L1_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S5_LTA_L1_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 16,
+            "overlayIcon": false,
+            "pattern": "S5_LTA_L1_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S5_LTA_L1_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S5_LTA_L2_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 17,
+            "overlayIcon": false,
+            "pattern": "S5_LTA_L2_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S5_LTA_L2_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S5_LTA_L2_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 18,
+            "overlayIcon": false,
+            "pattern": "S5_LTA_L2_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S5_LTA_L2_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S5_LTA_TOT_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 19,
+            "overlayIcon": false,
+            "pattern": "S5_LTA_TOT_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S5_LTA_TOT_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S5_LTA_TOT_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 20,
+            "overlayIcon": false,
+            "pattern": "S5_LTA_TOT_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S5_LTA_TOT_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S5_DD_L1_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 21,
+            "overlayIcon": false,
+            "pattern": "S5_DD_L1_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S5_DD_L1_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S5_DD_L1_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 22,
+            "overlayIcon": false,
+            "pattern": "S5_DD_L1_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S5_DD_L1_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S5_DD_L2_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 23,
+            "overlayIcon": false,
+            "pattern": "S5_DD_L2_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S5_DD_L2_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S5_DD_L2_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 24,
+            "overlayIcon": false,
+            "pattern": "S5_DD_L2_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S5_DD_L2_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S5_DD_TOT_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 25,
+            "overlayIcon": false,
+            "pattern": "S5_DD_TOT_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S5_DD_TOT_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S5_DD_TOT_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 26,
+            "overlayIcon": false,
+            "pattern": "S5_DD_TOT_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S5_DD_TOT_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S5_DL_L1_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 27,
+            "overlayIcon": false,
+            "pattern": "S5_DL_L1_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S5_DL_L1_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S5_DL_L1_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 28,
+            "overlayIcon": false,
+            "pattern": "S5_DL_L1_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S5_DL_L1_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S5_DL_L2_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 29,
+            "overlayIcon": false,
+            "pattern": "S5_DL_L2_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S5_DL_L2_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S5_DL_L2_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 30,
+            "overlayIcon": false,
+            "pattern": "S5_DL_L2_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S5_DL_L2_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S5_Dl_TOT_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 31,
+            "overlayIcon": false,
+            "pattern": "S5_Dl_TOT_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S5_Dl_TOT_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S5_Dl_TOT_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 32,
+            "overlayIcon": false,
+            "pattern": "S5_Dl_TOT_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S5_Dl_TOT_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          }
+        ]
+      },
+      "targets": [
+        {
+          "alias": "S5_ACQ_VOL",
+          "bucketAggs": [
+            {
+              "field": "time_created",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P7A7ACE4A571C05C7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "data_size",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "mission:S5",
+          "refId": "S5_ACQ_VOL",
+          "timeField": "time_created"
+        },
+        {
+          "alias": "S5_ACQ_COUNT",
+          "bucketAggs": [
+            {
+              "field": "time_created",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P7A7ACE4A571C05C7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "mission:S5",
+          "refId": "S5_ACQ_COUNT",
+          "timeField": "time_created"
+        },
+        {
+          "alias": "S5_PROD_L0_NTC_NRT_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S5 AND service_type:PRIP )   AND  (  (   ( product_type:OPER_L0__ENG_A_ OR product_type:OPER_L0__ODB_1_ OR product_type:OPER_L0__ODB_2_ OR product_type:OPER_L0__ODB_3_ OR product_type:OPER_L0__ODB_4_ OR product_type:OPER_L0__ODB_5_ OR product_type:OPER_L0__ODB_6_ OR product_type:OPER_L0__ODB_7_ OR product_type:OPER_L0__ODB_8_ OR product_type:OPER_L0__SAT_A_ ) AND ( timeliness:OPER )  )  )  ",
+          "refId": "S5_PROD_L0_NTC_NRT_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S5_PROD_L0_NTC_NRT_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S5 AND service_type:PRIP )   AND  (  (   ( product_type:OPER_L0__ENG_A_ OR product_type:OPER_L0__ODB_1_ OR product_type:OPER_L0__ODB_2_ OR product_type:OPER_L0__ODB_3_ OR product_type:OPER_L0__ODB_4_ OR product_type:OPER_L0__ODB_5_ OR product_type:OPER_L0__ODB_6_ OR product_type:OPER_L0__ODB_7_ OR product_type:OPER_L0__ODB_8_ OR product_type:OPER_L0__SAT_A_ ) AND ( timeliness:OPER )  )  )  ",
+          "refId": "S5_PROD_L0_NTC_NRT_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S5_PROD_L1_NRT_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S5 AND service_type:PRIP )   AND  (  (   ( product_type:NRTI_L1B_ENG_DB OR product_type:NRTI_L1B_RA_BD1 OR product_type:NRTI_L1B_RA_BD2 OR product_type:NRTI_L1B_RA_BD3 OR product_type:NRTI_L1B_RA_BD4 OR product_type:NRTI_L1B_RA_BD5 OR product_type:NRTI_L1B_RA_BD6 OR product_type:NRTI_L1B_RA_BD7 OR product_type:NRTI_L1B_RA_BD8 ) AND ( timeliness:NRTI )  )  )  ",
+          "refId": "S5_PROD_L1_NRT_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S5_PROD_L1_NRT_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S5 AND service_type:PRIP )   AND  (  (   ( product_type:NRTI_L1B_ENG_DB OR product_type:NRTI_L1B_RA_BD1 OR product_type:NRTI_L1B_RA_BD2 OR product_type:NRTI_L1B_RA_BD3 OR product_type:NRTI_L1B_RA_BD4 OR product_type:NRTI_L1B_RA_BD5 OR product_type:NRTI_L1B_RA_BD6 OR product_type:NRTI_L1B_RA_BD7 OR product_type:NRTI_L1B_RA_BD8 ) AND ( timeliness:NRTI )  )  )  ",
+          "refId": "S5_PROD_L1_NRT_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S5_PROD_L1_NTC_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S5 AND service_type:PRIP )   AND  (  (   ( product_type:OFFL_L1B_CA_SIR OR product_type:OFFL_L1B_CA_UVN OR product_type:OFFL_L1B_ENG_DB OR product_type:OFFL_L1B_IR_SIR OR product_type:OFFL_L1B_IR_UVN OR product_type:OFFL_L1B_RA_BD1 OR product_type:OFFL_L1B_RA_BD2 OR product_type:OFFL_L1B_RA_BD3 OR product_type:OFFL_L1B_RA_BD4 OR product_type:OFFL_L1B_RA_BD5 OR product_type:OFFL_L1B_RA_BD6 OR product_type:OFFL_L1B_RA_BD7 OR product_type:OFFL_L1B_RA_BD8 ) AND ( timeliness:OFFL )  )  )  ",
+          "refId": "S5_PROD_L1_NTC_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S5_PROD_L1_NTC_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S5 AND service_type:PRIP )   AND  (  (   ( product_type:OFFL_L1B_CA_SIR OR product_type:OFFL_L1B_CA_UVN OR product_type:OFFL_L1B_ENG_DB OR product_type:OFFL_L1B_IR_SIR OR product_type:OFFL_L1B_IR_UVN OR product_type:OFFL_L1B_RA_BD1 OR product_type:OFFL_L1B_RA_BD2 OR product_type:OFFL_L1B_RA_BD3 OR product_type:OFFL_L1B_RA_BD4 OR product_type:OFFL_L1B_RA_BD5 OR product_type:OFFL_L1B_RA_BD6 OR product_type:OFFL_L1B_RA_BD7 OR product_type:OFFL_L1B_RA_BD8 ) AND ( timeliness:OFFL )  )  )  ",
+          "refId": "S5_PROD_L1_NTC_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S5_PROD_L2_NRT_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S5 AND service_type:PRIP )   AND  (  (   ( product_type:NRTI_L2__03_TCL OR product_type:NRTI_L2__AER_AI OR product_type:NRTI_L2__AER_LH OR product_type:NRTI_L2__CLOUD_ OR product_type:NRTI_L2__CO____ OR product_type:NRTI_L2__FRESCO OR product_type:NRTI_L2__HCCO_ OR product_type:NRTI_L2__NO2___ OR product_type:NRTI_L2__O3____ OR product_type:NRTI_L2__O3__PR OR product_type:NRTI_L2__SO2___ ) AND ( timeliness:NRTI )  )  )  ",
+          "refId": "S5_PROD_L2_NRT_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S5_PROD_L2_NRT_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S5 AND service_type:PRIP )   AND  (  (   ( product_type:NRTI_L2__03_TCL OR product_type:NRTI_L2__AER_AI OR product_type:NRTI_L2__AER_LH OR product_type:NRTI_L2__CLOUD_ OR product_type:NRTI_L2__CO____ OR product_type:NRTI_L2__FRESCO OR product_type:NRTI_L2__HCCO_ OR product_type:NRTI_L2__NO2___ OR product_type:NRTI_L2__O3____ OR product_type:NRTI_L2__O3__PR OR product_type:NRTI_L2__SO2___ ) AND ( timeliness:NRTI )  )  )  ",
+          "refId": "S5_PROD_L2_NRT_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S5_PROD_L2_NTC_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S5 AND service_type:PRIP )   AND  (  (   ( product_type:OFFL_L2__03_TCL OR product_type:OFFL_L2__AER_AI OR product_type:OFFL_L2__AER_LH OR product_type:OFFL_L2__CH4_ OR product_type:OFFL_L2__CLOUD_ OR product_type:OFFL_L2__CO____ OR product_type:OFFL_L2__FRESCO OR product_type:OFFL_L2__HCHO_ OR product_type:OFFL_L2__NO2___ OR product_type:OFFL_L2__NP_BD3 OR product_type:OFFL_L2__NP_BD6 OR product_type:OFFL_L2__NP_BD7 OR product_type:OFFL_L2__O3____ OR product_type:OFFL_L2__O3__PR OR product_type:OFFL_L2__SO2___ ) AND ( timeliness:OFFL )  )  )  ",
+          "refId": "S5_PROD_L2_NTC_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S5_PROD_L2_NTC_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S5 AND service_type:PRIP )   AND  (  (   ( product_type:OFFL_L2__03_TCL OR product_type:OFFL_L2__AER_AI OR product_type:OFFL_L2__AER_LH OR product_type:OFFL_L2__CH4_ OR product_type:OFFL_L2__CLOUD_ OR product_type:OFFL_L2__CO____ OR product_type:OFFL_L2__FRESCO OR product_type:OFFL_L2__HCHO_ OR product_type:OFFL_L2__NO2___ OR product_type:OFFL_L2__NP_BD3 OR product_type:OFFL_L2__NP_BD6 OR product_type:OFFL_L2__NP_BD7 OR product_type:OFFL_L2__O3____ OR product_type:OFFL_L2__O3__PR OR product_type:OFFL_L2__SO2___ ) AND ( timeliness:OFFL )  )  )  ",
+          "refId": "S5_PROD_L2_NTC_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S5_LTA_L0_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S5 AND service_type:LTA AND service_id:S5P_DLR )   AND  (  (   ( product_type:OPER_L0__ENG_A_ OR product_type:OPER_L0__ODB_1_ OR product_type:OPER_L0__ODB_2_ OR product_type:OPER_L0__ODB_3_ OR product_type:OPER_L0__ODB_4_ OR product_type:OPER_L0__ODB_5_ OR product_type:OPER_L0__ODB_6_ OR product_type:OPER_L0__ODB_7_ OR product_type:OPER_L0__ODB_8_ OR product_type:OPER_L0__SAT_A_ ) AND ( timeliness:OPER )  )  )  ",
+          "refId": "S5_LTA_L0_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S5_LTA_L0_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S5 AND service_type:LTA AND service_id:S5P_DLR )   AND  (  (   ( product_type:OPER_L0__ENG_A_ OR product_type:OPER_L0__ODB_1_ OR product_type:OPER_L0__ODB_2_ OR product_type:OPER_L0__ODB_3_ OR product_type:OPER_L0__ODB_4_ OR product_type:OPER_L0__ODB_5_ OR product_type:OPER_L0__ODB_6_ OR product_type:OPER_L0__ODB_7_ OR product_type:OPER_L0__ODB_8_ OR product_type:OPER_L0__SAT_A_ ) AND ( timeliness:OPER )  )  )  ",
+          "refId": "S5_LTA_L0_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S5_LTA_L1_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S5 AND service_type:LTA AND service_id:S5P_DLR )   AND  (  (   ( product_type:NRTI_L1B_ENG_DB OR product_type:NRTI_L1B_RA_BD1 OR product_type:NRTI_L1B_RA_BD2 OR product_type:NRTI_L1B_RA_BD3 OR product_type:NRTI_L1B_RA_BD4 OR product_type:NRTI_L1B_RA_BD5 OR product_type:NRTI_L1B_RA_BD6 OR product_type:NRTI_L1B_RA_BD7 OR product_type:NRTI_L1B_RA_BD8 ) AND ( timeliness:NRTI )  )  OR (   ( product_type:OFFL_L1B_CA_SIR OR product_type:OFFL_L1B_CA_UVN OR product_type:OFFL_L1B_ENG_DB OR product_type:OFFL_L1B_IR_SIR OR product_type:OFFL_L1B_IR_UVN OR product_type:OFFL_L1B_RA_BD1 OR product_type:OFFL_L1B_RA_BD2 OR product_type:OFFL_L1B_RA_BD3 OR product_type:OFFL_L1B_RA_BD4 OR product_type:OFFL_L1B_RA_BD5 OR product_type:OFFL_L1B_RA_BD6 OR product_type:OFFL_L1B_RA_BD7 OR product_type:OFFL_L1B_RA_BD8 ) AND ( timeliness:OFFL )  )  )  ",
+          "refId": "S5_LTA_L1_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S5_LTA_L1_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S5 AND service_type:LTA AND service_id:S5P_DLR )   AND  (  (   ( product_type:NRTI_L1B_ENG_DB OR product_type:NRTI_L1B_RA_BD1 OR product_type:NRTI_L1B_RA_BD2 OR product_type:NRTI_L1B_RA_BD3 OR product_type:NRTI_L1B_RA_BD4 OR product_type:NRTI_L1B_RA_BD5 OR product_type:NRTI_L1B_RA_BD6 OR product_type:NRTI_L1B_RA_BD7 OR product_type:NRTI_L1B_RA_BD8 ) AND ( timeliness:NRTI )  )  OR (   ( product_type:OFFL_L1B_CA_SIR OR product_type:OFFL_L1B_CA_UVN OR product_type:OFFL_L1B_ENG_DB OR product_type:OFFL_L1B_IR_SIR OR product_type:OFFL_L1B_IR_UVN OR product_type:OFFL_L1B_RA_BD1 OR product_type:OFFL_L1B_RA_BD2 OR product_type:OFFL_L1B_RA_BD3 OR product_type:OFFL_L1B_RA_BD4 OR product_type:OFFL_L1B_RA_BD5 OR product_type:OFFL_L1B_RA_BD6 OR product_type:OFFL_L1B_RA_BD7 OR product_type:OFFL_L1B_RA_BD8 ) AND ( timeliness:OFFL )  )  )  ",
+          "refId": "S5_LTA_L1_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S5_LTA_L2_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S5 AND service_type:LTA AND service_id:S5P_DLR )   AND  (  (   ( product_type:NRTI_L2__03_TCL OR product_type:NRTI_L2__AER_AI OR product_type:NRTI_L2__AER_LH OR product_type:NRTI_L2__CLOUD_ OR product_type:NRTI_L2__CO____ OR product_type:NRTI_L2__FRESCO OR product_type:NRTI_L2__HCCO_ OR product_type:NRTI_L2__NO2___ OR product_type:NRTI_L2__O3____ OR product_type:NRTI_L2__O3__PR OR product_type:NRTI_L2__SO2___ ) AND ( timeliness:NRTI )  )  OR (   ( product_type:OFFL_L2__03_TCL OR product_type:OFFL_L2__AER_AI OR product_type:OFFL_L2__AER_LH OR product_type:OFFL_L2__CH4_ OR product_type:OFFL_L2__CLOUD_ OR product_type:OFFL_L2__CO____ OR product_type:OFFL_L2__FRESCO OR product_type:OFFL_L2__HCHO_ OR product_type:OFFL_L2__NO2___ OR product_type:OFFL_L2__NP_BD3 OR product_type:OFFL_L2__NP_BD6 OR product_type:OFFL_L2__NP_BD7 OR product_type:OFFL_L2__O3____ OR product_type:OFFL_L2__O3__PR OR product_type:OFFL_L2__SO2___ ) AND ( timeliness:OFFL )  )  )  ",
+          "refId": "S5_LTA_L2_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S5_LTA_L2_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S5 AND service_type:LTA AND service_id:S5P_DLR )   AND  (  (   ( product_type:NRTI_L2__03_TCL OR product_type:NRTI_L2__AER_AI OR product_type:NRTI_L2__AER_LH OR product_type:NRTI_L2__CLOUD_ OR product_type:NRTI_L2__CO____ OR product_type:NRTI_L2__FRESCO OR product_type:NRTI_L2__HCCO_ OR product_type:NRTI_L2__NO2___ OR product_type:NRTI_L2__O3____ OR product_type:NRTI_L2__O3__PR OR product_type:NRTI_L2__SO2___ ) AND ( timeliness:NRTI )  )  OR (   ( product_type:OFFL_L2__03_TCL OR product_type:OFFL_L2__AER_AI OR product_type:OFFL_L2__AER_LH OR product_type:OFFL_L2__CH4_ OR product_type:OFFL_L2__CLOUD_ OR product_type:OFFL_L2__CO____ OR product_type:OFFL_L2__FRESCO OR product_type:OFFL_L2__HCHO_ OR product_type:OFFL_L2__NO2___ OR product_type:OFFL_L2__NP_BD3 OR product_type:OFFL_L2__NP_BD6 OR product_type:OFFL_L2__NP_BD7 OR product_type:OFFL_L2__O3____ OR product_type:OFFL_L2__O3__PR OR product_type:OFFL_L2__SO2___ ) AND ( timeliness:OFFL )  )  )  ",
+          "refId": "S5_LTA_L2_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S5_LTA_TOT_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S5 AND service_type:LTA AND service_id:S5P_DLR )   AND  (  (   ( product_type:NRTI_L1B_ENG_DB OR product_type:NRTI_L1B_RA_BD1 OR product_type:NRTI_L1B_RA_BD2 OR product_type:NRTI_L1B_RA_BD3 OR product_type:NRTI_L1B_RA_BD4 OR product_type:NRTI_L1B_RA_BD5 OR product_type:NRTI_L1B_RA_BD6 OR product_type:NRTI_L1B_RA_BD7 OR product_type:NRTI_L1B_RA_BD8 OR product_type:NRTI_L2__03_TCL OR product_type:NRTI_L2__AER_AI OR product_type:NRTI_L2__AER_LH OR product_type:NRTI_L2__CLOUD_ OR product_type:NRTI_L2__CO____ OR product_type:NRTI_L2__FRESCO OR product_type:NRTI_L2__HCCO_ OR product_type:NRTI_L2__NO2___ OR product_type:NRTI_L2__O3____ OR product_type:NRTI_L2__O3__PR OR product_type:NRTI_L2__SO2___ ) AND ( timeliness:NRTI )  )  OR (   ( product_type:OFFL_L1B_CA_SIR OR product_type:OFFL_L1B_CA_UVN OR product_type:OFFL_L1B_ENG_DB OR product_type:OFFL_L1B_IR_SIR OR product_type:OFFL_L1B_IR_UVN OR product_type:OFFL_L1B_RA_BD1 OR product_type:OFFL_L1B_RA_BD2 OR product_type:OFFL_L1B_RA_BD3 OR product_type:OFFL_L1B_RA_BD4 OR product_type:OFFL_L1B_RA_BD5 OR product_type:OFFL_L1B_RA_BD6 OR product_type:OFFL_L1B_RA_BD7 OR product_type:OFFL_L1B_RA_BD8 OR product_type:OFFL_L2__03_TCL OR product_type:OFFL_L2__AER_AI OR product_type:OFFL_L2__AER_LH OR product_type:OFFL_L2__CH4_ OR product_type:OFFL_L2__CLOUD_ OR product_type:OFFL_L2__CO____ OR product_type:OFFL_L2__FRESCO OR product_type:OFFL_L2__HCHO_ OR product_type:OFFL_L2__NO2___ OR product_type:OFFL_L2__NP_BD3 OR product_type:OFFL_L2__NP_BD6 OR product_type:OFFL_L2__NP_BD7 OR product_type:OFFL_L2__O3____ OR product_type:OFFL_L2__O3__PR OR product_type:OFFL_L2__SO2___ ) AND ( timeliness:OFFL )  )  OR (   ( product_type:OPER_L0__ENG_A_ OR product_type:OPER_L0__ODB_1_ OR product_type:OPER_L0__ODB_2_ OR product_type:OPER_L0__ODB_3_ OR product_type:OPER_L0__ODB_4_ OR product_type:OPER_L0__ODB_5_ OR product_type:OPER_L0__ODB_6_ OR product_type:OPER_L0__ODB_7_ OR product_type:OPER_L0__ODB_8_ OR product_type:OPER_L0__SAT_A_ ) AND ( timeliness:OPER )  )  )  ",
+          "refId": "S5_LTA_TOT_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S5_LTA_TOT_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S5 AND service_type:LTA AND service_id:S5P_DLR )   AND  (  (   ( product_type:NRTI_L1B_ENG_DB OR product_type:NRTI_L1B_RA_BD1 OR product_type:NRTI_L1B_RA_BD2 OR product_type:NRTI_L1B_RA_BD3 OR product_type:NRTI_L1B_RA_BD4 OR product_type:NRTI_L1B_RA_BD5 OR product_type:NRTI_L1B_RA_BD6 OR product_type:NRTI_L1B_RA_BD7 OR product_type:NRTI_L1B_RA_BD8 OR product_type:NRTI_L2__03_TCL OR product_type:NRTI_L2__AER_AI OR product_type:NRTI_L2__AER_LH OR product_type:NRTI_L2__CLOUD_ OR product_type:NRTI_L2__CO____ OR product_type:NRTI_L2__FRESCO OR product_type:NRTI_L2__HCCO_ OR product_type:NRTI_L2__NO2___ OR product_type:NRTI_L2__O3____ OR product_type:NRTI_L2__O3__PR OR product_type:NRTI_L2__SO2___ ) AND ( timeliness:NRTI )  )  OR (   ( product_type:OFFL_L1B_CA_SIR OR product_type:OFFL_L1B_CA_UVN OR product_type:OFFL_L1B_ENG_DB OR product_type:OFFL_L1B_IR_SIR OR product_type:OFFL_L1B_IR_UVN OR product_type:OFFL_L1B_RA_BD1 OR product_type:OFFL_L1B_RA_BD2 OR product_type:OFFL_L1B_RA_BD3 OR product_type:OFFL_L1B_RA_BD4 OR product_type:OFFL_L1B_RA_BD5 OR product_type:OFFL_L1B_RA_BD6 OR product_type:OFFL_L1B_RA_BD7 OR product_type:OFFL_L1B_RA_BD8 OR product_type:OFFL_L2__03_TCL OR product_type:OFFL_L2__AER_AI OR product_type:OFFL_L2__AER_LH OR product_type:OFFL_L2__CH4_ OR product_type:OFFL_L2__CLOUD_ OR product_type:OFFL_L2__CO____ OR product_type:OFFL_L2__FRESCO OR product_type:OFFL_L2__HCHO_ OR product_type:OFFL_L2__NO2___ OR product_type:OFFL_L2__NP_BD3 OR product_type:OFFL_L2__NP_BD6 OR product_type:OFFL_L2__NP_BD7 OR product_type:OFFL_L2__O3____ OR product_type:OFFL_L2__O3__PR OR product_type:OFFL_L2__SO2___ ) AND ( timeliness:OFFL )  )  OR (   ( product_type:OPER_L0__ENG_A_ OR product_type:OPER_L0__ODB_1_ OR product_type:OPER_L0__ODB_2_ OR product_type:OPER_L0__ODB_3_ OR product_type:OPER_L0__ODB_4_ OR product_type:OPER_L0__ODB_5_ OR product_type:OPER_L0__ODB_6_ OR product_type:OPER_L0__ODB_7_ OR product_type:OPER_L0__ODB_8_ OR product_type:OPER_L0__SAT_A_ ) AND ( timeliness:OPER )  )  )  ",
+          "refId": "S5_LTA_TOT_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S5_DD_L1_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S5 AND service_type:DD )   AND  (  (   ( product_type:NRTI_L1B_ENG_DB OR product_type:NRTI_L1B_RA_BD1 OR product_type:NRTI_L1B_RA_BD2 OR product_type:NRTI_L1B_RA_BD3 OR product_type:NRTI_L1B_RA_BD4 OR product_type:NRTI_L1B_RA_BD5 OR product_type:NRTI_L1B_RA_BD6 OR product_type:NRTI_L1B_RA_BD7 OR product_type:NRTI_L1B_RA_BD8 ) AND ( timeliness:NRTI )  )  OR (   ( product_type:OFFL_L1B_CA_SIR OR product_type:OFFL_L1B_CA_UVN OR product_type:OFFL_L1B_ENG_DB OR product_type:OFFL_L1B_IR_SIR OR product_type:OFFL_L1B_IR_UVN OR product_type:OFFL_L1B_RA_BD1 OR product_type:OFFL_L1B_RA_BD2 OR product_type:OFFL_L1B_RA_BD3 OR product_type:OFFL_L1B_RA_BD4 OR product_type:OFFL_L1B_RA_BD5 OR product_type:OFFL_L1B_RA_BD6 OR product_type:OFFL_L1B_RA_BD7 OR product_type:OFFL_L1B_RA_BD8 ) AND ( timeliness:OFFL )  )  )  ",
+          "refId": "S5_DD_L1_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S5_DD_L1_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S5 AND service_type:DD )   AND  (  (   ( product_type:NRTI_L1B_ENG_DB OR product_type:NRTI_L1B_RA_BD1 OR product_type:NRTI_L1B_RA_BD2 OR product_type:NRTI_L1B_RA_BD3 OR product_type:NRTI_L1B_RA_BD4 OR product_type:NRTI_L1B_RA_BD5 OR product_type:NRTI_L1B_RA_BD6 OR product_type:NRTI_L1B_RA_BD7 OR product_type:NRTI_L1B_RA_BD8 ) AND ( timeliness:NRTI )  )  OR (   ( product_type:OFFL_L1B_CA_SIR OR product_type:OFFL_L1B_CA_UVN OR product_type:OFFL_L1B_ENG_DB OR product_type:OFFL_L1B_IR_SIR OR product_type:OFFL_L1B_IR_UVN OR product_type:OFFL_L1B_RA_BD1 OR product_type:OFFL_L1B_RA_BD2 OR product_type:OFFL_L1B_RA_BD3 OR product_type:OFFL_L1B_RA_BD4 OR product_type:OFFL_L1B_RA_BD5 OR product_type:OFFL_L1B_RA_BD6 OR product_type:OFFL_L1B_RA_BD7 OR product_type:OFFL_L1B_RA_BD8 ) AND ( timeliness:OFFL )  )  )  ",
+          "refId": "S5_DD_L1_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S5_DD_L2_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S5 AND service_type:DD )   AND  (  (   ( product_type:NRTI_L2__03_TCL OR product_type:NRTI_L2__AER_AI OR product_type:NRTI_L2__AER_LH OR product_type:NRTI_L2__CLOUD_ OR product_type:NRTI_L2__CO____ OR product_type:NRTI_L2__FRESCO OR product_type:NRTI_L2__HCCO_ OR product_type:NRTI_L2__NO2___ OR product_type:NRTI_L2__O3____ OR product_type:NRTI_L2__O3__PR OR product_type:NRTI_L2__SO2___ ) AND ( timeliness:NRTI )  )  OR (   ( product_type:OFFL_L2__03_TCL OR product_type:OFFL_L2__AER_AI OR product_type:OFFL_L2__AER_LH OR product_type:OFFL_L2__CH4_ OR product_type:OFFL_L2__CLOUD_ OR product_type:OFFL_L2__CO____ OR product_type:OFFL_L2__FRESCO OR product_type:OFFL_L2__HCHO_ OR product_type:OFFL_L2__NO2___ OR product_type:OFFL_L2__NP_BD3 OR product_type:OFFL_L2__NP_BD6 OR product_type:OFFL_L2__NP_BD7 OR product_type:OFFL_L2__O3____ OR product_type:OFFL_L2__O3__PR OR product_type:OFFL_L2__SO2___ ) AND ( timeliness:OFFL )  )  )  ",
+          "refId": "S5_DD_L2_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S5_DD_L2_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S5 AND service_type:DD )   AND  (  (   ( product_type:NRTI_L2__03_TCL OR product_type:NRTI_L2__AER_AI OR product_type:NRTI_L2__AER_LH OR product_type:NRTI_L2__CLOUD_ OR product_type:NRTI_L2__CO____ OR product_type:NRTI_L2__FRESCO OR product_type:NRTI_L2__HCCO_ OR product_type:NRTI_L2__NO2___ OR product_type:NRTI_L2__O3____ OR product_type:NRTI_L2__O3__PR OR product_type:NRTI_L2__SO2___ ) AND ( timeliness:NRTI )  )  OR (   ( product_type:OFFL_L2__03_TCL OR product_type:OFFL_L2__AER_AI OR product_type:OFFL_L2__AER_LH OR product_type:OFFL_L2__CH4_ OR product_type:OFFL_L2__CLOUD_ OR product_type:OFFL_L2__CO____ OR product_type:OFFL_L2__FRESCO OR product_type:OFFL_L2__HCHO_ OR product_type:OFFL_L2__NO2___ OR product_type:OFFL_L2__NP_BD3 OR product_type:OFFL_L2__NP_BD6 OR product_type:OFFL_L2__NP_BD7 OR product_type:OFFL_L2__O3____ OR product_type:OFFL_L2__O3__PR OR product_type:OFFL_L2__SO2___ ) AND ( timeliness:OFFL )  )  )  ",
+          "refId": "S5_DD_L2_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S5_DD_TOT_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S5 AND service_type:DD )   AND  (  (   ( product_type:NRTI_L1B_ENG_DB OR product_type:NRTI_L1B_RA_BD1 OR product_type:NRTI_L1B_RA_BD2 OR product_type:NRTI_L1B_RA_BD3 OR product_type:NRTI_L1B_RA_BD4 OR product_type:NRTI_L1B_RA_BD5 OR product_type:NRTI_L1B_RA_BD6 OR product_type:NRTI_L1B_RA_BD7 OR product_type:NRTI_L1B_RA_BD8 OR product_type:NRTI_L2__03_TCL OR product_type:NRTI_L2__AER_AI OR product_type:NRTI_L2__AER_LH OR product_type:NRTI_L2__CLOUD_ OR product_type:NRTI_L2__CO____ OR product_type:NRTI_L2__FRESCO OR product_type:NRTI_L2__HCCO_ OR product_type:NRTI_L2__NO2___ OR product_type:NRTI_L2__O3____ OR product_type:NRTI_L2__O3__PR OR product_type:NRTI_L2__SO2___ ) AND ( timeliness:NRTI )  )  OR (   ( product_type:OFFL_L1B_CA_SIR OR product_type:OFFL_L1B_CA_UVN OR product_type:OFFL_L1B_ENG_DB OR product_type:OFFL_L1B_IR_SIR OR product_type:OFFL_L1B_IR_UVN OR product_type:OFFL_L1B_RA_BD1 OR product_type:OFFL_L1B_RA_BD2 OR product_type:OFFL_L1B_RA_BD3 OR product_type:OFFL_L1B_RA_BD4 OR product_type:OFFL_L1B_RA_BD5 OR product_type:OFFL_L1B_RA_BD6 OR product_type:OFFL_L1B_RA_BD7 OR product_type:OFFL_L1B_RA_BD8 OR product_type:OFFL_L2__03_TCL OR product_type:OFFL_L2__AER_AI OR product_type:OFFL_L2__AER_LH OR product_type:OFFL_L2__CH4_ OR product_type:OFFL_L2__CLOUD_ OR product_type:OFFL_L2__CO____ OR product_type:OFFL_L2__FRESCO OR product_type:OFFL_L2__HCHO_ OR product_type:OFFL_L2__NO2___ OR product_type:OFFL_L2__NP_BD3 OR product_type:OFFL_L2__NP_BD6 OR product_type:OFFL_L2__NP_BD7 OR product_type:OFFL_L2__O3____ OR product_type:OFFL_L2__O3__PR OR product_type:OFFL_L2__SO2___ ) AND ( timeliness:OFFL )  )  OR (   ( product_type:OPER_L0__ENG_A_ OR product_type:OPER_L0__ODB_1_ OR product_type:OPER_L0__ODB_2_ OR product_type:OPER_L0__ODB_3_ OR product_type:OPER_L0__ODB_4_ OR product_type:OPER_L0__ODB_5_ OR product_type:OPER_L0__ODB_6_ OR product_type:OPER_L0__ODB_7_ OR product_type:OPER_L0__ODB_8_ OR product_type:OPER_L0__SAT_A_ ) AND ( timeliness:OPER )  )  )  ",
+          "refId": "S5_DD_TOT_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S5_DD_TOT_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S5 AND service_type:DD )   AND  (  (   ( product_type:NRTI_L1B_ENG_DB OR product_type:NRTI_L1B_RA_BD1 OR product_type:NRTI_L1B_RA_BD2 OR product_type:NRTI_L1B_RA_BD3 OR product_type:NRTI_L1B_RA_BD4 OR product_type:NRTI_L1B_RA_BD5 OR product_type:NRTI_L1B_RA_BD6 OR product_type:NRTI_L1B_RA_BD7 OR product_type:NRTI_L1B_RA_BD8 OR product_type:NRTI_L2__03_TCL OR product_type:NRTI_L2__AER_AI OR product_type:NRTI_L2__AER_LH OR product_type:NRTI_L2__CLOUD_ OR product_type:NRTI_L2__CO____ OR product_type:NRTI_L2__FRESCO OR product_type:NRTI_L2__HCCO_ OR product_type:NRTI_L2__NO2___ OR product_type:NRTI_L2__O3____ OR product_type:NRTI_L2__O3__PR OR product_type:NRTI_L2__SO2___ ) AND ( timeliness:NRTI )  )  OR (   ( product_type:OFFL_L1B_CA_SIR OR product_type:OFFL_L1B_CA_UVN OR product_type:OFFL_L1B_ENG_DB OR product_type:OFFL_L1B_IR_SIR OR product_type:OFFL_L1B_IR_UVN OR product_type:OFFL_L1B_RA_BD1 OR product_type:OFFL_L1B_RA_BD2 OR product_type:OFFL_L1B_RA_BD3 OR product_type:OFFL_L1B_RA_BD4 OR product_type:OFFL_L1B_RA_BD5 OR product_type:OFFL_L1B_RA_BD6 OR product_type:OFFL_L1B_RA_BD7 OR product_type:OFFL_L1B_RA_BD8 OR product_type:OFFL_L2__03_TCL OR product_type:OFFL_L2__AER_AI OR product_type:OFFL_L2__AER_LH OR product_type:OFFL_L2__CH4_ OR product_type:OFFL_L2__CLOUD_ OR product_type:OFFL_L2__CO____ OR product_type:OFFL_L2__FRESCO OR product_type:OFFL_L2__HCHO_ OR product_type:OFFL_L2__NO2___ OR product_type:OFFL_L2__NP_BD3 OR product_type:OFFL_L2__NP_BD6 OR product_type:OFFL_L2__NP_BD7 OR product_type:OFFL_L2__O3____ OR product_type:OFFL_L2__O3__PR OR product_type:OFFL_L2__SO2___ ) AND ( timeliness:OFFL )  )  OR (   ( product_type:OPER_L0__ENG_A_ OR product_type:OPER_L0__ODB_1_ OR product_type:OPER_L0__ODB_2_ OR product_type:OPER_L0__ODB_3_ OR product_type:OPER_L0__ODB_4_ OR product_type:OPER_L0__ODB_5_ OR product_type:OPER_L0__ODB_6_ OR product_type:OPER_L0__ODB_7_ OR product_type:OPER_L0__ODB_8_ OR product_type:OPER_L0__SAT_A_ ) AND ( timeliness:OPER )  )  )  ",
+          "refId": "S5_DD_TOT_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S5_DL_L1_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "mission:S5 AND service_type:Dl   AND   product_level:L1_ AND ( timeliness:NRTI OR timeliness:OFFL)",
+          "refId": "S5_DL_L1_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S5_DL_L1_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "mission:S5 AND service_type:Dl   AND   product_level:L1_ AND ( timeliness:NRTI OR timeliness:OFFL)",
+          "refId": "S5_DL_L1_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S5_DL_L2_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "mission:S5 AND service_type:Dl   AND   product_level:L2_ AND ( timeliness:NRTI OR timeliness:OFFL)",
+          "refId": "S5_DL_L2_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S5_DL_L2_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "mission:S5 AND service_type:Dl   AND   product_level:L2_ AND ( timeliness:NRTI OR timeliness:OFFL)",
+          "refId": "S5_DL_L2_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S5_Dl_TOT_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "(_value/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "mission:S5 AND service_type:Dl   AND ( product_level:L1_ OR product_level:L2_ )   AND ( timeliness:NRTI OR timeliness:OFFL)",
+          "refId": "S5_Dl_TOT_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S5_Dl_TOT_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "mission:S5 AND service_type:Dl   AND ( product_level:L1_ OR product_level:L2_ )   AND ( timeliness:NRTI OR timeliness:OFFL)",
+          "refId": "S5_Dl_TOT_COUNT",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Yearly Overall Data Flow S5 SATELLITE",
+      "transparent": true,
+      "type": "agenty-flowcharting-panel",
+      "valueName": "current",
+      "version": "0.9.0"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-1y",
+    "to": "now"
+  },
+  "timeRangeUpdatedDuringEditOrView": false,
+  "timepicker": {},
+  "timezone": "utc",
+  "title": "Prev - System Technical Budget Schematic View - S5",
+  "uid": "C-S9wvFVk",
+  "weekStart": ""
+}

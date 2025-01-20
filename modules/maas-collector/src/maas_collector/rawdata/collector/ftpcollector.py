@@ -1,33 +1,32 @@
 """Extract files from FTP server"""
-from collections import namedtuple
-from dataclasses import dataclass
-import ftplib
+
+import datetime
 import fnmatch
+import ftplib
 import os
 import time
 import typing
-
+from collections import namedtuple
+from dataclasses import dataclass, field
 
 import dateutil.parser
+import maas_collector.rawdata.collector.tools.archivetools as achivetools
 from dateutil.relativedelta import relativedelta
-import datetime
-
-
 from maas_collector.rawdata.collector.filecollector import (
     CollectorArgs,
     FileCollector,
     FileCollectorConfiguration,
 )
 from maas_collector.rawdata.collector.journal import (
-    CollectorJournal,
     CollectingInProgressError,
+    CollectorJournal,
     NoRefreshException,
 )
 
-import maas_collector.rawdata.collector.tools.archivetools as achivetools
 
-
-@dataclass
+# Désactive la génération automatique de __repr__ pour pouvoir utiliser
+# celui du parent qui masque les données sensible comme les mot de passe
+@dataclass(repr=False)
 class FTPCollectorConfiguration(FileCollectorConfiguration):
     """Configuration for FTP collection"""
 
@@ -41,7 +40,7 @@ class FTPCollectorConfiguration(FileCollectorConfiguration):
 
     client_username: str = ""
 
-    client_password: str = ""
+    client_password: str = field(default="", metadata={"sensitive": True})
 
     timeout: int = 120
 
@@ -427,3 +426,16 @@ class FTPCollector(FileCollector):
         except ftplib.all_errors as error:
             config.status = "KO"
             raise error
+
+    @classmethod
+    def attributs_url(cls):
+        return super().attributs_url() + ["ftp_hostname"]
+
+    @classmethod
+    def document(cls, config: FTPCollectorConfiguration):
+        information = super().document(config)
+        information |= {
+            "protocol": "FTP",
+            "auth_user": getattr(config, "client_username"),
+        }
+        return information

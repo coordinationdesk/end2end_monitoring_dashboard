@@ -67,8 +67,6 @@ class MpipCollectorConfiguration(HttpCollectorConfiguration):
 
     # auth argument
 
-    auth_timeout: int = 120
-
     client_username: str = ""
 
     client_password: str = ""
@@ -204,3 +202,13 @@ class MpipCollector(HttpCollector, HttpMixin):
         """
 
         return config.probe_url
+
+    @classmethod
+    def attributs_url(cls):
+        return super().attributs_url() + ["file_list_url"]
+
+    @classmethod
+    def document(cls, config: MpipCollectorConfiguration):
+        information = super().document(config)
+
+        return information

@@ -1,7 +1,9 @@
 """HealthCheck class"""
+
 import dataclasses
 import logging
 import time
+import typing
 
 from opensearchpy.connection.connections import connections as es_connections
 from flask import Flask
@@ -31,10 +33,7 @@ class ServiceHealthCheck:
 
         self.health = HealthCheck()
 
-        self.health.add_check(self.check_database)
-
-        # add tick check
-        self.health.add_check(self.check_tick)
+        self.add_base_checks()
 
         # Add a flask route to expose information
         app.add_url_rule("/", "healthcheck", view_func=self.health.run)
@@ -46,6 +45,18 @@ class ServiceHealthCheck:
             self.envdump.add_section("application", self.application_data)
 
             app.add_url_rule("/environment", "environment", view_func=self.envdump.run)
+
+    def add_base_checks(self) -> None:
+        """Default checks ( tick & database online check are added to the HealthCheck service)"""
+
+        self.health.add_check(self.check_database)
+
+        # add tick check
+        self.health.add_check(self.check_tick)
+
+    def add_check(self, check_func: typing.Callable) -> None:
+        """Add a custom check function to the HealthCheck service"""
+        self.health.add_check(check_func)
 
     def application_data(self):
         """add your own data to the environment dump"""

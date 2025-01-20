@@ -10,4 +10,4 @@ SCRIPTNAME=$(basename ${SCRIPT})
 
 source ${SCRIPTPATH}"/env.sh"
 
-omcs_install_python_modules_localy
+omcs_python_modules_install_localy

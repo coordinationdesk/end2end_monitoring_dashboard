@@ -1,6 +1,6 @@
 # `XLSXExtractor`
 
-```eval_rst
+```{eval-rst}
 :class:`maas_collector.rawdata.extractors.XlsxExtractor`
 ` uses the :py:mod:`xlsx` module of the python standard library to read dictionnary from xlsx files.
 ```
@@ -45,11 +45,11 @@ Given the following extractor configuration:
 
 And this input file:
 
-| Item#   | DOY | Satellite  | Downlink Orbit | Antenna ID | Antenna status (OK/NOK)| Front End Id | Front End Status| Planned Data Start | Planned Data Stop |
-|---------|-----|------------|----------------|------------|------------------------|--------------|-----------------|--------------------|-------------------|
-| 1       | 141 | SENTINEL-2A| 36102          | ALVA       |    OK                  | CORTEXHDR4,CORTEXHDR5,CORTEXHDR5-SEND,CORTEXHDR6,CORTEXHDR6-SEND| OK | 2022-05-21T17:03:42 | 2022-05-21T17:03:42 |
-| 2       | 141 | SENTINEL-2B| 27194          | SIV        |    OK                  | CORTEXHDR4,CORTEXHDR5,CORTEXHDR5-SEND,CORTEXHDR6,CORTEXHDR6-SEND| OK | 2022-05-21T17:53:20 | 2022-05-21T17:59:33 |
-| 3       | 141 | SENTINEL-2A| 36103          | ALVA       |    OK                  | CORTEXHDR4,CORTEXHDR5,CORTEXHDR5-SEND,CORTEXHDR6,CORTEXHDR6-SEND| OK | 2022-05-21T18:43:16 | 2022-05-21T18:51:12 |
+| Item# | DOY | Satellite   | Downlink Orbit | Antenna ID | Antenna status (OK/NOK) | Front End Id                                                     | Front End Status | Planned Data Start  | Planned Data Stop   |
+| ----- | --- | ----------- | -------------- | ---------- | ----------------------- | ---------------------------------------------------------------- | ---------------- | ------------------- | ------------------- |
+| 1     | 141 | SENTINEL-2A | 36102          | ALVA       | OK                      | CORTEXHDR4,CORTEXHDR5,CORTEXHDR5-SEND,CORTEXHDR6,CORTEXHDR6-SEND | OK               | 2022-05-21T17:03:42 | 2022-05-21T17:03:42 |
+| 2     | 141 | SENTINEL-2B | 27194          | SIV        | OK                      | CORTEXHDR4,CORTEXHDR5,CORTEXHDR5-SEND,CORTEXHDR6,CORTEXHDR6-SEND | OK               | 2022-05-21T17:53:20 | 2022-05-21T17:59:33 |
+| 3     | 141 | SENTINEL-2A | 36103          | ALVA       | OK                      | CORTEXHDR4,CORTEXHDR5,CORTEXHDR5-SEND,CORTEXHDR6,CORTEXHDR6-SEND | OK               | 2022-05-21T18:43:16 | 2022-05-21T18:51:12 |
 
 The extractor will extract the following objects:
 

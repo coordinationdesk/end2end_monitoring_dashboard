@@ -1,4 +1,5 @@
 """Extract files from OData rest API"""
+
 from dataclasses import dataclass, field
 import datetime
 import fnmatch
@@ -29,7 +30,9 @@ from maas_collector.rawdata.collector.http.authentication import build_authentic
 import maas_collector.rawdata.collector.tools.archivetools as archivetools
 
 
-@dataclass
+# Désactive la génération automatique de __repr__ pour pouvoir utiliser
+# celui du parent qui masque les données sensible comme les mot de passe
+@dataclass(repr=False)
 class ODataCollectorConfiguration(HttpCollectorConfiguration):
     """Configuration for OData collection"""
 
@@ -80,17 +83,15 @@ class ODataCollectorConfiguration(HttpCollectorConfiguration):
 
     # auth argument
 
-    auth_timeout: int = 120
-
     client_username: str = ""
 
-    client_password: str = ""
+    client_password: str = field(default="", metadata={"sensitive": True})
 
     token_url: str = ""
 
     client_id: str = ""
 
-    client_secret: str = ""
+    client_secret: str = field(default="", metadata={"sensitive": True})
 
     scope: str = None
 
@@ -464,7 +465,7 @@ class ODataCollector(HttpCollector, HttpMixin):
             KeyError: If the specified protocol version in the configuration is not recognized.
         """
 
-        now_date = datetime.datetime.utcnow()
+        now_date = datetime.datetime.now(tz=datetime.UTC)
 
         previous_day = datetime_to_zulu(now_date - datetime.timedelta(days=1))
 
@@ -478,3 +479,7 @@ class ODataCollector(HttpCollector, HttpMixin):
         }
 
         return probe_query_dict[config.get_config_protocol_version()]
+
+    @classmethod
+    def attributs_url(cls):
+        return super().attributs_url() + ["odata_product_url"]

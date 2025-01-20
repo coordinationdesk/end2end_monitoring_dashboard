@@ -1,0 +1,3079 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": true,
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 170,
+      "panels": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "gridPos": {
+            "h": 13,
+            "w": 24,
+            "x": 0,
+            "y": 1
+          },
+          "id": 64,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "This dashboard features Completeness computation on S3 mission.\r\n\r\nComparison is done using the following:\r\n - PRIP: Produced products.\r\n\r\nDatatake ID are built from:\r\n - Satellite number;\r\n - Cycle number;\r\n - Relative orbit number.\r\n\r\nWhen one PRIP product is published, every expected product related to this datatake is created.\r\n\r\nMissing products are displayed in purple.\r\n\r\nTips:\r\n - Annotations are available on time series;\r\n - Satellite to consider can be selected in the upper bar.\r\n\r\nNote: \r\n - SRAL L2, VG1 and V10 products are not included in the completeness computation since these products are not systematically produced at each orbit (production is not predictable).\r\n\n\nThe information displayed was originally taken from Product at PRIP  \n\nTime reference for this dashboard is : observation_time_start\n\nImportant notice : Tables & timelines can only display up to 10 000 entries. Please make use of filters to narrow down the retrieved data and get a more realistic view.",
+            "mode": "markdown"
+          },
+          "pluginVersion": "10.2.3",
+          "type": "text"
+        }
+      ],
+      "title": "Dashboard Description",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 2,
+      "panels": [],
+      "title": "Overall Completeness",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P067F7001DCF53170"
+      },
+      "description": "Overall Completeness over the period",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "#eab839",
+                "value": 99
+              },
+              {
+                "color": "super-light-green",
+                "value": 99.8
+              },
+              {
+                "color": "dark-green",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 3,
+        "x": 0,
+        "y": 2
+      },
+      "id": 4,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "/^duration_percentage / Sum expected$/",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "observation_time_start",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P067F7001DCF53170"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "expected",
+              "id": "1",
+              "type": "sum"
+            }
+          ],
+          "query": "mission:$mission AND satellite_unit: $satellite AND timeliness : $timeliness AND datatake_id : $datatake_id AND product_type : $product_type AND product_level : $product_level",
+          "refId": "expected",
+          "timeField": "observation_time_start"
+        },
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "observation_time_start",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P067F7001DCF53170"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "value_adjusted",
+              "id": "1",
+              "type": "sum"
+            }
+          ],
+          "query": "mission:$mission AND satellite_unit: $satellite AND timeliness : $timeliness AND datatake_id : $datatake_id AND product_type : $product_type AND product_level : $product_level",
+          "refId": "duration",
+          "timeField": "observation_time_start"
+        }
+      ],
+      "title": "Overall Completeness",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "duration_percentage",
+            "binary": {
+              "left": "Sum value_adjusted",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "100"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "mode": "reduceFields",
+            "reducers": [
+              "sum"
+            ]
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "duration_percentage",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Sum expected"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P067F7001DCF53170"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "mode": "gradient",
+              "type": "color-background"
+            },
+            "filterable": false,
+            "inspect": false
+          },
+          "mappings": [
+            {
+              "options": {
+                "AL": {
+                  "color": "transparent",
+                  "index": 3
+                },
+                "NR": {
+                  "color": "transparent",
+                  "index": 2
+                },
+                "NT": {
+                  "color": "transparent",
+                  "index": 1
+                },
+                "ST": {
+                  "color": "transparent",
+                  "index": 0
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "#eab839",
+                "value": 99
+              },
+              {
+                "color": "super-light-green",
+                "value": 99.8
+              },
+              {
+                "color": "dark-green",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 5,
+        "x": 3,
+        "y": 2
+      },
+      "id": 165,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "Sum final_completeness_value * 100.0 / Sum final_completeness_expected"
+          }
+        ]
+      },
+      "pluginVersion": "11.0.0",
+      "repeatDirection": "h",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "timeliness",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P067F7001DCF53170"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "expected",
+              "id": "1",
+              "type": "sum"
+            },
+            {
+              "field": "value_adjusted",
+              "hide": false,
+              "id": "3",
+              "type": "sum"
+            }
+          ],
+          "query": "mission:$mission AND satellite_unit: $satellite AND timeliness : $timeliness AND datatake_id : $datatake_id AND product_type : $product_type AND product_level : $product_level",
+          "refId": "expected",
+          "timeField": "observation_time_start"
+        }
+      ],
+      "title": "per Timeliness",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "Sum value_adjusted",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "100.0"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "Sum value_adjusted * 100.0",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Sum expected"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Sum expected": true,
+              "Sum final_completeness_expected": true,
+              "Sum final_completeness_value": true,
+              "Sum final_completeness_value * 100.0": true,
+              "Sum sensing_global_expected": true,
+              "Sum sensing_global_value_adjusted": true,
+              "Sum sensing_global_value_adjusted * 100.0": true,
+              "Sum value_adjusted": true,
+              "Sum value_adjusted * 100.0": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "Sum final_completeness_value * 100.0 / Sum final_completeness_expected": "Completeness",
+              "Sum final_completeness_value * 100.0 / Sum final_completeness_value": "Completeness",
+              "Sum sensing_global_value_adjusted * 100.0 / Sum sensing_global_expected": "Completeness",
+              "Sum value_adjusted * 100.0 / Sum expected": "Completeness",
+              "timeliness": "Timeliness"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P067F7001DCF53170"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "mode": "gradient",
+              "type": "color-background"
+            },
+            "filterable": false,
+            "inspect": false
+          },
+          "mappings": [
+            {
+              "options": {
+                "L0_": {
+                  "color": "transparent",
+                  "index": 2,
+                  "text": "L0"
+                },
+                "L1_": {
+                  "color": "transparent",
+                  "index": 1,
+                  "text": "L1"
+                },
+                "L2_": {
+                  "color": "transparent",
+                  "index": 0,
+                  "text": "L2"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "#eab839",
+                "value": 99
+              },
+              {
+                "color": "super-light-green",
+                "value": 99.8
+              },
+              {
+                "color": "dark-green",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 5,
+        "x": 8,
+        "y": 2
+      },
+      "id": 256,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Completeness"
+          }
+        ]
+      },
+      "pluginVersion": "11.0.0",
+      "repeatDirection": "h",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "product_level",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P067F7001DCF53170"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "expected",
+              "id": "1",
+              "type": "sum"
+            },
+            {
+              "field": "value_adjusted",
+              "hide": false,
+              "id": "3",
+              "type": "sum"
+            }
+          ],
+          "query": "mission:$mission AND satellite_unit: $satellite AND timeliness : $timeliness AND datatake_id : $datatake_id AND product_type : $product_type AND product_level : $product_level",
+          "refId": "expected",
+          "timeField": "observation_time_start"
+        }
+      ],
+      "title": "per Product Level",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "Sum value_adjusted",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "100.0"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "Sum value_adjusted * 100.0",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Sum expected"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Sum expected": true,
+              "Sum final_completeness_expected": true,
+              "Sum final_completeness_value": true,
+              "Sum final_completeness_value * 100.0": true,
+              "Sum sensing_global_expected": true,
+              "Sum sensing_global_value_adjusted": true,
+              "Sum sensing_global_value_adjusted * 100.0": true,
+              "Sum value_adjusted": true,
+              "Sum value_adjusted * 100.0": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "Sum final_completeness_value * 100.0 / Sum final_completeness_expected": "Completeness",
+              "Sum final_completeness_value * 100.0 / Sum final_completeness_value": "Completeness",
+              "Sum sensing_global_value_adjusted * 100.0 / Sum sensing_global_expected": "Completeness",
+              "Sum value_adjusted * 100.0 / Sum expected": "Completeness",
+              "timeliness": "Timeliness"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P067F7001DCF53170"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "scheme",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "stepAfter",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 2,
+            "pointSize": 6,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "always",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "#eab839",
+                "value": 98
+              },
+              {
+                "color": "super-light-green",
+                "value": 99.8
+              },
+              {
+                "color": "dark-green",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Time"
+            },
+            "properties": [
+              {
+                "id": "custom.axisLabel",
+                "value": "Sensing Time"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Completeness"
+            },
+            "properties": [
+              {
+                "id": "custom.axisLabel",
+                "value": "Completeness"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 11,
+        "x": 13,
+        "y": 2
+      },
+      "id": 8,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": false
+        },
+        "tooltip": {
+          "maxHeight": 600,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.3.6",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "observation_time_start",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "1",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P067F7001DCF53170"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "value_adjusted",
+              "id": "1",
+              "type": "sum"
+            }
+          ],
+          "query": "mission:$mission AND satellite_unit: $satellite AND timeliness : $timeliness AND datatake_id : $datatake_id AND product_type : $product_type AND product_level : $product_level",
+          "refId": "B",
+          "timeField": "observation_time_start"
+        },
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "observation_time_start",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "1",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P067F7001DCF53170"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "expected",
+              "id": "1",
+              "type": "sum"
+            }
+          ],
+          "query": "mission:$mission AND satellite_unit : $satellite AND timeliness : $timeliness AND datatake_id : $datatake_id AND product_type : $product_type AND product_level : $product_level",
+          "refId": "C",
+          "timeField": "observation_time_start"
+        }
+      ],
+      "title": "Average Completeness over time",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "duration_percentage",
+            "binary": {
+              "left": "Sum value_adjusted",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "100"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Completeness",
+            "binary": {
+              "left": "duration_percentage",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Sum expected"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 9
+      },
+      "id": 267,
+      "panels": [],
+      "title": "Datatake completeness per timeliness",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P067F7001DCF53170"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "links": [
+            {
+              "targetBlank": true,
+              "title": "Datatake Completeness",
+              "url": "d/tStGj_ynz/s3-datatake-completeness?orgId=1&var-datatake_id=${__data.fields.datatake_id}&var-satellite=${__data.fields.satellite_unit}&from=${__data.fields[\"sensing_start_adjusted\"]}&to=${__data.fields[\"sensing_stop_adjusted\"]}"
+            }
+          ],
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "dark-purple",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 1
+              },
+              {
+                "color": "#eab839",
+                "value": 99
+              },
+              {
+                "color": "green",
+                "value": 99.8
+              },
+              {
+                "color": "dark-green",
+                "value": 100
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 24,
+        "x": 0,
+        "y": 10
+      },
+      "id": 265,
+      "options": {
+        "colorByField": "percentage",
+        "endField": "observation_time_stop",
+        "labelFields": [
+          "datatake_id",
+          "observation_time_start",
+          "observation_time_stop",
+          "percentage",
+          "status"
+        ],
+        "showYAxis": true,
+        "sortBy": "startTime",
+        "sortOrder": "asc",
+        "startField": "observation_time_start",
+        "textField": "product_type"
+      },
+      "repeat": "timeliness",
+      "repeatDirection": "v",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P067F7001DCF53170"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "10000"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "mission:$mission AND satellite_unit: $satellite AND timeliness : $timeliness AND datatake_id : $datatake_id AND product_type : $product_type AND product_level : $product_level",
+          "refId": "A",
+          "timeField": "observation_time_start"
+        }
+      ],
+      "title": "Datatake completeness timeline ${timeliness}",
+      "transformations": [
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "string",
+                "targetField": "datatake_id"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "observation_time_start"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "observation_time_stop"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "_id": true,
+              "_index": true,
+              "_type": true,
+              "highlight": true,
+              "key": true,
+              "mission": true,
+              "satellite_unit": false,
+              "sort": true,
+              "updateTime": true
+            },
+            "indexByName": {
+              "_id": 5,
+              "_index": 6,
+              "_type": 7,
+              "datatake_id": 2,
+              "expected": 13,
+              "highlight": 8,
+              "key": 9,
+              "mission": 10,
+              "observation_time_start": 0,
+              "observation_time_stop": 1,
+              "percentage": 14,
+              "product_level": 15,
+              "product_type": 16,
+              "satellite_unit": 4,
+              "sort": 11,
+              "status": 17,
+              "timeliness": 3,
+              "updateTime": 12,
+              "value": 18,
+              "value_adjusted": 19
+            },
+            "renameByName": {
+              "_type": "",
+              "datatake_id": "Datatake ID",
+              "observation_time_start": "Sensing Start",
+              "observation_time_stop": "Sensing Stop",
+              "satellite_unit": "",
+              "timeliness": "Timeliness"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "sensing_stop_numeric",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "Sensing Stop"
+              ],
+              "reducer": "first"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "sensing_start_numeric",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "Sensing Start"
+              ],
+              "reducer": "first"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "sensing_start_adjusted",
+            "binary": {
+              "left": "Sensing Start",
+              "operator": "-",
+              "reducer": "sum",
+              "right": "1800000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "sensing_stop_adjusted",
+            "binary": {
+              "left": "sensing_stop_numeric",
+              "operator": "+",
+              "reducer": "sum",
+              "right": "1800000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        }
+      ],
+      "type": "marcusolsson-gantt-panel"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P067F7001DCF53170"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": false,
+            "inspect": true
+          },
+          "links": [],
+          "mappings": [
+            {
+              "options": {
+                "Complete": {
+                  "color": "green",
+                  "index": 2
+                },
+                "Missing": {
+                  "color": "red",
+                  "index": 1
+                },
+                "NaN": {
+                  "color": "#646464",
+                  "index": 4,
+                  "text": "N/A"
+                },
+                "Partial": {
+                  "color": "orange",
+                  "index": 0
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "color": "transparent",
+                  "index": 3
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "#eab839",
+                "value": 99
+              },
+              {
+                "color": "super-light-green",
+                "value": 99.8
+              },
+              {
+                "color": "dark-green",
+                "value": 100
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Sensing Start"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 200
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Sensing Stop"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 205
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Datatake ID"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 280
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sensing_stop_numeric"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sensing_start_numeric"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sensing_start_adjusted"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sensing_stop_adjusted"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Completeness"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "unit",
+                "value": "percent"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Datatake ID"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Datatake Completeness",
+                    "url": "d/tStGj_ynz/s3-datatake-completeness?orgId=1&var-datatake_id=${__data.fields.datatake_id}&var-satellite=${__data.fields.satellite_unit}&from=${__from}&to=${__to}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CAMs Link"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "title": "",
+                    "url": "https://esa-cams.atlassian.net/browse/${__value.raw}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "satellite_unit"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 24,
+        "x": 0,
+        "y": 58
+      },
+      "id": 257,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "datatake_id",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10000"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P067F7001DCF53170"
+          },
+          "metrics": [
+            {
+              "field": "expected",
+              "hide": false,
+              "id": "1",
+              "type": "sum"
+            },
+            {
+              "field": "value_adjusted",
+              "id": "3",
+              "type": "sum"
+            }
+          ],
+          "query": "mission:$mission AND satellite_unit: $satellite AND timeliness : $timeliness  AND datatake_id : $datatake_id AND product_type : $product_type AND product_level : $product_level",
+          "refId": "A",
+          "timeField": "observation_time_start"
+        },
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P067F7001DCF53170"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "10000"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "mission:$mission AND satellite_unit: $satellite AND timeliness : $timeliness  AND datatake_id : $datatake_id AND product_type : $product_type AND product_level : $product_level",
+          "refId": "B",
+          "timeField": "observation_time_start"
+        }
+      ],
+      "title": "Datatake Product list",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "Sum value_adjusted",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "100"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "Sum value_adjusted * 100",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Sum expected"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Sum expected": true,
+              "Sum value_adjusted": true,
+              "Sum value_adjusted * 100": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "Sum value_adjusted * 100 / Sum expected": "Completeness",
+              "datatake_id": "Datatake ID"
+            }
+          }
+        },
+        {
+          "id": "joinByField",
+          "options": {
+            "byField": "Datatake ID",
+            "mode": "outer"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Datatake ID": false,
+              "_id": true,
+              "_index": true,
+              "_type": true,
+              "cams_tickets": true,
+              "expected": true,
+              "highlight": true,
+              "key": true,
+              "last_attached_ticket_url": true,
+              "mission": true,
+              "observation_time_start": true,
+              "observation_time_stop": true,
+              "percentage": true,
+              "product_level": true,
+              "product_type": true,
+              "satellite_unit": false,
+              "sort": true,
+              "status": true,
+              "timeliness": true,
+              "updateTime": true,
+              "value": true,
+              "value_adjusted": true
+            },
+            "indexByName": {
+              "Completeness": 1,
+              "Datatake ID": 0,
+              "_id": 3,
+              "_index": 4,
+              "_type": 5,
+              "cams_description": 8,
+              "cams_origin": 7,
+              "cams_tickets": 9,
+              "expected": 10,
+              "highlight": 11,
+              "key": 12,
+              "last_attached_ticket": 6,
+              "last_attached_ticket_url": 13,
+              "mission": 14,
+              "observation_time_start": 2,
+              "observation_time_stop": 15,
+              "percentage": 16,
+              "product_level": 17,
+              "product_type": 18,
+              "satellite_unit": 19,
+              "sort": 20,
+              "status": 21,
+              "timeliness": 22,
+              "updateTime": 23,
+              "value": 24,
+              "value_adjusted": 25
+            },
+            "renameByName": {
+              "cams_description": "CAMs Description",
+              "cams_origin": "CAMs Origin",
+              "last_attached_ticket": "CAMs Link"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P067F7001DCF53170"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": false,
+            "inspect": false
+          },
+          "links": [],
+          "mappings": [
+            {
+              "options": {
+                "Complete": {
+                  "color": "green",
+                  "index": 2
+                },
+                "Missing": {
+                  "color": "red",
+                  "index": 1
+                },
+                "NaN": {
+                  "color": "#646464",
+                  "index": 4,
+                  "text": "N/A"
+                },
+                "Partial": {
+                  "color": "orange",
+                  "index": 0
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "color": "transparent",
+                  "index": 3
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "#eab839",
+                "value": 99
+              },
+              {
+                "color": "super-light-green",
+                "value": 99.8
+              },
+              {
+                "color": "dark-green",
+                "value": 100
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Sensing Start"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 200
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Sensing Stop"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 205
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Datatake ID"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 149
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sensing_stop_numeric"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sensing_start_numeric"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sensing_start_adjusted"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sensing_stop_adjusted"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "L0 Completeness"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "unit",
+                "value": "percent"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Datatake ID"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Datatake Completeness",
+                    "url": "d/tStGj_ynz/s3-datatake-completeness?orgId=1&var-datatake_id=${__data.fields.datatake_id}&var-satellite=${__data.fields.satellite_unit}&from=${__from}&to=${__to}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "satellite_unit"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 8,
+        "x": 0,
+        "y": 69
+      },
+      "id": 259,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Datatake ID"
+          }
+        ]
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "datatake_id",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10000"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "satellite_unit",
+              "id": "4",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P067F7001DCF53170"
+          },
+          "metrics": [
+            {
+              "field": "expected",
+              "hide": false,
+              "id": "1",
+              "type": "sum"
+            },
+            {
+              "field": "value_adjusted",
+              "id": "3",
+              "type": "sum"
+            }
+          ],
+          "query": "mission:$mission AND satellite_unit: $satellite AND timeliness : $timeliness  AND datatake_id : $datatake_id AND product_type : $product_type AND product_level : L0_",
+          "refId": "A",
+          "timeField": "observation_time_start"
+        }
+      ],
+      "title": "L0 Datatake list",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "Sum value_adjusted",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "100"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "Sum value_adjusted * 100",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Sum expected"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Sum expected": true,
+              "Sum value_adjusted": true,
+              "Sum value_adjusted * 100": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "Sum value_adjusted * 100 / Sum expected": "L0 Completeness",
+              "datatake_id": "Datatake ID"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P067F7001DCF53170"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": false,
+            "inspect": false
+          },
+          "links": [],
+          "mappings": [
+            {
+              "options": {
+                "Complete": {
+                  "color": "green",
+                  "index": 2
+                },
+                "Missing": {
+                  "color": "red",
+                  "index": 1
+                },
+                "NaN": {
+                  "color": "#646464",
+                  "index": 4,
+                  "text": "N/A"
+                },
+                "Partial": {
+                  "color": "orange",
+                  "index": 0
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "color": "transparent",
+                  "index": 3
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "#eab839",
+                "value": 99
+              },
+              {
+                "color": "super-light-green",
+                "value": 99.8
+              },
+              {
+                "color": "dark-green",
+                "value": 100
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Sensing Start"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 200
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Sensing Stop"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 205
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Datatake ID"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 149
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sensing_stop_numeric"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sensing_start_numeric"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sensing_start_adjusted"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sensing_stop_adjusted"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "L1 Completeness"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "unit",
+                "value": "percent"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Datatake ID"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Datatake Completeness",
+                    "url": "d/tStGj_ynz/s3-datatake-completeness?orgId=1&var-datatake_id=${__data.fields.datatake_id}&var-satellite=${__data.fields.satellite_unit}&from=${__from}&to=${__to}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "satellite_unit"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 8,
+        "x": 8,
+        "y": 69
+      },
+      "id": 262,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Datatake ID"
+          }
+        ]
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "datatake_id",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10000"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "satellite_unit",
+              "id": "4",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P067F7001DCF53170"
+          },
+          "metrics": [
+            {
+              "field": "expected",
+              "hide": false,
+              "id": "1",
+              "type": "sum"
+            },
+            {
+              "field": "value_adjusted",
+              "id": "3",
+              "type": "sum"
+            }
+          ],
+          "query": "mission:$mission AND satellite_unit: $satellite AND timeliness : $timeliness  AND datatake_id : $datatake_id AND product_type : $product_type AND product_level : L1_",
+          "refId": "A",
+          "timeField": "observation_time_start"
+        }
+      ],
+      "title": "L1 Datatake list",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "Sum value_adjusted",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "100"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "Sum value_adjusted * 100",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Sum expected"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Sum expected": true,
+              "Sum value_adjusted": true,
+              "Sum value_adjusted * 100": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "Sum value_adjusted * 100 / Sum expected": "L1 Completeness",
+              "datatake_id": "Datatake ID"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P067F7001DCF53170"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "center",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": false,
+            "inspect": false
+          },
+          "links": [],
+          "mappings": [
+            {
+              "options": {
+                "Complete": {
+                  "color": "green",
+                  "index": 2
+                },
+                "Missing": {
+                  "color": "red",
+                  "index": 1
+                },
+                "NaN": {
+                  "color": "#646464",
+                  "index": 4,
+                  "text": "N/A"
+                },
+                "Partial": {
+                  "color": "orange",
+                  "index": 0
+                }
+              },
+              "type": "value"
+            },
+            {
+              "options": {
+                "match": "null+nan",
+                "result": {
+                  "color": "transparent",
+                  "index": 3
+                }
+              },
+              "type": "special"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "#eab839",
+                "value": 99
+              },
+              {
+                "color": "super-light-green",
+                "value": 99.8
+              },
+              {
+                "color": "dark-green",
+                "value": 100
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Sensing Start"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 200
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Sensing Stop"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 205
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Datatake ID"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 149
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sensing_stop_numeric"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sensing_start_numeric"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sensing_start_adjusted"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sensing_stop_adjusted"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "L2 Completeness"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              },
+              {
+                "id": "unit",
+                "value": "percent"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Datatake ID"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Datatake Completeness",
+                    "url": "d/tStGj_ynz/s3-datatake-completeness?orgId=1&var-datatake_id=${__data.fields.datatake_id}&var-satellite=${__data.fields.satellite_unit}&from=${__from}&to=${__to}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "satellite_unit"
+            },
+            "properties": [
+              {
+                "id": "custom.hidden",
+                "value": true
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 13,
+        "w": 8,
+        "x": 16,
+        "y": 69
+      },
+      "id": 263,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Datatake ID"
+          }
+        ]
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "datatake_id",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10000"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "satellite_unit",
+              "id": "4",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P067F7001DCF53170"
+          },
+          "metrics": [
+            {
+              "field": "expected",
+              "hide": false,
+              "id": "1",
+              "type": "sum"
+            },
+            {
+              "field": "value_adjusted",
+              "id": "3",
+              "type": "sum"
+            }
+          ],
+          "query": "mission:$mission AND satellite_unit: $satellite AND timeliness : $timeliness  AND datatake_id : $datatake_id AND product_type : $product_type AND product_level : L2_",
+          "refId": "A",
+          "timeField": "observation_time_start"
+        }
+      ],
+      "title": "L2 Datatake list",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "Sum value_adjusted",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "100"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "Sum value_adjusted * 100",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Sum expected"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Sum expected": true,
+              "Sum value_adjusted": true,
+              "Sum value_adjusted * 100": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "Sum value_adjusted * 100 / Sum expected": "L2 Completeness",
+              "datatake_id": "Datatake ID"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "collapsed": true,
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 82
+      },
+      "id": 254,
+      "panels": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "fixedColor": "blue",
+                "mode": "fixed"
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "blue"
+                  }
+                ]
+              },
+              "unitScale": true
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 24,
+            "x": 0,
+            "y": 11
+          },
+          "id": 212,
+          "options": {
+            "endField": "sensing_end_date",
+            "labelFields": [
+              "sensing_start_date",
+              "sensing_end_date",
+              "name"
+            ],
+            "showYAxis": true,
+            "sortBy": "startTime",
+            "sortOrder": "asc",
+            "startField": "sensing_start_date",
+            "textField": "product_type"
+          },
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "size": "10000"
+                  },
+                  "type": "raw_data"
+                }
+              ],
+              "query": "mission:$mission AND satellite_unit: $satellite AND ( product_type: *HK* OR product_type:PRD_GP__)",
+              "refId": "A",
+              "timeField": "sensing_start_date"
+            }
+          ],
+          "title": "HKTM & GPS Products Timeline",
+          "type": "marcusolsson-gantt-panel"
+        },
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "fixedColor": "blue",
+                "mode": "fixed"
+              },
+              "custom": {
+                "align": "center",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "blue"
+                  }
+                ]
+              },
+              "unitScale": true
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Satellite"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 87
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Sensing Start Date"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 200
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Sensing End Date"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 198
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Absolulte Orbit"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 143
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Product Type"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 155
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "PRIP Publication Date"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 246
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 11,
+            "w": 24,
+            "x": 0,
+            "y": 18
+          },
+          "id": 255,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true,
+            "sortBy": []
+          },
+          "pluginVersion": "10.3.1",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "size": "10000"
+                  },
+                  "type": "raw_data"
+                }
+              ],
+              "query": "mission:$mission AND satellite_unit: $satellite AND (product_type: *HK* OR product_type: GN*)",
+              "refId": "A",
+              "timeField": "sensing_start_date"
+            }
+          ],
+          "title": "HKTM & GPS Products list",
+          "transformations": [
+            {
+              "id": "convertFieldType",
+              "options": {
+                "conversions": [
+                  {
+                    "destinationType": "string",
+                    "targetField": "Datatake ID String"
+                  },
+                  {
+                    "destinationType": "time",
+                    "targetField": "sensing_start_date"
+                  },
+                  {
+                    "destinationType": "time",
+                    "targetField": "sensing_end_date"
+                  },
+                  {
+                    "destinationType": "time",
+                    "targetField": "prip_publication_date"
+                  },
+                  {
+                    "destinationType": "time",
+                    "targetField": "LTA_CloudFerro_publication_date"
+                  },
+                  {
+                    "destinationType": "time",
+                    "targetField": "LTA_Exprivia_S2_publication_date"
+                  },
+                  {
+                    "destinationType": "time",
+                    "targetField": "LTA_Werum_publication_date"
+                  },
+                  {
+                    "destinationType": "time",
+                    "targetField": "updateTime"
+                  }
+                ],
+                "fields": {}
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "LTA_Acri_is_published": true,
+                  "LTA_Acri_publication_date": true,
+                  "LTA_CloudFerro_is_published": true,
+                  "LTA_CloudFerro_publication_date": true,
+                  "LTA_Exprivia_S1_is_published": true,
+                  "LTA_Exprivia_S1_publication_date": true,
+                  "LTA_Werum_is_published": true,
+                  "LTA_Werum_publication_date": true,
+                  "_id": true,
+                  "_index": true,
+                  "_type": true,
+                  "datatake_id": true,
+                  "expected_lta_number": true,
+                  "highlight": true,
+                  "instrument_mode": true,
+                  "key": true,
+                  "mission": true,
+                  "nb_lta_served": true,
+                  "polarization": true,
+                  "prip_id": true,
+                  "product_class": true,
+                  "product_level": true,
+                  "sensing_duration": true,
+                  "sort": true,
+                  "updateTime": true
+                },
+                "indexByName": {
+                  "LTA_Acri_is_published": 9,
+                  "LTA_Acri_publication_date": 10,
+                  "LTA_CloudFerro_is_published": 11,
+                  "LTA_CloudFerro_publication_date": 12,
+                  "LTA_Exprivia_S1_is_published": 13,
+                  "LTA_Exprivia_S1_publication_date": 14,
+                  "LTA_Werum_is_published": 15,
+                  "LTA_Werum_publication_date": 16,
+                  "_id": 17,
+                  "_index": 18,
+                  "_type": 19,
+                  "absolute_orbit": 3,
+                  "datatake_id": 8,
+                  "expected_lta_number": 20,
+                  "highlight": 21,
+                  "instrument_mode": 5,
+                  "key": 22,
+                  "mission": 23,
+                  "name": 6,
+                  "nb_lta_served": 24,
+                  "polarization": 25,
+                  "prip_id": 26,
+                  "prip_publication_date": 7,
+                  "product_class": 27,
+                  "product_level": 28,
+                  "product_type": 4,
+                  "satellite_unit": 0,
+                  "sensing_duration": 29,
+                  "sensing_end_date": 2,
+                  "sensing_start_date": 1,
+                  "sort": 30,
+                  "updateTime": 31
+                },
+                "renameByName": {
+                  "absolute_orbit": "Absolute Orbit",
+                  "name": "Product Name",
+                  "prip_publication_date": "PRIP Publication Date",
+                  "product_type": "Product Type",
+                  "satellite_unit": "Satellite",
+                  "sensing_end_date": "Sensing End Date",
+                  "sensing_start_date": "Sensing Start Date"
+                }
+              }
+            }
+          ],
+          "type": "table"
+        }
+      ],
+      "title": "HKTM & GPS ",
+      "type": "row"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [
+    "Completeness"
+  ],
+  "templating": {
+    "list": [
+      {
+        "hide": 2,
+        "label": "Mission",
+        "name": "mission",
+        "query": "S3",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": false,
+          "text": "S3A",
+          "value": "S3A"
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P067F7001DCF53170"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"satellite_unit\",\"query\":\"mission: $mission\"}",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Satellite",
+        "multi": false,
+        "name": "satellite",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"satellite_unit\",\"query\":\"mission: $mission\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P067F7001DCF53170"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"timeliness\",\"query\":\"mission: $mission AND satellite_unit : $satellite\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Category",
+        "multi": true,
+        "name": "timeliness",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"timeliness\",\"query\":\"mission: $mission AND satellite_unit : $satellite\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P067F7001DCF53170"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"product_level\",\"query\":\"mission: $mission AND satellite_unit : $satellite AND timeliness:$timeliness\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Level",
+        "multi": true,
+        "name": "product_level",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"product_level\",\"query\":\"mission: $mission AND satellite_unit : $satellite AND timeliness:$timeliness\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P067F7001DCF53170"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"product_type\",\"query\":\"mission: $mission AND satellite_unit : $satellite AND timeliness:$timeliness AND product_level:$product_level\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Product Type",
+        "multi": true,
+        "name": "product_type",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"product_type\",\"query\":\"mission: $mission AND satellite_unit : $satellite AND timeliness:$timeliness AND product_level:$product_level\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P067F7001DCF53170"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"datatake_id\",\"query\":\"mission: $mission AND satellite_unit : $satellite AND timeliness:$timeliness\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Datatake Id",
+        "multi": true,
+        "name": "datatake_id",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"datatake_id\",\"query\":\"mission: $mission AND satellite_unit : $satellite AND timeliness:$timeliness\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P067F7001DCF53170"
+        },
+        "filters": [],
+        "hide": 0,
+        "label": "Ad-Hoc filter",
+        "name": "Filters",
+        "skipUrlSync": false,
+        "type": "adhoc"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-1d/d",
+    "to": "now-1d/d"
+  },
+  "timeRangeUpdatedDuringEditOrView": false,
+  "timepicker": {},
+  "timezone": "utc",
+  "title": "S3 Production Completeness (Produced vs Planned)",
+  "uid": "T_6v1ss8z",
+  "weekStart": ""
+}

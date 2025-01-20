@@ -1,0 +1,4967 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 9,
+      "panels": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "description": "",
+          "gridPos": {
+            "h": 3,
+            "w": 24,
+            "x": 0,
+            "y": 1
+          },
+          "id": 5,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "This dashboard features Acquisition passes status.\n\nInformation is available for the following missions: S1 and S2.\n\nThe information displayed was originally taken from EDRS Report Ticket at JIRA EDRS  \n\nTime reference for this dashboard is : planned_link_session_start\n\nReport Type Logic : \n- If a document has been extracted from a daily report but not from a weekly or monthly report, it will be visible if 'daily' is selected\n- If a document has been extracted from a weekly report but not from a monthly report, il will be visible if 'weekly' is selected\n- If the same document has been extracted from multiple source, it will be available through the best source. Eg: To see a document retrieved from a weekly and a monthly source, you have to select 'monthly'\n- 2 document are considered equal for the report_type logic if they have the same link_session_id and the same ground_station\n- It is possible to find where the document originate from through the field 'report_name_daily' 'report_name_weekly' and 'report_name_monthly'\n\n\nImportant notice : Tables & timelines can only display up to 10 000 entries. Please make use of filters to narrow down the retrieved data and get a more realistic view.",
+            "mode": "markdown"
+          },
+          "pluginVersion": "10.2.3",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [
+                {
+                  "field": "sensing_start_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "",
+              "refId": "A",
+              "timeField": "sensing_start_date"
+            }
+          ],
+          "type": "text"
+        }
+      ],
+      "title": "Dashboard Description",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 21,
+      "panels": [],
+      "title": "Station Acquisition Status",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P292B19B64C7A8C1B"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 3,
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 80
+              },
+              {
+                "color": "#EAB839",
+                "value": 95
+              },
+              {
+                "color": "green",
+                "value": 99
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 0,
+        "y": 2
+      },
+      "id": 23,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "/^Overrall successful acquisition $/",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "alias": "SumTotalCount",
+          "bucketAggs": [
+            {
+              "field": "planned_link_session_start",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P292B19B64C7A8C1B"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "ground_station:$ground_station AND geo_satellite_id:$geo_satellite_id AND satellite_id: $satellite_unit AND mission:$mission AND link_session_id:$link_session_id AND report_type:$report_type",
+          "refId": "A",
+          "timeField": "planned_link_session_start"
+        },
+        {
+          "alias": "SumSuccessCount",
+          "bucketAggs": [
+            {
+              "field": "planned_link_session_start",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P292B19B64C7A8C1B"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "ground_station:$ground_station AND geo_satellite_id:$geo_satellite_id AND satellite_id: $satellite_unit AND mission:$mission AND link_session_id:$link_session_id AND NOT total_status: \"NOK\" AND report_type:$report_type",
+          "refId": "B",
+          "timeField": "planned_link_session_start"
+        }
+      ],
+      "title": "Success Linked Session Acquisition Status ",
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "reducers": [
+              "sum"
+            ]
+          }
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "mode": "reduceFields",
+            "reducers": [
+              "diffperc"
+            ]
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Overrall successful acquisition ",
+            "binary": {
+              "left": "1",
+              "reducer": "sum",
+              "right": "Total"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        }
+      ],
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P292B19B64C7A8C1B"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 6,
+        "y": 2
+      },
+      "id": 24,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "planned_link_session_start",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P292B19B64C7A8C1B"
+          },
+          "metrics": [
+            {
+              "field": "link_session_id",
+              "id": "1",
+              "type": "cardinality"
+            }
+          ],
+          "query": "ground_station:$ground_station AND geo_satellite_id:$geo_satellite_id AND satellite_id: $satellite_unit AND mission:$mission AND link_session_id:$link_session_id AND report_type:$report_type",
+          "refId": "A",
+          "timeField": "planned_link_session_start"
+        }
+      ],
+      "title": "All Link Session Acquisition Status ",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P292B19B64C7A8C1B"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 12,
+        "y": 2
+      },
+      "id": 25,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "planned_link_session_start",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P292B19B64C7A8C1B"
+          },
+          "metrics": [
+            {
+              "field": "link_session_id",
+              "id": "1",
+              "type": "cardinality"
+            }
+          ],
+          "query": "ground_station:$ground_station AND geo_satellite_id:$geo_satellite_id AND satellite_id: $satellite_unit AND mission:$mission AND link_session_id:$link_session_id AND total_status: \"NOK\" AND report_type:$report_type",
+          "refId": "A",
+          "timeField": "planned_link_session_start"
+        }
+      ],
+      "title": "Failed Link Session Acquisition Status ",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P292B19B64C7A8C1B"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 18,
+        "y": 2
+      },
+      "id": 26,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "planned_link_session_start",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P292B19B64C7A8C1B"
+          },
+          "metrics": [
+            {
+              "field": "link_session_id",
+              "id": "1",
+              "type": "cardinality"
+            }
+          ],
+          "query": "ground_station:$ground_station AND geo_satellite_id:$geo_satellite_id AND satellite_id: $satellite_unit AND mission:$mission AND link_session_id:$link_session_id AND NOT total_status: \"NOK\" AND report_type:$report_type",
+          "refId": "A",
+          "timeField": "planned_link_session_start"
+        }
+      ],
+      "title": "Success Link Session Acquisition Status ",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P292B19B64C7A8C1B"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "decimals": 3,
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 80
+              },
+              {
+                "color": "#EAB839",
+                "value": 95
+              },
+              {
+                "color": "green",
+                "value": 99
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 0,
+        "y": 6
+      },
+      "id": 27,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "/^Overrall successful acquisition $/",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "alias": "SumTotalCount",
+          "bucketAggs": [
+            {
+              "field": "planned_link_session_start",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P292B19B64C7A8C1B"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "ground_station:$ground_station AND geo_satellite_id:$geo_satellite_id AND satellite_id: $satellite_unit AND mission:$mission AND link_session_id:$link_session_id AND report_type:$report_type",
+          "refId": "A",
+          "timeField": "planned_link_session_start"
+        },
+        {
+          "alias": "SumSuccessCount",
+          "bucketAggs": [
+            {
+              "field": "planned_link_session_start",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P292B19B64C7A8C1B"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "ground_station:$ground_station AND geo_satellite_id:$geo_satellite_id AND satellite_id: $satellite_unit AND mission:$mission AND link_session_id:$link_session_id AND  total_status: \"OK\" AND report_type:$report_type",
+          "refId": "B",
+          "timeField": "planned_link_session_start"
+        }
+      ],
+      "title": "Success Station Acquisition Status",
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "reducers": [
+              "sum"
+            ]
+          }
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "mode": "reduceFields",
+            "reducers": [
+              "diffperc"
+            ]
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Overrall successful acquisition ",
+            "binary": {
+              "left": "1",
+              "reducer": "sum",
+              "right": "Total"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        }
+      ],
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P292B19B64C7A8C1B"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "blue",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 6,
+        "y": 6
+      },
+      "id": 31,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "planned_link_session_start",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P292B19B64C7A8C1B"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "ground_station:$ground_station AND geo_satellite_id:$geo_satellite_id AND satellite_id: $satellite_unit AND mission:$mission AND link_session_id:$link_session_id AND report_type:$report_type",
+          "refId": "A",
+          "timeField": "planned_link_session_start"
+        }
+      ],
+      "title": "All Station Acquisition Status ",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P292B19B64C7A8C1B"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 12,
+        "y": 6
+      },
+      "id": 29,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "planned_link_session_start",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P292B19B64C7A8C1B"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "ground_station:$ground_station AND geo_satellite_id:$geo_satellite_id AND satellite_id: $satellite_unit AND mission:$mission AND link_session_id:$link_session_id AND NOT total_status: \"OK\" AND report_type:$report_type",
+          "refId": "A",
+          "timeField": "planned_link_session_start"
+        }
+      ],
+      "title": "Failed Station Acquisition Status ",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P292B19B64C7A8C1B"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 6,
+        "x": 18,
+        "y": 6
+      },
+      "id": 30,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "planned_link_session_start",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P292B19B64C7A8C1B"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "ground_station:$ground_station AND geo_satellite_id:$geo_satellite_id AND satellite_id: $satellite_unit AND mission:$mission AND link_session_id:$link_session_id AND total_status: \"OK\" AND report_type:$report_type",
+          "refId": "A",
+          "timeField": "planned_link_session_start"
+        }
+      ],
+      "title": "Success Station Acquisition Status ",
+      "type": "stat"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 10
+      },
+      "id": 7,
+      "panels": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P292B19B64C7A8C1B"
+          },
+          "description": "in green when both sucess |\nIn yellow when the station sucess but the other failed |\nin orange when the station failed but the other sucess  |\nin red when both failed",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "links": [
+                {
+                  "title": "Acquisition EDRS",
+                  "url": "d/KoNYADm4z/acquisition-passes-status-from-edrs?orgId=1&var-link_session_id=${__data.fields.link_session_id}\ufeff&var-ground_station=\ufeff${__data.fields[\"ground_station\"]}\ufeff&from=\ufeff${__data.fields[\"sensing_start_adjusted\"]}\ufeff&to=\ufeff${__data.fields[\"sensing_stop_adjusted\"]}"
+                }
+              ],
+              "mappings": [
+                {
+                  "options": {
+                    "BFLGSBFLGS": {
+                      "color": "dark-green",
+                      "index": 2,
+                      "text": "BFLGS OK but FGLS KO"
+                    },
+                    "BFLGSFLGS": {
+                      "color": "red",
+                      "index": 5,
+                      "text": "BFLGS OK but FLGS KO"
+                    },
+                    "FLGSBFLGS": {
+                      "color": "red",
+                      "index": 6,
+                      "text": "FLGS OK but BFLGS KO"
+                    },
+                    "FLGSFLGS": {
+                      "color": "dark-green",
+                      "index": 1,
+                      "text": "FLGS OK but BFLGS KO"
+                    },
+                    "HDGSHDGS": {
+                      "color": "dark-green",
+                      "index": 4,
+                      "text": "HDGS OK but RDGS KO"
+                    },
+                    "HDGSRDGS": {
+                      "color": "red",
+                      "index": 8,
+                      "text": "HDGS OK but RDGS KO"
+                    },
+                    "RDGSHDGS": {
+                      "color": "red",
+                      "index": 7,
+                      "text": "HDGS OK but RDGS KO"
+                    },
+                    "RDGSRDGS": {
+                      "color": "dark-green",
+                      "index": 3,
+                      "text": "RDGS OK but HDGS KO"
+                    }
+                  },
+                  "type": "value"
+                },
+                {
+                  "options": {
+                    "pattern": ".*SOK",
+                    "result": {
+                      "color": "dark-green",
+                      "index": 0,
+                      "text": "Both OK"
+                    }
+                  },
+                  "type": "regex"
+                },
+                {
+                  "options": {
+                    "pattern": ".*NOK",
+                    "result": {
+                      "color": "red",
+                      "index": 9,
+                      "text": "Both KO"
+                    }
+                  },
+                  "type": "regex"
+                },
+                {
+                  "options": {
+                    "pattern": ".*",
+                    "result": {
+                      "color": "purple",
+                      "index": 10
+                    }
+                  },
+                  "type": "regex"
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 11,
+            "w": 24,
+            "x": 0,
+            "y": 11
+          },
+          "id": 2,
+          "options": {
+            "colorByField": "reduce",
+            "endField": "planned_link_session_stop",
+            "labelFields": [
+              "notes",
+              "total_status",
+              "geo_satellite_id"
+            ],
+            "showYAxis": true,
+            "sortBy": "startTime",
+            "sortOrder": "asc",
+            "startField": "planned_link_session_start",
+            "textField": "ground_station"
+          },
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P292B19B64C7A8C1B"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "size": "10000"
+                  },
+                  "type": "raw_data"
+                }
+              ],
+              "query": "ground_station:$ground_station AND geo_satellite_id:$geo_satellite_id AND satellite_id: $satellite_unit AND mission:$mission AND link_session_id:$link_session_id AND report_type:$report_type",
+              "refId": "A",
+              "timeField": "planned_link_session_start"
+            }
+          ],
+          "title": "Acquisition Passes Status Timeline by ground station",
+          "transformations": [
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "reduce",
+                "binary": {
+                  "left": "ground_station",
+                  "reducer": "sum",
+                  "right": "total_status"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "include": [
+                    "edte_acquisition_status",
+                    "ground_station"
+                  ],
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "convertFieldType",
+              "options": {
+                "conversions": [
+                  {
+                    "destinationType": "time",
+                    "targetField": "planned_link_session_start"
+                  },
+                  {
+                    "destinationType": "time",
+                    "targetField": "planned_link_session_stop"
+                  }
+                ],
+                "fields": {}
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "_id": true,
+                  "_index": true,
+                  "_type": true,
+                  "sort": true
+                },
+                "indexByName": {},
+                "renameByName": {}
+              }
+            }
+          ],
+          "type": "marcusolsson-gantt-panel"
+        },
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P292B19B64C7A8C1B"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "center",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "filterable": true,
+                "inspect": false
+              },
+              "mappings": [
+                {
+                  "options": {
+                    "BFLGS": {
+                      "color": "dark-green",
+                      "index": 8,
+                      "text": "OK"
+                    },
+                    "FLGS": {
+                      "color": "dark-green",
+                      "index": 5,
+                      "text": "OK"
+                    },
+                    "FLGS-BFLGS": {
+                      "color": "dark-green",
+                      "index": 4,
+                      "text": "OK"
+                    },
+                    "HDGS": {
+                      "color": "dark-green",
+                      "index": 6,
+                      "text": "OK"
+                    },
+                    "NA": {
+                      "color": "dark-green",
+                      "index": 2,
+                      "text": "OK"
+                    },
+                    "OK": {
+                      "color": "dark-green",
+                      "index": 0,
+                      "text": "OK"
+                    },
+                    "RDGS": {
+                      "color": "dark-green",
+                      "index": 7,
+                      "text": "OK"
+                    },
+                    "RDGS-HDGS": {
+                      "color": "dark-green",
+                      "index": 3,
+                      "text": "OK"
+                    }
+                  },
+                  "type": "value"
+                },
+                {
+                  "options": {
+                    "pattern": ".*NOK.*",
+                    "result": {
+                      "color": "red",
+                      "index": 1,
+                      "text": "NOK"
+                    }
+                  },
+                  "type": "regex"
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "total_status"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "basic",
+                      "type": "color-background"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "moc_accept_status"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "basic",
+                      "type": "color-background"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "uplink_status"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "basic",
+                      "type": "color-background"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "spacecraft_execution"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "basic",
+                      "type": "color-background"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "sfdap_dissem_status"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "basic",
+                      "type": "color-background"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "doy"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 78
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "satellite_id"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 110
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "geo_satellite_id"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 133
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "link_session_id"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 225
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "cadus"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 134
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "fer"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 94
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "link_session_id"
+                },
+                "properties": [
+                  {
+                    "id": "links",
+                    "value": [
+                      {
+                        "title": "",
+                        "url": "d/KoNYADm4z/acquisition-passes-status-from-edrs?orgId=1&var-link_session_id=${__data.fields.link_session_id}\ufeff&var-ground_station=\ufeff${__data.fields[\"ground_station\"]}\ufeff&from=${__from}&to=${__to}"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "dcsu_archive_status"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "basic",
+                      "type": "color-background"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "CAMs Link"
+                },
+                "properties": [
+                  {
+                    "id": "links",
+                    "value": [
+                      {
+                        "title": "",
+                        "url": "https://esa-cams.atlassian.net/browse/${__value.raw}"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 12,
+            "w": 24,
+            "x": 0,
+            "y": 22
+          },
+          "id": 3,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "enablePagination": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true,
+            "sortBy": []
+          },
+          "pluginVersion": "11.0.0",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P292B19B64C7A8C1B"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "size": "10000"
+                  },
+                  "type": "raw_data"
+                }
+              ],
+              "query": "ground_station:$ground_station AND geo_satellite_id:$geo_satellite_id AND satellite_id: $satellite_unit AND mission:$mission AND link_session_id:$link_session_id AND report_type:$report_type",
+              "refId": "A",
+              "timeField": "planned_link_session_start"
+            }
+          ],
+          "title": "Acquisition Passes Status ",
+          "transformations": [
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "_id": true,
+                  "_index": true,
+                  "_type": true,
+                  "cams_tickets": true,
+                  "highlight": true,
+                  "last_attached_ticket_url": true,
+                  "mission": true,
+                  "notes": true,
+                  "reportFolder": true,
+                  "sort": true,
+                  "updateTime": true
+                },
+                "indexByName": {
+                  "_id": 21,
+                  "_index": 22,
+                  "_type": 23,
+                  "archived_data_size": 11,
+                  "cadus": 10,
+                  "dcsu_archive_status": 9,
+                  "disseminated_data": 12,
+                  "dissemination_start": 16,
+                  "dissemination_stop": 17,
+                  "doy": 0,
+                  "edte_acquisition_status": 18,
+                  "fer": 13,
+                  "geo_satellite_id": 3,
+                  "ground_station": 19,
+                  "highlight": 24,
+                  "link_session_id": 2,
+                  "mission": 25,
+                  "moc_accept_status": 5,
+                  "notes": 27,
+                  "planned_link_session_start": 14,
+                  "planned_link_session_stop": 15,
+                  "reportFolder": 28,
+                  "satellite_id": 1,
+                  "sfdap_dissem_status": 8,
+                  "sort": 26,
+                  "spacecraft_execution": 7,
+                  "total_status": 4,
+                  "updateTime": 20,
+                  "uplink_status": 6
+                },
+                "renameByName": {
+                  "cams_description": "CAMs Description",
+                  "cams_origin": "CAMs Origin",
+                  "last_attached_ticket": "CAMs Link"
+                }
+              }
+            },
+            {
+              "id": "sortBy",
+              "options": {
+                "fields": {},
+                "sort": [
+                  {
+                    "desc": false,
+                    "field": "total_status"
+                  }
+                ]
+              }
+            }
+          ],
+          "type": "table"
+        }
+      ],
+      "title": "Acquisition passes status",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 11
+      },
+      "id": 11,
+      "panels": [
+        {
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "PD0067CAD9A63E081"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "center",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "application_date"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 190
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "acquisition_start"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 173
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "effective_downlink_start"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Effective Downlink Start"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 215
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Effective Downlink Stop"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 201
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 10,
+            "w": 24,
+            "x": 0,
+            "y": 12
+          },
+          "id": 17,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true,
+            "sortBy": []
+          },
+          "pluginVersion": "11.0.0",
+          "repeat": "mission_edrs",
+          "repeatDirection": "v",
+          "targets": [
+            {
+              "columns": [],
+              "datasource": {
+                "type": "yesoreyeram-infinity-datasource",
+                "uid": "PD0067CAD9A63E081"
+              },
+              "filters": [],
+              "format": "table",
+              "global_query_id": "",
+              "hide": false,
+              "refId": "A",
+              "root_selector": "hits.hits",
+              "source": "url",
+              "type": "json",
+              "url": "/cds-downlink-datatake/_search?q=mission:$mission_edrs AND station:$geo_satellite_id AND effective_downlink_start:[0 TO ${planned_link_session_stop}] AND effective_downlink_stop:[${planned_link_session_start} TO *]&size=1000",
+              "url_options": {
+                "data": "",
+                "method": "GET"
+              }
+            }
+          ],
+          "title": "Planned downlinks",
+          "transformations": [
+            {
+              "id": "extractFields",
+              "options": {
+                "format": "json",
+                "replace": true,
+                "source": "_source"
+              }
+            },
+            {
+              "disabled": true,
+              "id": "seriesToColumns",
+              "options": {
+                "byField": "B datatake_id"
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "acquisition_start": true,
+                  "application_date": true,
+                  "channel": false,
+                  "downlink_polarization": false,
+                  "latency": true,
+                  "mission": false,
+                  "reportName": true,
+                  "updateTime": true
+                },
+                "indexByName": {
+                  "acquisition_start": 13,
+                  "application_date": 10,
+                  "channel": 8,
+                  "datatake_id": 2,
+                  "downlink_absolute_orbit": 4,
+                  "downlink_duration": 7,
+                  "downlink_polarization": 9,
+                  "effective_downlink_start": 5,
+                  "effective_downlink_stop": 6,
+                  "latency": 11,
+                  "mission": 0,
+                  "reportName": 12,
+                  "satellite_unit": 1,
+                  "station": 3,
+                  "updateTime": 14
+                },
+                "renameByName": {
+                  "acquisition_start": "Effective Downlink Start",
+                  "application_date A": "",
+                  "channel": "Channel",
+                  "datatake_id": "Datatake ID",
+                  "downlink_absolute_orbit": "Downlink Absolute Orbit",
+                  "downlink_duration": "Downlink Duration",
+                  "downlink_polarization": "Polarization",
+                  "effective_downlink_start": "Effective Downlink Start",
+                  "effective_downlink_stop": "Effective Downlink Stop",
+                  "mission": "Mission",
+                  "satellite_unit": "Satellite",
+                  "station": "Station"
+                }
+              }
+            },
+            {
+              "id": "sortBy",
+              "options": {
+                "fields": {},
+                "sort": [
+                  {
+                    "desc": false,
+                    "field": "Mission"
+                  }
+                ]
+              }
+            }
+          ],
+          "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PA3CBD0DC9D8FBBE1"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "center",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "filterable": false,
+                "inspect": false
+              },
+              "links": [],
+              "mappings": [
+                {
+                  "options": {
+                    "Complete": {
+                      "color": "green",
+                      "index": 2
+                    },
+                    "Missing": {
+                      "color": "red",
+                      "index": 1
+                    },
+                    "NaN": {
+                      "color": "#646464",
+                      "index": 4,
+                      "text": "N/A"
+                    },
+                    "Partial": {
+                      "color": "orange",
+                      "index": 0
+                    }
+                  },
+                  "type": "value"
+                },
+                {
+                  "options": {
+                    "match": "null+nan",
+                    "result": {
+                      "color": "transparent",
+                      "index": 3
+                    }
+                  },
+                  "type": "special"
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "#EAB839",
+                    "value": 99
+                  },
+                  {
+                    "color": "super-light-green",
+                    "value": 99.8
+                  },
+                  {
+                    "color": "dark-green",
+                    "value": 100
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "DT Compl. %"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "basic",
+                      "type": "color-background"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Datatake ID"
+                },
+                "properties": [
+                  {
+                    "id": "links",
+                    "value": [
+                      {
+                        "targetBlank": true,
+                        "title": "Datatake Completeness",
+                        "url": "d/sStGi_ynz/s1-datatake-completeness?orgId=1&var-datatake_id=${__data.fields.datatake_id}&from=${__data.fields[\"sensing_start_adjusted\"]}&to=${__data.fields[\"sensing_stop_adjusted\"]}"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "L0 Compl. %"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "basic",
+                      "type": "color-background"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "L1 Compl. %"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "basic",
+                      "type": "color-background"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "L2 Compl. %"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "basic",
+                      "type": "color-background"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "sensing_start_numeric"
+                },
+                "properties": [
+                  {
+                    "id": "custom.hidden",
+                    "value": true
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "sensing_stop_numeric"
+                },
+                "properties": [
+                  {
+                    "id": "custom.hidden",
+                    "value": true
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "sensing_start_adjusted"
+                },
+                "properties": [
+                  {
+                    "id": "custom.hidden",
+                    "value": true
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "sensing_stop_adjusted"
+                },
+                "properties": [
+                  {
+                    "id": "custom.hidden",
+                    "value": true
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 24,
+            "x": 0,
+            "y": 22
+          },
+          "id": 15,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "enablePagination": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true,
+            "sortBy": [
+              {
+                "desc": true,
+                "displayName": "Datatake ID"
+              }
+            ]
+          },
+          "pluginVersion": "11.0.0",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "PA3CBD0DC9D8FBBE1"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "size": "10000"
+                  },
+                  "type": "raw_data"
+                }
+              ],
+              "query": "mission:S1 AND datatake_id:${datatake_id:lucene}",
+              "refId": "A",
+              "timeField": "observation_time_start"
+            }
+          ],
+          "title": "S1 Datatake",
+          "transformations": [
+            {
+              "id": "renameByRegex",
+              "options": {
+                "regex": ".*0.?_local_value_adjusted",
+                "renamePattern": "All_L0_sensing"
+              }
+            },
+            {
+              "id": "renameByRegex",
+              "options": {
+                "regex": ".*0.?_local_expected",
+                "renamePattern": "All_L0_expected"
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "L0_sensing",
+                "mode": "reduceRow",
+                "reduce": {
+                  "include": [
+                    "All_L0_sensing"
+                  ],
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "L0_expected",
+                "mode": "reduceRow",
+                "reduce": {
+                  "include": [
+                    "All_L0_expected"
+                  ],
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "L0_sensing100",
+                "binary": {
+                  "left": "L0_sensing",
+                  "operator": "*",
+                  "reducer": "sum",
+                  "right": "100"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "binary": {
+                  "left": "L0_sensing100",
+                  "operator": "/",
+                  "reducer": "sum",
+                  "right": "L0_expected"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "renameByRegex",
+              "options": {
+                "regex": ".*_1.?_local_value_adjusted",
+                "renamePattern": "All_L1_sensing"
+              }
+            },
+            {
+              "id": "renameByRegex",
+              "options": {
+                "regex": ".*_1.?_local_expected",
+                "renamePattern": "ALL_L1_expected"
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "L1_sensing",
+                "mode": "reduceRow",
+                "reduce": {
+                  "include": [
+                    "All_L1_sensing"
+                  ],
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "L1_expected",
+                "mode": "reduceRow",
+                "reduce": {
+                  "include": [
+                    "ALL_L1_expected"
+                  ],
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "L1_sensing100",
+                "binary": {
+                  "left": "L1_sensing",
+                  "operator": "*",
+                  "reducer": "sum",
+                  "right": "100"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "binary": {
+                  "left": "L1_sensing100",
+                  "operator": "/",
+                  "reducer": "sum",
+                  "right": "L1_expected"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "renameByRegex",
+              "options": {
+                "regex": ".*_2.?_local_value_adjusted",
+                "renamePattern": "All_L2_sensing"
+              }
+            },
+            {
+              "id": "renameByRegex",
+              "options": {
+                "regex": ".*_2.?_local_expected",
+                "renamePattern": "All_L2_expected"
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "L2_sensing",
+                "mode": "reduceRow",
+                "reduce": {
+                  "include": [
+                    "All_L2_sensing"
+                  ],
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "L2_expected",
+                "mode": "reduceRow",
+                "reduce": {
+                  "include": [
+                    "All_L2_expected"
+                  ],
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "L2_sensing100",
+                "binary": {
+                  "left": "L2_sensing",
+                  "operator": "*",
+                  "reducer": "sum",
+                  "right": "100"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "binary": {
+                  "left": "L2_sensing100",
+                  "operator": "/",
+                  "reducer": "sum",
+                  "right": "L2_expected"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "convertFieldType",
+              "options": {
+                "conversions": [
+                  {
+                    "destinationType": "number",
+                    "targetField": "datatake_id"
+                  }
+                ],
+                "fields": {}
+              }
+            },
+            {
+              "id": "convertFieldType",
+              "options": {
+                "conversions": [
+                  {
+                    "destinationType": "time",
+                    "targetField": "observation_time_stop"
+                  },
+                  {
+                    "destinationType": "time",
+                    "targetField": "observation_time_start"
+                  }
+                ],
+                "fields": {}
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "ALL_L1_expected": true,
+                  "AMALFI_REPORT_local_expected": true,
+                  "AMALFI_REPORT_local_percentage": true,
+                  "AMALFI_REPORT_local_status": true,
+                  "AMALFI_REPORT_local_value": true,
+                  "AMALFI_REPORT_local_value_adjusted": true,
+                  "All_L0_expected": true,
+                  "All_L0_sensing": true,
+                  "All_L1_sensing": true,
+                  "All_L2_expected": true,
+                  "All_L2_sensing": true,
+                  "EW_GRDM_1A_local_expected": true,
+                  "EW_GRDM_1A_local_percentage": true,
+                  "EW_GRDM_1A_local_status": true,
+                  "EW_GRDM_1A_local_value": true,
+                  "EW_GRDM_1A_local_value_adjusted": true,
+                  "EW_GRDM_1A_products_completeness_percentage": true,
+                  "EW_GRDM_1A_products_completeness_status": true,
+                  "EW_GRDM_1A_products_sensing_duration": true,
+                  "EW_GRDM_1A_products_sensing_duration_adjusted": true,
+                  "EW_GRDM_1A_total_expected_sensing": true,
+                  "EW_GRDM_1S_local_expected": true,
+                  "EW_GRDM_1S_local_percentage": true,
+                  "EW_GRDM_1S_local_status": true,
+                  "EW_GRDM_1S_local_value": true,
+                  "EW_GRDM_1S_local_value_adjusted": true,
+                  "EW_GRDM_1S_products_completeness_percentage": true,
+                  "EW_GRDM_1S_products_completeness_status": true,
+                  "EW_GRDM_1S_products_sensing_duration": true,
+                  "EW_GRDM_1S_products_sensing_duration_adjusted": true,
+                  "EW_GRDM_1S_total_expected_sensing": true,
+                  "EW_OCN__2A_local_expected": true,
+                  "EW_OCN__2A_local_percentage": true,
+                  "EW_OCN__2A_local_status": true,
+                  "EW_OCN__2A_local_value": true,
+                  "EW_OCN__2A_local_value_adjusted": true,
+                  "EW_OCN__2A_products_completeness_percentage": true,
+                  "EW_OCN__2A_products_completeness_status": true,
+                  "EW_OCN__2A_products_sensing_duration": true,
+                  "EW_OCN__2A_products_sensing_duration_adjusted": true,
+                  "EW_OCN__2A_total_expected_sensing": true,
+                  "EW_OCN__2S_local_expected": true,
+                  "EW_OCN__2S_local_percentage": true,
+                  "EW_OCN__2S_local_status": true,
+                  "EW_OCN__2S_local_value": true,
+                  "EW_OCN__2S_local_value_adjusted": true,
+                  "EW_OCN__2S_products_completeness_percentage": true,
+                  "EW_OCN__2S_products_completeness_status": true,
+                  "EW_OCN__2S_products_sensing_duration": true,
+                  "EW_OCN__2S_products_sensing_duration_adjusted": true,
+                  "EW_OCN__2S_total_expected_sensing": true,
+                  "EW_RAW__0A_local_expected": true,
+                  "EW_RAW__0A_local_percentage": true,
+                  "EW_RAW__0A_local_status": true,
+                  "EW_RAW__0A_local_value": true,
+                  "EW_RAW__0A_local_value_adjusted": true,
+                  "EW_RAW__0A_products_completeness_percentage": true,
+                  "EW_RAW__0A_products_completeness_status": true,
+                  "EW_RAW__0A_products_sensing_duration": true,
+                  "EW_RAW__0A_products_sensing_duration_adjusted": true,
+                  "EW_RAW__0A_total_expected_sensing": true,
+                  "EW_RAW__0C_local_expected": true,
+                  "EW_RAW__0C_local_percentage": true,
+                  "EW_RAW__0C_local_status": true,
+                  "EW_RAW__0C_local_value": true,
+                  "EW_RAW__0C_local_value_adjusted": true,
+                  "EW_RAW__0C_products_completeness_percentage": true,
+                  "EW_RAW__0C_products_completeness_status": true,
+                  "EW_RAW__0C_products_sensing_duration": true,
+                  "EW_RAW__0C_products_sensing_duration_adjusted": true,
+                  "EW_RAW__0C_total_expected_sensing": true,
+                  "EW_RAW__0N_local_expected": true,
+                  "EW_RAW__0N_local_percentage": true,
+                  "EW_RAW__0N_local_status": true,
+                  "EW_RAW__0N_local_value": true,
+                  "EW_RAW__0N_local_value_adjusted": true,
+                  "EW_RAW__0N_products_completeness_percentage": true,
+                  "EW_RAW__0N_products_completeness_status": true,
+                  "EW_RAW__0N_products_sensing_duration": true,
+                  "EW_RAW__0N_products_sensing_duration_adjusted": true,
+                  "EW_RAW__0N_total_expected_sensing": true,
+                  "EW_RAW__0S_local_expected": true,
+                  "EW_RAW__0S_local_percentage": true,
+                  "EW_RAW__0S_local_status": true,
+                  "EW_RAW__0S_local_value": true,
+                  "EW_RAW__0S_local_value_adjusted": true,
+                  "EW_RAW__0S_products_completeness_percentage": true,
+                  "EW_RAW__0S_products_completeness_status": true,
+                  "EW_RAW__0S_products_sensing_duration": true,
+                  "EW_RAW__0S_products_sensing_duration_adjusted": true,
+                  "EW_RAW__0S_total_expected_sensing": true,
+                  "EW_SLC__1A_local_expected": true,
+                  "EW_SLC__1A_local_percentage": true,
+                  "EW_SLC__1A_local_status": true,
+                  "EW_SLC__1A_local_value": true,
+                  "EW_SLC__1A_local_value_adjusted": true,
+                  "EW_SLC__1A_products_completeness_percentage": true,
+                  "EW_SLC__1A_products_completeness_status": true,
+                  "EW_SLC__1A_products_sensing_duration": true,
+                  "EW_SLC__1A_products_sensing_duration_adjusted": true,
+                  "EW_SLC__1A_total_expected_sensing": true,
+                  "EW_SLC__1S_local_expected": true,
+                  "EW_SLC__1S_local_percentage": true,
+                  "EW_SLC__1S_local_status": true,
+                  "EW_SLC__1S_local_value": true,
+                  "EW_SLC__1S_local_value_adjusted": true,
+                  "EW_SLC__1S_products_completeness_percentage": true,
+                  "EW_SLC__1S_products_completeness_status": true,
+                  "EW_SLC__1S_products_sensing_duration": true,
+                  "EW_SLC__1S_products_sensing_duration_adjusted": true,
+                  "EW_SLC__1S_total_expected_sensing": true,
+                  "IW_GRDH_1A_local_expected": true,
+                  "IW_GRDH_1A_local_percentage": true,
+                  "IW_GRDH_1A_local_status": true,
+                  "IW_GRDH_1A_local_value": true,
+                  "IW_GRDH_1A_local_value_adjusted": true,
+                  "IW_GRDH_1A_products_completeness_percentage": true,
+                  "IW_GRDH_1A_products_completeness_status": true,
+                  "IW_GRDH_1A_products_sensing_duration": true,
+                  "IW_GRDH_1A_products_sensing_duration_adjusted": true,
+                  "IW_GRDH_1A_total_expected_sensing": true,
+                  "IW_GRDH_1S_local_expected": true,
+                  "IW_GRDH_1S_local_percentage": true,
+                  "IW_GRDH_1S_local_status": true,
+                  "IW_GRDH_1S_local_value": true,
+                  "IW_GRDH_1S_local_value_adjusted": true,
+                  "IW_GRDH_1S_products_completeness_percentage": true,
+                  "IW_GRDH_1S_products_completeness_status": true,
+                  "IW_GRDH_1S_products_sensing_duration": true,
+                  "IW_GRDH_1S_products_sensing_duration_adjusted": true,
+                  "IW_GRDH_1S_total_expected_sensing": true,
+                  "IW_OCN__2A_local_expected": true,
+                  "IW_OCN__2A_local_percentage": true,
+                  "IW_OCN__2A_local_status": true,
+                  "IW_OCN__2A_local_value": true,
+                  "IW_OCN__2A_local_value_adjusted": true,
+                  "IW_OCN__2A_products_completeness_percentage": true,
+                  "IW_OCN__2A_products_completeness_status": true,
+                  "IW_OCN__2A_products_sensing_duration": true,
+                  "IW_OCN__2A_products_sensing_duration_adjusted": true,
+                  "IW_OCN__2A_total_expected_sensing": true,
+                  "IW_OCN__2S_local_expected": true,
+                  "IW_OCN__2S_local_percentage": true,
+                  "IW_OCN__2S_local_status": true,
+                  "IW_OCN__2S_local_value": true,
+                  "IW_OCN__2S_local_value_adjusted": true,
+                  "IW_OCN__2S_products_completeness_percentage": true,
+                  "IW_OCN__2S_products_completeness_status": true,
+                  "IW_OCN__2S_products_sensing_duration": true,
+                  "IW_OCN__2S_products_sensing_duration_adjusted": true,
+                  "IW_OCN__2S_total_expected_sensing": true,
+                  "IW_RAW__0A_local_expected": true,
+                  "IW_RAW__0A_local_percentage": true,
+                  "IW_RAW__0A_local_status": true,
+                  "IW_RAW__0A_local_value": true,
+                  "IW_RAW__0A_local_value_adjusted": true,
+                  "IW_RAW__0A_products_completeness_percentage": true,
+                  "IW_RAW__0A_products_completeness_status": true,
+                  "IW_RAW__0A_products_sensing_duration": true,
+                  "IW_RAW__0A_products_sensing_duration_adjusted": true,
+                  "IW_RAW__0A_total_expected_sensing": true,
+                  "IW_RAW__0C_local_expected": true,
+                  "IW_RAW__0C_local_percentage": true,
+                  "IW_RAW__0C_local_status": true,
+                  "IW_RAW__0C_local_value": true,
+                  "IW_RAW__0C_local_value_adjusted": true,
+                  "IW_RAW__0C_products_completeness_percentage": true,
+                  "IW_RAW__0C_products_completeness_status": true,
+                  "IW_RAW__0C_products_sensing_duration": true,
+                  "IW_RAW__0C_products_sensing_duration_adjusted": true,
+                  "IW_RAW__0C_total_expected_sensing": true,
+                  "IW_RAW__0N_local_expected": true,
+                  "IW_RAW__0N_local_percentage": true,
+                  "IW_RAW__0N_local_status": true,
+                  "IW_RAW__0N_local_value": true,
+                  "IW_RAW__0N_local_value_adjusted": true,
+                  "IW_RAW__0N_products_completeness_percentage": true,
+                  "IW_RAW__0N_products_completeness_status": true,
+                  "IW_RAW__0N_products_sensing_duration": true,
+                  "IW_RAW__0N_products_sensing_duration_adjusted": true,
+                  "IW_RAW__0N_total_expected_sensing": true,
+                  "IW_RAW__0S_local_expected": true,
+                  "IW_RAW__0S_local_percentage": true,
+                  "IW_RAW__0S_local_status": true,
+                  "IW_RAW__0S_local_value": true,
+                  "IW_RAW__0S_local_value_adjusted": true,
+                  "IW_RAW__0S_products_completeness_percentage": true,
+                  "IW_RAW__0S_products_completeness_status": true,
+                  "IW_RAW__0S_products_sensing_duration": true,
+                  "IW_RAW__0S_products_sensing_duration_adjusted": true,
+                  "IW_RAW__0S_total_expected_sensing": true,
+                  "IW_SLC__1A_local_expected": true,
+                  "IW_SLC__1A_local_percentage": true,
+                  "IW_SLC__1A_local_status": true,
+                  "IW_SLC__1A_local_value": true,
+                  "IW_SLC__1A_local_value_adjusted": true,
+                  "IW_SLC__1A_products_completeness_percentage": true,
+                  "IW_SLC__1A_products_completeness_status": true,
+                  "IW_SLC__1A_products_sensing_duration": true,
+                  "IW_SLC__1A_products_sensing_duration_adjusted": true,
+                  "IW_SLC__1A_total_expected_sensing": true,
+                  "IW_SLC__1S_local_expected": true,
+                  "IW_SLC__1S_local_percentage": true,
+                  "IW_SLC__1S_local_status": true,
+                  "IW_SLC__1S_local_value": true,
+                  "IW_SLC__1S_local_value_adjusted": true,
+                  "IW_SLC__1S_products_completeness_percentage": true,
+                  "IW_SLC__1S_products_completeness_status": true,
+                  "IW_SLC__1S_products_sensing_duration": true,
+                  "IW_SLC__1S_products_sensing_duration_adjusted": true,
+                  "IW_SLC__1S_total_expected_sensing": true,
+                  "L0_expected": true,
+                  "L0_sensing": true,
+                  "L0_sensing100": true,
+                  "L1_expected": true,
+                  "L1_sensing": true,
+                  "L1_sensing100": true,
+                  "L2_expected": true,
+                  "L2_sensing": true,
+                  "L2_sensing100": true,
+                  "MSI_L2A_TC_local_status": true,
+                  "MSI_L2A_TC_local_value": true,
+                  "MSI_L2A_TC_local_value_adjusted": true,
+                  "MSI_L2A_TL_local_expected": true,
+                  "MSI_L2A_TL_local_percentage": true,
+                  "MSI_L2A_TL_local_status": true,
+                  "MSI_L2A_TL_local_value": true,
+                  "MSI_L2A_TL_local_value_adjusted": true,
+                  "RF_RAW__0S_local_expected": true,
+                  "RF_RAW__0S_local_percentage": true,
+                  "RF_RAW__0S_local_status": true,
+                  "RF_RAW__0S_local_value": true,
+                  "RF_RAW__0S_local_value_adjusted": true,
+                  "S1_GRDH_1A_local_expected": true,
+                  "S1_GRDH_1A_local_percentage": true,
+                  "S1_GRDH_1A_local_status": true,
+                  "S1_GRDH_1A_local_value": true,
+                  "S1_GRDH_1A_local_value_adjusted": true,
+                  "S1_GRDH_1S_local_expected": true,
+                  "S1_GRDH_1S_local_percentage": true,
+                  "S1_GRDH_1S_local_status": true,
+                  "S1_GRDH_1S_local_value": true,
+                  "S1_GRDH_1S_local_value_adjusted": true,
+                  "S1_OCN__2A_local_expected": true,
+                  "S1_OCN__2A_local_percentage": true,
+                  "S1_OCN__2A_local_status": true,
+                  "S1_OCN__2A_local_value": true,
+                  "S1_OCN__2A_local_value_adjusted": true,
+                  "S1_OCN__2S_local_expected": true,
+                  "S1_OCN__2S_local_percentage": true,
+                  "S1_OCN__2S_local_status": true,
+                  "S1_OCN__2S_local_value": true,
+                  "S1_OCN__2S_local_value_adjusted": true,
+                  "S1_RAW__0A_local_expected": true,
+                  "S1_RAW__0A_local_percentage": true,
+                  "S1_RAW__0A_local_status": true,
+                  "S1_RAW__0A_local_value": true,
+                  "S1_RAW__0A_local_value_adjusted": true,
+                  "S1_RAW__0C_local_expected": true,
+                  "S1_RAW__0C_local_percentage": true,
+                  "S1_RAW__0C_local_status": true,
+                  "S1_RAW__0C_local_value": true,
+                  "S1_RAW__0C_local_value_adjusted": true,
+                  "S1_RAW__0N_local_expected": true,
+                  "S1_RAW__0N_local_percentage": true,
+                  "S1_RAW__0N_local_status": true,
+                  "S1_RAW__0N_local_value": true,
+                  "S1_RAW__0N_local_value_adjusted": true,
+                  "S1_RAW__0S_local_expected": true,
+                  "S1_RAW__0S_local_percentage": true,
+                  "S1_RAW__0S_local_status": true,
+                  "S1_RAW__0S_local_value": true,
+                  "S1_RAW__0S_local_value_adjusted": true,
+                  "S1_SLC__1A_local_expected": true,
+                  "S1_SLC__1A_local_percentage": true,
+                  "S1_SLC__1A_local_status": true,
+                  "S1_SLC__1A_local_value": true,
+                  "S1_SLC__1A_local_value_adjusted": true,
+                  "S1_SLC__1S_local_expected": true,
+                  "S1_SLC__1S_local_percentage": true,
+                  "S1_SLC__1S_local_status": true,
+                  "S1_SLC__1S_local_value": true,
+                  "S1_SLC__1S_local_value_adjusted": true,
+                  "S2_GRDH_1A_local_expected": true,
+                  "S2_GRDH_1A_local_percentage": true,
+                  "S2_GRDH_1A_local_status": true,
+                  "S2_GRDH_1A_local_value": true,
+                  "S2_GRDH_1A_local_value_adjusted": true,
+                  "S2_GRDH_1S_local_expected": true,
+                  "S2_GRDH_1S_local_percentage": true,
+                  "S2_GRDH_1S_local_status": true,
+                  "S2_GRDH_1S_local_value": true,
+                  "S2_GRDH_1S_local_value_adjusted": true,
+                  "S2_OCN__2A_local_expected": true,
+                  "S2_OCN__2A_local_percentage": true,
+                  "S2_OCN__2A_local_status": true,
+                  "S2_OCN__2A_local_value": true,
+                  "S2_OCN__2A_local_value_adjusted": true,
+                  "S2_OCN__2S_local_expected": true,
+                  "S2_OCN__2S_local_percentage": true,
+                  "S2_OCN__2S_local_status": true,
+                  "S2_OCN__2S_local_value": true,
+                  "S2_OCN__2S_local_value_adjusted": true,
+                  "S2_RAW__0A_local_expected": true,
+                  "S2_RAW__0A_local_percentage": true,
+                  "S2_RAW__0A_local_status": true,
+                  "S2_RAW__0A_local_value": true,
+                  "S2_RAW__0A_local_value_adjusted": true,
+                  "S2_RAW__0C_local_expected": true,
+                  "S2_RAW__0C_local_percentage": true,
+                  "S2_RAW__0C_local_status": true,
+                  "S2_RAW__0C_local_value": true,
+                  "S2_RAW__0C_local_value_adjusted": true,
+                  "S2_RAW__0N_local_expected": true,
+                  "S2_RAW__0N_local_percentage": true,
+                  "S2_RAW__0N_local_status": true,
+                  "S2_RAW__0N_local_value": true,
+                  "S2_RAW__0N_local_value_adjusted": true,
+                  "S2_RAW__0S_local_expected": true,
+                  "S2_RAW__0S_local_percentage": true,
+                  "S2_RAW__0S_local_status": true,
+                  "S2_RAW__0S_local_value": true,
+                  "S2_RAW__0S_local_value_adjusted": true,
+                  "S2_SLC__1A_local_expected": true,
+                  "S2_SLC__1A_local_percentage": true,
+                  "S2_SLC__1A_local_status": true,
+                  "S2_SLC__1A_local_value": true,
+                  "S2_SLC__1A_local_value_adjusted": true,
+                  "S2_SLC__1S_local_expected": true,
+                  "S2_SLC__1S_local_percentage": true,
+                  "S2_SLC__1S_local_status": true,
+                  "S2_SLC__1S_local_value": true,
+                  "S2_SLC__1S_local_value_adjusted": true,
+                  "S3_GRDH_1A_local_expected": true,
+                  "S3_GRDH_1A_local_percentage": true,
+                  "S3_GRDH_1A_local_status": true,
+                  "S3_GRDH_1A_local_value": true,
+                  "S3_GRDH_1A_local_value_adjusted": true,
+                  "S3_GRDH_1S_local_expected": true,
+                  "S3_GRDH_1S_local_percentage": true,
+                  "S3_GRDH_1S_local_status": true,
+                  "S3_GRDH_1S_local_value": true,
+                  "S3_GRDH_1S_local_value_adjusted": true,
+                  "S3_OCN__2A_local_expected": true,
+                  "S3_OCN__2A_local_percentage": true,
+                  "S3_OCN__2A_local_status": true,
+                  "S3_OCN__2A_local_value": true,
+                  "S3_OCN__2A_local_value_adjusted": true,
+                  "S3_OCN__2S_local_expected": true,
+                  "S3_OCN__2S_local_percentage": true,
+                  "S3_OCN__2S_local_status": true,
+                  "S3_OCN__2S_local_value": true,
+                  "S3_OCN__2S_local_value_adjusted": true,
+                  "S3_RAW__0A_local_expected": true,
+                  "S3_RAW__0A_local_percentage": true,
+                  "S3_RAW__0A_local_status": true,
+                  "S3_RAW__0A_local_value": true,
+                  "S3_RAW__0A_local_value_adjusted": true,
+                  "S3_RAW__0C_local_expected": true,
+                  "S3_RAW__0C_local_percentage": true,
+                  "S3_RAW__0C_local_status": true,
+                  "S3_RAW__0C_local_value": true,
+                  "S3_RAW__0C_local_value_adjusted": true,
+                  "S3_RAW__0N_local_expected": true,
+                  "S3_RAW__0N_local_percentage": true,
+                  "S3_RAW__0N_local_status": true,
+                  "S3_RAW__0N_local_value": true,
+                  "S3_RAW__0N_local_value_adjusted": true,
+                  "S3_RAW__0S_local_expected": true,
+                  "S3_RAW__0S_local_percentage": true,
+                  "S3_RAW__0S_local_status": true,
+                  "S3_RAW__0S_local_value": true,
+                  "S3_RAW__0S_local_value_adjusted": true,
+                  "S3_SLC__1A_local_expected": true,
+                  "S3_SLC__1A_local_percentage": true,
+                  "S3_SLC__1A_local_status": true,
+                  "S3_SLC__1A_local_value": true,
+                  "S3_SLC__1A_local_value_adjusted": true,
+                  "S3_SLC__1S_local_expected": true,
+                  "S3_SLC__1S_local_percentage": true,
+                  "S3_SLC__1S_local_status": true,
+                  "S3_SLC__1S_local_value": true,
+                  "S3_SLC__1S_local_value_adjusted": true,
+                  "S4_GRDH_1A_local_expected": true,
+                  "S4_GRDH_1A_local_percentage": true,
+                  "S4_GRDH_1A_local_status": true,
+                  "S4_GRDH_1A_local_value": true,
+                  "S4_GRDH_1A_local_value_adjusted": true,
+                  "S4_GRDH_1S_local_expected": true,
+                  "S4_GRDH_1S_local_percentage": true,
+                  "S4_GRDH_1S_local_status": true,
+                  "S4_GRDH_1S_local_value": true,
+                  "S4_GRDH_1S_local_value_adjusted": true,
+                  "S4_OCN__2A_local_expected": true,
+                  "S4_OCN__2A_local_percentage": true,
+                  "S4_OCN__2A_local_status": true,
+                  "S4_OCN__2A_local_value": true,
+                  "S4_OCN__2A_local_value_adjusted": true,
+                  "S4_OCN__2S_local_expected": true,
+                  "S4_OCN__2S_local_percentage": true,
+                  "S4_OCN__2S_local_status": true,
+                  "S4_OCN__2S_local_value": true,
+                  "S4_OCN__2S_local_value_adjusted": true,
+                  "S4_RAW__0A_local_expected": true,
+                  "S4_RAW__0A_local_percentage": true,
+                  "S4_RAW__0A_local_status": true,
+                  "S4_RAW__0A_local_value": true,
+                  "S4_RAW__0A_local_value_adjusted": true,
+                  "S4_RAW__0C_local_expected": true,
+                  "S4_RAW__0C_local_percentage": true,
+                  "S4_RAW__0C_local_status": true,
+                  "S4_RAW__0C_local_value": true,
+                  "S4_RAW__0C_local_value_adjusted": true,
+                  "S4_RAW__0N_local_expected": true,
+                  "S4_RAW__0N_local_percentage": true,
+                  "S4_RAW__0N_local_status": true,
+                  "S4_RAW__0N_local_value": true,
+                  "S4_RAW__0N_local_value_adjusted": true,
+                  "S4_RAW__0S_local_expected": true,
+                  "S4_RAW__0S_local_percentage": true,
+                  "S4_RAW__0S_local_status": true,
+                  "S4_RAW__0S_local_value": true,
+                  "S4_RAW__0S_local_value_adjusted": true,
+                  "S4_SLC__1A_local_expected": true,
+                  "S4_SLC__1A_local_percentage": true,
+                  "S4_SLC__1A_local_status": true,
+                  "S4_SLC__1A_local_value": true,
+                  "S4_SLC__1A_local_value_adjusted": true,
+                  "S4_SLC__1S_local_expected": true,
+                  "S4_SLC__1S_local_percentage": true,
+                  "S4_SLC__1S_local_status": true,
+                  "S4_SLC__1S_local_value": true,
+                  "S4_SLC__1S_local_value_adjusted": true,
+                  "S5_GRDH_1A_local_expected": true,
+                  "S5_GRDH_1A_local_percentage": true,
+                  "S5_GRDH_1A_local_status": true,
+                  "S5_GRDH_1A_local_value": true,
+                  "S5_GRDH_1A_local_value_adjusted": true,
+                  "S5_GRDH_1S_local_expected": true,
+                  "S5_GRDH_1S_local_percentage": true,
+                  "S5_GRDH_1S_local_status": true,
+                  "S5_GRDH_1S_local_value": true,
+                  "S5_GRDH_1S_local_value_adjusted": true,
+                  "S5_OCN__2A_local_expected": true,
+                  "S5_OCN__2A_local_percentage": true,
+                  "S5_OCN__2A_local_status": true,
+                  "S5_OCN__2A_local_value": true,
+                  "S5_OCN__2A_local_value_adjusted": true,
+                  "S5_OCN__2S_local_expected": true,
+                  "S5_OCN__2S_local_percentage": true,
+                  "S5_OCN__2S_local_status": true,
+                  "S5_OCN__2S_local_value": true,
+                  "S5_OCN__2S_local_value_adjusted": true,
+                  "S5_RAW__0A_local_expected": true,
+                  "S5_RAW__0A_local_percentage": true,
+                  "S5_RAW__0A_local_status": true,
+                  "S5_RAW__0A_local_value": true,
+                  "S5_RAW__0A_local_value_adjusted": true,
+                  "S5_RAW__0C_local_expected": true,
+                  "S5_RAW__0C_local_percentage": true,
+                  "S5_RAW__0C_local_status": true,
+                  "S5_RAW__0C_local_value": true,
+                  "S5_RAW__0C_local_value_adjusted": true,
+                  "S5_RAW__0N_local_expected": true,
+                  "S5_RAW__0N_local_percentage": true,
+                  "S5_RAW__0N_local_status": true,
+                  "S5_RAW__0N_local_value": true,
+                  "S5_RAW__0N_local_value_adjusted": true,
+                  "S5_RAW__0S_local_expected": true,
+                  "S5_RAW__0S_local_percentage": true,
+                  "S5_RAW__0S_local_status": true,
+                  "S5_RAW__0S_local_value": true,
+                  "S5_RAW__0S_local_value_adjusted": true,
+                  "S5_SLC__1A_local_expected": true,
+                  "S5_SLC__1A_local_percentage": true,
+                  "S5_SLC__1A_local_status": true,
+                  "S5_SLC__1A_local_value": true,
+                  "S5_SLC__1A_local_value_adjusted": true,
+                  "S5_SLC__1S_local_expected": true,
+                  "S5_SLC__1S_local_percentage": true,
+                  "S5_SLC__1S_local_status": true,
+                  "S5_SLC__1S_local_value": true,
+                  "S5_SLC__1S_local_value_adjusted": true,
+                  "S6_GRDH_1A_local_expected": true,
+                  "S6_GRDH_1A_local_percentage": true,
+                  "S6_GRDH_1A_local_status": true,
+                  "S6_GRDH_1A_local_value": true,
+                  "S6_GRDH_1A_local_value_adjusted": true,
+                  "S6_GRDH_1S_local_expected": true,
+                  "S6_GRDH_1S_local_percentage": true,
+                  "S6_GRDH_1S_local_status": true,
+                  "S6_GRDH_1S_local_value": true,
+                  "S6_GRDH_1S_local_value_adjusted": true,
+                  "S6_OCN__2A_local_expected": true,
+                  "S6_OCN__2A_local_percentage": true,
+                  "S6_OCN__2A_local_status": true,
+                  "S6_OCN__2A_local_value": true,
+                  "S6_OCN__2A_local_value_adjusted": true,
+                  "S6_OCN__2S_local_expected": true,
+                  "S6_OCN__2S_local_percentage": true,
+                  "S6_OCN__2S_local_status": true,
+                  "S6_OCN__2S_local_value": true,
+                  "S6_OCN__2S_local_value_adjusted": true,
+                  "S6_RAW__0A_local_expected": true,
+                  "S6_RAW__0A_local_percentage": true,
+                  "S6_RAW__0A_local_status": true,
+                  "S6_RAW__0A_local_value": true,
+                  "S6_RAW__0A_local_value_adjusted": true,
+                  "S6_RAW__0C_local_expected": true,
+                  "S6_RAW__0C_local_percentage": true,
+                  "S6_RAW__0C_local_status": true,
+                  "S6_RAW__0C_local_value": true,
+                  "S6_RAW__0C_local_value_adjusted": true,
+                  "S6_RAW__0N_local_expected": true,
+                  "S6_RAW__0N_local_percentage": true,
+                  "S6_RAW__0N_local_status": true,
+                  "S6_RAW__0N_local_value": true,
+                  "S6_RAW__0N_local_value_adjusted": true,
+                  "S6_RAW__0S_local_expected": true,
+                  "S6_RAW__0S_local_percentage": true,
+                  "S6_RAW__0S_local_status": true,
+                  "S6_RAW__0S_local_value": true,
+                  "S6_RAW__0S_local_value_adjusted": true,
+                  "S6_SLC__1A_local_expected": true,
+                  "S6_SLC__1A_local_percentage": true,
+                  "S6_SLC__1A_local_status": true,
+                  "S6_SLC__1A_local_value": true,
+                  "S6_SLC__1A_local_value_adjusted": true,
+                  "S6_SLC__1S_local_expected": true,
+                  "S6_SLC__1S_local_percentage": true,
+                  "S6_SLC__1S_local_status": true,
+                  "S6_SLC__1S_local_value": true,
+                  "S6_SLC__1S_local_value_adjusted": true,
+                  "SM_GRDH_1A_local_expected": true,
+                  "SM_GRDH_1A_local_percentage": true,
+                  "SM_GRDH_1A_local_status": true,
+                  "SM_GRDH_1A_local_value": true,
+                  "SM_GRDH_1A_local_value_adjusted": true,
+                  "SM_GRDH_1S_local_expected": true,
+                  "SM_GRDH_1S_local_percentage": true,
+                  "SM_GRDH_1S_local_status": true,
+                  "SM_GRDH_1S_local_value": true,
+                  "SM_GRDH_1S_local_value_adjusted": true,
+                  "SM_OCN__2A_local_expected": true,
+                  "SM_OCN__2A_local_percentage": true,
+                  "SM_OCN__2A_local_status": true,
+                  "SM_OCN__2A_local_value": true,
+                  "SM_OCN__2A_local_value_adjusted": true,
+                  "SM_OCN__2S_local_expected": true,
+                  "SM_OCN__2S_local_percentage": true,
+                  "SM_OCN__2S_local_status": true,
+                  "SM_OCN__2S_local_value": true,
+                  "SM_OCN__2S_local_value_adjusted": true,
+                  "SM_RAW__0A_local_expected": true,
+                  "SM_RAW__0A_local_percentage": true,
+                  "SM_RAW__0A_local_status": true,
+                  "SM_RAW__0A_local_value": true,
+                  "SM_RAW__0A_local_value_adjusted": true,
+                  "SM_RAW__0C_local_expected": true,
+                  "SM_RAW__0C_local_percentage": true,
+                  "SM_RAW__0C_local_status": true,
+                  "SM_RAW__0C_local_value": true,
+                  "SM_RAW__0C_local_value_adjusted": true,
+                  "SM_RAW__0N_local_expected": true,
+                  "SM_RAW__0N_local_percentage": true,
+                  "SM_RAW__0N_local_status": true,
+                  "SM_RAW__0N_local_value": true,
+                  "SM_RAW__0N_local_value_adjusted": true,
+                  "SM_RAW__0S_local_expected": true,
+                  "SM_RAW__0S_local_percentage": true,
+                  "SM_RAW__0S_local_status": true,
+                  "SM_RAW__0S_local_value": true,
+                  "SM_RAW__0S_local_value_adjusted": true,
+                  "SM_SLC__1A_local_expected": true,
+                  "SM_SLC__1A_local_percentage": true,
+                  "SM_SLC__1A_local_status": true,
+                  "SM_SLC__1A_local_value": true,
+                  "SM_SLC__1A_local_value_adjusted": true,
+                  "SM_SLC__1S_local_expected": true,
+                  "SM_SLC__1S_local_percentage": true,
+                  "SM_SLC__1S_local_status": true,
+                  "SM_SLC__1S_local_value": true,
+                  "SM_SLC__1S_local_value_adjusted": true,
+                  "TC_global_expected": true,
+                  "TC_global_percentage": true,
+                  "TC_global_status": true,
+                  "TC_global_value": true,
+                  "TC_global_value_adjusted": true,
+                  "WV_OCN__2A_local_expected": true,
+                  "WV_OCN__2A_local_percentage": true,
+                  "WV_OCN__2A_local_status": true,
+                  "WV_OCN__2A_local_value": true,
+                  "WV_OCN__2A_local_value_adjusted": true,
+                  "WV_OCN__2S_local_expected": true,
+                  "WV_OCN__2S_local_percentage": true,
+                  "WV_OCN__2S_local_status": true,
+                  "WV_OCN__2S_local_value": true,
+                  "WV_OCN__2S_local_value_adjusted": true,
+                  "WV_RAW__0A_local_expected": true,
+                  "WV_RAW__0A_local_percentage": true,
+                  "WV_RAW__0A_local_status": true,
+                  "WV_RAW__0A_local_value": true,
+                  "WV_RAW__0A_local_value_adjusted": true,
+                  "WV_RAW__0C_local_expected": true,
+                  "WV_RAW__0C_local_percentage": true,
+                  "WV_RAW__0C_local_status": true,
+                  "WV_RAW__0C_local_value": true,
+                  "WV_RAW__0C_local_value_adjusted": true,
+                  "WV_RAW__0N_local_expected": true,
+                  "WV_RAW__0N_local_percentage": true,
+                  "WV_RAW__0N_local_status": true,
+                  "WV_RAW__0N_local_value": true,
+                  "WV_RAW__0N_local_value_adjusted": true,
+                  "WV_RAW__0S_local_expected": true,
+                  "WV_RAW__0S_local_percentage": true,
+                  "WV_RAW__0S_local_status": true,
+                  "WV_RAW__0S_local_value": true,
+                  "WV_RAW__0S_local_value_adjusted": true,
+                  "WV_SLC__1A_local_expected": true,
+                  "WV_SLC__1A_local_percentage": true,
+                  "WV_SLC__1A_local_status": true,
+                  "WV_SLC__1A_local_value": true,
+                  "WV_SLC__1A_local_value_adjusted": true,
+                  "WV_SLC__1S_local_expected": true,
+                  "WV_SLC__1S_local_percentage": true,
+                  "WV_SLC__1S_local_status": true,
+                  "WV_SLC__1S_local_value": true,
+                  "WV_SLC__1S_local_value_adjusted": true,
+                  "_id": true,
+                  "_index": true,
+                  "_type": true,
+                  "application_date": true,
+                  "highlight": true,
+                  "instrument_swath": true,
+                  "key": true,
+                  "l0_sensing_duration": true,
+                  "l0_sensing_time_start": true,
+                  "l0_sensing_time_stop": true,
+                  "mission": true,
+                  "name": true,
+                  "number_of_expected_tiles": true,
+                  "number_of_scenes": true,
+                  "observation_duration": true,
+                  "polarization": true,
+                  "relative_orbit": true,
+                  "satellite_unit": true,
+                  "sensing_global_expected": true,
+                  "sensing_global_status": true,
+                  "sensing_global_value": true,
+                  "sensing_global_value_adjusted": true,
+                  "sort": true,
+                  "updateTime": true
+                },
+                "indexByName": {
+                  "EW_GRDM_1A_local_expected": 29,
+                  "EW_GRDM_1A_local_percentage": 30,
+                  "EW_GRDM_1A_local_status": 31,
+                  "EW_GRDM_1A_local_value": 32,
+                  "EW_GRDM_1A_local_value_adjusted": 33,
+                  "EW_GRDM_1S_local_expected": 34,
+                  "EW_GRDM_1S_local_percentage": 35,
+                  "EW_GRDM_1S_local_status": 36,
+                  "EW_GRDM_1S_local_value": 37,
+                  "EW_GRDM_1S_local_value_adjusted": 38,
+                  "EW_OCN__2A_local_expected": 39,
+                  "EW_OCN__2A_local_percentage": 40,
+                  "EW_OCN__2A_local_status": 41,
+                  "EW_OCN__2A_local_value": 42,
+                  "EW_OCN__2A_local_value_adjusted": 43,
+                  "EW_OCN__2S_local_expected": 44,
+                  "EW_OCN__2S_local_percentage": 45,
+                  "EW_OCN__2S_local_status": 46,
+                  "EW_OCN__2S_local_value": 47,
+                  "EW_OCN__2S_local_value_adjusted": 48,
+                  "EW_RAW__0A_local_expected": 49,
+                  "EW_RAW__0A_local_percentage": 50,
+                  "EW_RAW__0A_local_status": 51,
+                  "EW_RAW__0A_local_value": 52,
+                  "EW_RAW__0A_local_value_adjusted": 53,
+                  "EW_RAW__0C_local_expected": 54,
+                  "EW_RAW__0C_local_percentage": 55,
+                  "EW_RAW__0C_local_status": 56,
+                  "EW_RAW__0C_local_value": 57,
+                  "EW_RAW__0C_local_value_adjusted": 58,
+                  "EW_RAW__0N_local_expected": 59,
+                  "EW_RAW__0N_local_percentage": 60,
+                  "EW_RAW__0N_local_status": 61,
+                  "EW_RAW__0N_local_value": 62,
+                  "EW_RAW__0N_local_value_adjusted": 63,
+                  "EW_RAW__0S_local_expected": 64,
+                  "EW_RAW__0S_local_percentage": 65,
+                  "EW_RAW__0S_local_status": 66,
+                  "EW_RAW__0S_local_value": 67,
+                  "EW_RAW__0S_local_value_adjusted": 68,
+                  "EW_SLC__1A_local_expected": 69,
+                  "EW_SLC__1A_local_percentage": 70,
+                  "EW_SLC__1A_local_status": 71,
+                  "EW_SLC__1A_local_value": 72,
+                  "EW_SLC__1A_local_value_adjusted": 73,
+                  "EW_SLC__1S_local_expected": 74,
+                  "EW_SLC__1S_local_percentage": 75,
+                  "EW_SLC__1S_local_status": 76,
+                  "EW_SLC__1S_local_value": 77,
+                  "EW_SLC__1S_local_value_adjusted": 78,
+                  "_id": 17,
+                  "_index": 18,
+                  "_type": 19,
+                  "absolute_orbit": 3,
+                  "application_date": 20,
+                  "datatake_id": 2,
+                  "highlight": 21,
+                  "instrument_mode": 4,
+                  "instrument_swath": 22,
+                  "key": 23,
+                  "l0_sensing_duration": 13,
+                  "l0_sensing_time_start": 14,
+                  "l0_sensing_time_stop": 15,
+                  "mission": 24,
+                  "name": 25,
+                  "observation_duration": 16,
+                  "observation_time_start": 0,
+                  "observation_time_stop": 1,
+                  "polarization": 8,
+                  "relative_orbit": 26,
+                  "satellite_unit": 7,
+                  "sensing_global_expected": 10,
+                  "sensing_global_percentage": 6,
+                  "sensing_global_status": 9,
+                  "sensing_global_value": 12,
+                  "sensing_global_value_adjusted": 11,
+                  "sort": 27,
+                  "timeliness": 5,
+                  "updateTime": 28
+                },
+                "renameByName": {
+                  "L0_sensing100 / L0_expected": "L0 Compl. %",
+                  "L1_sensing100 / L1_expected": "L1 Compl. %",
+                  "L2_sensing100 / L2_expected": "L2 Compl. %",
+                  "absolute_orbit": "Absolute Orbit",
+                  "datatake_id": "Datatake ID",
+                  "instrument_mode": "Instrument Mode",
+                  "observation_time_start": "Sensing Start",
+                  "observation_time_stop": "Sensing Stop",
+                  "polarization": "Polarization",
+                  "sensing_global_expected": "",
+                  "sensing_global_percentage": "DT Compl. %",
+                  "sensing_global_status": "Completeness",
+                  "timeliness": "Timeliness"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "sensing_stop_numeric",
+                "mode": "reduceRow",
+                "reduce": {
+                  "include": [
+                    "Sensing Stop"
+                  ],
+                  "reducer": "first"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "sensing_start_numeric",
+                "mode": "reduceRow",
+                "reduce": {
+                  "include": [
+                    "Sensing Start"
+                  ],
+                  "reducer": "first"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "sensing_start_adjusted",
+                "binary": {
+                  "left": "sensing_start_numeric",
+                  "operator": "-",
+                  "reducer": "sum",
+                  "right": "30000"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "sensing_stop_adjusted",
+                "binary": {
+                  "left": "sensing_stop_numeric",
+                  "operator": "+",
+                  "reducer": "sum",
+                  "right": "30000"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            }
+          ],
+          "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PA3CBD0DC9D8FBBE1"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "center",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "filterable": false,
+                "inspect": false
+              },
+              "links": [],
+              "mappings": [
+                {
+                  "options": {
+                    "Complete": {
+                      "color": "green",
+                      "index": 2
+                    },
+                    "Missing": {
+                      "color": "red",
+                      "index": 1
+                    },
+                    "NaN": {
+                      "color": "#646464",
+                      "index": 4,
+                      "text": "N/A"
+                    },
+                    "Partial": {
+                      "color": "orange",
+                      "index": 0
+                    }
+                  },
+                  "type": "value"
+                },
+                {
+                  "options": {
+                    "match": "null+nan",
+                    "result": {
+                      "color": "transparent",
+                      "index": 3
+                    }
+                  },
+                  "type": "special"
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "red",
+                    "value": null
+                  },
+                  {
+                    "color": "#EAB839",
+                    "value": 99
+                  },
+                  {
+                    "color": "super-light-green",
+                    "value": 99.8
+                  },
+                  {
+                    "color": "dark-green",
+                    "value": 100
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Sensing Start"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 200
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Sensing Stop"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 205
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Completeness %"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "basic",
+                      "type": "color-background"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Datatake ID"
+                },
+                "properties": [
+                  {
+                    "id": "links",
+                    "value": [
+                      {
+                        "targetBlank": true,
+                        "title": "Datatake Completeness",
+                        "url": "d/sStGi_ymz/s2-datatake-completeness?orgId=1&var-datatake_id=${__data.fields.datatake_id}&from=${__data.fields[\"sensing_start_adjusted\"]}&to=${__data.fields[\"sensing_stop_adjusted\"]}"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "custom.width",
+                    "value": 149
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "sensing_stop_numeric"
+                },
+                "properties": [
+                  {
+                    "id": "custom.hidden",
+                    "value": true
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "sensing_start_numeric"
+                },
+                "properties": [
+                  {
+                    "id": "custom.hidden",
+                    "value": true
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "sensing_start_adjusted"
+                },
+                "properties": [
+                  {
+                    "id": "custom.hidden",
+                    "value": true
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "sensing_stop_adjusted"
+                },
+                "properties": [
+                  {
+                    "id": "custom.hidden",
+                    "value": true
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Absolute Orbit"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 127
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Instrument Mode"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 142
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "L0 Completeness %"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "basic",
+                      "type": "color-background"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "L2A Completeness %"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "basic",
+                      "type": "color-background"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "L1B Completeness %"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "basic",
+                      "type": "color-background"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "L1C Completeness %"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "basic",
+                      "type": "color-background"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "L1A Completeness %"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "basic",
+                      "type": "color-background"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 24,
+            "x": 0,
+            "y": 30
+          },
+          "id": 19,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true,
+            "sortBy": []
+          },
+          "pluginVersion": "11.0.0",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "PA3CBD0DC9D8FBBE1"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "size": "10000"
+                  },
+                  "type": "raw_data"
+                }
+              ],
+              "query": "mission:S2 AND datatake_id:${datatake_id:lucene}",
+              "refId": "A",
+              "timeField": "observation_time_start"
+            }
+          ],
+          "title": "S2 Datatake",
+          "transformations": [
+            {
+              "id": "convertFieldType",
+              "options": {
+                "conversions": [
+                  {
+                    "destinationType": "string",
+                    "targetField": "datatake_id"
+                  }
+                ],
+                "fields": {}
+              }
+            },
+            {
+              "id": "convertFieldType",
+              "options": {
+                "conversions": [
+                  {
+                    "destinationType": "time",
+                    "targetField": "observation_time_stop"
+                  },
+                  {
+                    "destinationType": "time",
+                    "targetField": "observation_time_start"
+                  }
+                ],
+                "fields": {}
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "binary": {
+                  "left": "L0__local_value",
+                  "operator": "*",
+                  "reducer": "sum",
+                  "right": "100"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "binary": {
+                  "left": "L0__local_value * 100",
+                  "operator": "/",
+                  "reducer": "sum",
+                  "right": "L0__local_expected"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "L1A_local_value * 100",
+                "binary": {
+                  "left": "L1A_local_value",
+                  "operator": "*",
+                  "reducer": "sum",
+                  "right": "100"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "L1A_local_value * 100 / L1A_local_expected",
+                "binary": {
+                  "left": "L1A_local_value * 100",
+                  "operator": "/",
+                  "reducer": "sum",
+                  "right": "L1A_local_expected"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "binary": {
+                  "left": "L1B_local_value",
+                  "operator": "*",
+                  "reducer": "sum",
+                  "right": "100"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "binary": {
+                  "left": "L1B_local_value * 100",
+                  "operator": "/",
+                  "reducer": "sum",
+                  "right": "L1B_local_expected"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "binary": {
+                  "left": "L1C_local_value",
+                  "operator": "*",
+                  "reducer": "sum",
+                  "right": "100"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "binary": {
+                  "left": "L1C_local_value * 100",
+                  "operator": "/",
+                  "reducer": "sum",
+                  "right": "L1C_local_expected"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "renameByRegex",
+              "options": {
+                "regex": "L2.*_local_value",
+                "renamePattern": "All_L2_sensing"
+              }
+            },
+            {
+              "id": "renameByRegex",
+              "options": {
+                "regex": "L2.*_local_expected",
+                "renamePattern": "All_L2_expected"
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "L2_sensing",
+                "mode": "reduceRow",
+                "reduce": {
+                  "include": [
+                    "All_L2_sensing"
+                  ],
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "L2_expected",
+                "mode": "reduceRow",
+                "reduce": {
+                  "include": [
+                    "All_L2_expected"
+                  ],
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "L2_sensing100",
+                "binary": {
+                  "left": "L2_sensing",
+                  "operator": "*",
+                  "reducer": "sum",
+                  "right": "100"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "binary": {
+                  "left": "L2_sensing100",
+                  "operator": "/",
+                  "reducer": "sum",
+                  "right": "L2_expected"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "All_L1_expected": true,
+                  "All_L1_sensing": true,
+                  "All_L2_expected": true,
+                  "All_L2_sensing": true,
+                  "DS_global_expected": true,
+                  "DS_global_percentage": true,
+                  "DS_global_status": true,
+                  "DS_global_value": true,
+                  "DS_global_value_adjusted": true,
+                  "EW_GRDM_1A_local_expected": true,
+                  "EW_GRDM_1A_local_percentage": true,
+                  "EW_GRDM_1A_local_status": true,
+                  "EW_GRDM_1A_local_value": true,
+                  "EW_GRDM_1A_local_value_adjusted": true,
+                  "EW_GRDM_1A_products_completeness_percentage": true,
+                  "EW_GRDM_1A_products_completeness_status": true,
+                  "EW_GRDM_1A_products_sensing_duration": true,
+                  "EW_GRDM_1A_products_sensing_duration_adjusted": true,
+                  "EW_GRDM_1A_total_expected_sensing": true,
+                  "EW_GRDM_1S_local_expected": true,
+                  "EW_GRDM_1S_local_percentage": true,
+                  "EW_GRDM_1S_local_status": true,
+                  "EW_GRDM_1S_local_value": true,
+                  "EW_GRDM_1S_local_value_adjusted": true,
+                  "EW_GRDM_1S_products_completeness_percentage": true,
+                  "EW_GRDM_1S_products_completeness_status": true,
+                  "EW_GRDM_1S_products_sensing_duration": true,
+                  "EW_GRDM_1S_products_sensing_duration_adjusted": true,
+                  "EW_GRDM_1S_total_expected_sensing": true,
+                  "EW_OCN__2A_local_expected": true,
+                  "EW_OCN__2A_local_percentage": true,
+                  "EW_OCN__2A_local_status": true,
+                  "EW_OCN__2A_local_value": true,
+                  "EW_OCN__2A_local_value_adjusted": true,
+                  "EW_OCN__2A_products_completeness_percentage": true,
+                  "EW_OCN__2A_products_completeness_status": true,
+                  "EW_OCN__2A_products_sensing_duration": true,
+                  "EW_OCN__2A_products_sensing_duration_adjusted": true,
+                  "EW_OCN__2A_total_expected_sensing": true,
+                  "EW_OCN__2S_local_expected": true,
+                  "EW_OCN__2S_local_percentage": true,
+                  "EW_OCN__2S_local_status": true,
+                  "EW_OCN__2S_local_value": true,
+                  "EW_OCN__2S_local_value_adjusted": true,
+                  "EW_OCN__2S_products_completeness_percentage": true,
+                  "EW_OCN__2S_products_completeness_status": true,
+                  "EW_OCN__2S_products_sensing_duration": true,
+                  "EW_OCN__2S_products_sensing_duration_adjusted": true,
+                  "EW_OCN__2S_total_expected_sensing": true,
+                  "EW_RAW__0A_local_expected": true,
+                  "EW_RAW__0A_local_percentage": true,
+                  "EW_RAW__0A_local_status": true,
+                  "EW_RAW__0A_local_value": true,
+                  "EW_RAW__0A_local_value_adjusted": true,
+                  "EW_RAW__0A_products_completeness_percentage": true,
+                  "EW_RAW__0A_products_completeness_status": true,
+                  "EW_RAW__0A_products_sensing_duration": true,
+                  "EW_RAW__0A_products_sensing_duration_adjusted": true,
+                  "EW_RAW__0A_total_expected_sensing": true,
+                  "EW_RAW__0C_local_expected": true,
+                  "EW_RAW__0C_local_percentage": true,
+                  "EW_RAW__0C_local_status": true,
+                  "EW_RAW__0C_local_value": true,
+                  "EW_RAW__0C_local_value_adjusted": true,
+                  "EW_RAW__0C_products_completeness_percentage": true,
+                  "EW_RAW__0C_products_completeness_status": true,
+                  "EW_RAW__0C_products_sensing_duration": true,
+                  "EW_RAW__0C_products_sensing_duration_adjusted": true,
+                  "EW_RAW__0C_total_expected_sensing": true,
+                  "EW_RAW__0N_local_expected": true,
+                  "EW_RAW__0N_local_percentage": true,
+                  "EW_RAW__0N_local_status": true,
+                  "EW_RAW__0N_local_value": true,
+                  "EW_RAW__0N_local_value_adjusted": true,
+                  "EW_RAW__0N_products_completeness_percentage": true,
+                  "EW_RAW__0N_products_completeness_status": true,
+                  "EW_RAW__0N_products_sensing_duration": true,
+                  "EW_RAW__0N_products_sensing_duration_adjusted": true,
+                  "EW_RAW__0N_total_expected_sensing": true,
+                  "EW_RAW__0S_local_expected": true,
+                  "EW_RAW__0S_local_percentage": true,
+                  "EW_RAW__0S_local_status": true,
+                  "EW_RAW__0S_local_value": true,
+                  "EW_RAW__0S_local_value_adjusted": true,
+                  "EW_RAW__0S_products_completeness_percentage": true,
+                  "EW_RAW__0S_products_completeness_status": true,
+                  "EW_RAW__0S_products_sensing_duration": true,
+                  "EW_RAW__0S_products_sensing_duration_adjusted": true,
+                  "EW_RAW__0S_total_expected_sensing": true,
+                  "EW_SLC__1A_local_expected": true,
+                  "EW_SLC__1A_local_percentage": true,
+                  "EW_SLC__1A_local_status": true,
+                  "EW_SLC__1A_local_value": true,
+                  "EW_SLC__1A_local_value_adjusted": true,
+                  "EW_SLC__1A_products_completeness_percentage": true,
+                  "EW_SLC__1A_products_completeness_status": true,
+                  "EW_SLC__1A_products_sensing_duration": true,
+                  "EW_SLC__1A_products_sensing_duration_adjusted": true,
+                  "EW_SLC__1A_total_expected_sensing": true,
+                  "EW_SLC__1S_local_expected": true,
+                  "EW_SLC__1S_local_percentage": true,
+                  "EW_SLC__1S_local_status": true,
+                  "EW_SLC__1S_local_value": true,
+                  "EW_SLC__1S_local_value_adjusted": true,
+                  "EW_SLC__1S_products_completeness_percentage": true,
+                  "EW_SLC__1S_products_completeness_status": true,
+                  "EW_SLC__1S_products_sensing_duration": true,
+                  "EW_SLC__1S_products_sensing_duration_adjusted": true,
+                  "EW_SLC__1S_total_expected_sensing": true,
+                  "GR_global_expected": true,
+                  "GR_global_percentage": true,
+                  "GR_global_status": true,
+                  "GR_global_value": true,
+                  "GR_global_value_adjusted": true,
+                  "IW_GRDH_1A_local_expected": true,
+                  "IW_GRDH_1A_local_percentage": true,
+                  "IW_GRDH_1A_local_status": true,
+                  "IW_GRDH_1A_local_value": true,
+                  "IW_GRDH_1A_local_value_adjusted": true,
+                  "IW_GRDH_1A_products_completeness_percentage": true,
+                  "IW_GRDH_1A_products_completeness_status": true,
+                  "IW_GRDH_1A_products_sensing_duration": true,
+                  "IW_GRDH_1A_products_sensing_duration_adjusted": true,
+                  "IW_GRDH_1A_total_expected_sensing": true,
+                  "IW_GRDH_1S_local_expected": true,
+                  "IW_GRDH_1S_local_percentage": true,
+                  "IW_GRDH_1S_local_status": true,
+                  "IW_GRDH_1S_local_value": true,
+                  "IW_GRDH_1S_local_value_adjusted": true,
+                  "IW_GRDH_1S_products_completeness_percentage": true,
+                  "IW_GRDH_1S_products_completeness_status": true,
+                  "IW_GRDH_1S_products_sensing_duration": true,
+                  "IW_GRDH_1S_products_sensing_duration_adjusted": true,
+                  "IW_GRDH_1S_total_expected_sensing": true,
+                  "IW_OCN__2A_local_expected": true,
+                  "IW_OCN__2A_local_percentage": true,
+                  "IW_OCN__2A_local_status": true,
+                  "IW_OCN__2A_local_value": true,
+                  "IW_OCN__2A_local_value_adjusted": true,
+                  "IW_OCN__2A_products_completeness_percentage": true,
+                  "IW_OCN__2A_products_completeness_status": true,
+                  "IW_OCN__2A_products_sensing_duration": true,
+                  "IW_OCN__2A_products_sensing_duration_adjusted": true,
+                  "IW_OCN__2A_total_expected_sensing": true,
+                  "IW_OCN__2S_local_expected": true,
+                  "IW_OCN__2S_local_percentage": true,
+                  "IW_OCN__2S_local_status": true,
+                  "IW_OCN__2S_local_value": true,
+                  "IW_OCN__2S_local_value_adjusted": true,
+                  "IW_OCN__2S_products_completeness_percentage": true,
+                  "IW_OCN__2S_products_completeness_status": true,
+                  "IW_OCN__2S_products_sensing_duration": true,
+                  "IW_OCN__2S_products_sensing_duration_adjusted": true,
+                  "IW_OCN__2S_total_expected_sensing": true,
+                  "IW_RAW__0A_local_expected": true,
+                  "IW_RAW__0A_local_percentage": true,
+                  "IW_RAW__0A_local_status": true,
+                  "IW_RAW__0A_local_value": true,
+                  "IW_RAW__0A_local_value_adjusted": true,
+                  "IW_RAW__0A_products_completeness_percentage": true,
+                  "IW_RAW__0A_products_completeness_status": true,
+                  "IW_RAW__0A_products_sensing_duration": true,
+                  "IW_RAW__0A_products_sensing_duration_adjusted": true,
+                  "IW_RAW__0A_total_expected_sensing": true,
+                  "IW_RAW__0C_local_expected": true,
+                  "IW_RAW__0C_local_percentage": true,
+                  "IW_RAW__0C_local_status": true,
+                  "IW_RAW__0C_local_value": true,
+                  "IW_RAW__0C_local_value_adjusted": true,
+                  "IW_RAW__0C_products_completeness_percentage": true,
+                  "IW_RAW__0C_products_completeness_status": true,
+                  "IW_RAW__0C_products_sensing_duration": true,
+                  "IW_RAW__0C_products_sensing_duration_adjusted": true,
+                  "IW_RAW__0C_total_expected_sensing": true,
+                  "IW_RAW__0N_local_expected": true,
+                  "IW_RAW__0N_local_percentage": true,
+                  "IW_RAW__0N_local_status": true,
+                  "IW_RAW__0N_local_value": true,
+                  "IW_RAW__0N_local_value_adjusted": true,
+                  "IW_RAW__0N_products_completeness_percentage": true,
+                  "IW_RAW__0N_products_completeness_status": true,
+                  "IW_RAW__0N_products_sensing_duration": true,
+                  "IW_RAW__0N_products_sensing_duration_adjusted": true,
+                  "IW_RAW__0N_total_expected_sensing": true,
+                  "IW_RAW__0S_local_expected": true,
+                  "IW_RAW__0S_local_percentage": true,
+                  "IW_RAW__0S_local_status": true,
+                  "IW_RAW__0S_local_value": true,
+                  "IW_RAW__0S_local_value_adjusted": true,
+                  "IW_RAW__0S_products_completeness_percentage": true,
+                  "IW_RAW__0S_products_completeness_status": true,
+                  "IW_RAW__0S_products_sensing_duration": true,
+                  "IW_RAW__0S_products_sensing_duration_adjusted": true,
+                  "IW_RAW__0S_total_expected_sensing": true,
+                  "IW_SLC__1A_local_expected": true,
+                  "IW_SLC__1A_local_percentage": true,
+                  "IW_SLC__1A_local_status": true,
+                  "IW_SLC__1A_local_value": true,
+                  "IW_SLC__1A_local_value_adjusted": true,
+                  "IW_SLC__1A_products_completeness_percentage": true,
+                  "IW_SLC__1A_products_completeness_status": true,
+                  "IW_SLC__1A_products_sensing_duration": true,
+                  "IW_SLC__1A_products_sensing_duration_adjusted": true,
+                  "IW_SLC__1A_total_expected_sensing": true,
+                  "IW_SLC__1S_local_expected": true,
+                  "IW_SLC__1S_local_percentage": true,
+                  "IW_SLC__1S_local_status": true,
+                  "IW_SLC__1S_local_value": true,
+                  "IW_SLC__1S_local_value_adjusted": true,
+                  "IW_SLC__1S_products_completeness_percentage": true,
+                  "IW_SLC__1S_products_completeness_status": true,
+                  "IW_SLC__1S_products_sensing_duration": true,
+                  "IW_SLC__1S_products_sensing_duration_adjusted": true,
+                  "IW_SLC__1S_total_expected_sensing": true,
+                  "L0__local_expected": true,
+                  "L0__local_percentage": true,
+                  "L0__local_status": true,
+                  "L0__local_value": true,
+                  "L0__local_value * 100": true,
+                  "L0__local_value * 100 / L0__local_expected": false,
+                  "L1A_local_expected": true,
+                  "L1A_local_percentage": true,
+                  "L1A_local_status": true,
+                  "L1A_local_value": true,
+                  "L1A_local_value * 100": true,
+                  "L1B_local_expected": true,
+                  "L1B_local_percentage": true,
+                  "L1B_local_status": true,
+                  "L1B_local_value": true,
+                  "L1B_local_value * 100": true,
+                  "L1C_local_expected": true,
+                  "L1C_local_percentage": true,
+                  "L1C_local_status": true,
+                  "L1C_local_value": true,
+                  "L1C_local_value * 100": true,
+                  "L1_expected": true,
+                  "L1_sensing": true,
+                  "L1_sensing 2": true,
+                  "L1_sensing100": true,
+                  "L2A_local_expected": true,
+                  "L2A_local_percentage": true,
+                  "L2A_local_status": true,
+                  "L2A_local_value": true,
+                  "L2_expected": true,
+                  "L2_sensing": true,
+                  "L2_sensing100": true,
+                  "MSI_L0__DS_local_expected": true,
+                  "MSI_L0__DS_local_percentage": true,
+                  "MSI_L0__DS_local_status": true,
+                  "MSI_L0__DS_local_value": true,
+                  "MSI_L0__DS_local_value_adjusted": true,
+                  "MSI_L0__GR_local_expected": true,
+                  "MSI_L0__GR_local_percentage": true,
+                  "MSI_L0__GR_local_status": true,
+                  "MSI_L0__GR_local_value": true,
+                  "MSI_L0__GR_local_value_adjusted": true,
+                  "MSI_L1A_DS_local_expected": true,
+                  "MSI_L1A_DS_local_percentage": true,
+                  "MSI_L1A_DS_local_status": true,
+                  "MSI_L1A_DS_local_value": true,
+                  "MSI_L1A_DS_local_value_adjusted": true,
+                  "MSI_L1A_GR_local_expected": true,
+                  "MSI_L1A_GR_local_percentage": true,
+                  "MSI_L1A_GR_local_status": true,
+                  "MSI_L1A_GR_local_value": true,
+                  "MSI_L1A_GR_local_value_adjusted": true,
+                  "MSI_L1B_DS_local_expected": true,
+                  "MSI_L1B_DS_local_percentage": true,
+                  "MSI_L1B_DS_local_status": true,
+                  "MSI_L1B_DS_local_value": true,
+                  "MSI_L1B_DS_local_value_adjusted": true,
+                  "MSI_L1B_GR_local_expected": true,
+                  "MSI_L1B_GR_local_percentage": true,
+                  "MSI_L1B_GR_local_status": true,
+                  "MSI_L1B_GR_local_value": true,
+                  "MSI_L1B_GR_local_value_adjusted": true,
+                  "MSI_L1C_DS_local_expected": true,
+                  "MSI_L1C_DS_local_percentage": true,
+                  "MSI_L1C_DS_local_status": true,
+                  "MSI_L1C_DS_local_value": true,
+                  "MSI_L1C_DS_local_value_adjusted": true,
+                  "MSI_L1C_TC_local_expected": true,
+                  "MSI_L1C_TC_local_percentage": true,
+                  "MSI_L1C_TC_local_status": true,
+                  "MSI_L1C_TC_local_value": true,
+                  "MSI_L1C_TC_local_value_adjusted": true,
+                  "MSI_L1C_TL_local_expected": true,
+                  "MSI_L1C_TL_local_percentage": true,
+                  "MSI_L1C_TL_local_status": true,
+                  "MSI_L1C_TL_local_value": true,
+                  "MSI_L1C_TL_local_value_adjusted": true,
+                  "MSI_L2A_DS_local_expected": true,
+                  "MSI_L2A_DS_local_percentage": true,
+                  "MSI_L2A_DS_local_status": true,
+                  "MSI_L2A_DS_local_value": true,
+                  "MSI_L2A_DS_local_value_adjusted": true,
+                  "MSI_L2A_TC_local_expected": true,
+                  "MSI_L2A_TC_local_percentage": true,
+                  "MSI_L2A_TC_local_status": true,
+                  "MSI_L2A_TC_local_value": true,
+                  "MSI_L2A_TC_local_value_adjusted": true,
+                  "MSI_L2A_TL_local_expected": true,
+                  "MSI_L2A_TL_local_percentage": true,
+                  "MSI_L2A_TL_local_status": true,
+                  "MSI_L2A_TL_local_value": true,
+                  "MSI_L2A_TL_local_value_adjusted": true,
+                  "RF_RAW__0S_local_expected": true,
+                  "RF_RAW__0S_local_percentage": true,
+                  "RF_RAW__0S_local_status": true,
+                  "RF_RAW__0S_local_value": true,
+                  "RF_RAW__0S_local_value_adjusted": true,
+                  "S1_GRDH_1A_local_expected": true,
+                  "S1_GRDH_1A_local_percentage": true,
+                  "S1_GRDH_1A_local_status": true,
+                  "S1_GRDH_1A_local_value": true,
+                  "S1_GRDH_1A_local_value_adjusted": true,
+                  "S1_GRDH_1S_local_expected": true,
+                  "S1_GRDH_1S_local_percentage": true,
+                  "S1_GRDH_1S_local_status": true,
+                  "S1_GRDH_1S_local_value": true,
+                  "S1_GRDH_1S_local_value_adjusted": true,
+                  "S1_OCN__2A_local_expected": true,
+                  "S1_OCN__2A_local_percentage": true,
+                  "S1_OCN__2A_local_status": true,
+                  "S1_OCN__2A_local_value": true,
+                  "S1_OCN__2A_local_value_adjusted": true,
+                  "S1_OCN__2S_local_expected": true,
+                  "S1_OCN__2S_local_percentage": true,
+                  "S1_OCN__2S_local_status": true,
+                  "S1_OCN__2S_local_value": true,
+                  "S1_OCN__2S_local_value_adjusted": true,
+                  "S1_RAW__0A_local_expected": true,
+                  "S1_RAW__0A_local_percentage": true,
+                  "S1_RAW__0A_local_status": true,
+                  "S1_RAW__0A_local_value": true,
+                  "S1_RAW__0A_local_value_adjusted": true,
+                  "S1_RAW__0C_local_expected": true,
+                  "S1_RAW__0C_local_percentage": true,
+                  "S1_RAW__0C_local_status": true,
+                  "S1_RAW__0C_local_value": true,
+                  "S1_RAW__0C_local_value_adjusted": true,
+                  "S1_RAW__0N_local_expected": true,
+                  "S1_RAW__0N_local_percentage": true,
+                  "S1_RAW__0N_local_status": true,
+                  "S1_RAW__0N_local_value": true,
+                  "S1_RAW__0N_local_value_adjusted": true,
+                  "S1_RAW__0S_local_expected": true,
+                  "S1_RAW__0S_local_percentage": true,
+                  "S1_RAW__0S_local_status": true,
+                  "S1_RAW__0S_local_value": true,
+                  "S1_RAW__0S_local_value_adjusted": true,
+                  "S1_SLC__1A_local_expected": true,
+                  "S1_SLC__1A_local_percentage": true,
+                  "S1_SLC__1A_local_status": true,
+                  "S1_SLC__1A_local_value": true,
+                  "S1_SLC__1A_local_value_adjusted": true,
+                  "S1_SLC__1S_local_expected": true,
+                  "S1_SLC__1S_local_percentage": true,
+                  "S1_SLC__1S_local_status": true,
+                  "S1_SLC__1S_local_value": true,
+                  "S1_SLC__1S_local_value_adjusted": true,
+                  "S2_GRDH_1A_local_expected": true,
+                  "S2_GRDH_1A_local_percentage": true,
+                  "S2_GRDH_1A_local_status": true,
+                  "S2_GRDH_1A_local_value": true,
+                  "S2_GRDH_1A_local_value_adjusted": true,
+                  "S2_GRDH_1S_local_expected": true,
+                  "S2_GRDH_1S_local_percentage": true,
+                  "S2_GRDH_1S_local_status": true,
+                  "S2_GRDH_1S_local_value": true,
+                  "S2_GRDH_1S_local_value_adjusted": true,
+                  "S2_OCN__2A_local_expected": true,
+                  "S2_OCN__2A_local_percentage": true,
+                  "S2_OCN__2A_local_status": true,
+                  "S2_OCN__2A_local_value": true,
+                  "S2_OCN__2A_local_value_adjusted": true,
+                  "S2_OCN__2S_local_expected": true,
+                  "S2_OCN__2S_local_percentage": true,
+                  "S2_OCN__2S_local_status": true,
+                  "S2_OCN__2S_local_value": true,
+                  "S2_OCN__2S_local_value_adjusted": true,
+                  "S2_RAW__0A_local_expected": true,
+                  "S2_RAW__0A_local_percentage": true,
+                  "S2_RAW__0A_local_status": true,
+                  "S2_RAW__0A_local_value": true,
+                  "S2_RAW__0A_local_value_adjusted": true,
+                  "S2_RAW__0C_local_expected": true,
+                  "S2_RAW__0C_local_percentage": true,
+                  "S2_RAW__0C_local_status": true,
+                  "S2_RAW__0C_local_value": true,
+                  "S2_RAW__0C_local_value_adjusted": true,
+                  "S2_RAW__0N_local_expected": true,
+                  "S2_RAW__0N_local_percentage": true,
+                  "S2_RAW__0N_local_status": true,
+                  "S2_RAW__0N_local_value": true,
+                  "S2_RAW__0N_local_value_adjusted": true,
+                  "S2_RAW__0S_local_expected": true,
+                  "S2_RAW__0S_local_percentage": true,
+                  "S2_RAW__0S_local_status": true,
+                  "S2_RAW__0S_local_value": true,
+                  "S2_RAW__0S_local_value_adjusted": true,
+                  "S2_SLC__1A_local_expected": true,
+                  "S2_SLC__1A_local_percentage": true,
+                  "S2_SLC__1A_local_status": true,
+                  "S2_SLC__1A_local_value": true,
+                  "S2_SLC__1A_local_value_adjusted": true,
+                  "S2_SLC__1S_local_expected": true,
+                  "S2_SLC__1S_local_percentage": true,
+                  "S2_SLC__1S_local_status": true,
+                  "S2_SLC__1S_local_value": true,
+                  "S2_SLC__1S_local_value_adjusted": true,
+                  "S3_GRDH_1A_local_expected": true,
+                  "S3_GRDH_1A_local_percentage": true,
+                  "S3_GRDH_1A_local_status": true,
+                  "S3_GRDH_1A_local_value": true,
+                  "S3_GRDH_1A_local_value_adjusted": true,
+                  "S3_GRDH_1S_local_expected": true,
+                  "S3_GRDH_1S_local_percentage": true,
+                  "S3_GRDH_1S_local_status": true,
+                  "S3_GRDH_1S_local_value": true,
+                  "S3_GRDH_1S_local_value_adjusted": true,
+                  "S3_OCN__2A_local_expected": true,
+                  "S3_OCN__2A_local_percentage": true,
+                  "S3_OCN__2A_local_status": true,
+                  "S3_OCN__2A_local_value": true,
+                  "S3_OCN__2A_local_value_adjusted": true,
+                  "S3_OCN__2S_local_expected": true,
+                  "S3_OCN__2S_local_percentage": true,
+                  "S3_OCN__2S_local_status": true,
+                  "S3_OCN__2S_local_value": true,
+                  "S3_OCN__2S_local_value_adjusted": true,
+                  "S3_RAW__0A_local_expected": true,
+                  "S3_RAW__0A_local_percentage": true,
+                  "S3_RAW__0A_local_status": true,
+                  "S3_RAW__0A_local_value": true,
+                  "S3_RAW__0A_local_value_adjusted": true,
+                  "S3_RAW__0C_local_expected": true,
+                  "S3_RAW__0C_local_percentage": true,
+                  "S3_RAW__0C_local_status": true,
+                  "S3_RAW__0C_local_value": true,
+                  "S3_RAW__0C_local_value_adjusted": true,
+                  "S3_RAW__0N_local_expected": true,
+                  "S3_RAW__0N_local_percentage": true,
+                  "S3_RAW__0N_local_status": true,
+                  "S3_RAW__0N_local_value": true,
+                  "S3_RAW__0N_local_value_adjusted": true,
+                  "S3_RAW__0S_local_expected": true,
+                  "S3_RAW__0S_local_percentage": true,
+                  "S3_RAW__0S_local_status": true,
+                  "S3_RAW__0S_local_value": true,
+                  "S3_RAW__0S_local_value_adjusted": true,
+                  "S3_SLC__1A_local_expected": true,
+                  "S3_SLC__1A_local_percentage": true,
+                  "S3_SLC__1A_local_status": true,
+                  "S3_SLC__1A_local_value": true,
+                  "S3_SLC__1A_local_value_adjusted": true,
+                  "S3_SLC__1S_local_expected": true,
+                  "S3_SLC__1S_local_percentage": true,
+                  "S3_SLC__1S_local_status": true,
+                  "S3_SLC__1S_local_value": true,
+                  "S3_SLC__1S_local_value_adjusted": true,
+                  "S4_GRDH_1A_local_expected": true,
+                  "S4_GRDH_1A_local_percentage": true,
+                  "S4_GRDH_1A_local_status": true,
+                  "S4_GRDH_1A_local_value": true,
+                  "S4_GRDH_1A_local_value_adjusted": true,
+                  "S4_GRDH_1S_local_expected": true,
+                  "S4_GRDH_1S_local_percentage": true,
+                  "S4_GRDH_1S_local_status": true,
+                  "S4_GRDH_1S_local_value": true,
+                  "S4_GRDH_1S_local_value_adjusted": true,
+                  "S4_OCN__2A_local_expected": true,
+                  "S4_OCN__2A_local_percentage": true,
+                  "S4_OCN__2A_local_status": true,
+                  "S4_OCN__2A_local_value": true,
+                  "S4_OCN__2A_local_value_adjusted": true,
+                  "S4_OCN__2S_local_expected": true,
+                  "S4_OCN__2S_local_percentage": true,
+                  "S4_OCN__2S_local_status": true,
+                  "S4_OCN__2S_local_value": true,
+                  "S4_OCN__2S_local_value_adjusted": true,
+                  "S4_RAW__0A_local_expected": true,
+                  "S4_RAW__0A_local_percentage": true,
+                  "S4_RAW__0A_local_status": true,
+                  "S4_RAW__0A_local_value": true,
+                  "S4_RAW__0A_local_value_adjusted": true,
+                  "S4_RAW__0C_local_expected": true,
+                  "S4_RAW__0C_local_percentage": true,
+                  "S4_RAW__0C_local_status": true,
+                  "S4_RAW__0C_local_value": true,
+                  "S4_RAW__0C_local_value_adjusted": true,
+                  "S4_RAW__0N_local_expected": true,
+                  "S4_RAW__0N_local_percentage": true,
+                  "S4_RAW__0N_local_status": true,
+                  "S4_RAW__0N_local_value": true,
+                  "S4_RAW__0N_local_value_adjusted": true,
+                  "S4_RAW__0S_local_expected": true,
+                  "S4_RAW__0S_local_percentage": true,
+                  "S4_RAW__0S_local_status": true,
+                  "S4_RAW__0S_local_value": true,
+                  "S4_RAW__0S_local_value_adjusted": true,
+                  "S4_SLC__1A_local_expected": true,
+                  "S4_SLC__1A_local_percentage": true,
+                  "S4_SLC__1A_local_status": true,
+                  "S4_SLC__1A_local_value": true,
+                  "S4_SLC__1A_local_value_adjusted": true,
+                  "S4_SLC__1S_local_expected": true,
+                  "S4_SLC__1S_local_percentage": true,
+                  "S4_SLC__1S_local_status": true,
+                  "S4_SLC__1S_local_value": true,
+                  "S4_SLC__1S_local_value_adjusted": true,
+                  "S5_GRDH_1A_local_expected": true,
+                  "S5_GRDH_1A_local_percentage": true,
+                  "S5_GRDH_1A_local_status": true,
+                  "S5_GRDH_1A_local_value": true,
+                  "S5_GRDH_1A_local_value_adjusted": true,
+                  "S5_GRDH_1S_local_expected": true,
+                  "S5_GRDH_1S_local_percentage": true,
+                  "S5_GRDH_1S_local_status": true,
+                  "S5_GRDH_1S_local_value": true,
+                  "S5_GRDH_1S_local_value_adjusted": true,
+                  "S5_OCN__2A_local_expected": true,
+                  "S5_OCN__2A_local_percentage": true,
+                  "S5_OCN__2A_local_status": true,
+                  "S5_OCN__2A_local_value": true,
+                  "S5_OCN__2A_local_value_adjusted": true,
+                  "S5_OCN__2S_local_expected": true,
+                  "S5_OCN__2S_local_percentage": true,
+                  "S5_OCN__2S_local_status": true,
+                  "S5_OCN__2S_local_value": true,
+                  "S5_OCN__2S_local_value_adjusted": true,
+                  "S5_RAW__0A_local_expected": true,
+                  "S5_RAW__0A_local_percentage": true,
+                  "S5_RAW__0A_local_status": true,
+                  "S5_RAW__0A_local_value": true,
+                  "S5_RAW__0A_local_value_adjusted": true,
+                  "S5_RAW__0C_local_expected": true,
+                  "S5_RAW__0C_local_percentage": true,
+                  "S5_RAW__0C_local_status": true,
+                  "S5_RAW__0C_local_value": true,
+                  "S5_RAW__0C_local_value_adjusted": true,
+                  "S5_RAW__0N_local_expected": true,
+                  "S5_RAW__0N_local_percentage": true,
+                  "S5_RAW__0N_local_status": true,
+                  "S5_RAW__0N_local_value": true,
+                  "S5_RAW__0N_local_value_adjusted": true,
+                  "S5_RAW__0S_local_expected": true,
+                  "S5_RAW__0S_local_percentage": true,
+                  "S5_RAW__0S_local_status": true,
+                  "S5_RAW__0S_local_value": true,
+                  "S5_RAW__0S_local_value_adjusted": true,
+                  "S5_SLC__1A_local_expected": true,
+                  "S5_SLC__1A_local_percentage": true,
+                  "S5_SLC__1A_local_status": true,
+                  "S5_SLC__1A_local_value": true,
+                  "S5_SLC__1A_local_value_adjusted": true,
+                  "S5_SLC__1S_local_expected": true,
+                  "S5_SLC__1S_local_percentage": true,
+                  "S5_SLC__1S_local_status": true,
+                  "S5_SLC__1S_local_value": true,
+                  "S5_SLC__1S_local_value_adjusted": true,
+                  "S6_GRDH_1A_local_expected": true,
+                  "S6_GRDH_1A_local_percentage": true,
+                  "S6_GRDH_1A_local_status": true,
+                  "S6_GRDH_1A_local_value": true,
+                  "S6_GRDH_1A_local_value_adjusted": true,
+                  "S6_GRDH_1S_local_expected": true,
+                  "S6_GRDH_1S_local_percentage": true,
+                  "S6_GRDH_1S_local_status": true,
+                  "S6_GRDH_1S_local_value": true,
+                  "S6_GRDH_1S_local_value_adjusted": true,
+                  "S6_OCN__2A_local_expected": true,
+                  "S6_OCN__2A_local_percentage": true,
+                  "S6_OCN__2A_local_status": true,
+                  "S6_OCN__2A_local_value": true,
+                  "S6_OCN__2A_local_value_adjusted": true,
+                  "S6_OCN__2S_local_expected": true,
+                  "S6_OCN__2S_local_percentage": true,
+                  "S6_OCN__2S_local_status": true,
+                  "S6_OCN__2S_local_value": true,
+                  "S6_OCN__2S_local_value_adjusted": true,
+                  "S6_RAW__0A_local_expected": true,
+                  "S6_RAW__0A_local_percentage": true,
+                  "S6_RAW__0A_local_status": true,
+                  "S6_RAW__0A_local_value": true,
+                  "S6_RAW__0A_local_value_adjusted": true,
+                  "S6_RAW__0C_local_expected": true,
+                  "S6_RAW__0C_local_percentage": true,
+                  "S6_RAW__0C_local_status": true,
+                  "S6_RAW__0C_local_value": true,
+                  "S6_RAW__0C_local_value_adjusted": true,
+                  "S6_RAW__0N_local_expected": true,
+                  "S6_RAW__0N_local_percentage": true,
+                  "S6_RAW__0N_local_status": true,
+                  "S6_RAW__0N_local_value": true,
+                  "S6_RAW__0N_local_value_adjusted": true,
+                  "S6_RAW__0S_local_expected": true,
+                  "S6_RAW__0S_local_percentage": true,
+                  "S6_RAW__0S_local_status": true,
+                  "S6_RAW__0S_local_value": true,
+                  "S6_RAW__0S_local_value_adjusted": true,
+                  "S6_SLC__1A_local_expected": true,
+                  "S6_SLC__1A_local_percentage": true,
+                  "S6_SLC__1A_local_status": true,
+                  "S6_SLC__1A_local_value": true,
+                  "S6_SLC__1A_local_value_adjusted": true,
+                  "S6_SLC__1S_local_expected": true,
+                  "S6_SLC__1S_local_percentage": true,
+                  "S6_SLC__1S_local_status": true,
+                  "S6_SLC__1S_local_value": true,
+                  "S6_SLC__1S_local_value_adjusted": true,
+                  "SM_GRDH_1A_local_expected": true,
+                  "SM_GRDH_1A_local_percentage": true,
+                  "SM_GRDH_1A_local_status": true,
+                  "SM_GRDH_1A_local_value": true,
+                  "SM_GRDH_1A_local_value_adjusted": true,
+                  "SM_GRDH_1S_local_expected": true,
+                  "SM_GRDH_1S_local_percentage": true,
+                  "SM_GRDH_1S_local_status": true,
+                  "SM_GRDH_1S_local_value": true,
+                  "SM_GRDH_1S_local_value_adjusted": true,
+                  "SM_OCN__2A_local_expected": true,
+                  "SM_OCN__2A_local_percentage": true,
+                  "SM_OCN__2A_local_status": true,
+                  "SM_OCN__2A_local_value": true,
+                  "SM_OCN__2A_local_value_adjusted": true,
+                  "SM_OCN__2S_local_expected": true,
+                  "SM_OCN__2S_local_percentage": true,
+                  "SM_OCN__2S_local_status": true,
+                  "SM_OCN__2S_local_value": true,
+                  "SM_OCN__2S_local_value_adjusted": true,
+                  "SM_RAW__0A_local_expected": true,
+                  "SM_RAW__0A_local_percentage": true,
+                  "SM_RAW__0A_local_status": true,
+                  "SM_RAW__0A_local_value": true,
+                  "SM_RAW__0A_local_value_adjusted": true,
+                  "SM_RAW__0C_local_expected": true,
+                  "SM_RAW__0C_local_percentage": true,
+                  "SM_RAW__0C_local_status": true,
+                  "SM_RAW__0C_local_value": true,
+                  "SM_RAW__0C_local_value_adjusted": true,
+                  "SM_RAW__0N_local_expected": true,
+                  "SM_RAW__0N_local_percentage": true,
+                  "SM_RAW__0N_local_status": true,
+                  "SM_RAW__0N_local_value": true,
+                  "SM_RAW__0N_local_value_adjusted": true,
+                  "SM_RAW__0S_local_expected": true,
+                  "SM_RAW__0S_local_percentage": true,
+                  "SM_RAW__0S_local_status": true,
+                  "SM_RAW__0S_local_value": true,
+                  "SM_RAW__0S_local_value_adjusted": true,
+                  "SM_SLC__1A_local_expected": true,
+                  "SM_SLC__1A_local_percentage": true,
+                  "SM_SLC__1A_local_status": true,
+                  "SM_SLC__1A_local_value": true,
+                  "SM_SLC__1A_local_value_adjusted": true,
+                  "SM_SLC__1S_local_expected": true,
+                  "SM_SLC__1S_local_percentage": true,
+                  "SM_SLC__1S_local_status": true,
+                  "SM_SLC__1S_local_value": true,
+                  "SM_SLC__1S_local_value_adjusted": true,
+                  "TC_global_expected": true,
+                  "TC_global_percentage": true,
+                  "TC_global_status": true,
+                  "TC_global_value": true,
+                  "TC_global_value_adjusted": true,
+                  "TL_global_expected": true,
+                  "TL_global_percentage": true,
+                  "TL_global_status": true,
+                  "TL_global_value": true,
+                  "TL_global_value_adjusted": true,
+                  "WV_OCN__2A_local_expected": true,
+                  "WV_OCN__2A_local_percentage": true,
+                  "WV_OCN__2A_local_status": true,
+                  "WV_OCN__2A_local_value": true,
+                  "WV_OCN__2A_local_value_adjusted": true,
+                  "WV_OCN__2S_local_expected": true,
+                  "WV_OCN__2S_local_percentage": true,
+                  "WV_OCN__2S_local_status": true,
+                  "WV_OCN__2S_local_value": true,
+                  "WV_OCN__2S_local_value_adjusted": true,
+                  "WV_RAW__0A_local_expected": true,
+                  "WV_RAW__0A_local_percentage": true,
+                  "WV_RAW__0A_local_status": true,
+                  "WV_RAW__0A_local_value": true,
+                  "WV_RAW__0A_local_value_adjusted": true,
+                  "WV_RAW__0C_local_expected": true,
+                  "WV_RAW__0C_local_percentage": true,
+                  "WV_RAW__0C_local_status": true,
+                  "WV_RAW__0C_local_value": true,
+                  "WV_RAW__0C_local_value_adjusted": true,
+                  "WV_RAW__0N_local_expected": true,
+                  "WV_RAW__0N_local_percentage": true,
+                  "WV_RAW__0N_local_status": true,
+                  "WV_RAW__0N_local_value": true,
+                  "WV_RAW__0N_local_value_adjusted": true,
+                  "WV_RAW__0S_local_expected": true,
+                  "WV_RAW__0S_local_percentage": true,
+                  "WV_RAW__0S_local_status": true,
+                  "WV_RAW__0S_local_value": true,
+                  "WV_RAW__0S_local_value_adjusted": true,
+                  "WV_SLC__1A_local_expected": true,
+                  "WV_SLC__1A_local_percentage": true,
+                  "WV_SLC__1A_local_status": true,
+                  "WV_SLC__1A_local_value": true,
+                  "WV_SLC__1A_local_value_adjusted": true,
+                  "WV_SLC__1S_local_expected": true,
+                  "WV_SLC__1S_local_percentage": true,
+                  "WV_SLC__1S_local_status": true,
+                  "WV_SLC__1S_local_value": true,
+                  "WV_SLC__1S_local_value_adjusted": true,
+                  "_id": true,
+                  "_index": true,
+                  "_type": true,
+                  "application_date": true,
+                  "final_completeness_expected": true,
+                  "final_completeness_status": true,
+                  "final_completeness_value": true,
+                  "highlight": true,
+                  "instrument_swath": true,
+                  "key": true,
+                  "l0_sensing_duration": true,
+                  "l0_sensing_time_start": true,
+                  "l0_sensing_time_stop": true,
+                  "mission": true,
+                  "name": true,
+                  "number_of_scenes": true,
+                  "observation_duration": true,
+                  "polarization": true,
+                  "relative_orbit": true,
+                  "satellite_unit": true,
+                  "sensing_global_expected": true,
+                  "sensing_global_status": true,
+                  "sensing_global_value": true,
+                  "sensing_global_value_adjusted": true,
+                  "sort": true,
+                  "timeliness": true,
+                  "updateTime": true
+                },
+                "indexByName": {
+                  "DS_global_expected": 21,
+                  "DS_global_percentage": 22,
+                  "DS_global_status": 23,
+                  "DS_global_value": 24,
+                  "DS_global_value_adjusted": 25,
+                  "GR_global_expected": 26,
+                  "GR_global_percentage": 27,
+                  "GR_global_status": 28,
+                  "GR_global_value": 29,
+                  "GR_global_value_adjusted": 30,
+                  "L0__local_expected": 31,
+                  "L0__local_percentage": 32,
+                  "L0__local_status": 33,
+                  "L0__local_value": 34,
+                  "L1A_local_expected": 35,
+                  "L1A_local_percentage": 36,
+                  "L1A_local_status": 37,
+                  "L1A_local_value": 38,
+                  "L1B_local_expected": 39,
+                  "L1B_local_percentage": 40,
+                  "L1B_local_status": 41,
+                  "L1B_local_value": 42,
+                  "L1C_local_expected": 43,
+                  "L1C_local_percentage": 44,
+                  "L1C_local_status": 45,
+                  "L1C_local_value": 46,
+                  "L2A_local_expected": 47,
+                  "L2A_local_percentage": 48,
+                  "L2A_local_status": 49,
+                  "L2A_local_value": 50,
+                  "MSI_L0__DS_local_expected": 51,
+                  "MSI_L0__DS_local_percentage": 52,
+                  "MSI_L0__DS_local_status": 53,
+                  "MSI_L0__DS_local_value": 54,
+                  "MSI_L0__DS_local_value_adjusted": 55,
+                  "MSI_L0__GR_local_expected": 56,
+                  "MSI_L0__GR_local_percentage": 57,
+                  "MSI_L0__GR_local_status": 58,
+                  "MSI_L0__GR_local_value": 59,
+                  "MSI_L0__GR_local_value_adjusted": 60,
+                  "MSI_L1A_DS_local_expected": 61,
+                  "MSI_L1A_DS_local_percentage": 62,
+                  "MSI_L1A_DS_local_status": 63,
+                  "MSI_L1A_DS_local_value": 64,
+                  "MSI_L1A_DS_local_value_adjusted": 65,
+                  "MSI_L1A_GR_local_expected": 66,
+                  "MSI_L1A_GR_local_percentage": 67,
+                  "MSI_L1A_GR_local_status": 68,
+                  "MSI_L1A_GR_local_value": 69,
+                  "MSI_L1A_GR_local_value_adjusted": 70,
+                  "MSI_L1B_DS_local_expected": 71,
+                  "MSI_L1B_DS_local_percentage": 72,
+                  "MSI_L1B_DS_local_status": 73,
+                  "MSI_L1B_DS_local_value": 74,
+                  "MSI_L1B_DS_local_value_adjusted": 75,
+                  "MSI_L1B_GR_local_expected": 76,
+                  "MSI_L1B_GR_local_percentage": 77,
+                  "MSI_L1B_GR_local_status": 78,
+                  "MSI_L1B_GR_local_value": 79,
+                  "MSI_L1B_GR_local_value_adjusted": 80,
+                  "MSI_L1C_DS_local_expected": 81,
+                  "MSI_L1C_DS_local_percentage": 82,
+                  "MSI_L1C_DS_local_status": 83,
+                  "MSI_L1C_DS_local_value": 84,
+                  "MSI_L1C_DS_local_value_adjusted": 85,
+                  "MSI_L1C_TC_local_expected": 86,
+                  "MSI_L1C_TC_local_percentage": 87,
+                  "MSI_L1C_TC_local_status": 88,
+                  "MSI_L1C_TC_local_value": 89,
+                  "MSI_L1C_TC_local_value_adjusted": 90,
+                  "MSI_L1C_TL_local_expected": 91,
+                  "MSI_L1C_TL_local_percentage": 92,
+                  "MSI_L1C_TL_local_status": 93,
+                  "MSI_L1C_TL_local_value": 94,
+                  "MSI_L1C_TL_local_value_adjusted": 95,
+                  "MSI_L2A_DS_local_expected": 96,
+                  "MSI_L2A_DS_local_percentage": 97,
+                  "MSI_L2A_DS_local_status": 98,
+                  "MSI_L2A_DS_local_value": 99,
+                  "MSI_L2A_DS_local_value_adjusted": 100,
+                  "MSI_L2A_TC_local_expected": 101,
+                  "MSI_L2A_TC_local_percentage": 102,
+                  "MSI_L2A_TC_local_status": 103,
+                  "MSI_L2A_TC_local_value": 104,
+                  "MSI_L2A_TC_local_value_adjusted": 105,
+                  "MSI_L2A_TL_local_expected": 106,
+                  "MSI_L2A_TL_local_percentage": 107,
+                  "MSI_L2A_TL_local_status": 108,
+                  "MSI_L2A_TL_local_value": 109,
+                  "MSI_L2A_TL_local_value_adjusted": 110,
+                  "TC_global_expected": 111,
+                  "TC_global_percentage": 112,
+                  "TC_global_status": 113,
+                  "TC_global_value": 114,
+                  "TC_global_value_adjusted": 115,
+                  "TL_global_expected": 116,
+                  "TL_global_percentage": 117,
+                  "TL_global_status": 118,
+                  "TL_global_value": 119,
+                  "TL_global_value_adjusted": 120,
+                  "_id": 10,
+                  "_index": 11,
+                  "_type": 12,
+                  "absolute_orbit": 3,
+                  "application_date": 13,
+                  "datatake_id": 2,
+                  "final_completeness_expected": 122,
+                  "final_completeness_percentage": 6,
+                  "final_completeness_status": 123,
+                  "final_completeness_value": 121,
+                  "highlight": 14,
+                  "instrument_mode": 4,
+                  "key": 15,
+                  "mission": 16,
+                  "name": 17,
+                  "number_of_scenes": 8,
+                  "observation_duration": 9,
+                  "observation_time_start": 0,
+                  "observation_time_stop": 1,
+                  "relative_orbit": 18,
+                  "satellite_unit": 7,
+                  "sort": 19,
+                  "timeliness": 5,
+                  "updateTime": 20
+                },
+                "renameByName": {
+                  "L0__local_value * 100 / L0__local_expected": "L0 Completeness %",
+                  "L1A_local_value * 100 / L1A_local_expected": "L1A Completeness %",
+                  "L1B_local_value * 100": "",
+                  "L1B_local_value * 100 / L1B_local_expected": "L1B Completeness %",
+                  "L1C_local_value * 100": "",
+                  "L1C_local_value * 100 / L1C_local_expected": "L1C Completeness %",
+                  "L1_sensing100": "",
+                  "L1_sensing100 / L1_expected": "L1 Completeness %",
+                  "L1_sensing100 / L1_sensing": "L1 Completeness %",
+                  "L2_expected": "",
+                  "L2_sensing100": "",
+                  "L2_sensing100 / L2_expected": "L2A Completeness %",
+                  "_type": "",
+                  "absolute_orbit": "Absolute Orbit",
+                  "datatake_id": "Datatake ID",
+                  "final_completeness_percentage": "Completeness %",
+                  "instrument_mode": "Instrument Mode",
+                  "observation_time_start": "Sensing Start",
+                  "observation_time_stop": "Sensing Stop",
+                  "polarization": "Polarization",
+                  "sensing_global_expected": "",
+                  "sensing_global_percentage": "Completeness %",
+                  "sensing_global_status": "Completeness",
+                  "timeliness": "Timeliness"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "sensing_stop_numeric",
+                "mode": "reduceRow",
+                "reduce": {
+                  "include": [
+                    "Sensing Stop"
+                  ],
+                  "reducer": "first"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "sensing_start_numeric",
+                "mode": "reduceRow",
+                "reduce": {
+                  "include": [
+                    "Sensing Start"
+                  ],
+                  "reducer": "first"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "sensing_start_adjusted",
+                "binary": {
+                  "left": "sensing_start_numeric",
+                  "operator": "-",
+                  "reducer": "sum",
+                  "right": "30000"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "sensing_stop_adjusted",
+                "binary": {
+                  "left": "sensing_stop_numeric",
+                  "operator": "+",
+                  "reducer": "sum",
+                  "right": "30000"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            }
+          ],
+          "type": "table"
+        }
+      ],
+      "title": "Planned Downlinks And Datatake Completeness Information",
+      "type": "row"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [
+    "Acquisition"
+  ],
+  "templating": {
+    "list": [
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "S1"
+          ],
+          "value": [
+            "S1"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P292B19B64C7A8C1B"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"mission\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Mission",
+        "multi": true,
+        "name": "mission",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"mission\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P292B19B64C7A8C1B"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"satellite_id\", \"query\":\"mission:$mission\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Satellite",
+        "multi": true,
+        "name": "satellite_unit",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"satellite_id\", \"query\":\"mission:$mission\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 2,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P292B19B64C7A8C1B"
+        },
+        "definition": "{\"find\": \"terms\", \"size\": 10000,\"field\": \"link_session_id\", \"query\": \"satellite_id:$satellite_unit AND geo_satellite_id:$geo_satellite_id\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Link_session_id",
+        "multi": true,
+        "name": "link_session_id",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"size\": 10000,\"field\": \"link_session_id\", \"query\": \"satellite_id:$satellite_unit AND geo_satellite_id:$geo_satellite_id\"}",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P292B19B64C7A8C1B"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"geo_satellite_id\", \"query\": \"satellite_id:$satellite_unit\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Geo Satellite ",
+        "multi": true,
+        "name": "geo_satellite_id",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"geo_satellite_id\", \"query\": \"satellite_id:$satellite_unit\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 2,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P292B19B64C7A8C1B"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"ground_station\", \"query\": \"satellite_id:$satellite_unit AND geo_satellite_id:$geo_satellite_id\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Ground Station",
+        "multi": true,
+        "name": "ground_station",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"ground_station\", \"query\": \"satellite_id:$satellite_unit AND geo_satellite_id:$geo_satellite_id\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 2,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "2022-10-11T07:26:55.000Z",
+          "value": "2022-10-11T07:26:55.000Z"
+        },
+        "datasource": {
+          "type": "yesoreyeram-infinity-datasource",
+          "uid": "PD0067CAD9A63E081"
+        },
+        "definition": "Infinity- (infinity) json",
+        "hide": 2,
+        "includeAll": false,
+        "label": "Planned_link_session_start",
+        "multi": false,
+        "name": "planned_link_session_start",
+        "options": [],
+        "query": {
+          "infinityQuery": {
+            "columns": [
+              {
+                "selector": "_source.planned_link_session_start",
+                "text": "",
+                "type": "string"
+              }
+            ],
+            "filters": [],
+            "format": "table",
+            "refId": "variable",
+            "root_selector": "hits.hits",
+            "source": "url",
+            "type": "json",
+            "url": "/cds-edrs-acquisition-pass-status/_search?q=link_session_id:${link_session_id}&size=1000",
+            "url_options": {
+              "data": "",
+              "method": "GET"
+            }
+          },
+          "query": "",
+          "queryType": "infinity"
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "2024-01-02T05:25:50.000Z",
+          "value": "2024-01-02T05:25:50.000Z"
+        },
+        "datasource": {
+          "type": "yesoreyeram-infinity-datasource",
+          "uid": "PD0067CAD9A63E081"
+        },
+        "definition": "Infinity- (infinity) json",
+        "hide": 2,
+        "includeAll": false,
+        "label": "Planned_link_session_stop",
+        "multi": false,
+        "name": "planned_link_session_stop",
+        "options": [],
+        "query": {
+          "infinityQuery": {
+            "columns": [
+              {
+                "selector": "_source.planned_link_session_stop",
+                "text": "",
+                "type": "string"
+              }
+            ],
+            "filters": [],
+            "format": "table",
+            "refId": "variable",
+            "root_selector": "hits.hits",
+            "source": "url",
+            "type": "json",
+            "url": "/cds-edrs-acquisition-pass-status/_search?q=link_session_id:${link_session_id}&size=1000",
+            "url_options": {
+              "data": "",
+              "method": "GET"
+            }
+          },
+          "query": "",
+          "queryType": "infinity"
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 2,
+        "type": "query"
+      },
+      {
+        "allValue": "",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "yesoreyeram-infinity-datasource",
+          "uid": "PD0067CAD9A63E081"
+        },
+        "definition": "Infinity- (infinity) json",
+        "hide": 2,
+        "includeAll": true,
+        "label": "Datatake",
+        "multi": true,
+        "name": "datatake_id",
+        "options": [],
+        "query": {
+          "infinityQuery": {
+            "columns": [
+              {
+                "selector": "_source.datatake_id",
+                "text": "",
+                "type": "string"
+              }
+            ],
+            "filters": [],
+            "format": "table",
+            "refId": "variable",
+            "root_selector": "hits.hits",
+            "source": "url",
+            "type": "json",
+            "url": "/cds-downlink-datatake/_search?q=mission:$mission_edrs AND effective_downlink_start:[0 TO ${planned_link_session_stop}] AND effective_downlink_stop:[${planned_link_session_start} TO *]&size=1000",
+            "url_options": {
+              "data": "",
+              "method": "GET"
+            }
+          },
+          "query": "",
+          "queryType": "infinity"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 3,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "S2",
+          "value": "S2"
+        },
+        "datasource": {
+          "type": "yesoreyeram-infinity-datasource",
+          "uid": "PD0067CAD9A63E081"
+        },
+        "definition": "Infinity- (infinity) json",
+        "hide": 2,
+        "includeAll": false,
+        "label": "Mission_edrs",
+        "multi": false,
+        "name": "mission_edrs",
+        "options": [],
+        "query": {
+          "infinityQuery": {
+            "columns": [
+              {
+                "selector": "_source.mission",
+                "text": "",
+                "type": "string"
+              }
+            ],
+            "filters": [],
+            "format": "table",
+            "refId": "variable",
+            "root_selector": "hits.hits",
+            "source": "url",
+            "type": "json",
+            "url": "/cds-edrs-acquisition-pass-status/_search?q=link_session_id:${link_session_id}&size=1000",
+            "url_options": {
+              "data": "",
+              "method": "GET"
+            }
+          },
+          "query": "",
+          "queryType": "infinity"
+        },
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 2,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P292B19B64C7A8C1B"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"report_type\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Report Type",
+        "multi": true,
+        "name": "report_type",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"report_type\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P292B19B64C7A8C1B"
+        },
+        "filters": [],
+        "hide": 0,
+        "label": "AcquisitionFilters",
+        "name": "acquisition_filter",
+        "skipUrlSync": false,
+        "type": "adhoc"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-30d",
+    "to": "now"
+  },
+  "timeRangeUpdatedDuringEditOrView": false,
+  "timepicker": {},
+  "timezone": "",
+  "title": "Acquisition passes status (from EDRS)",
+  "uid": "KoNYADm4z",
+  "weekStart": ""
+}

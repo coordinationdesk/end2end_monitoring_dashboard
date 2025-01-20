@@ -8,4 +8,4 @@ SCRIPT=$(readlink -f $0)
 SCRIPTPATH=$(dirname ${SCRIPT})
 
 source ${SCRIPTPATH}"/env.sh"
-omcs_build_modules
+omcs_python_modules_build

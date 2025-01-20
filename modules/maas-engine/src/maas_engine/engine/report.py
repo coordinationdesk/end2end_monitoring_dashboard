@@ -39,7 +39,7 @@ class EngineReport:
         """
         return (
             f"<{self.__class__.__name__} document_class={self.document_class} "
-            + f"action={self.action} with {self.size} ids>"
+            + f"action={self.action} with {self.size} ids in {self.document_indices}>"
         )
 
     @property

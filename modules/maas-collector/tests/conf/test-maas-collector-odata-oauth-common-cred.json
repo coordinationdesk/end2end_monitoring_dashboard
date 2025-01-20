@@ -1,0 +1,90 @@
+{
+    "collectors": [
+        {
+            "class": "ODataCollectorConfiguration",
+            "id_field": "product_id",
+            "routing_key": "new.raw.data.oauth-product",
+            "interface_name": "interface_alpha_commun_cred",
+            "interface_credentials": "common_cred",
+            "hours_delta": 3,
+            "product_per_page": 1000,
+            "model": {
+                "index": "raw-data-prip-product",
+                "name": "PripProduct",
+                "fields": [
+                    {
+                        "name": "product_id",
+                        "type": "Keyword"
+                    },
+                    {
+                        "name": "product_name",
+                        "type": "Keyword"
+                    },
+                    {
+                        "name": "content_length",
+                        "type": "Integer"
+                    },
+                    {
+                        "name": "publication_date",
+                        "type": "Date"
+                    }
+                ]
+            },
+            "extractor": {
+                "class": "JSONExtractor",
+                "args": {
+                    "attr_map": {
+                        "product_id": "`this`.Id",
+                        "product_name": "`this`.Name",
+                        "content_length": "`this`.ContentLength",
+                        "publication_date": "`this`.PublicationDate"
+                    },
+                    "iterate_nodes": "$.value"
+                }
+            }
+        },
+        {
+            "class": "ODataCollectorConfiguration",
+            "id_field": "product_id",
+            "routing_key": "new.raw.data.oauth-product",
+            "interface_name": "interface_beta_commun_cred",
+            "interface_credentials": "common_cred",
+            "hours_delta": 3,
+            "product_per_page": 1000,
+            "model": {
+                "index": "raw-data-prip-product",
+                "name": "PripProduct",
+                "fields": [
+                    {
+                        "name": "product_id",
+                        "type": "Keyword"
+                    },
+                    {
+                        "name": "product_name",
+                        "type": "Keyword"
+                    },
+                    {
+                        "name": "content_length",
+                        "type": "Integer"
+                    },
+                    {
+                        "name": "publication_date",
+                        "type": "Date"
+                    }
+                ]
+            },
+            "extractor": {
+                "class": "JSONExtractor",
+                "args": {
+                    "attr_map": {
+                        "product_id": "`this`.Id",
+                        "product_name": "`this`.Name",
+                        "content_length": "`this`.ContentLength",
+                        "publication_date": "`this`.PublicationDate"
+                    },
+                    "iterate_nodes": "$.value"
+                }
+            }
+        }
+    ]
+}

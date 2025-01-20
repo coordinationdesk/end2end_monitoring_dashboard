@@ -1,0 +1,1971 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 312,
+      "panels": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "gridPos": {
+            "h": 14,
+            "w": 24,
+            "x": 0,
+            "y": 1
+          },
+          "id": 89,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "This dashboard features a Timeliness computation of data published at the following interfaces:\n - AUXIP.\n\nAuxiliary data is divided into two categories:\n - Several per day (timeliness should be below 10 minutes);\n - One per day (timeliness should be below 30 minutes).\n\nThe list of products and their associated frequency :\n\n| Timeliness                | Product Type                                                                                                                                                                                                                                                                                                                                                                                                                                              |\n|---------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| Several per day (<10 min) | AUX_WND, AUX_PREORB, AUX_RESORB, AUX_POEORB, AUX_ECMWFD, AX___MF1_AX, AX___MFA_AX, AX___MA1_AX, AX___MF2_AX, AX___MA2_AX, SR___MDO_AX, SR_2_RMO_AX, SR_2_PMO_AX                                                                                                                                                                                                                                                                                           |\n| One per day (<30 min)     | AUX_ICE, AUX_TRO, MPL_ORBPRE, MPL_ORBRES, MPL_TLEPRE, TLM__REQ_B, TLM__REQ_C, TLM__REQ_D, TLM__REQ_E, TLM__REQ_F, AUX_CAMSFO, AUX_UT1UTC, TLM__REQ_A, TLM__REQ_B, REP__CHF__, REP__FCHF_, MPL_ORBPRE, MPL_ORBRES, SR_2_PMPSAX, SR_2_POL_AX, SR_2_PGI_AX, SR_2_RGI_AX, SR_1_USO_AX, SR___MGNSAX, SL_2_SSTAAX, SL_2_DIMSAX, AX___FPO_AX, AX___FRO_AX, AUX_POEORB, AUX_GNSSRD, SR_2_PCPPAX, SR_2_PMPPAX, SR___MGNPAX, SR___POEPAX, SR_2_SIFNAX, SR_2_SIFSAX |\n\nTimeliness is computed from metadata attached to each Auxiliary data (Publication Date - Origin Date).\n\nDiscrepancies are displayed through the following indicators:\n - Percent of data below timeliness threshold;\n - Average timeliness of data;\n - Time series of data displayed against the timeliness threshold;\n - Detailed list of data out of accepted range.\n\nInformation is available for each mission managed by OMCS.\n\nTips:\n - Annotations are available on time series;\n - Mission to consider can be selected in the upper bar.\n\n\nThe information displayed was originally taken from Product at AUXIP  \n\nTime reference for this dashboard is : sensing_start_date\n\nImportant notice : Tables & timelines can only display up to 10 000 entries. Please make use of filters to narrow down the retrieved data and get a more realistic view.",
+            "mode": "markdown"
+          },
+          "pluginVersion": "11.0.0",
+          "targets": [
+            {
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "refId": "A"
+            }
+          ],
+          "type": "text"
+        }
+      ],
+      "title": "Dashboard Description",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P4E6B5BC91908CBD9"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 290,
+      "panels": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "refId": "A"
+        }
+      ],
+      "title": "ADG Timeliness",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P9C1AEFD5EC435EE7"
+      },
+      "description": "Timeliness for files published several times per day ",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "semi-dark-red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 5,
+        "x": 0,
+        "y": 2
+      },
+      "id": 297,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto",
+        "text": {}
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "alias": "10 min",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "4",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "transfer_timeliness: [0 TO 600000000] AND service_type : AUXIP AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_type: (\"AUX_WND\" OR \"AUX_PREORB\" OR \"AUX_RESORB\" OR \"AUX_POEORB\" OR \"AUX_ECMWFD\" OR \"AX___MF1_AX\" OR \"AX___MFA_AX\" OR \"AX___MA1_AX\" OR \"AX___MF2_AX\" OR \"AX___MA2_AX\" OR \"SR___MDO_AX\" OR \"SR_2_RMO_AX\" OR \"SR_2_PMO_AX\") AND product_type: $product_type",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "Total",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "4",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "service_type : AUXIP AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_type: (\"AUX_WND\" OR \"AUX_PREORB\" OR \"AUX_RESORB\" OR \"AUX_POEORB\" OR \"AUX_ECMWFD\" OR \"AX___MF1_AX\" OR \"AX___MFA_AX\" OR \"AX___MA1_AX\" OR \"AX___MF2_AX\" OR \"AX___MA2_AX\" OR \"SR___MDO_AX\" OR \"SR_2_RMO_AX\" OR \"SR_2_PMO_AX\") AND product_type: $product_type",
+          "refId": "B",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "\"Several per day\" Timeliness (< 10 min)",
+      "transformations": [
+        {
+          "id": "seriesToRows",
+          "options": {}
+        },
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "Metric": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value": {
+                "aggregations": [
+                  "sum"
+                ],
+                "operation": "aggregate"
+              }
+            }
+          }
+        },
+        {
+          "id": "rowsToFields",
+          "options": {}
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Completeness 10min",
+            "binary": {
+              "left": "10 min",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Total"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P9C1AEFD5EC435EE7"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "m"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 4,
+        "x": 5,
+        "y": 2
+      },
+      "id": 304,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "metrics": [
+            {
+              "field": "transfer_timeliness",
+              "id": "1",
+              "type": "avg"
+            }
+          ],
+          "query": "service_type : AUXIP AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_type: (\"AUX_WND\" OR \"AUX_PREORB\" OR \"AUX_RESORB\" OR \"AUX_POEORB\" OR \"AUX_ECMWFD\" OR \"AX___MF1_AX\" OR \"AX___MFA_AX\" OR \"AX___MA1_AX\" OR \"AX___MF2_AX\" OR \"AX___MA2_AX\" OR \"SR___MDO_AX\" OR \"SR_2_RMO_AX\" OR \"SR_2_PMO_AX\") AND product_type: ${product_type}",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "\"Several per day\" average timeliness",
+      "transformations": [
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "isNull",
+                  "options": {}
+                },
+                "fieldName": "Average transfer_timeliness"
+              }
+            ],
+            "match": "any",
+            "type": "exclude"
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "Average transfer_timeliness",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "60000000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Average from_sensing_timeliness": true,
+              "Average from_sensing_timeliness / 3600000000": false,
+              "Average transfer_timeliness": true
+            },
+            "indexByName": {},
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P9C1AEFD5EC435EE7"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "Transfer Timeliness (min)",
+            "axisPlacement": "auto",
+            "axisSoftMax": 24,
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "scheme",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "stepAfter",
+            "lineWidth": 1,
+            "pointSize": 6,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "always",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-green",
+                "value": null
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 10
+              }
+            ]
+          },
+          "unit": "m"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Time"
+            },
+            "properties": [
+              {
+                "id": "custom.axisLabel",
+                "value": "Sensing Time"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 15,
+        "x": 9,
+        "y": 2
+      },
+      "id": 302,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "maxHeight": 600,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.4.2",
+      "targets": [
+        {
+          "alias": "Timeliness",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "4",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "transfer_timeliness",
+              "id": "1",
+              "type": "max"
+            }
+          ],
+          "query": "service_type : AUXIP AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_type: (\"AUX_WND\" OR \"AUX_PREORB\" OR \"AUX_RESORB\" OR \"AUX_POEORB\" OR \"AUX_ECMWFD\" OR \"AX___MF1_AX\" OR \"AX___MFA_AX\" OR \"AX___MA1_AX\" OR \"AX___MF2_AX\" OR \"AX___MA2_AX\" OR \"SR___MDO_AX\" OR \"SR_2_RMO_AX\" OR \"SR_2_PMO_AX\") AND product_type : ${product_type}",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "\"Several per day\" timeliness over time",
+      "transformations": [
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "isNull",
+                  "options": {}
+                },
+                "fieldName": "Timeliness"
+              }
+            ],
+            "match": "any",
+            "type": "exclude"
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "From Transfer Timeliness (min)",
+            "binary": {
+              "left": "Timeliness",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "60000000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P9C1AEFD5EC435EE7"
+      },
+      "description": "Timeliness for files published once or less than once per day",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "semi-dark-red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 95
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 5,
+        "x": 0,
+        "y": 9
+      },
+      "id": 298,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto",
+        "text": {}
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "alias": "30 min",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "4",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "transfer_timeliness: [0 TO 1800000000] AND service_type : AUXIP AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_type : (\"AUX_ICE\" OR \"AUX_TRO\" OR \"MPL_ORBPRE\" OR \"MPL_ORBRES\" OR \"MPL_TLEPRE\" OR \"TLM__REQ_B\" OR \"TLM__REQ_C\" OR \"TLM__REQ_D\" OR \"TLM__REQ_E\" OR \"TLM__REQ_F\" OR \"AUX_CAMSFO\" OR \"AUX_UT1UTC\" OR \"TLM__REQ_A\" OR \"TLM__REQ_B\" OR \"REP__CHF__\" OR \"REP__FCHF_\" OR \"MPL_ORBPRE\" OR \"MPL_ORBRES\" OR \"SR_2_PMPSAX\" OR \"SR_2_POL_AX\" OR \"SR_2_PGI_AX\" OR \"SR_2_RGI_AX\" OR \"SR_1_USO_AX\" OR \"SR___MGNSAX\" OR \"SL_2_SSTAAX\" OR \"SL_2_DIMSAX\" OR \"AX___FPO_AX\" OR \"AX___FRO_AX\" OR \"AUX_POEORB\" OR \"AUX_GNSSRD\" OR \"SR_2_PCPPAX\" OR \"SR_2_PMPPAX\" OR \"SR___MGNPAX\" OR \"SR___POEPAX\" OR \"SR_2_SIFNAX\" OR \"SR_2_SIFSAX\") AND product_type: $product_type",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "Total",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "4",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "service_type : AUXIP AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_type : (\"AUX_ICE\" OR \"AUX_TRO\" OR \"MPL_ORBPRE\" OR \"MPL_ORBRES\" OR \"MPL_TLEPRE\" OR \"TLM__REQ_B\" OR \"TLM__REQ_C\" OR \"TLM__REQ_D\" OR \"TLM__REQ_E\" OR \"TLM__REQ_F\" OR \"AUX_CAMSFO\" OR \"AUX_UT1UTC\" OR \"TLM__REQ_A\" OR \"TLM__REQ_B\" OR \"REP__CHF__\" OR \"REP__FCHF_\" OR \"MPL_ORBPRE\" OR \"MPL_ORBRES\" OR \"SR_2_PMPSAX\" OR \"SR_2_POL_AX\" OR \"SR_2_PGI_AX\" OR \"SR_2_RGI_AX\" OR \"SR_1_USO_AX\" OR \"SR___MGNSAX\" OR \"SL_2_SSTAAX\" OR \"SL_2_DIMSAX\" OR \"AX___FPO_AX\" OR \"AX___FRO_AX\" OR \"AUX_POEORB\" OR \"AUX_GNSSRD\" OR \"SR_2_PCPPAX\" OR \"SR_2_PMPPAX\" OR \"SR___MGNPAX\" OR \"SR___POEPAX\" OR \"SR_2_SIFNAX\" OR \"SR_2_SIFSAX\") AND product_type: $product_type",
+          "refId": "B",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "\"One per day\" timeliness (< 30 min)",
+      "transformations": [
+        {
+          "id": "seriesToRows",
+          "options": {}
+        },
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "Metric": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "Value": {
+                "aggregations": [
+                  "sum"
+                ],
+                "operation": "aggregate"
+              }
+            }
+          }
+        },
+        {
+          "id": "rowsToFields",
+          "options": {}
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Completeness 30 min",
+            "binary": {
+              "left": "30 min",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Total"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P9C1AEFD5EC435EE7"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "m"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 4,
+        "x": 5,
+        "y": 9
+      },
+      "id": 305,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "metrics": [
+            {
+              "field": "transfer_timeliness",
+              "id": "1",
+              "type": "avg"
+            }
+          ],
+          "query": "service_type : AUXIP AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_type : (\"AUX_ICE\" OR \"AUX_TRO\" OR \"MPL_ORBPRE\" OR \"MPL_ORBRES\" OR \"MPL_TLEPRE\" OR \"TLM__REQ_B\" OR \"TLM__REQ_C\" OR \"TLM__REQ_D\" OR \"TLM__REQ_E\" OR \"TLM__REQ_F\" OR \"AUX_CAMSFO\" OR \"AUX_UT1UTC\" OR \"TLM__REQ_A\" OR \"TLM__REQ_B\" OR \"REP__CHF__\" OR \"REP__FCHF_\" OR \"MPL_ORBPRE\" OR \"MPL_ORBRES\" OR \"SR_2_PMPSAX\" OR \"SR_2_POL_AX\" OR \"SR_2_PGI_AX\" OR \"SR_2_RGI_AX\" OR \"SR_1_USO_AX\" OR \"SR___MGNSAX\" OR \"SL_2_SSTAAX\" OR \"SL_2_DIMSAX\" OR \"AX___FPO_AX\" OR \"AX___FRO_AX\" OR \"AUX_POEORB\" OR \"AUX_GNSSRD\" OR \"SR_2_PCPPAX\" OR \"SR_2_PMPPAX\" OR \"SR___MGNPAX\" OR \"SR___POEPAX\" OR \"SR_2_SIFNAX\" OR \"SR_2_SIFSAX\") AND product_type: $product_type",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "\"One per day\" average timeliness",
+      "transformations": [
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "isNull",
+                  "options": {}
+                },
+                "fieldName": "Average transfer_timeliness"
+              }
+            ],
+            "match": "any",
+            "type": "exclude"
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "Average transfer_timeliness",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "60000000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Average from_sensing_timeliness": true,
+              "Average from_sensing_timeliness / 3600000000": false,
+              "Average transfer_timeliness": true
+            },
+            "indexByName": {},
+            "renameByName": {}
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P9C1AEFD5EC435EE7"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "Transfer Timeliness (min)",
+            "axisPlacement": "auto",
+            "axisSoftMax": 30,
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "scheme",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "stepAfter",
+            "lineWidth": 1,
+            "pointSize": 6,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "always",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "semi-dark-green",
+                "value": null
+              },
+              {
+                "color": "semi-dark-red",
+                "value": 30
+              }
+            ]
+          },
+          "unit": "m"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Time"
+            },
+            "properties": [
+              {
+                "id": "custom.axisLabel",
+                "value": "Sensing Time"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 15,
+        "x": 9,
+        "y": 9
+      },
+      "id": 306,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "maxHeight": 600,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.4.2",
+      "targets": [
+        {
+          "alias": "Timeliness",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "4",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "transfer_timeliness",
+              "id": "1",
+              "type": "max"
+            }
+          ],
+          "query": "service_type : AUXIP AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_type : (\"AUX_ICE\" OR \"AUX_TRO\" OR \"MPL_ORBPRE\" OR \"MPL_ORBRES\" OR \"MPL_TLEPRE\" OR \"TLM__REQ_B\" OR \"TLM__REQ_C\" OR \"TLM__REQ_D\" OR \"TLM__REQ_E\" OR \"TLM__REQ_F\" OR \"AUX_CAMSFO\" OR \"AUX_UT1UTC\" OR \"TLM__REQ_A\" OR \"TLM__REQ_B\" OR \"REP__CHF__\" OR \"REP__FCHF_\" OR \"MPL_ORBPRE\" OR \"MPL_ORBRES\" OR \"SR_2_PMPSAX\" OR \"SR_2_POL_AX\" OR \"SR_2_PGI_AX\" OR \"SR_2_RGI_AX\" OR \"SR_1_USO_AX\" OR \"SR___MGNSAX\" OR \"SL_2_SSTAAX\" OR \"SL_2_DIMSAX\" OR \"AX___FPO_AX\" OR \"AX___FRO_AX\" OR \"AUX_POEORB\" OR \"AUX_GNSSRD\" OR \"SR_2_PCPPAX\" OR \"SR_2_PMPPAX\" OR \"SR___MGNPAX\" OR \"SR___POEPAX\" OR \"SR_2_SIFNAX\" OR \"SR_2_SIFSAX\") AND product_type: $product_type",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "\"One per day\" timeliness over time",
+      "transformations": [
+        {
+          "id": "filterByValue",
+          "options": {
+            "filters": [
+              {
+                "config": {
+                  "id": "isNull",
+                  "options": {}
+                },
+                "fieldName": "Timeliness"
+              }
+            ],
+            "match": "any",
+            "type": "exclude"
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "From Transfer Timeliness (min)",
+            "binary": {
+              "left": "Timeliness",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "60000000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "collapsed": true,
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P4E6B5BC91908CBD9"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 16
+      },
+      "id": 309,
+      "panels": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "center",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "filterable": true,
+                "inspect": true
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "semi-dark-red",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 95
+                  }
+                ]
+              },
+              "unit": "none"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "satellite_unit"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 89
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "sensing_end_date"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 210
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "sensing_start_date"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 198
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "absolute_orbit"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 105
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "datatake_id"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 116
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "instrument_mode"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 135
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "timeliness"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 134
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "product_level"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 132
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "product_type"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 149
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "from_sensing_timeliness"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 188
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "name"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 801
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Product Name"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 696
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Transfer Timeliness"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "m"
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "CAMs Link"
+                },
+                "properties": [
+                  {
+                    "id": "links",
+                    "value": [
+                      {
+                        "title": "",
+                        "url": "https://esa-cams.atlassian.net/browse/${__value.raw}"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 12,
+            "w": 24,
+            "x": 0,
+            "y": 17
+          },
+          "id": 293,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true,
+            "sortBy": [
+              {
+                "desc": false,
+                "displayName": "CAMs Link"
+              }
+            ]
+          },
+          "pluginVersion": "11.0.0",
+          "targets": [
+            {
+              "alias": "< 3h",
+              "bucketAggs": [],
+              "datasource": {
+                "uid": "P9C1AEFD5EC435EE7"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "size": "10000"
+                  },
+                  "type": "raw_data"
+                }
+              ],
+              "query": "transfer_timeliness: [600000000 TO *] AND service_type : AUXIP AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_type: (\"AUX_WND\" OR \"AUX_PREORB\" OR \"AUX_RESORB\" OR \"AUX_POEORB\" OR \"AUX_ECMWFD\" OR \"AX___MF1_AX\" OR \"AX___MFA_AX\" OR \"AX___MA1_AX\" OR \"AX___MF2_AX\" OR \"AX___MA2_AX\" OR \"SR___MDO_AX\" OR \"SR_2_RMO_AX\" OR \"SR_2_PMO_AX\") AND product_type: $product_type",
+              "refId": "A",
+              "timeField": "sensing_start_date"
+            }
+          ],
+          "title": "Out of timeliness products (several per day)",
+          "transformations": [
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "From sensing timeliness (h)",
+                "binary": {
+                  "left": "from_sensing_timeliness",
+                  "operator": "/",
+                  "reducer": "sum",
+                  "right": "3600000000"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "include": [
+                    "from_sensing_timeliness"
+                  ],
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "binary": {
+                  "left": "transfer_timeliness",
+                  "operator": "/",
+                  "reducer": "sum",
+                  "right": "60000000"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "convertFieldType",
+              "options": {
+                "conversions": [
+                  {
+                    "destinationType": "time",
+                    "targetField": "sensing_start_date"
+                  },
+                  {
+                    "destinationType": "time",
+                    "targetField": "sensing_end_date"
+                  },
+                  {
+                    "destinationType": "time",
+                    "targetField": "publication_date"
+                  }
+                ],
+                "fields": {}
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "From sensing timeliness (h)": true,
+                  "_id": true,
+                  "_index": true,
+                  "_type": true,
+                  "cams_tickets": true,
+                  "content_length": true,
+                  "eviction_date": true,
+                  "from_sensing_timeliness": true,
+                  "highlight": true,
+                  "key": true,
+                  "last_attached_ticket": false,
+                  "last_attached_ticket_url": true,
+                  "mission": true,
+                  "modification_date": true,
+                  "polarization": true,
+                  "product_class": true,
+                  "product_uuid": true,
+                  "publication_date": false,
+                  "sensing_duration": true,
+                  "sensing_end_date": true,
+                  "sensing_start_date": true,
+                  "service_id": true,
+                  "service_type": true,
+                  "site_center": true,
+                  "sort": true,
+                  "timeliness": true,
+                  "transfer_timeliness": true,
+                  "updateTime": true
+                },
+                "indexByName": {
+                  "From sensing timeliness (h)": 9,
+                  "_id": 12,
+                  "_index": 13,
+                  "_type": 14,
+                  "cams_description": 31,
+                  "cams_origin": 30,
+                  "cams_tickets": 32,
+                  "content_length": 15,
+                  "eviction_date": 26,
+                  "from_sensing_timeliness": 10,
+                  "highlight": 16,
+                  "key": 17,
+                  "last_attached_ticket": 28,
+                  "last_attached_ticket_url": 29,
+                  "mission": 0,
+                  "name": 11,
+                  "origin_date": 19,
+                  "product_level": 5,
+                  "product_type": 6,
+                  "product_uuid": 18,
+                  "publication_date": 20,
+                  "satellite_unit": 1,
+                  "sensing_duration": 21,
+                  "sensing_end_date": 3,
+                  "sensing_start_date": 2,
+                  "service_id": 22,
+                  "service_type": 23,
+                  "site_center": 27,
+                  "sort": 24,
+                  "timeliness": 4,
+                  "transfer_timeliness": 7,
+                  "transfer_timeliness / 60000000": 8,
+                  "updateTime": 25
+                },
+                "renameByName": {
+                  "From sensing timeliness (h)": "Timeliness (h)",
+                  "absolute_orbit": "Absolute Orbit",
+                  "cams_description": "CAMs Description",
+                  "cams_origin": "CAMs Origin",
+                  "datatake_id": "Datatake ID",
+                  "from_sensing_timeliness": "",
+                  "instrument_mode": "Instrument",
+                  "last_attached_ticket": "CAMs Link",
+                  "last_attached_ticket_url": "",
+                  "name": "Product Name",
+                  "origin_date": "Source Publication date",
+                  "product_level": "Level",
+                  "product_type": "Type",
+                  "product_uuid": "",
+                  "publication_date": "AUXIP Publication Date",
+                  "satellite_unit": "Satellite",
+                  "sensing_end_date": "Sensing End",
+                  "sensing_start_date": "Sensing Start",
+                  "timeliness": "Category",
+                  "transfer_timeliness": "Transfer Timeliness",
+                  "transfer_timeliness / 60000000": "Transfer Timeliness"
+                }
+              }
+            }
+          ],
+          "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "center",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "filterable": true,
+                "inspect": false
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "percentage",
+                "steps": [
+                  {
+                    "color": "semi-dark-red",
+                    "value": null
+                  },
+                  {
+                    "color": "green",
+                    "value": 95
+                  }
+                ]
+              },
+              "unit": "none"
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "satellite_unit"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 89
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "sensing_end_date"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 210
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "sensing_start_date"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 198
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "absolute_orbit"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 105
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "datatake_id"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 116
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "instrument_mode"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 135
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "timeliness"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 134
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "product_level"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 132
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "product_type"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 149
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "from_sensing_timeliness"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 188
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "name"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 801
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Product Name"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 696
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Transfer Timeliness"
+                },
+                "properties": [
+                  {
+                    "id": "unit",
+                    "value": "m"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 12,
+            "w": 24,
+            "x": 0,
+            "y": 29
+          },
+          "id": 310,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "showHeader": true,
+            "sortBy": []
+          },
+          "pluginVersion": "11.0.0",
+          "targets": [
+            {
+              "alias": "< 3h",
+              "bucketAggs": [],
+              "datasource": {
+                "uid": "P9C1AEFD5EC435EE7"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "size": "10000"
+                  },
+                  "type": "raw_data"
+                }
+              ],
+              "query": " transfer_timeliness: [1800000000 TO *] AND service_type : AUXIP AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_type : (\"AUX_ICE\" OR \"AUX_TRO\" OR \"MPL_ORBPRE\" OR \"MPL_ORBRES\" OR \"MPL_TLEPRE\" OR \"TLM__REQ_B\" OR \"TLM__REQ_C\" OR \"TLM__REQ_D\" OR \"TLM__REQ_E\" OR \"TLM__REQ_F\" OR \"AUX_CAMSFO\" OR \"AUX_UT1UTC\" OR \"TLM__REQ_A\" OR \"TLM__REQ_B\" OR \"REP__CHF__\" OR \"REP__FCHF_\" OR \"MPL_ORBPRE\" OR \"MPL_ORBRES\" OR \"SR_2_PMPSAX\" OR \"SR_2_POL_AX\" OR \"SR_2_PGI_AX\" OR \"SR_2_RGI_AX\" OR \"SR_1_USO_AX\" OR \"SR___MGNSAX\" OR \"SL_2_SSTAAX\" OR \"SL_2_DIMSAX\" OR \"AX___FPO_AX\" OR \"AX___FRO_AX\" OR \"AUX_POEORB\" OR \"AUX_GNSSRD\" OR \"SR_2_PCPPAX\" OR \"SR_2_PMPPAX\" OR \"SR___MGNPAX\" OR \"SR___POEPAX\" OR \"SR_2_SIFNAX\" OR \"SR_2_SIFSAX\") AND product_type: $product_type",
+              "refId": "A",
+              "timeField": "sensing_start_date"
+            }
+          ],
+          "title": " Out of timeliness products (one per day)",
+          "transformations": [
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "From sensing timeliness (h)",
+                "binary": {
+                  "left": "from_sensing_timeliness",
+                  "operator": "/",
+                  "reducer": "sum",
+                  "right": "3600000000"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "include": [
+                    "from_sensing_timeliness"
+                  ],
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "binary": {
+                  "left": "transfer_timeliness",
+                  "operator": "/",
+                  "reducer": "sum",
+                  "right": "60000000"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "convertFieldType",
+              "options": {
+                "conversions": [
+                  {
+                    "destinationType": "time",
+                    "targetField": "sensing_start_date"
+                  },
+                  {
+                    "destinationType": "time",
+                    "targetField": "sensing_end_date"
+                  },
+                  {
+                    "destinationType": "time",
+                    "targetField": "publication_date"
+                  }
+                ],
+                "fields": {}
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "From sensing timeliness (h)": true,
+                  "_id": true,
+                  "_index": true,
+                  "_type": true,
+                  "content_length": true,
+                  "eviction_date": true,
+                  "from_sensing_timeliness": true,
+                  "highlight": true,
+                  "key": true,
+                  "mission": true,
+                  "modification_date": true,
+                  "polarization": true,
+                  "product_class": true,
+                  "product_uuid": true,
+                  "publication_date": false,
+                  "sensing_duration": true,
+                  "sensing_end_date": true,
+                  "sensing_start_date": true,
+                  "service_id": true,
+                  "service_type": true,
+                  "site_center": true,
+                  "sort": true,
+                  "timeliness": true,
+                  "transfer_timeliness": true,
+                  "updateTime": true
+                },
+                "indexByName": {
+                  "From sensing timeliness (h)": 9,
+                  "_id": 12,
+                  "_index": 13,
+                  "_type": 14,
+                  "content_length": 15,
+                  "eviction_date": 26,
+                  "from_sensing_timeliness": 10,
+                  "highlight": 16,
+                  "key": 17,
+                  "mission": 0,
+                  "name": 11,
+                  "origin_date": 19,
+                  "product_level": 5,
+                  "product_type": 6,
+                  "product_uuid": 18,
+                  "publication_date": 20,
+                  "satellite_unit": 1,
+                  "sensing_duration": 21,
+                  "sensing_end_date": 3,
+                  "sensing_start_date": 2,
+                  "service_id": 22,
+                  "service_type": 23,
+                  "site_center": 27,
+                  "sort": 24,
+                  "timeliness": 4,
+                  "transfer_timeliness": 7,
+                  "transfer_timeliness / 60000000": 8,
+                  "updateTime": 25
+                },
+                "renameByName": {
+                  "From sensing timeliness (h)": "Timeliness (h)",
+                  "absolute_orbit": "Absolute Orbit",
+                  "datatake_id": "Datatake ID",
+                  "from_sensing_timeliness": "",
+                  "instrument_mode": "Instrument",
+                  "name": "Product Name",
+                  "origin_date": "Source Publication date",
+                  "product_level": "Level",
+                  "product_type": "Type",
+                  "product_uuid": "",
+                  "publication_date": "AUXIP Publication Date",
+                  "satellite_unit": "Satellite",
+                  "sensing_end_date": "Sensing End",
+                  "sensing_start_date": "Sensing Start",
+                  "timeliness": "Category",
+                  "transfer_timeliness": "Transfer Timeliness",
+                  "transfer_timeliness / 60000000": "Transfer Timeliness"
+                }
+              }
+            }
+          ],
+          "type": "table"
+        }
+      ],
+      "targets": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "refId": "A"
+        }
+      ],
+      "title": "Out of timeliness product list",
+      "type": "row"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [
+    "Timeliness"
+  ],
+  "templating": {
+    "list": [
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "hide": 0,
+        "includeAll": true,
+        "label": "Mission",
+        "multi": true,
+        "name": "mission",
+        "options": [
+          {
+            "selected": true,
+            "text": "All",
+            "value": "$__all"
+          },
+          {
+            "selected": false,
+            "text": "S1",
+            "value": "S1"
+          },
+          {
+            "selected": false,
+            "text": "S2",
+            "value": "S2"
+          },
+          {
+            "selected": false,
+            "text": "S3",
+            "value": "S3"
+          }
+        ],
+        "query": "S1,S2, S3",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P9C1AEFD5EC435EE7"
+        },
+        "definition": "{\"find\":\"terms\",\"field\":\"satellite_unit\", \"query\":\"mission: $mission AND service_type:AUXIP\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Satellite",
+        "multi": true,
+        "name": "satellite_unit",
+        "options": [],
+        "query": "{\"find\":\"terms\",\"field\":\"satellite_unit\", \"query\":\"mission: $mission AND service_type:AUXIP\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P9C1AEFD5EC435EE7"
+        },
+        "definition": "{\"find\":\"terms\",\"field\":\"product_type\", \"query\":\"mission: $mission AND satellite_unit : $satellite_unit AND  service_type: AUXIP\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Product Type",
+        "multi": true,
+        "name": "product_type",
+        "options": [],
+        "query": "{\"find\":\"terms\",\"field\":\"product_type\", \"query\":\"mission: $mission AND satellite_unit : $satellite_unit AND service_type: AUXIP\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P9C1AEFD5EC435EE7"
+        },
+        "filters": [],
+        "hide": 0,
+        "label": "Ad-Hoc filter",
+        "name": "Filter",
+        "skipUrlSync": false,
+        "type": "adhoc"
+      },
+      {
+        "hide": 2,
+        "name": "S1_30",
+        "query": "AUX_WND,MPL_GTDEV,MPL_ORBPRE ,MPL_ORBRES,MPL_TLEPRE,TLM_REQ_B,TLM_REQ_D,TLM_REQ_E,TLM_REQ_F,AUX_PREORB,AUX_RESORB,AUX_POEORB",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "hide": 2,
+        "name": "S1_10",
+        "query": "AUX_ICE,AMH_ERRMAT,AMV_ERRMA,TLM_REQ_C",
+        "skipUrlSync": false,
+        "type": "constant"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-7d",
+    "to": "now"
+  },
+  "timeRangeUpdatedDuringEditOrView": false,
+  "timepicker": {},
+  "timezone": "utc",
+  "title": "ADG Timeliness",
+  "uid": "LYiLzXw8k",
+  "weekStart": ""
+}

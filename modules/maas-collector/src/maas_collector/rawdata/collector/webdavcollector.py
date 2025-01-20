@@ -1,5 +1,6 @@
 """Extract files from Webdav"""
-from dataclasses import dataclass
+
+from dataclasses import dataclass, field
 import json
 import os
 import requests
@@ -24,7 +25,9 @@ from maas_collector.rawdata.collector.httpmixin import HttpMixin
 from maas_collector.rawdata.collector.http.authentication import build_authentication
 
 
-@dataclass
+# Désactive la génération automatique de __repr__ pour pouvoir utiliser
+# celui du parent qui masque les données sensible comme les mot de passe
+@dataclass(repr=False)
 class WebDAVCollectorConfiguration(FileCollectorConfiguration):
     """Configuration for Webdav collector"""
 
@@ -40,7 +43,7 @@ class WebDAVCollectorConfiguration(FileCollectorConfiguration):
 
     client_username: str = ""
 
-    client_password: str = ""
+    client_password: str = field(default="", metadata={"sensitive": True})
 
     interface_name: str = ""
 
@@ -276,3 +279,17 @@ class WebDAVCollector(FileCollector, HttpMixin):
 
                 if not 200 <= response.status_code < 300:
                     raise ValueError(f"{response.content}")
+
+    @classmethod
+    def attributs_url(cls):
+        return super().attributs_url() + ["client_url", "token_url"]
+
+    @classmethod
+    def document(cls, config: WebDAVClient):
+        information = super().document(config)
+        information |= {
+            "protocol": "HTTP(S) - WebDAV",
+            "auth_method": getattr(config, "auth_method", "No auth"),
+            "auth_user": getattr(config, "client_username"),
+        }
+        return information

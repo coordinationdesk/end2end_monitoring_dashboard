@@ -1,0 +1,814 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 10,
+      "panels": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "gridPos": {
+            "h": 19,
+            "w": 24,
+            "x": 0,
+            "y": 1
+          },
+          "id": 11,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "The System Technical Budget Tables - Aquisition is based on \n\n- the data budget reference document [\\[ESA-EOPG-EOPGC-TN-9\\] CSC Operations \u2013 ESA Framework \u2013 System Technical Budget.pdf](https://omcs.atlassian.net/wiki/download/attachments/66158618/%5BESA-EOPG-EOPGC-TN-9%5D%20CSC%20Operations%20%E2%80%93%20ESA%20Framework%20%E2%80%93%20System%20Technical%20Budget.pdf?api=v2).\n- the data flow reference document [\\[ESA-EOPG-EOPGC-TN-58\\] CSC GS Data Flow Configuration.pdf](https://omcs.atlassian.net/wiki/download/attachments/66158618/%5BESA-EOPG-EOPGC-TN-58%5D%20CSC%20GS%20Data%20Flow%20Configuration.pdf?api=v2).\n\nData flow document extraction is visible in the [\"Data Flow dashboard\"](./d/MfmL_E4Vz/golden-rules-and-data-flow?orgId=1) \n\n# Data selected\n\nFrom [\\[ESA-EOPG-EOPGC-TN-9\\] CSC Operations \u2013 ESA Framework \u2013 System Technical Budget.pdf](https://omcs.atlassian.net/wiki/download/attachments/66158618/%5BESA-EOPG-EOPGC-TN-9%5D%20CSC%20Operations%20%E2%80%93%20ESA%20Framework%20%E2%80%93%20System%20Technical%20Budget.pdf?api=v2) document some assuption are made to provide the System Technical Budget dashboards.\n\nFor System Technical Budget Tables - Aquisition the data From DSIB are selected.\n\n - Section Data Aquisition data from DSIB files.\n\n\n**Data collection** are considered as consistent since **01/08/2022**\n\n**Data collection** for **aquisition** are considered as consistent since **15/03/2023**\n\nValues are mean by downlink (2 channels) by satellite number in mission. (i.e. S1 1 satellite, S2 mean of 2 satellite, S3 mean of 2 satellite; S5 1 satellite )\n\n# Annexes\n\n## Product type selected\n\nThere is no Product type, level or timleiness concept for information about passes transfers.\n\n# Dashboard usage\n\nOn left top of the dashboard the mean combobox allow to select mean period:\n\n- none: values for the selected period.\n- by day: values are divided by the number of seconds in the selected periode divided by the number of seconds in 1 day.\n- by week: values are divided by the number of seconds in the selected periode divided by the number of seconds in 7 day.\n- by month: values are divided by the number of seconds in the selected periode divided by the number of seconds in 30 day.\n- by year: values are divided by the number of seconds in the selected periode divided by the number of seconds in 365 day.\n\n\nTime reference for this dashboard is : time_created\n\nImportant notice : Tables & timelines can only display up to 10 000 entries. Please make use of filters to narrow down the retrieved data and get a more realistic view.",
+            "mode": "markdown"
+          },
+          "pluginVersion": "11.0.0",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [
+                {
+                  "field": "sensing_start_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "",
+              "refId": "A",
+              "timeField": "sensing_start_date"
+            }
+          ],
+          "title": "Help",
+          "type": "text"
+        }
+      ],
+      "title": "Dashboard description",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 76,
+      "panels": [],
+      "title": "Data Acquisition",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "S1"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "S2"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "S3"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#848484",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "S5"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Total"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 2
+      },
+      "id": 73,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "alias": "S1",
+          "bucketAggs": [
+            {
+              "field": "mission",
+              "id": "7",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "S1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE0BF01AC3817A56D"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "TotalVolume",
+              "id": "1",
+              "settings": {
+                "script": "(_value/2/1099511627776L)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "mission:S1",
+          "refId": "S1",
+          "timeField": "planned_data_start"
+        },
+        {
+          "alias": "S2",
+          "bucketAggs": [
+            {
+              "field": "mission",
+              "id": "7",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "S2",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE0BF01AC3817A56D"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "TotalVolume",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2/2)/1099511627776L)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "mission:S2",
+          "refId": "S2",
+          "timeField": "planned_data_start"
+        },
+        {
+          "alias": "S3",
+          "bucketAggs": [
+            {
+              "field": "mission",
+              "id": "7",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "S3",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE0BF01AC3817A56D"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "TotalVolume",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2/2)/1099511627776L)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "mission:S3",
+          "refId": "S3",
+          "timeField": "planned_data_start"
+        },
+        {
+          "alias": "S5",
+          "bucketAggs": [
+            {
+              "field": "mission",
+              "id": "7",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "S5",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P7A7ACE4A571C05C7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "data_size",
+              "id": "1",
+              "settings": {
+                "script": "(_value/2/1099511627776L)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "mission:S5",
+          "refId": "S5",
+          "timeField": "time_created"
+        }
+      ],
+      "title": "Downlinked data volume (TiB)",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "field": "mission"
+              }
+            ]
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "S1"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-blue",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "S2"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "S3"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "#848484",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "S5"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "semi-dark-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Total"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "light-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 24,
+        "x": 0,
+        "y": 10
+      },
+      "id": 74,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "alias": "S1",
+          "bucketAggs": [
+            {
+              "field": "mission",
+              "id": "7",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "S1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE0BF01AC3817A56D"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "mission:S1",
+          "refId": "S1",
+          "timeField": "planned_data_start"
+        },
+        {
+          "alias": "S2",
+          "bucketAggs": [
+            {
+              "field": "mission",
+              "id": "7",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "S2",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE0BF01AC3817A56D"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2/2)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "mission:S2",
+          "refId": "S2",
+          "timeField": "time_created"
+        },
+        {
+          "alias": "S3",
+          "bucketAggs": [
+            {
+              "field": "mission",
+              "id": "7",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "S3",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE0BF01AC3817A56D"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2/2)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "mission:S3",
+          "refId": "S3",
+          "timeField": "time_created"
+        },
+        {
+          "alias": "S5",
+          "bucketAggs": [
+            {
+              "field": "mission",
+              "id": "7",
+              "settings": {
+                "min_doc_count": "1",
+                "missing": "S5",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P7A7ACE4A571C05C7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)/((${__to:date:seconds}-${__from:date:seconds})/${mean_period})"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "mission:S5",
+          "refId": "S5",
+          "timeField": "time_created"
+        }
+      ],
+      "title": "Downlink number",
+      "transformations": [
+        {
+          "id": "merge",
+          "options": {}
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "fields": {},
+            "sort": [
+              {
+                "field": "mission"
+              }
+            ]
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Count": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "Bucket Script": "Count",
+              "mission": "",
+              "year\\mission": "mission"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [
+    "System Technical budget"
+  ],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": "none",
+          "value": "(${__to:date:seconds}-${__from:date:seconds})"
+        },
+        "description": "Select mean interval on the period: none (value on the period), by day, by week (day * 7), by month (day * 30), by year (day * 365)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Mean",
+        "multi": false,
+        "name": "mean_period",
+        "options": [
+          {
+            "selected": true,
+            "text": "none",
+            "value": "(${__to:date:seconds}-${__from:date:seconds})"
+          },
+          {
+            "selected": false,
+            "text": "by day",
+            "value": "86400"
+          },
+          {
+            "selected": false,
+            "text": "by week",
+            "value": "604800"
+          },
+          {
+            "selected": false,
+            "text": "by month",
+            "value": "2592000"
+          },
+          {
+            "selected": false,
+            "text": "by year",
+            "value": "31536000"
+          }
+        ],
+        "query": "by day : 86400, by week : 604800, by month : 2592000, by year : 31536000",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-5y",
+    "to": "now"
+  },
+  "timeRangeUpdatedDuringEditOrView": false,
+  "timepicker": {},
+  "timezone": "utc",
+  "title": "System Technical Budget Table - Acquisition",
+  "uid": "9jt42U2Vz",
+  "weekStart": ""
+}

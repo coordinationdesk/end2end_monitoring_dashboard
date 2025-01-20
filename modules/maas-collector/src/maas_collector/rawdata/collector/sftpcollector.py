@@ -1,4 +1,5 @@
 """Extract files from SFTP server"""
+
 from dataclasses import dataclass
 import os
 import time
@@ -519,3 +520,16 @@ class SFTPCollector(FileCollector):
             dowload_duration,
             size / 1024 / dowload_duration,
         )
+
+    @classmethod
+    def attributs_url(cls):
+        return super().attributs_url() + ["hostname"]
+
+    @classmethod
+    def document(cls, config: SFTPConfiguration):
+        information = super().document(config)
+        information |= {
+            "protocol": "SFTP",
+            "auth_user": getattr(config, "client_username"),
+        }
+        return information

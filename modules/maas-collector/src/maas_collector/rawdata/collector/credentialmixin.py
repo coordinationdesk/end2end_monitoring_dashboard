@@ -3,6 +3,7 @@
 Contains CredentialMixin class that add capability to load a json configuration file
 for credential storage and populate interface configuration with credential info.
 """
+
 import json
 import logging
 import os
@@ -64,24 +65,31 @@ class CredentialMixin:
         Raises:
             KeyError: if no credentials are found
         """
-        try:
-            if_dict = credential_dict[config.interface_name]
 
-            for name, value in if_dict.items():
-                if not hasattr(config, name):
-                    LOGGER.warning(
-                        "%s %s has not attribute %s",
-                        config.__class__.__name__,
-                        config.interface_name,
-                        name,
-                    )
-                setattr(config, name, value)
-
-        except KeyError as error:
+        if (
+            config.interface_credentials not in credential_dict
+            and config.interface_name not in credential_dict
+        ):
             LOGGER.warning(
                 "No credential configuration found for interface %s",
                 config.interface_name,
             )
+            return
+
+        if_dict = {
+            **credential_dict.get(config.interface_credentials, {}),
+            **credential_dict.get(config.interface_name, {}),
+        }
+
+        for name, value in if_dict.items():
+            if not hasattr(config, name):
+                LOGGER.warning(
+                    "%s %s has not attribute %s",
+                    config.__class__.__name__,
+                    config.interface_name,
+                    name,
+                )
+            setattr(config, name, value)
 
     def load_credentials(self, credential_file: str):
         """load credential file and populate configurations with username, password ...

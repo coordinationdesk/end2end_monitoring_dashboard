@@ -21,12 +21,12 @@ class ZuluDate(Date):
 
         # common case
         if isinstance(data, datetime.datetime):
-            return data.strftime("%Y-%m-%dT%H:%M:%S.%f")[:-3] + "Z"
+            return data.strftime("%04Y-%02m-%02dT%02H:%02M:%S.%f")[:-3] + "Z"
 
         # less common
         if isinstance(data, str) and data[-1] != "Z":
             data = dateutil.parser.parse(data).astimezone(dateutil.tz.UTC)
-            return data.strftime("%Y-%m-%dT%H:%M:%S.%f")[:-3] + "Z"
+            return data.strftime("%04Y-%2m-%2dT%H:%M:%S.%f")[:-3] + "Z"
 
         return data
 
@@ -42,6 +42,6 @@ class ZuluDate(Date):
 
         data = super()._deserialize(data)
         # normalize UTC
-        if data.tzinfo != dateutil.tz.UTC:
-            data = data.astimezone(dateutil.tz.UTC)
+        if data.tzinfo != datetime.timezone.utc:
+            data = data.astimezone(datetime.timezone.utc)
         return data

@@ -1,30 +1,30 @@
 """Extract files from JIRA rest API"""
+
 import base64
-from dataclasses import dataclass
 import datetime
 import json
 import os
 import pathlib
-from urllib.parse import urlparse
+from dataclasses import dataclass, field
 from typing import Any, Dict
 
 import dateutil.parser
 import jira
 import jira.resources
-
 from maas_collector.rawdata.collector.filecollector import (
     FileCollector,
     FileCollectorConfiguration,
 )
-
 from maas_collector.rawdata.collector.journal import (
-    CollectorJournal,
     CollectingInProgressError,
+    CollectorJournal,
     NoRefreshException,
 )
 
 
-@dataclass
+# Désactive la génération automatique de __repr__ pour pouvoir utiliser
+# celui du parent qui masque les données sensible comme les mot de passe
+@dataclass(repr=False)
 class JiraExtendedCollectorConfiguration(FileCollectorConfiguration):
     """Configuration for Jira collection"""
 
@@ -36,13 +36,13 @@ class JiraExtendedCollectorConfiguration(FileCollectorConfiguration):
 
     username: str = ""
 
-    password: str = ""
+    password: str = field(default="", metadata={"sensitive": True})
 
-    token: str = ""
+    token: str = field(default="", metadata={"sensitive": True})
 
     proxy_login: str = ""
 
-    proxy_password: str = ""
+    proxy_password: str = field(default="", metadata={"sensitive": True})
 
     ingest_attachements: bool = False
 
@@ -389,3 +389,21 @@ class JIRAExtendedCollector(FileCollector):
         except (jira.JIRAError, ConnectionError) as error:
             config.status = "KO"
             raise error
+
+    @classmethod
+    def attributs_url(cls):
+        return super().attributs_url() + ["end_point"]
+
+    @classmethod
+    def document(cls, config: JiraExtendedCollectorConfiguration):
+        information = super().document(config)
+
+        auth_method = getattr(config, "auth_method", "No auth")
+        if config.has_proxy_auth:
+            auth_method += f" - with proxy {config.proxy_login}"
+        information |= {
+            "protocol": "HTTP(S)",
+            "auth_method": auth_method,
+            "auth_user": getattr(config, "username"),
+        }
+        return information

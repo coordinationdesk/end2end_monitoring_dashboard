@@ -1,6 +1,6 @@
 # `JSONExtractor`
 
-```eval_rst
+```{eval-rst}
 :class:`maas_collector.rawdata.extractors.JSONExtractor`
 ` uses the :py:mod:`json` module of the python standard library to read files and [jsonpath-ng](https://github.com/h2non/jsonpath-ng) module to evaluate JSONPath expression.
 ```
@@ -18,7 +18,7 @@ Given the following extractor configuration:
     "class": "JSONExtractor",
     "args": {
       "attr_map": {
-        "fieldName": "$.key1.key2.key3",
+        "fieldName": "$.key1.key2.key3"
       }
     }
   }
@@ -29,11 +29,11 @@ And this input file:
 
 ```json
 {
-    "key1": {
-        "key2": {
-            "key3": "value"
-        }
+  "key1": {
+    "key2": {
+      "key3": "value"
     }
+  }
 }
 ```
 

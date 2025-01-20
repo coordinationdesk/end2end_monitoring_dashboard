@@ -11,6 +11,9 @@ import signal
 import time
 import traceback
 import typing
+import socket
+
+from urllib.parse import urlparse
 
 from functools import cached_property
 
@@ -119,6 +122,8 @@ class FileCollectorConfiguration:
 
     interface_name: str = ""
 
+    interface_credentials: str = ""
+
     file_routing_key: str = ""
 
     no_probe: bool = False
@@ -140,6 +145,28 @@ class FileCollectorConfiguration:
         else:
             model_name = "NoneType"
         return model_name
+
+    def __repr__(self):
+        # Liste pour stocker les éléments de représentation
+        repr_parts = []
+        # Parcours de tous les champs définis dans la classe
+        for field in dataclasses.fields(self):
+            # Récupère la valeur du champ
+            field_value = (
+                "*******"  # Si le champ est marqué comme sensible, afficher "*******"
+                if field.metadata.get(
+                    "sensitive", False
+                )  # Vérifie si le champ est sensible via les métadonnées
+                else getattr(
+                    self, field.name
+                )  # Sinon, récupérer la valeur réelle du champ
+            )
+
+            # Ajouter la représentation du champ à la liste
+            repr_parts.append(f"{field.name}={field_value!r}")
+
+        # Retourne la représentation de l'objet sous forme de chaîne de caractères
+        return f"{self.__class__.__name__}({', '.join(repr_parts)})"
 
     def get_id_func(self) -> typing.Callable[[dict], str]:
         """build a callable to generate a unique identifier for a data extract dict
@@ -347,7 +374,7 @@ class FileCollector(CredentialMixin):
 
     def setup(self):
         """Load rawdata extraction configuration, connect to AMQP and opensearch"""
-        # load json configuratio
+        # load json configuration
         self.load_config()
 
         # connect to amqp
@@ -633,11 +660,17 @@ class FileCollector(CredentialMixin):
         if not self.should_stop_loop:
             self.on_ingest_finish(path, errors)
 
+    def build_healthcheck(self) -> health.ServiceHealthCheck:
+        """Factory function to create an ServiceHealthCheck service to be used by the collector
+
+        Returns:
+            health.ServiceHealthCheck: HealthCheck service to be used by the collector
+        """
+        return health.ServiceHealthCheck(self, self.args.healthcheck_timeout)
+
     def start_healthcheck(self):
         """create healthcheck object and start the healthcheck server thread"""
-        self._healthcheck = health.ServiceHealthCheck(
-            self, self.args.healthcheck_timeout
-        )
+        self._healthcheck = self.build_healthcheck()
         self._healthcheck.tick()
 
         self._health_thread = ServerThread(
@@ -925,3 +958,47 @@ class FileCollector(CredentialMixin):
             f"({cls.__name__}) is not yet implemented"
         )
         probe_data.status_code = -1
+
+    @classmethod
+    def attributs_url(cls):
+        return []
+
+    @classmethod
+    def document(cls, config: FileCollectorConfiguration):
+        information = {
+            "__documentation__": "Only used on manual operation",
+            "maas_collector": cls.__name__,
+            "maas_collector_config": config.__class__.__name__,
+            "maas_interface_name": config.interface_name,
+            "maas_interface_model": config.model,
+            "protocol": "Filesystem",
+        }
+
+        attributs_url = cls.attributs_url()
+        for attribut_url in attributs_url:
+            url = getattr(config, attribut_url, None)
+            if url:
+
+                parsed_url = urlparse(url)
+
+                hostname = parsed_url.netloc
+
+                # Résoudre les adresses IP
+                information[attribut_url] = url
+                url_ip_field_name = f"{attribut_url}_ip"
+
+                # bypass kube svc
+                if hostname.endswith(".svc.cluster.local"):
+                    information[url_ip_field_name] = "Internal services"
+                    continue
+
+                information[url_ip_field_name] = "Faile to retrieve this"
+
+                try:
+                    host_info = socket.gethostbyname_ex(hostname)
+                    ip_addresses = host_info[2]
+                    information[url_ip_field_name] = ip_addresses
+                except socket.error as err:
+                    print(f"Erreur lors de la résolution des adresses IP : {err}")
+
+        return information

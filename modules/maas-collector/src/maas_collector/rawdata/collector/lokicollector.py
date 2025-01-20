@@ -1,4 +1,5 @@
 """Extract Loki json files from HTTP rest API"""
+
 from dataclasses import dataclass
 
 from maas_collector.rawdata.collector.httpcollector import (
@@ -64,3 +65,16 @@ class LokiCollector(HttpCollector, HttpMixin):
         str_v1 = f"{config.get_config_product_url()}/ready"
         probe_query_dict = {"v1": str_v1}
         return probe_query_dict[config.protocol_version]
+
+    @classmethod
+    def attributs_url(cls):
+        return super().attributs_url() + ["end_point"]
+
+    @classmethod
+    def document(cls, config: LokiCollectorConfiguration):
+        information = super().document(config)
+
+        information |= {
+            "protocol": "HTTP(S)",
+        }
+        return information

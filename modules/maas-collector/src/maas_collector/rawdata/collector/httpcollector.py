@@ -1,12 +1,13 @@
 """Extract files from HTTP rest API"""
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import datetime
 import gc
 import json
 import os
 from time import sleep
 import typing
+
 
 from urllib3.util.retry import Retry
 
@@ -37,7 +38,9 @@ from maas_collector.rawdata.collector.http.abstract_query_strategy import (
 from maas_collector.rawdata.collector.http.authentication import build_authentication
 
 
-@dataclass
+# Désactive la génération automatique de __repr__ pour pouvoir utiliser
+# celui du parent qui masque les données sensible comme les mot de passe
+@dataclass(repr=False)
 class HttpCollectorConfiguration(FileCollectorConfiguration):
     """Configuration for Http collection"""
 
@@ -49,7 +52,13 @@ class HttpCollectorConfiguration(FileCollectorConfiguration):
 
     auth_method: str = ""
 
+    token: str = field(default="", metadata={"sensitive": True})
+
     token_field_header: str = ""
+
+    http_query_params: str = ""
+
+    auth_timeout: int = 120
 
     def get_config_product_url(self):
         """Retrieve the product_url field from the collector configuration
@@ -491,3 +500,20 @@ class HttpCollector(FileCollector, HttpMixin):
                 )
 
         return "OK"
+
+    @classmethod
+    def attributs_url(cls):
+        return super().attributs_url() + ["product_url", "token_url"]
+
+    @classmethod
+    def document(cls, config: HttpCollectorConfiguration):
+        information = super().document(config)
+        information |= {
+            "protocol": "HTTP(S)",
+            "auth_method": getattr(config, "auth_method", "No auth"),
+        }
+
+        if hasattr(config, "auth_method") and getattr(config, "auth_method"):
+            information |= {"auth_user": getattr(config, "client_username")}
+
+        return information

@@ -1,0 +1,1397 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 87,
+      "panels": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "gridPos": {
+            "h": 14,
+            "w": 11,
+            "x": 0,
+            "y": 1
+          },
+          "id": 34,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "# Hello ${__user.login},\n\nHere are some indications on this board:\n\n####  This dashboard shows the number of products collected by **ingestion time**\n\n## Journal\n\n\u2b05 Last collect date must not be longer than the refresh_interval of the interface or the loop interval on the collector\n \n * Last collection date shows the last date where the collector has run on the interface\n * Last production date shows the time from now of the last colleted production\n * Tick date shows a colletor is running and had reserve the slot of collection from this time\n\n## Collection details\n\n\u2b07 Click on group tabs to view details on the collection during the period",
+            "mode": "markdown"
+          },
+          "pluginVersion": "9.2.15",
+          "targets": [
+            {
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "refId": "A"
+            }
+          ],
+          "transparent": true,
+          "type": "text"
+        }
+      ],
+      "title": "Description",
+      "type": "row"
+    },
+    {
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 85,
+      "title": "Collect Monitoring",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PE6A9DBACC21472D6"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 60,
+          "min": -10,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "purple",
+                "value": null
+              },
+              {
+                "color": "#6ED0E0",
+                "value": 0
+              },
+              {
+                "color": "#EAB839",
+                "value": 15
+              },
+              {
+                "color": "red",
+                "value": 60
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "freshness_indicator_minutes"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "m"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "mode": "thresholds"
+                }
+              },
+              {
+                "id": "unit",
+                "value": "m"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 24,
+        "x": 0,
+        "y": 2
+      },
+      "id": 83,
+      "options": {
+        "displayMode": "basic",
+        "minVizHeight": 1,
+        "minVizWidth": 0,
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^freshness_indicator_minutes$/",
+          "values": true
+        },
+        "showUnfilled": true
+      },
+      "pluginVersion": "9.2.15",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE6A9DBACC21472D6"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "100"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "",
+          "refId": "A",
+          "timeField": "last_collect_date"
+        }
+      ],
+      "timeFrom": "1y",
+      "title": "Journal",
+      "transformations": [
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "time",
+                "targetField": "last_collect_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "last_date"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "freshness_indicator",
+            "binary": {
+              "left": "last_collect_date",
+              "operator": "-",
+              "reducer": "sum",
+              "right": "last_date"
+            },
+            "mode": "binary",
+            "reduce": {
+              "include": [
+                "last_date"
+              ],
+              "reducer": "allValues"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "freshness_indicator_minutes",
+            "binary": {
+              "left": "freshness_indicator",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "60000000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "_index": true,
+              "_type": true,
+              "highlight": true,
+              "raw_last_publication_date": false,
+              "sort": true,
+              "tick_collect_date": true
+            },
+            "indexByName": {
+              "_id": 0,
+              "_index": 2,
+              "_type": 3,
+              "highlight": 4,
+              "last_collect_date": 1,
+              "last_date": 5,
+              "raw_last_publication_date": 6,
+              "sort": 7,
+              "tick_collect_date": 8
+            },
+            "renameByName": {
+              "_id": "Interface Name",
+              "_index": "",
+              "freshness_indicator": "",
+              "freshness_indicator_minutes": "",
+              "last_collect_date": "Last Collect Date",
+              "last_date": "Last Product Publication Date",
+              "raw_last_publication_date": "Last Product Publication Date",
+              "tick_collect_date": "Tick Collect Date"
+            }
+          }
+        }
+      ],
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PE6A9DBACC21472D6"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "displayMode": "auto",
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "last_date"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dateTimeFromNow"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Last Collect Date"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dateTimeFromNow"
+              },
+              {
+                "id": "custom.width",
+                "value": 148
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "tick_collect_date"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dateTimeFromNow"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Last Product Publication Date"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 218
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "raw_last_publication_date"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dateTimeAsSystem"
+              },
+              {
+                "id": "custom.width",
+                "value": 229
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 14,
+        "w": 13,
+        "x": 0,
+        "y": 14
+      },
+      "id": 20,
+      "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          },
+          {
+            "desc": true,
+            "displayName": "Last Product Publication Date"
+          }
+        ]
+      },
+      "pluginVersion": "9.2.15",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PE6A9DBACC21472D6"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "10000"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "",
+          "refId": "A",
+          "timeField": "last_collect_date"
+        }
+      ],
+      "timeFrom": "1y",
+      "title": "Journal",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "raw_last_publication_date",
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "last_date"
+              ],
+              "reducer": "allValues"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "_index": true,
+              "_type": true,
+              "highlight": true,
+              "sort": true
+            },
+            "indexByName": {
+              "_id": 0,
+              "_index": 2,
+              "_type": 3,
+              "highlight": 4,
+              "last_collect_date": 1,
+              "last_date": 5,
+              "raw_last_publication_date": 6,
+              "sort": 7,
+              "tick_collect_date": 8
+            },
+            "renameByName": {
+              "_id": "Interface Name",
+              "_index": "",
+              "last_collect_date": "Last Collect Date",
+              "last_date": "Last Product Publication Date",
+              "raw_last_publication_date": "Last Product Publication Date",
+              "tick_collect_date": "Tick Collect Date"
+            }
+          }
+        },
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "string",
+                "targetField": "raw_last_publication_date"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "dateFormat": "YYYY-MM-DDThh:mm:ss.SSS",
+                "destinationType": "time",
+                "targetField": "raw_last_publication_date"
+              }
+            ],
+            "fields": {}
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "${ds}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 2.4,
+        "x": 0,
+        "y": 28
+      },
+      "id": 46,
+      "maxPerRow": 12,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "value"
+      },
+      "pluginVersion": "9.2.15",
+      "repeat": "ds",
+      "repeatDirection": "h",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "ingestionTime",
+              "id": "2",
+              "settings": {
+                "interval": "1d",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "${ds}"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "",
+          "refId": "A",
+          "timeField": "ingestionTime"
+        }
+      ],
+      "title": "${ds}",
+      "type": "stat"
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P4E6B5BC91908CBD9"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 35
+      },
+      "id": 6,
+      "panels": [],
+      "repeat": "ds",
+      "targets": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "refId": "A"
+        }
+      ],
+      "title": "$ds",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "${ds}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 2,
+        "x": 0,
+        "y": 36
+      },
+      "id": 4,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "textMode": "value_and_name"
+      },
+      "pluginVersion": "9.2.15",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "interface_name",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "asc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "${ds}"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "",
+          "refId": "A",
+          "timeField": "ingestionTime"
+        }
+      ],
+      "title": "Total",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "${ds}"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": -1,
+            "drawStyle": "bars",
+            "fillOpacity": 23,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 4,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Time"
+            },
+            "properties": [
+              {
+                "id": "custom.axisLabel",
+                "value": "Ingestion Time"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value"
+            },
+            "properties": [
+              {
+                "id": "custom.axisLabel",
+                "value": "Product Count"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 22,
+        "x": 2,
+        "y": 36
+      },
+      "id": 2,
+      "maxDataPoints": 1000,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.3.1",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "interface_name",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "0",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "ingestionTime",
+              "id": "2",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "${ds}"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "*",
+          "refId": "A",
+          "timeField": "ingestionTime"
+        }
+      ],
+      "title": "Collect $ds",
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 37,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "hide": 0,
+        "includeAll": true,
+        "label": "DataSource",
+        "multi": true,
+        "name": "ds",
+        "options": [],
+        "query": "elasticsearch",
+        "queryValue": "",
+        "refresh": 1,
+        "regex": "/.*-alias/",
+        "skipUrlSync": false,
+        "type": "datasource"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-2d",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Data Collection monitoring",
+  "uid": "7J0p62_nk",
+  "weekStart": ""
+}

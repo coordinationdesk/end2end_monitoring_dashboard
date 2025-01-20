@@ -12,33 +12,33 @@ Also, it does not use the leaky pysftp api but raw paramiko api calls.
 """
 
 import base64
-from dataclasses import dataclass
 import datetime
 import os
+from dataclasses import dataclass, field
 from io import StringIO
+
 import paramiko
-
-
+from maas_collector.rawdata.collector.filecollector import (
+    CollectorArgs,
+    FileCollector,
+    FileCollectorConfiguration,
+)
 from maas_collector.rawdata.collector.journal import (
-    CollectorJournal,
     CollectingInProgressError,
+    CollectorJournal,
     NoRefreshException,
 )
 
-from maas_collector.rawdata.collector.filecollector import (
-    FileCollector,
-    FileCollectorConfiguration,
-    CollectorArgs,
-)
 
-
-@dataclass
+# Désactive la génération automatique de __repr__ pour pouvoir utiliser
+# celui du parent qui masque les données sensible comme les mot de passe
+@dataclass(repr=False)
 class ReadOnlySFTPCollectorConfiguration(FileCollectorConfiguration):
     """Store Read-Only SFTP configuration vars"""
 
     client_username: str = ""
 
-    client_password: str = ""
+    client_password: str = field(default="", metadata={"sensitive": True})
 
     client_keyfile: str = ""
 
@@ -330,3 +330,16 @@ class ReadOnlySFTPCollector(FileCollector):
 
         finally:
             transport.close()
+
+    @classmethod
+    def attributs_url(cls):
+        return super().attributs_url() + ["hostname"]
+
+    @classmethod
+    def document(cls, config: ReadOnlySFTPCollectorConfiguration):
+        information = super().document(config)
+        information |= {
+            "protocol": "SFTP (readonly)",
+            "auth_user": getattr(config, "client_username"),
+        }
+        return information

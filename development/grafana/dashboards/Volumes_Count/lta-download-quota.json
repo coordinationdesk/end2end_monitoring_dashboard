@@ -1,0 +1,2076 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 55,
+      "panels": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "description": "",
+          "gridPos": {
+            "h": 5,
+            "w": 24,
+            "x": 0,
+            "y": 9
+          },
+          "id": 53,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "This dashobard provide metrics (mainly count and volume) exposed by LTA\n\nNote: For CloudFerro we are waiting for them exposing of their metrics\n\nThe information displayed was originally taken from Metrics at LTA  \n\nTime reference for this dashboard is : timestamp\n\nImportant notice : Tables & timelines can only display up to 10 000 entries. Please make use of filters to narrow down the retrieved data and get a more realistic view.",
+            "mode": "markdown"
+          },
+          "pluginVersion": "11.0.0",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [
+                {
+                  "field": "sensing_start_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "",
+              "refId": "A",
+              "timeField": "sensing_start_date"
+            }
+          ],
+          "type": "text"
+        }
+      ],
+      "title": "Dashboard Description",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 28,
+      "panels": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P0A605902E87638CC"
+          },
+          "description": "",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisGridShow": true,
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "area"
+                }
+              },
+              "mappings": [],
+              "noValue": "0",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 10000000000000
+                  }
+                ]
+              },
+              "unit": "decbytes"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 24,
+            "x": 0,
+            "y": 2
+          },
+          "id": 41,
+          "maxDataPoints": 20,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": false
+            },
+            "tooltip": {
+              "maxHeight": 600,
+              "mode": "multi",
+              "sort": "desc"
+            }
+          },
+          "pluginVersion": "9.2.15",
+          "targets": [
+            {
+              "alias": "a",
+              "bucketAggs": [
+                {
+                  "field": "timestamp",
+                  "id": "6",
+                  "settings": {
+                    "interval": "1h",
+                    "min_doc_count": "1",
+                    "timeZone": "utc",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P0A605902E87638CC"
+              },
+              "metrics": [
+                {
+                  "field": "counter",
+                  "id": "1",
+                  "type": "sum"
+                }
+              ],
+              "query": "satellite_unit : $satellite AND \nmission: $mission AND \nproduction_service_name: $lta AND \nmetric_name: download AND\nmetric_sub_type : \"size\"",
+              "refId": "A",
+              "timeField": "timestamp"
+            },
+            {
+              "alias": "b",
+              "bucketAggs": [
+                {
+                  "field": "timestamp",
+                  "id": "6",
+                  "settings": {
+                    "interval": "1h",
+                    "min_doc_count": "1",
+                    "offset": "1h",
+                    "timeZone": "utc",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P0A605902E87638CC"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "field": "counter",
+                  "id": "1",
+                  "type": "sum"
+                }
+              ],
+              "query": "satellite_unit : $satellite AND \nmission: $mission AND \nproduction_service_name: $lta AND \nmetric_name: download AND\nmetric_sub_type : \"size\"",
+              "refId": "B",
+              "timeField": "timestamp"
+            }
+          ],
+          "title": "Downloaded volume over time",
+          "transformations": [
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "Diff",
+                "binary": {
+                  "left": "b",
+                  "operator": "-",
+                  "right": "a"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "include": [],
+                  "reducer": "sum"
+                },
+                "replaceFields": true
+              }
+            }
+          ],
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P0A605902E87638CC"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "noValue": "0",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              },
+              "unit": "decbytes"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 24,
+            "x": 0,
+            "y": 8
+          },
+          "id": 60,
+          "maxDataPoints": 10,
+          "maxPerRow": 6,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": false
+            },
+            "tooltip": {
+              "maxHeight": 600,
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "9.2.15",
+          "repeat": "lta",
+          "repeatDirection": "h",
+          "targets": [
+            {
+              "alias": "a",
+              "bucketAggs": [
+                {
+                  "field": "timestamp",
+                  "id": "6",
+                  "settings": {
+                    "interval": "1h",
+                    "min_doc_count": "0",
+                    "timeZone": "utc",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P0A605902E87638CC"
+              },
+              "metrics": [
+                {
+                  "field": "counter",
+                  "id": "1",
+                  "type": "sum"
+                }
+              ],
+              "query": "satellite_unit : $satellite AND \nmission: $mission AND \nproduction_service_name: $lta AND \nmetric_name: download AND\nmetric_sub_type : \"size\"",
+              "refId": "A",
+              "timeField": "timestamp"
+            },
+            {
+              "alias": "b",
+              "bucketAggs": [
+                {
+                  "field": "timestamp",
+                  "id": "6",
+                  "settings": {
+                    "interval": "1h",
+                    "min_doc_count": "0",
+                    "offset": "1h",
+                    "timeZone": "utc",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P0A605902E87638CC"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "field": "counter",
+                  "id": "1",
+                  "type": "sum"
+                }
+              ],
+              "query": "satellite_unit : $satellite AND \nmission: $mission AND \nproduction_service_name: $lta AND \nmetric_name: download AND\nmetric_sub_type : \"size\"",
+              "refId": "B",
+              "timeField": "timestamp"
+            }
+          ],
+          "title": "Downloaded volume over time for $lta",
+          "transformations": [
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "Diff",
+                "binary": {
+                  "left": "b",
+                  "operator": "-",
+                  "right": "a"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                },
+                "replaceFields": true
+              }
+            },
+            {
+              "disabled": true,
+              "id": "renameByRegex",
+              "options": {
+                "regex": "",
+                "renamePattern": "$1"
+              }
+            }
+          ],
+          "type": "timeseries"
+        }
+      ],
+      "title": "Overall LTA Downloaded Volume",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 2
+      },
+      "id": 14,
+      "panels": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P0A605902E87638CC"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "fieldMinMax": false,
+              "mappings": [],
+              "noValue": "0",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              },
+              "unit": "decbytes"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 4,
+            "x": 0,
+            "y": 3
+          },
+          "id": 108,
+          "maxDataPoints": 10,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "sum"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showPercentChange": false,
+            "textMode": "value",
+            "wideLayout": true
+          },
+          "pluginVersion": "11.0.0",
+          "targets": [
+            {
+              "alias": "a",
+              "bucketAggs": [
+                {
+                  "field": "timestamp",
+                  "id": "7",
+                  "settings": {
+                    "interval": "1h",
+                    "min_doc_count": "0",
+                    "timeZone": "utc",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P0A605902E87638CC"
+              },
+              "metrics": [
+                {
+                  "field": "counter",
+                  "id": "1",
+                  "type": "sum"
+                }
+              ],
+              "query": "satellite_unit : $satellite AND \nmission: $mission AND \nproduction_service_name: $lta AND \nmetric_name: download AND\nmetric_sub_type : \"size\"",
+              "refId": "A",
+              "timeField": "timestamp"
+            },
+            {
+              "alias": "b",
+              "bucketAggs": [
+                {
+                  "field": "timestamp",
+                  "id": "7",
+                  "settings": {
+                    "interval": "1h",
+                    "min_doc_count": "0",
+                    "offset": "1h",
+                    "timeZone": "utc",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P0A605902E87638CC"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "field": "counter",
+                  "id": "1",
+                  "type": "sum"
+                }
+              ],
+              "query": "satellite_unit : $satellite AND \nmission: $mission AND \nproduction_service_name: $lta AND \nmetric_name: download AND\nmetric_sub_type : \"size\"",
+              "refId": "B",
+              "timeField": "timestamp"
+            }
+          ],
+          "title": "Downloaded volume for $lta",
+          "transformations": [
+            {
+              "disabled": true,
+              "id": "seriesToRows",
+              "options": {}
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "Diff",
+                "binary": {
+                  "left": "b",
+                  "operator": "-",
+                  "right": "a"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "include": [],
+                  "reducer": "sum"
+                },
+                "replaceFields": true
+              }
+            }
+          ],
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P0A605902E87638CC"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [],
+              "noValue": "0",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  }
+                ]
+              },
+              "unit": "percentunit"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 4,
+            "x": 4,
+            "y": 3
+          },
+          "id": 109,
+          "maxDataPoints": 10,
+          "options": {
+            "colorMode": "value",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "mean"
+              ],
+              "fields": "",
+              "values": false
+            },
+            "showPercentChange": false,
+            "text": {},
+            "textMode": "auto",
+            "wideLayout": true
+          },
+          "pluginVersion": "11.0.0",
+          "targets": [
+            {
+              "alias": "a",
+              "bucketAggs": [
+                {
+                  "field": "timestamp",
+                  "id": "6",
+                  "settings": {
+                    "interval": "1d",
+                    "min_doc_count": "1",
+                    "timeZone": "utc",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P0A605902E87638CC"
+              },
+              "metrics": [
+                {
+                  "field": "counter",
+                  "id": "1",
+                  "type": "sum"
+                }
+              ],
+              "query": "production_service_name: $lta AND \nmetric_name: download AND\nmetric_sub_type : \"size\"",
+              "refId": "A",
+              "timeField": "timestamp"
+            },
+            {
+              "alias": "b",
+              "bucketAggs": [
+                {
+                  "field": "timestamp",
+                  "id": "6",
+                  "settings": {
+                    "interval": "1d",
+                    "min_doc_count": "1",
+                    "offset": "1d",
+                    "timeZone": "utc",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P0A605902E87638CC"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "field": "counter",
+                  "id": "1",
+                  "type": "sum"
+                }
+              ],
+              "query": "production_service_name: $lta AND \nmetric_name: download AND\nmetric_sub_type : \"size\"",
+              "refId": "B",
+              "timeField": "timestamp"
+            }
+          ],
+          "title": "Quota Usage for $lta",
+          "transformations": [
+            {
+              "disabled": true,
+              "id": "reduce",
+              "options": {
+                "includeTimeField": false,
+                "labelsToFields": false,
+                "mode": "reduceFields",
+                "reducers": [
+                  "diff"
+                ]
+              }
+            },
+            {
+              "disabled": true,
+              "id": "calculateField",
+              "options": {
+                "mode": "reduceRow",
+                "reduce": {
+                  "include": [],
+                  "reducer": "sum"
+                },
+                "replaceFields": false
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "mode": "reduceRow",
+                "reduce": {
+                  "include": [
+                    "a",
+                    "b"
+                  ],
+                  "reducer": "delta"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "duration_ms",
+                "binary": {
+                  "left": "$__to",
+                  "operator": "-",
+                  "right": "$__from"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "include": [
+                    "Sum counter"
+                  ],
+                  "reducer": "max"
+                },
+                "replaceFields": false
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "duration_days",
+                "binary": {
+                  "left": "duration_ms",
+                  "operator": "/",
+                  "right": "86400000"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "Quota",
+                "binary": {
+                  "left": "duration_days",
+                  "operator": "*",
+                  "right": "10000000000000"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            },
+            {
+              "id": "calculateField",
+              "options": {
+                "binary": {
+                  "left": "Delta",
+                  "operator": "/",
+                  "right": "Quota"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                },
+                "replaceFields": true
+              }
+            },
+            {
+              "disabled": true,
+              "id": "calculateField",
+              "options": {
+                "alias": "QuotaUsage",
+                "binary": {
+                  "left": "1",
+                  "operator": "-",
+                  "right": "Delta / Quota"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                },
+                "replaceFields": true
+              }
+            }
+          ],
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P0A605902E87638CC"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "fixedColor": "green",
+                "mode": "fixed"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "bars",
+                "fillOpacity": 100,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "dashed"
+                }
+              },
+              "mappings": [],
+              "max": 10000000000000,
+              "noValue": "0",
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 10000000000000
+                  }
+                ]
+              },
+              "unit": "decbytes"
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 11,
+            "x": 8,
+            "y": 3
+          },
+          "id": 62,
+          "maxDataPoints": 10,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "maxHeight": 600,
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "9.2.15",
+          "targets": [
+            {
+              "alias": "a",
+              "bucketAggs": [
+                {
+                  "field": "timestamp",
+                  "id": "7",
+                  "settings": {
+                    "interval": "1d",
+                    "min_doc_count": "0",
+                    "timeZone": "utc",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P0A605902E87638CC"
+              },
+              "metrics": [
+                {
+                  "field": "counter",
+                  "id": "1",
+                  "type": "sum"
+                }
+              ],
+              "query": "satellite_unit : $satellite AND \nmission: $mission AND \nproduction_service_name: $lta AND \nmetric_name: download AND\nmetric_sub_type : \"size\"",
+              "refId": "A",
+              "timeField": "timestamp"
+            },
+            {
+              "alias": "b",
+              "bucketAggs": [
+                {
+                  "field": "timestamp",
+                  "id": "7",
+                  "settings": {
+                    "interval": "1d",
+                    "min_doc_count": "0",
+                    "offset": "1d",
+                    "timeZone": "utc",
+                    "trimEdges": "0"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P0A605902E87638CC"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "field": "counter",
+                  "id": "1",
+                  "type": "sum"
+                }
+              ],
+              "query": "satellite_unit : $satellite AND \nmission: $mission AND \nproduction_service_name: $lta AND \nmetric_name: download AND\nmetric_sub_type : \"size\"",
+              "refId": "B",
+              "timeField": "timestamp"
+            }
+          ],
+          "title": "Daily Downloaded volume for $lta",
+          "transformations": [
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "Downloaded",
+                "binary": {
+                  "left": "b",
+                  "operator": "-",
+                  "right": "a"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                },
+                "replaceFields": true
+              }
+            },
+            {
+              "disabled": true,
+              "id": "calculateField",
+              "options": {
+                "alias": "Download Quota",
+                "binary": {
+                  "left": "10000000000000",
+                  "right": "0"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                }
+              }
+            }
+          ],
+          "type": "timeseries"
+        }
+      ],
+      "repeat": "lta",
+      "repeatDirection": "h",
+      "title": "$lta LTA Downloaded Volume",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 3
+      },
+      "id": 63,
+      "panels": [],
+      "repeat": "service_name",
+      "repeatDirection": "h",
+      "title": "Downloaded volume for service $service_name ",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P0A605902E87638CC"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 0,
+        "y": 4
+      },
+      "id": 152,
+      "maxDataPoints": 10,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "alias": "a",
+          "bucketAggs": [
+            {
+              "field": "timestamp",
+              "id": "6",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P0A605902E87638CC"
+          },
+          "metrics": [
+            {
+              "field": "counter",
+              "id": "1",
+              "type": "sum"
+            }
+          ],
+          "query": "satellite_unit : $satellite AND \nmission: $mission AND \nproduction_service_name: $lta AND \nmetric_name: download AND\nservice_name: $service_name\nmetric_sub_type : \"size\"",
+          "refId": "A",
+          "timeField": "timestamp"
+        },
+        {
+          "alias": "b",
+          "bucketAggs": [
+            {
+              "field": "timestamp",
+              "id": "6",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "offset": "1h",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P0A605902E87638CC"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "counter",
+              "id": "1",
+              "type": "sum"
+            }
+          ],
+          "query": "satellite_unit : $satellite AND \nmission: $mission AND \nproduction_service_name: $lta AND \nmetric_name: download AND\nservice_name: $service_name\nmetric_sub_type : \"size\"",
+          "refId": "B",
+          "timeField": "timestamp"
+        }
+      ],
+      "title": "Downloaded volume for $service_name",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Diff",
+            "binary": {
+              "left": "b",
+              "operator": "-",
+              "right": "a"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "NaN": {
+                  "index": 0,
+                  "text": "N/A"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "noValue": "0%",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 4,
+        "x": 4,
+        "y": 4
+      },
+      "id": 153,
+      "maxDataPoints": 10,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "alias": "a",
+          "bucketAggs": [
+            {
+              "field": "timestamp",
+              "id": "6",
+              "settings": {
+                "interval": "1d",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P0A605902E87638CC"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "counter",
+              "id": "1",
+              "type": "sum"
+            }
+          ],
+          "query": "satellite_unit : $satellite AND \nmission: $mission AND \nproduction_service_name: $lta AND \nmetric_name: download AND\nservice_name: $service_name\nmetric_sub_type : \"size\"",
+          "refId": "A",
+          "timeField": "timestamp"
+        },
+        {
+          "alias": "b",
+          "bucketAggs": [
+            {
+              "field": "timestamp",
+              "id": "6",
+              "settings": {
+                "interval": "1d",
+                "min_doc_count": "0",
+                "offset": "1d",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P0A605902E87638CC"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "counter",
+              "id": "1",
+              "type": "sum"
+            }
+          ],
+          "query": "satellite_unit : $satellite AND \nmission: $mission AND \nproduction_service_name: $lta AND \nmetric_name: download AND\nservice_name: $service_name\nmetric_sub_type : \"size\"",
+          "refId": "B",
+          "timeField": "timestamp"
+        },
+        {
+          "columns": [
+            {
+              "selector": "_source.daily_download_quota",
+              "text": "daily_download_quota",
+              "type": "number"
+            }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "PD0067CAD9A63E081"
+          },
+          "filters": [],
+          "format": "table",
+          "global_query_id": "",
+          "hide": true,
+          "refId": "C",
+          "root_selector": "hits.hits",
+          "source": "url",
+          "type": "json",
+          "url": "/cds-lta-download-quota-conf/_search",
+          "url_options": {
+            "data": "",
+            "method": "GET",
+            "params": [
+              {
+                "key": "size",
+                "value": "9999"
+              },
+              {
+                "key": "q",
+                "value": "service_name=${service_name}"
+              }
+            ]
+          }
+        },
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1d",
+                "min_doc_count": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P3DCA332DA903278C"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "daily_download_quota",
+              "id": "1",
+              "type": "sum"
+            }
+          ],
+          "query": "service_name:$service_name",
+          "refId": "D",
+          "timeField": "ingestionTime"
+        }
+      ],
+      "title": "Quota Usage for $service_name",
+      "transformations": [
+        {
+          "disabled": true,
+          "id": "reduce",
+          "options": {
+            "reducers": [
+              "sum"
+            ]
+          }
+        },
+        {
+          "disabled": true,
+          "id": "calculateField",
+          "options": {
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [],
+              "reducer": "lastNotNull"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Downloaded",
+            "binary": {
+              "left": "b",
+              "operator": "-",
+              "right": "a"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Usage",
+            "binary": {
+              "left": "Downloaded",
+              "operator": "/",
+              "right": "Sum daily_download_quota"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 7,
+        "x": 8,
+        "y": 4
+      },
+      "id": 64,
+      "maxDataPoints": 10,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "maxHeight": 600,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "9.2.15",
+      "targets": [
+        {
+          "alias": "a",
+          "bucketAggs": [
+            {
+              "field": "timestamp",
+              "id": "6",
+              "settings": {
+                "interval": "1d",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P0A605902E87638CC"
+          },
+          "metrics": [
+            {
+              "field": "counter",
+              "id": "1",
+              "type": "sum"
+            }
+          ],
+          "query": "satellite_unit : $satellite AND \nmission: $mission AND \nproduction_service_name: $lta AND \nmetric_name: download AND\nservice_name: $service_name\nmetric_sub_type : \"size\"",
+          "refId": "A",
+          "timeField": "timestamp"
+        },
+        {
+          "alias": "b",
+          "bucketAggs": [
+            {
+              "field": "timestamp",
+              "id": "6",
+              "settings": {
+                "interval": "1d",
+                "min_doc_count": "0",
+                "offset": "1d",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P0A605902E87638CC"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "counter",
+              "id": "1",
+              "type": "sum"
+            }
+          ],
+          "query": "satellite_unit : $satellite AND \nmission: $mission AND \nproduction_service_name: $lta AND \nmetric_name: download AND\nservice_name: $service_name\nmetric_sub_type : \"size\"",
+          "refId": "B",
+          "timeField": "timestamp"
+        },
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1d",
+                "min_doc_count": "1",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P3DCA332DA903278C"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "daily_download_quota",
+              "id": "1",
+              "type": "sum"
+            }
+          ],
+          "query": "service_name:$service_name",
+          "refId": "C",
+          "timeField": "timestamp"
+        }
+      ],
+      "title": "Downloaded volume for $service_name",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Downloaded",
+            "binary": {
+              "left": "b",
+              "operator": "-",
+              "right": "a"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "a": true,
+              "b": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Downloaded": 3,
+              "Sum daily_download_quota": 4,
+              "Time": 0,
+              "a": 1,
+              "b": 2
+            },
+            "renameByName": {
+              "Sum daily_download_quota": "Download Quota"
+            }
+          }
+        },
+        {
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byName",
+              "options": "Download Quota"
+            },
+            "configRefId": "config",
+            "mappings": []
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "dashed"
+            }
+          },
+          "mappings": [],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 7,
+        "x": 15,
+        "y": 4
+      },
+      "id": 162,
+      "maxDataPoints": 10,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "maxHeight": 600,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "9.2.15",
+      "targets": [
+        {
+          "alias": "a",
+          "bucketAggs": [
+            {
+              "field": "timestamp",
+              "id": "6",
+              "settings": {
+                "interval": "1d",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P0A605902E87638CC"
+          },
+          "metrics": [
+            {
+              "field": "counter",
+              "id": "1",
+              "type": "sum"
+            }
+          ],
+          "query": "satellite_unit : $satellite AND \nmission: $mission AND \nproduction_service_name: $lta AND \nmetric_name: download AND\nservice_name: $service_name\nmetric_sub_type : \"size\"",
+          "refId": "A",
+          "timeField": "timestamp"
+        },
+        {
+          "alias": "b",
+          "bucketAggs": [
+            {
+              "field": "timestamp",
+              "id": "6",
+              "settings": {
+                "interval": "1d",
+                "min_doc_count": "0",
+                "offset": "1d",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P0A605902E87638CC"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "counter",
+              "id": "1",
+              "type": "sum"
+            }
+          ],
+          "query": "satellite_unit : $satellite AND \nmission: $mission AND \nproduction_service_name: $lta AND \nmetric_name: download AND\nservice_name: $service_name\nmetric_sub_type : \"size\"",
+          "refId": "B",
+          "timeField": "timestamp"
+        },
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "timestamp",
+              "id": "2",
+              "settings": {
+                "interval": "1d",
+                "min_doc_count": "1",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P3DCA332DA903278C"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "daily_download_quota",
+              "id": "1",
+              "type": "sum"
+            }
+          ],
+          "query": "service_name:$service_name",
+          "refId": "C",
+          "timeField": "timestamp"
+        }
+      ],
+      "title": "Downloaded volume for $service_name",
+      "transformations": [
+        {
+          "filter": {
+            "id": "byRefId",
+            "options": "C"
+          },
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byName",
+              "options": "Value"
+            },
+            "configRefId": "C",
+            "mappings": [
+              {
+                "fieldName": "Value",
+                "handlerArguments": {
+                  "threshold": {
+                    "color": "orange"
+                  }
+                },
+                "handlerKey": "threshold1",
+                "reducerId": "lastNotNull"
+              },
+              {
+                "fieldName": "Time",
+                "handlerKey": "__ignore"
+              }
+            ]
+          }
+        },
+        {
+          "disabled": true,
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byName",
+              "options": "Value"
+            },
+            "configRefId": "C",
+            "mappings": [
+              {
+                "fieldName": "Value",
+                "handlerKey": "max"
+              },
+              {
+                "fieldName": "Time",
+                "handlerKey": "__ignore"
+              }
+            ]
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Downloaded",
+            "binary": {
+              "left": "b",
+              "operator": "-",
+              "right": "a"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Value": false,
+              "Value 2": true,
+              "a": true,
+              "b": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Downloaded": 3,
+              "Sum daily_download_quota": 4,
+              "Time": 0,
+              "a": 1,
+              "b": 2
+            },
+            "renameByName": {
+              "Downloaded": "",
+              "Sum daily_download_quota": "Download Quota",
+              "Value": "Quota",
+              "Value 1": "Downloaded",
+              "Value 2": ""
+            }
+          }
+        }
+      ],
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "",
+  "revision": 1,
+  "schemaVersion": 39,
+  "tags": [
+    "Volumes and Count"
+  ],
+  "templating": {
+    "list": [
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P0A605902E87638CC"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"mission\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Mission",
+        "multi": true,
+        "name": "mission",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"mission\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P0A605902E87638CC"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"satellite_unit\",\"query\":\"mission: ${mission}\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Satellite",
+        "multi": true,
+        "name": "satellite",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"satellite_unit\",\"query\":\"mission: ${mission}\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "Exprivia"
+          ],
+          "value": [
+            "Exprivia"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P0A605902E87638CC"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"production_service_name\", \"query\": \"production_service_type: LTA AND mission: $mission\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "LTA Service",
+        "multi": true,
+        "name": "lta",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"production_service_name\", \"query\": \"production_service_type: LTA AND mission: $mission\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P0A605902E87638CC"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"service_name.keyword\", \"query\":\"*\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Service name",
+        "multi": true,
+        "name": "service_name",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"service_name.keyword\", \"query\":\"*\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-4d",
+    "to": "now"
+  },
+  "timeRangeUpdatedDuringEditOrView": false,
+  "timepicker": {},
+  "timezone": "",
+  "title": "LTA Download Quota",
+  "uid": "fdx2r9szw03y8e",
+  "weekStart": ""
+}

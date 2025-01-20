@@ -1,0 +1,37 @@
+{
+    "aliases": {
+        "complexe-partition-field": {}
+    },
+    "index_patterns": [
+        "complexe-partition-field-*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "kw_field": {
+                "type": "keyword"
+            },
+            "int_field": {
+                "type": "integer"
+            },
+            "date_field": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            }
+        },
+        "_meta": {
+            "partition_field": [
+                "kw_field",
+                "int_field",
+                "date_field"
+            ],
+            "partition_format": "{kw_field}-{int_field:03}-{date_field:%Y-%m}"
+        }
+    }
+}

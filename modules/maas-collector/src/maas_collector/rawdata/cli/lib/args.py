@@ -484,6 +484,40 @@ def odata_parser():
     return parser
 
 
+def s3_parser():
+    """S3 CLI argument parser factory
+
+    Returns:
+        ArgumentParser: S3 argument parser
+
+    """
+    parser = ArgumentParser(add_help=False)
+
+    parser.add_argument(
+        "--s3-timeout",
+        dest="s3_timeout",
+        help="Default timeout (default: %(default)s)",
+        action=EnvDefault,
+        envvar="S3_TIMEOUT",
+        required=False,
+        type=int,
+        default=120,
+    )
+
+    parser.add_argument(
+        "--s3-keep-files",
+        dest="s3_keep_files",
+        help="Keep downloaded api pages (default: %(default)s)",
+        action=EnvDefault,
+        envvar="S3_KEEP_FILES",
+        required=False,
+        type=bool,
+        default=False,
+    )
+
+    return parser
+
+
 def loki_parser():
     """Loki CLI argument parser factory
 
@@ -1090,3 +1124,37 @@ def get_collector_args(classobj, namespace, **kwargs):
         args.healthcheck_timeout = new_timeout
 
     return args
+
+
+def http_common_parser():
+    """Http CLI argument parser factory
+
+    Returns:
+        ArgumentParser: Http argument parser
+
+    """
+    parser = ArgumentParser(add_help=False)
+
+    parser.add_argument(
+        "--http-common-timeout",
+        dest="http_common_timeout",
+        help="Default timeout (default: %(default)s) in seconds",
+        action=EnvDefault,
+        envvar="HTTP_COMMON_TIMEOUT",
+        required=False,
+        type=int,
+        default=120,
+    )
+
+    parser.add_argument(
+        "--http-common-keep-files",
+        dest="http_common_keep_files",
+        help="Keep downloaded api pages (default: %(default)s)",
+        action=EnvDefault,
+        envvar="HTTP_COMMON_KEEP_FILES",
+        required=False,
+        type=bool,
+        default=False,
+    )
+
+    return parser

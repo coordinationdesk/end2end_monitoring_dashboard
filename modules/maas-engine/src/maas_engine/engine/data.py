@@ -1,4 +1,5 @@
 """base class for engine"""
+
 import abc
 import dataclasses
 import logging
@@ -149,7 +150,7 @@ class DataEngine(Engine):
         """overide"""
         # initialize input lazily
         if not self.input_documents:
-            self._load_input_documents(payload)
+            self._load_input_documents(payload, routing_key)
         else:
             self.logger.debug("Won't load input documents: reuse from session")
 
@@ -222,7 +223,9 @@ class DataEngine(Engine):
             self.reports.append(report)
             yield report
 
-    def _load_input_documents(self, payload: maas_model.MAASMessage):
+    def _load_input_documents(
+        self, payload: maas_model.MAASMessage, routing_key: str = ""
+    ):
         """Populate input_model and input_documents attributes
 
         Args:
@@ -252,8 +255,17 @@ class DataEngine(Engine):
             }
 
             self.logger.critical(
-                "Some input documents %s are missing: %s", self.input_model, missing
+                "Some input documents %s on queue %s are missing: %s",
+                self.input_model,
+                routing_key,
+                missing,
             )
+
+            if self.args.es_requeue_missing_input:
+                raise HandleMessageException(
+                    f"{self.__class__.__name__}:Missing {self.input_model.__name__} "
+                    f"on {routing_key}:{missing}"
+                )
 
             # purify the input
             self.input_documents = [
@@ -272,7 +284,7 @@ class DataEngine(Engine):
 
         self._report_data[document_classname][es_result].append(document)
 
-    def _generate_reports(self) -> EngineReport:
+    def _generate_reports(self) -> Iterator[EngineReport]:
         """Generate reports from the stored database search result
 
 
@@ -298,13 +310,18 @@ class DataEngine(Engine):
                         action_documents[action].append(document)
 
                 for action, documents in action_documents.items():
-                    yield EngineReport(
-                        action,
-                        [document.meta.id for document in documents],
-                        document_class=classname,
-                        chunk_size=self.chunk_size,
-                        document_indices=self.get_index_names(documents),
-                    )
+                    yield from self.report_strategy(classname, action, documents)
+                   
+
+    def report_strategy(self, classname, action, documents):
+        """Default strategy to make report """
+        yield EngineReport(
+            action,
+            [document.meta.id for document in documents],
+            document_class=classname,
+            chunk_size=self.chunk_size,
+            document_indices=self.get_index_names(documents),
+        )
 
     @staticmethod
     def get_index_names(documents: list[maas_model.MAASDocument]) -> list[str]:

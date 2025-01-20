@@ -1,0 +1,3967 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 8,
+      "panels": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "gridPos": {
+            "h": 4,
+            "w": 24,
+            "x": 0,
+            "y": 9
+          },
+          "id": 10,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "This dashboard features the list CAMS issue retrieved from JIRA.\n\nThe information displayed was originally taken from Ticket at JIRA ESA CAMS  \n\nInformation is displayed through the following panels:\n - The creation of tickets is displayed in the form of a time series with the number of tickets created for each time frame;\n - List of tickets .\n\n Note: the time range filter on the tickets updated over the period, so if the ticket was created and updated outside this period it will not be visible\n\nTime reference for this dashboard is : updated\n\nImportant notice : Tables & timelines can only display up to 10 000 entries. Please make use of filters to narrow down the retrieved data and get a more realistic view.",
+            "mode": "markdown"
+          },
+          "pluginVersion": "11.0.0",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [
+                {
+                  "field": "sensing_start_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "",
+              "refId": "A",
+              "timeField": "sensing_start_date"
+            }
+          ],
+          "type": "text"
+        }
+      ],
+      "title": "Dashboard Description",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 6,
+      "panels": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisBorderShow": false,
+                "axisCenteredZero": false,
+                "axisColorMode": "text",
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 1,
+                "drawStyle": "bars",
+                "fillOpacity": 100,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "insertNulls": false,
+                "lineInterpolation": "linear",
+                "lineStyle": {
+                  "fill": "solid"
+                },
+                "lineWidth": 1,
+                "pointSize": 7,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 5,
+            "w": 24,
+            "x": 0,
+            "y": 2
+          },
+          "id": 4,
+          "options": {
+            "legend": {
+              "calcs": [],
+              "displayMode": "list",
+              "placement": "bottom",
+              "showLegend": true
+            },
+            "tooltip": {
+              "maxHeight": 600,
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "9.1.6",
+          "targets": [
+            {
+              "alias": "Opened tickets",
+              "bucketAggs": [
+                {
+                  "field": "created",
+                  "id": "2",
+                  "settings": {
+                    "interval": "1d"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "PB40898D8F967833A"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "_id:$CamsId",
+              "refId": "A",
+              "timeField": "created"
+            },
+            {
+              "alias": "Closed Tickets",
+              "bucketAggs": [
+                {
+                  "field": "updated",
+                  "id": "2",
+                  "settings": {
+                    "interval": "1d"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "PFAFAF64F5FF7E56B"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "status:closed AND _id:$CamsId",
+              "refId": "B",
+              "timeField": "updated"
+            }
+          ],
+          "title": "Opened and Closed tickets",
+          "transformations": [
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "Closed tickets",
+                "binary": {
+                  "left": "0",
+                  "operator": "-",
+                  "reducer": "sum",
+                  "right": "Closed Tickets"
+                },
+                "mode": "binary",
+                "reduce": {
+                  "reducer": "sum"
+                },
+                "replaceFields": false
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "Closed Tickets": true
+                },
+                "indexByName": {},
+                "renameByName": {}
+              }
+            }
+          ],
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PFAFAF64F5FF7E56B"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "auto",
+                "cellOptions": {
+                  "type": "auto"
+                },
+                "filterable": true,
+                "inspect": true
+              },
+              "mappings": [
+                {
+                  "options": {
+                    "Blocking": {
+                      "color": "red",
+                      "index": 3
+                    },
+                    "Critical": {
+                      "color": "orange",
+                      "index": 2
+                    },
+                    "High": {
+                      "color": "red",
+                      "index": 0
+                    },
+                    "Medium": {
+                      "color": "yellow",
+                      "index": 1
+                    },
+                    "false": {
+                      "color": "green",
+                      "index": 5,
+                      "text": "Yes"
+                    },
+                    "true": {
+                      "color": "transparent",
+                      "index": 4,
+                      "text": "-"
+                    }
+                  },
+                  "type": "value"
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "involved_entities"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 438
+                  },
+                  {
+                    "id": "custom.inspect",
+                    "value": true
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "urgency"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "basic",
+                      "type": "color-background"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Affected systems "
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 125
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Title"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 279
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Urgency "
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 74
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "originating_entity"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 129
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "entity"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 124
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "assigned_element"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 133
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "reporter"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 108
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "involved_entities"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 162
+                  },
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "type": "json-view"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "status"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 101
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "_id"
+                },
+                "properties": [
+                  {
+                    "id": "links",
+                    "value": [
+                      {
+                        "targetBlank": true,
+                        "title": "Open on https://esa-cams.atlassian.net",
+                        "url": "https://esa-cams.atlassian.net/browse/${__value.raw}"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "linked_issues"
+                },
+                "properties": [
+                  {
+                    "id": "links",
+                    "value": [
+                      {
+                        "targetBlank": true,
+                        "title": "Open on https://esa-cams.atlassian.net",
+                        "url": "https://esa-cams.atlassian.net/browse/${__value.raw}"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "criticality"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 116
+                  },
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "type": "color-text"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Corelation file present"
+                },
+                "properties": [
+                  {
+                    "id": "custom.cellOptions",
+                    "value": {
+                      "mode": "basic",
+                      "type": "color-background"
+                    }
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Origating entity"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 251
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 21,
+            "w": 24,
+            "x": 0,
+            "y": 7
+          },
+          "id": 2,
+          "options": {
+            "cellHeight": "sm",
+            "footer": {
+              "countRows": false,
+              "enablePagination": false,
+              "fields": "",
+              "reducer": [],
+              "show": true
+            },
+            "showHeader": true,
+            "sortBy": [
+              {
+                "desc": false,
+                "displayName": "Creation date"
+              }
+            ]
+          },
+          "pluginVersion": "11.0.6+security-01",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "PFAFAF64F5FF7E56B"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "size": "10000"
+                  },
+                  "type": "raw_data"
+                }
+              ],
+              "query": "_id:$CamsId",
+              "refId": "A",
+              "timeField": "updated"
+            }
+          ],
+          "title": "CAMS Anomaly",
+          "transformations": [
+            {
+              "id": "calculateField",
+              "options": {
+                "alias": "Corelation file present",
+                "binary": {
+                  "left": "correlation_file_id",
+                  "operator": "-",
+                  "reducer": "sum",
+                  "right": "correlation_file_id"
+                },
+                "mode": "reduceRow",
+                "reduce": {
+                  "include": [
+                    "correlation_file_id"
+                  ],
+                  "reducer": "allIsNull"
+                }
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "_index": true,
+                  "_type": true,
+                  "correlation_file_id": true,
+                  "highlight": true,
+                  "ingestionTime": true,
+                  "key": true,
+                  "reportFolder": true,
+                  "reportName": true,
+                  "sort": true,
+                  "url": true
+                },
+                "includeByName": {},
+                "indexByName": {
+                  "Corelation file present": 23,
+                  "_id": 0,
+                  "_index": 1,
+                  "_type": 2,
+                  "acquisition_pass": 26,
+                  "affected_systems": 4,
+                  "assigned_element": 9,
+                  "correlation_file_id": 22,
+                  "created": 13,
+                  "criticality": 5,
+                  "datatake_ids": 27,
+                  "description": 25,
+                  "entity": 8,
+                  "environment": 18,
+                  "highlight": 19,
+                  "involved_entities": 12,
+                  "key": 20,
+                  "linked_issues": 17,
+                  "occurence_date": 15,
+                  "origin": 24,
+                  "originating_entity": 7,
+                  "products": 28,
+                  "reporter": 11,
+                  "review_board_dispositions": 10,
+                  "sort": 21,
+                  "status": 16,
+                  "title": 3,
+                  "updated": 14,
+                  "urgency": 6,
+                  "url": 29
+                },
+                "renameByName": {
+                  "_id": "ID",
+                  "_type": "",
+                  "acquisition_pass": "Imp. Acquisitions",
+                  "affected_systems": "Affected systems ",
+                  "assigned_element": "Assigned Element",
+                  "created": "Creation date",
+                  "criticality": "Criticality ",
+                  "datatake_ids": "Imp. DataTakes",
+                  "description": "Description",
+                  "entity": "Assigned Entity",
+                  "environment": "Environment (Impacted DTs)",
+                  "highlight": "",
+                  "involved_entities": "Involved entities",
+                  "key": "",
+                  "linked_issues": "Linked CAMs",
+                  "occurence_date": "Occurence date",
+                  "origin": "Origin of issue",
+                  "originating_entity": "Origating entity",
+                  "products": "Imp. Products",
+                  "reporter": "Reporter",
+                  "review_board_dispositions": "Review board disposition",
+                  "status": "Status",
+                  "title": "Title",
+                  "updated": "Update date",
+                  "urgency": "Urgency "
+                }
+              }
+            }
+          ],
+          "type": "table"
+        }
+      ],
+      "title": "Issue List",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 2
+      },
+      "id": 11,
+      "panels": [],
+      "title": "Ticket created for SSC",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PB40898D8F967833A"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 3,
+        "x": 0,
+        "y": 3
+      },
+      "id": 13,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.0.6+security-01",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "created",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PB40898D8F967833A"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "entity: \"SSC Acquisition - INS PAR KSE\"",
+          "refId": "A",
+          "timeField": "created"
+        }
+      ],
+      "title": "Ticket created",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PB40898D8F967833A"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "inspect": true
+          },
+          "mappings": [
+            {
+              "options": {
+                "Blocking": {
+                  "color": "red",
+                  "index": 3
+                },
+                "Critical": {
+                  "color": "orange",
+                  "index": 2
+                },
+                "High": {
+                  "color": "red",
+                  "index": 0
+                },
+                "Medium": {
+                  "color": "yellow",
+                  "index": 1
+                },
+                "false": {
+                  "color": "green",
+                  "index": 5,
+                  "text": "Yes"
+                },
+                "true": {
+                  "color": "transparent",
+                  "index": 4,
+                  "text": "-"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "involved_entities"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 438
+              },
+              {
+                "id": "custom.inspect",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "urgency"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Affected systems "
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 125
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Title"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 279
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Urgency "
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 74
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "originating_entity"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 129
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "entity"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 124
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "assigned_element"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 133
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "reporter"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 108
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "involved_entities"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 162
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "json-view"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "status"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 101
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "_id"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Open on https://esa-cams.atlassian.net",
+                    "url": "https://esa-cams.atlassian.net/browse/${__value.raw}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "linked_issues"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Open on https://esa-cams.atlassian.net",
+                    "url": "https://esa-cams.atlassian.net/browse/${__value.raw}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "criticality"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 116
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Corelation file present"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 21,
+        "x": 3,
+        "y": 3
+      },
+      "id": 15,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": false,
+          "fields": "",
+          "reducer": [],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "Creation date"
+          }
+        ]
+      },
+      "pluginVersion": "11.0.6+security-01",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PB40898D8F967833A"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "10000"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "entity: \"SSC Acquisition - INS PAR KSE\"",
+          "refId": "A",
+          "timeField": "created"
+        }
+      ],
+      "title": "CAMS Anomaly",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Corelation file present",
+            "binary": {
+              "left": "correlation_file_id",
+              "operator": "-",
+              "reducer": "sum",
+              "right": "correlation_file_id"
+            },
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "correlation_file_id"
+              ],
+              "reducer": "allIsNull"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "_index": true,
+              "_type": true,
+              "correlation_file_id": true,
+              "highlight": true,
+              "ingestionTime": true,
+              "key": true,
+              "reportFolder": true,
+              "reportName": true,
+              "sort": true,
+              "url": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Corelation file present": 23,
+              "_id": 0,
+              "_index": 1,
+              "_type": 2,
+              "acquisition_pass": 26,
+              "affected_systems": 4,
+              "assigned_element": 9,
+              "correlation_file_id": 22,
+              "created": 13,
+              "criticality": 5,
+              "datatake_ids": 27,
+              "description": 25,
+              "entity": 8,
+              "environment": 18,
+              "highlight": 19,
+              "involved_entities": 12,
+              "key": 20,
+              "linked_issues": 17,
+              "occurence_date": 15,
+              "origin": 24,
+              "originating_entity": 7,
+              "products": 28,
+              "reporter": 11,
+              "review_board_dispositions": 10,
+              "sort": 21,
+              "status": 16,
+              "title": 3,
+              "updated": 14,
+              "urgency": 6,
+              "url": 29
+            },
+            "renameByName": {
+              "_id": "ID",
+              "_type": "",
+              "acquisition_pass": "Imp. Acquisitions",
+              "affected_systems": "Affected systems ",
+              "assigned_element": "Assigned Element",
+              "created": "Creation date",
+              "criticality": "Criticality ",
+              "datatake_ids": "Imp. DataTakes",
+              "description": "Description",
+              "entity": "Assigned Entity",
+              "environment": "Environment (Impacted DTs)",
+              "highlight": "",
+              "involved_entities": "Involved entities",
+              "key": "",
+              "linked_issues": "Linked CAMs",
+              "occurence_date": "Occurence date",
+              "origin": "Origin of issue",
+              "originating_entity": "Origating entity",
+              "products": "Imp. Products",
+              "reporter": "Reporter",
+              "review_board_dispositions": "Review board disposition",
+              "status": "Status",
+              "title": "Title",
+              "updated": "Update date",
+              "urgency": "Urgency "
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 13
+      },
+      "id": 32,
+      "panels": [],
+      "title": "Ticket created for MPS",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PB40898D8F967833A"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 3,
+        "x": 0,
+        "y": 14
+      },
+      "id": 16,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.0.6+security-01",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "created",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PB40898D8F967833A"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "entity: \"INTA Acquisition - MPS\"",
+          "refId": "A",
+          "timeField": "created"
+        }
+      ],
+      "title": "Ticket created",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PB40898D8F967833A"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "inspect": true
+          },
+          "mappings": [
+            {
+              "options": {
+                "Blocking": {
+                  "color": "red",
+                  "index": 3
+                },
+                "Critical": {
+                  "color": "orange",
+                  "index": 2
+                },
+                "High": {
+                  "color": "red",
+                  "index": 0
+                },
+                "Medium": {
+                  "color": "yellow",
+                  "index": 1
+                },
+                "false": {
+                  "color": "green",
+                  "index": 5,
+                  "text": "Yes"
+                },
+                "true": {
+                  "color": "transparent",
+                  "index": 4,
+                  "text": "-"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "involved_entities"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 438
+              },
+              {
+                "id": "custom.inspect",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "urgency"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Affected systems "
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 125
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Title"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 279
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Urgency "
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 74
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "originating_entity"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 129
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "entity"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 124
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "assigned_element"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 133
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "reporter"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 108
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "involved_entities"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 162
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "json-view"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "status"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 101
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "_id"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Open on https://esa-cams.atlassian.net",
+                    "url": "https://esa-cams.atlassian.net/browse/${__value.raw}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "linked_issues"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Open on https://esa-cams.atlassian.net",
+                    "url": "https://esa-cams.atlassian.net/browse/${__value.raw}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "criticality"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 116
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Corelation file present"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 21,
+        "x": 3,
+        "y": 14
+      },
+      "id": 23,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": false,
+          "fields": "",
+          "reducer": [],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "Creation date"
+          }
+        ]
+      },
+      "pluginVersion": "11.0.6+security-01",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PB40898D8F967833A"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "10000"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "entity: \"INTA Acquisition - MPS\"",
+          "refId": "A",
+          "timeField": "created"
+        }
+      ],
+      "title": "CAMS Anomaly",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Corelation file present",
+            "binary": {
+              "left": "correlation_file_id",
+              "operator": "-",
+              "reducer": "sum",
+              "right": "correlation_file_id"
+            },
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "correlation_file_id"
+              ],
+              "reducer": "allIsNull"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "_index": true,
+              "_type": true,
+              "correlation_file_id": true,
+              "highlight": true,
+              "ingestionTime": true,
+              "key": true,
+              "reportFolder": true,
+              "reportName": true,
+              "sort": true,
+              "url": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Corelation file present": 23,
+              "_id": 0,
+              "_index": 1,
+              "_type": 2,
+              "acquisition_pass": 26,
+              "affected_systems": 4,
+              "assigned_element": 9,
+              "correlation_file_id": 22,
+              "created": 13,
+              "criticality": 5,
+              "datatake_ids": 27,
+              "description": 25,
+              "entity": 8,
+              "environment": 18,
+              "highlight": 19,
+              "involved_entities": 12,
+              "key": 20,
+              "linked_issues": 17,
+              "occurence_date": 15,
+              "origin": 24,
+              "originating_entity": 7,
+              "products": 28,
+              "reporter": 11,
+              "review_board_dispositions": 10,
+              "sort": 21,
+              "status": 16,
+              "title": 3,
+              "updated": 14,
+              "urgency": 6,
+              "url": 29
+            },
+            "renameByName": {
+              "_id": "ID",
+              "_type": "",
+              "acquisition_pass": "Imp. Acquisitions",
+              "affected_systems": "Affected systems ",
+              "assigned_element": "Assigned Element",
+              "created": "Creation date",
+              "criticality": "Criticality ",
+              "datatake_ids": "Imp. DataTakes",
+              "description": "Description",
+              "entity": "Assigned Entity",
+              "environment": "Environment (Impacted DTs)",
+              "highlight": "",
+              "involved_entities": "Involved entities",
+              "key": "",
+              "linked_issues": "Linked CAMs",
+              "occurence_date": "Occurence date",
+              "origin": "Origin of issue",
+              "originating_entity": "Origating entity",
+              "products": "Imp. Products",
+              "reporter": "Reporter",
+              "review_board_dispositions": "Review board disposition",
+              "status": "Status",
+              "title": "Title",
+              "updated": "Update date",
+              "urgency": "Urgency "
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 24
+      },
+      "id": 28,
+      "panels": [],
+      "title": "Ticket created for MTI",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PB40898D8F967833A"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 3,
+        "x": 0,
+        "y": 25
+      },
+      "id": 18,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.0.6+security-01",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "created",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PB40898D8F967833A"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "entity: \"e-Geos Acquisition - MTI\"",
+          "refId": "A",
+          "timeField": "created"
+        }
+      ],
+      "title": "Ticket created",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PB40898D8F967833A"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "inspect": true
+          },
+          "mappings": [
+            {
+              "options": {
+                "Blocking": {
+                  "color": "red",
+                  "index": 3
+                },
+                "Critical": {
+                  "color": "orange",
+                  "index": 2
+                },
+                "High": {
+                  "color": "red",
+                  "index": 0
+                },
+                "Medium": {
+                  "color": "yellow",
+                  "index": 1
+                },
+                "false": {
+                  "color": "green",
+                  "index": 5,
+                  "text": "Yes"
+                },
+                "true": {
+                  "color": "transparent",
+                  "index": 4,
+                  "text": "-"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "involved_entities"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 438
+              },
+              {
+                "id": "custom.inspect",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "urgency"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Affected systems "
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 125
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Title"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 279
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Urgency "
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 74
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "originating_entity"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 129
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "entity"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 124
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "assigned_element"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 133
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "reporter"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 108
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "involved_entities"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 162
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "json-view"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "status"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 101
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "_id"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Open on https://esa-cams.atlassian.net",
+                    "url": "https://esa-cams.atlassian.net/browse/${__value.raw}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "linked_issues"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Open on https://esa-cams.atlassian.net",
+                    "url": "https://esa-cams.atlassian.net/browse/${__value.raw}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "criticality"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 116
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Corelation file present"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 21,
+        "x": 3,
+        "y": 25
+      },
+      "id": 22,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": false,
+          "fields": "",
+          "reducer": [],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "Creation date"
+          }
+        ]
+      },
+      "pluginVersion": "11.0.6+security-01",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PB40898D8F967833A"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "10000"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "entity: \"e-Geos Acquisition - MTI\"",
+          "refId": "A",
+          "timeField": "created"
+        }
+      ],
+      "title": "CAMS Anomaly",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Corelation file present",
+            "binary": {
+              "left": "correlation_file_id",
+              "operator": "-",
+              "reducer": "sum",
+              "right": "correlation_file_id"
+            },
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "correlation_file_id"
+              ],
+              "reducer": "allIsNull"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "_index": true,
+              "_type": true,
+              "correlation_file_id": true,
+              "highlight": true,
+              "ingestionTime": true,
+              "key": true,
+              "reportFolder": true,
+              "reportName": true,
+              "sort": true,
+              "url": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Corelation file present": 23,
+              "_id": 0,
+              "_index": 1,
+              "_type": 2,
+              "acquisition_pass": 26,
+              "affected_systems": 4,
+              "assigned_element": 9,
+              "correlation_file_id": 22,
+              "created": 13,
+              "criticality": 5,
+              "datatake_ids": 27,
+              "description": 25,
+              "entity": 8,
+              "environment": 18,
+              "highlight": 19,
+              "involved_entities": 12,
+              "key": 20,
+              "linked_issues": 17,
+              "occurence_date": 15,
+              "origin": 24,
+              "originating_entity": 7,
+              "products": 28,
+              "reporter": 11,
+              "review_board_dispositions": 10,
+              "sort": 21,
+              "status": 16,
+              "title": 3,
+              "updated": 14,
+              "urgency": 6,
+              "url": 29
+            },
+            "renameByName": {
+              "_id": "ID",
+              "_type": "",
+              "acquisition_pass": "Imp. Acquisitions",
+              "affected_systems": "Affected systems ",
+              "assigned_element": "Assigned Element",
+              "created": "Creation date",
+              "criticality": "Criticality ",
+              "datatake_ids": "Imp. DataTakes",
+              "description": "Description",
+              "entity": "Assigned Entity",
+              "environment": "Environment (Impacted DTs)",
+              "highlight": "",
+              "involved_entities": "Involved entities",
+              "key": "",
+              "linked_issues": "Linked CAMs",
+              "occurence_date": "Occurence date",
+              "origin": "Origin of issue",
+              "originating_entity": "Origating entity",
+              "products": "Imp. Products",
+              "reporter": "Reporter",
+              "review_board_dispositions": "Review board disposition",
+              "status": "Status",
+              "title": "Title",
+              "updated": "Update date",
+              "urgency": "Urgency "
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 35
+      },
+      "id": 31,
+      "panels": [],
+      "title": "Ticket created for NSG",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PB40898D8F967833A"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 3,
+        "x": 0,
+        "y": 36
+      },
+      "id": 17,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.0.6+security-01",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "created",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PB40898D8F967833A"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "entity: \"DLR Acquisition - NSG\"",
+          "refId": "A",
+          "timeField": "created"
+        }
+      ],
+      "title": "Ticket created",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PB40898D8F967833A"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "inspect": true
+          },
+          "mappings": [
+            {
+              "options": {
+                "Blocking": {
+                  "color": "red",
+                  "index": 3
+                },
+                "Critical": {
+                  "color": "orange",
+                  "index": 2
+                },
+                "High": {
+                  "color": "red",
+                  "index": 0
+                },
+                "Medium": {
+                  "color": "yellow",
+                  "index": 1
+                },
+                "false": {
+                  "color": "green",
+                  "index": 5,
+                  "text": "Yes"
+                },
+                "true": {
+                  "color": "transparent",
+                  "index": 4,
+                  "text": "-"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "involved_entities"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 438
+              },
+              {
+                "id": "custom.inspect",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "urgency"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Affected systems "
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 125
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Title"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 279
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Urgency "
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 74
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "originating_entity"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 129
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "entity"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 124
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "assigned_element"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 133
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "reporter"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 108
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "involved_entities"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 162
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "json-view"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "status"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 101
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "_id"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Open on https://esa-cams.atlassian.net",
+                    "url": "https://esa-cams.atlassian.net/browse/${__value.raw}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "linked_issues"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Open on https://esa-cams.atlassian.net",
+                    "url": "https://esa-cams.atlassian.net/browse/${__value.raw}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "criticality"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 116
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Corelation file present"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 21,
+        "x": 3,
+        "y": 36
+      },
+      "id": 21,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": false,
+          "fields": "",
+          "reducer": [],
+          "show": true
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "Creation date"
+          }
+        ]
+      },
+      "pluginVersion": "11.0.6+security-01",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PB40898D8F967833A"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "10000"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "entity: \"DLR Acquisition - NSG\"",
+          "refId": "A",
+          "timeField": "created"
+        }
+      ],
+      "title": "CAMS Anomaly",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Corelation file present",
+            "binary": {
+              "left": "correlation_file_id",
+              "operator": "-",
+              "reducer": "sum",
+              "right": "correlation_file_id"
+            },
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "correlation_file_id"
+              ],
+              "reducer": "allIsNull"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "_index": true,
+              "_type": true,
+              "correlation_file_id": true,
+              "highlight": true,
+              "ingestionTime": true,
+              "key": true,
+              "reportFolder": true,
+              "reportName": true,
+              "sort": true,
+              "url": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Corelation file present": 23,
+              "_id": 0,
+              "_index": 1,
+              "_type": 2,
+              "acquisition_pass": 26,
+              "affected_systems": 4,
+              "assigned_element": 9,
+              "correlation_file_id": 22,
+              "created": 13,
+              "criticality": 5,
+              "datatake_ids": 27,
+              "description": 25,
+              "entity": 8,
+              "environment": 18,
+              "highlight": 19,
+              "involved_entities": 12,
+              "key": 20,
+              "linked_issues": 17,
+              "occurence_date": 15,
+              "origin": 24,
+              "originating_entity": 7,
+              "products": 28,
+              "reporter": 11,
+              "review_board_dispositions": 10,
+              "sort": 21,
+              "status": 16,
+              "title": 3,
+              "updated": 14,
+              "urgency": 6,
+              "url": 29
+            },
+            "renameByName": {
+              "_id": "ID",
+              "_type": "",
+              "acquisition_pass": "Imp. Acquisitions",
+              "affected_systems": "Affected systems ",
+              "assigned_element": "Assigned Element",
+              "created": "Creation date",
+              "criticality": "Criticality ",
+              "datatake_ids": "Imp. DataTakes",
+              "description": "Description",
+              "entity": "Assigned Entity",
+              "environment": "Environment (Impacted DTs)",
+              "highlight": "",
+              "involved_entities": "Involved entities",
+              "key": "",
+              "linked_issues": "Linked CAMs",
+              "occurence_date": "Occurence date",
+              "origin": "Origin of issue",
+              "originating_entity": "Origating entity",
+              "products": "Imp. Products",
+              "reporter": "Reporter",
+              "review_board_dispositions": "Review board disposition",
+              "status": "Status",
+              "title": "Title",
+              "updated": "Update date",
+              "urgency": "Urgency "
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 46
+      },
+      "id": 30,
+      "panels": [],
+      "title": "Ticket created for SVL",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PB40898D8F967833A"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 3,
+        "x": 0,
+        "y": 47
+      },
+      "id": 26,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.0.6+security-01",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "created",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PB40898D8F967833A"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "entity: \"KSAT S1-2-3 Acquisition - SGS\"",
+          "refId": "A",
+          "timeField": "created"
+        }
+      ],
+      "title": "Ticket created",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PB40898D8F967833A"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "inspect": true
+          },
+          "mappings": [
+            {
+              "options": {
+                "Blocking": {
+                  "color": "red",
+                  "index": 3
+                },
+                "Critical": {
+                  "color": "orange",
+                  "index": 2
+                },
+                "High": {
+                  "color": "red",
+                  "index": 0
+                },
+                "Medium": {
+                  "color": "yellow",
+                  "index": 1
+                },
+                "false": {
+                  "color": "green",
+                  "index": 5,
+                  "text": "Yes"
+                },
+                "true": {
+                  "color": "transparent",
+                  "index": 4,
+                  "text": "-"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "involved_entities"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 438
+              },
+              {
+                "id": "custom.inspect",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "urgency"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Affected systems "
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 125
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Title"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 279
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Urgency "
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 74
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "originating_entity"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 129
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "entity"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 124
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "assigned_element"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 133
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "reporter"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 108
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "involved_entities"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 162
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "json-view"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "status"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 101
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "_id"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Open on https://esa-cams.atlassian.net",
+                    "url": "https://esa-cams.atlassian.net/browse/${__value.raw}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "linked_issues"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Open on https://esa-cams.atlassian.net",
+                    "url": "https://esa-cams.atlassian.net/browse/${__value.raw}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "criticality"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 116
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Corelation file present"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 21,
+        "x": 3,
+        "y": 47
+      },
+      "id": 20,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": false,
+          "fields": "",
+          "reducer": [],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "Creation date"
+          }
+        ]
+      },
+      "pluginVersion": "11.0.6+security-01",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PB40898D8F967833A"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "10000"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "entity: \"KSAT S1-2-3 Acquisition - SGS\"",
+          "refId": "A",
+          "timeField": "created"
+        }
+      ],
+      "title": "CAMS Anomaly",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Corelation file present",
+            "binary": {
+              "left": "correlation_file_id",
+              "operator": "-",
+              "reducer": "sum",
+              "right": "correlation_file_id"
+            },
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "correlation_file_id"
+              ],
+              "reducer": "allIsNull"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "_index": true,
+              "_type": true,
+              "correlation_file_id": true,
+              "highlight": true,
+              "ingestionTime": true,
+              "key": true,
+              "reportFolder": true,
+              "reportName": true,
+              "sort": true,
+              "url": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Corelation file present": 23,
+              "_id": 0,
+              "_index": 1,
+              "_type": 2,
+              "acquisition_pass": 26,
+              "affected_systems": 4,
+              "assigned_element": 9,
+              "correlation_file_id": 22,
+              "created": 13,
+              "criticality": 5,
+              "datatake_ids": 27,
+              "description": 25,
+              "entity": 8,
+              "environment": 18,
+              "highlight": 19,
+              "involved_entities": 12,
+              "key": 20,
+              "linked_issues": 17,
+              "occurence_date": 15,
+              "origin": 24,
+              "originating_entity": 7,
+              "products": 28,
+              "reporter": 11,
+              "review_board_dispositions": 10,
+              "sort": 21,
+              "status": 16,
+              "title": 3,
+              "updated": 14,
+              "urgency": 6,
+              "url": 29
+            },
+            "renameByName": {
+              "_id": "ID",
+              "_type": "",
+              "acquisition_pass": "Imp. Acquisitions",
+              "affected_systems": "Affected systems ",
+              "assigned_element": "Assigned Element",
+              "created": "Creation date",
+              "criticality": "Criticality ",
+              "datatake_ids": "Imp. DataTakes",
+              "description": "Description",
+              "entity": "Assigned Entity",
+              "environment": "Environment (Impacted DTs)",
+              "highlight": "",
+              "involved_entities": "Involved entities",
+              "key": "",
+              "linked_issues": "Linked CAMs",
+              "occurence_date": "Occurence date",
+              "origin": "Origin of issue",
+              "originating_entity": "Origating entity",
+              "products": "Imp. Products",
+              "reporter": "Reporter",
+              "review_board_dispositions": "Review board disposition",
+              "status": "Status",
+              "title": "Title",
+              "updated": "Update date",
+              "urgency": "Urgency "
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 57
+      },
+      "id": 29,
+      "panels": [],
+      "title": "Ticket created for S5P",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PB40898D8F967833A"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 3,
+        "x": 0,
+        "y": 58
+      },
+      "id": 27,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.0.6+security-01",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "created",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PB40898D8F967833A"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "entity: \"KSAT S-5p Acquisition - INU SGS\"",
+          "refId": "A",
+          "timeField": "created"
+        }
+      ],
+      "title": "Ticket created",
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PB40898D8F967833A"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "inspect": true
+          },
+          "mappings": [
+            {
+              "options": {
+                "Blocking": {
+                  "color": "red",
+                  "index": 3
+                },
+                "Critical": {
+                  "color": "orange",
+                  "index": 2
+                },
+                "High": {
+                  "color": "red",
+                  "index": 0
+                },
+                "Medium": {
+                  "color": "yellow",
+                  "index": 1
+                },
+                "false": {
+                  "color": "green",
+                  "index": 5,
+                  "text": "Yes"
+                },
+                "true": {
+                  "color": "transparent",
+                  "index": 4,
+                  "text": "-"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "involved_entities"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 438
+              },
+              {
+                "id": "custom.inspect",
+                "value": true
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "urgency"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Affected systems "
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 125
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Title"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 279
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Urgency "
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 74
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "originating_entity"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 129
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "entity"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 124
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "assigned_element"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 133
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "reporter"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 108
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "involved_entities"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 162
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "json-view"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "status"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 101
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "_id"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Open on https://esa-cams.atlassian.net",
+                    "url": "https://esa-cams.atlassian.net/browse/${__value.raw}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "linked_issues"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Open on https://esa-cams.atlassian.net",
+                    "url": "https://esa-cams.atlassian.net/browse/${__value.raw}"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "criticality"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 116
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Corelation file present"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "mode": "basic",
+                  "type": "color-background"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Assigned Element"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 452
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 21,
+        "x": 3,
+        "y": 58
+      },
+      "id": 24,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": false,
+          "fields": "",
+          "reducer": [],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "Creation date"
+          }
+        ]
+      },
+      "pluginVersion": "11.0.6+security-01",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PB40898D8F967833A"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "10000"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "entity: \"KSAT S-5p Acquisition - INU SGS\"",
+          "refId": "A",
+          "timeField": "created"
+        }
+      ],
+      "title": "CAMS Anomaly",
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Corelation file present",
+            "binary": {
+              "left": "correlation_file_id",
+              "operator": "-",
+              "reducer": "sum",
+              "right": "correlation_file_id"
+            },
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "correlation_file_id"
+              ],
+              "reducer": "allIsNull"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "_index": true,
+              "_type": true,
+              "correlation_file_id": true,
+              "highlight": true,
+              "ingestionTime": true,
+              "key": true,
+              "reportFolder": true,
+              "reportName": true,
+              "sort": true,
+              "url": true
+            },
+            "includeByName": {},
+            "indexByName": {
+              "Corelation file present": 23,
+              "_id": 0,
+              "_index": 1,
+              "_type": 2,
+              "acquisition_pass": 26,
+              "affected_systems": 4,
+              "assigned_element": 9,
+              "correlation_file_id": 22,
+              "created": 13,
+              "criticality": 5,
+              "datatake_ids": 27,
+              "description": 25,
+              "entity": 8,
+              "environment": 18,
+              "highlight": 19,
+              "involved_entities": 12,
+              "key": 20,
+              "linked_issues": 17,
+              "occurence_date": 15,
+              "origin": 24,
+              "originating_entity": 7,
+              "products": 28,
+              "reporter": 11,
+              "review_board_dispositions": 10,
+              "sort": 21,
+              "status": 16,
+              "title": 3,
+              "updated": 14,
+              "urgency": 6,
+              "url": 29
+            },
+            "renameByName": {
+              "_id": "ID",
+              "_type": "",
+              "acquisition_pass": "Imp. Acquisitions",
+              "affected_systems": "Affected systems ",
+              "assigned_element": "Assigned Element",
+              "created": "Creation date",
+              "criticality": "Criticality ",
+              "datatake_ids": "Imp. DataTakes",
+              "description": "Description",
+              "entity": "Assigned Entity",
+              "environment": "Environment (Impacted DTs)",
+              "highlight": "",
+              "involved_entities": "Involved entities",
+              "key": "",
+              "linked_issues": "Linked CAMs",
+              "occurence_date": "Occurence date",
+              "origin": "Origin of issue",
+              "originating_entity": "Origating entity",
+              "products": "Imp. Products",
+              "reporter": "Reporter",
+              "review_board_dispositions": "Review board disposition",
+              "status": "Status",
+              "title": "Title",
+              "updated": "Update date",
+              "urgency": "Urgency "
+            }
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [
+    "Anomalies"
+  ],
+  "templating": {
+    "list": [
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "PFAFAF64F5FF7E56B"
+        },
+        "definition": "{\"find\":\"terms\",\"field\":\"key\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "CAMS ID",
+        "multi": true,
+        "name": "CamsId",
+        "options": [],
+        "query": "{\"find\":\"terms\",\"field\":\"key\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "PFAFAF64F5FF7E56B"
+        },
+        "description": "Ad hoc filter for CAMS issue List",
+        "filters": [],
+        "hide": 0,
+        "label": "CAMS Filters",
+        "name": "filters",
+        "skipUrlSync": false,
+        "type": "adhoc"
+      },
+      {
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "PB40898D8F967833A"
+        },
+        "description": "Ad hoc filter dedicated for row contant ",
+        "filters": [],
+        "hide": 0,
+        "label": "CAMS Filters per Service",
+        "name": "filter_created",
+        "skipUrlSync": false,
+        "type": "adhoc"
+      }
+    ]
+  },
+  "time": {
+    "from": "now/w",
+    "to": "now/w"
+  },
+  "timeRangeUpdatedDuringEditOrView": false,
+  "timepicker": {},
+  "timezone": "",
+  "title": "CAMS issue list",
+  "uid": "j-DkP4Cnz",
+  "weekStart": ""
+}

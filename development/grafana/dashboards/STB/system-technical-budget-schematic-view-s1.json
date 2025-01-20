@@ -1,0 +1,4545 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 10,
+      "panels": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "gridPos": {
+            "h": 19,
+            "w": 24,
+            "x": 0,
+            "y": 1
+          },
+          "id": 11,
+          "options": {
+            "content": "The System Technical Budget Schematic View - S1 is based on \n\n\n\n- the data budget reference document [\\[ESA-EOPG-EOPGC-TN-9\\] CSC Operations \u2013 ESA Framework \u2013 System Technical Budget.pdf](https://omcs.atlassian.net/wiki/download/attachments/66158618/%5BESA-EOPG-EOPGC-TN-9%5D%20CSC%20Operations%20%E2%80%93%20ESA%20Framework%20%E2%80%93%20System%20Technical%20Budget.pdf?api=v2).\n\n\n\n- the data flow reference document [\\[ESA-EOPG-EOPGC-TN-58\\] CSC GS Data Flow Configuration.pdf](https://omcs.atlassian.net/wiki/download/attachments/66158618/%5BESA-EOPG-EOPGC-TN-58%5D%20CSC%20GS%20Data%20Flow%20Configuration.pdf?api=v2).\n\n\n\nData flow document extraction is visible in the [\"Data Flow dashboard\"](./d/MfmL_E4Vz/golden-rules-and-data-flow?orgId=1) \n\n\n\n# Data selected\n\n\n\nFrom [\\[ESA-EOPG-EOPGC-TN-9\\] CSC Operations \u2013 ESA Framework \u2013 System Technical Budget.pdf](https://omcs.atlassian.net/wiki/download/attachments/66158618/%5BESA-EOPG-EOPGC-TN-9%5D%20CSC%20Operations%20%E2%80%93%20ESA%20Framework%20%E2%80%93%20System%20Technical%20Budget.pdf?api=v2) document some assuption are made to provide the System Technical Budget dashboards.\n\n\n\nFor System Technical Budget Schematic View - S1 the data published at PRIP, LTA or DD and DSIB files are selected.\n\n\n\n - Section Data Aquisition data from DSIB files.\n\n - Section Data Production data published at PRIP.\n\n - Section Data Preservation data published at LTA.\n\n - Section Data Distribution data published at DD.\n\n\n\nData collection for **DSIB files** are considered as consistent since **01/15/2023**.\n\n\n\nData collection for **PRIP**, **LTA** and **DD** are considered as consistent since **01/08/2022**.\n\n\n\nValues are mean by satellite number in mission. (i.e. S1 1 satellite, S2 mean of 2 satellite, S3 mean of 2 satellite; S5 1 satellite )\n\n\n\nFor S1, S2, S3 values are mean of the 4 LTA, for S5 values came from S5P_DLR.\n\n\n\nRmq : There is today no S5 L0 data published at prip.\n\n\n\n# Annexes\n\n\n\n## Product type selected\n\n\n\nThe tables below present how products types are classified in STB level and STB timeliness:\n\n\n\n### For panel **Yearly Overall Data Flow S1 SATELLITE**:\n\n\n\n|Mission|STB Level|STB Timeliness|Real timeliness|Misc.|Product Type|\n|---|---|---|---|---|---|\n|S1|||NRT,NRT-PT|ACQ VOL|EW_GRDM_1A, EW_GRDM_1S, EW_OCN__2A, EW_OCN__2S, EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_OCN__2A, IW_OCN__2S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, IW_SLC__1A, IW_SLC__1S|\n|S1|||NTC|ACQ VOL|EW_GRDM_1A, EW_GRDM_1S, EW_OCN__2A, EW_OCN__2S, EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_OCN__2A, IW_OCN__2S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, IW_SLC__1A, IW_SLC__1S, RF_RAW, S1_GRDH_1A, S1_GRDH_1S, S1_OCN__2A, S1_OCN__2S, S1_RAW__0A, S1_RAW__0C, S1_RAW__0N, S1_RAW__0S, S1_SLC__1A, S1_SLC__1S, S2_GRDH_1A, S2_GRDH_1S, S2_OCN__2A, S2_OCN__2S, S2_RAW__0A, S2_RAW__0C, S2_RAW__0N, S2_RAW__0S, S2_SLC__1A, S2_SLC__1S, S3_GRDH_1A, S3_GRDH_1S, S3_OCN__2A, S3_OCN__2S, S3_RAW__0A, S3_RAW__0C, S3_RAW__0N, S3_RAW__0S, S3_SLC__1A, S3_SLC__1S, S4_GRDH_1A, S4_GRDH_1S, S4_OCN__2A, S4_OCN__2S, S4_RAW__0A, S4_RAW__0C, S4_RAW__0N, S4_RAW__0S, S4_SLC__1A, S4_SLC__1S, S5_GRDH_1A, S5_GRDH_1S, S5_OCN__2A, S5_OCN__2S, S5_RAW__0A, S5_RAW__0C, S5_RAW__0N, S5_RAW__0S, S5_SLC__1A, S5_SLC__1S, S6_GRDH_1A, S6_GRDH_1S, S6_OCN__2A, S6_OCN__2S, S6_RAW__0A, S6_RAW__0C, S6_RAW__0N, S6_RAW__0S, S6_SLC__1A, S6_SLC__1S, WV_OCN__2A, WV_OCN__2S, WV_RAW__0A, WV_RAW__0C, WV_RAW__0N, WV_RAW__0S, WV_SLC__1A, WV_SLC__1S|\n|S1|||NRT,NRT-PT|ACQ COUNT|EW_GRDM_1A, EW_GRDM_1S, EW_OCN__2A, EW_OCN__2S, EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_OCN__2A, IW_OCN__2S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, IW_SLC__1A, IW_SLC__1S|\n|S1|||NTC|ACQ COUNT|EW_GRDM_1A, EW_GRDM_1S, EW_OCN__2A, EW_OCN__2S, EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_OCN__2A, IW_OCN__2S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, IW_SLC__1A, IW_SLC__1S, RF_RAW, S1_GRDH_1A, S1_GRDH_1S, S1_OCN__2A, S1_OCN__2S, S1_RAW__0A, S1_RAW__0C, S1_RAW__0N, S1_RAW__0S, S1_SLC__1A, S1_SLC__1S, S2_GRDH_1A, S2_GRDH_1S, S2_OCN__2A, S2_OCN__2S, S2_RAW__0A, S2_RAW__0C, S2_RAW__0N, S2_RAW__0S, S2_SLC__1A, S2_SLC__1S, S3_GRDH_1A, S3_GRDH_1S, S3_OCN__2A, S3_OCN__2S, S3_RAW__0A, S3_RAW__0C, S3_RAW__0N, S3_RAW__0S, S3_SLC__1A, S3_SLC__1S, S4_GRDH_1A, S4_GRDH_1S, S4_OCN__2A, S4_OCN__2S, S4_RAW__0A, S4_RAW__0C, S4_RAW__0N, S4_RAW__0S, S4_SLC__1A, S4_SLC__1S, S5_GRDH_1A, S5_GRDH_1S, S5_OCN__2A, S5_OCN__2S, S5_RAW__0A, S5_RAW__0C, S5_RAW__0N, S5_RAW__0S, S5_SLC__1A, S5_SLC__1S, S6_GRDH_1A, S6_GRDH_1S, S6_OCN__2A, S6_OCN__2S, S6_RAW__0A, S6_RAW__0C, S6_RAW__0N, S6_RAW__0S, S6_SLC__1A, S6_SLC__1S, WV_OCN__2A, WV_OCN__2S, WV_RAW__0A, WV_RAW__0C, WV_RAW__0N, WV_RAW__0S, WV_SLC__1A, WV_SLC__1S|\n|S1|L0|NRT|NRT,NRT-PT|PROD VOL|EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S|\n|S1|L0|NRT|NRT,NRT-PT|PROD COUNT|EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S|\n|S1|L1|NRT|NRT,NRT-PT|PROD VOL|EW_GRDM_1A, EW_GRDM_1S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_SLC__1A, IW_SLC__1S|\n|S1|L1|NRT|NRT,NRT-PT|PROD COUNT|EW_GRDM_1A, EW_GRDM_1S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_SLC__1A, IW_SLC__1S|\n|S1|L0|NTC|NTC|PROD VOL|EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, RF_RAW, S1_RAW__0A, S1_RAW__0C, S1_RAW__0N, S1_RAW__0S, S2_RAW__0A, S2_RAW__0C, S2_RAW__0N, S2_RAW__0S, S3_RAW__0A, S3_RAW__0C, S3_RAW__0N, S3_RAW__0S, S4_RAW__0A, S4_RAW__0C, S4_RAW__0N, S4_RAW__0S, S5_RAW__0A, S5_RAW__0C, S5_RAW__0N, S5_RAW__0S, S6_RAW__0A, S6_RAW__0C, S6_RAW__0N, S6_RAW__0S, WV_RAW__0A, WV_RAW__0C, WV_RAW__0N, WV_RAW__0S|\n|S1|L0|NTC|NTC|PROD COUNT|EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, RF_RAW, S1_RAW__0A, S1_RAW__0C, S1_RAW__0N, S1_RAW__0S, S2_RAW__0A, S2_RAW__0C, S2_RAW__0N, S2_RAW__0S, S3_RAW__0A, S3_RAW__0C, S3_RAW__0N, S3_RAW__0S, S4_RAW__0A, S4_RAW__0C, S4_RAW__0N, S4_RAW__0S, S5_RAW__0A, S5_RAW__0C, S5_RAW__0N, S5_RAW__0S, S6_RAW__0A, S6_RAW__0C, S6_RAW__0N, S6_RAW__0S, WV_RAW__0A, WV_RAW__0C, WV_RAW__0N, WV_RAW__0S|\n|S1|L1|NTC|NTC|PROD VOL|EW_GRDM_1A, EW_GRDM_1S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_SLC__1A, IW_SLC__1S, S1_GRDH_1A, S1_GRDH_1S, S1_SLC__1A, S1_SLC__1S, S2_GRDH_1A, S2_GRDH_1S, S2_SLC__1A, S2_SLC__1S, S3_GRDH_1A, S3_GRDH_1S, S3_SLC__1A, S3_SLC__1S, S4_GRDH_1A, S4_GRDH_1S, S4_SLC__1A, S4_SLC__1S, S5_GRDH_1A, S5_GRDH_1S, S5_SLC__1A, S5_SLC__1S, S6_GRDH_1A, S6_GRDH_1S, S6_SLC__1A, S6_SLC__1S, WV_SLC__1A, WV_SLC__1S|\n|S1|L1|NTC|NTC|PROD COUNT|EW_GRDM_1A, EW_GRDM_1S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_SLC__1A, IW_SLC__1S, S1_GRDH_1A, S1_GRDH_1S, S1_SLC__1A, S1_SLC__1S, S2_GRDH_1A, S2_GRDH_1S, S2_SLC__1A, S2_SLC__1S, S3_GRDH_1A, S3_GRDH_1S, S3_SLC__1A, S3_SLC__1S, S4_GRDH_1A, S4_GRDH_1S, S4_SLC__1A, S4_SLC__1S, S5_GRDH_1A, S5_GRDH_1S, S5_SLC__1A, S5_SLC__1S, S6_GRDH_1A, S6_GRDH_1S, S6_SLC__1A, S6_SLC__1S, WV_SLC__1A, WV_SLC__1S|\n|S1|L2|NRT|NRT,NRT-PT|PROD VOL|EW_OCN__2A, EW_OCN__2S, IW_OCN__2A, IW_OCN__2S|\n|S1|L2|NRT|NRT,NRT-PT|PROD COUNT|EW_OCN__2A, EW_OCN__2S, IW_OCN__2A, IW_OCN__2S|\n|S1|L2|NTC|NTC|PROD VOL|EW_OCN__2A, EW_OCN__2S, IW_OCN__2A, IW_OCN__2S, S1_OCN__2A, S1_OCN__2S, S2_OCN__2A, S2_OCN__2S, S3_OCN__2A, S3_OCN__2S, S4_OCN__2A, S4_OCN__2S, S5_OCN__2A, S5_OCN__2S, S6_OCN__2A, S6_OCN__2S, WV_OCN__2A, WV_OCN__2S|\n|S1|L2|NTC|NTC|PROD COUNT|EW_OCN__2A, EW_OCN__2S, IW_OCN__2A, IW_OCN__2S, S1_OCN__2A, S1_OCN__2S, S2_OCN__2A, S2_OCN__2S, S3_OCN__2A, S3_OCN__2S, S4_OCN__2A, S4_OCN__2S, S5_OCN__2A, S5_OCN__2S, S6_OCN__2A, S6_OCN__2S, WV_OCN__2A, WV_OCN__2S|\n|S1||NRT-NTC|NRT,NRT-PT|PROD TOT VOL|EW_GRDM_1A, EW_GRDM_1S, EW_OCN__2A, EW_OCN__2S, EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_OCN__2A, IW_OCN__2S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, IW_SLC__1A, IW_SLC__1S|\n|S1||NRT-NTC|NTC|PROD TOT VOL|EW_GRDM_1A, EW_GRDM_1S, EW_OCN__2A, EW_OCN__2S, EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_OCN__2A, IW_OCN__2S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, IW_SLC__1A, IW_SLC__1S, RF_RAW, S1_GRDH_1A, S1_GRDH_1S, S1_OCN__2A, S1_OCN__2S, S1_RAW__0A, S1_RAW__0C, S1_RAW__0N, S1_RAW__0S, S1_SLC__1A, S1_SLC__1S, S2_GRDH_1A, S2_GRDH_1S, S2_OCN__2A, S2_OCN__2S, S2_RAW__0A, S2_RAW__0C, S2_RAW__0N, S2_RAW__0S, S2_SLC__1A, S2_SLC__1S, S3_GRDH_1A, S3_GRDH_1S, S3_OCN__2A, S3_OCN__2S, S3_RAW__0A, S3_RAW__0C, S3_RAW__0N, S3_RAW__0S, S3_SLC__1A, S3_SLC__1S, S4_GRDH_1A, S4_GRDH_1S, S4_OCN__2A, S4_OCN__2S, S4_RAW__0A, S4_RAW__0C, S4_RAW__0N, S4_RAW__0S, S4_SLC__1A, S4_SLC__1S, S5_GRDH_1A, S5_GRDH_1S, S5_OCN__2A, S5_OCN__2S, S5_RAW__0A, S5_RAW__0C, S5_RAW__0N, S5_RAW__0S, S5_SLC__1A, S5_SLC__1S, S6_GRDH_1A, S6_GRDH_1S, S6_OCN__2A, S6_OCN__2S, S6_RAW__0A, S6_RAW__0C, S6_RAW__0N, S6_RAW__0S, S6_SLC__1A, S6_SLC__1S, WV_OCN__2A, WV_OCN__2S, WV_RAW__0A, WV_RAW__0C, WV_RAW__0N, WV_RAW__0S, WV_SLC__1A, WV_SLC__1S|\n|S1||NRT-NTC|NRT,NRT-PT|PROD TOT COUNT|EW_GRDM_1A, EW_GRDM_1S, EW_OCN__2A, EW_OCN__2S, EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_OCN__2A, IW_OCN__2S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, IW_SLC__1A, IW_SLC__1S|\n|S1||NRT-NTC|NTC|PROD TOT COUNT|EW_GRDM_1A, EW_GRDM_1S, EW_OCN__2A, EW_OCN__2S, EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_OCN__2A, IW_OCN__2S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, IW_SLC__1A, IW_SLC__1S, RF_RAW, S1_GRDH_1A, S1_GRDH_1S, S1_OCN__2A, S1_OCN__2S, S1_RAW__0A, S1_RAW__0C, S1_RAW__0N, S1_RAW__0S, S1_SLC__1A, S1_SLC__1S, S2_GRDH_1A, S2_GRDH_1S, S2_OCN__2A, S2_OCN__2S, S2_RAW__0A, S2_RAW__0C, S2_RAW__0N, S2_RAW__0S, S2_SLC__1A, S2_SLC__1S, S3_GRDH_1A, S3_GRDH_1S, S3_OCN__2A, S3_OCN__2S, S3_RAW__0A, S3_RAW__0C, S3_RAW__0N, S3_RAW__0S, S3_SLC__1A, S3_SLC__1S, S4_GRDH_1A, S4_GRDH_1S, S4_OCN__2A, S4_OCN__2S, S4_RAW__0A, S4_RAW__0C, S4_RAW__0N, S4_RAW__0S, S4_SLC__1A, S4_SLC__1S, S5_GRDH_1A, S5_GRDH_1S, S5_OCN__2A, S5_OCN__2S, S5_RAW__0A, S5_RAW__0C, S5_RAW__0N, S5_RAW__0S, S5_SLC__1A, S5_SLC__1S, S6_GRDH_1A, S6_GRDH_1S, S6_OCN__2A, S6_OCN__2S, S6_RAW__0A, S6_RAW__0C, S6_RAW__0N, S6_RAW__0S, S6_SLC__1A, S6_SLC__1S, WV_OCN__2A, WV_OCN__2S, WV_RAW__0A, WV_RAW__0C, WV_RAW__0N, WV_RAW__0S, WV_SLC__1A, WV_SLC__1S|\n|S1|L0|NRT-NTC|NRT,NRT-PT|LTA VOL|EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S|\n|S1|L0|NRT-NTC|NTC|LTA VOL|EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, RF_RAW, S1_RAW__0A, S1_RAW__0C, S1_RAW__0N, S1_RAW__0S, S2_RAW__0A, S2_RAW__0C, S2_RAW__0N, S2_RAW__0S, S3_RAW__0A, S3_RAW__0C, S3_RAW__0N, S3_RAW__0S, S4_RAW__0A, S4_RAW__0C, S4_RAW__0N, S4_RAW__0S, S5_RAW__0A, S5_RAW__0C, S5_RAW__0N, S5_RAW__0S, S6_RAW__0A, S6_RAW__0C, S6_RAW__0N, S6_RAW__0S, WV_RAW__0A, WV_RAW__0C, WV_RAW__0N, WV_RAW__0S|\n|S1|L0|NRT-NTC|NRT,NRT-PT|LTA COUNT|EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S|\n|S1|L0|NRT-NTC|NTC|LTA COUNT|EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, RF_RAW, S1_RAW__0A, S1_RAW__0C, S1_RAW__0N, S1_RAW__0S, S2_RAW__0A, S2_RAW__0C, S2_RAW__0N, S2_RAW__0S, S3_RAW__0A, S3_RAW__0C, S3_RAW__0N, S3_RAW__0S, S4_RAW__0A, S4_RAW__0C, S4_RAW__0N, S4_RAW__0S, S5_RAW__0A, S5_RAW__0C, S5_RAW__0N, S5_RAW__0S, S6_RAW__0A, S6_RAW__0C, S6_RAW__0N, S6_RAW__0S, WV_RAW__0A, WV_RAW__0C, WV_RAW__0N, WV_RAW__0S|\n|S1|L0|NRT-NTC|NRT,NRT-PT|DD VOL|EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S|\n|S1|L0|NRT-NTC|NTC|DD VOL|EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, RF_RAW, S1_RAW__0A, S1_RAW__0C, S1_RAW__0N, S1_RAW__0S, S2_RAW__0A, S2_RAW__0C, S2_RAW__0N, S2_RAW__0S, S3_RAW__0A, S3_RAW__0C, S3_RAW__0N, S3_RAW__0S, S4_RAW__0A, S4_RAW__0C, S4_RAW__0N, S4_RAW__0S, S5_RAW__0A, S5_RAW__0C, S5_RAW__0N, S5_RAW__0S, S6_RAW__0A, S6_RAW__0C, S6_RAW__0N, S6_RAW__0S, WV_RAW__0A, WV_RAW__0C, WV_RAW__0N, WV_RAW__0S|\n|S1|L0|NRT-NTC|NRT,NRT-PT|DD COUNT|EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S|\n|S1|L0|NRT-NTC|NTC|DD COUNT|EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, RF_RAW, S1_RAW__0A, S1_RAW__0C, S1_RAW__0N, S1_RAW__0S, S2_RAW__0A, S2_RAW__0C, S2_RAW__0N, S2_RAW__0S, S3_RAW__0A, S3_RAW__0C, S3_RAW__0N, S3_RAW__0S, S4_RAW__0A, S4_RAW__0C, S4_RAW__0N, S4_RAW__0S, S5_RAW__0A, S5_RAW__0C, S5_RAW__0N, S5_RAW__0S, S6_RAW__0A, S6_RAW__0C, S6_RAW__0N, S6_RAW__0S, WV_RAW__0A, WV_RAW__0C, WV_RAW__0N, WV_RAW__0S|\n|S1|L1|NRT-NTC|NRT,NRT-PT|DD VOL|EW_GRDM_1A, EW_GRDM_1S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_SLC__1A, IW_SLC__1S|\n|S1|L1|NRT-NTC|NTC|DD VOL|EW_GRDM_1A, EW_GRDM_1S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_SLC__1A, IW_SLC__1S, S1_GRDH_1A, S1_GRDH_1S, S1_SLC__1A, S1_SLC__1S, S2_GRDH_1A, S2_GRDH_1S, S2_SLC__1A, S2_SLC__1S, S3_GRDH_1A, S3_GRDH_1S, S3_SLC__1A, S3_SLC__1S, S4_GRDH_1A, S4_GRDH_1S, S4_SLC__1A, S4_SLC__1S, S5_GRDH_1A, S5_GRDH_1S, S5_SLC__1A, S5_SLC__1S, S6_GRDH_1A, S6_GRDH_1S, S6_SLC__1A, S6_SLC__1S, WV_SLC__1A, WV_SLC__1S|\n|S1|L1|NRT-NTC|NRT,NRT-PT|DD COUNT|EW_GRDM_1A, EW_GRDM_1S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_SLC__1A, IW_SLC__1S|\n|S1|L1|NRT-NTC|NTC|DD COUNT|EW_GRDM_1A, EW_GRDM_1S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_SLC__1A, IW_SLC__1S, S1_GRDH_1A, S1_GRDH_1S, S1_SLC__1A, S1_SLC__1S, S2_GRDH_1A, S2_GRDH_1S, S2_SLC__1A, S2_SLC__1S, S3_GRDH_1A, S3_GRDH_1S, S3_SLC__1A, S3_SLC__1S, S4_GRDH_1A, S4_GRDH_1S, S4_SLC__1A, S4_SLC__1S, S5_GRDH_1A, S5_GRDH_1S, S5_SLC__1A, S5_SLC__1S, S6_GRDH_1A, S6_GRDH_1S, S6_SLC__1A, S6_SLC__1S, WV_SLC__1A, WV_SLC__1S|\n|S1|L2|NRT-NTC|NRT,NRT-PT|DD VOL|EW_OCN__2A, EW_OCN__2S, IW_OCN__2A, IW_OCN__2S|\n|S1|L2|NRT-NTC|NTC|DD VOL|EW_OCN__2A, EW_OCN__2S, IW_OCN__2A, IW_OCN__2S, S1_OCN__2A, S1_OCN__2S, S2_OCN__2A, S2_OCN__2S, S3_OCN__2A, S3_OCN__2S, S4_OCN__2A, S4_OCN__2S, S5_OCN__2A, S5_OCN__2S, S6_OCN__2A, S6_OCN__2S, WV_OCN__2A, WV_OCN__2S|\n|S1|L2|NRT-NTC|NRT,NRT-PT|DD COUNT|EW_OCN__2A, EW_OCN__2S, IW_OCN__2A, IW_OCN__2S|\n|S1|L2|NRT-NTC|NTC|DD COUNT|EW_OCN__2A, EW_OCN__2S, IW_OCN__2A, IW_OCN__2S, S1_OCN__2A, S1_OCN__2S, S2_OCN__2A, S2_OCN__2S, S3_OCN__2A, S3_OCN__2S, S4_OCN__2A, S4_OCN__2S, S5_OCN__2A, S5_OCN__2S, S6_OCN__2A, S6_OCN__2S, WV_OCN__2A, WV_OCN__2S|\n|S1||NRT-NTC|NRT,NRT-PT|DD TOT VOL|EW_GRDM_1A, EW_GRDM_1S, EW_OCN__2A, EW_OCN__2S, EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_OCN__2A, IW_OCN__2S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, IW_SLC__1A, IW_SLC__1S|\n|S1||NRT-NTC|NTC|DD TOT VOL|EW_GRDM_1A, EW_GRDM_1S, EW_OCN__2A, EW_OCN__2S, EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_OCN__2A, IW_OCN__2S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, IW_SLC__1A, IW_SLC__1S, RF_RAW, S1_GRDH_1A, S1_GRDH_1S, S1_OCN__2A, S1_OCN__2S, S1_RAW__0A, S1_RAW__0C, S1_RAW__0N, S1_RAW__0S, S1_SLC__1A, S1_SLC__1S, S2_GRDH_1A, S2_GRDH_1S, S2_OCN__2A, S2_OCN__2S, S2_RAW__0A, S2_RAW__0C, S2_RAW__0N, S2_RAW__0S, S2_SLC__1A, S2_SLC__1S, S3_GRDH_1A, S3_GRDH_1S, S3_OCN__2A, S3_OCN__2S, S3_RAW__0A, S3_RAW__0C, S3_RAW__0N, S3_RAW__0S, S3_SLC__1A, S3_SLC__1S, S4_GRDH_1A, S4_GRDH_1S, S4_OCN__2A, S4_OCN__2S, S4_RAW__0A, S4_RAW__0C, S4_RAW__0N, S4_RAW__0S, S4_SLC__1A, S4_SLC__1S, S5_GRDH_1A, S5_GRDH_1S, S5_OCN__2A, S5_OCN__2S, S5_RAW__0A, S5_RAW__0C, S5_RAW__0N, S5_RAW__0S, S5_SLC__1A, S5_SLC__1S, S6_GRDH_1A, S6_GRDH_1S, S6_OCN__2A, S6_OCN__2S, S6_RAW__0A, S6_RAW__0C, S6_RAW__0N, S6_RAW__0S, S6_SLC__1A, S6_SLC__1S, WV_OCN__2A, WV_OCN__2S, WV_RAW__0A, WV_RAW__0C, WV_RAW__0N, WV_RAW__0S, WV_SLC__1A, WV_SLC__1S|\n|S1||NRT-NTC|NRT,NRT-PT|DD TOT COUNT|EW_GRDM_1A, EW_GRDM_1S, EW_OCN__2A, EW_OCN__2S, EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_OCN__2A, IW_OCN__2S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, IW_SLC__1A, IW_SLC__1S|\n|S1||NRT-NTC|NTC|DD TOT COUNT|EW_GRDM_1A, EW_GRDM_1S, EW_OCN__2A, EW_OCN__2S, EW_RAW__0A, EW_RAW__0C, EW_RAW__0N, EW_RAW__0S, EW_SLC__1A, EW_SLC__1S, IW_GRDH_1A, IW_GRDH_1S, IW_OCN__2A, IW_OCN__2S, IW_RAW__0A, IW_RAW__0C, IW_RAW__0N, IW_RAW__0S, IW_SLC__1A, IW_SLC__1S, RF_RAW, S1_GRDH_1A, S1_GRDH_1S, S1_OCN__2A, S1_OCN__2S, S1_RAW__0A, S1_RAW__0C, S1_RAW__0N, S1_RAW__0S, S1_SLC__1A, S1_SLC__1S, S2_GRDH_1A, S2_GRDH_1S, S2_OCN__2A, S2_OCN__2S, S2_RAW__0A, S2_RAW__0C, S2_RAW__0N, S2_RAW__0S, S2_SLC__1A, S2_SLC__1S, S3_GRDH_1A, S3_GRDH_1S, S3_OCN__2A, S3_OCN__2S, S3_RAW__0A, S3_RAW__0C, S3_RAW__0N, S3_RAW__0S, S3_SLC__1A, S3_SLC__1S, S4_GRDH_1A, S4_GRDH_1S, S4_OCN__2A, S4_OCN__2S, S4_RAW__0A, S4_RAW__0C, S4_RAW__0N, S4_RAW__0S, S4_SLC__1A, S4_SLC__1S, S5_GRDH_1A, S5_GRDH_1S, S5_OCN__2A, S5_OCN__2S, S5_RAW__0A, S5_RAW__0C, S5_RAW__0N, S5_RAW__0S, S5_SLC__1A, S5_SLC__1S, S6_GRDH_1A, S6_GRDH_1S, S6_OCN__2A, S6_OCN__2S, S6_RAW__0A, S6_RAW__0C, S6_RAW__0N, S6_RAW__0S, S6_SLC__1A, S6_SLC__1S, WV_OCN__2A, WV_OCN__2S, WV_RAW__0A, WV_RAW__0C, WV_RAW__0N, WV_RAW__0S, WV_SLC__1A, WV_SLC__1S|\n\n\n\n",
+            "mode": "markdown"
+          },
+          "pluginVersion": "9.1.6",
+          "targets": [
+            {
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "refId": "A"
+            }
+          ],
+          "title": "Help",
+          "type": "text"
+        }
+      ],
+      "title": "Dashboard description",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 120,
+      "panels": [],
+      "title": "Schematic View - S1",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 23,
+        "w": 24,
+        "x": 0,
+        "y": 2
+      },
+      "id": 121,
+      "options": {
+        "infinitePan": false,
+        "inlineEditing": true,
+        "panZoom": false,
+        "root": {
+          "background": {
+            "color": {
+              "fixed": "transparent"
+            }
+          },
+          "border": {
+            "color": {
+              "fixed": "dark-green"
+            }
+          },
+          "elements": [
+            {
+              "background": {
+                "color": {
+                  "fixed": "#fad9d54d"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "text"
+                },
+                "size": 20,
+                "text": {
+                  "fixed": "Preservation"
+                },
+                "valign": "top"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "PRESERVATION",
+              "placement": {
+                "height": 120,
+                "left": 248,
+                "top": 500,
+                "width": 725
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#83b9ef4d"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "text"
+                },
+                "size": 20,
+                "text": {
+                  "fixed": "Data Distribution"
+                },
+                "valign": "top"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "DISTRIBUTION",
+              "placement": {
+                "height": 490,
+                "left": 990,
+                "top": 1,
+                "width": 227
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#dae8fc4d"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "dark-green"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "text"
+                },
+                "size": 20,
+                "text": {
+                  "fixed": "Production"
+                },
+                "valign": "top"
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "PRODUCTION",
+              "placement": {
+                "height": 490,
+                "left": 248,
+                "top": 1,
+                "width": 725
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "transparent"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "text"
+                },
+                "radius": 9,
+                "width": 3
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "text"
+                },
+                "size": 20,
+                "text": {
+                  "fixed": "Sentinel 1"
+                },
+                "valign": "middle"
+              },
+              "connections": [
+                {
+                  "color": {
+                    "fixed": "rgb(204, 204, 220)"
+                  },
+                  "path": "straight",
+                  "size": {
+                    "fixed": 2,
+                    "max": 10,
+                    "min": 1
+                  },
+                  "source": {
+                    "x": -3.471374246873913e-05,
+                    "y": -0.9998346827880621
+                  },
+                  "sourceOriginal": {
+                    "x": 104.99653625488281,
+                    "y": 77.98265075683594
+                  },
+                  "target": {
+                    "x": 0.00899297645622433,
+                    "y": 1.0233349591571839
+                  },
+                  "targetName": "S1___ACQ_LABEL",
+                  "targetOriginal": {
+                    "x": 105.89930534362793,
+                    "y": 159.7083282470703
+                  }
+                }
+              ],
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "SATELLITE",
+              "placement": {
+                "height": 41.99652862548828,
+                "left": 5,
+                "top": 36,
+                "width": 200.00001525878906
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#A9D08E"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#2D7600"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "mode": "fixed"
+                }
+              },
+              "connections": [
+                {
+                  "color": {
+                    "fixed": "#2D7600"
+                  },
+                  "path": "straight",
+                  "size": {
+                    "fixed": 2,
+                    "max": 10,
+                    "min": 1
+                  },
+                  "source": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "sourceOriginal": {
+                    "x": 205.00001525878906,
+                    "y": 197.5
+                  },
+                  "target": {
+                    "x": -1,
+                    "y": 0
+                  },
+                  "targetName": "S1_L0_NRT_PROD",
+                  "targetOriginal": {
+                    "x": 255.00001335144043,
+                    "y": 198.5
+                  }
+                },
+                {
+                  "color": {
+                    "fixed": "#2D7600"
+                  },
+                  "path": "straight",
+                  "size": {
+                    "fixed": 2,
+                    "max": 10,
+                    "min": 1
+                  },
+                  "source": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "sourceOriginal": {
+                    "x": 205.00001525878906,
+                    "y": 197.5
+                  },
+                  "target": {
+                    "x": -1,
+                    "y": 0
+                  },
+                  "targetName": "S1_L0_NTC_PROD",
+                  "targetOriginal": {
+                    "x": 255.00001335144043,
+                    "y": 322.5
+                  },
+                  "vertices": [
+                    {
+                      "x": 0.3639996858215212,
+                      "y": 0
+                    },
+                    {
+                      "x": 0.3639996858215212,
+                      "y": 0.9895999755859375
+                    }
+                  ]
+                }
+              ],
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1___ACQ",
+              "placement": {
+                "height": 75,
+                "left": 5,
+                "top": 160,
+                "width": 200
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#A9D08E"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#2D7600"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "ACQUISITION",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1___ACQ_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 5,
+                "top": 160,
+                "width": 200
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#A9D08E"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#2D7600"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "field": "S1___ACQ_COUNT",
+                  "fixed": "",
+                  "mode": "field"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1___ACQ_VOL",
+              "placement": {
+                "height": 25,
+                "left": 5,
+                "top": 185,
+                "width": 130
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#A9D08E"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#2D7600"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Tib",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1___ACQ_VOL_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 135,
+                "top": 185,
+                "width": 70
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#A9D08E"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#2D7600"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "field": "S1___ACQ_VOL",
+                  "fixed": "",
+                  "mode": "field"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1___ACQ_COUNT",
+              "placement": {
+                "height": 25,
+                "left": 5,
+                "top": 210,
+                "width": 130
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#A9D08E"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#2D7600"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Products",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1___ACQ_COUNT_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 135,
+                "top": 210,
+                "width": 70
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#CBA117"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#7D630E"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "mode": "fixed"
+                }
+              },
+              "connections": [
+                {
+                  "color": {
+                    "fixed": "#CBA117"
+                  },
+                  "path": "straight",
+                  "size": {
+                    "fixed": 2,
+                    "max": 10,
+                    "min": 1
+                  },
+                  "source": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "sourceOriginal": {
+                    "x": 455.0000286102295,
+                    "y": 197.5
+                  },
+                  "target": {
+                    "x": -1,
+                    "y": 0
+                  },
+                  "targetName": "S1_L0_NRT-NTC_DD",
+                  "targetOriginal": {
+                    "x": 1005.0000743865967,
+                    "y": 72.5
+                  },
+                  "vertices": [
+                    {
+                      "x": 0.022424186227346005,
+                      "y": -0.0055999755859375
+                    },
+                    {
+                      "x": 0.022424186227346005,
+                      "y": 1
+                    }
+                  ]
+                },
+                {
+                  "color": {
+                    "fixed": "#CBA117"
+                  },
+                  "path": "straight",
+                  "size": {
+                    "fixed": 2,
+                    "max": 10,
+                    "min": 1
+                  },
+                  "source": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "sourceOriginal": {
+                    "x": 455.0000286102295,
+                    "y": 197.5
+                  },
+                  "target": {
+                    "x": -1,
+                    "y": 0
+                  },
+                  "targetName": "S1_L1_NRT_PROD",
+                  "targetOriginal": {
+                    "x": 505.00001335144043,
+                    "y": 198.5
+                  }
+                }
+              ],
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L0_NRT_PROD",
+              "placement": {
+                "height": 75,
+                "left": 255,
+                "top": 160,
+                "width": 200
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#CBA117"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#7D630E"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "L0 NRT",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L0_NRT_PROD_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 255,
+                "top": 160,
+                "width": 200
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#CBA117"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#7D630E"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "field": "S1_L0_NRT_PROD_COUNT",
+                  "fixed": "",
+                  "mode": "field"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L0_NRT_PROD_VOL",
+              "placement": {
+                "height": 25,
+                "left": 255,
+                "top": 185,
+                "width": 130
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#CBA117"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#7D630E"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Tib",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L0_NRT_PROD_VOL_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 385,
+                "top": 185,
+                "width": 70
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#CBCF73"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#7D630E"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "field": "S1_L0_NRT_PROD_VOL",
+                  "fixed": "",
+                  "mode": "field"
+                }
+              },
+              "connections": [
+                {
+                  "color": {
+                    "fixed": "#cba117"
+                  },
+                  "path": "straight",
+                  "size": {
+                    "fixed": 2,
+                    "max": 10,
+                    "min": 1
+                  },
+                  "source": {
+                    "x": -1,
+                    "y": 0.5
+                  },
+                  "sourceOriginal": {
+                    "x": 255,
+                    "y": 216.25
+                  },
+                  "target": {
+                    "x": -1,
+                    "y": 0.2
+                  },
+                  "targetName": "S1_L0_NRT-NTC_LTA_VOL",
+                  "targetOriginal": {
+                    "x": 256,
+                    "y": 570
+                  },
+                  "vertices": [
+                    {
+                      "x": -22,
+                      "y": 0
+                    },
+                    {
+                      "x": -22,
+                      "y": 0.9915194346289753
+                    }
+                  ]
+                }
+              ],
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L0_NRT_PROD_COUNT",
+              "placement": {
+                "height": 25,
+                "left": 255,
+                "top": 210,
+                "width": 130
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#CBCF73"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#7D630E"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Products",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L0_NRT_PROD_COUNT_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 385,
+                "top": 210,
+                "width": 70
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#08CEDB"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0697A1"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "mode": "fixed"
+                }
+              },
+              "connections": [
+                {
+                  "color": {
+                    "fixed": "#08CEDB"
+                  },
+                  "path": "straight",
+                  "size": {
+                    "fixed": 2,
+                    "max": 10,
+                    "min": 1
+                  },
+                  "source": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "sourceOriginal": {
+                    "x": 705.0000286102295,
+                    "y": 197.5
+                  },
+                  "target": {
+                    "x": -1,
+                    "y": 0
+                  },
+                  "targetName": "S1_L2_NRT_PROD",
+                  "targetOriginal": {
+                    "x": 755.0000133514404,
+                    "y": 198.5
+                  }
+                },
+                {
+                  "color": {
+                    "fixed": "#08CEDB"
+                  },
+                  "path": "straight",
+                  "size": {
+                    "fixed": 2,
+                    "max": 10,
+                    "min": 1
+                  },
+                  "source": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "sourceOriginal": {
+                    "x": 705.0000286102295,
+                    "y": 197.5
+                  },
+                  "target": {
+                    "x": -1,
+                    "y": 0
+                  },
+                  "targetName": "S1_L1_NRT-NTC_DD",
+                  "targetOriginal": {
+                    "x": 1005.0000743865967,
+                    "y": 198.5
+                  },
+                  "vertices": [
+                    {
+                      "x": 0.044444338056792494,
+                      "y": -0.1666717529296875
+                    },
+                    {
+                      "x": 0.047777670881499604,
+                      "y": -56.16667175292969
+                    },
+                    {
+                      "x": 0.9211108709547621,
+                      "y": -56.16667175292969
+                    },
+                    {
+                      "x": 0.9577775320265404,
+                      "y": -28.166671752929688
+                    }
+                  ]
+                }
+              ],
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L1_NRT_PROD",
+              "placement": {
+                "height": 75,
+                "left": 505,
+                "top": 160,
+                "width": 200
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#08CEDB"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0697A1"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "L1 NRT",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L1_NRT_PROD_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 505,
+                "top": 160,
+                "width": 200
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#08CEDB"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0697A1"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "field": "S1_L1_NRT_PROD_COUNT",
+                  "fixed": "",
+                  "mode": "field"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L1_NRT_PROD_VOL",
+              "placement": {
+                "height": 25,
+                "left": 505,
+                "top": 185,
+                "width": 130
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#08CEDB"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0697A1"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Tib",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L1_NRT_PROD_VOL_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 635,
+                "top": 185,
+                "width": 70
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#5FCFBB"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0697A1"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "field": "S1_L1_NRT_PROD_VOL",
+                  "fixed": "",
+                  "mode": "field"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L1_NRT_PROD_COUNT",
+              "placement": {
+                "height": 25,
+                "left": 505,
+                "top": 210,
+                "width": 130
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#5FCFBB"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0697A1"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Products",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L1_NRT_PROD_COUNT_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 635,
+                "top": 210,
+                "width": 70
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#CBA117"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#7D630E"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "mode": "fixed"
+                }
+              },
+              "connections": [
+                {
+                  "color": {
+                    "fixed": "#CBA117"
+                  },
+                  "path": "straight",
+                  "size": {
+                    "fixed": 2,
+                    "max": 10,
+                    "min": 1
+                  },
+                  "source": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "sourceOriginal": {
+                    "x": 455.0000286102295,
+                    "y": 322.5
+                  },
+                  "target": {
+                    "x": -1,
+                    "y": 0
+                  },
+                  "targetName": "S1_L0_NRT-NTC_DD",
+                  "targetOriginal": {
+                    "x": 1005.0000743865967,
+                    "y": 72.5
+                  },
+                  "vertices": [
+                    {
+                      "x": 0.013333277893071021,
+                      "y": 0.00466668701171875
+                    },
+                    {
+                      "x": 0.013333277893071021,
+                      "y": 1
+                    }
+                  ]
+                },
+                {
+                  "color": {
+                    "fixed": "#CBA117"
+                  },
+                  "path": "straight",
+                  "size": {
+                    "fixed": 2,
+                    "max": 10,
+                    "min": 1
+                  },
+                  "source": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "sourceOriginal": {
+                    "x": 455.0000286102295,
+                    "y": 322.5
+                  },
+                  "target": {
+                    "x": -1,
+                    "y": 0
+                  },
+                  "targetName": "S1_L1_NTC_PROD",
+                  "targetOriginal": {
+                    "x": 505.00001335144043,
+                    "y": 323.5
+                  }
+                }
+              ],
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L0_NTC_PROD",
+              "placement": {
+                "height": 75,
+                "left": 255,
+                "top": 285,
+                "width": 200
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#CBA117"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#7D630E"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "L0 NTC",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L0_NTC_PROD_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 255,
+                "top": 285,
+                "width": 200
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#CBA117"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#7D630E"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "field": "S1_L0_NTC_PROD_COUNT",
+                  "fixed": "",
+                  "mode": "field"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L0_NTC_PROD_VOL",
+              "placement": {
+                "height": 25,
+                "left": 255,
+                "top": 310,
+                "width": 130
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#CBA117"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#7D630E"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Tib",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L0_NTC_PROD_VOL_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 385,
+                "top": 310,
+                "width": 70
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#CBCF73"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#7D630E"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "field": "S1_L0_NTC_PROD_VOL",
+                  "fixed": "",
+                  "mode": "field"
+                }
+              },
+              "connections": [
+                {
+                  "color": {
+                    "fixed": "#cba117"
+                  },
+                  "path": "straight",
+                  "size": {
+                    "fixed": 2,
+                    "max": 10,
+                    "min": 1
+                  },
+                  "source": {
+                    "x": -1.0000000293438251,
+                    "y": 0.500001220703125
+                  },
+                  "sourceOriginal": {
+                    "x": 255.00001525878906,
+                    "y": 341.25
+                  },
+                  "target": {
+                    "x": -1.0276925893930289,
+                    "y": -0.1360009765625
+                  },
+                  "targetName": "S1_L0_NRT-NTC_LTA_VOL",
+                  "targetOriginal": {
+                    "x": 253.19999885559082,
+                    "y": 574.1999969482422
+                  },
+                  "vertices": [
+                    {
+                      "x": 12.111009857723685,
+                      "y": -0.004507418182070664
+                    },
+                    {
+                      "x": 12.666560350609869,
+                      "y": 0.9699506327894253
+                    }
+                  ]
+                }
+              ],
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L0_NTC_PROD_COUNT",
+              "placement": {
+                "height": 25,
+                "left": 255,
+                "top": 335,
+                "width": 130
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#CBCF73"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#7D630E"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Products",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L0_NTC_PROD_COUNT_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 385,
+                "top": 335,
+                "width": 70
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#08CEDB"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0697A1"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "mode": "fixed"
+                }
+              },
+              "connections": [
+                {
+                  "color": {
+                    "fixed": "#08CEDB"
+                  },
+                  "path": "straight",
+                  "size": {
+                    "fixed": 2,
+                    "max": 10,
+                    "min": 1
+                  },
+                  "source": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "sourceOriginal": {
+                    "x": 705.0000286102295,
+                    "y": 322.5
+                  },
+                  "target": {
+                    "x": -1,
+                    "y": 0
+                  },
+                  "targetName": "S1_L1_NRT-NTC_DD",
+                  "targetOriginal": {
+                    "x": 1005.0000743865967,
+                    "y": 197.5
+                  },
+                  "vertices": [
+                    {
+                      "x": 0.047777670881499604,
+                      "y": 0.0013333740234375
+                    },
+                    {
+                      "x": 0.047777670881499604,
+                      "y": 0.4253333740234375
+                    },
+                    {
+                      "x": 0.9144442053053479,
+                      "y": 0.4253333740234375
+                    }
+                  ]
+                },
+                {
+                  "color": {
+                    "fixed": "#08CEDB"
+                  },
+                  "path": "straight",
+                  "size": {
+                    "fixed": 2,
+                    "max": 10,
+                    "min": 1
+                  },
+                  "source": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "sourceOriginal": {
+                    "x": 705.0000286102295,
+                    "y": 322.5
+                  },
+                  "target": {
+                    "x": -1,
+                    "y": 0
+                  },
+                  "targetName": "S1_L2_NTC_PROD",
+                  "targetOriginal": {
+                    "x": 755.0000133514404,
+                    "y": 323.5
+                  }
+                }
+              ],
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L1_NTC_PROD",
+              "placement": {
+                "height": 75,
+                "left": 505,
+                "top": 285,
+                "width": 200
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#08CEDB"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0697A1"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "L1 NTC",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L1_NTC_PROD_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 505,
+                "top": 285,
+                "width": 200
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#08CEDB"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0697A1"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "field": "S1_L1_NTC_PROD_COUNT",
+                  "fixed": "",
+                  "mode": "field"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L1_NTC_PROD_VOL",
+              "placement": {
+                "height": 25,
+                "left": 505,
+                "top": 310,
+                "width": 130
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#08CEDB"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0697A1"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Tib",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L1_NTC_PROD_VOL_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 635,
+                "top": 310,
+                "width": 70
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#5FCFBB"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0697A1"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "field": "S1_L1_NTC_PROD_VOL",
+                  "fixed": "",
+                  "mode": "field"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L1_NTC_PROD_COUNT",
+              "placement": {
+                "height": 25,
+                "left": 505,
+                "top": 335,
+                "width": 130
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#5FCFBB"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0697A1"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Products",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L1_NTC_PROD_COUNT_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 635,
+                "top": 335,
+                "width": 70
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#FE7AFF"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#AD53AD"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "mode": "fixed"
+                }
+              },
+              "connections": [
+                {
+                  "color": {
+                    "fixed": "#FE7AFF"
+                  },
+                  "path": "straight",
+                  "size": {
+                    "fixed": 2,
+                    "max": 10,
+                    "min": 1
+                  },
+                  "source": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "sourceOriginal": {
+                    "x": 955.0000286102295,
+                    "y": 197.5
+                  },
+                  "target": {
+                    "x": -1,
+                    "y": 0
+                  },
+                  "targetName": "S1_L2_NRT-NTC_DD",
+                  "targetOriginal": {
+                    "x": 1005.0000743865967,
+                    "y": 322.5
+                  }
+                }
+              ],
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L2_NRT_PROD",
+              "placement": {
+                "height": 75,
+                "left": 755,
+                "top": 160,
+                "width": 200
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#FE7AFF"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#AD53AD"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "L2 NRT",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L2_NRT_PROD_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 755,
+                "top": 160,
+                "width": 200
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#FE7AFF"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#AD53AD"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "field": "S1_L2_NRT_PROD_COUNT",
+                  "fixed": "",
+                  "mode": "field"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L2_NRT_PROD_VOL",
+              "placement": {
+                "height": 25,
+                "left": 755,
+                "top": 185,
+                "width": 130
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#FE7AFF"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#AD53AD"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Tib",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L2_NRT_PROD_VOL_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 885,
+                "top": 185,
+                "width": 70
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#D883FF"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#AD53AD"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "field": "S1_L2_NRT_PROD_VOL",
+                  "fixed": "",
+                  "mode": "field"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L2_NRT_PROD_COUNT",
+              "placement": {
+                "height": 25,
+                "left": 755,
+                "top": 210,
+                "width": 130
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#D883FF"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#AD53AD"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Products",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L2_NRT_PROD_COUNT_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 885,
+                "top": 210,
+                "width": 70
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#FE7AFF"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#AD53AD"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "mode": "fixed"
+                }
+              },
+              "connections": [
+                {
+                  "color": {
+                    "fixed": "#FE7AFF"
+                  },
+                  "path": "straight",
+                  "size": {
+                    "fixed": 2,
+                    "max": 10,
+                    "min": 1
+                  },
+                  "source": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "sourceOriginal": {
+                    "x": 955.0000286102295,
+                    "y": 322.5
+                  },
+                  "target": {
+                    "x": -1,
+                    "y": 0
+                  },
+                  "targetName": "S1_L2_NRT-NTC_DD",
+                  "targetOriginal": {
+                    "x": 1005.0000743865967,
+                    "y": 323.5
+                  }
+                }
+              ],
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L2_NTC_PROD",
+              "placement": {
+                "height": 75,
+                "left": 755,
+                "top": 285,
+                "width": 200
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#FE7AFF"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#AD53AD"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "L2 NTC",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L2_NTC_PROD_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 755,
+                "top": 285,
+                "width": 200
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#FE7AFF"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#AD53AD"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "field": "S1_L2_NTC_PROD_COUNT",
+                  "fixed": "",
+                  "mode": "field"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L2_NTC_PROD_VOL",
+              "placement": {
+                "height": 25,
+                "left": 755,
+                "top": 310,
+                "width": 130
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#FE7AFF"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#AD53AD"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Tib",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L2_NTC_PROD_VOL_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 885,
+                "top": 310,
+                "width": 70
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#D883FF"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#AD53AD"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "field": "S1_L2_NTC_PROD_VOL",
+                  "fixed": "",
+                  "mode": "field"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L2_NTC_PROD_COUNT",
+              "placement": {
+                "height": 25,
+                "left": 755,
+                "top": 335,
+                "width": 130
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#D883FF"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#AD53AD"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Products",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L2_NTC_PROD_COUNT_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 885,
+                "top": 335,
+                "width": 70
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {}
+              },
+              "border": {
+                "color": {}
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "mode": "fixed"
+                }
+              },
+              "connections": [],
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1__NRT-NTC_PROD_TOT",
+              "placement": {
+                "height": 75,
+                "left": 755,
+                "top": 410,
+                "width": 200
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {}
+              },
+              "border": {
+                "color": {}
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Total",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1__NRT-NTC_PROD_TOT_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 755,
+                "top": 410,
+                "width": 200
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {}
+              },
+              "border": {
+                "color": {}
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "field": "S1__NRT-NTC_PROD_TOT_COUNT",
+                  "fixed": "",
+                  "mode": "field"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1__NRT-NTC_PROD_TOT_VOL",
+              "placement": {
+                "height": 25,
+                "left": 755,
+                "top": 435,
+                "width": 130
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {}
+              },
+              "border": {
+                "color": {}
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Tib",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1__NRT-NTC_PROD_TOT_VOL_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 885,
+                "top": 435,
+                "width": 70
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {}
+              },
+              "border": {
+                "color": {}
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "field": "S1__NRT-NTC_PROD_TOT_VOL",
+                  "fixed": "",
+                  "mode": "field"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1__NRT-NTC_PROD_TOT_COUNT",
+              "placement": {
+                "height": 25,
+                "left": 755,
+                "top": 460,
+                "width": 130
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {}
+              },
+              "border": {
+                "color": {}
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Products",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1__NRT-NTC_PROD_TOT_COUNT_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 885,
+                "top": 460,
+                "width": 70
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#CBA117"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#7D630E"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "mode": "fixed"
+                }
+              },
+              "connections": [],
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L0_NRT-NTC_LTA",
+              "placement": {
+                "height": 75,
+                "left": 255,
+                "top": 535,
+                "width": 200
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#CBA117"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#7D630E"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "L0 NRT+NTC",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L0_NRT-NTC_LTA_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 255,
+                "top": 535,
+                "width": 200
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#CBA117"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#7D630E"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "field": "S1_L0_NRT-NTC_LTA_COUNT",
+                  "fixed": "",
+                  "mode": "field"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L0_NRT-NTC_LTA_VOL",
+              "placement": {
+                "height": 25,
+                "left": 255,
+                "top": 560,
+                "width": 130
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#CBA117"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#7D630E"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Tib",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L0_NRT-NTC_LTA_VOL_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 385,
+                "top": 560,
+                "width": 70
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#CBCF73"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#7D630E"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "field": "S1_L0_NRT-NTC_LTA_VOL",
+                  "fixed": "",
+                  "mode": "field"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L0_NRT-NTC_LTA_COUNT",
+              "placement": {
+                "height": 25,
+                "left": 255,
+                "top": 585,
+                "width": 130
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#CBCF73"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#7D630E"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Products",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L0_NRT-NTC_LTA_COUNT_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 385,
+                "top": 585,
+                "width": 70
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#CBA117"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#7D630E"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "mode": "fixed"
+                }
+              },
+              "connections": [
+                {
+                  "color": {
+                    "fixed": "#CBA117"
+                  },
+                  "path": "straight",
+                  "size": {
+                    "fixed": 2,
+                    "max": 10,
+                    "min": 1
+                  },
+                  "source": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "target": {
+                    "x": -1,
+                    "y": 0
+                  },
+                  "targetName": "S1_L0_NRT-NTC_DL"
+                }
+              ],
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L0_NRT-NTC_DD",
+              "placement": {
+                "height": 75,
+                "left": 1005,
+                "top": 35,
+                "width": 200
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#CBA117"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#7D630E"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "L0",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L0_NRT-NTC_DD_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 1005,
+                "top": 35,
+                "width": 200
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#CBA117"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#7D630E"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "field": "S1_L0_NRT-NTC_DD_COUNT",
+                  "fixed": "",
+                  "mode": "field"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L0_NRT-NTC_DD_VOL",
+              "placement": {
+                "height": 25,
+                "left": 1005,
+                "top": 60,
+                "width": 130
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#CBA117"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#7D630E"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Tib",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L0_NRT-NTC_DD_VOL_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 1135,
+                "top": 60,
+                "width": 70
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#CBCF73"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#7D630E"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "field": "S1_L0_NRT-NTC_DD_VOL",
+                  "fixed": "",
+                  "mode": "field"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L0_NRT-NTC_DD_COUNT",
+              "placement": {
+                "height": 25,
+                "left": 1005,
+                "top": 85,
+                "width": 130
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#CBCF73"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#7D630E"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Products",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L0_NRT-NTC_DD_COUNT_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 1135,
+                "top": 85,
+                "width": 70
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#08CEDB"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0697A1"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "mode": "fixed"
+                }
+              },
+              "connections": [
+                {
+                  "color": {
+                    "fixed": "#08CEDB"
+                  },
+                  "path": "straight",
+                  "size": {
+                    "fixed": 2,
+                    "max": 10,
+                    "min": 1
+                  },
+                  "source": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "target": {
+                    "x": -1,
+                    "y": 0
+                  },
+                  "targetName": "S1_L1_NRT-NTC_DL"
+                }
+              ],
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L1_NRT-NTC_DD",
+              "placement": {
+                "height": 75,
+                "left": 1005,
+                "top": 160,
+                "width": 200
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#08CEDB"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0697A1"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "L1",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L1_NRT-NTC_DD_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 1005,
+                "top": 160,
+                "width": 200
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#08CEDB"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0697A1"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "field": "S1_L1_NRT-NTC_DD_COUNT",
+                  "fixed": "",
+                  "mode": "field"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L1_NRT-NTC_DD_VOL",
+              "placement": {
+                "height": 25,
+                "left": 1005,
+                "top": 185,
+                "width": 130
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#08CEDB"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0697A1"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Tib",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L1_NRT-NTC_DD_VOL_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 1135,
+                "top": 185,
+                "width": 70
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#5FCFBB"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0697A1"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "field": "S1_L1_NRT-NTC_DD_VOL",
+                  "fixed": "",
+                  "mode": "field"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L1_NRT-NTC_DD_COUNT",
+              "placement": {
+                "height": 25,
+                "left": 1005,
+                "top": 210,
+                "width": 130
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#5FCFBB"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#0697A1"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Products",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L1_NRT-NTC_DD_COUNT_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 1135,
+                "top": 210,
+                "width": 70
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#FE7AFF"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#AD53AD"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "mode": "fixed"
+                }
+              },
+              "connections": [
+                {
+                  "color": {
+                    "fixed": "#FE7AFF"
+                  },
+                  "path": "straight",
+                  "size": {
+                    "fixed": 2,
+                    "max": 10,
+                    "min": 1
+                  },
+                  "source": {
+                    "x": 1,
+                    "y": 0
+                  },
+                  "target": {
+                    "x": -1,
+                    "y": 0
+                  },
+                  "targetName": "S1_L2_NRT-NTC_DL"
+                }
+              ],
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L2_NRT-NTC_DD",
+              "placement": {
+                "height": 75,
+                "left": 1005,
+                "top": 285,
+                "width": 200
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#FE7AFF"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#AD53AD"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "L2",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L2_NRT-NTC_DD_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 1005,
+                "top": 285,
+                "width": 200
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#FE7AFF"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#AD53AD"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "field": "S1_L2_NRT-NTC_DD_COUNT",
+                  "fixed": "",
+                  "mode": "field"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L2_NRT-NTC_DD_VOL",
+              "placement": {
+                "height": 25,
+                "left": 1005,
+                "top": 310,
+                "width": 130
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#FE7AFF"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#AD53AD"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Tib",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L2_NRT-NTC_DD_VOL_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 1135,
+                "top": 310,
+                "width": 70
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#D883FF"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#AD53AD"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "field": "S1_L2_NRT-NTC_DD_VOL",
+                  "fixed": "",
+                  "mode": "field"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L2_NRT-NTC_DD_COUNT",
+              "placement": {
+                "height": 25,
+                "left": 1005,
+                "top": 335,
+                "width": 130
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {
+                  "fixed": "#D883FF"
+                }
+              },
+              "border": {
+                "color": {
+                  "fixed": "#AD53AD"
+                }
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Products",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1_L2_NRT-NTC_DD_COUNT_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 1135,
+                "top": 335,
+                "width": 70
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {}
+              },
+              "border": {
+                "color": {}
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "mode": "fixed"
+                }
+              },
+              "connections": [],
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1__NRT-NTC_DD_TOT",
+              "placement": {
+                "height": 75,
+                "left": 1005,
+                "top": 410,
+                "width": 200
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {}
+              },
+              "border": {
+                "color": {}
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Total",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1__NRT-NTC_DD_TOT_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 1005,
+                "top": 410,
+                "width": 200
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {}
+              },
+              "border": {
+                "color": {}
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "field": "S1__NRT-NTC_DD_TOT_COUNT",
+                  "fixed": "",
+                  "mode": "field"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1__NRT-NTC_DD_TOT_VOL",
+              "placement": {
+                "height": 25,
+                "left": 1005,
+                "top": 435,
+                "width": 130
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {}
+              },
+              "border": {
+                "color": {}
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Tib",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1__NRT-NTC_DD_TOT_VOL_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 1135,
+                "top": 435,
+                "width": 70
+              },
+              "type": "rectangle"
+            },
+            {
+              "background": {
+                "color": {}
+              },
+              "border": {
+                "color": {}
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "field": "S1__NRT-NTC_DD_TOT_VOL",
+                  "fixed": "",
+                  "mode": "field"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1__NRT-NTC_DD_TOT_COUNT",
+              "placement": {
+                "height": 25,
+                "left": 1005,
+                "top": 460,
+                "width": 130
+              },
+              "type": "metric-value"
+            },
+            {
+              "background": {
+                "color": {}
+              },
+              "border": {
+                "color": {}
+              },
+              "config": {
+                "align": "center",
+                "color": {
+                  "fixed": "#000000"
+                },
+                "size": 12,
+                "text": {
+                  "fixed": "Products",
+                  "mode": "fixed"
+                }
+              },
+              "constraint": {
+                "horizontal": "left",
+                "vertical": "top"
+              },
+              "name": "S1__NRT-NTC_DD_TOT_COUNT_LABEL",
+              "placement": {
+                "height": 25,
+                "left": 1135,
+                "top": 460,
+                "width": 70
+              },
+              "type": "rectangle"
+            }
+          ],
+          "name": "root",
+          "type": "frame"
+        },
+        "showAdvancedTypes": true
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "alias": "S1___ACQ_VOL",
+          "bucketAggs": [
+            {
+              "field": "time_created",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P7A7ACE4A571C05C7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "data_size",
+              "id": "1",
+              "settings": {
+                "script": "((_value/1)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "mission:S1",
+          "refId": "S1___ACQ_VOL",
+          "timeField": "time_created"
+        },
+        {
+          "alias": "S1___ACQ_COUNT",
+          "bucketAggs": [
+            {
+              "field": "time_created",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P7A7ACE4A571C05C7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/1)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "mission:S1",
+          "refId": "S1___ACQ_COUNT",
+          "timeField": "time_created"
+        },
+        {
+          "alias": "S1_L0_NRT_PROD_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/1)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:PRIP )   AND  (  (   ( product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  )  ",
+          "refId": "S1_L0_NRT_PROD_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_L0_NRT_PROD_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/1)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:PRIP )   AND  (  (   ( product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  )  ",
+          "refId": "S1_L0_NRT_PROD_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_L1_NRT_PROD_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/1)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:PRIP )   AND  (  (   ( product_type:EW_GRDM_1A OR product_type:EW_GRDM_1S OR product_type:EW_SLC__1A OR product_type:EW_SLC__1S OR product_type:IW_GRDH_1A OR product_type:IW_GRDH_1S OR product_type:IW_SLC__1A OR product_type:IW_SLC__1S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  )  ",
+          "refId": "S1_L1_NRT_PROD_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_L1_NRT_PROD_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/1)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:PRIP )   AND  (  (   ( product_type:EW_GRDM_1A OR product_type:EW_GRDM_1S OR product_type:EW_SLC__1A OR product_type:EW_SLC__1S OR product_type:IW_GRDH_1A OR product_type:IW_GRDH_1S OR product_type:IW_SLC__1A OR product_type:IW_SLC__1S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  )  ",
+          "refId": "S1_L1_NRT_PROD_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_L0_NTC_PROD_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/1)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:PRIP )   AND  (  (   ( product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S OR product_type:RF_RAW OR product_type:S1_RAW__0A OR product_type:S1_RAW__0C OR product_type:S1_RAW__0N OR product_type:S1_RAW__0S OR product_type:S2_RAW__0A OR product_type:S2_RAW__0C OR product_type:S2_RAW__0N OR product_type:S2_RAW__0S OR product_type:S3_RAW__0A OR product_type:S3_RAW__0C OR product_type:S3_RAW__0N OR product_type:S3_RAW__0S OR product_type:S4_RAW__0A OR product_type:S4_RAW__0C OR product_type:S4_RAW__0N OR product_type:S4_RAW__0S OR product_type:S5_RAW__0A OR product_type:S5_RAW__0C OR product_type:S5_RAW__0N OR product_type:S5_RAW__0S OR product_type:S6_RAW__0A OR product_type:S6_RAW__0C OR product_type:S6_RAW__0N OR product_type:S6_RAW__0S OR product_type:WV_RAW__0A OR product_type:WV_RAW__0C OR product_type:WV_RAW__0N OR product_type:WV_RAW__0S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1_L0_NTC_PROD_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_L0_NTC_PROD_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/1)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:PRIP )   AND  (  (   ( product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S OR product_type:RF_RAW OR product_type:S1_RAW__0A OR product_type:S1_RAW__0C OR product_type:S1_RAW__0N OR product_type:S1_RAW__0S OR product_type:S2_RAW__0A OR product_type:S2_RAW__0C OR product_type:S2_RAW__0N OR product_type:S2_RAW__0S OR product_type:S3_RAW__0A OR product_type:S3_RAW__0C OR product_type:S3_RAW__0N OR product_type:S3_RAW__0S OR product_type:S4_RAW__0A OR product_type:S4_RAW__0C OR product_type:S4_RAW__0N OR product_type:S4_RAW__0S OR product_type:S5_RAW__0A OR product_type:S5_RAW__0C OR product_type:S5_RAW__0N OR product_type:S5_RAW__0S OR product_type:S6_RAW__0A OR product_type:S6_RAW__0C OR product_type:S6_RAW__0N OR product_type:S6_RAW__0S OR product_type:WV_RAW__0A OR product_type:WV_RAW__0C OR product_type:WV_RAW__0N OR product_type:WV_RAW__0S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1_L0_NTC_PROD_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_L1_NTC_PROD_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/1)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:PRIP )   AND  (  (   ( product_type:EW_GRDM_1A OR product_type:EW_GRDM_1S OR product_type:EW_SLC__1A OR product_type:EW_SLC__1S OR product_type:IW_GRDH_1A OR product_type:IW_GRDH_1S OR product_type:IW_SLC__1A OR product_type:IW_SLC__1S OR product_type:S1_GRDH_1A OR product_type:S1_GRDH_1S OR product_type:S1_SLC__1A OR product_type:S1_SLC__1S OR product_type:S2_GRDH_1A OR product_type:S2_GRDH_1S OR product_type:S2_SLC__1A OR product_type:S2_SLC__1S OR product_type:S3_GRDH_1A OR product_type:S3_GRDH_1S OR product_type:S3_SLC__1A OR product_type:S3_SLC__1S OR product_type:S4_GRDH_1A OR product_type:S4_GRDH_1S OR product_type:S4_SLC__1A OR product_type:S4_SLC__1S OR product_type:S5_GRDH_1A OR product_type:S5_GRDH_1S OR product_type:S5_SLC__1A OR product_type:S5_SLC__1S OR product_type:S6_GRDH_1A OR product_type:S6_GRDH_1S OR product_type:S6_SLC__1A OR product_type:S6_SLC__1S OR product_type:WV_SLC__1A OR product_type:WV_SLC__1S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1_L1_NTC_PROD_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_L1_NTC_PROD_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/1)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:PRIP )   AND  (  (   ( product_type:EW_GRDM_1A OR product_type:EW_GRDM_1S OR product_type:EW_SLC__1A OR product_type:EW_SLC__1S OR product_type:IW_GRDH_1A OR product_type:IW_GRDH_1S OR product_type:IW_SLC__1A OR product_type:IW_SLC__1S OR product_type:S1_GRDH_1A OR product_type:S1_GRDH_1S OR product_type:S1_SLC__1A OR product_type:S1_SLC__1S OR product_type:S2_GRDH_1A OR product_type:S2_GRDH_1S OR product_type:S2_SLC__1A OR product_type:S2_SLC__1S OR product_type:S3_GRDH_1A OR product_type:S3_GRDH_1S OR product_type:S3_SLC__1A OR product_type:S3_SLC__1S OR product_type:S4_GRDH_1A OR product_type:S4_GRDH_1S OR product_type:S4_SLC__1A OR product_type:S4_SLC__1S OR product_type:S5_GRDH_1A OR product_type:S5_GRDH_1S OR product_type:S5_SLC__1A OR product_type:S5_SLC__1S OR product_type:S6_GRDH_1A OR product_type:S6_GRDH_1S OR product_type:S6_SLC__1A OR product_type:S6_SLC__1S OR product_type:WV_SLC__1A OR product_type:WV_SLC__1S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1_L1_NTC_PROD_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_L2_NRT_PROD_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/1)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:PRIP )   AND  (  (   ( product_type:EW_OCN__2A OR product_type:EW_OCN__2S OR product_type:IW_OCN__2A OR product_type:IW_OCN__2S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  )  ",
+          "refId": "S1_L2_NRT_PROD_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_L2_NRT_PROD_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/1)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:PRIP )   AND  (  (   ( product_type:EW_OCN__2A OR product_type:EW_OCN__2S OR product_type:IW_OCN__2A OR product_type:IW_OCN__2S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  )  ",
+          "refId": "S1_L2_NRT_PROD_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_L2_NTC_PROD_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/1)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:PRIP )   AND  (  (   ( product_type:EW_OCN__2A OR product_type:EW_OCN__2S OR product_type:IW_OCN__2A OR product_type:IW_OCN__2S OR product_type:S1_OCN__2A OR product_type:S1_OCN__2S OR product_type:S2_OCN__2A OR product_type:S2_OCN__2S OR product_type:S3_OCN__2A OR product_type:S3_OCN__2S OR product_type:S4_OCN__2A OR product_type:S4_OCN__2S OR product_type:S5_OCN__2A OR product_type:S5_OCN__2S OR product_type:S6_OCN__2A OR product_type:S6_OCN__2S OR product_type:WV_OCN__2A OR product_type:WV_OCN__2S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1_L2_NTC_PROD_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_L2_NTC_PROD_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/1)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:PRIP )   AND  (  (   ( product_type:EW_OCN__2A OR product_type:EW_OCN__2S OR product_type:IW_OCN__2A OR product_type:IW_OCN__2S OR product_type:S1_OCN__2A OR product_type:S1_OCN__2S OR product_type:S2_OCN__2A OR product_type:S2_OCN__2S OR product_type:S3_OCN__2A OR product_type:S3_OCN__2S OR product_type:S4_OCN__2A OR product_type:S4_OCN__2S OR product_type:S5_OCN__2A OR product_type:S5_OCN__2S OR product_type:S6_OCN__2A OR product_type:S6_OCN__2S OR product_type:WV_OCN__2A OR product_type:WV_OCN__2S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1_L2_NTC_PROD_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1__NRT-NTC_PROD_TOT_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/1)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:PRIP )   AND  (  (   ( product_type:EW_GRDM_1A OR product_type:EW_GRDM_1S OR product_type:EW_OCN__2A OR product_type:EW_OCN__2S OR product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:EW_SLC__1A OR product_type:EW_SLC__1S OR product_type:IW_GRDH_1A OR product_type:IW_GRDH_1S OR product_type:IW_OCN__2A OR product_type:IW_OCN__2S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S OR product_type:IW_SLC__1A OR product_type:IW_SLC__1S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  OR (   ( product_type:EW_GRDM_1A OR product_type:EW_GRDM_1S OR product_type:EW_OCN__2A OR product_type:EW_OCN__2S OR product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:EW_SLC__1A OR product_type:EW_SLC__1S OR product_type:IW_GRDH_1A OR product_type:IW_GRDH_1S OR product_type:IW_OCN__2A OR product_type:IW_OCN__2S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S OR product_type:IW_SLC__1A OR product_type:IW_SLC__1S OR product_type:RF_RAW OR product_type:S1_GRDH_1A OR product_type:S1_GRDH_1S OR product_type:S1_OCN__2A OR product_type:S1_OCN__2S OR product_type:S1_RAW__0A OR product_type:S1_RAW__0C OR product_type:S1_RAW__0N OR product_type:S1_RAW__0S OR product_type:S1_SLC__1A OR product_type:S1_SLC__1S OR product_type:S2_GRDH_1A OR product_type:S2_GRDH_1S OR product_type:S2_OCN__2A OR product_type:S2_OCN__2S OR product_type:S2_RAW__0A OR product_type:S2_RAW__0C OR product_type:S2_RAW__0N OR product_type:S2_RAW__0S OR product_type:S2_SLC__1A OR product_type:S2_SLC__1S OR product_type:S3_GRDH_1A OR product_type:S3_GRDH_1S OR product_type:S3_OCN__2A OR product_type:S3_OCN__2S OR product_type:S3_RAW__0A OR product_type:S3_RAW__0C OR product_type:S3_RAW__0N OR product_type:S3_RAW__0S OR product_type:S3_SLC__1A OR product_type:S3_SLC__1S OR product_type:S4_GRDH_1A OR product_type:S4_GRDH_1S OR product_type:S4_OCN__2A OR product_type:S4_OCN__2S OR product_type:S4_RAW__0A OR product_type:S4_RAW__0C OR product_type:S4_RAW__0N OR product_type:S4_RAW__0S OR product_type:S4_SLC__1A OR product_type:S4_SLC__1S OR product_type:S5_GRDH_1A OR product_type:S5_GRDH_1S OR product_type:S5_OCN__2A OR product_type:S5_OCN__2S OR product_type:S5_RAW__0A OR product_type:S5_RAW__0C OR product_type:S5_RAW__0N OR product_type:S5_RAW__0S OR product_type:S5_SLC__1A OR product_type:S5_SLC__1S OR product_type:S6_GRDH_1A OR product_type:S6_GRDH_1S OR product_type:S6_OCN__2A OR product_type:S6_OCN__2S OR product_type:S6_RAW__0A OR product_type:S6_RAW__0C OR product_type:S6_RAW__0N OR product_type:S6_RAW__0S OR product_type:S6_SLC__1A OR product_type:S6_SLC__1S OR product_type:WV_OCN__2A OR product_type:WV_OCN__2S OR product_type:WV_RAW__0A OR product_type:WV_RAW__0C OR product_type:WV_RAW__0N OR product_type:WV_RAW__0S OR product_type:WV_SLC__1A OR product_type:WV_SLC__1S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1__NRT-NTC_PROD_TOT_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1__NRT-NTC_PROD_TOT_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/1)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:PRIP )   AND  (  (   ( product_type:EW_GRDM_1A OR product_type:EW_GRDM_1S OR product_type:EW_OCN__2A OR product_type:EW_OCN__2S OR product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:EW_SLC__1A OR product_type:EW_SLC__1S OR product_type:IW_GRDH_1A OR product_type:IW_GRDH_1S OR product_type:IW_OCN__2A OR product_type:IW_OCN__2S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S OR product_type:IW_SLC__1A OR product_type:IW_SLC__1S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  OR (   ( product_type:EW_GRDM_1A OR product_type:EW_GRDM_1S OR product_type:EW_OCN__2A OR product_type:EW_OCN__2S OR product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:EW_SLC__1A OR product_type:EW_SLC__1S OR product_type:IW_GRDH_1A OR product_type:IW_GRDH_1S OR product_type:IW_OCN__2A OR product_type:IW_OCN__2S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S OR product_type:IW_SLC__1A OR product_type:IW_SLC__1S OR product_type:RF_RAW OR product_type:S1_GRDH_1A OR product_type:S1_GRDH_1S OR product_type:S1_OCN__2A OR product_type:S1_OCN__2S OR product_type:S1_RAW__0A OR product_type:S1_RAW__0C OR product_type:S1_RAW__0N OR product_type:S1_RAW__0S OR product_type:S1_SLC__1A OR product_type:S1_SLC__1S OR product_type:S2_GRDH_1A OR product_type:S2_GRDH_1S OR product_type:S2_OCN__2A OR product_type:S2_OCN__2S OR product_type:S2_RAW__0A OR product_type:S2_RAW__0C OR product_type:S2_RAW__0N OR product_type:S2_RAW__0S OR product_type:S2_SLC__1A OR product_type:S2_SLC__1S OR product_type:S3_GRDH_1A OR product_type:S3_GRDH_1S OR product_type:S3_OCN__2A OR product_type:S3_OCN__2S OR product_type:S3_RAW__0A OR product_type:S3_RAW__0C OR product_type:S3_RAW__0N OR product_type:S3_RAW__0S OR product_type:S3_SLC__1A OR product_type:S3_SLC__1S OR product_type:S4_GRDH_1A OR product_type:S4_GRDH_1S OR product_type:S4_OCN__2A OR product_type:S4_OCN__2S OR product_type:S4_RAW__0A OR product_type:S4_RAW__0C OR product_type:S4_RAW__0N OR product_type:S4_RAW__0S OR product_type:S4_SLC__1A OR product_type:S4_SLC__1S OR product_type:S5_GRDH_1A OR product_type:S5_GRDH_1S OR product_type:S5_OCN__2A OR product_type:S5_OCN__2S OR product_type:S5_RAW__0A OR product_type:S5_RAW__0C OR product_type:S5_RAW__0N OR product_type:S5_RAW__0S OR product_type:S5_SLC__1A OR product_type:S5_SLC__1S OR product_type:S6_GRDH_1A OR product_type:S6_GRDH_1S OR product_type:S6_OCN__2A OR product_type:S6_OCN__2S OR product_type:S6_RAW__0A OR product_type:S6_RAW__0C OR product_type:S6_RAW__0N OR product_type:S6_RAW__0S OR product_type:S6_SLC__1A OR product_type:S6_SLC__1S OR product_type:WV_OCN__2A OR product_type:WV_OCN__2S OR product_type:WV_RAW__0A OR product_type:WV_RAW__0C OR product_type:WV_RAW__0N OR product_type:WV_RAW__0S OR product_type:WV_SLC__1A OR product_type:WV_SLC__1S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1__NRT-NTC_PROD_TOT_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_L0_NRT-NTC_LTA_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/4)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:LTA )   AND  (  (   ( product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  OR (   ( product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S OR product_type:RF_RAW OR product_type:S1_RAW__0A OR product_type:S1_RAW__0C OR product_type:S1_RAW__0N OR product_type:S1_RAW__0S OR product_type:S2_RAW__0A OR product_type:S2_RAW__0C OR product_type:S2_RAW__0N OR product_type:S2_RAW__0S OR product_type:S3_RAW__0A OR product_type:S3_RAW__0C OR product_type:S3_RAW__0N OR product_type:S3_RAW__0S OR product_type:S4_RAW__0A OR product_type:S4_RAW__0C OR product_type:S4_RAW__0N OR product_type:S4_RAW__0S OR product_type:S5_RAW__0A OR product_type:S5_RAW__0C OR product_type:S5_RAW__0N OR product_type:S5_RAW__0S OR product_type:S6_RAW__0A OR product_type:S6_RAW__0C OR product_type:S6_RAW__0N OR product_type:S6_RAW__0S OR product_type:WV_RAW__0A OR product_type:WV_RAW__0C OR product_type:WV_RAW__0N OR product_type:WV_RAW__0S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1_L0_NRT-NTC_LTA_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_L0_NRT-NTC_LTA_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/4)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:LTA )   AND  (  (   ( product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  OR (   ( product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S OR product_type:RF_RAW OR product_type:S1_RAW__0A OR product_type:S1_RAW__0C OR product_type:S1_RAW__0N OR product_type:S1_RAW__0S OR product_type:S2_RAW__0A OR product_type:S2_RAW__0C OR product_type:S2_RAW__0N OR product_type:S2_RAW__0S OR product_type:S3_RAW__0A OR product_type:S3_RAW__0C OR product_type:S3_RAW__0N OR product_type:S3_RAW__0S OR product_type:S4_RAW__0A OR product_type:S4_RAW__0C OR product_type:S4_RAW__0N OR product_type:S4_RAW__0S OR product_type:S5_RAW__0A OR product_type:S5_RAW__0C OR product_type:S5_RAW__0N OR product_type:S5_RAW__0S OR product_type:S6_RAW__0A OR product_type:S6_RAW__0C OR product_type:S6_RAW__0N OR product_type:S6_RAW__0S OR product_type:WV_RAW__0A OR product_type:WV_RAW__0C OR product_type:WV_RAW__0N OR product_type:WV_RAW__0S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1_L0_NRT-NTC_LTA_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_L0_NRT-NTC_DD_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/1)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:DD )   AND  (  (   ( product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  OR (   ( product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S OR product_type:RF_RAW OR product_type:S1_RAW__0A OR product_type:S1_RAW__0C OR product_type:S1_RAW__0N OR product_type:S1_RAW__0S OR product_type:S2_RAW__0A OR product_type:S2_RAW__0C OR product_type:S2_RAW__0N OR product_type:S2_RAW__0S OR product_type:S3_RAW__0A OR product_type:S3_RAW__0C OR product_type:S3_RAW__0N OR product_type:S3_RAW__0S OR product_type:S4_RAW__0A OR product_type:S4_RAW__0C OR product_type:S4_RAW__0N OR product_type:S4_RAW__0S OR product_type:S5_RAW__0A OR product_type:S5_RAW__0C OR product_type:S5_RAW__0N OR product_type:S5_RAW__0S OR product_type:S6_RAW__0A OR product_type:S6_RAW__0C OR product_type:S6_RAW__0N OR product_type:S6_RAW__0S OR product_type:WV_RAW__0A OR product_type:WV_RAW__0C OR product_type:WV_RAW__0N OR product_type:WV_RAW__0S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1_L0_NRT-NTC_DD_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_L0_NRT-NTC_DD_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/1)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:DD )   AND  (  (   ( product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  OR (   ( product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S OR product_type:RF_RAW OR product_type:S1_RAW__0A OR product_type:S1_RAW__0C OR product_type:S1_RAW__0N OR product_type:S1_RAW__0S OR product_type:S2_RAW__0A OR product_type:S2_RAW__0C OR product_type:S2_RAW__0N OR product_type:S2_RAW__0S OR product_type:S3_RAW__0A OR product_type:S3_RAW__0C OR product_type:S3_RAW__0N OR product_type:S3_RAW__0S OR product_type:S4_RAW__0A OR product_type:S4_RAW__0C OR product_type:S4_RAW__0N OR product_type:S4_RAW__0S OR product_type:S5_RAW__0A OR product_type:S5_RAW__0C OR product_type:S5_RAW__0N OR product_type:S5_RAW__0S OR product_type:S6_RAW__0A OR product_type:S6_RAW__0C OR product_type:S6_RAW__0N OR product_type:S6_RAW__0S OR product_type:WV_RAW__0A OR product_type:WV_RAW__0C OR product_type:WV_RAW__0N OR product_type:WV_RAW__0S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1_L0_NRT-NTC_DD_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_L1_NRT-NTC_DD_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/1)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:DD )   AND  (  (   ( product_type:EW_GRDM_1A OR product_type:EW_GRDM_1S OR product_type:EW_SLC__1A OR product_type:EW_SLC__1S OR product_type:IW_GRDH_1A OR product_type:IW_GRDH_1S OR product_type:IW_SLC__1A OR product_type:IW_SLC__1S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  OR (   ( product_type:EW_GRDM_1A OR product_type:EW_GRDM_1S OR product_type:EW_SLC__1A OR product_type:EW_SLC__1S OR product_type:IW_GRDH_1A OR product_type:IW_GRDH_1S OR product_type:IW_SLC__1A OR product_type:IW_SLC__1S OR product_type:S1_GRDH_1A OR product_type:S1_GRDH_1S OR product_type:S1_SLC__1A OR product_type:S1_SLC__1S OR product_type:S2_GRDH_1A OR product_type:S2_GRDH_1S OR product_type:S2_SLC__1A OR product_type:S2_SLC__1S OR product_type:S3_GRDH_1A OR product_type:S3_GRDH_1S OR product_type:S3_SLC__1A OR product_type:S3_SLC__1S OR product_type:S4_GRDH_1A OR product_type:S4_GRDH_1S OR product_type:S4_SLC__1A OR product_type:S4_SLC__1S OR product_type:S5_GRDH_1A OR product_type:S5_GRDH_1S OR product_type:S5_SLC__1A OR product_type:S5_SLC__1S OR product_type:S6_GRDH_1A OR product_type:S6_GRDH_1S OR product_type:S6_SLC__1A OR product_type:S6_SLC__1S OR product_type:WV_SLC__1A OR product_type:WV_SLC__1S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1_L1_NRT-NTC_DD_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_L1_NRT-NTC_DD_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/1)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:DD )   AND  (  (   ( product_type:EW_GRDM_1A OR product_type:EW_GRDM_1S OR product_type:EW_SLC__1A OR product_type:EW_SLC__1S OR product_type:IW_GRDH_1A OR product_type:IW_GRDH_1S OR product_type:IW_SLC__1A OR product_type:IW_SLC__1S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  OR (   ( product_type:EW_GRDM_1A OR product_type:EW_GRDM_1S OR product_type:EW_SLC__1A OR product_type:EW_SLC__1S OR product_type:IW_GRDH_1A OR product_type:IW_GRDH_1S OR product_type:IW_SLC__1A OR product_type:IW_SLC__1S OR product_type:S1_GRDH_1A OR product_type:S1_GRDH_1S OR product_type:S1_SLC__1A OR product_type:S1_SLC__1S OR product_type:S2_GRDH_1A OR product_type:S2_GRDH_1S OR product_type:S2_SLC__1A OR product_type:S2_SLC__1S OR product_type:S3_GRDH_1A OR product_type:S3_GRDH_1S OR product_type:S3_SLC__1A OR product_type:S3_SLC__1S OR product_type:S4_GRDH_1A OR product_type:S4_GRDH_1S OR product_type:S4_SLC__1A OR product_type:S4_SLC__1S OR product_type:S5_GRDH_1A OR product_type:S5_GRDH_1S OR product_type:S5_SLC__1A OR product_type:S5_SLC__1S OR product_type:S6_GRDH_1A OR product_type:S6_GRDH_1S OR product_type:S6_SLC__1A OR product_type:S6_SLC__1S OR product_type:WV_SLC__1A OR product_type:WV_SLC__1S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1_L1_NRT-NTC_DD_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_L2_NRT-NTC_DD_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/1)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:DD )   AND  (  (   ( product_type:EW_OCN__2A OR product_type:EW_OCN__2S OR product_type:IW_OCN__2A OR product_type:IW_OCN__2S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  OR (   ( product_type:EW_OCN__2A OR product_type:EW_OCN__2S OR product_type:IW_OCN__2A OR product_type:IW_OCN__2S OR product_type:S1_OCN__2A OR product_type:S1_OCN__2S OR product_type:S2_OCN__2A OR product_type:S2_OCN__2S OR product_type:S3_OCN__2A OR product_type:S3_OCN__2S OR product_type:S4_OCN__2A OR product_type:S4_OCN__2S OR product_type:S5_OCN__2A OR product_type:S5_OCN__2S OR product_type:S6_OCN__2A OR product_type:S6_OCN__2S OR product_type:WV_OCN__2A OR product_type:WV_OCN__2S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1_L2_NRT-NTC_DD_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1_L2_NRT-NTC_DD_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/1)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:DD )   AND  (  (   ( product_type:EW_OCN__2A OR product_type:EW_OCN__2S OR product_type:IW_OCN__2A OR product_type:IW_OCN__2S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  OR (   ( product_type:EW_OCN__2A OR product_type:EW_OCN__2S OR product_type:IW_OCN__2A OR product_type:IW_OCN__2S OR product_type:S1_OCN__2A OR product_type:S1_OCN__2S OR product_type:S2_OCN__2A OR product_type:S2_OCN__2S OR product_type:S3_OCN__2A OR product_type:S3_OCN__2S OR product_type:S4_OCN__2A OR product_type:S4_OCN__2S OR product_type:S5_OCN__2A OR product_type:S5_OCN__2S OR product_type:S6_OCN__2A OR product_type:S6_OCN__2S OR product_type:WV_OCN__2A OR product_type:WV_OCN__2S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1_L2_NRT-NTC_DD_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1__NRT-NTC_DD_TOT_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/1)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:DD )   AND  (  (   ( product_type:EW_GRDM_1A OR product_type:EW_GRDM_1S OR product_type:EW_OCN__2A OR product_type:EW_OCN__2S OR product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:EW_SLC__1A OR product_type:EW_SLC__1S OR product_type:IW_GRDH_1A OR product_type:IW_GRDH_1S OR product_type:IW_OCN__2A OR product_type:IW_OCN__2S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S OR product_type:IW_SLC__1A OR product_type:IW_SLC__1S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  OR (   ( product_type:EW_GRDM_1A OR product_type:EW_GRDM_1S OR product_type:EW_OCN__2A OR product_type:EW_OCN__2S OR product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:EW_SLC__1A OR product_type:EW_SLC__1S OR product_type:IW_GRDH_1A OR product_type:IW_GRDH_1S OR product_type:IW_OCN__2A OR product_type:IW_OCN__2S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S OR product_type:IW_SLC__1A OR product_type:IW_SLC__1S OR product_type:RF_RAW OR product_type:S1_GRDH_1A OR product_type:S1_GRDH_1S OR product_type:S1_OCN__2A OR product_type:S1_OCN__2S OR product_type:S1_RAW__0A OR product_type:S1_RAW__0C OR product_type:S1_RAW__0N OR product_type:S1_RAW__0S OR product_type:S1_SLC__1A OR product_type:S1_SLC__1S OR product_type:S2_GRDH_1A OR product_type:S2_GRDH_1S OR product_type:S2_OCN__2A OR product_type:S2_OCN__2S OR product_type:S2_RAW__0A OR product_type:S2_RAW__0C OR product_type:S2_RAW__0N OR product_type:S2_RAW__0S OR product_type:S2_SLC__1A OR product_type:S2_SLC__1S OR product_type:S3_GRDH_1A OR product_type:S3_GRDH_1S OR product_type:S3_OCN__2A OR product_type:S3_OCN__2S OR product_type:S3_RAW__0A OR product_type:S3_RAW__0C OR product_type:S3_RAW__0N OR product_type:S3_RAW__0S OR product_type:S3_SLC__1A OR product_type:S3_SLC__1S OR product_type:S4_GRDH_1A OR product_type:S4_GRDH_1S OR product_type:S4_OCN__2A OR product_type:S4_OCN__2S OR product_type:S4_RAW__0A OR product_type:S4_RAW__0C OR product_type:S4_RAW__0N OR product_type:S4_RAW__0S OR product_type:S4_SLC__1A OR product_type:S4_SLC__1S OR product_type:S5_GRDH_1A OR product_type:S5_GRDH_1S OR product_type:S5_OCN__2A OR product_type:S5_OCN__2S OR product_type:S5_RAW__0A OR product_type:S5_RAW__0C OR product_type:S5_RAW__0N OR product_type:S5_RAW__0S OR product_type:S5_SLC__1A OR product_type:S5_SLC__1S OR product_type:S6_GRDH_1A OR product_type:S6_GRDH_1S OR product_type:S6_OCN__2A OR product_type:S6_OCN__2S OR product_type:S6_RAW__0A OR product_type:S6_RAW__0C OR product_type:S6_RAW__0N OR product_type:S6_RAW__0S OR product_type:S6_SLC__1A OR product_type:S6_SLC__1S OR product_type:WV_OCN__2A OR product_type:WV_OCN__2S OR product_type:WV_RAW__0A OR product_type:WV_RAW__0C OR product_type:WV_RAW__0N OR product_type:WV_RAW__0S OR product_type:WV_SLC__1A OR product_type:WV_SLC__1S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1__NRT-NTC_DD_TOT_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S1__NRT-NTC_DD_TOT_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/1)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S1 AND service_type:DD )   AND  (  (   ( product_type:EW_GRDM_1A OR product_type:EW_GRDM_1S OR product_type:EW_OCN__2A OR product_type:EW_OCN__2S OR product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:EW_SLC__1A OR product_type:EW_SLC__1S OR product_type:IW_GRDH_1A OR product_type:IW_GRDH_1S OR product_type:IW_OCN__2A OR product_type:IW_OCN__2S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S OR product_type:IW_SLC__1A OR product_type:IW_SLC__1S ) AND ( timeliness:NRT OR timeliness:NRT-PT )  )  OR (   ( product_type:EW_GRDM_1A OR product_type:EW_GRDM_1S OR product_type:EW_OCN__2A OR product_type:EW_OCN__2S OR product_type:EW_RAW__0A OR product_type:EW_RAW__0C OR product_type:EW_RAW__0N OR product_type:EW_RAW__0S OR product_type:EW_SLC__1A OR product_type:EW_SLC__1S OR product_type:IW_GRDH_1A OR product_type:IW_GRDH_1S OR product_type:IW_OCN__2A OR product_type:IW_OCN__2S OR product_type:IW_RAW__0A OR product_type:IW_RAW__0C OR product_type:IW_RAW__0N OR product_type:IW_RAW__0S OR product_type:IW_SLC__1A OR product_type:IW_SLC__1S OR product_type:RF_RAW OR product_type:S1_GRDH_1A OR product_type:S1_GRDH_1S OR product_type:S1_OCN__2A OR product_type:S1_OCN__2S OR product_type:S1_RAW__0A OR product_type:S1_RAW__0C OR product_type:S1_RAW__0N OR product_type:S1_RAW__0S OR product_type:S1_SLC__1A OR product_type:S1_SLC__1S OR product_type:S2_GRDH_1A OR product_type:S2_GRDH_1S OR product_type:S2_OCN__2A OR product_type:S2_OCN__2S OR product_type:S2_RAW__0A OR product_type:S2_RAW__0C OR product_type:S2_RAW__0N OR product_type:S2_RAW__0S OR product_type:S2_SLC__1A OR product_type:S2_SLC__1S OR product_type:S3_GRDH_1A OR product_type:S3_GRDH_1S OR product_type:S3_OCN__2A OR product_type:S3_OCN__2S OR product_type:S3_RAW__0A OR product_type:S3_RAW__0C OR product_type:S3_RAW__0N OR product_type:S3_RAW__0S OR product_type:S3_SLC__1A OR product_type:S3_SLC__1S OR product_type:S4_GRDH_1A OR product_type:S4_GRDH_1S OR product_type:S4_OCN__2A OR product_type:S4_OCN__2S OR product_type:S4_RAW__0A OR product_type:S4_RAW__0C OR product_type:S4_RAW__0N OR product_type:S4_RAW__0S OR product_type:S4_SLC__1A OR product_type:S4_SLC__1S OR product_type:S5_GRDH_1A OR product_type:S5_GRDH_1S OR product_type:S5_OCN__2A OR product_type:S5_OCN__2S OR product_type:S5_RAW__0A OR product_type:S5_RAW__0C OR product_type:S5_RAW__0N OR product_type:S5_RAW__0S OR product_type:S5_SLC__1A OR product_type:S5_SLC__1S OR product_type:S6_GRDH_1A OR product_type:S6_GRDH_1S OR product_type:S6_OCN__2A OR product_type:S6_OCN__2S OR product_type:S6_RAW__0A OR product_type:S6_RAW__0C OR product_type:S6_RAW__0N OR product_type:S6_RAW__0S OR product_type:S6_SLC__1A OR product_type:S6_SLC__1S OR product_type:WV_OCN__2A OR product_type:WV_OCN__2S OR product_type:WV_RAW__0A OR product_type:WV_RAW__0C OR product_type:WV_RAW__0N OR product_type:WV_RAW__0S OR product_type:WV_SLC__1A OR product_type:WV_SLC__1S ) AND ( timeliness:NTC )  )  )  ",
+          "refId": "S1__NRT-NTC_DD_TOT_COUNT",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Yearly Overall Data Flow S1 SATELLITE",
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "mode": "reduceFields",
+            "reducers": [
+              "sum"
+            ]
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "canvas"
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 39,
+  "tags": [
+    "System Technical budget"
+  ],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-1y",
+    "to": "now"
+  },
+  "timeRangeUpdatedDuringEditOrView": false,
+  "timepicker": {},
+  "timezone": "utc",
+  "title": "System Technical Budget Schematic View - S1",
+  "uid": "fdpd3fppz3toga",
+  "weekStart": ""
+}

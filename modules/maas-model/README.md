@@ -2,11 +2,41 @@
 
 This project provides various base classes and DAO code generation from index templates.
 
-## MAASMessage
+## Message Model
 
-`MAASMessage` class stores some attributes for exchange between MAAS components through the AMQP bus : `document_class`, `document_ids`, `document_indices`, and `date` (defaults to now).
+### MAASBaseMessage
+
+`MAASBaseMessage` class stores some extra attributes for exchange between MAAS components through the AMQP bus : `ancestor_ids` (list of previous message ids), `message_id` (id of the message), `date`, `pipeline` (List of all engine id crossed by the message since the first ancestor_ids), `force`
+
+### MAASMessage
+
+MAASMessage are based on MAASBaseMessage.
+`MAASMessage` class stores some extra attributes for exchange between MAAS components through the AMQP bus : `document_class`, `document_ids`, `document_indices`
 
 The `to_dict()` method outputs a dictionary ready for serialization.
+
+### Custom Message
+
+It is possible to extend MAASBaseMessage, to provide extra information for a custom engine.
+
+```python
+@dataclasses.dataclass
+class MAASCustomMessage(MAASBaseMessage):
+
+    custom_field: str = "default_value"
+```
+
+Next you have to provide the custom class for your custom engine that consume `MAASCustomMessage`
+It will allow the engine to deserialize correctly the message (by default `PAYLOAD_MODEL = MAASMessage`)
+
+```python
+from maas_model import MAASCustomMessage
+from maas_engine.engine.base import Engine
+
+class CustomEngine(Engine):
+
+    PAYLOAD_MODEL = MAASCustomMessage
+```
 
 ## DAO Code generation
 

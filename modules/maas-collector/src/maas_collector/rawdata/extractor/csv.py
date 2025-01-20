@@ -1,31 +1,69 @@
 """CSV extractor implementation"""
+
 import csv
 import os
 import typing
+
+import chardet
 
 from .base import BaseExtractor
 
 
 class CSVExtractor(BaseExtractor):
-    """read log text file line per line and extract data using regular expression from one line
+    """read CSV file line per line and extract data using regular expression from one line
 
     if attr_map is a dict, cvs.DictReader is used to extract fields.
     if attr_map is a list, csv.reader is used, as it is assumed the csv do not contains headers.
+    if autodetect_encoding: auto detect file encoding. Defaults to False.
     """
 
     def __init__(
         self,
         attr_map,
+        autodetect_encoding=False,
         converter_map: dict = None,
         allow_partial: bool = False,
     ):
+        """_summary_
+
+        Args:
+            attr_map (_type_): _description_
+            autodetect_encoding (bool, optional): auto detect file encoding. Defaults to False.
+            converter_map (dict, optional): _description_. Defaults to None.
+            allow_partial (bool, optional): _description_. Defaults to False.
+        """
         super().__init__(converter_map=converter_map, allow_partial=allow_partial)
         self.attr_map = attr_map
+        self.autodetect_encoding = autodetect_encoding
+
+    def detect_file_encoding(self, path: str, default_encoding: str = "utf-8") -> str:
+        """Detects file encoding if found otherwise default one."""
+        self.logger.debug("Attempting to auto-detect encoding for %s", path)
+
+        # Vérification de la taille du fichier
+        file_size = os.path.getsize(path)
+        if file_size == 0:
+            self.logger.error("File %s is empty.", path)
+            raise ValueError("File is empty.")
+
+        # Lire un échantillon pour détecter l'encodage
+        sample_size = min(file_size, 5000)
+        with open(path, "rb") as file:
+            raw_data = file.read(sample_size)
+
+        detected_encoding = chardet.detect(raw_data).get("encoding", default_encoding)
+        self.logger.info("Detected encoding of file %s: %s", path, detected_encoding)
+        return detected_encoding
 
     def extract(self, path, report_folder: str = "") -> typing.Iterator[dict]:
         """override"""
 
         basepath = os.path.basename(path)
+        encoding = "utf-8-sig"
+        if self.autodetect_encoding:
+            encoding = self.detect_file_encoding(path, default_encoding=encoding)
+
+        self.logger.debug("Encoding format of file %s is %s", path, encoding)
 
         # depending the attr_map type, choose the according extract method
         reader = (
@@ -34,7 +72,7 @@ class CSVExtractor(BaseExtractor):
             else self._extract_with_reader
         )
 
-        with open(path, encoding="utf-8-sig") as input_fd:
+        with open(path, encoding=encoding) as input_fd:
 
             # automatically setup the csv dialect
             reader_kwargs = {}

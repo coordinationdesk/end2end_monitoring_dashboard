@@ -1,4 +1,5 @@
 """ This file test monitoring configuration """
+
 import os
 import logging
 import sys
@@ -61,5 +62,7 @@ def test_monitoring_disable(amqp_mock, es_mock, find_conf_mock):
 
     monitoring.setup()
 
-    assert len(monitoring.meta_list) == 1
-    assert monitoring.meta_list[0].name == "basic_test"
+    assert len(monitoring.meta_dict) == 1
+    assert list(monitoring.meta_dict.values())[0].name == "basic_test"
+
+    monitoring.exit_gracefully(9, "")

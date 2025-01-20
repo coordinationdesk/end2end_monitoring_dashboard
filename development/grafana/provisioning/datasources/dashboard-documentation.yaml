@@ -1,0 +1,14 @@
+apiVersion: 1
+datasources:
+- name: dashboard-documentation
+  type: grafana-testdata-datasource
+  access: proxy
+  url: ''
+  database: ''
+  basicAuth: false
+  isDefault: false
+  jsonData: {}
+  editable: true
+  basicAuthUser: ${ES_USERNAME}
+  secureJsonData:
+    basicAuthPassword: ${ES_PASSWORD}

@@ -6,11 +6,12 @@
     PyScaffold helps you to put up the scaffold of your new Python project.
     Learn more under: https://pyscaffold.org/
 """
+
 from setuptools import setup
 
 if __name__ == "__main__":
     try:
-        setup(use_scm_version={"version_scheme": "no-guess-dev"},version="2.4.1")
+        setup(use_scm_version={"version_scheme": "no-guess-dev"}, version="2.8.0")
     except:  # noqa
         print(
             "\n\nAn error occurred while building the project, "

@@ -18,7 +18,7 @@ def datetime_to_zulu(datetime_object: datetime.datetime | None) -> str | None:
     """
     if datetime_object is None:
         return None
-    return datetime_object.strftime("%Y-%m-%dT%H:%M:%S.%f")[:-3] + "Z"
+    return datetime_object.strftime("%04Y-%02m-%02dT%02H:%02M:%02S.%f")[:-3] + "Z"
 
 
 def datestr_to_zulu(date_str: str | None) -> str | None:

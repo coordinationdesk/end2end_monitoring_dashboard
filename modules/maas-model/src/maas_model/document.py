@@ -1,4 +1,5 @@
 """Base classes for maas elastic search documents"""
+
 __all__ = ["MAASDocument", "MAASRawDocument"]
 
 import datetime
@@ -13,6 +14,7 @@ from typing import (
     Optional,
     Type,
     Self,
+    Union,
 )
 
 
@@ -44,7 +46,7 @@ class MAASDocument(Document):
     TODO upgrade with compute-engine features
     """
 
-    _PARTITION_FIELD: str = ""
+    _PARTITION_FIELD: Union[str, List[str]] = ""
 
     _PARTITION_FIELD_FORMAT: str = "%Y"
 
@@ -83,44 +85,76 @@ class MAASDocument(Document):
         Returns:
             [str]: index name
         """
-        date_value = None
 
         index_name = getattr(self, "Index").name
 
         if not self._PARTITION_FIELD:
             return index_name
 
-        date_value = self.partition_field_value
+        partionned_values = self.partition_field_value
 
-        if date_value is None:
-            raise ValueError(
-                f"No value for partition field "
-                f"{self._PARTITION_FIELD} for index {index_name}"
+        template_string = self._PARTITION_FIELD_FORMAT
+
+        # Keep retro compatibility with previous way
+        if not isinstance(partionned_values, dict):
+            template_string = (
+                f"{{{self._PARTITION_FIELD}:{self._PARTITION_FIELD_FORMAT}}}"
             )
+            partionned_values = {self._PARTITION_FIELD: partionned_values}
 
-        return f"{index_name}-{date_value.strftime(self._PARTITION_FIELD_FORMAT)}"
+        partionned_values = {
+            key: value.lower() if isinstance(value, str) else value
+            for key, value in partionned_values.items()
+        }
+
+        return f"{index_name}-{template_string.format(**partionned_values)}"
 
     @property
-    def partition_field_value(self) -> datetime.datetime:
-        """get the value of the partition field
+    def partition_field_value(
+        self,
+    ) -> Any:
+        """get the values of the partition field
 
         Returns:
-            datetime: datetime of the partition field
+            datetime.datetime | int | None | list | str : all values of all partition field
         """
-        return getattr(self, self._PARTITION_FIELD)
+
+        if not self._PARTITION_FIELD:
+            return
+        elif isinstance(self._PARTITION_FIELD, str):
+            return getattr(self, self._PARTITION_FIELD)
+        elif isinstance(self._PARTITION_FIELD, list):
+            return {field: getattr(self, field) for field in self._PARTITION_FIELD}
+        else:
+            raise TypeError(
+                "Unsupported type of partition %s", type(self._PARTITION_FIELD)
+            )
 
     @property
     def has_partition_field_value(self) -> bool:
-        """tell if partition field has a value
+        """tell if all partition field has a value
 
         Returns:
             bool: flag
         """
-        return getattr(self, self._PARTITION_FIELD, None) is not None
+        # If we haven't partition field it is correct to haven't value
+        if not self._PARTITION_FIELD:
+            return True
+        elif isinstance(self._PARTITION_FIELD, str):
+            return getattr(self, self._PARTITION_FIELD, None) is not None
+        elif isinstance(self._PARTITION_FIELD, list):
+            return all([getattr(self, field) for field in self._PARTITION_FIELD])
+        else:
+            raise TypeError(
+                "Unsupported type of partition %s", type(self._PARTITION_FIELD)
+            )
 
     @classmethod
     def get_by_id(
-        cls, document_id: str, ignore_missing_index=False
+        cls,
+        document_id: str,
+        document_index: str | None = None,
+        ignore_missing_index=False,
     ) -> Optional["MAASDocument"]:
         """get a document by id in the index or alias
 
@@ -134,7 +168,10 @@ class MAASDocument(Document):
             [MAASRawDocument]: the concrete MAASRawDocument found, or None if not found
         """
         try:
-            response: Iterator[MAASDocument | None] = cls.mget_by_ids([document_id])
+
+            response: Iterator[MAASDocument | None] = cls.mget_by_ids(
+                [document_id], [document_index] if document_index else None
+            )
 
         except ValueError as error:
             LOGGER.warning(
@@ -283,6 +320,7 @@ class MAASDocument(Document):
                 new_id = self.meta.id
             else:
                 new_id = _id
+
             return {
                 "_id": new_id,
                 "_index": self.partition_index_name,

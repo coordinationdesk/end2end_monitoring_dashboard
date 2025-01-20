@@ -1,11 +1,13 @@
 """Core module containing MAASEngine main class"""
+
 import argparse
 import json
 import logging
 import signal
 from typing import Any, Dict, List, Optional
 
-
+from opensearchpy.connection import Connection as OpenSearchConnection
+from amqp import Connection
 import opensearchpy.connection.connections as db_connections
 from opensearchpy.exceptions import OpenSearchException, ImproperlyConfigured
 
@@ -38,6 +40,8 @@ class MaasEngineConsumer(MaasConsumerMixin):
 
         self.current_pipeline: List[str] = []
 
+        self.db_connection: OpenSearchConnection | None = None
+
     @property
     def connection(self):
         """proxy to self.amqp_settings.connection so ConsumerMixin is happy"""
@@ -61,16 +65,6 @@ class MaasEngineConsumer(MaasConsumerMixin):
 
         if self.args.config_directory:
             Engine.load_config_directory(self.args.config_directory)
-
-        self.logger.info("Setup connection to opensearch")
-        db_connections.create_connection(
-            hosts=[self.args.es_url],
-            retry_on_timeout=True,
-            max_retries=self.args.es_retries,
-            timeout=self.args.es_timeout,
-            verify_certs=not self.args.es_ignore_certs_verification,
-            ssl_show_warn=not self.args.es_ignore_certs_verification,
-        )
 
         if self.args.force:
             self.logger.info("Data update is forced")
@@ -132,7 +126,21 @@ class MaasEngineConsumer(MaasConsumerMixin):
             self.logger.info("MaasEngine is exiting: not consuming anymore.")
             return
 
+        # pylint: disable=W0718
+        # catching any error is justified by the design of the on_start_message() method
+        # that shall absolutely succeed before doing anything, otherwise requeue.
         try:
+            self.on_start_message(body, message)
+        except Exception as error:
+            self.logger.exception(error)
+            message.requeue()
+            return
+        # pylint: enable=W0718
+
+        try:
+            # setup db
+
+            # execute pipeline to get reports
             reports = self._execute_engines(routing_key, body)
 
         except maas_engine.exceptions.HandleMessageException as hme:
@@ -198,6 +206,42 @@ class MaasEngineConsumer(MaasConsumerMixin):
 
             message.ack()
 
+        finally:
+            self.on_end_message(body, message)
+
+    def on_start_message(self, body: Dict[str, Any], message: kombu.Message) -> None:
+        """
+        Hook for pre-pipeline execution: setup db connection
+
+        Args:
+            body (Dict[str, Any]): message body
+            message (kombu.Message): message
+        """
+
+        self.logger.debug("on_start_message: create connection to opensearch")
+        self.db_connection = db_connections.create_connection(
+            hosts=[self.args.es_url],
+            retry_on_timeout=True,
+            max_retries=self.args.es_retries,
+            timeout=self.args.es_timeout,
+            verify_certs=not self.args.es_ignore_certs_verification,
+            ssl_show_warn=not self.args.es_ignore_certs_verification,
+        )
+
+    def on_end_message(self, body: Dict[str, Any], message: kombu.Message) -> None:
+        """
+        Hook for post-pipeline execution: close opensearch connection
+
+        Args:
+            body (Dict[str, Any]): message body
+            message (kombu.Message): message
+        """
+        if self.db_connection:
+            self.logger.debug("on_end_message: close connection to opensearch")
+            self.db_connection.close()
+            db_connections.remove_connection("default")
+            self.db_connection = None
+
     def _execute_engines(
         self, routing_key: str, body: Dict[str, Any]
     ) -> list[EngineReport]:
@@ -215,6 +259,8 @@ class MaasEngineConsumer(MaasConsumerMixin):
         ]
 
         engine_responses: List[EngineReport] = []
+
+        standalone_responses: List[EngineReport] = []
 
         self.current_pipeline = []
 
@@ -259,12 +305,16 @@ class MaasEngineConsumer(MaasConsumerMixin):
 
             # later use engine.reports after v1 ?
 
+            self.amqp_settings.event_mapping[routing_key]
             if responses:
-                engine_responses.extend(responses)
+                if getattr(engine, "merge_reports", True):
+                    engine_responses.extend(responses)
+                else:
+                    standalone_responses.extend(responses)
 
         engine_responses = EngineReport.merge_reports(engine_responses)
 
-        return engine_responses
+        return engine_responses + standalone_responses
 
     # pylint: disable=W0613
     def handle_message_return(self, exception, exchange, routing_key, message):

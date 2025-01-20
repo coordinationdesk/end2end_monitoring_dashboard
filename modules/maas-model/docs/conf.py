@@ -72,6 +72,7 @@ extensions = [
     "sphinx.ext.ifconfig",
     "sphinx.ext.mathjax",
     "sphinx.ext.napoleon",
+    "myst_parser",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -80,23 +81,23 @@ templates_path = ["_templates"]
 
 # Configure AutoStructify
 # https://recommonmark.readthedocs.io/en/latest/auto_structify.html
-def setup(app):
-    from recommonmark.transform import AutoStructify
+# def setup(app):
+#     from recommonmark.transform import AutoStructify
 
-    params = {
-        "enable_auto_toc_tree": True,
-        "auto_toc_tree_section": "Contents",
-        "auto_toc_maxdepth": 2,
-        "enable_eval_rst": True,
-        "enable_math": True,
-        "enable_inline_math": True,
-    }
-    app.add_config_value("recommonmark_config", params, True)
-    app.add_transform(AutoStructify)
+#     params = {
+#         "enable_auto_toc_tree": True,
+#         "auto_toc_tree_section": "Contents",
+#         "auto_toc_maxdepth": 2,
+#         "enable_eval_rst": True,
+#         "enable_math": True,
+#         "enable_inline_math": True,
+#     }
+#     app.add_config_value("recommonmark_config", params, True)
+#     app.add_transform(AutoStructify)
 
 
-# Enable markdown
-extensions.append("recommonmark")
+# # Enable markdown
+# extensions.append("recommonmark")
 
 # The suffix of source filenames.
 source_suffix = [".rst", ".md"]
@@ -109,7 +110,7 @@ master_doc = "index"
 
 # General information about the project.
 project = "maas-model"
-copyright = "2023, telespazio"
+copyright = "2023, Telespazio France"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -174,15 +175,12 @@ todo_emit_warnings = True
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = "alabaster"
+html_theme = "sphinx_rtd_theme"
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
-html_theme_options = {
-    "sidebar_width": "300px",
-    "page_width": "1200px"
-}
+# html_theme_options = {"sidebar_width": "300px", "page_width": "1200px"}
 
 # Add any paths that contain custom themes here, relative to this directory.
 # html_theme_path = []

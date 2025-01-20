@@ -1,0 +1,30 @@
+{
+    "aliases": {
+        "no-partition-just-index": {}
+    },
+    "index_patterns": [
+        "no-partition-just-index"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "kw_field": {
+                "type": "keyword"
+            },
+            "int_field": {
+                "type": "integer"
+            },
+            "date_field": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            }
+        },
+        "_meta": {}
+    }
+}

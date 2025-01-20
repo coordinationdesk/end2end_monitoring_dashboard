@@ -1,4 +1,5 @@
 """tools for command line interface, Argument parsers"""
+
 import logging
 import os
 import urllib
@@ -136,6 +137,18 @@ def es_parser() -> ArgumentParser:
         help="If set, the SSL cert of opensearch is not verified (default: %(default)s)",
         action=EnvDefault,
         envvar="IGNORE_CERTS_VERIFICATION",
+        required=False,
+        type=bool,
+        default=False,
+    )
+
+    parser.add_argument(
+        "--es-requeue-missing-input",
+        dest="es_requeue_missing_input",
+        help="If set, a message with missing input document will be requeued "
+        "(default: %(default)s)",
+        action=EnvDefault,
+        envvar="ES_REQUEUE_MISSING_INPUT",
         required=False,
         type=bool,
         default=False,

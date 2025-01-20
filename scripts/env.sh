@@ -20,7 +20,7 @@ export COLLECTOR_TAG_VERSION=3.5.1
 
 # execution env variables
 export ES_USERNAME=admin
-export ES_PASSWORD=admin
+export ES_PASSWORD=StrongP4sSword!!or-N-o-t
 export ES_PORT=9200
 export ES_URL=https://localhost:${ES_PORT}/
 export AMQP_PORT=5672

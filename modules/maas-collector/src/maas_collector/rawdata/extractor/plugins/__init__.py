@@ -7,6 +7,7 @@ __all__ = [
     "EDRSApsExtractor",
     "AnomalyCorrelationExtractor",
     "EdrsDdpExtractor",
+    "OrbitEphemerisMessageExtractor"
 ]
 
 # import custom extractor classes
@@ -21,3 +22,5 @@ from .edrs_aps import EDRSApsExtractor
 from .anomaly_correlation import AnomalyCorrelationExtractor
 
 from .edrs_ddp import EdrsDdpExtractor
+
+from .orbit_ephemeris_messages import OrbitEphemerisMessageExtractor

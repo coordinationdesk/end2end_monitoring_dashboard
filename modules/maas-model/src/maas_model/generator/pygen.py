@@ -165,10 +165,18 @@ class ModelGenerator:
             )
         ]
         if meta.partition_field:
-            class_lines.append(
-                self.template.INDENT
-                + f'_PARTITION_FIELD = "{meta.partition_field}"\n\n'
-            )
+            if isinstance(meta.partition_field, str):
+                class_lines.append(
+                    self.template.INDENT
+                    + f'_PARTITION_FIELD = "{meta.partition_field}"\n\n'
+                )
+            elif isinstance(meta.partition_field, list):
+                class_lines.append(
+                    self.template.INDENT
+                    + f"_PARTITION_FIELD = {meta.partition_field}\n\n"
+                )
+            else:
+                raise TypeError("Unsupported type partition field")
 
         if meta.partition_format:
             class_lines.append(

@@ -1,10 +1,13 @@
 """Module used for HTTP OAuth authentification operation"""
+
 import base64
 import datetime
 import logging
 
 from dataclasses import dataclass
 from requests import RequestException
+
+# pylint: disable=line-too-long / C0301
 
 
 @dataclass
@@ -52,7 +55,7 @@ class Authentication:
 
     def __init__(self, config, http_session) -> None:
         self.token_field_header = config.token_field_header
-        self.token = ""
+        self.token = config.token
         self.http_session = http_session
         self.logger = logging.getLogger(self.__class__.__name__)
 
@@ -273,11 +276,68 @@ class Basic(Authentication):
         return formated_token
 
 
+class SessionAuth(Authentication):
+    """
+    Session-Based Authentication Workflow
+    In this workflow, authentication is managed within the HTTP session itself.
+    For example, after logging in through a login URL, the same HTTP session can be used to access protected data,
+    with all authentication details remaining within the session.
+    """
+
+    def __init__(self, config: BasicConfiguration, http_session) -> None:
+        super().__init__(config, http_session)
+        self.login_url = config.login_url
+        self.timeout = config.auth_timeout
+        self._login(config.credentials)
+
+    def _login(self, credentials):
+        """
+        Authenticates the client by sending the user's credentials to the server.
+
+        Args:
+            credentials (dict): A dictionary of the form
+                {
+                    "username_field": "username",
+                    "password_field": "password"
+                }
+                where:
+                - username_field (str): The expected form field name for the user's identifier.
+                - password_field (str): The expected form field name for the user's password.
+                - username (str): The user's identifier or username.
+                - password (str): The user's password.
+
+        Raises:
+            connection_error: Raised when there is a connection issue with the authentication server.
+            ValueError: Raised when required credentials are missing or improperly formatted.
+        """
+
+        try:
+            response = self.http_session.post(
+                self.login_url,
+                data=credentials,
+                timeout=self.timeout,
+            )
+        except RequestException as connection_error:
+            self.logger.error("[SessionAuth] - Failed to login")
+            raise connection_error
+
+        if not 200 <= response.status_code < 300:
+            # serious problem
+            self.logger.error(
+                "Error login at %s %d: %s",
+                self.login_url,
+                response.status_code,
+                response.content,
+            )
+            raise ValueError(f"Error login {self.login_url}")
+
+
 # global implemetation dict. TODO refactor with __init__subclass later like maas-engine
 # plugins
 AUTH_METHOD_DICT = {
     "OAuth": OAuth,
     "Basic": Basic,
+    "SessionAuth": SessionAuth,
     "": Authentication,
 }
 

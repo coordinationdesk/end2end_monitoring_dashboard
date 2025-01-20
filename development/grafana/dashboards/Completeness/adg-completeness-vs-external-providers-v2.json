@@ -1,0 +1,1655 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "Support group by external provider",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "panels": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "gridPos": {
+            "h": 11,
+            "w": 24,
+            "x": 0,
+            "y": 1
+          },
+          "id": 159,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "This dashboard features a completeness by product_type between product published at AUXIP and theorical daily production\n\nDetails of theorical production used in dashboard :\n\nS1:```json[{'product_type': 'AUX_WND', 'product_type_expected': 182.0, 'timeliness': '10 min'}, {'product_type': 'AUX_ICE', 'product_type_expected': 1.0, 'timeliness': '30 min'}, {'product_type': 'AUX_TEC', 'product_type_expected': 1.0, 'timeliness': 'N/A'}, {'product_type': 'AUX_TRO', 'product_type_expected': 4.0, 'timeliness': '30 min'}, {'product_type': 'MPL_ORBPRE', 'product_type_expected': 1.0, 'timeliness': '30 min'}, {'product_type': 'MPL_ORBRES', 'product_type_expected': 1.0, 'timeliness': '30 min'}, {'product_type': 'MPL_TLEPRE', 'product_type_expected': 1.0, 'timeliness': '30 min'}, {'product_type': 'TLM__REQ_B', 'product_type_expected': 1.0, 'timeliness': '30 min'}, {'product_type': 'TLM__REQ_C', 'product_type_expected': 1.0, 'timeliness': '30 min'}, {'product_type': 'TLM__REQ_D', 'product_type_expected': 1.0, 'timeliness': '30 min'}, {'product_type': 'TLM__REQ_E', 'product_type_expected': 1.0, 'timeliness': '30 min'}, {'product_type': 'TLM__REQ_F', 'product_type_expected': 1.0, 'timeliness': '30 min'}, {'product_type': 'AUX_PREORB', 'product_type_expected': 14.0, 'timeliness': '10 min'}, {'product_type': 'AUX_RESORB', 'product_type_expected': 14.0, 'timeliness': '10 min'}, {'product_type': 'AUX_POEORB', 'product_type_expected': 1.0, 'timeliness': '10 min'}]```\n\nS2:```json[{'product_type': 'AUX_ECMWFD', 'product_type_expected': 2.0, 'timeliness': '10 min'}, {'product_type': 'AUX_CAMSFO', 'product_type_expected': 2.0, 'timeliness': '30 min'}, {'product_type': 'AUX_UT1UTC', 'product_type_expected': 0.14285714285714285, 'timeliness': '30 min'}, {'product_type': 'TLM__REQ_A', 'product_type_expected': 6.0, 'timeliness': '30 min'}, {'product_type': 'TLM__REQ_B', 'product_type_expected': 2.0, 'timeliness': '30 min'}, {'product_type': 'REP__CHF__', 'product_type_expected': 0.28571428571, 'timeliness': '30 min'}, {'product_type': 'REP__FCHF_', 'product_type_expected': 0.28571428571, 'timeliness': '30 min'}, {'product_type': 'MPL_ORBPRE', 'product_type_expected': 2.0, 'timeliness': '30 min'}, {'product_type': 'MPL_ORBRES', 'product_type_expected': 2.0, 'timeliness': '30 min'}]```\n\nS3:```json[{'product_type': 'AX___MF1_AX', 'product_type_expected': 8.0, 'timeliness': '10 min'}, {'product_type': 'AX___MFA_AX', 'product_type_expected': 4.0, 'timeliness': '10 min'}, {'product_type': 'AX___MA1_AX', 'product_type_expected': 4.0, 'timeliness': '10 min'}, {'product_type': 'AX___MF2_AX', 'product_type_expected': 8.0, 'timeliness': '10 min'}, {'product_type': 'AX___MA2_AX', 'product_type_expected': 4.0, 'timeliness': '10 min'}, {'product_type': 'SR___MDO_AX', 'product_type_expected': 2.0, 'timeliness': '10 min'}, {'product_type': 'SR_2_PMPSAX', 'product_type_expected': 2.0, 'timeliness': '30 min'}, {'product_type': 'SR_2_RMO_AX', 'product_type_expected': 4.0, 'timeliness': '10 min'}, {'product_type': 'SR_2_PMO_AX', 'product_type_expected': 4.0, 'timeliness': '10 min'}, {'product_type': 'SR_2_POL_AX', 'product_type_expected': 1.0, 'timeliness': '30 min'}, {'product_type': 'SR_2_PGI_AX', 'product_type_expected': 2.0, 'timeliness': '30 min'}, {'product_type': 'SR_2_RGI_AX', 'product_type_expected': 2.0, 'timeliness': '30 min'}, {'product_type': 'SR_1_USO_AX', 'product_type_expected': 2.0, 'timeliness': '30 min'}, {'product_type': 'SR___MGNSAX', 'product_type_expected': 2.0, 'timeliness': '30 min'}, {'product_type': 'SL_2_SSTAAX', 'product_type_expected': 1.0, 'timeliness': '30 min'}, {'product_type': 'SL_2_DIMSAX', 'product_type_expected': 1.0, 'timeliness': '30 min'}, {'product_type': 'AX___FPO_AX', 'product_type_expected': 2.0, 'timeliness': '30 min'}, {'product_type': 'AX___FRO_AX', 'product_type_expected': 2.0, 'timeliness': '30 min'}, {'product_type': 'SR_2_PCPPAX', 'product_type_expected': 2.0, 'timeliness': '30 min'}, {'product_type': 'SR_2_PMPPAX', 'product_type_expected': 2.0, 'timeliness': '30 min'}, {'product_type': 'SR___MGNPAX', 'product_type_expected': 2.0, 'timeliness': '30 min'}, {'product_type': 'SR___POEPAX', 'product_type_expected': 2.0, 'timeliness': '30 min'}, {'product_type': 'SR_2_SIFNAX', 'product_type_expected': 1.0, 'timeliness': '30 min'}, {'product_type': 'SR_2_SIFSAX', 'product_type_expected': 1.0, 'timeliness': '30 min'}, {'product_type': 'SR_2_SICNAX', 'product_type_expected': 1.0, 'timeliness': '30 min'}, {'product_type': 'SR_2_SICSAX', 'product_type_expected': 1.0, 'timeliness': '30 min'}]```\n\n\n\nTime reference for this dashboard is : publication_date\n\nImportant notice : Tables & timelines can only display up to 10 000 entries. Please make use of filters to narrow down the retrieved data and get a more realistic view.",
+            "mode": "markdown"
+          },
+          "pluginVersion": "11.0.0",
+          "title": "Description",
+          "type": "text"
+        }
+      ],
+      "title": "Dashboard Description",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 167,
+      "panels": [],
+      "repeat": "mission",
+      "repeatDirection": "h",
+      "title": "Global product type per mission - $mission",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 0,
+        "y": 2
+      },
+      "id": 170,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "product_type",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "0",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PAB1B72147BE890C9"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "service_type: AUXIP AND mission: $mission AND product_type: ${product_types:lucene}",
+          "refId": "count",
+          "timeField": "publication_date"
+        },
+        {
+          "columns": [
+            {
+              "selector": "_source.expected_daily",
+              "text": "expected_daily",
+              "type": "number"
+            },
+            {
+              "selector": "_source.product_type",
+              "text": "product_type",
+              "type": "string"
+            }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "PD0067CAD9A63E081"
+          },
+          "filters": [],
+          "format": "table",
+          "global_query_id": "",
+          "hide": false,
+          "parser": "backend",
+          "refId": "expected",
+          "root_selector": "hits.hits",
+          "source": "url",
+          "type": "json",
+          "url": "/cds-auxiliary-data-producers-conf/_search",
+          "url_options": {
+            "data": "",
+            "headers": [],
+            "method": "GET",
+            "params": [
+              {
+                "key": "q",
+                "value": "mission:${mission:lucene} AND product_type:${product_types:lucene}"
+              },
+              {
+                "key": "size",
+                "value": "9999"
+              }
+            ]
+          }
+        }
+      ],
+      "title": "$mission over period",
+      "transformations": [
+        {
+          "id": "joinByField",
+          "options": {
+            "byField": "product_type",
+            "mode": "outerTabular"
+          }
+        },
+        {
+          "disabled": true,
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "mode": "reduceFields",
+            "reducers": [
+              "sum"
+            ]
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "duration_s",
+            "binary": {
+              "left": "$__to",
+              "operator": "-",
+              "right": "$__from"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "duration_days",
+            "binary": {
+              "left": "duration_s",
+              "operator": "/",
+              "right": "86400000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Expected",
+            "binary": {
+              "left": "duration_days",
+              "operator": "*",
+              "right": "expected_daily expected"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "mode": "reduceFields",
+            "reducers": [
+              "sum"
+            ]
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Completeness",
+            "binary": {
+              "left": "Count",
+              "operator": "/",
+              "right": "Expected"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "Value": {
+                  "index": 0,
+                  "text": "Count"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 5,
+        "x": 4,
+        "y": 2
+      },
+      "id": 169,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PAB1B72147BE890C9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "service_type: AUXIP AND mission: $mission AND product_type: ${product_types:lucene}",
+          "refId": "A",
+          "timeField": "publication_date"
+        },
+        {
+          "columns": [
+            {
+              "selector": "_source.expected_daily",
+              "text": "expected_daily",
+              "type": "string"
+            }
+          ],
+          "computed_columns": [
+            {
+              "selector": "",
+              "text": "",
+              "type": "string"
+            }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "PD0067CAD9A63E081"
+          },
+          "filters": [],
+          "format": "table",
+          "global_query_id": "",
+          "hide": false,
+          "json_options": {
+            "columnar": false,
+            "root_is_not_array": false
+          },
+          "pagination_mode": "none",
+          "parser": "backend",
+          "refId": "expected",
+          "root_selector": "hits.hits",
+          "source": "url",
+          "summarizeBy": "",
+          "summarizeExpression": "",
+          "type": "json",
+          "url": "/cds-auxiliary-data-producers-conf/_search",
+          "url_options": {
+            "data": "",
+            "method": "GET",
+            "params": [
+              {
+                "key": "q",
+                "value": "mission:${mission:lucene} AND product_type:${product_types:lucene}"
+              },
+              {
+                "key": "size",
+                "value": "9999"
+              }
+            ]
+          }
+        }
+      ],
+      "title": "$mission over period",
+      "transformations": [
+        {
+          "filter": {
+            "id": "byRefId",
+            "options": "A"
+          },
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "mode": "reduceFields",
+            "reducers": [
+              "sum"
+            ]
+          }
+        },
+        {
+          "filter": {
+            "id": "byRefId",
+            "options": "expected"
+          },
+          "id": "calculateField",
+          "options": {
+            "alias": "duration_s",
+            "binary": {
+              "left": "$__to",
+              "operator": "-",
+              "right": "$__from"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "filter": {
+            "id": "byRefId",
+            "options": "expected"
+          },
+          "id": "calculateField",
+          "options": {
+            "alias": "duration_days",
+            "binary": {
+              "left": "duration_s",
+              "operator": "/",
+              "right": "86400000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Expected",
+            "binary": {
+              "left": "expected expected_daily",
+              "operator": "*",
+              "right": "expected duration_days"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "labelsToFields": true,
+            "reducers": [
+              "sum"
+            ]
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [
+            {
+              "options": {
+                "Value": {
+                  "index": 0,
+                  "text": "Count"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 9,
+        "y": 2
+      },
+      "id": 6,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "maxHeight": 600,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "product_type",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "0",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "publication_date",
+              "id": "5",
+              "settings": {
+                "interval": "1d",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PAB1B72147BE890C9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "service_type: AUXIP AND mission: $mission AND product_type: ${product_types:lucene}",
+          "refId": "A",
+          "timeField": "publication_date"
+        },
+        {
+          "columns": [
+            {
+              "selector": "_source.expected_daily",
+              "text": "expected_daily",
+              "type": "number"
+            },
+            {
+              "selector": "_source.product_type",
+              "text": "product_type",
+              "type": "string"
+            }
+          ],
+          "computed_columns": [
+            {
+              "selector": "",
+              "text": "",
+              "type": "string"
+            }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "PD0067CAD9A63E081"
+          },
+          "filters": [],
+          "format": "table",
+          "global_query_id": "",
+          "hide": true,
+          "json_options": {
+            "columnar": false
+          },
+          "parser": "backend",
+          "refId": "expected",
+          "root_selector": "hits.hits",
+          "source": "url",
+          "type": "json",
+          "url": "/cds-auxiliary-data-producers-conf/_search",
+          "url_options": {
+            "data": "",
+            "method": "GET",
+            "params": [
+              {
+                "key": "q",
+                "value": "mission:${mission:lucene} AND product_type:${product_types:lucene}"
+              },
+              {
+                "key": "size",
+                "value": "9999"
+              }
+            ]
+          }
+        }
+      ],
+      "title": "$mission per day",
+      "transformations": [
+        {
+          "filter": {
+            "id": "byRefId",
+            "options": "A"
+          },
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "AUX_WND",
+              "right": "Time"
+            },
+            "mode": "reduceRow",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Expected",
+            "binary": {
+              "left": "0",
+              "right": "$daily_expected_products"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false,
+            "unary": {
+              "fieldName": "",
+              "operator": "abs"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "Total": "Count"
+            }
+          }
+        }
+      ],
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 8
+      },
+      "id": 179,
+      "panels": [],
+      "repeat": "product_types",
+      "repeatDirection": "h",
+      "title": "Details for ${product_types}",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 1,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 4,
+        "x": 0,
+        "y": 9
+      },
+      "id": 180,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto"
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "product_type",
+              "id": "2",
+              "settings": {
+                "min_doc_count": "0",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PAB1B72147BE890C9"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "service_type: AUXIP AND mission: S1 AND product_type: ${product_types}",
+          "refId": "A",
+          "timeField": "publication_date"
+        },
+        {
+          "columns": [
+            {
+              "selector": "_source.expected_daily",
+              "text": "expected_daily",
+              "type": "number"
+            },
+            {
+              "selector": "_source.product_type",
+              "text": "product_type",
+              "type": "string"
+            }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "PD0067CAD9A63E081"
+          },
+          "filters": [],
+          "format": "table",
+          "global_query_id": "",
+          "hide": false,
+          "parser": "backend",
+          "refId": "B",
+          "root_selector": "hits.hits",
+          "source": "url",
+          "type": "json",
+          "url": "/cds-auxiliary-data-producers-conf/_search",
+          "url_options": {
+            "data": "",
+            "method": "GET",
+            "params": [
+              {
+                "key": "q",
+                "value": "mission:${mission:lucene} AND product_type:${product_types:lucene}"
+              },
+              {
+                "key": "size",
+                "value": "9999"
+              }
+            ]
+          }
+        }
+      ],
+      "title": "${product_types} over period",
+      "transformations": [
+        {
+          "id": "joinByField",
+          "options": {
+            "byField": "product_type",
+            "mode": "outerTabular"
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "duration_s",
+            "binary": {
+              "left": "$__to",
+              "operator": "-",
+              "right": "$__from"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "duration_days",
+            "binary": {
+              "left": "duration_s",
+              "operator": "/",
+              "right": "86400000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Expected",
+            "binary": {
+              "left": "duration_days",
+              "operator": "*",
+              "right": "expected_daily B"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "mode": "reduceFields",
+            "reducers": [
+              "sum"
+            ]
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Ratio",
+            "binary": {
+              "left": "Count",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Expected"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "Value": {
+                  "index": 0,
+                  "text": "Count"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "max": 100,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Total"
+            },
+            "properties": [
+              {
+                "id": "decimals",
+                "value": 0
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 5,
+        "x": 4,
+        "y": 9
+      },
+      "id": 181,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PAB1B72147BE890C9"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "service_type: AUXIP AND mission: $mission AND product_type: ${product_types}",
+          "refId": "count",
+          "timeField": "publication_date"
+        },
+        {
+          "columns": [
+            {
+              "selector": "_source.expected_daily",
+              "text": "expected_daily",
+              "type": "number"
+            }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "PD0067CAD9A63E081"
+          },
+          "filters": [],
+          "format": "table",
+          "global_query_id": "",
+          "hide": false,
+          "parser": "backend",
+          "refId": "expected",
+          "root_selector": "hits.hits",
+          "source": "url",
+          "type": "json",
+          "url": "/cds-auxiliary-data-producers-conf/_search",
+          "url_options": {
+            "data": "",
+            "method": "GET",
+            "params": [
+              {
+                "key": "q",
+                "value": "mission:${mission:lucene} AND product_type:${product_types:lucene}"
+              },
+              {
+                "key": "size",
+                "value": "9999"
+              }
+            ]
+          }
+        }
+      ],
+      "title": "${product_types} over period",
+      "transformations": [
+        {
+          "filter": {
+            "id": "byRefId",
+            "options": "expected"
+          },
+          "id": "calculateField",
+          "options": {
+            "alias": "duration_s",
+            "binary": {
+              "left": "$__to",
+              "operator": "-",
+              "right": "$__from"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "duration_days",
+            "binary": {
+              "left": "expected duration_s",
+              "operator": "/",
+              "right": "86400000"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Expected",
+            "binary": {
+              "left": "expected expected_daily",
+              "operator": "*",
+              "right": "expected duration_days"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": false
+          }
+        },
+        {
+          "filter": {
+            "id": "byRefId",
+            "options": "expected"
+          },
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "duration_days": true,
+              "duration_s": true,
+              "expected_daily": true
+            },
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "expected_daily": ""
+            }
+          }
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": false,
+            "labelsToFields": true,
+            "mode": "seriesToRows",
+            "reducers": [
+              "sum"
+            ]
+          }
+        },
+        {
+          "id": "organize",
+          "options": {}
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds",
+            "seriesBy": "last"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "line"
+            }
+          },
+          "decimals": 0,
+          "fieldMinMax": false,
+          "mappings": [],
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 8,
+        "x": 9,
+        "y": 9
+      },
+      "id": 182,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "maxHeight": 600,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "1d"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PAB1B72147BE890C9"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "service_type: AUXIP AND mission: S1 AND product_type: ${product_types}",
+          "refId": "A",
+          "timeField": "publication_date"
+        },
+        {
+          "columns": [
+            {
+              "selector": "_source.expected_daily",
+              "text": "expected_daily",
+              "type": "number"
+            },
+            {
+              "selector": "_source.product_type",
+              "text": "product_type",
+              "type": "string"
+            }
+          ],
+          "datasource": {
+            "type": "yesoreyeram-infinity-datasource",
+            "uid": "PD0067CAD9A63E081"
+          },
+          "filters": [],
+          "format": "table",
+          "global_query_id": "",
+          "hide": false,
+          "parser": "backend",
+          "refId": "B",
+          "root_selector": "hits.hits",
+          "source": "url",
+          "type": "json",
+          "url": "/cds-auxiliary-data-producers-conf/_search",
+          "url_options": {
+            "data": "",
+            "method": "GET",
+            "params": [
+              {
+                "key": "q",
+                "value": "mission:${mission:lucene} AND product_type:${product_types:lucene}"
+              },
+              {
+                "key": "size",
+                "value": "9999"
+              }
+            ]
+          }
+        }
+      ],
+      "title": "${product_types} per day",
+      "transformations": [
+        {
+          "filter": {
+            "id": "byRefId",
+            "options": "B"
+          },
+          "id": "calculateField",
+          "options": {
+            "alias": "weekly",
+            "binary": {
+              "left": "expected_daily",
+              "operator": "*",
+              "right": "7"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          },
+          "topic": "series"
+        },
+        {
+          "id": "configFromData",
+          "options": {
+            "applyTo": {
+              "id": "byName",
+              "options": "Count"
+            },
+            "configRefId": "B",
+            "mappings": [
+              {
+                "fieldName": "expected_daily",
+                "handlerArguments": {
+                  "threshold": {
+                    "color": "yellow"
+                  }
+                },
+                "handlerKey": "threshold1"
+              },
+              {
+                "fieldName": "weekly",
+                "handlerKey": "max"
+              }
+            ]
+          }
+        }
+      ],
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 39,
+  "tags": [
+    "Completeness"
+  ],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "S1",
+          "value": "S1"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "Mission",
+        "multi": false,
+        "name": "mission",
+        "options": [
+          {
+            "selected": true,
+            "text": "S1",
+            "value": "S1"
+          },
+          {
+            "selected": false,
+            "text": "S2",
+            "value": "S2"
+          },
+          {
+            "selected": false,
+            "text": "S3",
+            "value": "S3"
+          }
+        ],
+        "query": "S1,S2,S3",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "yesoreyeram-infinity-datasource",
+          "uid": "PD0067CAD9A63E081"
+        },
+        "definition": "Infinity- (infinity) json",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Auxiliary Data Providers",
+        "multi": true,
+        "name": "auxiliary_data_providers",
+        "options": [],
+        "query": {
+          "infinityQuery": {
+            "columns": [
+              {
+                "selector": "_source.producer_name",
+                "text": "",
+                "type": "string"
+              }
+            ],
+            "filters": [],
+            "format": "table",
+            "json_options": {
+              "root_is_not_array": false
+            },
+            "refId": "variable",
+            "root_selector": "hits.hits",
+            "source": "url",
+            "type": "json",
+            "url": "/cds-auxiliary-data-producers-conf/_search",
+            "url_options": {
+              "data": "",
+              "method": "GET",
+              "params": [
+                {
+                  "key": "q",
+                  "value": "*"
+                },
+                {
+                  "key": "size",
+                  "value": "9999"
+                }
+              ]
+            }
+          },
+          "query": "",
+          "queryType": "infinity"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "All",
+          "value": "$__all"
+        },
+        "datasource": {
+          "type": "yesoreyeram-infinity-datasource",
+          "uid": "PD0067CAD9A63E081"
+        },
+        "definition": "Infinity- (infinity) json",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Product Types",
+        "multi": true,
+        "name": "product_types",
+        "options": [],
+        "query": {
+          "infinityQuery": {
+            "columns": [
+              {
+                "selector": "_source.product_type",
+                "text": "",
+                "type": "string"
+              }
+            ],
+            "filters": [],
+            "format": "table",
+            "refId": "variable",
+            "root_selector": "hits.hits",
+            "source": "url",
+            "type": "json",
+            "url": "/cds-auxiliary-data-producers-conf/_search?",
+            "url_options": {
+              "data": "",
+              "method": "GET",
+              "params": [
+                {
+                  "key": "q",
+                  "value": "mission:${mission:lucene} AND producer_name:${auxiliary_data_providers:lucene}"
+                },
+                {
+                  "key": "size",
+                  "value": "9999"
+                }
+              ]
+            }
+          },
+          "query": "",
+          "queryType": "infinity"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "222",
+          "value": "222"
+        },
+        "datasource": {
+          "type": "yesoreyeram-infinity-datasource",
+          "uid": "PD0067CAD9A63E081"
+        },
+        "definition": "Infinity- (infinity) json",
+        "hide": 2,
+        "includeAll": false,
+        "multi": false,
+        "name": "daily_expected_products",
+        "options": [],
+        "query": {
+          "infinityQuery": {
+            "columns": [
+              {
+                "selector": "_source.expected_daily",
+                "text": "expected_daily",
+                "type": "number"
+              }
+            ],
+            "computed_columns": [
+              {
+                "selector": "",
+                "text": "",
+                "type": "string"
+              }
+            ],
+            "filters": [],
+            "format": "table",
+            "parser": "backend",
+            "refId": "variable",
+            "root_selector": "hits.hits",
+            "source": "url",
+            "summarizeBy": "",
+            "summarizeExpression": "sum(expected_daily)",
+            "type": "json",
+            "url": "/cds-auxiliary-data-producers-conf/_search",
+            "url_options": {
+              "data": "",
+              "method": "GET",
+              "params": [
+                {
+                  "key": "q",
+                  "value": "mission:${mission:lucene} AND product_type:${product_types:lucene}"
+                },
+                {
+                  "key": "size",
+                  "value": "9999"
+                }
+              ]
+            }
+          },
+          "query": "",
+          "queryType": "infinity"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-8d/d",
+    "to": "now-1d/d"
+  },
+  "timeRangeUpdatedDuringEditOrView": false,
+  "timepicker": {},
+  "timezone": "utc",
+  "title": "ADG Completeness (vs external providers) - v2",
+  "uid": "fdzjhya87w074c",
+  "weekStart": ""
+}

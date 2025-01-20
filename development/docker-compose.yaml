@@ -1,0 +1,63 @@
+version: '3'
+services:
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: dev-omcs-rabbitmq
+    volumes:
+      - rabbitmq-etc:/etc/rabbitmq/
+      - rabbitmq-data:/var/lib/rabbitmq/
+      - rabbitmq-logs:/var/log/rabbitmq/
+    ports:
+      - ${AMQP_PORT}:5672
+      - ${AMQP_IHM_PORT}:15672
+
+  opensearch:
+    image: opensearchproject/opensearch:latest
+    container_name: dev-omcs-opensearch
+    environment:
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
+      - OPENSEARCH_INITIAL_ADMIN_PASSWORD=${ES_PASSWORD}
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536 # Maximum number of open files for the opensearch user - set to at least 65536
+        hard: 65536
+    volumes:
+      - opensearch-data:/usr/share/opensearch/data
+      - opensearch-config:/usr/share/opensearch/config
+    ports:
+      - ${ES_PORT}:9200
+    # Bypass cert different than remote access
+    # extra_hosts: 
+    #   - "cert_HOST:real_HOST"
+
+  grafana:
+    image: grafana/grafana:11.4.0
+    container_name: dev-omcs-grafana
+    environment:
+      GF_SECURITY_DISABLE_INITIAL_ADMIN_CREATION: "true"
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: "Admin"
+      GF_AUTH_DISABLE_SIGNOUT_MENU: "true"
+      GF_AUTH_DISABLE_LOGIN_FORM: "true"
+      GF_INSTALL_PLUGINS: "yesoreyeram-infinity-datasource"
+      ES_URL: https://opensearch:9200/
+      ES_USERNAME: ${ES_USERNAME}
+      ES_PASSWORD: ${ES_PASSWORD}
+    ports:
+      - ${GRF_PORT}:3000
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
+
+
+volumes:
+  rabbitmq-etc:
+  rabbitmq-data:
+  rabbitmq-logs:
+  opensearch-data:
+  opensearch-config:

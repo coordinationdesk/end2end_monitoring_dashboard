@@ -1,6 +1,6 @@
 # `LogExtractor`
 
-```eval_rst
+```{eval-rst}
 :class:`maas_collector.rawdata.extractors.LogExtractor`
 ` uses the :py:mod:`re` module of the python standard library to extract data using regex with python group dict.
 ```
@@ -51,11 +51,12 @@ The extractor will extract the following objects:
 
 ## Advices to build regex
 
-Writing directly the regular expression in the configuration file may be tough due to the number of character to escape: double quote and anti-slash.
+Writing directly the regular expression in the configuration file may be tough due to the number of characters to escape: double quote and anti-slash.
 
 So it is convenient to:
- - use [pythex](https://pythex.org/) online tool
- - write a tiny Python script or use a Python like `ipython` and write the pattern using raw strings (`r` prefixed) that does not require escaping anti-slashes and allow multi-line writing with concatenation.
+
+- use [pythex](https://pythex.org/) online tool
+- write a tiny Python script or use a Python like `ipython` and write the pattern using raw strings (`r` prefixed) that does not require escaping anti-slashes and allows writing multi-lines with concatenation.
 
 ```python
 import re

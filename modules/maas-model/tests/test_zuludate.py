@@ -50,3 +50,12 @@ def test_zulu_date():
     assert deserialized.tzname() == "UTC"
 
     assert deserialized == now
+
+
+def test_zulu_before_year_1000():
+
+    zd = ZuluDate()
+    d = datetime.datetime(1, 1, 1, tzinfo=datetime.timezone.utc)
+    serialized = zd.serialize(d)
+    assert serialized == "0001-01-01T00:00:00.000Z"
+    assert zd.deserialize(serialized) == d

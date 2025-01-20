@@ -1,4 +1,5 @@
 """Basic meta for maas-model"""
+
 import dataclasses
 import json
 import logging
@@ -103,7 +104,16 @@ class ModelClassMeta:
 
                 self.field_names.append(name)
 
-        if self.partition_field and not self.partition_field in self.field_names:
+        if self.partition_field and (
+            (
+                isinstance(self.partition_field, str)
+                and not self.partition_field in self.field_names
+            )
+            or (
+                isinstance(self.partition_field, list)
+                and not set(self.partition_field).issubset(set(self.field_names))
+            )
+        ):
             raise ValueError(
                 f"Partition field { self.partition_field} "
                 f"does not exist in {self.index_name}"
