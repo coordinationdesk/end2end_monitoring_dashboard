@@ -29,7 +29,7 @@ jobs:
         pytest ./modules/${{ matrix.module }}/tests --junitxml=reports/${{ matrix.module }}-results.xml
 
     - name: Upload test results
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: test-results
         path: reports/
