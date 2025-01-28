@@ -333,24 +333,63 @@ def test_s1_report_product_2():
 
 def test_s1_eta_x_product_1():
 
-    product_name = "S1A_EW_ETA__AXDH_20220210T144717_20220210T144920_041852_04FB83_42F3.SAFE.zip"
+    product_name = (
+        "S1A_EW_ETA__AXDH_20220210T144717_20220210T144920_041852_04FB83_42F3.SAFE.zip"
+    )
 
     result_dict = extract_data_from_product_name_s1(product_name)
 
     assert result_dict == {
-        'satellite_unit': 'S1A', 
-        'mission': 'S1', 
-        'product_type': 'EW_ETA__AX', 
-        'product_level': 'LA_', 
-        'instrument_mode': 'EW', 
-        'type': 'ETA', 
-        'resolution_class': '_', 
-        'product_class': 'X', 
-        'polarization': 'DH', 
-        'start_date': datestr_to_utc_datetime("20220210T144717"),
-        'stop_date': datestr_to_utc_datetime("20220210T144920"),
-        'absolute_orbit_number': '041852',
-        'datatake_id': '04FB83',
-        'product_unique_id': '42F3'
+        "satellite_unit": "S1A",
+        "mission": "S1",
+        "product_type": "EW_ETA__AX",
+        "product_level": "LA_",
+        "instrument_mode": "EW",
+        "type": "ETA",
+        "resolution_class": "_",
+        "product_class": "X",
+        "polarization": "DH",
+        "start_date": datestr_to_utc_datetime("20220210T144717"),
+        "stop_date": datestr_to_utc_datetime("20220210T144920"),
+        "absolute_orbit_number": "041852",
+        "datatake_id": "04FB83",
+        "product_unique_id": "42F3",
     }
 
+
+def test_s1_aux_mp_classic_size_10():
+    product_name = "S1A_MP_ACQ_B2B_20241111T173809_20241123T192514.csv.zip"
+
+    result_dict = extract_data_from_product_name_s1(product_name)
+
+    assert result_dict == {
+        "satellite_unit": "S1A",
+        "mission": "S1",
+        "product_type": "MP_ACQ_B2B",
+        "product_level": "L__",
+    }
+
+
+def test_s1_aux_mp_specific_size_8():
+
+    product_name = "S1C_MP_ALL__MTL_20241021T171016_20241102T193714.tgz"
+    result_dict = extract_data_from_product_name_s1(product_name)
+
+    assert result_dict == {
+        "satellite_unit": "S1C",
+        "mission": "S1",
+        "product_type": "MP_ALL__",
+        "product_level": "L__",
+    }
+
+
+def test_s1_aux_mp_specific_size_12():
+    product_name = "S1A_OPER_MPL_TIMELINE_20241119T171645_20241201T193544.tgz"
+    result_dict = extract_data_from_product_name_s1(product_name)
+
+    assert result_dict == {
+        "satellite_unit": "S1A",
+        "mission": "S1",
+        "product_type": "MPL_TIMELINE",
+        "product_level": "L__",
+    }

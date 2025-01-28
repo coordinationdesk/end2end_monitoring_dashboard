@@ -21,6 +21,7 @@ class MetricsProductConsolidatorEngine(ReplicatorEngine):
         exclude_fields=None,
         include_fields=None,
     ):
+        # Add some default configuration for this replciator engine
         if include_fields is None:
             include_fields = [
                 "name",
@@ -50,10 +51,10 @@ class MetricsProductConsolidatorEngine(ReplicatorEngine):
     def consolidate(
         self, raw_document: MetricsProduct, document: CdsMetricsProduct
     ) -> Union[CdsMetricsProduct, None]:
-        """consolidate ddp data available
+        """consolidate metrics data
 
         Args:
-            raw_document (MetricsProduct): raw MetricsProduct extracted from DSIB files
+            raw_document (MetricsProduct): raw MetricsProduct extracted from metrics api
             document (CdsMetricsProduct): consolidated data
 
         Returns:
@@ -63,43 +64,41 @@ class MetricsProductConsolidatorEngine(ReplicatorEngine):
 
         # Expected name pattern
         # "Name": "Archived.WV_RAW__0N.SENTINEL-1.A.size",
+        # "Name": "Archived._AUX_CTM_CO.SENTINEL-5P.P.count"",
+        # "name": "Download.MSI_L0__DS.SENTINEL-2.A.s2b_ps_cap.size",
 
         # For S5P DLR :
         # Archived.L2__FRESCO._.size
 
         splitted_name = raw_document.name.split(".")
 
-        if len(splitted_name) == 5:
+        expected_length = {"Archived": 5, "Download": 6}.get(splitted_name[0], 0)
+
+        if len(splitted_name) == expected_length:
             # Ignoring name patterns without product types like "Archived.SENTINEL-1.A.size",
+
+            metric_name = splitted_name[0].lower()
+            document.metric_name = metric_name
 
             document.metric_sub_type = splitted_name[-1]
 
             full_mission_name = splitted_name[2]
-
-            # WV_RAW__0N
-            document.product_type = splitted_name[1]
-
-            # S1B / S1A
-            document.satellite_unit = (
-                full_mission_name[0] + full_mission_name[-1] + splitted_name[-2]
+            short_mission_name = (
+                # supports "SENTINEL-1.A" & "SENTINEL-5P.P"
+                full_mission_name[0]
+                + full_mission_name.split("-")[1][0]
             )
 
-            # S1, S2 ...
-            document.mission = document.satellite_unit[:-1]
-
-            return document
-
-        if (
-            raw_document.production_service_name == "S5P_DLR"
-            and splitted_name[1] != "SENTINEL-5P"
-        ):
-            document.mission = "S5"
-
-            document.satellite_unit = "S5P"
-
+            # Product type
             document.product_type = splitted_name[1]
 
-            document.metric_sub_type = splitted_name[-1]
+            document.satellite_unit = short_mission_name + splitted_name[3]
+
+            if metric_name == "download":
+                document.service_name = splitted_name[4]
+
+            # S1, S2 ...
+            document.mission = short_mission_name
 
             return document
 

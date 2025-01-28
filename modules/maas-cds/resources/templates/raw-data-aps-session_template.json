@@ -92,6 +92,9 @@
             "production_service_type": {
                 "type": "keyword"
             },
+            "station_id": {
+                "type": "keyword"
+            },
             "production_service_name": {
                 "type": "keyword"
             },

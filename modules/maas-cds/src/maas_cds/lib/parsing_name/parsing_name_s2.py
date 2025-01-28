@@ -21,7 +21,7 @@ def is_compact(product_name):
     # Regex on multiline decrease comprehension and readibility
     # pylint: disable=C0301
     is_compact_product = re.match(
-        "S[1|2][A|B|_]_[A-Z0-9]{6}_[0-9]{8}T[0-9]{6}_N[0-9]{4}_R[0-9]{3}(_T[A-Z0-9]{5})?_[0-9]{8}T[0-9]{6}(.SAFE|.zip)?$",
+        "S2[A|B|C|_]_[A-Z0-9]{6}_[0-9]{8}T[0-9]{6}_N[0-9]{4}_R[0-9]{3}(_T[A-Z0-9]{5})?_[0-9]{8}T[0-9]{6}(.SAFE|.zip)?$",
         product_name,
     )
 
@@ -132,12 +132,16 @@ def extract_optional_char_id(short_product_name: str):
 
     dict_char_label = {
         "_S": lambda x: {"applicability_start_time": datestr_to_utc_datetime(x[:15])},
-        "_O": lambda x: {  # specific rule for skip _OLQC
-            "first_absolute_orbit_number": datestr_to_utc_datetime(x.split("_")[0]),
-            "last_absolute_orbit_number": datestr_to_utc_datetime(x.split("_")[1][:15]),
-        }
-        if len(x.split("_")[0]) == 15
-        else {},
+        "_O": lambda x: (
+            {  # specific rule for skip _OLQC
+                "first_absolute_orbit_number": datestr_to_utc_datetime(x.split("_")[0]),
+                "last_absolute_orbit_number": datestr_to_utc_datetime(
+                    x.split("_")[1][:15]
+                ),
+            }
+            if len(x.split("_")[0]) == 15
+            else {}
+        ),
         "_V": lambda x: {
             "start_applicability_time_period": datestr_to_utc_datetime(x.split("_")[0]),
             "end_applicability_time_period": datestr_to_utc_datetime(

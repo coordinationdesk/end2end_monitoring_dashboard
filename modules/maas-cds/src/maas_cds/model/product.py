@@ -26,8 +26,11 @@ class CdsProduct(
     cams_tickets = Keyword(multi=True)
 
     _PARTITION_FIELDS = [
+        "PRIP_.*_publication_date",
         "prip_publication_date",
+        "AUXIP_.*_publication_date",
         "auxip_publication_date",
+        "DD_.*_publication_date",
         "ddip_publication_date",
         "dddas_publication_date",
         "ddcreodias_publication_date",
@@ -85,7 +88,9 @@ class CdsProduct(
 
     def calculate_dd_timeliness(self, dd_service_name, dd_attrs):
         """Calculate from PRIP to DD timeliness"""
+
         dd_attr_config = dd_attrs.get(dd_service_name)
+
         if dd_attr_config is None:
             LOGGER.error(
                 "Unknown dd service name : %s. Cannot calculate dd timeliness for product : %s.",
@@ -93,7 +98,9 @@ class CdsProduct(
                 self.name,
             )
             return
+
         dd_publication_date = getattr(self, dd_attr_config["publication_date"])
+
         if self.prip_publication_date and dd_publication_date:
             setattr(
                 self,

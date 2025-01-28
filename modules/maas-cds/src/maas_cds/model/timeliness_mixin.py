@@ -1,6 +1,7 @@
 """
 Mixin to calculate timeliness
 """
+
 import logging
 
 from maas_cds.lib.dateutils import get_microseconds_delta
@@ -16,7 +17,6 @@ class TimelinessCalculationMixin:
 
     def calculate_timeliness(
         self,
-        key: str,
     ) -> int:
         """Calculate timeliness
 
@@ -35,7 +35,7 @@ class TimelinessCalculationMixin:
                 "cannot calculate timeliness for publication key= %s",
                 self._TIMELINESS_START_FIELD,
                 self._TIMELINESS_END_FIELD,
-                key,
+                self,
             )
             return None
 

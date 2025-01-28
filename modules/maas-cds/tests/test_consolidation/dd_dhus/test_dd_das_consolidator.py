@@ -39,8 +39,14 @@ def test_dd_das_product_consolidation(mock_get_by_id, s1_ddas_product_1, dd_attr
     product.full_clean()
 
     assert product.to_dict() == {
+        "DD_DAS_id": "7fe19497-072c-4ff0-87a3-903ec8b87903",
+        "DD_DAS_is_published": True,
+        "DD_DAS_publication_date": datetime.datetime(
+            2022, 2, 7, 12, 33, 2, 606000, tzinfo=datetime.timezone.utc
+        ),
         "absolute_orbit": "41805",
         "datatake_id": "326097",
+        "nb_dd_served": 1,
         "dddas_publication_date": "2022-02-07T12:33:02.606Z",
         "instrument_mode": "IW",
         "key": "5e394d48c5b3eb8dacfa93bbf1ef6dc5",

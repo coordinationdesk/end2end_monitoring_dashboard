@@ -91,6 +91,7 @@ def test_lta_product_consolidation(lta_product_1):
         "timeliness": "OFFL",
         "processor_version": "001200",
         "collection_number": "01",
+        "LTA_S5P_DLR_id": "d30d0187-5de5-4031-a160-1bac13e19689",
         "LTA_S5P_DLR_is_published": True,
         "LTA_S5P_DLR_publication_date": datestr_to_utc_datetime(
             "2021-07-07T12:50:45.770Z"
@@ -116,6 +117,7 @@ def test_lta_l5p_product_consolidation(s5_lta_product_l0):
         "absolute_orbit": "24429",
         "key": "1d0138fbb1de98d3462fc344904b26a5",
         "mission": "S5",
+        "LTA_S5P_DLR_id": "501e0178-5a04-4ada-8beb-d04094bebb24",
         "name": "S5P_OPER_L0__SAT_A__20220701T051131_20220701T053148_24429_05.RAW",
         "product_type": "OPER_L0__SAT_A_",
         "product_level": "L0_",

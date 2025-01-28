@@ -273,7 +273,7 @@ def test_compute_related_products(
     }
     CdsDatatake.MISSING_PERIODS_MAXIMAL_OFFSET = missing_periods_maximal_offset
 
-    datatake.compute_missing_products("MSI_L0__DS", related_products_arg)
+    datatake.compute_missing_production("MSI_L0__DS", related_products_arg)
 
     assert datatake.missing_periods[0].to_dict() == {
         "name": "Missing Product",
@@ -294,7 +294,7 @@ def test_compute_related_products(
     }
     CdsDatatake.MISSING_PERIODS_MAXIMAL_OFFSET = missing_periods_maximal_offset
 
-    datatake.compute_missing_products("MSI_L0__DS", related_products_arg)
+    datatake.compute_missing_production("MSI_L0__DS", related_products_arg)
 
     assert datatake.missing_periods == []
 
@@ -579,6 +579,12 @@ def test_compute_from_empty_datatake(
             "L2A_local_percentage": 0.0,
             "L2A_local_status": "Missing",
             "L2A_local_value": 0.0,
+            "MSI_L0__DS_duplicated_avg_duration": 0,
+            "MSI_L0__DS_duplicated_avg_percentage": 0.0,
+            "MSI_L0__DS_duplicated_max_duration": 0,
+            "MSI_L0__DS_duplicated_max_percentage": 0.0,
+            "MSI_L0__DS_duplicated_min_duration": 0,
+            "MSI_L0__DS_duplicated_min_percentage": 0.0,
             "MSI_L0__DS_local_expected": 18040000,
             "MSI_L0__DS_local_percentage": 0.0,
             "MSI_L0__DS_local_status": "Missing",
@@ -589,6 +595,12 @@ def test_compute_from_empty_datatake(
             "MSI_L0__GR_local_status": "Missing",
             "MSI_L0__GR_local_value": 0,
             "MSI_L0__GR_local_value_adjusted": 0,
+            "MSI_L1B_DS_duplicated_avg_duration": 0,
+            "MSI_L1B_DS_duplicated_avg_percentage": 0.0,
+            "MSI_L1B_DS_duplicated_max_duration": 0,
+            "MSI_L1B_DS_duplicated_max_percentage": 0.0,
+            "MSI_L1B_DS_duplicated_min_duration": 0,
+            "MSI_L1B_DS_duplicated_min_percentage": 0.0,
             "MSI_L1B_DS_local_expected": 10824000,
             "MSI_L1B_DS_local_percentage": 0.0,
             "MSI_L1B_DS_local_status": "Missing",
@@ -599,11 +611,23 @@ def test_compute_from_empty_datatake(
             "MSI_L1B_GR_local_status": "Missing",
             "MSI_L1B_GR_local_value": 0,
             "MSI_L1B_GR_local_value_adjusted": 0,
+            "MSI_L1C_DS_duplicated_avg_duration": 0,
+            "MSI_L1C_DS_duplicated_avg_percentage": 0.0,
+            "MSI_L1C_DS_duplicated_max_duration": 0,
+            "MSI_L1C_DS_duplicated_max_percentage": 0.0,
+            "MSI_L1C_DS_duplicated_min_duration": 0,
+            "MSI_L1C_DS_duplicated_min_percentage": 0.0,
             "MSI_L1C_DS_local_expected": 10824000,
             "MSI_L1C_DS_local_percentage": 0.0,
             "MSI_L1C_DS_local_status": "Missing",
             "MSI_L1C_DS_local_value": 0,
             "MSI_L1C_DS_local_value_adjusted": 0,
+            "MSI_L2A_DS_duplicated_avg_duration": 0,
+            "MSI_L2A_DS_duplicated_avg_percentage": 0.0,
+            "MSI_L2A_DS_duplicated_max_duration": 0,
+            "MSI_L2A_DS_duplicated_max_percentage": 0.0,
+            "MSI_L2A_DS_duplicated_min_duration": 0,
+            "MSI_L2A_DS_duplicated_min_percentage": 0.0,
             "MSI_L2A_DS_local_expected": 10824000,
             "MSI_L2A_DS_local_percentage": 0.0,
             "MSI_L2A_DS_local_status": "Missing",
@@ -617,6 +641,8 @@ def test_compute_from_empty_datatake(
             "final_completeness_status": "Missing",
             "final_completeness_value": 0.0,
             "instrument_mode": "NOBS",
+            "duplicated_global_max_duration": 0,
+            "duplicated_global_max_percentage": 0.0,
             "key": "S2A-38107-1",
             "mission": "S2",
             "name": "S2A_MP_ACQ__MTL_20221006T120000_20221024T150000.csv",

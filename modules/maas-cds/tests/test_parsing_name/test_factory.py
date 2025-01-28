@@ -62,10 +62,23 @@ def test_s5_product_name_non_standard(expected_product_type, name):
 
 
 @mark.parametrize(
-    "expected_product_type,name",
+    "expected_product_type,expected_product_level,name",
     [
-        ("AUX_ML2", "S1A_AUX_ML2_V20190228T032500_G20230301T012345.SAFE"),
+        ("AUX_ML2", "L__", "S1A_AUX_ML2_V20190228T032500_G20230301T012345.SAFE"),
+        (
+            "OUT_OF_MONITORING",
+            "L1_",
+            "S1B_EW_GRDM_1SDH_20161119T211944_20161119T212044_003033_005280_2167_COG.SAFE",
+        ),
+        (
+            "OUT_OF_MONITORING",
+            "L1_",
+            "S1A_IW_GRDH_1SDV_20141220T083036_20141220T083106_003800_00489B_48B7_CARD_BS",
+        ),
     ],
 )
-def test_s1_new_product(expected_product_type, name):
+def test_s1_new_product(expected_product_type, expected_product_level, name):
     assert expected_product_type == extract_data_from_product_name(name)["product_type"]
+    assert (
+        expected_product_level == extract_data_from_product_name(name)["product_level"]
+    )

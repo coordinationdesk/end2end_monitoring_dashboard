@@ -1,7 +1,36 @@
 """ Custom method to extract data from sentinel 1 product name"""
+
 import re
 
 from maas_model import datestr_to_utc_datetime
+
+
+def extract_product_type_from_product_name_s1(product_name):
+    # TODO Quick win store the next stuff in database
+    #! But care to migration
+
+    regex_patterns = {
+        "AMALFI_REPORT": r".*-report-[0-9]{8}T[0-9]{6}.xml$",
+        "OUT_OF_MONITORING": r"(.*_COG.*)|(.*CARD_BS$)",  # todo verify ut
+    } | {
+        f"{pattern_type}": r".*{}.*".format(pattern_type)
+        for pattern_type in ["AISAUX", "MPL_TIMELINE", "MP_FULL", "MP_ALL__"]
+    }
+
+    for product_type, pattern in regex_patterns.items():
+        if re.match(pattern, product_name):
+            return product_type
+
+    # Handling AUX
+    if match := re.search(r"_AUX_([a-zA-Z0-9]*)_", product_name):
+        return f"AUX_{match.group(1)}"
+
+    # Handling OPER
+    if match := re.search(r"_OPER_([a-zA-Z0-9]*_[a-zA-Z0-9]*)_", product_name):
+        return f"{match.group(1)}"
+
+    # 90% product_type is on 10 char
+    return product_name[4:14]
 
 
 def extract_data_from_product_name_s1(product_name):
@@ -13,23 +42,8 @@ def extract_data_from_product_name_s1(product_name):
     Returns:
         dict: dict with all data extracted from the name
     """
-
-    # Report product
-    if re.match(".*-report-[0-9]{8}T[0-9]{6}.xml$", product_name):
-        product_type = "AMALFI_REPORT"
-    else:
-        product_type = product_name[4:14]
-
-        if product_type.startswith("OPER"):
-            product_type = product_name[9:19]
-
-        elif "AUX" in product_type:
-            splitted_name = product_name.split("_")
-            product_type = f"AUX_{splitted_name[splitted_name.index('AUX')+1]}"
-
-        elif product_type.startswith('MP'):
-            splitted_name = product_name.split("_")
-            product_type = f"MP_{splitted_name[splitted_name.index('MP')+1]}"
+    # If too much bug extend this to all mission
+    product_type = extract_product_type_from_product_name_s1(product_name)
 
     data = {
         "satellite_unit": product_name[:3],  # S1A / S1B / S1_
@@ -44,7 +58,7 @@ def extract_data_from_product_name_s1(product_name):
     # L
     product_level = product_name[12]
 
-    if product_level in ["0", "1", "2"] or ( product_type[3:] == "ETA__AX"):
+    if product_level in ["0", "1", "2"] or (product_type[3:] == "ETA__AX"):
 
         extra_data_from_parsing = {}
 
@@ -53,7 +67,9 @@ def extract_data_from_product_name_s1(product_name):
             extra_data_from_parsing["product_level"] = f"L{product_level}_"
 
             # BB
-            extra_data_from_parsing["instrument_mode"] = product_name[4:6]  # IW-EW-VW-RF-SM
+            extra_data_from_parsing["instrument_mode"] = product_name[
+                4:6
+            ]  # IW-EW-VW-RF-SM-AI
 
             # TTT
             extra_data_from_parsing["type"] = product_name[7:10]
@@ -68,10 +84,14 @@ def extract_data_from_product_name_s1(product_name):
             extra_data_from_parsing["polarization"] = product_name[14:16]
 
             # first date
-            extra_data_from_parsing["start_date"] = datestr_to_utc_datetime(product_name[17:32])
+            extra_data_from_parsing["start_date"] = datestr_to_utc_datetime(
+                product_name[17:32]
+            )
 
             # second date
-            extra_data_from_parsing["stop_date"] = datestr_to_utc_datetime(product_name[33:48])
+            extra_data_from_parsing["stop_date"] = datestr_to_utc_datetime(
+                product_name[33:48]
+            )
 
             # OOOOOO
             extra_data_from_parsing["absolute_orbit_number"] = product_name[49:55]

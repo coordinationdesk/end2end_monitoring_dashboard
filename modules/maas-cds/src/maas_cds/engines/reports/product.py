@@ -18,7 +18,6 @@ from maas_cds.engines.reports.anomaly_impact import (
 
 from maas_cds.lib.geo_mask_utils import GeoMaskUtils
 from maas_cds.lib.parsing_name.utils import remove_extension_from_product_name
-
 from maas_cds import model
 
 
@@ -104,6 +103,8 @@ class ProductConsolidatorEngine(
             raw_document, document, data_dict, start_key, end_key, fill_name
         )
 
+        self.consolidate_service_information(raw_document, document)
+
         # S2 Specific
         document.detector_id = new_data_dict.get("detector_id", None)
         document.tile_number = new_data_dict.get("tile_number", None)
@@ -127,11 +128,13 @@ class ProductConsolidatorEngine(
         """
         data_dict = self.fill_common_attributes(raw_document, document)
 
+        # Need to check the use of this before removing
         document.prip_id = raw_document.product_id
 
         document.prip_publication_date = raw_document.publication_date
 
         document.prip_service = raw_document.interface_name
+        #
 
         if document.mission == "S2" and document.product_type == "PRD_HKTM__":
             self.hktm_related_products.append(document)
@@ -195,7 +198,9 @@ class ProductConsolidatorEngine(
 
             # Add intersect coverage
             result_dict = self.geo_mask_utils.coverage_over_specific_area_s1(
-                instrument_mode, raw_document.footprint
+                instrument_mode,
+                raw_document.footprint,
+                raw_document.start_date,
             )
 
             self.logger.debug(
@@ -229,9 +234,15 @@ class ProductConsolidatorEngine(
         Returns:
             model.CdsProduct: consolidated document
         """
+
+        # Hummm we forgot to setup the interface_name with a lambda during the collect
+        raw_document.interface_name = "DD_DHUS-ARCHIVE"
+
         self.fill_common_attributes(raw_document, document)
 
+        # Need to check the use of this before removing
         document.ddip_publication_date = raw_document.ingestion_date
+        #
 
         return document
 
@@ -252,9 +263,11 @@ class ProductConsolidatorEngine(
         """
         self.fill_common_attributes(raw_document, document)
 
+        # Need to check the use of this before removing
         document.auxip_id = raw_document.product_id
 
         document.auxip_publication_date = raw_document.publication_date
+        #
 
         return document
 
@@ -275,29 +288,42 @@ class ProductConsolidatorEngine(
         """
         self.fill_common_attributes(raw_document, document)
 
-        published_attr = f"{raw_document.interface_name}_is_published"
+        return document
+
+    def consolidate_service_information(self, raw_document, document):
+        attr_tuple_mapping = [
+            (f"{raw_document.interface_name}_is_published", "true", True),
+            (
+                f"{raw_document.interface_name}_publication_date",
+                "publication_date",
+                None,
+            ),
+            (f"{raw_document.interface_name}_id", "product_id", "MISSING"),
+        ]
 
         # set dynamic attributes
-        if not hasattr(document, published_attr):
-            setattr(document, published_attr, True)
+        if not hasattr(document, attr_tuple_mapping[0][0]):
+            for attr_name, reference, missing_value in attr_tuple_mapping:
+                setattr(
+                    document,
+                    attr_name,
+                    getattr(raw_document, reference, missing_value),
+                )
 
-            publication_attr = f"{raw_document.interface_name}_publication_date"
-
-            setattr(
-                document,
-                publication_attr,
-                raw_document.publication_date,
+            service_name = raw_document.interface_name.split("_")[0].lower()
+            current_service_field_name = f"nb_{service_name}_served"
+            current_service_number = (
+                getattr(document, current_service_field_name, 0) or 0
             )
+            setattr(document, current_service_field_name, current_service_number + 1)
 
         else:
-            # warn or debug ?
             self.logger.warning(
-                "This product is already register in cds-product %s from %s",
+                "This product is already register in cds-product %s from %s (id: %s)",
                 raw_document.product_name,
                 raw_document.interface_name,
+                raw_document.meta.id,
             )
-
-        return document
 
     def _generate_reports(self):
         """Override to additionnaly report product attachement to container

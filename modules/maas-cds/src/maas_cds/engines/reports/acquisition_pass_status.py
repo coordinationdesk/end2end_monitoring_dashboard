@@ -2,12 +2,13 @@
 
 acquisition sass status engines for consolidation
 """
+
 from maas_engine.engine.replicate import ReplicatorEngine
 from maas_cds.engines.reports.anomaly_impact import (
     AnomalyImpactMixinEngine,
 )
 from maas_engine.engine.base import EngineReport
-
+from maas_model import datestr_to_utc_datetime
 
 import hashlib
 from typing import Any, Dict, Iterator
@@ -181,9 +182,7 @@ class XBandAcquisitionPassStatusConsolidatorEngine(
         # S1,S2,S3 only daily report are collected, so report_name_daily = reportName
         document.report_name_daily = raw_document.reportName
 
-        document.from_acq_delivery_timeliness = document.calculate_timeliness(
-            raw_document.meta.id,
-        )
+        document.from_acq_delivery_timeliness = document.calculate_timeliness()
 
         document.delivery_bitrate = document.calculate_bitrate(
             raw_document.meta.id,
@@ -283,20 +282,24 @@ class XBandV2AcquisitionPassStatusConsolidatorEngine(
         # sum all metrics across all chanels
         for metric in metrics:
             reduced_metric = sum(
-                getattr(quality_info, metric) or 0 for quality_info in quality_infos
+                getattr(quality_info, metric, 0) for quality_info in quality_infos
             )
             setattr(document, metric, reduced_metric)
 
-        # Oldest delivery start -> global sesison delivery start
+        # Oldest delivery start -> global session delivery start
         min_delivery_start = min(
-            getattr(quality_info, "DeliveryStart") for quality_info in quality_infos
+            getattr(quality_info, "DeliveryStart")
+            or datestr_to_utc_datetime("2999-01-01T01:01:01.000Z")
+            for quality_info in quality_infos
         )
 
         document.delivery_start = min_delivery_start
 
         # Most recent delivery stop -> global session delivery stop
         max_delivery_stop = max(
-            getattr(quality_info, "DeliveryStop") for quality_info in quality_infos
+            getattr(quality_info, "DeliveryStop")
+            or datestr_to_utc_datetime("1970-01-01T01:01:01.000Z")
+            for quality_info in quality_infos
         )
 
         document.delivery_stop = max_delivery_stop
@@ -322,6 +325,8 @@ class XBandV2AcquisitionPassStatusConsolidatorEngine(
             "front_end_status",
             "delivery_push_status",
             "downlink_status",
+            "downlink_start",
+            "downlink_stop",
         ]
 
         missing_attributes = [
@@ -375,10 +380,6 @@ class XBandV2AcquisitionPassStatusConsolidatorEngine(
 
         document = super().consolidate(raw_document, document)
 
-        if not self.session_is_valid(raw_document):
-            self.logger.warning("Session is not valid : %s ", raw_document)
-            return None
-
         if raw_document.publication_date < document.publication_date:
             self.logger.warning("Raw document is too old : %s ", raw_document)
             return None
@@ -391,14 +392,17 @@ class XBandV2AcquisitionPassStatusConsolidatorEngine(
         if quality_infos:
             document = self.aggregate_quality_infos_metrics(document, quality_infos)
 
-        document.global_status = self.get_global_status(raw_document)
-
         document.mission = raw_document.satellite_id[:-1]
 
-        document.from_acq_delivery_timeliness = document.calculate_timeliness(
-            raw_document.meta.id,
-        )
+        document.from_acq_delivery_timeliness = document.calculate_timeliness()
 
         document.delivery_bitrate = document.calculate_bitrate(raw_document.meta.id)
+        if not self.session_is_valid(raw_document):
+            self.logger.info("Incomplete session: %s ", raw_document)
+
+            document.global_status = "INCOMPLETE"
+
+        else:
+            document.global_status = self.get_global_status(raw_document)
 
         return document

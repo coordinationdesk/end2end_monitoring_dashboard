@@ -42,6 +42,7 @@ class CdsProductS1(CdsProduct):
                 "ZI",
                 "ZE",
                 "ZW",
+                "AIS",
             )
             or self.product_type in CdsDatatakeS1.EXCLUDES_PRODUCTED_TYPES
         ):

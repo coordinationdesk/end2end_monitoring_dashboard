@@ -45,6 +45,8 @@ def test_mpcip_product_consolidation(mpcip_product):
     engine.consolidated_documents = [product]
 
     assert product.to_dict() == {
+        "MPCIP_Acri_id": "ec4789a8-5ff8-47da-9cab-11c2194d3fcf",
+        "nb_mpcip_served": 1,
         "mission": "S2",
         "MPCIP_Acri_is_published": True,
         "MPCIP_Acri_publication_date": datetime.datetime(

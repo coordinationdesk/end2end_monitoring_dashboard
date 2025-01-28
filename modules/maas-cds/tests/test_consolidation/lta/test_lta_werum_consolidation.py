@@ -1,4 +1,5 @@
 """Tests for LTA Werum consolidation into products and publications"""
+
 import datetime
 
 from unittest.mock import patch
@@ -73,6 +74,7 @@ def test_lta_werum_product_consolidation(mock_search, mock_execute, lta_product_
         2020, 5, 12, 1, 47, 27, 000000, tzinfo=datetime.timezone.utc
     )
     product = engine.consolidate_from_LtaProduct(lta_product_1, cds_product)
+
     # note that dynamic fields are not serialized by full_clean()
     assert product.to_dict() == {
         "key": "775f0604c418c9a48f229e7b07b66281",
@@ -87,6 +89,7 @@ def test_lta_werum_product_consolidation(mock_search, mock_execute, lta_product_
         "sensing_duration": 12084000000.0,
         "expected_lta_number": 4,
         "LTA_Werum_is_published": True,
+        "LTA_Werum_id": "9484cbcc-c1d0-48d8-0de6-0104621c7d82",
         "datatake_id": "______",
         "LTA_Werum_publication_date": datetime.datetime(
             2022, 1, 12, 7, 11, 53, 994000, tzinfo=datetime.timezone.utc

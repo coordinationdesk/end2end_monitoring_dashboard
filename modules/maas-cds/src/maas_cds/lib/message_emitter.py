@@ -118,7 +118,7 @@ class MessageEmitter:
             yield MAASMessage(
                 document_class=report.document_class,
                 document_ids=report.data_ids[min_offset:max_offset],
-                pipeline=["BornFromTheMordor"]
+                pipeline=["BornFromTheMordor"],
             )
 
             min_offset = max_offset
@@ -154,6 +154,7 @@ class MessageEmitter:
             )
 
             message.document_class = document_class
+            message.document_indices = report.document_indices
 
             self.publish_message(
                 message_content_dict=message.to_dict(),

@@ -25,6 +25,9 @@
                 "type": "date",
                 "locale": "utc"
             },
+            "metric_name": {
+                "type": "keyword"
+            },
             "metric_type": {
                 "type": "keyword"
             },

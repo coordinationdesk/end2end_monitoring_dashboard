@@ -1,6 +1,7 @@
 """
 acquisition pass status engines for consolidation
 """
+
 import copy
 import hashlib
 
@@ -350,9 +351,7 @@ class S5AcquisitionPassStatusConsolidatorEngine(
         consolidated_document.ground_station = raw_data.reportName.split("_")[0]
 
         consolidated_document.from_acq_delivery_timeliness = (
-            consolidated_document.calculate_timeliness(
-                consolidated_document.meta.id,
-            )
+            consolidated_document.calculate_timeliness()
         )
 
         consolidated_document.delivery_bitrate = (

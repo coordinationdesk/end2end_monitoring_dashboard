@@ -2,6 +2,7 @@
 
 from unittest.mock import patch
 import unittest
+from maas_cds import model
 from maas_cds.lib.geo_mask_utils import GeoMaskUtils
 from opensearchpy.helpers.utils import AttrDict
 
@@ -9,16 +10,23 @@ from opensearchpy.helpers.utils import AttrDict
 def test_geo_cache():
     geo_mask_utils = GeoMaskUtils()
 
+    # Purge cache for test purpose
+    GeoMaskUtils.CACHED_MASK = {}
+
+    assert len(GeoMaskUtils.CACHED_MASK) == 0
+
     geo_mask_utils.load_mask("OCN")
 
-    assert "OCN" in GeoMaskUtils.CACHED_MASK
+    assert len(GeoMaskUtils.CACHED_MASK) > 0
 
 
 def test_s1_ew(s1_product_ew):
     geo_mask_utils = GeoMaskUtils()
 
     result = geo_mask_utils.coverage_over_specific_area_s1(
-        s1_product_ew.instrument_mode, s1_product_ew.footprint
+        s1_product_ew.instrument_mode,
+        s1_product_ew.footprint,
+        s1_product_ew.sensing_start_date,
     )
 
     result_keys = result.keys()
@@ -32,7 +40,9 @@ def test_s1_wv(s1_product_wv):
     geo_mask_utils = GeoMaskUtils()
 
     result = geo_mask_utils.coverage_over_specific_area_s1(
-        s1_product_wv.instrument_mode, s1_product_wv.footprint
+        s1_product_wv.instrument_mode,
+        s1_product_wv.footprint,
+        s1_product_wv.sensing_start_date,
     )
 
     assert result == {"EU_coverage_percentage": 0.0}
@@ -61,7 +71,10 @@ def test_load_all_mask(logger_mock):
 
 class MyTestCase(unittest.TestCase):
     def test_load_invalid_mask_path(self):
-        GeoMaskUtils.OVER_SPECIFIC_AREA_GEOJSON["WRONGPATH"] = "resources/masks/YOLO"
+
+        GeoMaskUtils.OVER_SPECIFIC_AREA_GEOJSON["WRONGPATH"] = {
+            "0": "resources/masks/YOLO"
+        }
 
         with self.assertRaises(FileNotFoundError):
             GeoMaskUtils().load_mask("WRONGPATH")
@@ -92,7 +105,10 @@ def test_invalid_footprint_coverage(logger_mock, s1_product_wv):
 
 def test_intersect_svalbard():
     footprint = "Polygon((15 79, 15 80, 16 80, 16 79, 15 79))"
-    intersect = GeoMaskUtils().area_coverage(footprint, "SLC")
+
+    intersect = GeoMaskUtils().area_coverage(
+        footprint, "SLC", "2024-04-02T12:12:12.000Z"
+    )
 
     assert intersect == 100
 
@@ -142,7 +158,11 @@ def test_new_masks():
             ]
         ],
     }
-    intersect = GeoMaskUtils().area_coverage(footprint, "SLC")
+
+    intersect = GeoMaskUtils().area_coverage(
+        footprint, "SLC", "2024-04-02T12:12:12.000Z"
+    )
+
     assert intersect == 100
 
 
@@ -164,3 +184,71 @@ def test_intersect_format_geojson_eu_mask():
     intersect = GeoMaskUtils().area_coverage(footprint, "EU")
 
     assert intersect == 100
+
+
+def test_groenland_coverage():
+
+    footprint = "Polygon((-39.9765 80.9498,-17.6093 82.9458,-21.0764 83.8781,-44.8408 81.6605,-39.9765 80.9498))"
+    intersect = GeoMaskUtils().area_coverage(footprint, "OCN")
+
+    assert 19.46 < intersect < 19.47
+
+
+def test_date_masks_impact_bug():
+    raw_data_product_dict = {
+        "reportName": "https://s1a.prip.copernicus.eu",
+        "product_id": "9e839192-d960-4c1b-97b5-515cb46b95d2",
+        "product_name": "S1A_IW_RAW__0SDV_20240705T235557_20240705T235629_054632_06A68B_D824.SAFE.zip",
+        "content_length": 1604002216,
+        "publication_date": "2024-07-06T00:47:36.686Z",
+        "start_date": "2024-07-05T23:55:57.545Z",
+        "end_date": "2024-01-05T23:56:29.944Z",  # fake previous date
+        "origin_date": "2024-07-06T00:37:12.000Z",
+        "eviction_date": "2024-07-19T12:47:36.298Z",
+        "footprint": {
+            "type": "Polygon",
+            "coordinates": [
+                [
+                    [-71.6787, -53.635],
+                    [-68.1222, -52.8622],
+                    [-69.3888, -51.0393],
+                    [-72.8177, -51.7742],
+                    [-71.6787, -53.635],
+                ]
+            ],
+        },
+        "interface_name": "PRIP_S1A_Serco",
+        "production_service_type": "PRIP",
+        "production_service_name": "S1A-Serco",
+        "ingestionTime": "2024-07-06T01:10:52.044Z",
+    }
+    raw_document = model.PripProduct(**raw_data_product_dict)
+    raw_document.meta.id = "39f5dc8ab626c24fbd12e138679bf2bf"
+    raw_document.full_clean()
+
+    # OLD mask 12.7% NEW mask 20.883%
+    geo_mask_utils = GeoMaskUtils()
+
+    # OLD
+    result = geo_mask_utils.coverage_over_specific_area_s1(
+        "IW",
+        raw_document.footprint,
+        raw_document.end_date,  # fake previous date
+    )
+
+    assert result == {
+        "OCN_coverage_percentage": 12.711695280606387,
+        "EU_coverage_percentage": 0.0,
+    }
+
+    # NEW
+    result = geo_mask_utils.coverage_over_specific_area_s1(
+        "IW",
+        raw_data_product_dict.get("footprint"),
+        raw_document.start_date,
+    )
+
+    assert result == {
+        "OCN_coverage_percentage": 20.870232761754124,
+        "EU_coverage_percentage": 0.0,
+    }

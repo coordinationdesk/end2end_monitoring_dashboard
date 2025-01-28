@@ -8,6 +8,8 @@ from maas_cds.model.datatake_s1 import (
     CdsDatatakeS1,
 )
 
+from maas_cds.model import CdsProduct
+
 
 def test_evaluate_all_global_expected(s1_datatake_wv):
     """test evaluate_all_global_expected"""
@@ -239,3 +241,54 @@ def test_evaluate_expected_over_specific_area_ocn(
 
     # Reset completeness tolerance to not impact other test
     CdsDatatake.COMPLETENESS_TOLERANCE = {}
+
+
+@patch("maas_cds.model.datatake_s1.CdsDatatakeS1.find_brother_products_scan")
+def test_get_expected_value_over_speficic_area(mock_find_brother_products_scan):
+    product_prip = CdsProduct(
+        **{
+            "key": "9b644d15eefa49f35179175f90d2b729",
+            "mission": "S1",
+            "name": "S1B_OPER_REP__MACP__20160429T072531_20220615T224730_0001.TGZ",
+            "product_level": "L__",
+            "product_type": "REP__MACP_",
+            "satellite_unit": "S1B",
+            "sensing_start_date": "2016-04-29T07:25:31.000Z",
+            "sensing_end_date": "2022-06-15T22:47:30.000Z",
+            "sensing_duration": 193418519000000,
+            "timeliness": "_",
+            "prip_id": "5c7b36c8-ec8a-11ec-a1af-fa163e7968e5",
+            "prip_publication_date": "2022-06-15T09:05:54.284Z",
+            "updateTime": "2022-06-15T09:21:53.333Z",
+        }
+    )
+    product_prip.full_clean()
+
+    mock_find_brother_products_scan.return_value = [product_prip]
+
+    datatake_doc = CdsDatatakeS1(
+        **{
+            "name": "S1A_MP_ACQ__L0__20220406T160000_20220418T180000.csv",
+            "key": "S1A-333628",
+            "datatake_id": "333628",
+            "satellite_unit": "S1A",
+            "mission": "S1",
+            "updateTime": "2022-04-08T14:13:24.020Z",
+            "observation_time_start": "2022-04-07T12:11:39.958Z",
+            "observation_duration": 30005000,
+            "observation_time_stop": "2022-04-07T12:12:09.963Z",
+            "l0_sensing_duration": 31600000,
+            "l0_sensing_time_start": "2022-04-07T12:11:38.657Z",
+            "l0_sensing_time_stop": "2022-04-07T12:12:10.257Z",
+            "absolute_orbit": "42667",
+            "relative_orbit": "70",
+            "polarization": "DH",
+            "timeliness": "NTC",
+            "instrument_mode": "SM",
+            "instrument_swath": "1",
+            "application_date": "2022-04-06T16:00:00.000Z",
+        }
+    )
+    datatake_doc.full_clean()
+
+    datatake_doc.get_expected_value_over_speficic_area("S1_OCN")  # fake value

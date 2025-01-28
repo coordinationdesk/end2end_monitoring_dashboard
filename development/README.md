@@ -228,11 +228,89 @@ Then update also the query
 }
 ```
 
+## Run local python module
+
+## Build local python wheel 
+
+tox -c ./modules/maas-model/tox.ini -e build
+cp -ar ${WORK_DIR}/modules/maas-model/dist/ ${WORK_DIR}/modules/build/maas-model/
+
+tox -c ./modules/maas-engine/tox.ini -e build
+cp -ar ${WORK_DIR}/modules/maas-engine/dist/ ${WORK_DIR}/modules/build/maas-engine/
+
+tox -c ./modules/maas-collector/tox.ini -e build
+cp -ar ${WORK_DIR}/modules/maas-collector/dist/ ${WORK_DIR}/modules/build/maas-collector/
+
+tox -c ./modules/maas-cds/tox.ini -e build
+cp -ar ${WORK_DIR}/modules/maas-cds/dist/ ${WORK_DIR}/modules/build/maas-cds/
+
+## Build local docker image
+
+```
+docker build --no-cache -t "maas-cds:2.8.1-beta" -f ./modules/Dockerfile.maas-cds ./modules
+docker build --no-cache -t "maas-collector:3.8.2-beta" -f ./modules/Dockerfile.maas-collector ./modules
+```
+
+## S3 bucket snapshot
+
+```bash
+docker exec -it dev-omcs-opensearch /bin/bash -c "opensearch-plugin install repository-s3"  
+```
+
+
+```bash
+export S3_SECRET_KEY=""
+export S3_ACCESS_KEY=""
+
+docker exec -it dev-omcs-opensearch /bin/bash -c "opensearch-keystore list ; opensearch-keystore remove s3.client.default.access_key ;opensearch-keystore remove s3.client.default.secret_key; echo ${S3_ACCESS_KEY} | opensearch-keystore add --stdin --force s3.client.default.access_key && echo ${S3_SECRET_KEY} | opensearch-keystore add --stdin --force s3.client.default.secret_key; opensearch-keystore list"
+```
+
+
+## Performing some reprocessing
+
+
+### Replay PRIP ingestion
+
+```bash
+el_grando_satruman --document-class PripProduct --query-string "interface_name: PRIP_S1C_Serco" --routing-key "new.raw.data.prip-product" --chunk-size "512" --amqp-priority 4 --output-document-class 'PripProduct' -c $WORK_DIR/development/maas-engine-conf/cds-engine.json
+
+el_grando_satruman --document-class PripProduct --query-string "interface_name: PRIP_S1C_Werum" --routing-key "new.raw.data.prip-product" --chunk-size "512" --amqp-priority 4 --output-document-class 'PripProduct' -c $WORK_DIR/development/maas-engine-conf/cds-engine.json
+```
+
+### Compute again completeness S1 from completeness
+
+```bash
+el_grando_satruman --document-class CdsCompletenessS1 --query-string "sensing_global_percentage: [* TO 99] AND  observation_time_start: [now-7d TO now-2h]" --routing-key "compute.cds-completeness" --chunk-size "1" --amqp-priority 4 --output-document-class 'CdsCompletenessS1' -c $WORK_DIR/development/maas-engine-conf/cds-engine.json
+```
+
+
+## Replay RabbitMQ Manually
+
+Some engine can't be trigger be satruman
+
+#### collect-exchange
+
+##### file.raw.data.mp-product
+
+
+```json
+{"date": "2025-01-20T13:43:32.773Z", "message_id": "49af7c48-d31b-45ef-8c3e-70d88d5f6271", "ancestor_ids": [], "pipeline": ["ODataCollector"], "force": true, "document_ids": ["S1C_MP_ACQ__L0__20250120T174545_20250124T181805.csv"], "document_indices": [], "document_class": "MpProduct"}
+```
+
 ## Tips
+
+
+- In this file all command are full, we encourage you to use aliases
+
+### OpenSearch
 
 For better OpenSearch explorations and manipulations https://elasticvue.com
 
-In this file all command are full, we encourage you to use aliases
 
 Check Opensearch log `docker logs dev-omcs-opensearch`
 With follow `docker logs -f dev-omcs-opensearch`
+
+It's not possible to restore a snapshot from a higher version cluster.
+However, it is possible to restore a snasphot from a lower version cluster (cool for upgrade).
+
+For small extract you can use Elastic dump https://github.com/elasticsearch-dump/elasticsearch-dump

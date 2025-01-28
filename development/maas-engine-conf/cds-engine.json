@@ -1,0 +1,925 @@
+{
+    "amqp": [
+        {
+            "name": "collect-exchange",
+            "queues": [
+                {
+                    "name": "collect-new.raw.data.ddp-data-available",
+                    "routing_key": "new.raw.data.ddp-data-available",
+                    "events": [
+                        {
+                            "id": "CONSOLIDATE_DDP_DATA_AVAILABLE",
+                            "send_reports": false
+                        }
+                    ]
+                },
+                {
+                    "name": "collect-new.raw.data.lta-product",
+                    "routing_key": "new.raw.data.lta-product",
+                    "events": [
+                        "CONSOLIDATE_PUBLICATION",
+                        {
+                            "id": "CONSOLIDATE_LTA_PRODUCT",
+                            "send_reports": true
+                        }
+                    ]
+                },
+                {
+                    "name": "collect-new.raw.data.prip-product",
+                    "routing_key": "new.raw.data.prip-product",
+                    "events": [
+                        {
+                            "id": "CONSOLIDATE_PUBLICATION",
+                            "send_reports": true
+                        },
+                        {
+                            "id": "CONSOLIDATE_PRODUCT",
+                            "send_reports": true,
+                            "container_chunk_size": 128
+                        }
+                    ]
+                },
+                {
+                    "name": "collect-new.raw.data.dd-product",
+                    "routing_key": "new.raw.data.dd-product",
+                    "events": [
+                        "CONSOLIDATE_PUBLICATION",
+                        {
+                            "id": "CONSOLIDATE_DD_PRODUCT",
+                            "output_rk": "new.container-dd-product",
+                            "send_reports": true,
+                            "container_chunk_size": 128
+                        }
+                    ]
+                },
+                {
+                    "name": "collect-file.raw.data.mp-product",
+                    "routing_key": "file.raw.data.mp-product",
+                    "events": [
+                        {
+                            "id": "CONSOLIDATE_MP_FILE",
+                            "raw_data_type": "MpProduct",
+                            "consolidated_data_type": "CdsDatatake",
+                            "data_time_start_field_name": "observation_time_start"
+                        },
+                        {
+                            "id": "CONSOLIDATE_MP_FILE",
+                            "raw_data_type": "MpProduct",
+                            "consolidated_data_type": "CdsCompleteness",
+                            "data_time_start_field_name": "observation_time_start",
+                            "merge_reports": false
+                        }
+                    ]
+                },
+                {
+                    "name": "collect-file.raw.data.mp-all-product",
+                    "routing_key": "file.raw.data.mp-all-product",
+                    "events": [
+                        {
+                            "id": "CONSOLIDATE_MP_FILE",
+                            "raw_data_type": "MpAllProduct",
+                            "consolidated_data_type": "CdsDownlinkDatatake",
+                            "data_time_start_field_name": "acquisition_start"
+                        }
+                    ]
+                },
+                {
+                    "name": "collect-file.raw.data.databudget",
+                    "routing_key": "file.raw.data.databudget",
+                    "events": [
+                        {
+                            "id": "CONSOLIDATE_DATABUDGET",
+                            "send_reports": true
+                        }
+                    ]
+                },
+                {
+                    "name": "collect-file.raw.data.mp-hktm-acquisition-product",
+                    "routing_key": "file.raw.data.mp-hktm-acquisition-product",
+                    "events": [
+                        {
+                            "id": "CONSOLIDATE_MP_FILE",
+                            "raw_data_type": "MpHktmAcquisitionProduct",
+                            "consolidated_data_type": "CdsHktmAcquisitionCompleteness",
+                            "data_time_start_field_name": "execution_time",
+                            "tolerance_value": 30,
+                            "send_reports": false
+                        }
+                    ]
+                },
+                {
+                    "name": "collect-file.raw.data.mp-hktm-downlink",
+                    "routing_key": "file.raw.data.mp-hktm-downlink",
+                    "events": [
+                        {
+                            "id": "CONSOLIDATE_MP_FILE",
+                            "raw_data_type": "MpHktmDownlink",
+                            "consolidated_data_type": "CdsHktmProductionCompleteness",
+                            "data_time_start_field_name": "effective_downlink_start",
+                            "tolerance_value": 30,
+                            "send_reports": false
+                        }
+                    ]
+                },
+                {
+                    "name": "collect-new.raw.data.auxip-product",
+                    "routing_key": "new.raw.data.auxip-product",
+                    "events": [
+                        "CONSOLIDATE_PUBLICATION",
+                        "CONSOLIDATE_PRODUCT"
+                    ]
+                },
+                {
+                    "name": "collect-new.raw.data.mpcip-product",
+                    "routing_key": "new.raw.data.mpcip-product",
+                    "events": [
+                        "CONSOLIDATE_PUBLICATION",
+                        {
+                            "id": "CONSOLIDATE_PRODUCT",
+                            "send_reports": true,
+                            "container_chunk_size": 128
+                        }
+                    ]
+                },
+                {
+                    "name": "collect-new.raw.data.sat-unavailability-product",
+                    "routing_key": "new.raw.data.sat-unavailability-product",
+                    "events": [
+                        {
+                            "id": "CONSOLIDATE_SATUNAVAILABILITY",
+                            "send_reports": false
+                        }
+                    ]
+                },
+                {
+                    "name": "colect-new.raw.data.cams-ticket",
+                    "routing_key": "new.raw.data.cams-ticket",
+                    "events": [
+                        {
+                            "id": "CONSOLIDATE_REPLICATE",
+                            "target_model": "CdsCamsTickets",
+                            "exclude_fields": [
+                                "ingestionTime",
+                                "interface_name",
+                                "reportName"
+                            ],
+                            "send_reports": false
+                        },
+                        {
+                            "id": "COMPUTE_CAMS_REFERENCES",
+                            "base_url": "https://esa-cams.atlassian.net"
+                        }
+                    ]
+                },
+                {
+                    "name": "collect-new.raw.data.interface-probe",
+                    "routing_key": "new.raw.data.interface-probe",
+                    "events": [
+                        {
+                            "id": "CONSOLIDATE_INTERFACE_STATUS",
+                            "send_reports": false,
+                            "refresh_interval_seconds": 1500
+                        }
+                    ]
+                },
+                {
+                    "name": "collect-new.raw.data.dd-archive",
+                    "routing_key": "new.raw.data.dd-archive",
+                    "events": [
+                        {
+                            "id": "CONSOLIDATE_DD_PRODUCT",
+                            "send_reports": false
+                        },
+                        "CONSOLIDATE_PUBLICATION"
+                    ]
+                },
+                {
+                    "name": "collect-new.raw.data.aps.product",
+                    "routing_key": "new.raw.data.aps.product",
+                    "events": [
+                        {
+                            "id": "CONSOLIDATE_APS",
+                            "send_reports": false
+                        }
+                    ]
+                },
+                {
+                    "name": "collect-new.raw.data.s5aps.product",
+                    "routing_key": "new.raw.data.s5aps.product",
+                    "events": [
+                        {
+                            "id": "CONSOLIDATE_S5APS",
+                            "send_reports": false
+                        }
+                    ]
+                },
+                {
+                    "name": "collect-new.raw.data.aps.edrs",
+                    "routing_key": "new.raw.data.aps.edrs",
+                    "events": [
+                        {
+                            "id": "CONSOLIDATE_APS_EDRS",
+                            "send_reports": true,
+                            "hktm_chunk_size": 128
+                        }
+                    ]
+                },
+                {
+                    "name": "collect-new.raw.data.aps-session",
+                    "routing_key": "new.raw.data.aps-session",
+                    "events": [
+                        {
+                            "id": "CONSOLIDATE_APS_SESSION",
+                            "send_reports": true,
+                            "hktm_chunk_size": 128
+                        }
+                    ]
+                },
+                {
+                    "name": "collect-new.raw.data.anomaly-correlation",
+                    "routing_key": "new.raw.data.anomaly-correlation",
+                    "events": [
+                        {
+                            "id": "CONSOLIDATE_ANOMALY_CORRELATION_FILE",
+                            "send_reports": false,
+                            "base_url": "https://esa-cams.atlassian.net/browse/"
+                        }
+                    ]
+                },
+                {
+                    "name": "collect-new.raw.data.deletion-issue",
+                    "routing_key": "new.raw.data.deletion-issue",
+                    "events": [
+                        {
+                            "id": "CONSOLIDATE_DELETION",
+                            "send_reports": true
+                        }
+                    ]
+                },
+                {
+                    "name": "collect-new.raw.data.product-deletion",
+                    "routing_key": "new.raw.data.product-deletion",
+                    "events": [
+                        {
+                            "id": "CONSOLIDATE_REPLICATE",
+                            "target_model": "CdsInterfaceProductDeletion",
+                            "include_fields": [
+                                "jira_issue",
+                                "ingestionTime"
+                            ],
+                            "send_reports": true
+                        }
+                    ]
+                },
+                {
+                    "name": "collect-new.raw.data.metrics-product",
+                    "routing_key": "new.raw.data.metrics-product",
+                    "events": [
+                        {
+                            "id": "CONSOLIDATE_METRICS_PRODUCT",
+                            "target_model": "CdsMetricsProduct",
+                            "send_reports": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "etl-exchange",
+            "queues": [
+                {
+                    "name": "etl-compute.cds-completeness",
+                    "routing_key": "compute.cds-completeness",
+                    "events": [
+                        "COMPUTE_COMPLETENESS_V2"
+                    ]
+                },
+                {
+                    "name": "etl-new.cds-publication-s1",
+                    "routing_key": "new.cds-publication-s1",
+                    "events": [
+                        "COMPUTE_COMPLETENESS_V2"
+                    ]
+                },
+                {
+                    "name": "etl-update.cds-publication-s1",
+                    "routing_key": "update.cds-publication-s1",
+                    "events": [
+                        "COMPUTE_COMPLETENESS_V2"
+                    ]
+                },
+                {
+                    "name": "etl-new.cds-completeness-s1",
+                    "routing_key": "new.cds-completeness-s1",
+                    "events": [
+                        {
+                            "id": "COMPUTE_COMPLETENESS_V2"
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-update.cds-completeness-s1",
+                    "routing_key": "update.cds-completeness-s1",
+                    "events": [
+                        {
+                            "id": "COMPUTE_COMPLETENESS_V2"
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-new.cds-publication-s2",
+                    "routing_key": "new.cds-publication-s2",
+                    "events": []
+                },
+                {
+                    "name": "etl-update.cds-publication-s2",
+                    "routing_key": "update.cds-publication-s2",
+                    "events": []
+                },
+                {
+                    "name": "etl-new.cds-completeness-s2",
+                    "routing_key": "new.cds-completeness-s2",
+                    "events": []
+                },
+                {
+                    "name": "etl-update.cds-completeness-s2",
+                    "routing_key": "update.cds-completeness-s2",
+                    "events": []
+                },
+                {
+                    "name": "etl-compute.cds-datatake",
+                    "routing_key": "compute.cds-datatake",
+                    "events": [
+                        "COMPUTE_COMPLETENESS"
+                    ]
+                },
+                {
+                    "name": "etl-new.cds-product-s1",
+                    "routing_key": "new.cds-product-s1",
+                    "events": [
+                        "COMPUTE_COMPLETENESS"
+                    ]
+                },
+                {
+                    "name": "etl-update.cds-product-s1",
+                    "routing_key": "update.cds-product-s1",
+                    "events": [
+                        "COMPUTE_COMPLETENESS"
+                    ]
+                },
+                {
+                    "name": "etl-new.cds-product-s2",
+                    "routing_key": "new.cds-product-s2",
+                    "events": [
+                        "COMPUTE_COMPLETENESS"
+                    ]
+                },
+                {
+                    "name": "etl-update.cds-product-s2",
+                    "routing_key": "update.cds-product-s2",
+                    "events": [
+                        "COMPUTE_COMPLETENESS"
+                    ]
+                },
+                {
+                    "name": "etl-new.cds-product-s3",
+                    "routing_key": "new.cds-product-s3",
+                    "events": [
+                        "COMPUTE_S3_COMPLETENESS"
+                    ]
+                },
+                {
+                    "name": "etl-update.cds-product-s3",
+                    "routing_key": "update.cds-product-s3",
+                    "events": [
+                        "COMPUTE_S3_COMPLETENESS"
+                    ]
+                },
+                {
+                    "name": "etl-new.cds-product-s5",
+                    "routing_key": "new.cds-product-s5",
+                    "events": [
+                        "COMPUTE_S5_COMPLETENESS"
+                    ]
+                },
+                {
+                    "name": "etl-update.cds-product-s5",
+                    "routing_key": "update.cds-product-s5",
+                    "events": [
+                        "COMPUTE_S5_COMPLETENESS"
+                    ]
+                },
+                {
+                    "name": "etl-new.cds-datatake-s1-product",
+                    "routing_key": "new.cds-datatake-s1-product",
+                    "events": [
+                        {
+                            "id": "COMPUTE_DATATAKE_RELATED",
+                            "target_model": "CdsProduct"
+                        },
+                        {
+                            "id": "CORRELATE_ACQUISITIONS",
+                            "send_reports": false,
+                            "chunk_size": 128,
+                            "source_type": "CdsDatatake"
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-update.cds-datatake-s1-product",
+                    "routing_key": "update.cds-datatake-s1-product",
+                    "events": [
+                        {
+                            "id": "COMPUTE_DATATAKE_RELATED",
+                            "target_model": "CdsProduct"
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-new.cds-datatake-s1-publication",
+                    "routing_key": "new.cds-datatake-s1-publication",
+                    "events": [
+                        {
+                            "id": "COMPUTE_DATATAKE_RELATED",
+                            "target_model": "CdsPublication",
+                            "send_reports": false
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-update.cds-datatake-s1-publication",
+                    "routing_key": "update.cds-datatake-s1-publication",
+                    "events": [
+                        {
+                            "id": "COMPUTE_DATATAKE_RELATED",
+                            "target_model": "CdsPublication",
+                            "send_reports": false
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-new.cds-datatake-s2-product",
+                    "routing_key": "new.cds-datatake-s2-product",
+                    "events": [
+                        {
+                            "id": "COMPUTE_DATATAKE_RELATED",
+                            "target_model": "CdsProduct"
+                        },
+                        {
+                            "id": "CORRELATE_ACQUISITIONS",
+                            "send_reports": false,
+                            "chunk_size": 128,
+                            "source_type": "CdsDatatake"
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-update.cds-datatake-s2-product",
+                    "routing_key": "update.cds-datatake-s2-product",
+                    "events": [
+                        {
+                            "id": "COMPUTE_DATATAKE_RELATED",
+                            "target_model": "CdsProduct"
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-new.cds-datatake-s2-publication",
+                    "routing_key": "new.cds-datatake-s2-publication",
+                    "events": [
+                        {
+                            "id": "COMPUTE_DATATAKE_RELATED",
+                            "target_model": "CdsPublication",
+                            "send_reports": false
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-update.cds-datatake-s2-publication",
+                    "routing_key": "update.cds-datatake-s2-publication",
+                    "events": [
+                        {
+                            "id": "COMPUTE_DATATAKE_RELATED",
+                            "target_model": "CdsPublication",
+                            "send_reports": false
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-new.cds-datatake-s1",
+                    "routing_key": "new.cds-datatake-s1",
+                    "events": [
+                        {
+                            "id": "COMPUTE_COMPLETENESS"
+                        },
+                        {
+                            "id": "CORRELATE_ACQUISITIONS",
+                            "chunk_size": 128,
+                            "source_type": "CdsDatatake"
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-update.cds-datatake-s1",
+                    "routing_key": "update.cds-datatake-s1",
+                    "events": [
+                        {
+                            "id": "COMPUTE_COMPLETENESS"
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-new.cds-datatake-s2",
+                    "routing_key": "new.cds-datatake-s2",
+                    "events": [
+                        {
+                            "id": "COMPUTE_COMPLETENESS"
+                        },
+                        {
+                            "id": "CORRELATE_ACQUISITIONS",
+                            "chunk_size": 128,
+                            "source_type": "CdsDatatake"
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-update.cds-datatake-s2",
+                    "routing_key": "update.cds-datatake-s2",
+                    "events": [
+                        {
+                            "id": "COMPUTE_COMPLETENESS"
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-new.container-dd-product",
+                    "routing_key": "new.container-dd-product",
+                    "events": [
+                        {
+                            "id": "COMPUTE_CONTAINER_RELATED",
+                            "target_model": "DdProduct",
+                            "send_reports": false
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-new.container-products",
+                    "routing_key": "new.container-products",
+                    "events": [
+                        {
+                            "id": "COMPUTE_CONTAINER_PRODUCTS",
+                            "send_reports": false
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-update.hktm-products",
+                    "routing_key": "update.hktm-products",
+                    "events": [
+                        {
+                            "id": "COMPUTE_HKTM_RELATED",
+                            "send_reports": false,
+                            "tolerance_value": 30,
+                            "target_model": "CdsHktmProductionCompleteness"
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-update.hktm-acquisition",
+                    "routing_key": "update.hktm-acquisition",
+                    "events": [
+                        {
+                            "id": "COMPUTE_HKTM_RELATED",
+                            "send_reports": false,
+                            "target_model": "CdsHktmAcquisitionCompleteness"
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-new.cds-interface-product-deletion",
+                    "routing_key": "new.cds-interface-product-deletion",
+                    "events": [
+                        {
+                            "id": "CONSOLIDATE_DELETION",
+                            "send_reports": false
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-update.cds-interface-product-deletion",
+                    "routing_key": "update.cds-interface-product-deletion",
+                    "events": [
+                        {
+                            "id": "CONSOLIDATE_DELETION",
+                            "send_reports": false
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-new.cds-edrs-acquisition-pass-status",
+                    "routing_key": "new.cds-edrs-acquisition-pass-status",
+                    "events": [
+                        {
+                            "id": "CORRELATE_ACQUISITIONS",
+                            "send_reports": false,
+                            "chunk_size": 128,
+                            "source_type": "CdsEdrsAcquisitionPassStatus"
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-new.cds-cadip-acquisition-pass-status",
+                    "routing_key": "new.cds-cadip-acquisition-pass-status",
+                    "events": [
+                        {
+                            "id": "CORRELATE_ACQUISITIONS",
+                            "send_reports": false,
+                            "chunk_size": 128,
+                            "source_type": "CdsCadipAcquisitionPassStatus"
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-update.cds-edrs-acquisition-pass-status",
+                    "routing_key": "update.cds-edrs-acquisition-pass-status",
+                    "events": [
+                        {
+                            "id": "CORRELATE_ACQUISITIONS",
+                            "send_reports": false,
+                            "chunk_size": 128,
+                            "source_type": "CdsEdrsAcquisitionPassStatus"
+                        }
+                    ]
+                },
+                {
+                    "name": "etl-update.cds-cadip-acquisition-pass-status",
+                    "routing_key": "update.cds-cadip-acquisition-pass-status",
+                    "events": [
+                        {
+                            "id": "CORRELATE_ACQUISITIONS",
+                            "send_reports": false,
+                            "chunk_size": 128,
+                            "source_type": "CdsCadipAcquisitionPassStatus"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "modules": [
+        "maas_cds.engines.reports",
+        "maas_cds.engines.compute",
+        "maas_cds.engines.operations"
+    ],
+    "model": "maas_cds.model",
+    "defaults": [
+        {
+            "id": [
+                "CONSOLIDATE_DD_PRODUCT",
+                "CONSOLIDATE_PRODUCT",
+                "COMPUTE_CONTAINER_RELATED",
+                "COMPUTE_CONTAINER_PRODUCTS",
+                "MISSING_CONSOLIDATION"
+            ],
+            "dd_attrs": {
+                "DHUS": {
+                    "raw_data_model": "DdProduct",
+                    "publication_date": "ddip_publication_date",
+                    "from_prip_timeliness": "from_prip_ddip_timeliness",
+                    "product_name": "ddip_name",
+                    "container_id": "ddip_id",
+                    "container_name": "ddip_container_name"
+                },
+                "DAS": {
+                    "raw_data_model": "DasProduct",
+                    "publication_date": "dddas_publication_date",
+                    "from_prip_timeliness": "from_prip_dddas_timeliness",
+                    "product_name": "dddas_name",
+                    "container_id": "dddas_id",
+                    "container_name": "dddas_container_name"
+                },
+                "CREODIAS": {
+                    "raw_data_model": "CreodiasProduct",
+                    "publication_date": "ddcreodias_publication_date",
+                    "from_prip_timeliness": "from_prip_ddcreodias_timeliness",
+                    "product_name": "ddcreodias_name",
+                    "container_id": "ddcreodias_id",
+                    "container_name": "ddcreodias_container_name"
+                }
+            }
+        },
+        {
+            "id": "CONSOLIDATE_DATATAKE",
+            "send_reports": true
+        },
+        {
+            "id": "CONSOLIDATE_PUBLICATION",
+            "send_reports": false,
+            "min_doi": null
+        },
+        {
+            "id": "CONSOLIDATE_PRODUCT",
+            "send_reports": false,
+            "min_doi": null,
+            "container_rk": "new.container-products"
+        },
+        {
+            "id": "COMPUTE_COMPLETENESS",
+            "send_reports": false,
+            "completeness_tolerance": {
+                "S1": {
+                    "local": {
+                        "WV_.*0.": -759000,
+                        "WV_.*1.": -13500000,
+                        "WV_.*2.": -12843000,
+                        "S.*0.": -1000000,
+                        "S.*1.": -2400000,
+                        "S.*2.": -2000000,
+                        "EW_.*0.": -135000,
+                        "EW_.*1.": 230000,
+                        "IW_.*0.": -512000,
+                        "IW_.*1.": 150000
+                    },
+                    "slice": {
+                        "IW_OCN__2.": -7400000,
+                        "EW_OCN__2.": -8200000,
+                        "EW_SLC__1.": -8200000
+                    }
+                }
+            },
+            "generate_missing_periods": true,
+            "missing_periods_maximal_offset": {
+                "S1": {
+                    "local": {
+                        "WV_.*0.": 6000000,
+                        "S.*0.": 6000000,
+                        "EW_.*0.": 6000000,
+                        "IW_.*0.": 6000000
+                    }
+                },
+                "S2": {
+                    "local": {
+                        "MSI_L0__DS": 10000000
+                    }
+                }
+            }
+        },
+        {
+            "id": "COMPUTE_COMPLETENESS_V2",
+            "send_reports": false,
+            "completeness_tolerance": {
+                "S1": {
+                    "local": {
+                        "WV_.*0.": -759000,
+                        "WV_.*1.": -13500000,
+                        "WV_.*2.": -12843000,
+                        "S.*0.": -1000000,
+                        "S.*1.": -2400000,
+                        "S.*2.": -2000000,
+                        "EW_.*0.": -135000,
+                        "EW_.*1.": 230000,
+                        "IW_.*0.": -512000,
+                        "IW_.*1.": 150000
+                    },
+                    "slice": {
+                        "IW_OCN__2.": -7400000,
+                        "EW_OCN__2.": -8200000,
+                        "EW_SLC__1.": -8200000
+                    }
+                }
+            },
+            "generate_missing_periods": true,
+            "missing_periods_maximal_offset": {
+                "S1": {
+                    "local": {
+                        "WV_.*0.": 6000000,
+                        "S.*0.": 6000000,
+                        "EW_.*0.": 6000000,
+                        "IW_.*0.": 6000000
+                    }
+                },
+                "S2": {
+                    "local": {
+                        "MSI_L0__DS": 10000000
+                    }
+                }
+            }
+        },
+        {
+            "id": "COMPUTE_S3_COMPLETENESS",
+            "completeness_tolerance": {
+                "S3": {
+                    "local": {
+                        "SR_1_LAN_RD": -540000000,
+                        "DO_0_(DOP|NAV)___|GN_0_GNS___|MW_0_MWR___": -180000000,
+                        "SL_(0_SLT___|1_RBT___|2_(FRP___|LST___))": -240000000,
+                        "SR_(0_SRA___|1_SRA_(__|A_|BS))": -540000000,
+                        "TM_0_(HKM(___|2__)|NAT___)|MW_1_(CAL___|MWR___)": -180000000,
+                        "OL_(0_EFR___|1_E(FR___|RR___)|2_L(FR___|RR___))": 0,
+                        "SY_(1_MISR__|2_(AOD___|SYN___|VG(K___|P___)))": 0
+                    }
+                }
+            }
+        },
+        {
+            "id": "COMPUTE_S5_COMPLETENESS",
+            "completeness_tolerance": {
+                "S5": {
+                    "local": {
+                        "OPER_L0__(ENG_A_|ODB_[1-8]_|SAT_A)": -180000000,
+                        "NRTI_L1B_(ENG_DB|RA_BD[1-8])": -180000000,
+                        "NRTI_L2__(AER_AI|AER_LH|CLOUD_|CO____|FRESCO|HCHO__|NO2___|O3__PR|O3____|SO2___)": -180000000,
+                        "OFFL_L1B_(ENG_DB|RA_BD[1-8])": -180000000,
+                        "OFFL_L2__(AER_AI|AER_LH|CH4___|CLOUD_|CO____|FRESCO|HCHO__|NO2___|NP_BD(3|6|7)|O3__PR|O3____|SO2___)": -180000000
+                    }
+                }
+            }
+        },
+        {
+            "id": "CONSOLIDATE_DELETION",
+            "send_reports": false,
+            "interface_dict": {
+                "werum": "Werum",
+                "exprivia": "Exprivia",
+                "acri": "Acri",
+                "cloudferro": "CloudFerro",
+                "dlr": "S5P_DLR"
+            }
+        },
+        {
+            "id": "CONSOLIDATE_DATABUDGET",
+            "regex_replace_to_perform": [
+                {
+                    "mission": "S1",
+                    "field": "type",
+                    "text": " \\(AUX_ECE\\)",
+                    "replacement": ""
+                },
+                {
+                    "mission": "S1",
+                    "field": "timeliness",
+                    "text": "^_$",
+                    "replacement": "UNDERSCORE"
+                },
+                {
+                    "mission": "S2",
+                    "field": "type",
+                    "text": " \\(EUP\\)",
+                    "replacement": ""
+                },
+                {
+                    "mission": "S1",
+                    "field": "type",
+                    "text": "\\(SH/SV/DH/DV\\)",
+                    "replacement": ""
+                },
+                {
+                    "mission": "S1",
+                    "field": "type",
+                    "text": "\\(SH/SV\\)",
+                    "replacement": ""
+                }
+            ],
+            "override_value_dict": [
+                {
+                    "mission": "S1",
+                    "selector_field": "type",
+                    "selector_value": "S[1..6]_ETA__AX",
+                    "override_field": "timeliness",
+                    "override_value": "A"
+                },
+                {
+                    "mission": "S1",
+                    "selector_field": "type",
+                    "selector_value": "IW_ETA__AX",
+                    "override_field": "timeliness",
+                    "override_value": "A"
+                },
+                {
+                    "mission": "S1",
+                    "selector_field": "type",
+                    "selector_value": "EW_ETA__AX",
+                    "override_field": "timeliness",
+                    "override_value": "A"
+                },
+                {
+                    "mission": "S5",
+                    "selector_field": "type",
+                    "selector_value": "OFFL_L1B_IR_UVN",
+                    "override_field": "level",
+                    "override_value": "L1"
+                },
+                {
+                    "mission": "S5",
+                    "selector_field": "type",
+                    "selector_value": "OFFL_L2__HCCO_",
+                    "override_field": "type",
+                    "override_value": "OFFL_L2__HCHO_"
+                }
+            ]
+        }
+    ],
+    "logging": {
+        "shapely.geos": "CRITICAL"
+    }
+}

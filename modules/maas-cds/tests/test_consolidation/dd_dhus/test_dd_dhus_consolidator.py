@@ -1,7 +1,7 @@
 from unittest.mock import patch
 
 import pytest
-
+import datetime
 from maas_engine.engine.base import EngineSession
 
 import maas_cds.model as model
@@ -38,6 +38,12 @@ def test_dd_dhus_product_consolidation(mock_get_by_id, s1_dd_product_1, dd_attrs
     product.full_clean()
 
     assert product.to_dict() == {
+        "DD_DHUS_id": "7fe19497-072c-4ff0-87a3-903ec8b87903",
+        "DD_DHUS_is_published": True,
+        "DD_DHUS_publication_date": datetime.datetime(
+            2022, 2, 7, 12, 33, 2, 606000, tzinfo=datetime.timezone.utc
+        ),
+        "nb_dd_served": 1,
         "absolute_orbit": "41805",
         "datatake_id": "326097",
         "ddip_publication_date": "2022-02-07T12:33:02.606Z",

@@ -2,11 +2,16 @@
 
 import logging
 from typing import List
+from functools import cached_property
 
 from opensearchpy import Keyword, Q
 from maas_cds.lib import tolerance
 from maas_cds.lib.dateutils import get_microseconds_delta
-from maas_cds.lib.periodutils import Period, compute_missing_sensing_periods
+from maas_cds.lib.periodutils import (
+    Period,
+    compute_duplicated_indicator,
+    compute_missing_sensing_periods,
+)
 from maas_cds.model import generated
 from maas_cds.model.anomaly_mixin import AnomalyMixin
 from maas_cds.model.enumeration import CompletenessScope, CompletenessStatus
@@ -46,6 +51,20 @@ class CdsDatatake(AnomalyMixin, generated.CdsDatatake):
     datastrip_ids = Keyword(multi=True)
 
     product_group_ids = Keyword(multi=True)
+
+    def get_service_for_completeness(self):
+        completeness_service_dict = {
+            "S1A": ["PRIP_S1A_Serco"],
+            "S1C": ["PRIP_S1C_Serco", "PRIP_S1C_Werum"],
+            "S2A": ["PRIP_S2A_ATOS"],
+            "S2B": ["PRIP_S2B_CAPGEMINI"],
+            "S2C": ["PRIP_S2C_ATOS_datatest"],
+            # "S3A": "PRIP_SERVICE_S3A", N/A
+            # "S3B": "PRIP_SERVICE_S3B", N/A
+            # "S5P": "PRIP_SERVICE_S5P", N/A
+        }
+
+        return completeness_service_dict.get(self.satellite_unit, None)
 
     def compute_local_value(self, product_type, related_documents=None):
         """Compute value for a specific product_type"""
@@ -89,6 +108,12 @@ class CdsDatatake(AnomalyMixin, generated.CdsDatatake):
             f"Must be implement in subclasses in CdsDatatake{self.mission}"
         )
 
+    def product_type_with_duplicated(self, product_type: str) -> bool:
+        """Do we want check duplicated for this product type ?"""
+        raise NotImplementedError(
+            f"Must be implement in subclasses in CdsDatatake{self.mission}"
+        )
+
     def compute_all_local_completeness(self):
         """Complete all local completeness for this datatake"""
         all_product_type = self.get_all_product_types()
@@ -105,9 +130,10 @@ class CdsDatatake(AnomalyMixin, generated.CdsDatatake):
                 product_type_value,
             )
 
-            self.compute_missing_products(product_type, related_products)
+            self.compute_missing_production(product_type, related_products)
+            self.compute_duplicated(product_type, related_products)
 
-    def compute_missing_products(
+    def compute_missing_production(
         self, product_type: str, related_products: List[Period]
     ):
         """Find and store missing sensing periods on this datatake
@@ -167,6 +193,20 @@ class CdsDatatake(AnomalyMixin, generated.CdsDatatake):
                 )
                 for missing_period in missing_periods
             ]
+
+    def compute_duplicated(self, product_type: str, related_products: List[Period]):
+        """Find and store duplicated indicator on this datatake
+
+        Args:
+            product_type (str): The current product type
+            related_products (List[Period]): The list of products for
+                this datatake/product-type
+        """
+
+        if self.product_type_with_duplicated(product_type):
+            indicator = compute_duplicated_indicator(related_products)
+            for key_indicator, value in indicator.items():
+                setattr(self, f"{product_type}_duplicated_{key_indicator}", value)
 
     def load_data_before_compute(self):
         """Some step need to be done before starting compute all completeness"""
@@ -357,6 +397,7 @@ class CdsDatatake(AnomalyMixin, generated.CdsDatatake):
         )
 
         global_values = {}
+        global_duplication_indicator = {"max_duration": 0, "max_percentage": 0.0}
 
         doc_dict = self.to_dict().items()
 
@@ -372,6 +413,20 @@ class CdsDatatake(AnomalyMixin, generated.CdsDatatake):
                     global_values[key_field] = 0
 
                 global_values[key_field] += value
+
+            # Duplicated indicator per product type
+            if key.endswith("_duplicated_max_duration"):
+                if value > global_duplication_indicator["max_duration"]:
+                    global_duplication_indicator["max_duration"] = value
+
+            if key.endswith("_duplicated_max_percentage"):
+                if value > global_duplication_indicator["max_percentage"]:
+                    global_duplication_indicator["max_percentage"] = value
+
+        # Set
+        for key_field, value in global_duplication_indicator.items():
+            global_key = f"duplicated_{CompletenessScope.GLOBAL.value}_{key_field}"
+            setattr(self, global_key, value)
 
         # update global completness
         for key_field, value in global_values.items():
@@ -405,11 +460,24 @@ class CdsDatatake(AnomalyMixin, generated.CdsDatatake):
         # TODO MAAS_CDS-1236: make a single query to find all the whole brotherhood
         # with list of datatake / product types later post-processed to be grouped by
         # tuple (datatake_id, product_type) in a dict
+
+        completeness_service = self.get_service_for_completeness()
+
+        if not completeness_service:
+            LOGGER.warning(
+                "Try to compute completess but no service identified : %s %s %s",
+                self.satellite_unit,
+                self.datatake_id,
+                product_type,
+            )
+            completeness_service = ["NO_SERVICE_FOR_THIS"]
+
         search_request = (
             CdsProduct.search()
             .filter("term", datatake_id=self.datatake_id)
             .filter("term", satellite_unit=self.satellite_unit)
             .filter("term", product_type=product_type)
+            .filter("terms", prip_service=self.get_service_for_completeness())
             .filter("exists", field="prip_id")
             .params(ignore=404)
         )

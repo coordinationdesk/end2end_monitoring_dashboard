@@ -1,0 +1,149 @@
+{
+    "aliases": {
+        "cds-completeness": {}
+    },
+    "index_patterns": [
+        "cds-completeness-*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1,
+            "mapping": {
+                "total_fields": {
+                    "limit": "2000"
+                }
+            }
+        }
+    },
+    "mappings": {
+        "properties": {
+            "updateTime": {
+                "type": "date",
+                "format": "date_time",
+                "locale": "utc"
+            },
+            "key": {
+                "type": "keyword"
+            },
+            "name": {
+                "type": "keyword"
+            },
+            "prip_name": {
+                "type": "keyword"
+            },
+            "mission": {
+                "type": "keyword"
+            },
+            "satellite_unit": {
+                "type": "keyword"
+            },
+            "datatake_id": {
+                "type": "keyword"
+            },
+            "hex_datatake_id": {
+                "type": "keyword"
+            },
+            "application_date": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "observation_time_start": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "observation_duration": {
+                "type": "long"
+            },
+            "observation_time_stop": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "l0_sensing_time_start": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "l0_sensing_duration": {
+                "type": "long"
+            },
+            "l0_sensing_time_stop": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "number_of_scenes": {
+                "type": "integer"
+            },
+            "number_of_expected_tiles": {
+                "type": "integer"
+            },
+            "absolute_orbit": {
+                "type": "keyword"
+            },
+            "relative_orbit": {
+                "type": "keyword"
+            },
+            "polarization": {
+                "type": "keyword"
+            },
+            "instrument_mode": {
+                "type": "keyword"
+            },
+            "instrument_swath": {
+                "type": "keyword"
+            },
+            "timeliness": {
+                "type": "keyword"
+            },
+            "cams_tickets": {
+                "type": "keyword"
+            },
+            "datastrip_ids": {
+                "type": "keyword"
+            },
+            "product_group_ids": {
+                "type": "keyword"
+            },
+            "last_attached_ticket": {
+                "type": "keyword"
+            },
+            "last_attached_ticket_url": {
+                "type": "keyword"
+            },
+            "cams_origin": {
+                "type": "keyword"
+            },
+            "cams_description": {
+                "type": "keyword"
+            },
+            "missing_periods": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "keyword"
+                    },
+                    "product_type": {
+                        "type": "keyword"
+                    },
+                    "sensing_start_date": {
+                        "type": "date",
+                        "locale": "utc"
+                    },
+                    "sensing_end_date": {
+                        "type": "date",
+                        "locale": "utc"
+                    },
+                    "duration": {
+                        "type": "long"
+                    }
+                }
+            }
+        },
+        "_meta": {
+            "partition_field": [
+                "satellite_unit",
+                "prip_name"
+            ],
+            "partition_format": "{satellite_unit}-{prip_name}"
+        }
+    }
+}

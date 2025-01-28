@@ -1,0 +1,7 @@
+{
+    "amqp": {
+        "new.raw.data.dd-product": {
+            "chunk_size": 512
+        }
+    }
+}

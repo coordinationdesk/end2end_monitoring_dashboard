@@ -2,7 +2,7 @@ from unittest.mock import patch
 
 import pytest
 
-
+import datetime
 import maas_cds.model as model
 
 from maas_cds.engines.reports import (
@@ -115,6 +115,12 @@ def test_auxip_product_consolidation(mock_find_datatake, auxip_product_1, datata
     engine.on_post_consolidate()
 
     assert product.to_dict() == {
+        "AUXIP_Exprivia_id": "dc03b87e-9461-11ec-9d4b-fa163e7968e5",
+        "AUXIP_Exprivia_is_published": True,
+        "AUXIP_Exprivia_publication_date": datetime.datetime(
+            2022, 2, 23, 4, 34, 16, 559000, tzinfo=datetime.timezone.utc
+        ),
+        "nb_auxip_served": 1,
         "key": "3f465f68e5d494b50cefc1171aed06ca",
         "mission": "S1",
         "auxip_id": "dc03b87e-9461-11ec-9d4b-fa163e7968e5",
@@ -165,7 +171,10 @@ def test_auxip_publication_consolidation(auxip_product_1):
     }
 
 
-def test_sat_unavailabilty_product_consolidation(sat_unavailability_product_1):
+@patch("maas_cds.model.CdsSatUnavailability.get_by_id", return_value=None)
+def test_sat_unavailabilty_product_consolidation(
+    get_by_id, sat_unavailability_product_1
+):
     engine = SatUnavailabilityConsolidatorEngine()
 
     engine.input_documents = [sat_unavailability_product_1]
@@ -176,9 +185,10 @@ def test_sat_unavailabilty_product_consolidation(sat_unavailability_product_1):
     )
 
     assert product.to_dict() == {
-        "key": "63acb4648cd5d627a45f8593b9e95c4c",
+        "key": "ea887b25bb5b1dd8484479f1cf6e78b7",
         "satellite_unit": "S1A",
         "mission": "S1",
+        "raw_data_ingestion_time": "2022-05-16T12:00:14.985Z",
         "comment": "The PDHT blockage recocurred (with a Downlink this time) after the previous recovery attempt was unsucessful.\nThe anomoly is tracked in AR GS1_SC-283.\nA manual Power Cycle of the PDHT has been performed.",
         "end_anx_offset": 3025,
         "end_orbit": "40599",
@@ -237,6 +247,12 @@ def test_auxip_product_consolidation_1(dd_attrs):
     output = engine.consolidate_from_AuxipProduct(auxip_product, model.CdsProduct())
 
     assert output.to_dict() == {
+        "AUXIP_Exprivia_id": "17a1f3d6-e238-11ec-8988-fa163e7968e5",
+        "AUXIP_Exprivia_is_published": True,
+        "AUXIP_Exprivia_publication_date": datetime.datetime(
+            2022, 6, 2, 5, 51, 48, 415000, tzinfo=datetime.timezone.utc
+        ),
+        "nb_auxip_served": 1,
         "auxip_id": "17a1f3d6-e238-11ec-8988-fa163e7968e5",
         "auxip_publication_date": "2022-06-02T05:51:48.415Z",
         "key": "d374307f62caeb94e36b0f74e98e17c3",
@@ -281,9 +297,14 @@ def test_auxip_product_consolidation_2():
     engine.on_pre_consolidate()
 
     output = engine.consolidate_from_AuxipProduct(auxip_product, model.CdsProduct())
-    print(output.to_dict())
 
     assert output.to_dict() == {
+        "AUXIP_Exprivia_id": "b1301c7e-2ba9-11ee-8b4d-fa163e7968e5",
+        "AUXIP_Exprivia_is_published": True,
+        "AUXIP_Exprivia_publication_date": datetime.datetime(
+            2023, 7, 26, 11, 43, 51, 723000, tzinfo=datetime.timezone.utc
+        ),
+        "nb_auxip_served": 1,
         "key": "775c1ac4e6b2c7df8545b3b006d4f4e8",
         "mission": "S1",
         "name": "S1A_MP_FULL_20230726T174000_20230815T194000.kml.zip",

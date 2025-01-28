@@ -115,7 +115,9 @@ class Satruman:
         # #     self.messenger.flush_message_groups()
 
         else:
-            engine = QueryEngine(chunk_size=self.args.chunk_size)
+            engine = QueryEngine(
+                chunk_size=self.args.chunk_size, merge_reports=self.args.merge_reports
+            )
 
             payload = MAASQueryMessage(
                 **{
@@ -196,6 +198,7 @@ def satruman_main(argv):
     )
 
     parser.add_argument("--document-class", dest="document_class", default=None)
+    parser.add_argument("--merge-reports", dest="merge_reports", default=True)
     parser.add_argument(
         "--output-document-class", dest="output_document_class", default=None
     )

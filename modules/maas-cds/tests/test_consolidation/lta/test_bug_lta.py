@@ -1,12 +1,12 @@
 from unittest.mock import patch
 
 import pytest
-
+import datetime
 import maas_cds.model as model
 
 from maas_cds.engines.reports import (
-    ProductConsolidatorEngine,
     PublicationConsolidatorEngine,
+    LTAProductConsolidatorEngine,
 )
 
 
@@ -67,4 +67,42 @@ def test_prip_publication_consolidation_s1_bug_wont_consolidate(
         "eviction_date": "9999-12-31T23:59:59.999Z",
         "origin_date": "2020-12-22T04:24:23.058Z",
         "transfer_timeliness": 6496781000.0,
+    }
+
+
+@patch("maas_cds.model.CdsDatatake.mget_by_ids")
+def test_prip_product_consolidation_s1_bug_wont_consolidate(
+    mock_mget_by_ids, prip_product_wont_consolidate
+):
+    engine = LTAProductConsolidatorEngine()
+
+    product = engine.consolidate_from_LtaProduct(
+        prip_product_wont_consolidate, model.CdsProduct()
+    )
+
+    assert product is not None
+
+    assert product._PARTITION_FIELD is not None
+
+    assert product.has_partition_field_value is True
+
+    assert product.partition_index_name == "cds-product-2020-12"
+
+    assert product.to_dict() == {
+        "datatake_id": "______",
+        "key": "0f7e9022f4447a5c2fff8c9a037d16d9",
+        "mission": "S1",
+        "name": "S1A_OPER_AMV_ERRMAT_MPC__20201222T040009_V20000101T000000_20201221T232325.EOF.zip",
+        "product_type": "AMV_ERRMAT",
+        "product_level": "AUX",
+        "satellite_unit": "S1A",
+        "timeliness": "_",
+        "content_length": 11487,
+        "LTA_CloudFerro_is_published": True,
+        "LTA_CloudFerro_publication_date": datetime.datetime(
+            2020, 12, 22, 6, 12, 39, 839000, tzinfo=datetime.timezone.utc
+        ),
+        "LTA_CloudFerro_id": "2c08a752-c1b3-4a58-80e0-afb5c9f1ff7c",
+        "nb_lta_served": 1,
+        "expected_lta_number": 4,
     }

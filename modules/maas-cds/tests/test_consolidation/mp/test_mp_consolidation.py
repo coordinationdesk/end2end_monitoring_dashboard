@@ -358,6 +358,29 @@ MP_ALL_DICT = {
     ],
 }
 
+MP_ALL_S2_DICT = {
+    "satellite_id": "S2B",
+    "effective_downlink_start": "2024-05-13T09:41:32.655Z",
+    "effective_downlink_stop": "2024-05-13T09:43:57.716Z",
+    "downlink_duration": 145061,
+    "acquisition_start": "2024-05-13T09:35:40.960Z",
+    "acquisition_stop": "2024-05-13T09:38:19.712Z",
+    "acquisition_duration": 158752,
+    "latency": 5,
+    "station": "SGS_",
+    "partial": "P",
+    "number_of_scenes": 44,
+    "timeliness": "NOMINAL",
+    "mission": "S2",
+    "datatake_id": "37528-1",
+    "absolute_orbit": "37528",
+    "relative_orbit": "36",
+    "downlink_absolute_orbit": "37528",
+    "interface_name": "S2MissionPlanningALL",
+    "reportName": "S2B_MP_ALL__MTL_20240425T120000_20240513T150000.csv",
+    "ingestionTime": "2024-04-23T09:19:49.062Z",
+}
+
 DOUBLE_MP_ALL_DICT = copy.deepcopy(MP_ALL_DICT)
 DOUBLE_MP_ALL_DICT["session_id"] = [
     "DCS_0X_S1A_20240112161124052076",
@@ -1173,3 +1196,19 @@ def test_split_mp_all():
     for mp in splitted_mps:
         assert len(mp.session_id) == 1
         assert len(mp.station) == 4  # ex: "SGS_"
+
+
+def test_bug_no_session_id():
+    ConsolidateMpFileEngine.MODEL_MODULE = model
+    engine = ConsolidateMpFileEngine(
+        raw_data_type="MpAllProduct",
+        consolidated_data_type="CdsDownlinkDatatake",
+    )
+
+    raw = model.MpAllProduct(**MP_ALL_S2_DICT)
+    raw.meta.index = "raw-data-mp-all-product"
+    raw.meta.id = "rawID3"
+
+    consolidated_doc = engine.consolidate_cdsdownlinkdatatake_from_mpallproduct(raw)
+
+    assert consolidated_doc.session_id is None

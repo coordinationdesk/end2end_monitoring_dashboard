@@ -312,7 +312,7 @@ function omcs_python_module_build(){
                 error "Building ${MODULE}"
             else
                 info "Build ${MODULE} done"
-                info "Copy ${MODULE} in folder ${WORK_DIR}/modules/build/${MODULE}/dist/ ."
+                info "Copy ${MODULE} in folder ${WORK_DIR}/modules/build/${MODULE}/ ."
                 mkdir -p ${WORK_DIR}/modules/build/${MODULE}/
                 cp -ar ${WORK_DIR}/modules/${MODULE}/dist/ ${WORK_DIR}/modules/build/${MODULE}/
             fi

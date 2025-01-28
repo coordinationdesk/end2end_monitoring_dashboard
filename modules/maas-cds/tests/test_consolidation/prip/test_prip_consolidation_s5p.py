@@ -1,8 +1,9 @@
 from unittest.mock import patch
 
 import pytest
-
+import datetime
 import maas_cds.model as model
+
 
 from maas_cds.engines.reports import (
     ProductConsolidatorEngine,
@@ -105,6 +106,12 @@ def test_prip_product_consolidation(prip_product_1, dd_attrs):
     product.full_clean()
 
     assert product.to_dict() == {
+        "PRIP_S5P_DLR_id": "d30d0187-5de5-4031-a160-1bac13e19689",
+        "PRIP_S5P_DLR_is_published": True,
+        "PRIP_S5P_DLR_publication_date": datetime.datetime(
+            2021, 7, 7, 12, 50, 45, 770000, tzinfo=datetime.timezone.utc
+        ),
+        "nb_prip_served": 1,
         "absolute_orbit": "469",
         "key": "59f5375b291bda5643dbe95f1f1b8890",
         "mission": "S5",

@@ -42,6 +42,14 @@ class ComputeDatatakeRelatedEngine(DataEngine):
                 document_indices=message.document_indices,
                 chunk_size=self.chunk_size,
             )
+        if self.target_model.startswith("CdsPublication"):
+            yield EngineReport(
+                "compute.cds-completeness",
+                message.document_ids,
+                document_class=message.document_class,
+                document_indices=message.document_indices,
+                chunk_size=self.chunk_size,
+            )
 
     def action_iterator(self):
         """override

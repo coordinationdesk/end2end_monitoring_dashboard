@@ -214,7 +214,7 @@
             }
         },
         "_meta": {
-            "partition_field": "planned_data_start",
+            "partition_field": "publication_date",
             "partition_format": "static"
         }
     }

@@ -59,6 +59,20 @@ class CdsDatatakeS2(CdsDatatake):
         ],
     }
 
+    S2_NUMBER_OF_GR_PER_SCENE_PER_INSTRUMENT_DICT = {
+        "NOBS": 12,
+        "VIC": 12,
+        "RAW": 4,
+        "DASC": 12,
+        "ABSR": 12,
+        "EOBS": 12,
+        "DARK-O": 12,
+        "DARK-C": 12,
+        "SUN": 12,
+        "HKTM": 12,
+        "MSMOON": 12,
+    }
+
     S2_PRODUCT_LEVEL_FROM_INSTRUMENT_DICT = {
         "NOBS": ["L0_", "L1B", "L1C", "L2A"],
         "VIC": ["L0_", "L1B", "L1C"],
@@ -67,8 +81,10 @@ class CdsDatatakeS2(CdsDatatake):
         "ABSR": ["L0_", "L1A"],
         "EOBS": ["L0_", "L1A"],
         "DARK-O": ["L0_", "L1A"],
+        "DARK-C": ["L0_", "L1A"],
         "SUN": ["L0_", "L1A"],
         "HKTM": ["L0_"],
+        "MSMOON": ["L0_"],
     }
 
     STATIC_COMPLETENESS_VALUE = {"MSI_L.*_DS": 3608000 + 1000000}
@@ -81,6 +97,10 @@ class CdsDatatakeS2(CdsDatatake):
         """Do we want missing periods for this product type ?"""
         return product_type == "MSI_L0__DS"
 
+    def product_type_with_duplicated(self, product_type: str) -> bool:
+        """Do we want check duplicated for this product type ?"""
+        return product_type.endswith("DS")
+
     def get_expected_from_product_level(self, product_level):
         """Get expected from the product level
 
@@ -91,23 +111,38 @@ class CdsDatatakeS2(CdsDatatake):
             dict: expect dict for the given product level
         """
 
+        if (
+            self.instrument_mode
+            not in self.S2_NUMBER_OF_GR_PER_SCENE_PER_INSTRUMENT_DICT
+        ):
+            LOGGER.critical(
+                "Unhandled instrument mode '%s' in %s. Unable to calculate expected products.",
+                self.instrument_mode,
+                self,
+            )
+            return {}
+
         # find a better name and set top level conf
 
         # - 3608000 -> remove one scene (cause first and last gr are at the half)
         # - 1000000 -> remove one sec (cause millisec are truncate)
 
+        s2_number_of_gr_per_scene = self.S2_NUMBER_OF_GR_PER_SCENE_PER_INSTRUMENT_DICT[
+            self.instrument_mode
+        ]
+
         s2_expected_from_product_level_dict = {
             "L0_": {
                 "DS": self.observation_duration,
-                "GR": self.number_of_scenes * 12,
+                "GR": self.number_of_scenes * s2_number_of_gr_per_scene,
             },
             "L1A": {
                 "DS": self.observation_duration - (2 * 3608000),
-                "GR": (self.number_of_scenes - 2) * 12,
+                "GR": (self.number_of_scenes - 2) * s2_number_of_gr_per_scene,
             },
             "L1B": {
                 "DS": self.observation_duration - (2 * 3608000),
-                "GR": (self.number_of_scenes - 2) * 12,
+                "GR": (self.number_of_scenes - 2) * s2_number_of_gr_per_scene,
             },
             "L1C": {
                 "DS": self.observation_duration - (2 * 3608000),

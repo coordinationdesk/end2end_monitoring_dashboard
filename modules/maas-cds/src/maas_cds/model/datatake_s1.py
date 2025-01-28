@@ -6,11 +6,13 @@ from opensearchpy import Q
 
 from maas_cds.model.datatake import CdsDatatake
 from maas_cds.model import CdsProduct
+from maas_cds.lib.config import get_good_threshold_config_from_value
 from maas_cds.lib.periodutils import compute_total_sensing_product, Period
 
 from maas_cds.model.enumeration import CompletenessScope
 
 from maas_cds.lib import tolerance
+
 
 __all__ = ["CdsDatatakeS1"]
 
@@ -23,7 +25,10 @@ class CdsDatatakeS1(CdsDatatake):
 
     EXCLUDES_PRODUCTED_TYPES = ["AMALFI_REPORT"]
 
-    MINIMUM_PERCENTAGE_OVERLAPPING_AREA = {"OCN": 20, "SLC": 0}
+    MINIMUM_PERCENTAGE_OVERLAPPING_AREA = {
+        "OCN": {"0": 20, "2024-06-06T13:20:00.000Z": 17},
+        "SLC": {"0": 0},
+    }
 
     REFERENCE_PRODUCT_TYPE_SENSING = "RAW__0S"
 
@@ -42,9 +47,15 @@ class CdsDatatakeS1(CdsDatatake):
     L2_OCN__PRODUCT_TYPE = ["OCN__2A", "OCN__2S"]
     LA__PRODUCT_TYPE = ["ETA__AX"]
 
+    REFERENCE_PRODUCT_TIME_FIELD = "prip_publication_date"
+
     def product_type_with_missing_periods(self, product_type: str) -> bool:
         """Do we want missing periods for this product type ?"""
         return not product_type.startswith("RF") and product_type.endswith("RAW__0S")
+
+    def product_type_with_duplicated(self, product_type: str) -> bool:
+        """Do we want check duplicated for this product type ?"""
+        return True
 
     def impact_other_calculation(self, compute_key):
         """Reference product sensing provide expected for OCN or SLC
@@ -219,9 +230,11 @@ class CdsDatatakeS1(CdsDatatake):
         for product in query_scan:
             target_attr_coverage = f"{type_of_area}{self.COVERING_AREA_FIELD}"
 
-            if getattr(
-                product, target_attr_coverage, 0
-            ) > self.MINIMUM_PERCENTAGE_OVERLAPPING_AREA.get(type_of_area):
+            config = self.MINIMUM_PERCENTAGE_OVERLAPPING_AREA.get(type_of_area)
+            (_, target_threshold) = get_good_threshold_config_from_value(
+                config, str(getattr(product, self.REFERENCE_PRODUCT_TIME_FIELD))
+            )
+            if getattr(product, target_attr_coverage, 0) > target_threshold:
                 raw_l0_sensing_period.append(
                     Period(product.sensing_start_date, product.sensing_end_date)
                 )
@@ -338,6 +351,7 @@ class CdsDatatakeS1(CdsDatatake):
             "ZI": ["RAW__0S"],
             "ZE": ["RAW__0S"],
             "ZW": ["RAW__0S"],
+            "AIS": ["RAW__0S"],
         }
 
         if self.instrument_mode[:2] not in [

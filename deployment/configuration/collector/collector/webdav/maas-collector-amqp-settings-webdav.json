@@ -1,7 +1,0 @@
-{
-    "amqp": {
-        "new.raw.data.ddp-data-available": {
-            "chunk_size": 512
-        }
-    }
-}

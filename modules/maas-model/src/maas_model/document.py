@@ -153,7 +153,7 @@ class MAASDocument(Document):
     def get_by_id(
         cls,
         document_id: str,
-        document_index: str | None = None,
+        document_index: List[str] | None = None,
         ignore_missing_index=False,
     ) -> Optional["MAASDocument"]:
         """get a document by id in the index or alias
@@ -170,7 +170,7 @@ class MAASDocument(Document):
         try:
 
             response: Iterator[MAASDocument | None] = cls.mget_by_ids(
-                [document_id], [document_index] if document_index else None
+                [document_id], document_index if document_index else None
             )
 
         except ValueError as error:

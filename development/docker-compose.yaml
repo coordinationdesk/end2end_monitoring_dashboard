@@ -45,7 +45,7 @@ services:
       GF_AUTH_DISABLE_SIGNOUT_MENU: "true"
       GF_AUTH_DISABLE_LOGIN_FORM: "true"
       GF_INSTALL_PLUGINS: "yesoreyeram-infinity-datasource"
-      ES_URL: https://opensearch:9200/
+      ES_URL: ${ES_INTERNAL_URL}
       ES_USERNAME: ${ES_USERNAME}
       ES_PASSWORD: ${ES_PASSWORD}
     ports:
@@ -54,10 +54,97 @@ services:
       - ./grafana/provisioning:/etc/grafana/provisioning
       - ./grafana/dashboards:/var/lib/grafana/dashboards
 
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: "minioadmin"
+      MINIO_ROOT_PASSWORD: "minioadmin"
+      # MINIO_BROWSER_REDIRECT_URL: "http://localhost:9001"
+    volumes:
+      - minio_data:/data
+    command: server /data --console-address ":9001"
+  
+  maas-engine:
+    image: maas-cds:2.8.1-beta
+    container_name: maas-engine-cds
+    command: ["maas_engine", "--config-directory", "/app/conf/", "--healthcheck-port", "80", "-f", "-vv"]
+    # ports:
+    #   - "80:80" # For external healthcheck
+    environment:
+      ES_URL: ${ES_INTERNAL_URL}
+      ES_USERNAME: ${ES_USERNAME}
+      ES_PASSWORD: ${ES_PASSWORD}
+      AMQP_USERNAME: ${AMQP_USERNAME}
+      AMQP_PASSWORD: ${AMQP_PASSWORD}
+      AMQP_URL: ${AMQP_INTERNAL_URL}
+      IGNORE_CERTS_VERIFICATION: True
+    volumes:
+      - ./maas-engine-conf:/app/conf:ro
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: '0.5'
+    #       memory: 1G
+    #     reservations:
+    #       cpus: '0.1'
+    #       memory: 50M
+  # maas-collector:
+    # image: maas-collector:2.8.1:beta
 
+  maas-collector-odata:
+    image: maas-collector:3.8.2-beta 
+    container_name: maas-collector-odata
+    command: ["maas_collector.rawdata.cli.odata", "-v", "-p", "300"]
+    # ports:
+    #   - "80:80" # For external healthcheck
+    environment:
+      ES_URL: "${ES_INTERNAL_URL}"
+      ES_USERNAME: "${ES_USERNAME}"
+      ES_PASSWORD: "${ES_PASSWORD}"
+      AMQP_USERNAME: "${AMQP_USERNAME}"
+      AMQP_PASSWORD: "${AMQP_PASSWORD}"
+      AMQP_URL: "${AMQP_INTERNAL_URL}"
+      RAWDATA_CONFIG_DIR: "/conf/collector/"
+      CREDENTIAL_FILE: "/conf/secrets/maas-api-collector-credentials.json"
+      # IGNORE_CERTS_VERIFICATION: True
+      # BACKUP_ENABLED: "1"
+      # BACKUP_HOSTNAME: "${BACKUP_HOSTNAME}"
+      # BACKUP_PORT: "${BACKUP_PORT}"
+      # BACKUP_USERNAME: "${BACKUP_USERNAME}"
+      # BACKUP_PASSWORD: "${BACKUP_PASSWORD}"
+      # BACKUP_DIR: "/files/MAAS/BACKUP/ODATA"
+      # BACKUP_CALENDAR_TREE: "1"
+      # BACKUP_GZIP: "1"
+    volumes:
+      - ../deployment/configuration/collector/odata/dd:/conf/collector/:ro
+      - ../deployment/configuration/credentials:/conf/secrets/:ro
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: '0.5'
+    #       memory: 1G
+    #     reservations:
+    #       cpus: '0.3'
+    #       memory: 200M
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/"]
+      interval: 10s
+      timeout: 1s
+      retries: 3
+      start_period: 30s
 volumes:
   rabbitmq-etc:
   rabbitmq-data:
   rabbitmq-logs:
   opensearch-data:
-  opensearch-config:
+  minio_data:

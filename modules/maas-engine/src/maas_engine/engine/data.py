@@ -310,11 +310,12 @@ class DataEngine(Engine):
                         action_documents[action].append(document)
 
                 for action, documents in action_documents.items():
-                    yield from self.report_strategy(classname, action, documents)
-                   
+                    yield from self._generate_report_from_action_per_documents(
+                        classname, action, documents
+                    )
 
-    def report_strategy(self, classname, action, documents):
-        """Default strategy to make report """
+    def _generate_report_from_action_per_documents(self, classname, action, documents):
+        """Default strategy to make report"""
         yield EngineReport(
             action,
             [document.meta.id for document in documents],

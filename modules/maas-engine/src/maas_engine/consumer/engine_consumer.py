@@ -305,7 +305,6 @@ class MaasEngineConsumer(MaasConsumerMixin):
 
             # later use engine.reports after v1 ?
 
-            self.amqp_settings.event_mapping[routing_key]
             if responses:
                 if getattr(engine, "merge_reports", True):
                     engine_responses.extend(responses)

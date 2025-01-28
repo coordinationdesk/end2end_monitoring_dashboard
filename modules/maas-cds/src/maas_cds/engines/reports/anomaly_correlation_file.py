@@ -323,31 +323,53 @@ class ConsolidateAnomalyCorrelationFileEngine(DataEngine):
         # consolidate report informations
         ticket.datatake_ids = report.impacted_observations
 
-        if report.impacted_passes and report.sattelite_unit:
+        if report.impacted_passes:
             acquisition_pass_keys = []
+            if not report.station or not report.station_type:
+                self.logger.warning(
+                    "No station or station type provided in anomaly report %s",
+                    report.key,
+                )
+                ticket.acquisition_pass = []
 
-            # TODO investigate data
-            satellite_list = report.sattelite_unit
-
-            if isinstance(report.sattelite_unit, str):
-                satellite_list = [report.sattelite_unit]
-
-            for satellite in satellite_list:
-                for orbit in report.impacted_passes:
-                    if not report.station or not report.station_type:
-                        self.logger.warning(
-                            "No station or station type provided in anomaly report %s for %s / %s",
-                            report.key,
-                            satellite,
-                            orbit,
-                        )
-                        continue
-
-                    acquisition_pass_keys.append(
-                        "_".join(
-                            [satellite, report.station_type, orbit, report.station]
-                        )
+                return
+            # Impacted pass must contains satellite like S1A-orbit
+            for impacted_passe in report.impacted_passes:
+                try:
+                    (satellite, orbit) = impacted_passe.split("-")
+                except ValueError as _not_enough_values_to_unpack:
+                    self.logger.warning(
+                        "Wrong format of passes type provided in anomaly report %s - %s | expected SXX-orbit",
+                        report.key,
+                        impacted_passe,
                     )
+                    continue
+
+                acquisition_pass_keys.append(
+                    "_".join([satellite, report.station_type, orbit, report.station])
+                )
+
+            # Since the 21/06/2024 we supporte only orbit that are prefix by satellite unit to avoid collision in the futur
+            # Keep it to be retroactive
+            if report.created < datetime.datetime(
+                2024, 7, 1, tzinfo=datetime.timezone.utc
+            ):
+                satellite_list = report.sattelite_unit
+                if isinstance(report.sattelite_unit, str):
+                    satellite_list = [report.sattelite_unit]
+                for satellite in satellite_list:
+                    for impacted_passe in report.impacted_passes:
+                        acquisition_pass_keys.append(
+                            "_".join(
+                                [
+                                    satellite,
+                                    report.station_type,
+                                    impacted_passe,
+                                    report.station,
+                                ]
+                            )
+                        )
+
             # remove duplicated
             ticket.acquisition_pass = list(dict.fromkeys(acquisition_pass_keys).keys())
 

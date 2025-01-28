@@ -1,6 +1,7 @@
 from unittest.mock import patch
 
 import pytest
+import datetime
 from opensearchpy.helpers.utils import AttrDict
 from maas_engine.engine.base import EngineSession
 
@@ -340,6 +341,12 @@ def test_prip_product_consolidation(mock_mget_by_ids, prip_product_s1, dd_attrs)
     assert product.to_dict() == {
         "absolute_orbit": "41259",
         "datatake_id": "321363",
+        "PRIP_S1_Legacy_id": "44aa2042-edc1-4cbb-b8df-355a53676c96",
+        "PRIP_S1_Legacy_is_published": True,
+        "PRIP_S1_Legacy_publication_date": datetime.datetime(
+            2022, 1, 1, 0, 1, 2, 411000, tzinfo=datetime.timezone.utc
+        ),
+        "nb_prip_served": 1,
         "instrument_mode": "IW",
         "content_length": 3850694465,
         "key": "de080dea60537a05416bc10a8139e154",
@@ -560,6 +567,12 @@ def test_prip_footprint_consolidation(
     expected_dict = {
         "absolute_orbit": "36577",
         "datatake_id": "36577-1",
+        "PRIP_S2A_ATOS_id": "4be1a2aa-9aee-4867-aea4-9799224b4c23",
+        "PRIP_S2A_ATOS_is_published": True,
+        "PRIP_S2A_ATOS_publication_date": datetime.datetime(
+            2022, 6, 24, 0, 57, 26, 305000, tzinfo=datetime.timezone.utc
+        ),
+        "nb_prip_served": 1,
         "key": "aededde8b5433c159358ed55363ed5aa",
         "instrument_mode": "NOBS",
         "mission": "S2",
@@ -627,6 +640,12 @@ def test_prip_contained_product_consolidation(
         "tile_number": "43XDG",
         "timeliness": "_",
         "datatake_id": "______",
+        "PRIP_S2A_ATOS_id": "1d3c9b81-990b-44a0-b306-3ef104896de8",
+        "PRIP_S2A_ATOS_is_published": True,
+        "PRIP_S2A_ATOS_publication_date": datetime.datetime(
+            2022, 6, 5, 11, 45, 37, 934000, tzinfo=datetime.timezone.utc
+        ),
+        "nb_prip_served": 1,
     }
 
     assert product.to_dict() == expected_dict

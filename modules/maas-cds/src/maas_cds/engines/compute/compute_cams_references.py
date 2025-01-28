@@ -18,8 +18,8 @@ class ComputeCamsReferencesEngine(DataEngine):
     MAX_IMPACTED_DATATAKE_COUNT = 256
 
     REFERENCE_PATTERNS = {
-        "S1": re.compile("S1(A|B)-[0-9]{6}"),
-        "S2": re.compile("S2(A|B)-[0-9]{5}(-[0-9]([0-9])?)?"),
+        "S1": re.compile("S1(A|B|C|D)-[0-9]{6}"),
+        "S2": re.compile("S2(A|B|C|D)-[0-9]{5}(-[0-9]([0-9])?)?"),
         "S3": re.compile("S3(A|B)-[0-9]{3}-[0-9]{3}"),
         "S5": re.compile("S5P-[0-9]{5}"),
     }

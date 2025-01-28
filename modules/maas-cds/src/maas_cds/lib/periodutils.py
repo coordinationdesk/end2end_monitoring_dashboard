@@ -124,3 +124,105 @@ def compute_missing_sensing_periods(
         )
 
     return missing_periods
+
+
+def compute_missing_sensing_periods(
+    range_to_evaluate: Period,
+    periods: List[Period],
+    maximal_offset,
+    tolerance_value=0,
+) -> List[Period]:
+    """Identify missing products within sensing period"""
+
+    period_start = range_to_evaluate.start
+    period_stop = range_to_evaluate.end
+
+    if not periods:
+        # No coverage at all, return the whole period
+        return [Period(period_start, period_stop)]
+
+    period_stop += datetime.timedelta(microseconds=tolerance_value)
+
+    previous = None
+    missing_periods = []
+
+    start_offset = (periods[0].start - period_start).total_seconds() * 1000000
+
+    # Missing period at start
+    if start_offset > maximal_offset:
+        # Fake product ending at the begin of the datatake
+        previous = Period(period_start, period_start)
+
+    else:
+        # move end date cursor
+        period_stop += datetime.timedelta(microseconds=start_offset)
+
+    for brother in periods:
+        if previous and brother.start > previous.end:
+            # Missing period between products
+            missing_periods.append(Period(previous.end, brother.start))
+        previous = brother
+
+    end_offset = (period_stop - periods[-1].end).total_seconds()
+
+    if end_offset > 0:
+        # Missing period at stop
+        missing_periods.append(
+            Period(
+                periods[-1].end,
+                period_stop,
+            )
+        )
+
+    return missing_periods
+
+
+def compute_duplicated_indicator(
+    periods: List[Period],
+) -> List[Period]:
+    """Identify missing products within sensing period"""
+
+    duplicated_indicator = {
+        "min_percentage": 0.0,
+        "avg_percentage": 0.0,
+        "max_percentage": 0.0,
+        "min_duration": 0,
+        "avg_duration": 0,
+        "max_duration": 0,
+    }
+
+    duplicated_percentage = []
+    duplicated_duration = []
+
+    if len(periods) < 2:
+        # No coverage at all, return the whole period
+        return duplicated_indicator
+
+    for previous, brother in zip(periods[:-1], periods[1:]):
+
+        if brother.start < previous.end:
+            common_time = (
+                min(previous.end, brother.end) - brother.start
+            ).total_seconds() * 1000
+            duplicated_duration.append(common_time)
+
+            total_period = (previous.end - previous.start).total_seconds() * 1000
+
+            common_percentage = common_time / total_period * 100
+            duplicated_percentage.append(common_percentage)
+        else:
+            duplicated_duration.append(0)
+            duplicated_percentage.append(0)
+
+    duplicated_indicator = {
+        "min_percentage": float(min(duplicated_percentage)),
+        "avg_percentage": float(
+            sum(duplicated_percentage) / len(duplicated_percentage)
+        ),
+        "max_percentage": float(max(duplicated_percentage)),
+        "min_duration": int(min(duplicated_duration)),
+        "avg_duration": int(sum(duplicated_duration) / len(duplicated_duration)),
+        "max_duration": int(max(duplicated_duration)),
+    }
+
+    return duplicated_indicator

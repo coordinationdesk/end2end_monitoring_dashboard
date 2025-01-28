@@ -4,63 +4,66 @@ DA0 classes generated from index templates.
 
 **DO NOT EDIT, ONLY INHERIT !**
 
-Generated date: 2024-04-02T10:18:43.900446
+Generated date: 2025-01-17T08:13:23.698885
 
 Generated from:
-    - resources/templates/cds-acquisition-pass-status_template.json
-    - resources/templates/cds-cadip-acquisition-pass-status_template.json
-    - resources/templates/cds-cams-tickets_template.json
-    - resources/templates/cds-databudget_template.json
-    - resources/templates/cds-dataflow_template.json
-    - resources/templates/cds-datatake_template.json
-    - resources/templates/cds-ddp-data-available_template.json
-    - resources/templates/cds-downlink-datatake_template.json
-    - resources/templates/cds-edrs-acquisition-pass-status_template.json
-    - resources/templates/cds-grafana-usage_template.json
-    - resources/templates/cds-hktm-acquisition-completeness_template.json
-    - resources/templates/cds-hktm-production-completeness_template.json
-    - resources/templates/cds-interface-product-deletion_template.json
-    - resources/templates/cds-interface-status_template.json
-    - resources/templates/cds-metrics-product_template.json
-    - resources/templates/cds-product_template.json
-    - resources/templates/cds-publication_template.json
-    - resources/templates/cds-s2-tilpar_template.json
-    - resources/templates/cds-s3-completeness_template.json
-    - resources/templates/cds-s5-completeness_template.json
-    - resources/templates/cds-sat-unavailability_template.json
-    - resources/templates/raw-data-app-product_template.json
-    - resources/templates/raw-data-aps-edrs_template.json
-    - resources/templates/raw-data-aps-file_template.json
-    - resources/templates/raw-data-aps-per-pass_template.json
-    - resources/templates/raw-data-aps-product_template.json
-    - resources/templates/raw-data-aps-quality-info_template.json
-    - resources/templates/raw-data-aps-session_template.json
-    - resources/templates/raw-data-auxip-product_template.json
-    - resources/templates/raw-data-cams-anomaly-correlation_template.json
-    - resources/templates/raw-data-cams-cloud-anomaly-correlation_template.json
-    - resources/templates/raw-data-cams-cloud-tickets_template.json
-    - resources/templates/raw-data-cams-tickets_template.json
-    - resources/templates/raw-data-creodias-product_template.json
-    - resources/templates/raw-data-das-product_template.json
-    - resources/templates/raw-data-databudget_template.json
-    - resources/templates/raw-data-dd-archive_template.json
-    - resources/templates/raw-data-ddp-data-available_template.json
-    - resources/templates/raw-data-dd-product_template.json
-    - resources/templates/raw-data-deletion-issue_template.json
-    - resources/templates/raw-data-download-volume-count_template.json
-    - resources/templates/raw-data-grafana-usage_template.json
-    - resources/templates/raw-data-interface-probe_template.json
-    - resources/templates/raw-data-lta-product_template.json
-    - resources/templates/raw-data-metrics-product_template.json
-    - resources/templates/raw-data-mp-all-product_template.json
-    - resources/templates/raw-data-mpcip-product_template.json
-    - resources/templates/raw-data-mp-hktm-acquisition-product_template.json
-    - resources/templates/raw-data-mp-hktm-downlink_template.json
-    - resources/templates/raw-data-mpip-product_template.json
-    - resources/templates/raw-data-mp-product_template.json
-    - resources/templates/raw-data-prip-product_template.json
-    - resources/templates/raw-data-product-deletion_template.json
-    - resources/templates/raw-data-sat-unavailability-product_template.json
+    - /maas-cds/resources/templates/cds-acquisition-pass-status_template.json
+    - /maas-cds/resources/templates/cds-cadip-acquisition-pass-status_template.json
+    - /maas-cds/resources/templates/cds-cams-tickets_template.json
+    - /maas-cds/resources/templates/cds-completeness_template.json
+    - /maas-cds/resources/templates/cds-databudget_template.json
+    - /maas-cds/resources/templates/cds-dataflow_template.json
+    - /maas-cds/resources/templates/cds-datatake_template.json
+    - /maas-cds/resources/templates/cds-ddp-data-available_template.json
+    - /maas-cds/resources/templates/cds-downlink-datatake_template.json
+    - /maas-cds/resources/templates/cds-edrs-acquisition-pass-status_template.json
+    - /maas-cds/resources/templates/cds-grafana-usage_template.json
+    - /maas-cds/resources/templates/cds-hktm-acquisition-completeness_template.json
+    - /maas-cds/resources/templates/cds-hktm-production-completeness_template.json
+    - /maas-cds/resources/templates/cds-interface-product-deletion_template.json
+    - /maas-cds/resources/templates/cds-interface-status_template.json
+    - /maas-cds/resources/templates/cds-lta-download-quota_template.json
+    - /maas-cds/resources/templates/cds-metrics-product_template.json
+    - /maas-cds/resources/templates/cds-product_template.json
+    - /maas-cds/resources/templates/cds-publication_template.json
+    - /maas-cds/resources/templates/cds-s2-tilpar_template.json
+    - /maas-cds/resources/templates/cds-s3-completeness_template.json
+    - /maas-cds/resources/templates/cds-s5-completeness_template.json
+    - /maas-cds/resources/templates/cds-sat-unavailability_template.json
+    - /maas-cds/resources/templates/maas-config-completeness_template.json
+    - /maas-cds/resources/templates/raw-data-app-product_template.json
+    - /maas-cds/resources/templates/raw-data-aps-edrs_template.json
+    - /maas-cds/resources/templates/raw-data-aps-file_template.json
+    - /maas-cds/resources/templates/raw-data-aps-per-pass_template.json
+    - /maas-cds/resources/templates/raw-data-aps-product_template.json
+    - /maas-cds/resources/templates/raw-data-aps-quality-info_template.json
+    - /maas-cds/resources/templates/raw-data-aps-session_template.json
+    - /maas-cds/resources/templates/raw-data-auxip-product_template.json
+    - /maas-cds/resources/templates/raw-data-cams-anomaly-correlation_template.json
+    - /maas-cds/resources/templates/raw-data-cams-cloud-anomaly-correlation_template.json
+    - /maas-cds/resources/templates/raw-data-cams-cloud-tickets_template.json
+    - /maas-cds/resources/templates/raw-data-cams-tickets_template.json
+    - /maas-cds/resources/templates/raw-data-creodias-product_template.json
+    - /maas-cds/resources/templates/raw-data-das-product_template.json
+    - /maas-cds/resources/templates/raw-data-databudget_template.json
+    - /maas-cds/resources/templates/raw-data-dd-archive_template.json
+    - /maas-cds/resources/templates/raw-data-dd-product_template.json
+    - /maas-cds/resources/templates/raw-data-ddp-data-available_template.json
+    - /maas-cds/resources/templates/raw-data-deletion-issue_template.json
+    - /maas-cds/resources/templates/raw-data-download-volume-count_template.json
+    - /maas-cds/resources/templates/raw-data-grafana-usage_template.json
+    - /maas-cds/resources/templates/raw-data-interface-probe_template.json
+    - /maas-cds/resources/templates/raw-data-lta-product_template.json
+    - /maas-cds/resources/templates/raw-data-metrics-product_template.json
+    - /maas-cds/resources/templates/raw-data-mp-all-product_template.json
+    - /maas-cds/resources/templates/raw-data-mp-hktm-acquisition-product_template.json
+    - /maas-cds/resources/templates/raw-data-mp-hktm-downlink_template.json
+    - /maas-cds/resources/templates/raw-data-mp-product_template.json
+    - /maas-cds/resources/templates/raw-data-mpcip-product_template.json
+    - /maas-cds/resources/templates/raw-data-mpip-product_template.json
+    - /maas-cds/resources/templates/raw-data-prip-product_template.json
+    - /maas-cds/resources/templates/raw-data-product-deletion_template.json
+    - /maas-cds/resources/templates/raw-data-sat-unavailability-product_template.json
 """
 
 from opensearchpy import (
@@ -95,6 +98,8 @@ __all__ = [
     "CdsCadipAcquisitionPassStatus",
     "CdsCadipAcquisitionPassStatusQualityInfos",
     "CdsCamsTickets",
+    "CdsCompleteness",
+    "CdsCompletenessMissingPeriods",
     "CdsDatabudget",
     "CdsDataflow",
     "CdsDatatake",
@@ -107,6 +112,7 @@ __all__ = [
     "CdsHktmProductionCompleteness",
     "CdsInterfaceProductDeletion",
     "CdsInterfaceStatus",
+    "CdsLtaDownloadQuota",
     "CdsMetricsProduct",
     "CdsProduct",
     "CdsPublication",
@@ -125,6 +131,7 @@ __all__ = [
     "GrafanaUsage",
     "InterfaceProbe",
     "LtaProduct",
+    "MaasConfigCompleteness",
     "MetricsProduct",
     "MpAllProduct",
     "MpHktmAcquisitionProduct",
@@ -142,7 +149,7 @@ class AppProduct(MAASRawDocument):
     """
     Mapping class for index: raw-data-app-product
 
-    Generated from: resources/templates/raw-data-app-product_template.json
+    Generated from: /maas-cds/resources/templates/raw-data-app-product_template.json
     """
 
     class Index:
@@ -184,7 +191,7 @@ class ApsEdrs(MAASRawDocument):
     """
     Mapping class for index: raw-data-aps-edrs
 
-    Generated from: resources/templates/raw-data-aps-edrs_template.json
+    Generated from: /maas-cds/resources/templates/raw-data-aps-edrs_template.json
     """
 
     class Index:
@@ -258,7 +265,7 @@ class ApsFile(MAASRawDocument):
     """
     Mapping class for index: raw-data-aps-file
 
-    Generated from: resources/templates/raw-data-aps-file_template.json
+    Generated from: /maas-cds/resources/templates/raw-data-aps-file_template.json
     """
 
     class Index:
@@ -304,7 +311,7 @@ class ApsPerPass(MAASRawDocument):
     """
     Mapping class for index: raw-data-aps-per-pass
 
-    Generated from: resources/templates/raw-data-aps-per-pass_template.json
+    Generated from: /maas-cds/resources/templates/raw-data-aps-per-pass_template.json
     """
 
     class Index:
@@ -356,7 +363,7 @@ class ApsProduct(MAASRawDocument):
     """
     Mapping class for index: raw-data-aps-product
 
-    Generated from: resources/templates/raw-data-aps-product_template.json
+    Generated from: /maas-cds/resources/templates/raw-data-aps-product_template.json
     """
 
     class Index:
@@ -436,7 +443,7 @@ class ApsQualityInfo(MAASRawDocument):
     """
     Mapping class for index: raw-data-aps-quality-info
 
-    Generated from: resources/templates/raw-data-aps-quality-info_template.json
+    Generated from: /maas-cds/resources/templates/raw-data-aps-quality-info_template.json
     """
 
     class Index:
@@ -528,7 +535,7 @@ class ApsSession(MAASRawDocument):
     """
     Mapping class for index: raw-data-aps-session
 
-    Generated from: resources/templates/raw-data-aps-session_template.json
+    Generated from: /maas-cds/resources/templates/raw-data-aps-session_template.json
     """
 
     class Index:
@@ -589,6 +596,8 @@ class ApsSession(MAASRawDocument):
 
     session_id = Keyword()
 
+    station_id = Keyword()
+
     station_unit_id = Keyword()
 
 
@@ -596,7 +605,7 @@ class AuxipProduct(MAASRawDocument):
     """
     Mapping class for index: raw-data-auxip-product
 
-    Generated from: resources/templates/raw-data-auxip-product_template.json
+    Generated from: /maas-cds/resources/templates/raw-data-auxip-product_template.json
     """
 
     class Index:
@@ -640,7 +649,7 @@ class CamsAnomalyCorrelation(MAASRawDocument):
     """
     Mapping class for index: raw-data-cams-anomaly-correlation
 
-    Generated from: resources/templates/raw-data-cams-anomaly-correlation_template.json
+    Generated from: /maas-cds/resources/templates/raw-data-cams-anomaly-correlation_template.json
     """
 
     class Index:
@@ -678,7 +687,7 @@ class CamsCloudAnomalyCorrelation(MAASRawDocument):
     """
     Mapping class for index: raw-data-cams-cloud-anomaly-correlation
 
-    Generated from: resources/templates/raw-data-cams-cloud-anomaly-correlation_template.json
+    Generated from: /maas-cds/resources/templates/raw-data-cams-cloud-anomaly-correlation_template.json
     """
 
     class Index:
@@ -732,7 +741,7 @@ class CamsCloudTickets(MAASRawDocument):
     """
     Mapping class for index: raw-data-cams-cloud-tickets
 
-    Generated from: resources/templates/raw-data-cams-cloud-tickets_template.json
+    Generated from: /maas-cds/resources/templates/raw-data-cams-cloud-tickets_template.json
     """
 
     class Index:
@@ -794,7 +803,7 @@ class CamsTickets(MAASRawDocument):
     """
     Mapping class for index: raw-data-cams-tickets
 
-    Generated from: resources/templates/raw-data-cams-tickets_template.json
+    Generated from: /maas-cds/resources/templates/raw-data-cams-tickets_template.json
     """
 
     class Index:
@@ -852,7 +861,7 @@ class CdsAcquisitionPassStatus(MAASDocument):
     """
     Mapping class for index: cds-acquisition-pass-status
 
-    Generated from: resources/templates/cds-acquisition-pass-status_template.json
+    Generated from: /maas-cds/resources/templates/cds-acquisition-pass-status_template.json
     """
 
     class Index:
@@ -982,7 +991,7 @@ class CdsCadipAcquisitionPassStatus(MAASDocument):
     """
     Mapping class for index: cds-cadip-acquisition-pass-status
 
-    Generated from: resources/templates/cds-cadip-acquisition-pass-status_template.json
+    Generated from: /maas-cds/resources/templates/cds-cadip-acquisition-pass-status_template.json
     """
 
     class Index:
@@ -993,7 +1002,7 @@ class CdsCadipAcquisitionPassStatus(MAASDocument):
     def _matches(cls, hit):
         return hit["_index"].startswith("cds-cadip-acquisition-pass-status-")
 
-    _PARTITION_FIELD = "planned_data_start"
+    _PARTITION_FIELD = "publication_date"
 
     _PARTITION_FIELD_FORMAT = "static"
 
@@ -1096,7 +1105,7 @@ class CdsCamsTickets(MAASDocument):
     """
     Mapping class for index: cds-cams-tickets
 
-    Generated from: resources/templates/cds-cams-tickets_template.json
+    Generated from: /maas-cds/resources/templates/cds-cams-tickets_template.json
     """
 
     class Index:
@@ -1166,11 +1175,113 @@ class CdsCamsTickets(MAASDocument):
     url = Keyword()
 
 
+class CdsCompletenessMissingPeriods(InnerDoc):
+    """
+    Inner document class for parent class: CdsCompleteness
+
+    Generated from property: missing_periods
+    """
+
+    name = Keyword()
+
+    product_type = Keyword()
+
+    sensing_start_date = ZuluDate()
+
+    sensing_end_date = ZuluDate()
+
+    duration = Long()
+
+
+class CdsCompleteness(
+    MAASDocument,
+):
+    """
+    Mapping class for index: cds-completeness
+
+    Generated from: /maas-cds/resources/templates/cds-completeness_template.json
+    """
+
+    class Index:
+        "inner class for DSL"
+        name = "cds-completeness"
+
+    @classmethod
+    def _matches(cls, hit):
+        return hit["_index"].startswith("cds-completeness-")
+
+    _PARTITION_FIELD = ["satellite_unit", "prip_name"]
+
+    _PARTITION_FIELD_FORMAT = "{satellite_unit}-{prip_name}"
+
+    absolute_orbit = Keyword()
+
+    application_date = ZuluDate()
+
+    cams_description = Keyword()
+
+    cams_origin = Keyword()
+
+    cams_tickets = Keyword()
+
+    datastrip_ids = Keyword()
+
+    datatake_id = Keyword()
+
+    hex_datatake_id = Keyword()
+
+    instrument_mode = Keyword()
+
+    instrument_swath = Keyword()
+
+    key = Keyword()
+
+    l0_sensing_duration = Long()
+
+    l0_sensing_time_start = ZuluDate()
+
+    l0_sensing_time_stop = ZuluDate()
+
+    last_attached_ticket = Keyword()
+
+    last_attached_ticket_url = Keyword()
+
+    missing_periods = Object(CdsCompletenessMissingPeriods)
+
+    mission = Keyword()
+
+    name = Keyword()
+
+    number_of_expected_tiles = Integer()
+
+    number_of_scenes = Integer()
+
+    observation_duration = Long()
+
+    observation_time_start = ZuluDate()
+
+    observation_time_stop = ZuluDate()
+
+    polarization = Keyword()
+
+    prip_name = Keyword()
+
+    product_group_ids = Keyword()
+
+    relative_orbit = Keyword()
+
+    satellite_unit = Keyword()
+
+    timeliness = Keyword()
+
+    updateTime = ZuluDate()
+
+
 class CdsDatabudget(MAASDocument):
     """
     Mapping class for index: cds-databudget
 
-    Generated from: resources/templates/cds-databudget_template.json
+    Generated from: /maas-cds/resources/templates/cds-databudget_template.json
     """
 
     class Index:
@@ -1222,7 +1333,7 @@ class CdsDataflow(MAASDocument):
     """
     Mapping class for index: cds-dataflow
 
-    Generated from: resources/templates/cds-dataflow_template.json
+    Generated from: /maas-cds/resources/templates/cds-dataflow_template.json
     """
 
     class Index:
@@ -1280,7 +1391,7 @@ class CdsDatatake(MAASDocument):
     """
     Mapping class for index: cds-datatake
 
-    Generated from: resources/templates/cds-datatake_template.json
+    Generated from: /maas-cds/resources/templates/cds-datatake_template.json
     """
 
     class Index:
@@ -1360,7 +1471,7 @@ class CdsDdpDataAvailable(MAASDocument):
     """
     Mapping class for index: cds-ddp-data-available
 
-    Generated from: resources/templates/cds-ddp-data-available_template.json
+    Generated from: /maas-cds/resources/templates/cds-ddp-data-available_template.json
     """
 
     class Index:
@@ -1406,7 +1517,7 @@ class CdsDownlinkDatatake(MAASDocument):
     """
     Mapping class for index: cds-downlink-datatake
 
-    Generated from: resources/templates/cds-downlink-datatake_template.json
+    Generated from: /maas-cds/resources/templates/cds-downlink-datatake_template.json
     """
 
     class Index:
@@ -1468,7 +1579,7 @@ class CdsEdrsAcquisitionPassStatus(MAASDocument):
     """
     Mapping class for index: cds-edrs-acquisition-pass-status
 
-    Generated from: resources/templates/cds-edrs-acquisition-pass-status_template.json
+    Generated from: /maas-cds/resources/templates/cds-edrs-acquisition-pass-status_template.json
     """
 
     class Index:
@@ -1552,7 +1663,7 @@ class CdsGrafanaUsage(MAASDocument):
     """
     Mapping class for index: cds-grafana-usage
 
-    Generated from: resources/templates/cds-grafana-usage_template.json
+    Generated from: /maas-cds/resources/templates/cds-grafana-usage_template.json
     """
 
     class Index:
@@ -1582,7 +1693,7 @@ class CdsHktmAcquisitionCompleteness(MAASDocument):
     """
     Mapping class for index: cds-hktm-acquisition-completeness
 
-    Generated from: resources/templates/cds-hktm-acquisition-completeness_template.json
+    Generated from: /maas-cds/resources/templates/cds-hktm-acquisition-completeness_template.json
     """
 
     class Index:
@@ -1640,7 +1751,7 @@ class CdsHktmProductionCompleteness(MAASDocument):
     """
     Mapping class for index: cds-hktm-production-completeness
 
-    Generated from: resources/templates/cds-hktm-production-completeness_template.json
+    Generated from: /maas-cds/resources/templates/cds-hktm-production-completeness_template.json
     """
 
     class Index:
@@ -1706,7 +1817,7 @@ class CdsInterfaceProductDeletion(MAASDocument):
     """
     Mapping class for index: cds-interface-product-deletion
 
-    Generated from: resources/templates/cds-interface-product-deletion_template.json
+    Generated from: /maas-cds/resources/templates/cds-interface-product-deletion_template.json
     """
 
     class Index:
@@ -1732,7 +1843,7 @@ class CdsInterfaceStatus(MAASDocument):
     """
     Mapping class for index: cds-interface-status
 
-    Generated from: resources/templates/cds-interface-status_template.json
+    Generated from: /maas-cds/resources/templates/cds-interface-status_template.json
     """
 
     class Index:
@@ -1760,11 +1871,37 @@ class CdsInterfaceStatus(MAASDocument):
     updateTime = ZuluDate()
 
 
+class CdsLtaDownloadQuota(MAASDocument):
+    """
+    Mapping class for index: cds-lta-download-quota
+
+    Generated from: /maas-cds/resources/templates/cds-lta-download-quota_template.json
+    """
+
+    class Index:
+        "inner class for DSL"
+        name = "cds-lta-download-quota"
+
+    @classmethod
+    def _matches(cls, hit):
+        return hit["_index"].startswith("cds-lta-download-quota-")
+
+    _PARTITION_FIELD = "timestamp"
+
+    _PARTITION_FIELD_FORMAT = "conf"
+
+    daily_download_quota = Long()
+
+    service_name = Keyword()
+
+    timestamp = ZuluDate()
+
+
 class CdsMetricsProduct(MAASDocument):
     """
     Mapping class for index: cds-metrics-product
 
-    Generated from: resources/templates/cds-metrics-product_template.json
+    Generated from: /maas-cds/resources/templates/cds-metrics-product_template.json
     """
 
     class Index:
@@ -1782,6 +1919,8 @@ class CdsMetricsProduct(MAASDocument):
     counter = Long()
 
     interface_name = Keyword()
+
+    metric_name = Keyword()
 
     metric_type = Keyword()
 
@@ -1806,7 +1945,7 @@ class CdsProduct(MAASDocument):
     """
     Mapping class for index: cds-product
 
-    Generated from: resources/templates/cds-product_template.json
+    Generated from: /maas-cds/resources/templates/cds-product_template.json
     """
 
     class Index:
@@ -1820,6 +1959,8 @@ class CdsProduct(MAASDocument):
     _PARTITION_FIELD = "sensing_start_date"
 
     _PARTITION_FIELD_FORMAT = "%Y-%m"
+
+    EU_coverage_percentage = Float()
 
     absolute_orbit = Keyword()
 
@@ -1864,8 +2005,6 @@ class CdsProduct(MAASDocument):
     ddip_publication_date = ZuluDate()
 
     detector_id = Keyword()
-
-    EU_percentage_coverage = Float()
 
     expected_lta_number = Integer()
 
@@ -1944,7 +2083,7 @@ class CdsPublication(MAASDocument):
     """
     Mapping class for index: cds-publication
 
-    Generated from: resources/templates/cds-publication_template.json
+    Generated from: /maas-cds/resources/templates/cds-publication_template.json
     """
 
     class Index:
@@ -2072,7 +2211,7 @@ class CdsS2Tilpar(MAASDocument):
     """
     Mapping class for index: cds-s2-tilpar
 
-    Generated from: resources/templates/cds-s2-tilpar_template.json
+    Generated from: /maas-cds/resources/templates/cds-s2-tilpar_template.json
     """
 
     class Index:
@@ -2098,7 +2237,7 @@ class CdsS3Completeness(MAASDocument):
     """
     Mapping class for index: cds-s3-completeness
 
-    Generated from: resources/templates/cds-s3-completeness_template.json
+    Generated from: /maas-cds/resources/templates/cds-s3-completeness_template.json
     """
 
     class Index:
@@ -2160,7 +2299,7 @@ class CdsS5Completeness(MAASDocument):
     """
     Mapping class for index: cds-s5-completeness
 
-    Generated from: resources/templates/cds-s5-completeness_template.json
+    Generated from: /maas-cds/resources/templates/cds-s5-completeness_template.json
     """
 
     class Index:
@@ -2228,7 +2367,7 @@ class CdsSatUnavailability(MAASDocument):
     """
     Mapping class for index: cds-sat-unavailability
 
-    Generated from: resources/templates/cds-sat-unavailability_template.json
+    Generated from: /maas-cds/resources/templates/cds-sat-unavailability_template.json
     """
 
     class Index:
@@ -2257,6 +2396,8 @@ class CdsSatUnavailability(MAASDocument):
 
     mission = Keyword()
 
+    raw_data_ingestion_time = ZuluDate()
+
     satellite_unit = Keyword()
 
     start_anx_offset = Integer()
@@ -2282,7 +2423,7 @@ class CreodiasProduct(MAASRawDocument):
     """
     Mapping class for index: raw-data-creodias-product
 
-    Generated from: resources/templates/raw-data-creodias-product_template.json
+    Generated from: /maas-cds/resources/templates/raw-data-creodias-product_template.json
     """
 
     class Index:
@@ -2334,7 +2475,7 @@ class DasProduct(MAASRawDocument):
     """
     Mapping class for index: raw-data-das-product
 
-    Generated from: resources/templates/raw-data-das-product_template.json
+    Generated from: /maas-cds/resources/templates/raw-data-das-product_template.json
     """
 
     class Index:
@@ -2378,7 +2519,7 @@ class Databudget(MAASRawDocument):
     """
     Mapping class for index: raw-data-databudget
 
-    Generated from: resources/templates/raw-data-databudget_template.json
+    Generated from: /maas-cds/resources/templates/raw-data-databudget_template.json
     """
 
     class Index:
@@ -2420,7 +2561,7 @@ class DdArchive(MAASRawDocument):
     """
     Mapping class for index: raw-data-dd-archive
 
-    Generated from: resources/templates/raw-data-dd-archive_template.json
+    Generated from: /maas-cds/resources/templates/raw-data-dd-archive_template.json
     """
 
     class Index:
@@ -2454,7 +2595,7 @@ class DdProduct(MAASRawDocument):
     """
     Mapping class for index: raw-data-dd-product
 
-    Generated from: resources/templates/raw-data-dd-product_template.json
+    Generated from: /maas-cds/resources/templates/raw-data-dd-product_template.json
     """
 
     class Index:
@@ -2498,7 +2639,7 @@ class DdpDataAvailable(MAASRawDocument):
     """
     Mapping class for index: raw-data-ddp-data-available
 
-    Generated from: resources/templates/raw-data-ddp-data-available_template.json
+    Generated from: /maas-cds/resources/templates/raw-data-ddp-data-available_template.json
     """
 
     class Index:
@@ -2538,7 +2679,7 @@ class DeletionIssue(MAASRawDocument):
     """
     Mapping class for index: raw-data-deletion-issue
 
-    Generated from: resources/templates/raw-data-deletion-issue_template.json
+    Generated from: /maas-cds/resources/templates/raw-data-deletion-issue_template.json
     """
 
     class Index:
@@ -2572,7 +2713,7 @@ class DownloadVolumeCount(MAASRawDocument):
     """
     Mapping class for index: raw-data-download-volume-count
 
-    Generated from: resources/templates/raw-data-download-volume-count_template.json
+    Generated from: /maas-cds/resources/templates/raw-data-download-volume-count_template.json
     """
 
     class Index:
@@ -2610,7 +2751,7 @@ class GrafanaUsage(MAASRawDocument):
     """
     Mapping class for index: raw-data-grafana-usage
 
-    Generated from: resources/templates/raw-data-grafana-usage_template.json
+    Generated from: /maas-cds/resources/templates/raw-data-grafana-usage_template.json
     """
 
     class Index:
@@ -2638,7 +2779,7 @@ class InterfaceProbe(MAASRawDocument):
     """
     Mapping class for index: raw-data-interface-probe
 
-    Generated from: resources/templates/raw-data-interface-probe_template.json
+    Generated from: /maas-cds/resources/templates/raw-data-interface-probe_template.json
     """
 
     class Index:
@@ -2676,7 +2817,7 @@ class LtaProduct(MAASRawDocument):
     """
     Mapping class for index: raw-data-lta-product
 
-    Generated from: resources/templates/raw-data-lta-product_template.json
+    Generated from: /maas-cds/resources/templates/raw-data-lta-product_template.json
     """
 
     class Index:
@@ -2718,11 +2859,41 @@ class LtaProduct(MAASRawDocument):
     start_date = ZuluDate()
 
 
+class MaasConfigCompleteness(MAASDocument):
+    """
+    Mapping class for index: maas-config-completeness
+
+    Generated from: /maas-cds/resources/templates/maas-config-completeness_template.json
+    """
+
+    class Index:
+        "inner class for DSL"
+        name = "maas-config-completeness"
+
+    @classmethod
+    def _matches(cls, hit):
+        return hit["_index"].startswith("maas-config-completeness-")
+
+    _PARTITION_FIELD_FORMAT = "production"
+
+    activated = Boolean()
+
+    end_date = ZuluDate()
+
+    key = Keyword()
+
+    prip_name = Keyword()
+
+    satellite_unit = Keyword()
+
+    start_date = ZuluDate()
+
+
 class MetricsProduct(MAASRawDocument):
     """
     Mapping class for index: raw-data-metrics-product
 
-    Generated from: resources/templates/raw-data-metrics-product_template.json
+    Generated from: /maas-cds/resources/templates/raw-data-metrics-product_template.json
     """
 
     class Index:
@@ -2760,7 +2931,7 @@ class MpAllProduct(MAASRawDocument):
     """
     Mapping class for index: raw-data-mp-all-product
 
-    Generated from: resources/templates/raw-data-mp-all-product_template.json
+    Generated from: /maas-cds/resources/templates/raw-data-mp-all-product_template.json
     """
 
     class Index:
@@ -2832,7 +3003,7 @@ class MpHktmAcquisitionProduct(MAASRawDocument):
     """
     Mapping class for index: raw-data-mp-hktm-acquisition-product
 
-    Generated from: resources/templates/raw-data-mp-hktm-acquisition-product_template.json
+    Generated from: /maas-cds/resources/templates/raw-data-mp-hktm-acquisition-product_template.json
     """
 
     class Index:
@@ -2872,7 +3043,7 @@ class MpHktmDownlink(MAASRawDocument):
     """
     Mapping class for index: raw-data-mp-hktm-downlink
 
-    Generated from: resources/templates/raw-data-mp-hktm-downlink_template.json
+    Generated from: /maas-cds/resources/templates/raw-data-mp-hktm-downlink_template.json
     """
 
     class Index:
@@ -2940,7 +3111,7 @@ class MpProduct(MAASRawDocument):
     """
     Mapping class for index: raw-data-mp-product
 
-    Generated from: resources/templates/raw-data-mp-product_template.json
+    Generated from: /maas-cds/resources/templates/raw-data-mp-product_template.json
     """
 
     class Index:
@@ -2996,7 +3167,7 @@ class MpcipProduct(MAASRawDocument):
     """
     Mapping class for index: raw-data-mpcip-product
 
-    Generated from: resources/templates/raw-data-mpcip-product_template.json
+    Generated from: /maas-cds/resources/templates/raw-data-mpcip-product_template.json
     """
 
     class Index:
@@ -3042,7 +3213,7 @@ class MpipProduct(MAASRawDocument):
     """
     Mapping class for index: raw-data-mpip-product
 
-    Generated from: resources/templates/raw-data-mpip-product_template.json
+    Generated from: /maas-cds/resources/templates/raw-data-mpip-product_template.json
     """
 
     class Index:
@@ -3078,7 +3249,7 @@ class PripProduct(MAASRawDocument):
     """
     Mapping class for index: raw-data-prip-product
 
-    Generated from: resources/templates/raw-data-prip-product_template.json
+    Generated from: /maas-cds/resources/templates/raw-data-prip-product_template.json
     """
 
     class Index:
@@ -3132,7 +3303,7 @@ class ProductDeletion(MAASRawDocument):
     """
     Mapping class for index: raw-data-product-deletion
 
-    Generated from: resources/templates/raw-data-product-deletion_template.json
+    Generated from: /maas-cds/resources/templates/raw-data-product-deletion_template.json
     """
 
     class Index:
@@ -3158,7 +3329,7 @@ class SatUnavailabilityProduct(MAASRawDocument):
     """
     Mapping class for index: raw-data-sat-unavailability-product
 
-    Generated from: resources/templates/raw-data-sat-unavailability-product_template.json
+    Generated from: /maas-cds/resources/templates/raw-data-sat-unavailability-product_template.json
     """
 
     class Index:

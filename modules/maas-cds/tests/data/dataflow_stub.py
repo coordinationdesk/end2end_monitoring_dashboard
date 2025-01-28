@@ -8,6 +8,8 @@ __all__ = ["dataflow_cache", "dataflow_cache_s5"]
 @pytest.fixture(autouse=True)
 def dataflow_cache():
     dataflow = {
+        "S1#AISAUX": "AUX",
+        "S1#AI_RAW__0_": "L0_",
         "S1#S1_RAW__0S": "L0_",
         "S1#S3_RAW__0S": "L0_",
         "S1#S5_RAW__0S": "L0_",

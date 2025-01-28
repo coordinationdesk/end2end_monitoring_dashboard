@@ -24,9 +24,11 @@ raw_doc_product_l0 = {
 
 @pytest.fixture
 def s5_lta_product_l0():
-    product = LtaProduct(**raw_doc_product_l0)
-    product.full_clean()
-    return product
+    lta_product = LtaProduct(**raw_doc_product_l0)
+    lta_product.full_clean()
+    lta_product.meta.id = "random-id"
+
+    return lta_product
 
 
 s5_dd_archive_product_dict = {
@@ -44,7 +46,8 @@ s5_dd_archive_product_dict = {
 @pytest.fixture
 def s5_dd_archive_product():
     product = DdArchive(**s5_dd_archive_product_dict)
-    product.full_clean()
     product.meta.index = "raw-data-dd-archive-2021"
     product.meta.id = "5299172b-eb68-4102-ae13-2cbc841c9081"
+    product.full_clean()
+
     return product

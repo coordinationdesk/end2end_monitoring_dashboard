@@ -1,0 +1,41 @@
+{
+    "aliases": {
+        "maas-config-completeness": {}
+    },
+    "index_patterns": [
+        "maas-config-completeness-*"
+    ],
+    "settings": {
+        "index": {
+            "number_of_shards": 3,
+            "number_of_replicas": 1
+        }
+    },
+    "mappings": {
+        "properties": {
+            "key": {
+                "type": "keyword"
+            },
+            "activated": {
+                "type": "boolean"
+            },
+            "satellite_unit": {
+                "type": "keyword"
+            },
+            "prip_name": {
+                "type": "keyword"
+            },
+            "start_date": {
+                "type": "date",
+                "locale": "utc"
+            },
+            "end_date": {
+                "type": "date",
+                "locale": "utc"
+            }
+        },
+        "_meta": {
+            "partition_format": "production"
+        }
+    }
+}

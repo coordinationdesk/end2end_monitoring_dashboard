@@ -239,7 +239,9 @@ class ComputeCompletenessEngine(DataEngine):
                 local_value,
             )
 
-            datatake_doc.compute_missing_products(product_type, related_products)
+            datatake_doc.compute_missing_production(product_type, related_products)
+
+            datatake_doc.compute_duplicated(product_type, related_products)
 
             self.logger.info(
                 "[ITER][Product][%s] - Compute local value : %s -> %s",

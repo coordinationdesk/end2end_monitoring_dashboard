@@ -5,10 +5,13 @@ import json
 
 import pkgutil
 
+from maas_cds.lib.config import get_good_threshold_config_from_value
 from shapely.wkt import loads
 from shapely.geometry import GeometryCollection, shape
 from shapely.errors import ShapelyError
+import pyproj
 
+from maas_model import datetime_to_zulu, ZuluDate
 from maas_cds.model.datatake_s1 import CdsDatatakeS1
 
 from opensearchpy.helpers.utils import AttrDict
@@ -18,9 +21,15 @@ class GeoMaskUtils:
     """Class to manage mask and intersection"""
 
     OVER_SPECIFIC_AREA_GEOJSON = {
-        "OCN": "ne_110m_ocean.geojson",
-        "SLC": "EW_SLC_area_v2.geojson",
-        "EU": "EU_area.json",
+        "OCN": {
+            "0": "ne_110m_ocean.geojson",
+            "2024-06-06T13:20:00.000Z": "simplified_sea_cls.geojson",
+        },
+        "SLC": {
+            "0": "EW_SLC_area.geojson",
+            "2024-01-29T22:47:05.000Z": "EW_SLC_area_v2.geojson",
+        },
+        "EU": {"0": "EU_area.json"},
     }
 
     COVERING_AREA_FIELD = "_coverage_percentage"
@@ -30,19 +39,29 @@ class GeoMaskUtils:
     def __init__(self) -> None:
         self.logger = logging.getLogger(self.__class__.__name__)
 
-    def load_mask(self, mask_name):
+    def load_mask(self, mask_name, nearest_time_indicators="0"):
         """Load mask from his identifier (his name)
 
         Args:
             mask_name (str): identifier of the mask
         """
 
-        mask_filename = self.OVER_SPECIFIC_AREA_GEOJSON.get(mask_name, None)
+        config_mask = self.OVER_SPECIFIC_AREA_GEOJSON.get(mask_name, None)
+
+        if config_mask is None:
+            self.logger.warning(
+                "[%s] - Mask not found",
+                config_mask,
+            )
+
+            return
+
+        mask_filename = config_mask.get(nearest_time_indicators, None)
 
         if mask_filename is None:
             self.logger.warning(
                 "[%s] - Mask not found",
-                mask_name,
+                mask_filename,
             )
 
             return
@@ -62,16 +81,16 @@ class GeoMaskUtils:
             self.logger.error("[%s] - Mask path invalid : %s", mask_name, mask_filename)
             raise file_error
 
-        mask_ocn_shapes = GeometryCollection(
+        mask_shapes = GeometryCollection(
             [
                 shape(feature["geometry"]).buffer(0)
                 for feature in geojson_data["features"]
             ]
         )
 
-        self.CACHED_MASK[mask_name] = mask_ocn_shapes
+        self.CACHED_MASK[mask_filename] = mask_shapes
 
-    def get_mask(self, mask_name):
+    def get_mask(self, mask_name, time_indicator="0"):
         """Get mask from his identifier (his name)
 
         Args:
@@ -80,17 +99,18 @@ class GeoMaskUtils:
         Returns:
             Polygons: The mask with shapely format (Polygons)
         """
+        (nearest_time_indicator, file_name) = get_good_threshold_config_from_value(
+            self.OVER_SPECIFIC_AREA_GEOJSON.get(mask_name, {}), time_indicator
+        )
 
-        if mask_name not in self.CACHED_MASK:
-            self.load_mask(mask_name)
-
+        if file_name not in self.CACHED_MASK:
+            self.load_mask(mask_name, nearest_time_indicator)
         else:
             self.logger.debug(
-                "[%s] - Mask already loaded",
-                mask_name,
+                "[%s] - Mask already loaded (%s)", mask_name, nearest_time_indicator
             )
 
-        return self.CACHED_MASK.get(mask_name, None)
+        return self.CACHED_MASK.get(file_name, None)
 
     def load_area_shape_from_footprint(self, footprint):
         """Load shapely object from footprint
@@ -103,7 +123,6 @@ class GeoMaskUtils:
         """
 
         product_shape = None
-
         # Geojson
         if isinstance(footprint, AttrDict):
             footprint = footprint.to_dict()
@@ -140,8 +159,13 @@ class GeoMaskUtils:
 
         return product_shape
 
-    def area_coverage(self, footprint, mask_name):
+    def area_coverage(self, footprint, mask_name, date_indicator="0"):
         """Get the coverage of the footprint on the mask identified by the mask_name
+
+        Area is calculated in square meters to match products calculus method.
+
+        https://pyproj4.github.io/pyproj/stable/api/geod.html#pyproj.Geod.polygon_area_perimeter
+        https://en.wikipedia.org/wiki/Geodesics_on_an_ellipsoid#Area_of_a_geodesic_polygon
 
         Args:
             footprint (str | dict): The footprint (ex: "Polygon((..., ...))" or GeoJSON)
@@ -151,7 +175,7 @@ class GeoMaskUtils:
             float: the percentage of the footprint in the mask
         """
 
-        mask = self.get_mask(mask_name)
+        mask = self.get_mask(mask_name, date_indicator)
 
         if mask is None:
             self.logger.warning("[%s] - Cannot intersect with this mask", mask_name)
@@ -162,17 +186,20 @@ class GeoMaskUtils:
         if product_shape is None:
             return 0
 
-        total_intersect = self.get_mask(mask_name).intersection(product_shape).area
-        total_coverage = total_intersect / product_shape.area * 100
-        # FIXME to pass tests: something is wrong in data provided to intersection
-        #
-        #         tests/test_geo_mask_utils.py::test_intersect_specific_product
-        #   /home/fgirault/Code/MAAS/venvX/lib/python3.11/site-packages/shapely/set_operations.py:133: RuntimeWarning: invalid value encountered in intersection
-        #     return lib.intersection(a, b, **kwargs)
+        # Use geodesic projection
+        geod = pyproj.Geod(ellps="WGS84")
+
+        product_area = abs(geod.geometry_area_perimeter(product_shape)[0])
+
+        mask = self.get_mask(mask_name, date_indicator)
+        intersection = mask.intersection(product_shape)
+        intersection_area = abs(geod.geometry_area_perimeter(intersection)[0])
+
+        total_coverage = intersection_area / product_area * 100
 
         return min(total_coverage, 100)
 
-    def intersect_with_masks(self, footprint, masks_name):
+    def intersect_with_masks(self, footprint, masks_name, date_indicator="0"):
         """Intersect a footprint with several masks
 
         Args:
@@ -185,7 +212,7 @@ class GeoMaskUtils:
         result_coverage = {}
 
         for mask_name in masks_name:
-            total_coverage = self.area_coverage(footprint, mask_name)
+            total_coverage = self.area_coverage(footprint, mask_name, date_indicator)
 
             self.logger.debug(
                 "[%s] - Footprint intersect of %s %%", mask_name, total_coverage
@@ -195,7 +222,9 @@ class GeoMaskUtils:
 
         return result_coverage
 
-    def coverage_over_specific_area_s1(self, instrument_mode: str, footprint: str):
+    def coverage_over_specific_area_s1(
+        self, instrument_mode: str, footprint: str, start_date: ZuluDate
+    ):
         """Coverage method specific for sentinel 1
 
         Args:
@@ -219,6 +248,8 @@ class GeoMaskUtils:
 
         intersection_data = {}
         if masks_name:
-            intersection_data = self.intersect_with_masks(footprint, masks_name)
+            intersection_data = self.intersect_with_masks(
+                footprint, masks_name, datetime_to_zulu(start_date)
+            )
 
         return intersection_data

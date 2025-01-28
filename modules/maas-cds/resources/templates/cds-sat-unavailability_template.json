@@ -65,6 +65,10 @@
             "comment": {
                 "type": "keyword"
             },
+            "raw_data_ingestion_time": {
+                "type": "date",
+                "locale": "utc"
+            },
             "unavailability_duration": {
                 "type": "long"
             }
