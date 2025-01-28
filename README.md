@@ -341,3 +341,8 @@ maas-collector:${COLLECTOR_TAG_VERSION} maas_collector.rawdata.cli.filesystem -v
 
 Omcs could be deployed on the "cloud". To do it, you will be guided by reading the [deployment](./deployment/docs/deployment.md) documentation.
 
+
+## CI/CD
+
+
+https://adamj.eu/tech/2023/11/02/github-actions-faster-python-virtual-environments/

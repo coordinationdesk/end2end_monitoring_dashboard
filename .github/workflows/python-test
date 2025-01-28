@@ -1,0 +1,35 @@
+name: Run Tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        module: [maas-model, maas-engine, maas-collector, maas-cds]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        pip install -e ./modules/${{ matrix.module }}
+
+    - name: Run tests
+      run: |
+        pytest ./modules/${{ matrix.module }}/tests --junitxml=reports/${{ matrix.module }}-results.xml
+
+    - name: Upload test results
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-results
+        path: reports/
