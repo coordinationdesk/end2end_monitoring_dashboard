@@ -36,6 +36,7 @@ jobs:
         source venv/bin/activate
         pip install pytest
         pip install pytest-cov
+        pip install wheel
     - name: Run tests
       run: |
         source venv/bin/activate
