@@ -19,12 +19,21 @@ jobs:
       with:
         python-version: '3.11'
 
+    - name: Init venv
+      run: |
+        python -m venv venv
+
     - name: Install dependencies
       run: |
-        pip install -e ./modules/${{ matrix.module }}
+        source venv/bin/activate
+        pip install -e ./modules/maas-model
+        pip install -e ./modules/maas-engine
+        pip install -e ./modules/maas-collector
+        pip install -e ./modules/maas-cds
 
     - name: Run tests
       run: |
+        source venv/bin/activate
         pytest ./modules/${{ matrix.module }}/tests --junitxml=reports/${{ matrix.module }}-results.xml
 
     - name: Upload test results
