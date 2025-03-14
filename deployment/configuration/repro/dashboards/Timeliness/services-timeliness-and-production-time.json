@@ -1,0 +1,2501 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 500,
+      "panels": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "gridPos": {
+            "h": 14,
+            "w": 24,
+            "x": 0,
+            "y": 1
+          },
+          "id": 89,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "This dashboard features a Timeliness computation of products published at the following interfaces:\n - PRIP;\n - LTA;\n - DD DHUS.\n\nTimeliness is computed from metadata attached to each product:\n - Production Time is (Publication Date - Origin Date);\n - From sensing timeliness (Publication Date - Content Date/End (which is the end of sensing)).\n\nDiscrepancies are displayed through the following indicators:\n - Minimum, maximum, average timeliness;\n - Distribution of timeliness in various time ranges.\n\nInformation is available for each mission and interface managed by OMCS.\n\nTips:\n - Mission to consider can be selected in the upper bar.\n\n Note : \n - Timeliness \"_\" selects HKTM files which are not disseminated to DD",
+            "mode": "markdown"
+          },
+          "pluginVersion": "9.2.1",
+          "type": "text"
+        }
+      ],
+      "title": "Dashboard Description",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 502,
+      "panels": [],
+      "title": "DD : from PRIP",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P58807B943476643B"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "m"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 4,
+        "x": 0,
+        "y": 2
+      },
+      "id": 503,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "min"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.2.6",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P58807B943476643B"
+          },
+          "metrics": [
+            {
+              "field": "from_prip_ddip_timeliness",
+              "id": "1",
+              "settings": {
+                "script": "_value/60000000"
+              },
+              "type": "min"
+            }
+          ],
+          "query": "mission:${mission} AND satellite_unit:${satellite_unit} AND product_level:${product_level} AND product_type:${product_type} AND timeliness:${timeliness}",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Min from PRIP to DD timelinesss",
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P58807B943476643B"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "m"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 4,
+        "x": 4,
+        "y": 2
+      },
+      "id": 504,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "mean"
+          ],
+          "fields": "",
+          "values": true
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.2.6",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P58807B943476643B"
+          },
+          "metrics": [
+            {
+              "field": "from_prip_ddip_timeliness",
+              "id": "1",
+              "settings": {
+                "script": "_value / 60000000"
+              },
+              "type": "sum"
+            },
+            {
+              "hide": false,
+              "id": "3",
+              "type": "count"
+            }
+          ],
+          "query": "mission:${mission} AND satellite_unit:${satellite_unit} AND product_level:${product_level} AND product_type:${product_type} AND timeliness:${timeliness} AND from_prip_ddip_timeliness:*",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Average from PRIP to DD  timelinesss",
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "reducers": [
+              "sum"
+            ]
+          }
+        },
+        {
+          "id": "rowsToFields",
+          "options": {}
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Mean",
+            "binary": {
+              "left": "Sum from_prip_ddip_timeliness",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Count"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            },
+            "replaceFields": true
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P58807B943476643B"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "m"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 4,
+        "x": 8,
+        "y": 2
+      },
+      "id": 505,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "max"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.2.6",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P58807B943476643B"
+          },
+          "metrics": [
+            {
+              "field": "from_prip_ddip_timeliness",
+              "id": "1",
+              "settings": {
+                "script": "_value/60000000"
+              },
+              "type": "max"
+            }
+          ],
+          "query": "mission:${mission} AND satellite_unit:${satellite_unit} AND product_level:${product_level} AND product_type:${product_type} AND timeliness:${timeliness}",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Max from PRIP to DD timelinesss",
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "< 1h"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "1h - 2h"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "2h - 3h"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "super-light-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "3h - 8h"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "super-light-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "8h - 12h"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "12h - 24h"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "24h - 2d"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "2d - 1m"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "> 1m"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 6,
+        "x": 12,
+        "y": 2
+      },
+      "id": 506,
+      "options": {
+        "displayLabels": [
+          "name"
+        ],
+        "legend": {
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": false,
+          "values": [
+            "value",
+            "percent"
+          ]
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.3.3",
+      "targets": [
+        {
+          "alias": "< 1h",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "4",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P58807B943476643B"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_prip_ddip_timeliness: [0 TO 360000000] AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_level:${product_level} AND product_type:${product_type}  AND timeliness:${timeliness}",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "1h - 2h",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "4",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P58807B943476643B"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_prip_ddip_timeliness: {360000000 TO 7200000000] AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_level:${product_level} AND product_type:${product_type}  AND timeliness:${timeliness}",
+          "refId": "B",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "2h - 3h",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "4",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_prip_ddip_timeliness: {7200000000 TO 10800000000] AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_level:${product_level} AND product_type:${product_type}  AND timeliness:${timeliness}",
+          "refId": "C",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "3h - 8h",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "4",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_prip_ddip_timeliness: {10800000000 TO 28800000000] AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_level:${product_level} AND product_type:${product_type}  AND timeliness:${timeliness}",
+          "refId": "D",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "8h - 12h",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "4",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_prip_ddip_timeliness: {28800000000 TO 43200000000 ] AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_level:${product_level} AND product_type:${product_type}  AND timeliness:${timeliness}",
+          "refId": "E",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "12h - 24h",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "4",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_prip_ddip_timeliness: {43200000000 TO 86400000000 ] AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_level:${product_level} AND product_type:${product_type}  AND timeliness:${timeliness}",
+          "refId": "F",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "24h - 2d",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "4",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_prip_ddip_timeliness: {86400000000 TO 172800000000 ] AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_level:${product_level} AND product_type:${product_type}  AND timeliness:${timeliness}",
+          "refId": "G",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "2d - 1m",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_prip_ddip_timeliness: {172800000000 TO 2592000000000] AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_level:${product_level} AND product_type:${product_type}  AND timeliness:${timeliness}",
+          "refId": "H",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "> 1m",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_prip_ddip_timeliness: {2592000000000 TO *] AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_level:${product_level} AND product_type:${product_type}  AND timeliness:${timeliness}",
+          "refId": "I",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Distribution from PRIP to DD according to thresholds",
+      "transformations": [],
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "displayMode": "auto",
+            "inspect": false
+          },
+          "mappings": [
+            {
+              "options": {
+                "12h - 24h": {
+                  "color": "dark-yellow",
+                  "index": 5
+                },
+                "1h - 2h": {
+                  "color": "green",
+                  "index": 1
+                },
+                "24h - 2d": {
+                  "color": "orange",
+                  "index": 6
+                },
+                "2d - 1m": {
+                  "color": "red",
+                  "index": 7
+                },
+                "2h - 3h": {
+                  "color": "super-light-green",
+                  "index": 2
+                },
+                "3h - 8h": {
+                  "color": "super-light-yellow",
+                  "index": 3
+                },
+                "8h - 12h": {
+                  "color": "yellow",
+                  "index": 4
+                },
+                "< 1h": {
+                  "color": "dark-green",
+                  "index": 0
+                },
+                "> 1m": {
+                  "color": "dark-red",
+                  "index": 8
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "< 1h"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "1h - 2h"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "2h - 3h"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "super-light-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "3h - 8h"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "super-light-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "8h - 12h"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "12h - 24h"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "12h - 24h"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "2d - 1m"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "> 1m"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Max"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 83
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Field"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 76
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Value"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 106
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Field"
+            },
+            "properties": [
+              {
+                "id": "custom.displayMode",
+                "value": "color-background-solid"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 3,
+        "x": 18,
+        "y": 2
+      },
+      "id": 509,
+      "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "9.2.6",
+      "targets": [
+        {
+          "alias": "< 1h",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "4",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_prip_ddip_timeliness: [0 TO 360000000] AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_level:${product_level} AND product_type:${product_type}  AND timeliness:${timeliness}",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "1h - 2h",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "4",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_prip_ddip_timeliness: {360000000 TO 7200000000] AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_level:${product_level} AND product_type:${product_type}  AND timeliness:${timeliness}",
+          "refId": "B",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "2h - 3h",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "4",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_prip_ddip_timeliness: {7200000000 TO 10800000000] AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_level:${product_level} AND product_type:${product_type}  AND timeliness:${timeliness}",
+          "refId": "C",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "3h - 8h",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "4",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_prip_ddip_timeliness: {10800000000 TO 28800000000] AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_level:${product_level} AND product_type:${product_type}  AND timeliness:${timeliness}",
+          "refId": "D",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "8h - 12h",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "4",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_prip_ddip_timeliness: {28800000000 TO 43200000000 ] AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_level:${product_level} AND product_type:${product_type}  AND timeliness:${timeliness}",
+          "refId": "E",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "12h - 24h",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "4",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_prip_ddip_timeliness: {43200000000 TO 86400000000 ] AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_level:${product_level} AND product_type:${product_type}  AND timeliness:${timeliness}",
+          "refId": "F",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "24h - 2d",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "4",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_prip_ddip_timeliness: {86400000000 TO 172800000000 ] AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_level:${product_level} AND product_type:${product_type}  AND timeliness:${timeliness}",
+          "refId": "G",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "2d - 1m",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_prip_ddip_timeliness: {172800000000 TO 2592000000000] AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_level:${product_level} AND product_type:${product_type}  AND timeliness:${timeliness}",
+          "refId": "H",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "> 1m",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_prip_ddip_timeliness: {2592000000000 TO *] AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_level:${product_level} AND product_type:${product_type}  AND timeliness:${timeliness}",
+          "refId": "I",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Value",
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "reducers": [
+              "sum"
+            ]
+          }
+        },
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "Field": {
+                "aggregations": [
+                  "sum"
+                ],
+                "operation": "groupby"
+              },
+              "Total": {
+                "aggregations": [
+                  "sum"
+                ],
+                "operation": "aggregate"
+              }
+            }
+          }
+        },
+        {
+          "id": "rowsToFields",
+          "options": {}
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "12h - 24h"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Total": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "Total": "Value"
+            }
+          }
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "reducers": [
+              "sum"
+            ]
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "Field": "Range",
+              "Total": "Value"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "displayMode": "auto",
+            "inspect": false
+          },
+          "decimals": 2,
+          "mappings": [
+            {
+              "options": {
+                "12h - 24h": {
+                  "color": "dark-yellow",
+                  "index": 5
+                },
+                "1h - 2h": {
+                  "color": "green",
+                  "index": 1
+                },
+                "24h - 2d": {
+                  "color": "orange",
+                  "index": 6
+                },
+                "2d - 1m": {
+                  "color": "red",
+                  "index": 7
+                },
+                "2h - 3h": {
+                  "color": "super-light-green",
+                  "index": 2
+                },
+                "3h - 8h": {
+                  "color": "super-light-yellow",
+                  "index": 3
+                },
+                "8h - 12h": {
+                  "color": "yellow",
+                  "index": 4
+                },
+                "< 1h": {
+                  "color": "dark-green",
+                  "index": 0
+                },
+                "> 1m": {
+                  "color": "dark-red",
+                  "index": 8
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percent"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "< 1h"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "1h - 2h"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "2h - 3h"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "super-light-green",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "3h - 8h"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "super-light-yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "8h - 12h"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "12h - 24h"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "12h - 24h"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-orange",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "2d - 1m"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "> 1m"
+            },
+            "properties": [
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-red",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Max"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 83
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Field"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 76
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Percent"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 106
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Field"
+            },
+            "properties": [
+              {
+                "id": "custom.displayMode",
+                "value": "color-background-solid"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 3,
+        "x": 21,
+        "y": 2
+      },
+      "id": 510,
+      "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": []
+      },
+      "pluginVersion": "9.2.6",
+      "targets": [
+        {
+          "alias": "< 1h",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "4",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_prip_ddip_timeliness: [0 TO 360000000] AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_level:${product_level} AND product_type:${product_type}  AND timeliness:${timeliness}",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "1h - 2h",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "4",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_prip_ddip_timeliness: {360000000 TO 7200000000] AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_level:${product_level} AND product_type:${product_type}  AND timeliness:${timeliness}",
+          "refId": "B",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "2h - 3h",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "4",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_prip_ddip_timeliness: {7200000000 TO 10800000000] AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_level:${product_level} AND product_type:${product_type}  AND timeliness:${timeliness}",
+          "refId": "C",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "3h - 8h",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "4",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_prip_ddip_timeliness: {10800000000 TO 28800000000] AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_level:${product_level} AND product_type:${product_type}  AND timeliness:${timeliness}",
+          "refId": "D",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "8h - 12h",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "4",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_prip_ddip_timeliness: {28800000000 TO 43200000000 ] AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_level:${product_level} AND product_type:${product_type}  AND timeliness:${timeliness}",
+          "refId": "E",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "12h - 24h",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "4",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_prip_ddip_timeliness: {43200000000 TO 86400000000 ] AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_level:${product_level} AND product_type:${product_type}  AND timeliness:${timeliness}",
+          "refId": "F",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "24h - 2d",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "4",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_prip_ddip_timeliness: {86400000000 TO 172800000000 ] AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_level:${product_level} AND product_type:${product_type}  AND timeliness:${timeliness}",
+          "refId": "G",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "2d - 1m",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_prip_ddip_timeliness: {172800000000 TO 2592000000000] AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_level:${product_level} AND product_type:${product_type}  AND timeliness:${timeliness}",
+          "refId": "H",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "> 1m",
+          "bucketAggs": [
+            {
+              "field": "prip_publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "from_prip_ddip_timeliness: {2592000000000 TO *] AND mission:${mission} AND satellite_unit:${satellite_unit} AND product_level:${product_level} AND product_type:${product_type}  AND timeliness:${timeliness}",
+          "refId": "I",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Percent",
+      "transformations": [
+        {
+          "id": "reduce",
+          "options": {
+            "reducers": [
+              "sum"
+            ]
+          }
+        },
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "Field": {
+                "aggregations": [
+                  "sum"
+                ],
+                "operation": "groupby"
+              },
+              "Total": {
+                "aggregations": [
+                  "sum"
+                ],
+                "operation": "aggregate"
+              }
+            }
+          }
+        },
+        {
+          "id": "rowsToFields",
+          "options": {}
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "mode": "reduceRow",
+            "reduce": {
+              "include": [
+                "< 1h",
+                "1h - 2h",
+                "2h - 3h",
+                "3h - 8h",
+                "8h - 12h",
+                "12h - 24h",
+                "24h - 2d",
+                "2d - 1m",
+                "> 1m"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "100",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Total"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "< 1h",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "100 / Total"
+            },
+            "mode": "binary",
+            "reduce": {
+              "include": [
+                "Value"
+              ],
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "1h - 2h",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "100 / Total"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "2h - 3h",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "100 / Total"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "3h - 8h",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "100 / Total"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "8h - 12h",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "100 / Total"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "12h - 24h",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "100 / Total"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "24h - 2d",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "100 / Total"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "2d - 1m",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "100 / Total"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "binary": {
+              "left": "> 1m",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "100 / Total"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "100 / Total": true,
+              "12h - 24h": true,
+              "1h - 2h": true,
+              "24h - 2d": true,
+              "2d - 1m": true,
+              "2h - 3h": true,
+              "3h - 8h": true,
+              "8h - 12h": true,
+              "< 1h": true,
+              "> 1m": true,
+              "Total": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "100 / Total": "",
+              "12h - 24h * 100 / Total": "12h - 24h",
+              "1h - 2h * 100 / Total": "1h - 2h",
+              "24h - 2d * 100 / Total": "24h - 2d",
+              "2d - 1m * 100 / Total": "2d - 1m",
+              "2h - 3h * 100 / Total": "2h - 3h",
+              "3h - 8h * 100 / Total": "3h - 8h",
+              "8h - 12h * 100 / Total": "8h - 12h",
+              "< 1h * 100 / Total": "< 1h",
+              "> 1m * 100 / Total": "> 1m",
+              "Total": "Value"
+            }
+          }
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "reducers": [
+              "sum"
+            ]
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "Field": "Range",
+              "Total": "Percent"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 37,
+  "style": "dark",
+  "tags": [
+    "Timeliness"
+  ],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "S2",
+          "value": "S2"
+        },
+        "hide": 0,
+        "includeAll": true,
+        "label": "Mission",
+        "multi": false,
+        "name": "mission",
+        "options": [
+          {
+            "selected": false,
+            "text": "All",
+            "value": "$__all"
+          },
+          {
+            "selected": false,
+            "text": "S1",
+            "value": "S1"
+          },
+          {
+            "selected": true,
+            "text": "S2",
+            "value": "S2"
+          },
+          {
+            "selected": false,
+            "text": "S3",
+            "value": "S3"
+          },
+          {
+            "selected": false,
+            "text": "S5",
+            "value": "S5"
+          }
+        ],
+        "query": "S1,S2,S3,S5",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P58807B943476643B"
+        },
+        "definition": "{\"find\":\"terms\",\"field\":\"satellite_unit\", \"query\":\"mission: $mission\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Satellite",
+        "multi": true,
+        "name": "satellite_unit",
+        "options": [],
+        "query": "{\"find\":\"terms\",\"field\":\"satellite_unit\", \"query\":\"mission: $mission\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P58807B943476643B"
+        },
+        "definition": "{\"find\":\"terms\",\"field\":\"timeliness\", \"query\":\"mission: $mission AND satellite_unit : $satellite_unit\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Category",
+        "multi": true,
+        "name": "timeliness",
+        "options": [],
+        "query": "{\"find\":\"terms\",\"field\":\"timeliness\", \"query\":\"mission: $mission AND satellite_unit : $satellite_unit\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P58807B943476643B"
+        },
+        "definition": "{\"find\":\"terms\",\"field\":\"product_level\", \"query\":\"mission: $mission AND satellite_unit : $satellite_unit AND timeliness: $timeliness\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Level",
+        "multi": true,
+        "name": "product_level",
+        "options": [],
+        "query": "{\"find\":\"terms\",\"field\":\"product_level\", \"query\":\"mission: $mission AND satellite_unit : $satellite_unit AND timeliness: $timeliness\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P58807B943476643B"
+        },
+        "definition": "{\"find\":\"terms\",\"field\":\"product_type\", \"query\":\"mission: $mission AND satellite_unit : $satellite_unit AND product_level:$product_level  AND timeliness: $timeliness\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Product Type",
+        "multi": true,
+        "name": "product_type",
+        "options": [],
+        "query": "{\"find\":\"terms\",\"field\":\"product_type\", \"query\":\"mission: $mission AND satellite_unit : $satellite_unit AND product_level:$product_level  AND timeliness: $timeliness\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P58807B943476643B"
+        },
+        "definition": "{\"find\":\"terms\",\"field\":\"service_id\", \"query\":\"mission: $mission AND satellite_unit : $satellite_unit AND service_type: LTA\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "LTA Service",
+        "multi": true,
+        "name": "lta_service",
+        "options": [],
+        "query": "{\"find\":\"terms\",\"field\":\"service_id\", \"query\":\"mission: $mission AND satellite_unit : $satellite_unit AND service_type: LTA\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P58807B943476643B"
+        },
+        "definition": "{\"find\":\"terms\",\"field\":\"service_id\", \"query\":\"mission: $mission AND satellite_unit : $satellite_unit AND service_type: PRIP\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "PRIP Service",
+        "multi": true,
+        "name": "prip_service",
+        "options": [],
+        "query": "{\"find\":\"terms\",\"field\":\"service_id\", \"query\":\"mission: $mission AND satellite_unit : $satellite_unit AND service_type: PRIP\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P58807B943476643B"
+        },
+        "filters": [],
+        "hide": 0,
+        "label": "Ad-Hoc filter",
+        "name": "Filter",
+        "skipUrlSync": false,
+        "type": "adhoc"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6M",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "utc",
+  "title": "DD Timeliness",
+  "uid": "CdIGZab7azazaz",
+  "weekStart": ""
+}

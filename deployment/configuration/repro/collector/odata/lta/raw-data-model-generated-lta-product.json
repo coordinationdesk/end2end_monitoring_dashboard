@@ -1,0 +1,60 @@
+{
+    "models": [
+        {
+            "index": "raw-data-lta-product",
+            "name": "LtaProduct",
+            "fields": [
+                {
+                    "name": "product_id",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "product_name",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "content_length",
+                    "type": "Long"
+                },
+                {
+                    "name": "publication_date",
+                    "type": "Date"
+                },
+                {
+                    "name": "origin_date",
+                    "type": "Date"
+                },
+                {
+                    "name": "eviction_date",
+                    "type": "Date"
+                },
+                {
+                    "name": "start_date",
+                    "type": "Date"
+                },
+                {
+                    "name": "end_date",
+                    "type": "Date"
+                },
+                {
+                    "name": "interface_name",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "production_service_type",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "production_service_name",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "modification_date",
+                    "type": "Date"
+                }
+            ],
+            "partition_field": "ingestionTime",
+            "partition_format": "%Y-%m"
+        }
+    ]
+}

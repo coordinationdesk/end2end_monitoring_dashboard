@@ -1,0 +1,2759 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 10,
+      "panels": [
+        {
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P4E6B5BC91908CBD9"
+          },
+          "gridPos": {
+            "h": 19,
+            "w": 24,
+            "x": 0,
+            "y": 1
+          },
+          "id": 11,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "The System Technical Budget Schematic View - S2 is based on \n\n\n\n- the data budget reference document  [\\[ESA-EOPG-EOPGC-TN-9\\] CSC Operations \u2013 ESA Framework \u2013 System Technical Budget.pdf](https://omcs.atlassian.net/wiki/download/attachments/66158618/%5BESA-EOPG-EOPGC-TN-9%5D%20CSC%20Operations%20%E2%80%93%20ESA%20Framework%20%E2%80%93%20System%20Technical%20Budget.pdf?api=v2).\n\n\n\n- the data flow reference document  [\\[ESA-EOPG-EOPGC-TN-58\\] CSC GS Data Flow Configuration.pdf](https://omcs.atlassian.net/wiki/download/attachments/66158618/%5BESA-EOPG-EOPGC-TN-58%5D%20CSC%20GS%20Data%20Flow%20Configuration.pdf?api=v2).\n\n\n\nData flow document extraction is visible in the [\"Data Flow dashboard\"](./d/MfmL_E4Vz/golden-rules-and-data-flow?orgId=1) \n\n\n\n# Data selected\n\n\n\nFrom [\\[ESA-EOPG-EOPGC-TN-9\\] CSC Operations \u2013 ESA Framework \u2013 System Technical Budget.pdf](https://omcs.atlassian.net/wiki/download/attachments/66158618/%5BESA-EOPG-EOPGC-TN-9%5D%20CSC%20Operations%20%E2%80%93%20ESA%20Framework%20%E2%80%93%20System%20Technical%20Budget.pdf?api=v2) document some assuption are made to provide the System Technical Budget dashboards.\n\n\n\n## System Technical Budget Publication data selected\n\n\n\nFor System Technical Budget the data published at PRIP, LTA or DD are selected.\n\n\n\nSection Data Production data published at PRIP.\n\nSection Data Preservation data published at LTA.\n\nSection Data Distribution data published at DD.\n\n\n\nValues are mean by satellite number in mission. (i.e. S1 1 satellite, S2 mean of 2 satellite, S3 mean of 2 satellite; S5 1 satellite )\n\n\n\nFor S1, S2, S3 values are mean of the 4 LTA, for S5 values came from S5P_DLR.\n\n\n\nRmq : There is today no S5 L0 data published at prip.\n\n\n\n# Annexes\n\n\n\n## Product type selected\n\n\n\nThe tables below present how products types are classified in STB level and STB timeliness:\n\n\n\n### For panel **Yearly Overall Data Flow S2 SATELLITE**:\n\n\n\n|Mission|STB Level|STB Timeliness|Real timeliness|Misc.|Product Type|\n|---|---|---|---|---|---|\n|S2|||NOMINAL|ACQ VOL|MSI_L0__DS, MSI_L0__GR, MSI_L1A_DS, MSI_L1A_GR, MSI_L1B_DS, MSI_L1B_GR, MSI_L1C___ , MSI_L1C_DS, MSI_L1C_TC, MSI_L1C_TL, MSI_L2A___ , MSI_L2A_DS, MSI_L2A_TC, MSI_L2A_TL|\n|S2|||NOMINAL|ACQ COUNT|MSI_L0__DS, MSI_L0__GR, MSI_L1A_DS, MSI_L1A_GR, MSI_L1B_DS, MSI_L1B_GR, MSI_L1C___ , MSI_L1C_DS, MSI_L1C_TC, MSI_L1C_TL, MSI_L2A___ , MSI_L2A_DS, MSI_L2A_TC, MSI_L2A_TL|\n|S2|L0||NOMINAL|PROD VOL|MSI_L0__DS, MSI_L0__GR|\n|S2|L0||NOMINAL|PROD COUNT|MSI_L0__DS, MSI_L0__GR|\n|S2|L1C||NOMINAL|PROD VOL|MSI_L1C___ , MSI_L1C_DS, MSI_L1C_TC, MSI_L1C_TL|\n|S2|L1C||NOMINAL|PROD COUNT|MSI_L1C___ , MSI_L1C_DS, MSI_L1C_TC, MSI_L1C_TL|\n|S2|L1B||NOMINAL|PROD VOL|MSI_L1B_DS, MSI_L1B_GR|\n|S2|L1B||NOMINAL|PROD COUNT|MSI_L1B_DS, MSI_L1B_GR|\n|S2|L2A||NOMINAL|PROD VOL|MSI_L2A___ , MSI_L2A_DS, MSI_L2A_TC, MSI_L2A_TL|\n|S2|L2A||NOMINAL|PROD COUNT|MSI_L2A___ , MSI_L2A_DS, MSI_L2A_TC, MSI_L2A_TL|\n|S2|||NOMINAL|PROD TOT VOL|MSI_L0__DS, MSI_L0__GR, MSI_L1B_DS, MSI_L1B_GR, MSI_L1C___ , MSI_L1C_DS, MSI_L1C_TC, MSI_L1C_TL, MSI_L2A___ , MSI_L2A_DS, MSI_L2A_TC, MSI_L2A_TL|\n|S2|||NOMINAL|PROD TOT COUNT|MSI_L0__DS, MSI_L0__GR, MSI_L1B_DS, MSI_L1B_GR, MSI_L1C___ , MSI_L1C_DS, MSI_L1C_TC, MSI_L1C_TL, MSI_L2A___ , MSI_L2A_DS, MSI_L2A_TC, MSI_L2A_TL|\n|S2|L0||NOMINAL|LTA VOL|MSI_L0__DS, MSI_L0__GR|\n|S2|L0||NOMINAL|LTA COUNT|MSI_L0__DS, MSI_L0__GR|\n|S2|L1C||NOMINAL|DD VOL|MSI_L1C___ , MSI_L1C_DS, MSI_L1C_TC, MSI_L1C_TL|\n|S2|L1C||NOMINAL|DD COUNT|MSI_L1C___ , MSI_L1C_DS, MSI_L1C_TC, MSI_L1C_TL|\n|S2|L2A||NOMINAL|DD VOL|MSI_L2A___ , MSI_L2A_DS, MSI_L2A_TC, MSI_L2A_TL|\n|S2|L2A||NOMINAL|DD COUNT|MSI_L2A___ , MSI_L2A_DS, MSI_L2A_TC, MSI_L2A_TL|\n|S2|||NOMINAL|DD TOT VOL|MSI_L0__DS, MSI_L0__GR, MSI_L1A_DS, MSI_L1A_GR, MSI_L1B_DS, MSI_L1B_GR, MSI_L1C___ , MSI_L1C_DS, MSI_L1C_TC, MSI_L1C_TL, MSI_L2A___ , MSI_L2A_DS, MSI_L2A_TC, MSI_L2A_TL|\n|S2|||NOMINAL|DD TOT COUNT|MSI_L0__DS, MSI_L0__GR, MSI_L1A_DS, MSI_L1A_GR, MSI_L1B_DS, MSI_L1B_GR, MSI_L1C___ , MSI_L1C_DS, MSI_L1C_TC, MSI_L1C_TL, MSI_L2A___ , MSI_L2A_DS, MSI_L2A_TC, MSI_L2A_TL|\n|S2|L1||NOMINAL|DL VOL|MSI_L1A_DS, MSI_L1A_GR, MSI_L1B_DS, MSI_L1B_GR, MSI_L1C___ , MSI_L1C_DS, MSI_L1C_TC, MSI_L1C_TL|\n|S2|L1||NOMINAL|DL COUNT|MSI_L1A_DS, MSI_L1A_GR, MSI_L1B_DS, MSI_L1B_GR, MSI_L1C___ , MSI_L1C_DS, MSI_L1C_TC, MSI_L1C_TL|\n|S2|L2||NOMINAL|DL VOL|MSI_L2A___ , MSI_L2A_DS, MSI_L2A_TC, MSI_L2A_TL|\n|S2|L2||NOMINAL|DL COUNT|MSI_L2A___ , MSI_L2A_DS, MSI_L2A_TC, MSI_L2A_TL|\n|S2|||NOMINAL|DL TOT VOL|MSI_L0__DS, MSI_L0__GR, MSI_L1A_DS, MSI_L1A_GR, MSI_L1B_DS, MSI_L1B_GR, MSI_L1C___ , MSI_L1C_DS, MSI_L1C_TC, MSI_L1C_TL, MSI_L2A___ , MSI_L2A_DS, MSI_L2A_TC, MSI_L2A_TL|\n|S2|||NOMINAL|DL TOT COUNT|MSI_L0__DS, MSI_L0__GR, MSI_L1A_DS, MSI_L1A_GR, MSI_L1B_DS, MSI_L1B_GR, MSI_L1C___ , MSI_L1C_DS, MSI_L1C_TC, MSI_L1C_TL, MSI_L2A___ , MSI_L2A_DS, MSI_L2A_TC, MSI_L2A_TL|\n\n",
+            "mode": "markdown"
+          },
+          "pluginVersion": "9.2.1",
+          "targets": [
+            {
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "refId": "A"
+            }
+          ],
+          "title": "Help",
+          "type": "text"
+        }
+      ],
+      "title": "Dashboard description",
+      "type": "row"
+    },
+    {
+      "collapsed": false,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 120,
+      "panels": [],
+      "title": "Schematic View - S2",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "-- Mixed --"
+      },
+      "description": "",
+      "flowchartsData": {
+        "flowcharts": [
+          {
+            "allowDrawio": false,
+            "bgColor": "#305496",
+            "center": true,
+            "csv": "## See more information for the syntax at https://drawio-app.com/import-from-csv-to-drawio/\n##\n## Example CSV. Use ## for comments and # for configuration.\n## The following names are reserved and should not be used (or ignored):\n## id, tooltip, placeholder(s), link and label (see below)\n##\n#\n## Node label with placeholders and HTML.\n## Default is '%name_of_first_column%'.\n#\n# label: %name%<br><i style=\"color:gray;\">%position%</i><br><a href=\"mailto:%email%\">Email</a>\n#\n## Node style (placeholders are replaced once).\n## Default is the current style for nodes.\n#\n# style: label;image=%image%;whiteSpace=wrap;html=1;rounded=1;fillColor=%fill%;strokeColor=%stroke%;\n#\n## Parent style for nodes with child nodes (placeholders are replaced once).\n#\n# parentstyle: swimlane;whiteSpace=wrap;html=1;childLayout=stackLayout;horizontal=1;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;\n#\n## Optional column name that contains a reference to a named style in styles.\n## Default is the current style for nodes.\n#\n# stylename: -\n#\n## JSON for named styles of the form {\"name\": \"style\", \"name\": \"style\"} where style is a cell style with\n## placeholders that are replaced once.\n#\n# styles: -\n#\n## Optional column name that contains a reference to a named label in labels.\n## Default is the current label.\n#\n# labelname: -\n#\n## JSON for named labels of the form {\"name\": \"label\", \"name\": \"label\"} where label is a cell label with\n## placeholders.\n#\n# labels: -\n#\n## Uses the given column name as the identity for cells (updates existing cells).\n## Default is no identity (empty value or -).\n#\n# identity: -\n#\n## Uses the given column name as the parent reference for cells. Default is no parent (empty or -).\n## The identity above is used for resolving the reference so it must be specified.\n#\n# parent: -\n#\n## Adds a prefix to the identity of cells to make sure they do not collide with existing cells (whose\n## IDs are numbers from 0..n, sometimes with a GUID prefix in the context of realtime collaboration).\n## Default is csvimport-.\n#\n# namespace: csvimport-\n#\n## Connections between rows (\"from\": source colum, \"to\": target column).\n## Label, style and invert are optional. Defaults are '', current style and false.\n## If placeholders are used in the style, they are replaced with data from the source.\n## An optional placeholders can be set to target to use data from the target instead.\n## In addition to label, an optional fromlabel and tolabel can be used to name the column\n## that contains the text for the label in the edges source or target (invert ignored).\n## The label is concatenated in the form fromlabel + label + tolabel if all are defined.\n## The target column may contain a comma-separated list of values.\n## Multiple connect entries are allowed.\n#\n# connect: {\"from\": \"manager\", \"to\": \"name\", \"invert\": true, \"label\": \"manages\", \\\n#          \"style\": \"curved=1;endArrow=blockThin;endFill=1;fontSize=11;\"}\n# connect: {\"from\": \"refs\", \"to\": \"id\", \"style\": \"curved=1;fontSize=11;\"}\n#\n## Node x-coordinate. Possible value is a column name. Default is empty. Layouts will\n## override this value.\n#\n# left: \n#\n## Node y-coordinate. Possible value is a column name. Default is empty. Layouts will\n## override this value.\n#\n# top: \n#\n## Node width. Possible value is a number (in px), auto or an @ sign followed by a column\n## name that contains the value for the width. Default is auto.\n#\n# width: auto\n#\n## Node height. Possible value is a number (in px), auto or an @ sign followed by a column\n## name that contains the value for the height. Default is auto.\n#\n# height: auto\n#\n## Padding for autosize. Default is 0.\n#\n# padding: -12\n#\n## Comma-separated list of ignored columns for metadata. (These can be\n## used for connections and styles but will not be added as metadata.)\n#\n# ignore: id,image,fill,stroke,refs,manager\n#\n## Column to be renamed to link attribute (used as link).\n#\n# link: url\n#\n## Spacing between nodes. Default is 40.\n#\n# nodespacing: 40\n#\n## Spacing between levels of hierarchical layouts. Default is 100.\n#\n# levelspacing: 100\n#\n## Spacing between parallel edges. Default is 40. Use 0 to disable.\n#\n# edgespacing: 40\n#\n## Name or JSON of layout. Possible values are auto, none, verticaltree, horizontaltree,\n## verticalflow, horizontalflow, organic, circle or a JSON string as used in Layout, Apply.\n## Default is auto.\n#\n# layout: auto\n#\n## ---- CSV below this line. First line are column names. ----\nname,position,id,location,manager,email,fill,stroke,refs,url,image\nEvan Miller,CFO,emi,Office 1,,me@example.com,#dae8fc,#6c8ebf,,https://www.draw.io,https://cdn3.iconfinder.com/data/icons/user-avatars-1/512/users-9-2-128.png\nEdward Morrison,Brand Manager,emo,Office 2,Evan Miller,me@example.com,#d5e8d4,#82b366,,https://www.draw.io,https://cdn3.iconfinder.com/data/icons/user-avatars-1/512/users-10-3-128.png\nRon Donovan,System Admin,rdo,Office 3,Evan Miller,me@example.com,#d5e8d4,#82b366,\"emo,tva\",https://www.draw.io,https://cdn3.iconfinder.com/data/icons/user-avatars-1/512/users-2-128.png\nTessa Valet,HR Director,tva,Office 4,Evan Miller,me@example.com,#d5e8d4,#82b366,,https://www.draw.io,https://cdn3.iconfinder.com/data/icons/user-avatars-1/512/users-3-128.png\n",
+            "download": false,
+            "editorTheme": "dark",
+            "editorUrl": "https://www.draw.io",
+            "enableAnim": true,
+            "grid": false,
+            "lock": true,
+            "name": "Main",
+            "scale": true,
+            "tooltip": true,
+            "type": "xml",
+            "url": "http://<YourUrl>/<Your XML/drawio file/api>",
+            "xml": "<mxfile host=\"app.diagrams.net\" modified=\"2022-12-01T14:48:53.339Z\" agent=\"5.0 (X11)\" version=\"20.6.0\" etag=\"FxNfzy1wQYz3d8w6s_vQ\" type=\"embed\"><diagram id=\"1vqaerrUo67vyuvTgb2-\" name=\"Page-1\">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</diagram></mxfile>",
+            "zoom": "100%"
+          }
+        ]
+      },
+      "format": "short",
+      "graphId": "flowchart_121",
+      "gridPos": {
+        "h": 23,
+        "w": 24,
+        "x": 0,
+        "y": 2
+      },
+      "id": 121,
+      "newFlag": false,
+      "rulesData": {
+        "rulesData": [
+          {
+            "aggregation": "total",
+            "alias": "S2_ACQ_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 1,
+            "overlayIcon": false,
+            "pattern": "S2_ACQ_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S2_ACQ_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S2_ACQ_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 2,
+            "overlayIcon": false,
+            "pattern": "S2_ACQ_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S2_ACQ_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S2_PROD_L0_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 3,
+            "overlayIcon": false,
+            "pattern": "S2_PROD_L0_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S2_PROD_L0_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S2_PROD_L0_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 4,
+            "overlayIcon": false,
+            "pattern": "S2_PROD_L0_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S2_PROD_L0_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S2_PROD_L1C_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 5,
+            "overlayIcon": false,
+            "pattern": "S2_PROD_L1C_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S2_PROD_L1C_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S2_PROD_L1C_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 6,
+            "overlayIcon": false,
+            "pattern": "S2_PROD_L1C_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S2_PROD_L1C_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S2_PROD_L1B_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 7,
+            "overlayIcon": false,
+            "pattern": "S2_PROD_L1B_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S2_PROD_L1B_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S2_PROD_L1B_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 8,
+            "overlayIcon": false,
+            "pattern": "S2_PROD_L1B_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S2_PROD_L1B_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S2_PROD_L2A_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 9,
+            "overlayIcon": false,
+            "pattern": "S2_PROD_L2A_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S2_PROD_L2A_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S2_PROD_L2A_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 10,
+            "overlayIcon": false,
+            "pattern": "S2_PROD_L2A_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S2_PROD_L2A_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S2_PROD_TOT_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 11,
+            "overlayIcon": false,
+            "pattern": "S2_PROD_TOT_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S2_PROD_TOT_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S2_PROD_TOT_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 12,
+            "overlayIcon": false,
+            "pattern": "S2_PROD_TOT_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S2_PROD_TOT_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S2_LTA_L0_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 13,
+            "overlayIcon": false,
+            "pattern": "S2_LTA_L0_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S2_LTA_L0_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S2_LTA_L0_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 14,
+            "overlayIcon": false,
+            "pattern": "S2_LTA_L0_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S2_LTA_L0_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S2_DD_L1C_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 15,
+            "overlayIcon": false,
+            "pattern": "S2_DD_L1C_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S2_DD_L1C_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S2_DD_L1C_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 16,
+            "overlayIcon": false,
+            "pattern": "S2_DD_L1C_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S2_DD_L1C_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S2_DD_L2A_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 17,
+            "overlayIcon": false,
+            "pattern": "S2_DD_L2A_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S2_DD_L2A_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S2_DD_L2A_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 18,
+            "overlayIcon": false,
+            "pattern": "S2_DD_L2A_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S2_DD_L2A_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S2_DD_TOT_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 19,
+            "overlayIcon": false,
+            "pattern": "S2_DD_TOT_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S2_DD_TOT_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S2_DD_TOT_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 20,
+            "overlayIcon": false,
+            "pattern": "S2_DD_TOT_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S2_DD_TOT_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S2_DL_L1_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 21,
+            "overlayIcon": false,
+            "pattern": "S2_DL_L1_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S2_DL_L1_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S2_DL_L1_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 22,
+            "overlayIcon": false,
+            "pattern": "S2_DL_L1_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S2_DL_L1_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S2_DL_L2_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 23,
+            "overlayIcon": false,
+            "pattern": "S2_DL_L2_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S2_DL_L2_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S2_DL_L2_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 24,
+            "overlayIcon": false,
+            "pattern": "S2_DL_L2_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S2_DL_L2_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S2_DL_TOT_VOL",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 25,
+            "overlayIcon": false,
+            "pattern": "S2_DL_TOT_VOL",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S2_DL_TOT_VOL",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          },
+          {
+            "aggregation": "total",
+            "alias": "S2_DL_TOT_COUNT",
+            "colors": [
+              "rgba(245, 54, 54, 0.9)",
+              "rgba(237, 129, 40, 0.89)",
+              "rgba(50, 172, 45, 0.97)"
+            ],
+            "column": "Time",
+            "dateFormat": "YYYY-MM-DD HH:mm:ss",
+            "decimals": 2,
+            "eventData": [],
+            "eventProp": "id",
+            "eventRegEx": false,
+            "gradient": false,
+            "hidden": false,
+            "invert": false,
+            "linkData": [],
+            "linkProp": "id",
+            "linkRegEx": true,
+            "mappingType": 1,
+            "metricType": "serie",
+            "order": 26,
+            "overlayIcon": false,
+            "pattern": "S2_DL_TOT_COUNT",
+            "rangeData": [],
+            "reduce": true,
+            "refId": "A",
+            "sanitize": false,
+            "shapeData": [],
+            "shapeProp": "id",
+            "shapeRegEx": true,
+            "stringThresholds": [
+              "/.*/",
+              "/.*/"
+            ],
+            "textData": [
+              {
+                "hidden": false,
+                "pattern": "S2_DL_TOT_COUNT",
+                "textOn": "wmd",
+                "textPattern": "/.*/",
+                "textReplace": "content"
+              }
+            ],
+            "textProp": "value",
+            "textRegEx": false,
+            "thresholds": [
+              50,
+              80
+            ],
+            "tooltip": false,
+            "tooltipColors": false,
+            "tooltipLabel": "",
+            "tooltipOn": "a",
+            "tpDirection": "v",
+            "tpGraph": false,
+            "tpGraphScale": "linear",
+            "tpGraphSize": "100%",
+            "tpGraphType": "line",
+            "type": "number",
+            "unit": "short",
+            "valueData": []
+          }
+        ]
+      },
+      "targets": [
+        {
+          "alias": "S2_ACQ_VOL",
+          "bucketAggs": [
+            {
+              "field": "time_created",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P7A7ACE4A571C05C7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "data_size",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "mission:S2",
+          "refId": "S2_ACQ_VOL",
+          "timeField": "time_created"
+        },
+        {
+          "alias": "S2_ACQ_COUNT",
+          "bucketAggs": [
+            {
+              "field": "time_created",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P7A7ACE4A571C05C7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "mission:S2",
+          "refId": "S2_ACQ_COUNT",
+          "timeField": "time_created"
+        },
+        {
+          "alias": "S2_PROD_L0_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S2 AND service_type:PRIP )   AND  (  (   ( product_type:MSI_L0__DS OR product_type:MSI_L0__GR ) AND ( timeliness:NOMINAL )  )  )  ",
+          "refId": "S2_PROD_L0_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S2_PROD_L0_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S2 AND service_type:PRIP )   AND  (  (   ( product_type:MSI_L0__DS OR product_type:MSI_L0__GR ) AND ( timeliness:NOMINAL )  )  )  ",
+          "refId": "S2_PROD_L0_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S2_PROD_L1C_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S2 AND service_type:PRIP )   AND  (  (   ( product_type:MSI_L1C___  OR product_type:MSI_L1C_DS OR product_type:MSI_L1C_TC OR product_type:MSI_L1C_TL ) AND ( timeliness:NOMINAL )  )  )  ",
+          "refId": "S2_PROD_L1C_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S2_PROD_L1C_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S2 AND service_type:PRIP )   AND  (  (   ( product_type:MSI_L1C___  OR product_type:MSI_L1C_DS OR product_type:MSI_L1C_TC OR product_type:MSI_L1C_TL ) AND ( timeliness:NOMINAL )  )  )  ",
+          "refId": "S2_PROD_L1C_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S2_PROD_L1B_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S2 AND service_type:PRIP )   AND  (  (   ( product_type:MSI_L1B_DS OR product_type:MSI_L1B_GR ) AND ( timeliness:NOMINAL )  )  )  ",
+          "refId": "S2_PROD_L1B_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S2_PROD_L1B_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S2 AND service_type:PRIP )   AND  (  (   ( product_type:MSI_L1B_DS OR product_type:MSI_L1B_GR ) AND ( timeliness:NOMINAL )  )  )  ",
+          "refId": "S2_PROD_L1B_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S2_PROD_L2A_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S2 AND service_type:PRIP )   AND  (  (   ( product_type:MSI_L2A___  OR product_type:MSI_L2A_DS OR product_type:MSI_L2A_TC OR product_type:MSI_L2A_TL ) AND ( timeliness:NOMINAL )  )  )  ",
+          "refId": "S2_PROD_L2A_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S2_PROD_L2A_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S2 AND service_type:PRIP )   AND  (  (   ( product_type:MSI_L2A___  OR product_type:MSI_L2A_DS OR product_type:MSI_L2A_TC OR product_type:MSI_L2A_TL ) AND ( timeliness:NOMINAL )  )  )  ",
+          "refId": "S2_PROD_L2A_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S2_PROD_TOT_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S2 AND service_type:PRIP )   AND  (  (   ( product_type:MSI_L0__DS OR product_type:MSI_L0__GR OR product_type:MSI_L1B_DS OR product_type:MSI_L1B_GR OR product_type:MSI_L1C___  OR product_type:MSI_L1C_DS OR product_type:MSI_L1C_TC OR product_type:MSI_L1C_TL OR product_type:MSI_L2A___  OR product_type:MSI_L2A_DS OR product_type:MSI_L2A_TC OR product_type:MSI_L2A_TL ) AND ( timeliness:NOMINAL )  )  )  ",
+          "refId": "S2_PROD_TOT_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S2_PROD_TOT_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S2 AND service_type:PRIP )   AND  (  (   ( product_type:MSI_L0__DS OR product_type:MSI_L0__GR OR product_type:MSI_L1B_DS OR product_type:MSI_L1B_GR OR product_type:MSI_L1C___  OR product_type:MSI_L1C_DS OR product_type:MSI_L1C_TC OR product_type:MSI_L1C_TL OR product_type:MSI_L2A___  OR product_type:MSI_L2A_DS OR product_type:MSI_L2A_TC OR product_type:MSI_L2A_TL ) AND ( timeliness:NOMINAL )  )  )  ",
+          "refId": "S2_PROD_TOT_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S2_LTA_L0_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/8)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S2 AND service_type:LTA )   AND  (  (   ( product_type:MSI_L0__DS OR product_type:MSI_L0__GR ) AND ( timeliness:NOMINAL )  )  )  ",
+          "refId": "S2_LTA_L0_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S2_LTA_L0_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/8)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S2 AND service_type:LTA )   AND  (  (   ( product_type:MSI_L0__DS OR product_type:MSI_L0__GR ) AND ( timeliness:NOMINAL )  )  )  ",
+          "refId": "S2_LTA_L0_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S2_DD_L1C_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S2 AND service_type:DD )  AND  (  (   ( product_type:MSI_L1C___  OR product_type:MSI_L1C_DS OR product_type:MSI_L1C_TC OR product_type:MSI_L1C_TL ) AND ( timeliness:NOMINAL )  )  )  ",
+          "refId": "S2_DD_L1C_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S2_DD_L1C_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S2 AND service_type:DD )  AND  (  (   ( product_type:MSI_L1C___  OR product_type:MSI_L1C_DS OR product_type:MSI_L1C_TC OR product_type:MSI_L1C_TL ) AND ( timeliness:NOMINAL )  )  )  ",
+          "refId": "S2_DD_L1C_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S2_DD_L2A_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S2 AND service_type:DD )  AND  (  (   ( product_type:MSI_L2A___  OR product_type:MSI_L2A_DS OR product_type:MSI_L2A_TC OR product_type:MSI_L2A_TL ) AND ( timeliness:NOMINAL )  )  )  ",
+          "refId": "S2_DD_L2A_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S2_DD_L2A_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S2 AND service_type:DD )  AND  (  (   ( product_type:MSI_L2A___  OR product_type:MSI_L2A_DS OR product_type:MSI_L2A_TC OR product_type:MSI_L2A_TL ) AND ( timeliness:NOMINAL )  )  )  ",
+          "refId": "S2_DD_L2A_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S2_DD_TOT_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "( mission:S2 AND service_type:DD )  AND  (  (   ( product_type:MSI_L0__DS OR product_type:MSI_L0__GR OR product_type:MSI_L1A_DS OR product_type:MSI_L1A_GR OR product_type:MSI_L1B_DS OR product_type:MSI_L1B_GR OR product_type:MSI_L1C___  OR product_type:MSI_L1C_DS OR product_type:MSI_L1C_TC OR product_type:MSI_L1C_TL OR product_type:MSI_L2A___  OR product_type:MSI_L2A_DS OR product_type:MSI_L2A_TC OR product_type:MSI_L2A_TL ) AND ( timeliness:NOMINAL )  )  )  ",
+          "refId": "S2_DD_TOT_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S2_DD_TOT_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "( mission:S2 AND service_type:DD )  AND  (  (   ( product_type:MSI_L0__DS OR product_type:MSI_L0__GR OR product_type:MSI_L1A_DS OR product_type:MSI_L1A_GR OR product_type:MSI_L1B_DS OR product_type:MSI_L1B_GR OR product_type:MSI_L1C___  OR product_type:MSI_L1C_DS OR product_type:MSI_L1C_TC OR product_type:MSI_L1C_TL OR product_type:MSI_L2A___  OR product_type:MSI_L2A_DS OR product_type:MSI_L2A_TC OR product_type:MSI_L2A_TL ) AND ( timeliness:NOMINAL )  )  )  ",
+          "refId": "S2_DD_TOT_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S2_DL_L1_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "mission:S2 AND service_type:Dl AND ( product_level:L1A OR product_level:L1B OR product_level:L1C)",
+          "refId": "S2_DL_L1_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S2_DL_L1_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "mission:S2 AND service_type:Dl AND ( product_level:L1A OR product_level:L1B OR product_level:L1C)",
+          "refId": "S2_DL_L1_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S2_DL_L2_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "mission:S2 AND service_type:Dl AND product_level:L2A",
+          "refId": "S2_DL_L2_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S2_DL_L2_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "mission:S2 AND service_type:Dl AND product_level:L2A",
+          "refId": "S2_DL_L2_COUNT",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S2_DL_TOT_VOL",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "field": "content_length",
+              "id": "1",
+              "settings": {
+                "script": "((_value/2)/1099511627776L)"
+              },
+              "type": "sum"
+            }
+          ],
+          "query": "mission:S2 AND service_type:Dl AND ( product_level:L0_ OR product_level:L1A OR product_level:L1B OR product_level:L1C OR product_level:L2A )",
+          "refId": "S2_DL_TOT_VOL",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "S2_DL_TOT_COUNT",
+          "bucketAggs": [
+            {
+              "field": "sensing_start_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P9C1AEFD5EC435EE7"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "hide": true,
+              "id": "2",
+              "type": "count"
+            },
+            {
+              "id": "11",
+              "pipelineVariables": [
+                {
+                  "name": "Count_",
+                  "pipelineAgg": "2"
+                }
+              ],
+              "settings": {
+                "script": "(params.Count_/2)"
+              },
+              "type": "bucket_script"
+            }
+          ],
+          "query": "mission:S2 AND service_type:Dl AND ( product_level:L0_ OR product_level:L1A OR product_level:L1B OR product_level:L1C OR product_level:L2A )",
+          "refId": "S2_DL_TOT_COUNT",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Yearly Overall Data Flow S2 SATELLITE",
+      "transparent": true,
+      "type": "agenty-flowcharting-panel",
+      "valueName": "current",
+      "version": "0.9.0"
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 37,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-1y",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "utc",
+  "title": "System Technical Budget Schematic View - S2",
+  "uid": "SIMuwDKVz",
+  "weekStart": ""
+}

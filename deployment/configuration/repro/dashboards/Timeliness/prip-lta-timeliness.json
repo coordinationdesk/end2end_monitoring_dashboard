@@ -1,0 +1,1358 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [
+    {
+      "asDropdown": false,
+      "icon": "external link",
+      "includeVars": false,
+      "keepTime": true,
+      "tags": [],
+      "targetBlank": false,
+      "title": "S2 Preset",
+      "tooltip": "",
+      "type": "link",
+      "url": "/grafana/d/ZrsG86xnl/prip-lta-timeliness?orgId=1&var-mission=S2&var-satellite=All&var-timeliness=All&var-product_level=All&var-product_type=MSI_L0__DS&var-product_type=MSI_L0__GR&var-product_type=PRD_HKTM__&var-product_type=AUX_SADATA"
+    }
+  ],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 29,
+      "options": {
+        "code": {
+          "language": "plaintext",
+          "showLineNumbers": false,
+          "showMiniMap": false
+        },
+        "content": "# LTAs Timeliness\nThis dashboard show statistics about the LTA product timeliness.",
+        "mode": "markdown"
+      },
+      "pluginVersion": "9.2.6",
+      "title": "Introduction",
+      "type": "text"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PAB1B72147BE890C9"
+      },
+      "description": "Number of product and percentage with timeliness between 0-3 days / 3-5 days / 5-15 days / above 15 days ",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": [],
+          "noValue": "0",
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 0,
+        "y": 4
+      },
+      "id": 251,
+      "maxPerRow": 4,
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "sortBy": "Value",
+          "sortDesc": true,
+          "values": [
+            "percent",
+            "value"
+          ]
+        },
+        "pieType": "donut",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.3.3",
+      "repeat": "service_id",
+      "repeatDirection": "h",
+      "targets": [
+        {
+          "alias": "0 - 3 days",
+          "bucketAggs": [
+            {
+              "field": "publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PAB1B72147BE890C9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "service_type:LTA AND mission: $mission AND satellite_unit: $satellite AND product_level: $product_level AND timeliness: $timeliness AND product_type: ${product_type} AND service_id: $service_id AND transfer_timeliness: [0 TO 259200000000 ]",
+          "refId": "0to3D",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "3 - 5 days",
+          "bucketAggs": [
+            {
+              "field": "publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PAB1B72147BE890C9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "service_type:LTA AND mission: $mission AND satellite_unit: $satellite AND product_level: $product_level AND timeliness: $timeliness AND product_type: ${product_type} AND service_id: $service_id AND transfer_timeliness: {259200000000 TO 432000000000]",
+          "refId": "0to5D",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "5 - 15 days",
+          "bucketAggs": [
+            {
+              "field": "publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PAB1B72147BE890C9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "service_type:LTA AND mission: $mission AND satellite_unit: $satellite AND product_level: $product_level AND timeliness: $timeliness AND product_type: ${product_type} AND service_id: $service_id AND transfer_timeliness: {432000000000 TO 1296000000000]",
+          "refId": "5to15D",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "Above 15 days",
+          "bucketAggs": [
+            {
+              "field": "publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PAB1B72147BE890C9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "service_type:LTA AND mission: $mission AND satellite_unit: $satellite AND product_level: $product_level AND timeliness: $timeliness AND product_type: ${product_type} AND service_id: $service_id AND transfer_timeliness: {1296000000000 TO *]",
+          "refId": "above15D",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Timeliness distribution $service_id ",
+      "transformations": [
+        {
+          "disabled": true,
+          "id": "reduce",
+          "options": {
+            "labelsToFields": false,
+            "reducers": []
+          }
+        }
+      ],
+      "type": "piechart"
+    },
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 9
+      },
+      "id": 6,
+      "panels": [],
+      "repeat": "service_id",
+      "title": "Details timeliness for $service_id LTA",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PAB1B72147BE890C9"
+      },
+      "description": "Number of product with timeliness between 0 and 3 days ",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 0,
+        "y": 10
+      },
+      "id": 17,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "/^Count$/",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": false,
+        "text": {
+          "titleSize": 0,
+          "valueSize": 30
+        }
+      },
+      "pluginVersion": "9.2.6",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "1h",
+                "min_doc_count": "0",
+                "timeZone": "utc",
+                "trimEdges": "0"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PAB1B72147BE890C9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "service_type:LTA AND mission: $mission AND satellite_unit: $satellite AND product_level: $product_level AND timeliness: $timeliness AND product_type: ${product_type} AND service_id: $service_id AND transfer_timeliness: [0 TO 259200000000]",
+          "refId": "0to3D",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Timeliness 0-3 days",
+      "transformations": [],
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PAB1B72147BE890C9"
+      },
+      "description": "Number of product with timeliness between 3 and 5 days ",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "yellow",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 6,
+        "y": 10
+      },
+      "id": 18,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "/^Count$/",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": false,
+        "text": {
+          "titleSize": 0,
+          "valueSize": 30
+        }
+      },
+      "pluginVersion": "9.2.6",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PAB1B72147BE890C9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "service_type:LTA AND mission: $mission AND satellite_unit: $satellite AND product_level: $product_level AND timeliness: $timeliness AND product_type: ${product_type} AND service_id: $service_id AND transfer_timeliness: {259200000000 TO 432000000000]",
+          "refId": "3-5D",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Timeliness 3-5 days",
+      "transformations": [],
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PAB1B72147BE890C9"
+      },
+      "description": "Number of product with timeliness between 5 and 15 days ",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "orange",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 12,
+        "y": 10
+      },
+      "id": 19,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "/^Count$/",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": false,
+        "text": {
+          "titleSize": 0,
+          "valueSize": 30
+        }
+      },
+      "pluginVersion": "9.2.6",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PAB1B72147BE890C9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "service_type:LTA AND mission: $mission AND satellite_unit: $satellite AND product_level: $product_level AND timeliness: $timeliness AND product_type: ${product_type} AND service_id: $service_id AND transfer_timeliness: {432000000000 TO 1296000000000]",
+          "refId": "5-15D",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Timeliness 5-15 days",
+      "transformations": [],
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PAB1B72147BE890C9"
+      },
+      "description": "Number of product with timeliness more than 15 days ",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "noValue": "0",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 18,
+        "y": 10
+      },
+      "id": 20,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "/^Count$/",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": false,
+        "text": {
+          "titleSize": 0,
+          "valueSize": 30
+        }
+      },
+      "pluginVersion": "9.2.6",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PAB1B72147BE890C9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "service_type:LTA AND mission: $mission AND satellite_unit: $satellite AND product_level: $product_level AND timeliness: $timeliness AND product_type: ${product_type} AND service_id: $service_id AND transfer_timeliness: {1296000000000 TO *]",
+          "refId": "15-*D",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Timeliness > 15 days",
+      "transformations": [],
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PAB1B72147BE890C9"
+      },
+      "description": "Number of product and percentage with timeliness between 0-3 days / 3-5 days / 5-15 days / above 15 days ",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": [],
+          "noValue": "0",
+          "unit": "none"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 12,
+        "x": 0,
+        "y": 15
+      },
+      "id": 62,
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "right",
+          "showLegend": true,
+          "values": [
+            "percent",
+            "value"
+          ]
+        },
+        "pieType": "donut",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.3.3",
+      "targets": [
+        {
+          "alias": "0 - 3 days",
+          "bucketAggs": [
+            {
+              "field": "publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PAB1B72147BE890C9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "service_type:LTA AND mission: $mission AND satellite_unit: $satellite AND product_level: $product_level AND timeliness: $timeliness AND product_type: ${product_type} AND service_id: $service_id AND transfer_timeliness: [0 TO 259200000000 ]",
+          "refId": "0to3D",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "3 - 5 days",
+          "bucketAggs": [
+            {
+              "field": "publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PAB1B72147BE890C9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "service_type:LTA AND mission: $mission AND satellite_unit: $satellite AND product_level: $product_level AND timeliness: $timeliness AND product_type: ${product_type} AND service_id: $service_id AND transfer_timeliness: {259200000000 TO 432000000000]",
+          "refId": "0to5D",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "5 - 15 days",
+          "bucketAggs": [
+            {
+              "field": "publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PAB1B72147BE890C9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "service_type:LTA AND mission: $mission AND satellite_unit: $satellite AND product_level: $product_level AND timeliness: $timeliness AND product_type: ${product_type} AND service_id: $service_id AND transfer_timeliness: {432000000000 TO 1296000000000]",
+          "refId": "5to15D",
+          "timeField": "sensing_start_date"
+        },
+        {
+          "alias": "Above 15 days",
+          "bucketAggs": [
+            {
+              "field": "publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PAB1B72147BE890C9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "service_type:LTA AND mission: $mission AND satellite_unit: $satellite AND product_level: $product_level AND timeliness: $timeliness AND product_type: ${product_type} AND service_id: $service_id AND transfer_timeliness: {1296000000000 TO *]",
+          "refId": "above15D",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Timeliness distribution ",
+      "transformations": [
+        {
+          "disabled": true,
+          "id": "reduce",
+          "options": {
+            "labelsToFields": false,
+            "reducers": []
+          }
+        }
+      ],
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PAB1B72147BE890C9"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 259200000001
+              },
+              {
+                "color": "orange",
+                "value": 432000000001
+              },
+              {
+                "color": "red",
+                "value": 1296000000001
+              }
+            ]
+          },
+          "unit": "µs"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 12,
+        "y": 15
+      },
+      "id": 21,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "max"
+          ],
+          "fields": "/^Average transfer_timeliness$/",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": false
+      },
+      "pluginVersion": "9.2.6",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "1h"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PAB1B72147BE890C9"
+          },
+          "metrics": [
+            {
+              "field": "transfer_timeliness",
+              "id": "1",
+              "type": "avg"
+            }
+          ],
+          "query": "service_type:LTA AND mission: $mission AND satellite_unit: $satellite AND product_level: $product_level AND timeliness: $timeliness AND product_type: ${product_type} AND service_id: $service_id",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Average timeliness on period",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PAB1B72147BE890C9"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#EAB839",
+                "value": 2592000000001
+              },
+              {
+                "color": "orange",
+                "value": 4320000000001
+              },
+              {
+                "color": "red",
+                "value": 12960000000001
+              }
+            ]
+          },
+          "unit": "µs"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 6,
+        "x": 18,
+        "y": 15
+      },
+      "id": 15,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "max"
+          ],
+          "fields": "/^Max transfer_timeliness$/",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": false
+      },
+      "pluginVersion": "9.2.6",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "1h"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PAB1B72147BE890C9"
+          },
+          "metrics": [
+            {
+              "field": "transfer_timeliness",
+              "id": "1",
+              "settings": {},
+              "type": "max"
+            }
+          ],
+          "query": "service_type:LTA AND mission: $mission AND satellite_unit: $satellite AND product_level: $product_level AND timeliness: $timeliness AND product_type: ${product_type} AND service_id: $service_id",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Max timeliness on period",
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "PAB1B72147BE890C9"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "displayMode": "auto",
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CAMs Link"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "title": "",
+                    "url": "${__value.raw}"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 20
+      },
+      "id": 27,
+      "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "9.2.6",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PAB1B72147BE890C9"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "10000"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "service_type:LTA AND mission: $mission AND satellite_unit: $satellite AND product_level: $product_level AND timeliness: $timeliness AND product_type: ${product_type} AND service_id: $service_id AND transfer_timeliness: {259200000000 TO *]",
+          "refId": "Above 3 days",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Product with timeliness above 3 days",
+      "transformations": [
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "time",
+                "targetField": "sensing_start_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "modification_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "eviction_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "origin_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "publication_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "sensing_end_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "updateTime"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "cams_tickets": true,
+              "last_attached_ticket": true
+            },
+            "indexByName": {
+              "_id": 1,
+              "_index": 2,
+              "_type": 3,
+              "absolute_orbit": 4,
+              "cams_description": 36,
+              "cams_origin": 35,
+              "cams_tickets": 5,
+              "content_length": 6,
+              "datatake_id": 7,
+              "eviction_date": 8,
+              "from_sensing_timeliness": 9,
+              "highlight": 10,
+              "instrument_mode": 11,
+              "key": 12,
+              "last_attached_ticket": 13,
+              "last_attached_ticket_url": 34,
+              "mission": 14,
+              "modification_date": 15,
+              "name": 16,
+              "origin_date": 17,
+              "polarization": 18,
+              "product_class": 19,
+              "product_level": 20,
+              "product_type": 21,
+              "product_uuid": 22,
+              "publication_date": 23,
+              "satellite_unit": 24,
+              "sensing_duration": 25,
+              "sensing_end_date": 26,
+              "sensing_start_date": 0,
+              "service_id": 27,
+              "service_type": 28,
+              "site_center": 29,
+              "sort": 30,
+              "timeliness": 31,
+              "transfer_timeliness": 32,
+              "updateTime": 33
+            },
+            "renameByName": {
+              "cams_description": "CAMs Description",
+              "cams_origin": "CAMs Origin",
+              "last_attached_ticket_url": "CAMs Link"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 37,
+  "style": "dark",
+  "tags": [
+    "Timeliness"
+  ],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "S2"
+          ],
+          "value": [
+            "S2"
+          ]
+        },
+        "hide": 0,
+        "includeAll": true,
+        "label": "Mission",
+        "multi": true,
+        "name": "mission",
+        "options": [
+          {
+            "selected": false,
+            "text": "All",
+            "value": "$__all"
+          },
+          {
+            "selected": false,
+            "text": "S1",
+            "value": "S1"
+          },
+          {
+            "selected": true,
+            "text": "S2",
+            "value": "S2"
+          },
+          {
+            "selected": false,
+            "text": "S3",
+            "value": "S3"
+          }
+        ],
+        "query": "S1,S2,S3",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "PAB1B72147BE890C9"
+        },
+        "definition": "{\"find\":\"terms\",\"field\":\"satellite_unit\",  \"query\":\"mission: $mission\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Satellite",
+        "multi": true,
+        "name": "satellite",
+        "options": [],
+        "query": "{\"find\":\"terms\",\"field\":\"satellite_unit\",  \"query\":\"mission: $mission\"}",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "PAB1B72147BE890C9"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"timeliness\",\"query\":\"mission: ${mission} \"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Category",
+        "multi": true,
+        "name": "timeliness",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"timeliness\",\"query\":\"mission: ${mission} \"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "PAB1B72147BE890C9"
+        },
+        "definition": "{\"find\":\"terms\",\"field\":\"product_level\", \"query\":\"mission: $mission AND satellite_unit : $satellite\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Level",
+        "multi": true,
+        "name": "product_level",
+        "options": [],
+        "query": "{\"find\":\"terms\",\"field\":\"product_level\", \"query\":\"mission: $mission AND satellite_unit : $satellite\"}",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "PAB1B72147BE890C9"
+        },
+        "definition": "{\"find\":\"terms\",\"field\":\"product_type\", \"query\":\"mission: $mission AND satellite_unit : $satellite AND product_level:$product_level\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Product Type",
+        "multi": true,
+        "name": "product_type",
+        "options": [],
+        "query": "{\"find\":\"terms\",\"field\":\"product_type\", \"query\":\"mission: $mission AND satellite_unit : $satellite AND product_level:$product_level\"}",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "PAB1B72147BE890C9"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"service_id\", \"query\": \"service_type: LTA  AND mission:$mission\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "LTA Service",
+        "multi": true,
+        "name": "service_id",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"service_id\", \"query\": \"service_type: LTA  AND mission:$mission\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "PAB1B72147BE890C9"
+        },
+        "filters": [],
+        "hide": 0,
+        "label": "Ad-Hoc filter",
+        "name": "Filter",
+        "skipUrlSync": false,
+        "type": "adhoc"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-1w/w",
+    "to": "now-1w/w"
+  },
+  "timepicker": {},
+  "timezone": "utc",
+  "title": "PRIP-LTA Timeliness",
+  "uid": "ZrsG86xnl",
+  "weekStart": ""
+}

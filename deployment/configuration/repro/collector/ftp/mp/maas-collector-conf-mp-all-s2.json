@@ -1,0 +1,69 @@
+{
+    "collectors": [
+        {
+            "class": "FTPCollectorConfiguration",
+            "id_field": [
+                "satellite_id",
+                "mission",
+                "datatake_id",
+                "effective_downlink_start",
+                "station",
+                "reportName"
+            ],
+            "file_pattern": "*S2*MP_ALL__*.csv",
+            "directories": [
+                "/eds/S2PDGS/S2MP_SHARED/"
+            ],
+            "routing_key": "",
+            "file_routing_key": "file.raw.data.mp-all-product",
+            "interface_name": "S2MissionPlanningALL",
+            "refresh_interval": 10,
+            "model": "MpAllProduct",
+            "extractor": {
+                "class": "CSVExtractor",
+                "args": {
+                    "allow_partial": true,
+                    "attr_map": {
+                        "satellite_id": "SatelliteID",
+                        "mission": {
+                            "python": "lambda c: 'S2'"
+                        },
+                        "datatake_id": {
+                            "python": "lambda row: row.get('ID') or row.get('AcquisitionID')"
+                        },
+                        "effective_downlink_start": "EffectiveDownlinkStart",
+                        "effective_downlink_stop": "EffectiveDownlinkStop",
+                        "downlink_duration": "DownlinkDuration[msec]",
+                        "acquisition_start": "AcquisitionStart",
+                        "acquisition_stop": "AcquisitionStop",
+                        "acquisition_duration": "AcquisitionDuration[msec]",
+                        "latency": "Latency[min]",
+                        "station": "Station",
+                        "partial": "Partial",
+                        "absolute_orbit": {
+                            "python": "lambda root: None if root.get('AbsoluteOrbit') is None else str(root.get('AbsoluteOrbit'))"
+                        },
+                        "relative_orbit": {
+                            "python": "lambda root: None if root.get('RelativeOrbit') is None else str(root.get('RelativeOrbit'))"
+                        },
+                        "downlink_absolute_orbit": {
+                            "python": "lambda root: None if root.get('DownlinkOrbit') is None else str(root.get('DownlinkOrbit'))"
+                        },
+                        "downlink_polarization": "DownlinkPolarization",
+                        "channel": "Channel",
+                        "number_of_scenes": "Scenes",
+                        "timeliness": "Timeliness",
+                        "interface_name": {
+                            "python": "lambda c: 'S2MissionPlanningALL'"
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "amqp": {
+        "new.raw.data.mp-all-product": {
+            "chunk_size": 1
+        }
+    }
+}

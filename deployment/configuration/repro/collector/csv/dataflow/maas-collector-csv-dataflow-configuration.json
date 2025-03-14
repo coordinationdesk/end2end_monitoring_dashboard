@@ -1,0 +1,42 @@
+{
+    "collectors": [
+        {
+            "class": "FileCollectorConfiguration",
+            "id_field": [
+                "product_type",
+                "mission"
+            ],
+            "routing_key": "",
+            "interface_name": "DATAFLOW",
+            "file_pattern": "Copernicus_Ground_Segment_Sentinels_Data_Flow_Configuration_v*.csv",
+            "model": "CdsDataflow",
+            "no_probe": true,
+            "extractor": {
+                "class": "CSVExtractor",
+                "args": {
+                    "attr_map": {
+                        "product_type": "product_type",
+                        "mission": "mission",
+                        "level": "level",
+                        "origin_level": "origin_level",
+                        "instrument": "instrument",
+                        "mode": "mode",
+                        "type": "type",
+                        "groups": {
+                            "type": "python",
+                            "python": "lambda doc: doc['groups'].split('|')"
+                        },
+                        "published_by": {
+                            "type": "python",
+                            "python": "lambda doc: doc['published_by'].split('|')"
+                        },
+                        "consumed_by": {
+                            "type": "python",
+                            "python": "lambda doc: doc['consumed_by'].split('|')"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

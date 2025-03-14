@@ -1,0 +1,622 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "links": [
+    {
+      "asDropdown": false,
+      "icon": "dashboard",
+      "includeVars": true,
+      "keepTime": true,
+      "tags": [],
+      "targetBlank": false,
+      "title": "DDIP Published",
+      "tooltip": "",
+      "type": "link",
+      "url": "/grafana/d/zASfw_wnk/products-inventory?orgId=1&var-Filter=ddip_publication_date|%3E|1900-01-01"
+    }
+  ],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 63,
+      "panels": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "grafana"
+          },
+          "description": "",
+          "gridPos": {
+            "h": 3,
+            "w": 24,
+            "x": 0,
+            "y": 1
+          },
+          "id": 59,
+          "options": {
+            "code": {
+              "language": "plaintext",
+              "showLineNumbers": false,
+              "showMiniMap": false
+            },
+            "content": "This dashboard features information on:\n - Detailed list of published products and date of publication on each interface.",
+            "mode": "markdown"
+          },
+          "pluginVersion": "9.2.1",
+          "type": "text"
+        }
+      ],
+      "title": "Dashboard Description",
+      "type": "row"
+    },
+    {
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
+      "id": 61,
+      "title": "Product Inventory",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P58807B943476643B"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "auto",
+            "displayMode": "auto",
+            "inspect": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "name"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 648
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sensing_start_date"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 199
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "sensing_end_date"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 198
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "datatake_id"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 104
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "absolute_orbit"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 117
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "timeliness"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 94
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "CAMs Link"
+            },
+            "properties": [
+              {
+                "id": "links",
+                "value": [
+                  {
+                    "targetBlank": true,
+                    "title": "Jira CAMS",
+                    "url": "${__value.raw}"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 19,
+        "w": 24,
+        "x": 0,
+        "y": 2
+      },
+      "id": 14,
+      "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "cams_tickets"
+          }
+        ]
+      },
+      "pluginVersion": "9.2.6",
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P58807B943476643B"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "settings": {
+                "size": "10000"
+              },
+              "type": "raw_data"
+            }
+          ],
+          "query": "mission: $mission AND satellite_unit : $satellite AND timeliness:$timeliness product_level:$product_level AND product_type:$product_type",
+          "refId": "A",
+          "timeField": "sensing_start_date"
+        }
+      ],
+      "title": "Inventory of products",
+      "transformations": [
+        {
+          "id": "convertFieldType",
+          "options": {
+            "conversions": [
+              {
+                "destinationType": "time",
+                "targetField": "sensing_start_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "sensing_end_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "prip_publication_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "ddip_publication_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "LTA_Acri_publication_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "LTA_CloudFerro_publication_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "LTA_Exprivia_S1_publication_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "LTA_Werum_publication_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "LTA_Exprivia_S2_publication_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "LTA_Exprivia_S3_publication_date"
+              },
+              {
+                "destinationType": "time",
+                "targetField": "auxip_publication_date"
+              }
+            ],
+            "fields": {}
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "LTA_Acri_is_published": true,
+              "LTA_Acri_publication_date": false,
+              "LTA_CloudFerro_is_published": true,
+              "LTA_CloudFerro_publication_date": false,
+              "LTA_Exprivia_S1_is_published": true,
+              "LTA_Exprivia_S1_publication_date": false,
+              "LTA_Exprivia_S2_is_published": true,
+              "LTA_Exprivia_S3_is_published": true,
+              "LTA_LTA_Acri_is_published": true,
+              "LTA_LTA_Acri_publication_date": true,
+              "LTA_LTA_CloudFerro_is_published": true,
+              "LTA_LTA_CloudFerro_publication_date": true,
+              "LTA_LTA_Exprivia_S1_is_published": true,
+              "LTA_LTA_Exprivia_S1_publication_date": true,
+              "LTA_LTA_Exprivia_S2_is_published": true,
+              "LTA_LTA_Exprivia_S2_publication_date": true,
+              "LTA_LTA_Exprivia_S3_is_published": true,
+              "LTA_LTA_Exprivia_S3_publication_date": true,
+              "LTA_LTA_Werum_is_published": true,
+              "LTA_LTA_Werum_publication_date": true,
+              "LTA_Werum_is_published": true,
+              "LTA_Werum_publication_date": false,
+              "OCN_coverage_percentage": true,
+              "SLC_coverage_percentage": true,
+              "_id": true,
+              "_index": true,
+              "_type": true,
+              "absolute_orbit": true,
+              "auxip_id": true,
+              "cams_tickets": true,
+              "collection_number": true,
+              "datatake_id": true,
+              "ddip_container_name": true,
+              "ddip_id": true,
+              "detector_id": true,
+              "expected_lta_number": true,
+              "expected_tiles": true,
+              "highlight": true,
+              "instrument_mode": true,
+              "key": true,
+              "last_attached_ticket": true,
+              "mission": true,
+              "nb_lta_served": true,
+              "polarization": true,
+              "prip_id": true,
+              "prip_service": true,
+              "processor_version": true,
+              "product_class": true,
+              "product_discriminator_date": true,
+              "product_level": true,
+              "product_type": true,
+              "satellite_unit": true,
+              "sensing_duration": true,
+              "site_center": true,
+              "sort": true,
+              "tile_number": true,
+              "updateTime": true
+            },
+            "indexByName": {
+              "LTA_Acri_is_published": 15,
+              "LTA_Acri_publication_date": 16,
+              "LTA_CloudFerro_is_published": 17,
+              "LTA_CloudFerro_publication_date": 18,
+              "LTA_Exprivia_S1_is_published": 19,
+              "LTA_Exprivia_S1_publication_date": 20,
+              "LTA_Exprivia_S2_is_published": 36,
+              "LTA_Exprivia_S2_publication_date": 37,
+              "LTA_Exprivia_S3_is_published": 38,
+              "LTA_Exprivia_S3_publication_date": 39,
+              "LTA_Werum_is_published": 34,
+              "LTA_Werum_publication_date": 21,
+              "OCN_coverage_percentage": 43,
+              "SLC_coverage_percentage": 44,
+              "_id": 22,
+              "_index": 23,
+              "_type": 24,
+              "absolute_orbit": 5,
+              "auxip_id": 40,
+              "auxip_publication_date": 12,
+              "cams_description": 53,
+              "cams_origin": 52,
+              "cams_tickets": 45,
+              "collection_number": 46,
+              "datatake_id": 4,
+              "ddip_name": 47,
+              "ddip_publication_date": 14,
+              "detector_id": 41,
+              "expected_lta_number": 31,
+              "expected_tiles": 48,
+              "from_prip_ddip_timeliness": 49,
+              "highlight": 26,
+              "instrument_mode": 10,
+              "key": 27,
+              "last_attached_ticket": 50,
+              "last_attached_ticket_url": 51,
+              "mission": 0,
+              "name": 11,
+              "nb_lta_served": 32,
+              "polarization": 28,
+              "prip_id": 25,
+              "prip_publication_date": 13,
+              "prip_service": 35,
+              "processor_version": 54,
+              "product_class": 8,
+              "product_discriminator_date": 55,
+              "product_level": 7,
+              "product_type": 9,
+              "satellite_unit": 1,
+              "sensing_duration": 29,
+              "sensing_end_date": 3,
+              "sensing_start_date": 2,
+              "site_center": 42,
+              "sort": 30,
+              "tile_number": 56,
+              "timeliness": 6,
+              "updateTime": 33
+            },
+            "renameByName": {
+              "cams_description": "CAMs Description",
+              "cams_origin": "CAMs Origin",
+              "last_attached_ticket_url": "CAMs Link"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 37,
+  "style": "dark",
+  "tags": [
+    "Volume&Count"
+  ],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "S2"
+          ],
+          "value": [
+            "S2"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P58807B943476643B"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"mission\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Mission",
+        "multi": true,
+        "name": "mission",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"mission\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P58807B943476643B"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"satellite_unit\",\"query\":\"mission: ${mission}\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Satellite",
+        "multi": true,
+        "name": "satellite",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"satellite_unit\",\"query\":\"mission: ${mission}\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P58807B943476643B"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"timeliness\",\"query\":\"mission: ${mission}\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Category",
+        "multi": true,
+        "name": "timeliness",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"timeliness\",\"query\":\"mission: ${mission}\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P58807B943476643B"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"product_level\",\"query\":\"mission: ${mission} AND satellite_unit:$satellite AND timeliness:$timeliness\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Level",
+        "multi": true,
+        "name": "product_level",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"product_level\",\"query\":\"mission: ${mission} AND satellite_unit:$satellite AND timeliness:$timeliness\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P58807B943476643B"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"product_type\",\"query\":\"mission: ${mission} AND satellite_unit:$satellite AND product_level:${product_level} AND timeliness:$timeliness\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Product Type",
+        "multi": true,
+        "name": "product_type",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"product_type\",\"query\":\"mission: ${mission} AND satellite_unit:$satellite AND product_level:${product_level} AND timeliness:$timeliness\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P58807B943476643B"
+        },
+        "filters": [],
+        "hide": 0,
+        "label": "Ad-Hoc filter",
+        "name": "Filter",
+        "skipUrlSync": false,
+        "type": "adhoc"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-1d/d",
+    "to": "now-1d/d"
+  },
+  "timepicker": {},
+  "timezone": "utc",
+  "title": "Products Inventory",
+  "uid": "zASfw_wnk",
+  "weekStart": ""
+}

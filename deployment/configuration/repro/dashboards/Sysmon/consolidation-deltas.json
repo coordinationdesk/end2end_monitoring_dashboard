@@ -1,0 +1,6027 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "iteration": 1659683101877,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "collapsed": false,
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 5,
+      "panels": [],
+      "title": "RAW DATA count by publication_date and service_name",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "elasticsearch",
+        "uid": "P1E15E5090AA52157"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 1
+      },
+      "id": 3,
+      "maxDataPoints": 10,
+      "options": {
+        "legend": {
+          "calcs": [
+            "sum"
+          ],
+          "displayMode": "table",
+          "placement": "right"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "production_service_name",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "P1E15E5090AA52157"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "",
+          "refId": "A",
+          "timeField": "publication_date"
+        }
+      ],
+      "title": "PRIP / $__interval",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Mixed --"
+      },
+      "description": "$__interval",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 1
+      },
+      "id": 2,
+      "maxDataPoints": 10,
+      "options": {
+        "legend": {
+          "calcs": [
+            "sum"
+          ],
+          "displayMode": "table",
+          "placement": "right"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "production_service_name",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "publication_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "type": "elasticsearch",
+            "uid": "PEA18F349EA3C1266"
+          },
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "",
+          "refId": "A",
+          "timeField": "publication_date"
+        },
+        {
+          "alias": "",
+          "bucketAggs": [
+            {
+              "field": "production_service_name",
+              "id": "3",
+              "settings": {
+                "min_doc_count": "1",
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "10"
+              },
+              "type": "terms"
+            },
+            {
+              "field": "creation_date",
+              "id": "2",
+              "settings": {
+                "interval": "auto"
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "datasource": {
+            "uid": "P313A857D26D5EC17"
+          },
+          "hide": false,
+          "metrics": [
+            {
+              "id": "1",
+              "type": "count"
+            }
+          ],
+          "query": "",
+          "refId": "B",
+          "timeField": "creation_date"
+        }
+      ],
+      "title": "LTA / $__interval",
+      "transformations": [],
+      "type": "timeseries"
+    },
+    {
+      "collapsed": true,
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 10
+      },
+      "id": 12,
+      "panels": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds",
+                "seriesBy": "max"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineStyle": {
+                  "fill": "solid"
+                },
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "orange"
+                  },
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "red",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 24,
+            "x": 0,
+            "y": 2
+          },
+          "id": 14,
+          "maxDataPoints": 20,
+          "options": {
+            "legend": {
+              "calcs": [
+                "sum"
+              ],
+              "displayMode": "table",
+              "placement": "right"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "alias": "raw-prip",
+              "bucketAggs": [
+                {
+                  "field": "start_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "uid": "PEDC943A8D2470CBD"
+              },
+              "hide": true,
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "interface_name: $prip_interface_name",
+              "refId": "A",
+              "timeField": "start_date"
+            },
+            {
+              "alias": "raw-lta",
+              "bucketAggs": [
+                {
+                  "field": "start_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "uid": "PAE58BE1A275D9ADA"
+              },
+              "hide": true,
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "interface_name: $lta_interface_name",
+              "refId": "B",
+              "timeField": "start_date"
+            },
+            {
+              "alias": "raw-dd",
+              "bucketAggs": [
+                {
+                  "field": "start_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "uid": "P57CF0E2A9CE703E6"
+              },
+              "hide": true,
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "interface_name: $dd_interface_name",
+              "refId": "C",
+              "timeField": "start_date"
+            },
+            {
+              "alias": "raw-auxip",
+              "bucketAggs": [
+                {
+                  "field": "publication_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "uid": "PE9DC41D9EF89578E"
+              },
+              "hide": true,
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "interface_name: $auxip_interface_name",
+              "refId": "D",
+              "timeField": "start_date"
+            },
+            {
+              "alias": "consolidated",
+              "bucketAggs": [
+                {
+                  "field": "sensing_start_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "uid": "m0jIf1kVk"
+              },
+              "hide": true,
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "service_id: $service_id AND service_type: $service_type AND NOT service_type: AUXIP AND (mission: $mission OR service_id: S5P_DLR)",
+              "refId": "P",
+              "timeField": "sensing_start_date"
+            },
+            {
+              "alias": "consolidated_auxip",
+              "bucketAggs": [
+                {
+                  "field": "publication_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "uid": "m0jIf1kVk"
+              },
+              "hide": true,
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "service_id: $service_id AND service_type: AUXIP AND service_type: $service_type ",
+              "refId": "E",
+              "timeField": "sensing_start_date"
+            },
+            {
+              "datasource": {
+                "type": "__expr__",
+                "uid": "__expr__"
+              },
+              "expression": "$A + $B + $C + $D",
+              "hide": true,
+              "refId": "S",
+              "type": "math"
+            },
+            {
+              "datasource": {
+                "type": "__expr__",
+                "uid": "__expr__"
+              },
+              "expression": "$S - ($P + $E)",
+              "hide": false,
+              "refId": "diff",
+              "type": "math"
+            }
+          ],
+          "title": "Missing Publication Consolidation / $__interval",
+          "type": "timeseries"
+        }
+      ],
+      "title": "Publication Consolidation",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 11
+      },
+      "id": 7,
+      "panels": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byFrameRefID",
+                  "options": "diff"
+                },
+                "properties": [
+                  {
+                    "id": "custom.axisPlacement",
+                    "value": "right"
+                  },
+                  {
+                    "id": "color",
+                    "value": {
+                      "mode": "thresholds",
+                      "seriesBy": "max"
+                    }
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "dark-orange"
+                        },
+                        {
+                          "color": "dark-green",
+                          "value": 0
+                        },
+                        {
+                          "color": "red",
+                          "value": 1
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "id": "custom.lineStyle",
+                    "value": {
+                      "dash": [
+                        10,
+                        10
+                      ],
+                      "fill": "dash"
+                    }
+                  },
+                  {
+                    "id": "custom.scaleDistribution",
+                    "value": {
+                      "type": "linear"
+                    }
+                  },
+                  {
+                    "id": "displayName",
+                    "value": "Delta"
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 10,
+            "w": 24,
+            "x": 0,
+            "y": 3
+          },
+          "id": 9,
+          "maxDataPoints": 20,
+          "options": {
+            "legend": {
+              "calcs": [
+                "sum"
+              ],
+              "displayMode": "table",
+              "placement": "right"
+            },
+            "tooltip": {
+              "mode": "multi",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "alias": "Product",
+              "bucketAggs": [
+                {
+                  "field": "sensing_start_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "metrics": [
+                {
+                  "hide": false,
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "prip_id:* AND prip_service: ${prip_interface_name}",
+              "refId": "A",
+              "timeField": "sensing_start_date"
+            },
+            {
+              "alias": "Publications",
+              "bucketAggs": [
+                {
+                  "field": "sensing_start_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "uid": "P9C1AEFD5EC435EE7"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "hide": false,
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "service_type: PRIP AND NOT service_id: *Legacy AND service_id: $service_id",
+              "refId": "B",
+              "timeField": "sensing_start_date"
+            },
+            {
+              "datasource": {
+                "type": "__expr__",
+                "uid": "__expr__"
+              },
+              "expression": "$A - $B",
+              "hide": false,
+              "refId": "diff",
+              "type": "math"
+            }
+          ],
+          "title": "Missing PRIP Products (by $__interval)",
+          "type": "timeseries"
+        }
+      ],
+      "title": "Product Consolidation PRIP",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 12
+      },
+      "id": 37,
+      "panels": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byFrameRefID",
+                  "options": "diff"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "mode": "thresholds",
+                      "seriesBy": "max"
+                    }
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "dark-orange"
+                        },
+                        {
+                          "color": "dark-green",
+                          "value": 0
+                        },
+                        {
+                          "color": "red",
+                          "value": 1
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "id": "displayName",
+                    "value": "Delta"
+                  },
+                  {
+                    "id": "custom.axisPlacement",
+                    "value": "right"
+                  },
+                  {
+                    "id": "custom.lineStyle",
+                    "value": {
+                      "dash": [
+                        10,
+                        10
+                      ],
+                      "fill": "dash"
+                    }
+                  },
+                  {
+                    "id": "custom.scaleDistribution",
+                    "value": {
+                      "type": "linear"
+                    }
+                  },
+                  {
+                    "id": "custom.lineWidth",
+                    "value": 3
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 10,
+            "w": 24,
+            "x": 0,
+            "y": 15
+          },
+          "id": 33,
+          "maxDataPoints": 20,
+          "options": {
+            "legend": {
+              "calcs": [
+                "sum"
+              ],
+              "displayMode": "table",
+              "placement": "right"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "8.4.2",
+          "targets": [
+            {
+              "alias": "Product",
+              "bucketAggs": [
+                {
+                  "field": "sensing_start_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "metrics": [
+                {
+                  "hide": false,
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "LTA_Exprivia_S1_is_published: true",
+              "refId": "A",
+              "timeField": "sensing_start_date"
+            },
+            {
+              "alias": "Publications",
+              "bucketAggs": [
+                {
+                  "field": "sensing_start_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "uid": "P9C1AEFD5EC435EE7"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "hide": false,
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "service_type: LTA AND service_id: Exprivia AND mission: S1",
+              "refId": "B",
+              "timeField": "sensing_start_date"
+            },
+            {
+              "datasource": {
+                "type": "__expr__",
+                "uid": "__expr__"
+              },
+              "expression": "$B - $A",
+              "hide": false,
+              "refId": "diff",
+              "type": "math"
+            }
+          ],
+          "title": "Missing LTA Exprivia S1 products (by $__interval)",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byFrameRefID",
+                  "options": "diff"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "mode": "thresholds",
+                      "seriesBy": "max"
+                    }
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "dark-orange"
+                        },
+                        {
+                          "color": "dark-green",
+                          "value": 0
+                        },
+                        {
+                          "color": "red",
+                          "value": 1
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "id": "displayName",
+                    "value": "Delta"
+                  },
+                  {
+                    "id": "custom.axisPlacement",
+                    "value": "right"
+                  },
+                  {
+                    "id": "custom.lineStyle",
+                    "value": {
+                      "dash": [
+                        10,
+                        10
+                      ],
+                      "fill": "dash"
+                    }
+                  },
+                  {
+                    "id": "custom.scaleDistribution",
+                    "value": {
+                      "type": "linear"
+                    }
+                  },
+                  {
+                    "id": "custom.lineWidth",
+                    "value": 3
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 10,
+            "w": 24,
+            "x": 0,
+            "y": 25
+          },
+          "id": 32,
+          "maxDataPoints": 20,
+          "options": {
+            "legend": {
+              "calcs": [
+                "sum"
+              ],
+              "displayMode": "table",
+              "placement": "right"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "8.4.2",
+          "targets": [
+            {
+              "alias": "Product",
+              "bucketAggs": [
+                {
+                  "field": "sensing_start_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "metrics": [
+                {
+                  "hide": false,
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "LTA_Exprivia_S2_is_published: true",
+              "refId": "A",
+              "timeField": "sensing_start_date"
+            },
+            {
+              "alias": "Publications",
+              "bucketAggs": [
+                {
+                  "field": "sensing_start_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "uid": "P9C1AEFD5EC435EE7"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "hide": false,
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "service_type: LTA AND service_id: Exprivia AND mission: S2",
+              "refId": "B",
+              "timeField": "sensing_start_date"
+            },
+            {
+              "datasource": {
+                "type": "__expr__",
+                "uid": "__expr__"
+              },
+              "expression": "$B - $A",
+              "hide": false,
+              "refId": "diff",
+              "type": "math"
+            }
+          ],
+          "title": "Missing LTA Exprivia S2 products (by $__interval)",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byFrameRefID",
+                  "options": "diff"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "mode": "thresholds",
+                      "seriesBy": "max"
+                    }
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "dark-orange"
+                        },
+                        {
+                          "color": "dark-green",
+                          "value": 0
+                        },
+                        {
+                          "color": "red",
+                          "value": 1
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "id": "displayName",
+                    "value": "Delta"
+                  },
+                  {
+                    "id": "custom.axisPlacement",
+                    "value": "right"
+                  },
+                  {
+                    "id": "custom.lineStyle",
+                    "value": {
+                      "dash": [
+                        10,
+                        10
+                      ],
+                      "fill": "dash"
+                    }
+                  },
+                  {
+                    "id": "custom.scaleDistribution",
+                    "value": {
+                      "type": "linear"
+                    }
+                  },
+                  {
+                    "id": "custom.lineWidth",
+                    "value": 3
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 10,
+            "w": 24,
+            "x": 0,
+            "y": 35
+          },
+          "id": 40,
+          "maxDataPoints": 20,
+          "options": {
+            "legend": {
+              "calcs": [
+                "sum"
+              ],
+              "displayMode": "table",
+              "placement": "right"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "8.4.2",
+          "targets": [
+            {
+              "alias": "Product",
+              "bucketAggs": [
+                {
+                  "field": "sensing_start_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "metrics": [
+                {
+                  "hide": false,
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "LTA_Exprivia_S3_is_published: true",
+              "refId": "A",
+              "timeField": "sensing_start_date"
+            },
+            {
+              "alias": "Publications",
+              "bucketAggs": [
+                {
+                  "field": "sensing_start_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "uid": "P9C1AEFD5EC435EE7"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "hide": false,
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "service_type: LTA AND service_id: Exprivia AND mission: S3",
+              "refId": "B",
+              "timeField": "sensing_start_date"
+            },
+            {
+              "datasource": {
+                "type": "__expr__",
+                "uid": "__expr__"
+              },
+              "expression": "$B - $A",
+              "hide": false,
+              "refId": "diff",
+              "type": "math"
+            }
+          ],
+          "title": "Missing LTA Exprivia S3 products (by $__interval)",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byFrameRefID",
+                  "options": "diff"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "mode": "thresholds",
+                      "seriesBy": "max"
+                    }
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "dark-orange"
+                        },
+                        {
+                          "color": "dark-green",
+                          "value": 0
+                        },
+                        {
+                          "color": "red",
+                          "value": 1
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "id": "displayName",
+                    "value": "Delta"
+                  },
+                  {
+                    "id": "custom.axisPlacement",
+                    "value": "right"
+                  },
+                  {
+                    "id": "custom.lineStyle",
+                    "value": {
+                      "dash": [
+                        10,
+                        10
+                      ],
+                      "fill": "dash"
+                    }
+                  },
+                  {
+                    "id": "custom.scaleDistribution",
+                    "value": {
+                      "type": "linear"
+                    }
+                  },
+                  {
+                    "id": "custom.lineWidth",
+                    "value": 3
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 10,
+            "w": 24,
+            "x": 0,
+            "y": 45
+          },
+          "id": 41,
+          "maxDataPoints": 20,
+          "options": {
+            "legend": {
+              "calcs": [
+                "sum"
+              ],
+              "displayMode": "table",
+              "placement": "right"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "8.4.2",
+          "targets": [
+            {
+              "alias": "Product",
+              "bucketAggs": [
+                {
+                  "field": "sensing_start_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "metrics": [
+                {
+                  "hide": false,
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "LTA_Werum_is_published: true AND mission: $mission",
+              "refId": "A",
+              "timeField": "sensing_start_date"
+            },
+            {
+              "alias": "Publications",
+              "bucketAggs": [
+                {
+                  "field": "sensing_start_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "uid": "P9C1AEFD5EC435EE7"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "hide": false,
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "service_type: LTA AND service_id: Werum AND mission: $mission",
+              "refId": "B",
+              "timeField": "sensing_start_date"
+            },
+            {
+              "datasource": {
+                "type": "__expr__",
+                "uid": "__expr__"
+              },
+              "expression": "$B - $A",
+              "hide": false,
+              "refId": "diff",
+              "type": "math"
+            }
+          ],
+          "title": "Missing LTA Werum products (by $__interval)",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byFrameRefID",
+                  "options": "diff"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "mode": "thresholds",
+                      "seriesBy": "max"
+                    }
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "dark-orange"
+                        },
+                        {
+                          "color": "dark-green",
+                          "value": 0
+                        },
+                        {
+                          "color": "red",
+                          "value": 1
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "id": "displayName",
+                    "value": "Delta"
+                  },
+                  {
+                    "id": "custom.axisPlacement",
+                    "value": "right"
+                  },
+                  {
+                    "id": "custom.lineStyle",
+                    "value": {
+                      "dash": [
+                        10,
+                        10
+                      ],
+                      "fill": "dash"
+                    }
+                  },
+                  {
+                    "id": "custom.scaleDistribution",
+                    "value": {
+                      "type": "linear"
+                    }
+                  },
+                  {
+                    "id": "custom.lineWidth",
+                    "value": 3
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 10,
+            "w": 24,
+            "x": 0,
+            "y": 55
+          },
+          "id": 42,
+          "maxDataPoints": 20,
+          "options": {
+            "legend": {
+              "calcs": [
+                "sum"
+              ],
+              "displayMode": "table",
+              "placement": "right"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "8.4.2",
+          "targets": [
+            {
+              "alias": "Product",
+              "bucketAggs": [
+                {
+                  "field": "sensing_start_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "metrics": [
+                {
+                  "hide": false,
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "LTA_Acri_is_published: true AND mission: $mission",
+              "refId": "A",
+              "timeField": "sensing_start_date"
+            },
+            {
+              "alias": "Publications",
+              "bucketAggs": [
+                {
+                  "field": "sensing_start_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "uid": "P9C1AEFD5EC435EE7"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "hide": false,
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "service_type: LTA AND service_id: Acri AND mission: $mission",
+              "refId": "B",
+              "timeField": "sensing_start_date"
+            },
+            {
+              "datasource": {
+                "type": "__expr__",
+                "uid": "__expr__"
+              },
+              "expression": "$B - $A",
+              "hide": false,
+              "refId": "diff",
+              "type": "math"
+            }
+          ],
+          "title": "Missing LTA Acri products (by $__interval)",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byFrameRefID",
+                  "options": "diff"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "mode": "thresholds",
+                      "seriesBy": "max"
+                    }
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "dark-orange"
+                        },
+                        {
+                          "color": "dark-green",
+                          "value": 0
+                        },
+                        {
+                          "color": "red",
+                          "value": 1
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "id": "displayName",
+                    "value": "Delta"
+                  },
+                  {
+                    "id": "custom.axisPlacement",
+                    "value": "right"
+                  },
+                  {
+                    "id": "custom.lineStyle",
+                    "value": {
+                      "dash": [
+                        10,
+                        10
+                      ],
+                      "fill": "dash"
+                    }
+                  },
+                  {
+                    "id": "custom.scaleDistribution",
+                    "value": {
+                      "type": "linear"
+                    }
+                  },
+                  {
+                    "id": "custom.lineWidth",
+                    "value": 3
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 10,
+            "w": 24,
+            "x": 0,
+            "y": 65
+          },
+          "id": 43,
+          "maxDataPoints": 20,
+          "options": {
+            "legend": {
+              "calcs": [
+                "sum"
+              ],
+              "displayMode": "table",
+              "placement": "right"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "8.4.2",
+          "targets": [
+            {
+              "alias": "Product",
+              "bucketAggs": [
+                {
+                  "field": "sensing_start_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "metrics": [
+                {
+                  "hide": false,
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "LTA_CloudFerro_is_published: true AND mission: $mission",
+              "refId": "A",
+              "timeField": "sensing_start_date"
+            },
+            {
+              "alias": "Publications",
+              "bucketAggs": [
+                {
+                  "field": "sensing_start_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "uid": "P9C1AEFD5EC435EE7"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "hide": false,
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "service_type: LTA AND service_id: CloudFerro AND mission: $mission",
+              "refId": "B",
+              "timeField": "sensing_start_date"
+            },
+            {
+              "datasource": {
+                "type": "__expr__",
+                "uid": "__expr__"
+              },
+              "expression": "$B - $A",
+              "hide": false,
+              "refId": "diff",
+              "type": "math"
+            }
+          ],
+          "title": "Missing LTA CloudFerro products (by $__interval)",
+          "type": "timeseries"
+        }
+      ],
+      "title": "Product Consolidation LTAs",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 13
+      },
+      "id": 45,
+      "panels": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byFrameRefID",
+                  "options": "diff"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "mode": "thresholds",
+                      "seriesBy": "max"
+                    }
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "dark-orange",
+                          "value": null
+                        },
+                        {
+                          "color": "dark-green",
+                          "value": 0
+                        },
+                        {
+                          "color": "red",
+                          "value": 1
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "id": "displayName",
+                    "value": "Delta"
+                  },
+                  {
+                    "id": "custom.axisPlacement",
+                    "value": "right"
+                  },
+                  {
+                    "id": "custom.lineStyle",
+                    "value": {
+                      "dash": [
+                        10,
+                        10
+                      ],
+                      "fill": "dash"
+                    }
+                  },
+                  {
+                    "id": "custom.scaleDistribution",
+                    "value": {
+                      "type": "linear"
+                    }
+                  },
+                  {
+                    "id": "custom.lineWidth",
+                    "value": 3
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 10,
+            "w": 24,
+            "x": 0,
+            "y": 14
+          },
+          "id": 34,
+          "maxDataPoints": 20,
+          "options": {
+            "legend": {
+              "calcs": [
+                "sum"
+              ],
+              "displayMode": "table",
+              "placement": "right"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "8.4.2",
+          "targets": [
+            {
+              "alias": "Product",
+              "bucketAggs": [
+                {
+                  "field": "ddip_publication_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P946981DD87893763"
+              },
+              "metrics": [
+                {
+                  "id": "4",
+                  "type": "count"
+                }
+              ],
+              "query": "ddip_id: * AND mission: S2",
+              "refId": "A",
+              "timeField": "ddip_publication_date"
+            },
+            {
+              "alias": "Publications",
+              "bucketAggs": [
+                {
+                  "field": "publication_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "PAB1B72147BE890C9"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "id": "4",
+                  "type": "count"
+                }
+              ],
+              "query": "service_type: DD AND mission: S2",
+              "refId": "B",
+              "timeField": "publication_date"
+            },
+            {
+              "datasource": {
+                "type": "__expr__",
+                "uid": "__expr__"
+              },
+              "expression": "$B - ($A/2)",
+              "hide": false,
+              "refId": "diff",
+              "type": "math"
+            }
+          ],
+          "title": "Missing DD (S2) products (by $__interval)",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green",
+                    "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byFrameRefID",
+                  "options": "diff"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "mode": "thresholds",
+                      "seriesBy": "max"
+                    }
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "dark-orange",
+                          "value": null
+                        },
+                        {
+                          "color": "dark-green",
+                          "value": 0
+                        },
+                        {
+                          "color": "red",
+                          "value": 1
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "id": "displayName",
+                    "value": "Delta"
+                  },
+                  {
+                    "id": "custom.axisPlacement",
+                    "value": "right"
+                  },
+                  {
+                    "id": "custom.lineStyle",
+                    "value": {
+                      "dash": [
+                        10,
+                        10
+                      ],
+                      "fill": "dash"
+                    }
+                  },
+                  {
+                    "id": "custom.scaleDistribution",
+                    "value": {
+                      "type": "linear"
+                    }
+                  },
+                  {
+                    "id": "custom.lineWidth",
+                    "value": 3
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 10,
+            "w": 24,
+            "x": 0,
+            "y": 24
+          },
+          "id": 47,
+          "maxDataPoints": 20,
+          "options": {
+            "legend": {
+              "calcs": [
+                "sum"
+              ],
+              "displayMode": "table",
+              "placement": "right"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "8.4.2",
+          "targets": [
+            {
+              "alias": "Product",
+              "bucketAggs": [
+                {
+                  "field": "ddip_publication_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P946981DD87893763"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "id": "4",
+                  "type": "count"
+                }
+              ],
+              "query": "ddip_name: * AND NOT mission: S2 AND mission: $mission",
+              "refId": "A",
+              "timeField": "sensing_start_date"
+            },
+            {
+              "alias": "Publications",
+              "bucketAggs": [
+                {
+                  "field": "publication_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "PAB1B72147BE890C9"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "id": "4",
+                  "type": "count"
+                }
+              ],
+              "query": "service_type: DD AND NOT mission: S2 AND mission: $mission",
+              "refId": "B",
+              "timeField": "sensing_start_date"
+            },
+            {
+              "datasource": {
+                "type": "__expr__",
+                "uid": "__expr__"
+              },
+              "expression": "$B - $A",
+              "hide": false,
+              "refId": "diff",
+              "type": "math"
+            }
+          ],
+          "title": "Missing DD (not S2)  products (by $__interval)",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byFrameRefID",
+                  "options": "diff"
+                },
+                "properties": [
+                  {
+                    "id": "color",
+                    "value": {
+                      "mode": "thresholds",
+                      "seriesBy": "max"
+                    }
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "dark-orange"
+                        },
+                        {
+                          "color": "dark-green",
+                          "value": 0
+                        },
+                        {
+                          "color": "red",
+                          "value": 1
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "id": "displayName",
+                    "value": "Delta"
+                  },
+                  {
+                    "id": "custom.axisPlacement",
+                    "value": "right"
+                  },
+                  {
+                    "id": "custom.lineStyle",
+                    "value": {
+                      "dash": [
+                        10,
+                        10
+                      ],
+                      "fill": "dash"
+                    }
+                  },
+                  {
+                    "id": "custom.scaleDistribution",
+                    "value": {
+                      "type": "linear"
+                    }
+                  },
+                  {
+                    "id": "custom.lineWidth",
+                    "value": 3
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 10,
+            "w": 24,
+            "x": 0,
+            "y": 34
+          },
+          "id": 46,
+          "maxDataPoints": 20,
+          "options": {
+            "legend": {
+              "calcs": [
+                "sum"
+              ],
+              "displayMode": "table",
+              "placement": "right"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "pluginVersion": "8.4.2",
+          "targets": [
+            {
+              "alias": "Product",
+              "bucketAggs": [
+                {
+                  "field": "sensing_start_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "metrics": [
+                {
+                  "hide": false,
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "auxip_id: *",
+              "refId": "A",
+              "timeField": "sensing_start_date"
+            },
+            {
+              "alias": "Publications",
+              "bucketAggs": [
+                {
+                  "field": "sensing_start_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "uid": "P9C1AEFD5EC435EE7"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "hide": false,
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "service_type: AUXIP",
+              "refId": "B",
+              "timeField": "sensing_start_date"
+            },
+            {
+              "datasource": {
+                "type": "__expr__",
+                "uid": "__expr__"
+              },
+              "expression": "$B - $A",
+              "hide": false,
+              "refId": "diff",
+              "type": "math"
+            }
+          ],
+          "title": "Missing AUXIP products (by $__interval)",
+          "type": "timeseries"
+        }
+      ],
+      "title": "Product Consolidation DD/AUXIP",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 14
+      },
+      "id": 18,
+      "panels": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "diff"
+                },
+                "properties": [
+                  {
+                    "id": "custom.axisPlacement",
+                    "value": "right"
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "green"
+                        },
+                        {
+                          "color": "red",
+                          "value": 1
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "id": "color",
+                    "value": {
+                      "mode": "thresholds",
+                      "seriesBy": "max"
+                    }
+                  },
+                  {
+                    "id": "custom.lineStyle",
+                    "value": {
+                      "dash": [
+                        10,
+                        10
+                      ],
+                      "fill": "dash"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 24,
+            "x": 0,
+            "y": 3
+          },
+          "id": 16,
+          "maxDataPoints": 20,
+          "options": {
+            "legend": {
+              "calcs": [
+                "sum"
+              ],
+              "displayMode": "table",
+              "placement": "right"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "alias": "consolidated",
+              "bucketAggs": [
+                {
+                  "field": "sensing_start_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "uid": "m0jIf1kVk"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "service_type: PRIP",
+              "refId": "A",
+              "timeField": "sensing_start_date"
+            },
+            {
+              "alias": "raw-prip",
+              "bucketAggs": [
+                {
+                  "field": "start_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "uid": "PEDC943A8D2470CBD"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "",
+              "refId": "B",
+              "timeField": "start_date"
+            },
+            {
+              "datasource": {
+                "type": "__expr__",
+                "uid": "__expr__"
+              },
+              "expression": "$B - $A",
+              "hide": false,
+              "refId": "diff",
+              "type": "math"
+            }
+          ],
+          "title": "Missing PRIP Publication Consolidation / $__interval",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "orange"
+                  },
+                  {
+                    "color": "green",
+                    "value": 0
+                  },
+                  {
+                    "color": "red",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "diff"
+                },
+                "properties": [
+                  {
+                    "id": "custom.axisPlacement",
+                    "value": "right"
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "orange"
+                        },
+                        {
+                          "color": "green",
+                          "value": 0
+                        },
+                        {
+                          "color": "red",
+                          "value": 1
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "id": "color",
+                    "value": {
+                      "mode": "thresholds",
+                      "seriesBy": "max"
+                    }
+                  },
+                  {
+                    "id": "custom.lineStyle",
+                    "value": {
+                      "dash": [
+                        10,
+                        10
+                      ],
+                      "fill": "dash"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 7,
+            "w": 24,
+            "x": 0,
+            "y": 10
+          },
+          "id": 19,
+          "maxDataPoints": 20,
+          "options": {
+            "legend": {
+              "calcs": [
+                "sum"
+              ],
+              "displayMode": "table",
+              "placement": "right"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "alias": "consolidated",
+              "bucketAggs": [
+                {
+                  "field": "sensing_start_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "uid": "m0jIf1kVk"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "service_type: LTA",
+              "refId": "A",
+              "timeField": "sensing_start_date"
+            },
+            {
+              "alias": "raw-lta",
+              "bucketAggs": [
+                {
+                  "field": "start_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "uid": "PAE58BE1A275D9ADA"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "",
+              "refId": "B",
+              "timeField": "start_date"
+            },
+            {
+              "datasource": {
+                "type": "__expr__",
+                "uid": "__expr__"
+              },
+              "expression": "$B - $A",
+              "hide": false,
+              "refId": "diff",
+              "type": "math"
+            }
+          ],
+          "title": "Missing LTA Publication Consolidation / $__interval",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "diff"
+                },
+                "properties": [
+                  {
+                    "id": "custom.axisPlacement",
+                    "value": "right"
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "green"
+                        },
+                        {
+                          "color": "red",
+                          "value": 1
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "id": "color",
+                    "value": {
+                      "mode": "thresholds",
+                      "seriesBy": "max"
+                    }
+                  },
+                  {
+                    "id": "custom.lineStyle",
+                    "value": {
+                      "dash": [
+                        10,
+                        10
+                      ],
+                      "fill": "dash"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 24,
+            "x": 0,
+            "y": 17
+          },
+          "id": 15,
+          "maxDataPoints": 20,
+          "options": {
+            "legend": {
+              "calcs": [
+                "sum"
+              ],
+              "displayMode": "table",
+              "placement": "right"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "alias": "consolidated",
+              "bucketAggs": [
+                {
+                  "field": "publication_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "uid": "m0jIf1kVk"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "service_type: AUXIP",
+              "refId": "A",
+              "timeField": "sensing_start_date"
+            },
+            {
+              "alias": "raw-auxip",
+              "bucketAggs": [
+                {
+                  "field": "publication_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "uid": "PE9DC41D9EF89578E"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "",
+              "refId": "B",
+              "timeField": "start_date"
+            },
+            {
+              "datasource": {
+                "type": "__expr__",
+                "uid": "__expr__"
+              },
+              "expression": "$B - $A",
+              "hide": false,
+              "refId": "diff",
+              "type": "math"
+            }
+          ],
+          "title": "Missing AUXIP Publication Consolidation / $__interval",
+          "type": "timeseries"
+        },
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "palette-classic"
+              },
+              "custom": {
+                "axisLabel": "",
+                "axisPlacement": "auto",
+                "barAlignment": 0,
+                "drawStyle": "line",
+                "fillOpacity": 0,
+                "gradientMode": "none",
+                "hideFrom": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": false
+                },
+                "lineInterpolation": "linear",
+                "lineWidth": 1,
+                "pointSize": 5,
+                "scaleDistribution": {
+                  "type": "linear"
+                },
+                "showPoints": "auto",
+                "spanNulls": false,
+                "stacking": {
+                  "group": "A",
+                  "mode": "none"
+                },
+                "thresholdsStyle": {
+                  "mode": "off"
+                }
+              },
+              "mappings": [],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "diff"
+                },
+                "properties": [
+                  {
+                    "id": "custom.axisPlacement",
+                    "value": "right"
+                  },
+                  {
+                    "id": "thresholds",
+                    "value": {
+                      "mode": "absolute",
+                      "steps": [
+                        {
+                          "color": "orange"
+                        },
+                        {
+                          "color": "green",
+                          "value": 0
+                        },
+                        {
+                          "color": "red",
+                          "value": 1
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "id": "color",
+                    "value": {
+                      "mode": "thresholds",
+                      "seriesBy": "max"
+                    }
+                  },
+                  {
+                    "id": "custom.lineStyle",
+                    "value": {
+                      "dash": [
+                        10,
+                        10
+                      ],
+                      "fill": "dash"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 24,
+            "x": 0,
+            "y": 25
+          },
+          "id": 20,
+          "maxDataPoints": 20,
+          "options": {
+            "legend": {
+              "calcs": [
+                "sum"
+              ],
+              "displayMode": "table",
+              "placement": "right"
+            },
+            "tooltip": {
+              "mode": "single",
+              "sort": "none"
+            }
+          },
+          "targets": [
+            {
+              "alias": "consolidated",
+              "bucketAggs": [
+                {
+                  "field": "sensing_start_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "uid": "m0jIf1kVk"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "service_type: DD",
+              "refId": "A",
+              "timeField": "sensing_start_date"
+            },
+            {
+              "alias": "raw-dd",
+              "bucketAggs": [
+                {
+                  "field": "start_date",
+                  "id": "2",
+                  "settings": {
+                    "interval": "auto"
+                  },
+                  "type": "date_histogram"
+                }
+              ],
+              "datasource": {
+                "uid": "P57CF0E2A9CE703E6"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "id": "1",
+                  "type": "count"
+                }
+              ],
+              "query": "",
+              "refId": "B",
+              "timeField": "start_date"
+            },
+            {
+              "datasource": {
+                "type": "__expr__",
+                "uid": "__expr__"
+              },
+              "expression": "$B - $A",
+              "hide": false,
+              "refId": "diff",
+              "type": "math"
+            }
+          ],
+          "title": "Missing DD Publication Consolidation / $__interval",
+          "type": "timeseries"
+        }
+      ],
+      "title": "Publication Consolidation Details",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "datasource": {
+        "type": "datasource",
+        "uid": "grafana"
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 15
+      },
+      "id": 23,
+      "panels": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "description": "!!! Zoom in timeline to have below 10000 products ",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "auto",
+                "displayMode": "auto",
+                "inspect": false
+              },
+              "mappings": [
+                {
+                  "options": {
+                    "true": {
+                      "color": "green",
+                      "index": 0
+                    }
+                  },
+                  "type": "value"
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "name"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 563
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "expected_lta_number"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 82
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "nb_lta_served"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 71
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Expected LTA"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 101
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Served LTA"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 86
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "_id 2"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 45
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "_index 2"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 13
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 24,
+            "x": 0,
+            "y": 17
+          },
+          "id": 27,
+          "options": {
+            "footer": {
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "frameIndex": 1,
+            "showHeader": true,
+            "sortBy": []
+          },
+          "pluginVersion": "9.0.3",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [],
+              "datasource": {
+                "uid": "PEDC943A8D2470CBD"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "size": "10000"
+                  },
+                  "type": "raw_data"
+                }
+              ],
+              "query": "NOT product_name: *OLQC_report.tar",
+              "refId": "A",
+              "timeField": "start_date"
+            },
+            {
+              "alias": "",
+              "bucketAggs": [],
+              "datasource": {
+                "uid": "m0jIf1kVk"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "size": "10000"
+                  },
+                  "type": "raw_data"
+                }
+              ],
+              "query": "service_type: PRIP",
+              "refId": "B",
+              "timeField": "sensing_start_date"
+            }
+          ],
+          "title": "Missng publication updates in PRIP product",
+          "transformations": [
+            {
+              "id": "renameByRegex",
+              "options": {
+                "regex": "(product_name)",
+                "renamePattern": "name"
+              }
+            },
+            {
+              "id": "seriesToColumns",
+              "options": {
+                "byField": "name"
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "LTA_Acri_publication_date": true,
+                  "LTA_CloudFerro_publication_date": true,
+                  "LTA_Werum_publication_date": true,
+                  "_type 1": true,
+                  "_type 2": true,
+                  "absolute_orbit": true,
+                  "absolute_orbit 1": true,
+                  "absolute_orbit 2": true,
+                  "content_length": true,
+                  "content_length 1": true,
+                  "content_length 2": true,
+                  "datatake_id 1": true,
+                  "datatake_id 2": true,
+                  "end_date": true,
+                  "eviction_date 1": true,
+                  "eviction_date 2": true,
+                  "expected_lta_number": false,
+                  "from_sensing_timeliness": true,
+                  "highlight 1": true,
+                  "highlight 2": true,
+                  "instrument_mode 1": true,
+                  "instrument_mode 2": true,
+                  "key": true,
+                  "key 1": true,
+                  "key 2": true,
+                  "mission": true,
+                  "mission 1": true,
+                  "mission 2": true,
+                  "modification_date": true,
+                  "origin_date": true,
+                  "origin_date 2": true,
+                  "polarization 1": true,
+                  "polarization 2": true,
+                  "prip_publication_date": true,
+                  "product_class 1": true,
+                  "product_class 2": true,
+                  "product_level": true,
+                  "product_level 1": true,
+                  "product_level 2": true,
+                  "product_type": true,
+                  "product_type 1": true,
+                  "product_type 2": true,
+                  "product_uuid": true,
+                  "production_service_name": true,
+                  "production_service_type": true,
+                  "publication_date": true,
+                  "publication_date 2": true,
+                  "satellite_unit": true,
+                  "satellite_unit 1": true,
+                  "satellite_unit 2": true,
+                  "sensing_duration": true,
+                  "sensing_duration 1": true,
+                  "sensing_duration 2": true,
+                  "sensing_end_date": true,
+                  "sensing_end_date 1": true,
+                  "sensing_end_date 2": true,
+                  "sensing_start_date": true,
+                  "sensing_start_date 1": true,
+                  "sensing_start_date 2": true,
+                  "service_id": true,
+                  "service_type": true,
+                  "site_center": true,
+                  "sort 1": true,
+                  "sort 2": true,
+                  "transfer_timeliness": true,
+                  "updateTime": true,
+                  "updateTime 1": true,
+                  "updateTime 2": true
+                },
+                "indexByName": {
+                  "_id 1": 2,
+                  "_id 2": 7,
+                  "_index 1": 3,
+                  "_index 2": 8,
+                  "_type 1": 4,
+                  "_type 2": 9,
+                  "absolute_orbit": 29,
+                  "content_length 1": 18,
+                  "content_length 2": 30,
+                  "end_date": 19,
+                  "eviction_date 1": 20,
+                  "eviction_date 2": 31,
+                  "from_sensing_timeliness": 10,
+                  "highlight 1": 5,
+                  "highlight 2": 11,
+                  "ingestionTime": 28,
+                  "interface_name": 1,
+                  "key": 32,
+                  "mission": 33,
+                  "name": 0,
+                  "origin_date 1": 21,
+                  "origin_date 2": 34,
+                  "product_id": 22,
+                  "product_level": 35,
+                  "product_type": 36,
+                  "product_uuid": 12,
+                  "production_service_name": 23,
+                  "production_service_type": 24,
+                  "publication_date 1": 25,
+                  "publication_date 2": 37,
+                  "reportName": 26,
+                  "satellite_unit": 38,
+                  "sensing_duration": 39,
+                  "sensing_end_date": 40,
+                  "sensing_start_date": 27,
+                  "service_id": 13,
+                  "service_type": 14,
+                  "site_center": 41,
+                  "sort 1": 6,
+                  "sort 2": 15,
+                  "start_date": 17,
+                  "transfer_timeliness": 16,
+                  "updateTime": 42
+                },
+                "renameByName": {
+                  "expected_lta_number": "Expected LTA",
+                  "nb_lta_served": "Served LTA",
+                  "prip_id": ""
+                }
+              }
+            },
+            {
+              "id": "filterByValue",
+              "options": {
+                "filters": [
+                  {
+                    "config": {
+                      "id": "isNull",
+                      "options": {}
+                    },
+                    "fieldName": "_id 2"
+                  },
+                  {
+                    "config": {
+                      "id": "isNotNull",
+                      "options": {}
+                    },
+                    "fieldName": "_id 1"
+                  }
+                ],
+                "match": "all",
+                "type": "include"
+              }
+            }
+          ],
+          "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "description": "!!! Zoom in timeline to have below 10000 products ",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "auto",
+                "displayMode": "auto",
+                "inspect": false
+              },
+              "mappings": [
+                {
+                  "options": {
+                    "true": {
+                      "color": "green",
+                      "index": 0
+                    }
+                  },
+                  "type": "value"
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "name"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 563
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "expected_lta_number"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 82
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "nb_lta_served"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 71
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Expected LTA"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 101
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Served LTA"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 86
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "_id 2"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 45
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "_index 2"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 13
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 24,
+            "x": 0,
+            "y": 23
+          },
+          "id": 31,
+          "options": {
+            "footer": {
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "frameIndex": 1,
+            "showHeader": true,
+            "sortBy": []
+          },
+          "pluginVersion": "9.0.3",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [],
+              "datasource": {
+                "uid": "PAE58BE1A275D9ADA"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "size": "10000"
+                  },
+                  "type": "raw_data"
+                }
+              ],
+              "query": "",
+              "refId": "A",
+              "timeField": "start_date"
+            },
+            {
+              "alias": "",
+              "bucketAggs": [],
+              "datasource": {
+                "uid": "m0jIf1kVk"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "size": "10000"
+                  },
+                  "type": "raw_data"
+                }
+              ],
+              "query": "service_type: LTA",
+              "refId": "B",
+              "timeField": "sensing_start_date"
+            }
+          ],
+          "title": "Missng publication updates in LTA product",
+          "transformations": [
+            {
+              "id": "renameByRegex",
+              "options": {
+                "regex": "(product_name)",
+                "renamePattern": "name"
+              }
+            },
+            {
+              "id": "seriesToColumns",
+              "options": {
+                "byField": "name"
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "LTA_Acri_publication_date": true,
+                  "LTA_CloudFerro_publication_date": true,
+                  "LTA_Werum_publication_date": true,
+                  "_type 1": true,
+                  "_type 2": true,
+                  "absolute_orbit": true,
+                  "absolute_orbit 1": true,
+                  "absolute_orbit 2": true,
+                  "content_length": true,
+                  "content_length 1": true,
+                  "content_length 2": true,
+                  "datatake_id 1": true,
+                  "datatake_id 2": true,
+                  "end_date": true,
+                  "eviction_date 1": true,
+                  "eviction_date 2": true,
+                  "expected_lta_number": false,
+                  "from_sensing_timeliness": true,
+                  "highlight 1": true,
+                  "highlight 2": true,
+                  "instrument_mode 1": true,
+                  "instrument_mode 2": true,
+                  "key": true,
+                  "key 1": true,
+                  "key 2": true,
+                  "mission": true,
+                  "mission 1": true,
+                  "mission 2": true,
+                  "modification_date": true,
+                  "origin_date": true,
+                  "origin_date 2": true,
+                  "polarization 1": true,
+                  "polarization 2": true,
+                  "prip_publication_date": true,
+                  "product_class 1": true,
+                  "product_class 2": true,
+                  "product_level": true,
+                  "product_level 1": true,
+                  "product_level 2": true,
+                  "product_type": true,
+                  "product_type 1": true,
+                  "product_type 2": true,
+                  "product_uuid": true,
+                  "production_service_name": true,
+                  "production_service_type": true,
+                  "publication_date": true,
+                  "publication_date 2": true,
+                  "satellite_unit": true,
+                  "satellite_unit 1": true,
+                  "satellite_unit 2": true,
+                  "sensing_duration": true,
+                  "sensing_duration 1": true,
+                  "sensing_duration 2": true,
+                  "sensing_end_date": true,
+                  "sensing_end_date 1": true,
+                  "sensing_end_date 2": true,
+                  "sensing_start_date": true,
+                  "sensing_start_date 1": true,
+                  "sensing_start_date 2": true,
+                  "service_id": true,
+                  "service_type": true,
+                  "site_center": true,
+                  "sort 1": true,
+                  "sort 2": true,
+                  "transfer_timeliness": true,
+                  "updateTime": true,
+                  "updateTime 1": true,
+                  "updateTime 2": true
+                },
+                "indexByName": {
+                  "_id 1": 2,
+                  "_id 2": 7,
+                  "_index 1": 3,
+                  "_index 2": 8,
+                  "_type 1": 4,
+                  "_type 2": 9,
+                  "absolute_orbit": 29,
+                  "content_length 1": 18,
+                  "content_length 2": 30,
+                  "end_date": 19,
+                  "eviction_date 1": 20,
+                  "eviction_date 2": 31,
+                  "from_sensing_timeliness": 10,
+                  "highlight 1": 5,
+                  "highlight 2": 11,
+                  "ingestionTime": 28,
+                  "interface_name": 1,
+                  "key": 32,
+                  "mission": 33,
+                  "name": 0,
+                  "origin_date 1": 21,
+                  "origin_date 2": 34,
+                  "product_id": 22,
+                  "product_level": 35,
+                  "product_type": 36,
+                  "product_uuid": 12,
+                  "production_service_name": 23,
+                  "production_service_type": 24,
+                  "publication_date 1": 25,
+                  "publication_date 2": 37,
+                  "reportName": 26,
+                  "satellite_unit": 38,
+                  "sensing_duration": 39,
+                  "sensing_end_date": 40,
+                  "sensing_start_date": 27,
+                  "service_id": 13,
+                  "service_type": 14,
+                  "site_center": 41,
+                  "sort 1": 6,
+                  "sort 2": 15,
+                  "start_date": 17,
+                  "transfer_timeliness": 16,
+                  "updateTime": 42
+                },
+                "renameByName": {
+                  "expected_lta_number": "Expected LTA",
+                  "nb_lta_served": "Served LTA",
+                  "prip_id": ""
+                }
+              }
+            },
+            {
+              "id": "filterByValue",
+              "options": {
+                "filters": [
+                  {
+                    "config": {
+                      "id": "isNull",
+                      "options": {}
+                    },
+                    "fieldName": "_id 2"
+                  },
+                  {
+                    "config": {
+                      "id": "isNotNull",
+                      "options": {}
+                    },
+                    "fieldName": "_id 1"
+                  }
+                ],
+                "match": "all",
+                "type": "include"
+              }
+            }
+          ],
+          "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "description": "!!! Zoom in timeline to have below 10000 products ",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "auto",
+                "displayMode": "auto",
+                "inspect": false
+              },
+              "mappings": [
+                {
+                  "options": {
+                    "true": {
+                      "color": "green",
+                      "index": 0
+                    }
+                  },
+                  "type": "value"
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "name"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 563
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "expected_lta_number"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 82
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "nb_lta_served"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 71
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Expected LTA"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 101
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Served LTA"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 86
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "_id 2"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 45
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "_index 2"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 13
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 24,
+            "x": 0,
+            "y": 29
+          },
+          "id": 28,
+          "options": {
+            "footer": {
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "frameIndex": 1,
+            "showHeader": true,
+            "sortBy": []
+          },
+          "pluginVersion": "9.0.3",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [],
+              "datasource": {
+                "uid": "P57CF0E2A9CE703E6"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "size": "10000"
+                  },
+                  "type": "raw_data"
+                }
+              ],
+              "query": "",
+              "refId": "A",
+              "timeField": "start_date"
+            },
+            {
+              "alias": "",
+              "bucketAggs": [],
+              "datasource": {
+                "uid": "m0jIf1kVk"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "size": "10000"
+                  },
+                  "type": "raw_data"
+                }
+              ],
+              "query": "service_type: DD",
+              "refId": "B",
+              "timeField": "sensing_start_date"
+            }
+          ],
+          "title": "Missng publication updates in DD product",
+          "transformations": [
+            {
+              "id": "renameByRegex",
+              "options": {
+                "regex": "(product_name)",
+                "renamePattern": "name"
+              }
+            },
+            {
+              "id": "seriesToColumns",
+              "options": {
+                "byField": "name"
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "LTA_Acri_publication_date": true,
+                  "LTA_CloudFerro_publication_date": true,
+                  "LTA_Werum_publication_date": true,
+                  "_type 1": true,
+                  "_type 2": true,
+                  "absolute_orbit": true,
+                  "absolute_orbit 1": true,
+                  "absolute_orbit 2": true,
+                  "content_length": true,
+                  "content_length 1": true,
+                  "content_length 2": true,
+                  "datatake_id 1": true,
+                  "datatake_id 2": true,
+                  "end_date": true,
+                  "eviction_date 1": true,
+                  "eviction_date 2": true,
+                  "expected_lta_number": false,
+                  "from_sensing_timeliness": true,
+                  "highlight 1": true,
+                  "highlight 2": true,
+                  "instrument_mode 1": true,
+                  "instrument_mode 2": true,
+                  "key": true,
+                  "key 1": true,
+                  "key 2": true,
+                  "mission": true,
+                  "mission 1": true,
+                  "mission 2": true,
+                  "modification_date": true,
+                  "origin_date": true,
+                  "origin_date 2": true,
+                  "polarization 1": true,
+                  "polarization 2": true,
+                  "prip_publication_date": true,
+                  "product_class 1": true,
+                  "product_class 2": true,
+                  "product_level": true,
+                  "product_level 1": true,
+                  "product_level 2": true,
+                  "product_type": true,
+                  "product_type 1": true,
+                  "product_type 2": true,
+                  "product_uuid": true,
+                  "production_service_name": true,
+                  "production_service_type": true,
+                  "publication_date": true,
+                  "publication_date 2": true,
+                  "satellite_unit": true,
+                  "satellite_unit 1": true,
+                  "satellite_unit 2": true,
+                  "sensing_duration": true,
+                  "sensing_duration 1": true,
+                  "sensing_duration 2": true,
+                  "sensing_end_date": true,
+                  "sensing_end_date 1": true,
+                  "sensing_end_date 2": true,
+                  "sensing_start_date": true,
+                  "sensing_start_date 1": true,
+                  "sensing_start_date 2": true,
+                  "service_id": true,
+                  "service_type": true,
+                  "site_center": true,
+                  "sort 1": true,
+                  "sort 2": true,
+                  "transfer_timeliness": true,
+                  "updateTime": true,
+                  "updateTime 1": true,
+                  "updateTime 2": true
+                },
+                "indexByName": {
+                  "_id 1": 2,
+                  "_id 2": 7,
+                  "_index 1": 3,
+                  "_index 2": 8,
+                  "_type 1": 4,
+                  "_type 2": 9,
+                  "absolute_orbit": 29,
+                  "content_length 1": 18,
+                  "content_length 2": 30,
+                  "end_date": 19,
+                  "eviction_date 1": 20,
+                  "eviction_date 2": 31,
+                  "from_sensing_timeliness": 10,
+                  "highlight 1": 5,
+                  "highlight 2": 11,
+                  "ingestionTime": 28,
+                  "interface_name": 1,
+                  "key": 32,
+                  "mission": 33,
+                  "name": 0,
+                  "origin_date 1": 21,
+                  "origin_date 2": 34,
+                  "product_id": 22,
+                  "product_level": 35,
+                  "product_type": 36,
+                  "product_uuid": 12,
+                  "production_service_name": 23,
+                  "production_service_type": 24,
+                  "publication_date 1": 25,
+                  "publication_date 2": 37,
+                  "reportName": 26,
+                  "satellite_unit": 38,
+                  "sensing_duration": 39,
+                  "sensing_end_date": 40,
+                  "sensing_start_date": 27,
+                  "service_id": 13,
+                  "service_type": 14,
+                  "site_center": 41,
+                  "sort 1": 6,
+                  "sort 2": 15,
+                  "start_date": 17,
+                  "transfer_timeliness": 16,
+                  "updateTime": 42
+                },
+                "renameByName": {
+                  "expected_lta_number": "Expected LTA",
+                  "nb_lta_served": "Served LTA",
+                  "prip_id": ""
+                }
+              }
+            },
+            {
+              "id": "filterByValue",
+              "options": {
+                "filters": [
+                  {
+                    "config": {
+                      "id": "isNull",
+                      "options": {}
+                    },
+                    "fieldName": "_id 2"
+                  },
+                  {
+                    "config": {
+                      "id": "isNotNull",
+                      "options": {}
+                    },
+                    "fieldName": "_id 1"
+                  }
+                ],
+                "match": "all",
+                "type": "include"
+              }
+            }
+          ],
+          "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "description": "!!! Zoom in timeline to have below 10000 products ",
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "auto",
+                "displayMode": "auto",
+                "inspect": false
+              },
+              "mappings": [
+                {
+                  "options": {
+                    "true": {
+                      "color": "green",
+                      "index": 0
+                    }
+                  },
+                  "type": "value"
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "name"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 563
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "expected_lta_number"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 82
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "nb_lta_served"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 71
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Expected LTA"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 101
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Served LTA"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 86
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "_id 2"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 45
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "_index 2"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 13
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 6,
+            "w": 24,
+            "x": 0,
+            "y": 35
+          },
+          "id": 35,
+          "options": {
+            "footer": {
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "frameIndex": 1,
+            "showHeader": true,
+            "sortBy": []
+          },
+          "pluginVersion": "9.0.3",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [],
+              "datasource": {
+                "uid": "PE9DC41D9EF89578E"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "size": "10000"
+                  },
+                  "type": "raw_data"
+                }
+              ],
+              "query": "",
+              "refId": "A",
+              "timeField": "start_date"
+            },
+            {
+              "alias": "",
+              "bucketAggs": [],
+              "datasource": {
+                "uid": "m0jIf1kVk"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "size": "10000"
+                  },
+                  "type": "raw_data"
+                }
+              ],
+              "query": "service_type: AUXIP",
+              "refId": "B",
+              "timeField": "sensing_start_date"
+            }
+          ],
+          "title": "Missng publication updates in AUXIP product",
+          "transformations": [
+            {
+              "id": "renameByRegex",
+              "options": {
+                "regex": "(product_name)",
+                "renamePattern": "name"
+              }
+            },
+            {
+              "id": "seriesToColumns",
+              "options": {
+                "byField": "name"
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "LTA_Acri_publication_date": true,
+                  "LTA_CloudFerro_publication_date": true,
+                  "LTA_Werum_publication_date": true,
+                  "_type 1": true,
+                  "_type 2": true,
+                  "absolute_orbit": true,
+                  "absolute_orbit 1": true,
+                  "absolute_orbit 2": true,
+                  "content_length": true,
+                  "content_length 1": true,
+                  "content_length 2": true,
+                  "datatake_id 1": true,
+                  "datatake_id 2": true,
+                  "end_date": true,
+                  "eviction_date 1": true,
+                  "eviction_date 2": true,
+                  "expected_lta_number": false,
+                  "from_sensing_timeliness": true,
+                  "highlight 1": true,
+                  "highlight 2": true,
+                  "instrument_mode 1": true,
+                  "instrument_mode 2": true,
+                  "key": true,
+                  "key 1": true,
+                  "key 2": true,
+                  "mission": true,
+                  "mission 1": true,
+                  "mission 2": true,
+                  "modification_date": true,
+                  "origin_date": true,
+                  "origin_date 2": true,
+                  "polarization 1": true,
+                  "polarization 2": true,
+                  "prip_publication_date": true,
+                  "product_class 1": true,
+                  "product_class 2": true,
+                  "product_level": true,
+                  "product_level 1": true,
+                  "product_level 2": true,
+                  "product_type": true,
+                  "product_type 1": true,
+                  "product_type 2": true,
+                  "product_uuid": true,
+                  "production_service_name": true,
+                  "production_service_type": true,
+                  "publication_date": true,
+                  "publication_date 2": true,
+                  "satellite_unit": true,
+                  "satellite_unit 1": true,
+                  "satellite_unit 2": true,
+                  "sensing_duration": true,
+                  "sensing_duration 1": true,
+                  "sensing_duration 2": true,
+                  "sensing_end_date": true,
+                  "sensing_end_date 1": true,
+                  "sensing_end_date 2": true,
+                  "sensing_start_date": true,
+                  "sensing_start_date 1": true,
+                  "sensing_start_date 2": true,
+                  "service_id": true,
+                  "service_type": true,
+                  "site_center": true,
+                  "sort 1": true,
+                  "sort 2": true,
+                  "transfer_timeliness": true,
+                  "updateTime": true,
+                  "updateTime 1": true,
+                  "updateTime 2": true
+                },
+                "indexByName": {
+                  "_id 1": 2,
+                  "_id 2": 7,
+                  "_index 1": 3,
+                  "_index 2": 8,
+                  "_type 1": 4,
+                  "_type 2": 9,
+                  "absolute_orbit": 29,
+                  "content_length 1": 18,
+                  "content_length 2": 30,
+                  "end_date": 19,
+                  "eviction_date 1": 20,
+                  "eviction_date 2": 31,
+                  "from_sensing_timeliness": 10,
+                  "highlight 1": 5,
+                  "highlight 2": 11,
+                  "ingestionTime": 28,
+                  "interface_name": 1,
+                  "key": 32,
+                  "mission": 33,
+                  "name": 0,
+                  "origin_date 1": 21,
+                  "origin_date 2": 34,
+                  "product_id": 22,
+                  "product_level": 35,
+                  "product_type": 36,
+                  "product_uuid": 12,
+                  "production_service_name": 23,
+                  "production_service_type": 24,
+                  "publication_date 1": 25,
+                  "publication_date 2": 37,
+                  "reportName": 26,
+                  "satellite_unit": 38,
+                  "sensing_duration": 39,
+                  "sensing_end_date": 40,
+                  "sensing_start_date": 27,
+                  "service_id": 13,
+                  "service_type": 14,
+                  "site_center": 41,
+                  "sort 1": 6,
+                  "sort 2": 15,
+                  "start_date": 17,
+                  "transfer_timeliness": 16,
+                  "updateTime": 42
+                },
+                "renameByName": {
+                  "expected_lta_number": "Expected LTA",
+                  "nb_lta_served": "Served LTA",
+                  "prip_id": ""
+                }
+              }
+            },
+            {
+              "id": "filterByValue",
+              "options": {
+                "filters": [
+                  {
+                    "config": {
+                      "id": "isNull",
+                      "options": {}
+                    },
+                    "fieldName": "_id 2"
+                  },
+                  {
+                    "config": {
+                      "id": "isNotNull",
+                      "options": {}
+                    },
+                    "fieldName": "_id 1"
+                  }
+                ],
+                "match": "all",
+                "type": "include"
+              }
+            }
+          ],
+          "type": "table"
+        }
+      ],
+      "title": "Publication Consolidation Tables",
+      "type": "row"
+    },
+    {
+      "collapsed": true,
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 16
+      },
+      "id": 39,
+      "panels": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Dashboard --"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [
+                {
+                  "options": {
+                    "from": 0,
+                    "result": {
+                      "color": "green",
+                      "index": 0
+                    },
+                    "to": 10000
+                  },
+                  "type": "range"
+                },
+                {
+                  "options": {
+                    "from": 10000,
+                    "result": {
+                      "color": "red",
+                      "index": 1,
+                      "text": "Too much result for the table"
+                    },
+                    "to": 9999999999999
+                  },
+                  "type": "range"
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 2,
+            "x": 0,
+            "y": 17
+          },
+          "id": 50,
+          "options": {
+            "colorMode": "background",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "max"
+              ],
+              "fields": "/^Count$/",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "9.0.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "datasource",
+                "uid": "-- Dashboard --"
+              },
+              "panelId": 26,
+              "refId": "A"
+            }
+          ],
+          "title": "Table check",
+          "transformations": [
+            {
+              "id": "filterFieldsByName",
+              "options": {
+                "include": {
+                  "pattern": "name"
+                }
+              }
+            },
+            {
+              "id": "reduce",
+              "options": {
+                "labelsToFields": false,
+                "reducers": [
+                  "count"
+                ]
+              }
+            }
+          ],
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "auto",
+                "displayMode": "auto",
+                "inspect": false
+              },
+              "mappings": [
+                {
+                  "options": {
+                    "true": {
+                      "color": "green",
+                      "index": 0
+                    }
+                  },
+                  "type": "value"
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "name"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 438
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "expected_lta_number"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 82
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "nb_lta_served"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 71
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Expected LTA"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 101
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Served LTA"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 86
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 22,
+            "x": 2,
+            "y": 17
+          },
+          "id": 26,
+          "options": {
+            "footer": {
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "frameIndex": 0,
+            "showHeader": true,
+            "sortBy": [
+              {
+                "desc": false,
+                "displayName": "name"
+              }
+            ]
+          },
+          "pluginVersion": "9.0.3",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P4E6B5BC91908CBD9"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "size": "10000"
+                  },
+                  "type": "raw_data"
+                }
+              ],
+              "query": "prip_id:* AND prip_service: ${prip_interface_name}",
+              "refId": "A",
+              "timeField": "sensing_start_date"
+            },
+            {
+              "alias": "",
+              "bucketAggs": [],
+              "datasource": {
+                "uid": "P9C1AEFD5EC435EE7"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "size": "10000"
+                  },
+                  "type": "raw_data"
+                }
+              ],
+              "query": "service_type: PRIP AND NOT service_id: *Legacy AND service_id: $service_id",
+              "refId": "B",
+              "timeField": "sensing_start_date"
+            }
+          ],
+          "title": "Missing PRIP updates in product",
+          "transformations": [
+            {
+              "id": "seriesToColumns",
+              "options": {
+                "byField": "name"
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "LTA_Acri_publication_date": true,
+                  "LTA_CloudFerro_publication_date": true,
+                  "LTA_Werum_publication_date": true,
+                  "_type 1": true,
+                  "_type 2": true,
+                  "absolute_orbit 1": true,
+                  "absolute_orbit 2": true,
+                  "content_length": true,
+                  "datatake_id 1": true,
+                  "datatake_id 2": true,
+                  "expected_lta_number": false,
+                  "from_sensing_timeliness": true,
+                  "highlight 1": true,
+                  "highlight 2": true,
+                  "instrument_mode 1": true,
+                  "instrument_mode 2": true,
+                  "key 1": true,
+                  "key 2": true,
+                  "mission 1": true,
+                  "mission 2": true,
+                  "modification_date": true,
+                  "origin_date": true,
+                  "polarization 1": true,
+                  "polarization 2": true,
+                  "prip_publication_date": true,
+                  "product_class 1": true,
+                  "product_class 2": true,
+                  "product_level 1": true,
+                  "product_level 2": true,
+                  "product_type 1": true,
+                  "product_type 2": true,
+                  "product_uuid": true,
+                  "publication_date": true,
+                  "satellite_unit 1": true,
+                  "satellite_unit 2": true,
+                  "sensing_duration 1": true,
+                  "sensing_duration 2": true,
+                  "sensing_end_date 1": true,
+                  "sensing_end_date 2": true,
+                  "sensing_start_date 1": true,
+                  "sensing_start_date 2": true,
+                  "sort 1": true,
+                  "sort 2": true,
+                  "transfer_timeliness": true,
+                  "updateTime 1": true,
+                  "updateTime 2": true
+                },
+                "indexByName": {
+                  "LTA_Acri_is_published": 5,
+                  "LTA_Acri_publication_date": 6,
+                  "LTA_CloudFerro_is_published": 7,
+                  "LTA_CloudFerro_publication_date": 8,
+                  "LTA_Werum_is_published": 9,
+                  "LTA_Werum_publication_date": 10,
+                  "_id 1": 11,
+                  "_id 2": 31,
+                  "_index 1": 12,
+                  "_index 2": 32,
+                  "_type 1": 13,
+                  "_type 2": 33,
+                  "absolute_orbit 1": 14,
+                  "absolute_orbit 2": 34,
+                  "content_length": 35,
+                  "datatake_id 1": 15,
+                  "datatake_id 2": 36,
+                  "expected_lta_number": 2,
+                  "from_sensing_timeliness": 37,
+                  "highlight 1": 16,
+                  "highlight 2": 38,
+                  "instrument_mode 1": 17,
+                  "instrument_mode 2": 39,
+                  "key 1": 18,
+                  "key 2": 40,
+                  "mission 1": 19,
+                  "mission 2": 41,
+                  "modification_date": 42,
+                  "name": 0,
+                  "nb_lta_served": 3,
+                  "origin_date": 43,
+                  "polarization 1": 20,
+                  "polarization 2": 44,
+                  "prip_id": 4,
+                  "prip_publication_date": 21,
+                  "product_class 1": 22,
+                  "product_class 2": 45,
+                  "product_level 1": 23,
+                  "product_level 2": 46,
+                  "product_type 1": 24,
+                  "product_type 2": 47,
+                  "product_uuid": 48,
+                  "publication_date": 49,
+                  "satellite_unit 1": 25,
+                  "satellite_unit 2": 50,
+                  "sensing_duration 1": 26,
+                  "sensing_duration 2": 51,
+                  "sensing_end_date 1": 27,
+                  "sensing_end_date 2": 52,
+                  "sensing_start_date 1": 1,
+                  "sensing_start_date 2": 30,
+                  "service_id": 53,
+                  "service_type": 54,
+                  "sort 1": 28,
+                  "sort 2": 55,
+                  "transfer_timeliness": 56,
+                  "updateTime 1": 29,
+                  "updateTime 2": 57
+                },
+                "renameByName": {
+                  "expected_lta_number": "Expected LTA",
+                  "nb_lta_served": "Served LTA",
+                  "prip_id": ""
+                }
+              }
+            },
+            {
+              "id": "filterByValue",
+              "options": {
+                "filters": [
+                  {
+                    "config": {
+                      "id": "isNull",
+                      "options": {}
+                    },
+                    "fieldName": "_id 1"
+                  },
+                  {
+                    "config": {
+                      "id": "isNotNull",
+                      "options": {}
+                    },
+                    "fieldName": "_id 2"
+                  }
+                ],
+                "match": "all",
+                "type": "include"
+              }
+            }
+          ],
+          "type": "table"
+        },
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Dashboard --"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "mappings": [
+                {
+                  "options": {
+                    "from": 0,
+                    "result": {
+                      "color": "green",
+                      "index": 0
+                    },
+                    "to": 10000
+                  },
+                  "type": "range"
+                },
+                {
+                  "options": {
+                    "from": 10000,
+                    "result": {
+                      "color": "red",
+                      "index": 1,
+                      "text": "Too much result for the table"
+                    },
+                    "to": 9999999999999
+                  },
+                  "type": "range"
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": []
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 2,
+            "x": 0,
+            "y": 25
+          },
+          "id": 49,
+          "options": {
+            "colorMode": "background",
+            "graphMode": "none",
+            "justifyMode": "auto",
+            "orientation": "auto",
+            "reduceOptions": {
+              "calcs": [
+                "max"
+              ],
+              "fields": "/^Count$/",
+              "values": false
+            },
+            "textMode": "auto"
+          },
+          "pluginVersion": "9.0.3",
+          "targets": [
+            {
+              "datasource": {
+                "type": "datasource",
+                "uid": "-- Dashboard --"
+              },
+              "panelId": 48,
+              "refId": "A"
+            }
+          ],
+          "title": "Table check",
+          "transformations": [
+            {
+              "id": "filterFieldsByName",
+              "options": {
+                "include": {
+                  "pattern": "name"
+                }
+              }
+            },
+            {
+              "id": "reduce",
+              "options": {
+                "labelsToFields": false,
+                "reducers": [
+                  "count"
+                ]
+              }
+            }
+          ],
+          "type": "stat"
+        },
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Mixed --"
+          },
+          "fieldConfig": {
+            "defaults": {
+              "color": {
+                "mode": "thresholds"
+              },
+              "custom": {
+                "align": "auto",
+                "displayMode": "auto",
+                "inspect": false
+              },
+              "mappings": [
+                {
+                  "options": {
+                    "true": {
+                      "color": "green",
+                      "index": 0
+                    }
+                  },
+                  "type": "value"
+                }
+              ],
+              "thresholds": {
+                "mode": "absolute",
+                "steps": [
+                  {
+                    "color": "green"
+                  },
+                  {
+                    "color": "red",
+                    "value": 80
+                  }
+                ]
+              }
+            },
+            "overrides": [
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "name"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 544
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "expected_lta_number"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 82
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "nb_lta_served"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 71
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Expected LTA"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 101
+                  }
+                ]
+              },
+              {
+                "matcher": {
+                  "id": "byName",
+                  "options": "Served LTA"
+                },
+                "properties": [
+                  {
+                    "id": "custom.width",
+                    "value": 86
+                  }
+                ]
+              }
+            ]
+          },
+          "gridPos": {
+            "h": 8,
+            "w": 22,
+            "x": 2,
+            "y": 25
+          },
+          "id": 48,
+          "options": {
+            "footer": {
+              "fields": "",
+              "reducer": [
+                "sum"
+              ],
+              "show": false
+            },
+            "frameIndex": 0,
+            "showHeader": true,
+            "sortBy": [
+              {
+                "desc": false,
+                "displayName": "name"
+              }
+            ]
+          },
+          "pluginVersion": "9.0.3",
+          "targets": [
+            {
+              "alias": "",
+              "bucketAggs": [],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "P946981DD87893763"
+              },
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "size": "10000"
+                  },
+                  "type": "raw_data"
+                }
+              ],
+              "query": "ddip_id:* AND mission: S2",
+              "refId": "A",
+              "timeField": "ddip_publication_date"
+            },
+            {
+              "alias": "",
+              "bucketAggs": [],
+              "datasource": {
+                "type": "elasticsearch",
+                "uid": "PAB1B72147BE890C9"
+              },
+              "hide": false,
+              "metrics": [
+                {
+                  "id": "1",
+                  "settings": {
+                    "size": "10000"
+                  },
+                  "type": "raw_data"
+                }
+              ],
+              "query": "mission: S2 AND service_type: DD",
+              "refId": "B",
+              "timeField": "publication_date"
+            }
+          ],
+          "title": "Missing DD S2 updates in product",
+          "transformations": [
+            {
+              "id": "seriesToColumns",
+              "options": {
+                "byField": "name"
+              }
+            },
+            {
+              "id": "organize",
+              "options": {
+                "excludeByName": {
+                  "LTA_Acri_publication_date": true,
+                  "LTA_CloudFerro_publication_date": true,
+                  "LTA_Werum_publication_date": true,
+                  "_type 1": true,
+                  "_type 2": true,
+                  "absolute_orbit 1": true,
+                  "absolute_orbit 2": true,
+                  "content_length": true,
+                  "datatake_id 1": true,
+                  "datatake_id 2": true,
+                  "expected_lta_number": false,
+                  "from_sensing_timeliness": true,
+                  "highlight 1": true,
+                  "highlight 2": true,
+                  "instrument_mode 1": true,
+                  "instrument_mode 2": true,
+                  "key 1": true,
+                  "key 2": true,
+                  "mission 1": true,
+                  "mission 2": true,
+                  "modification_date": true,
+                  "origin_date": true,
+                  "polarization 1": true,
+                  "polarization 2": true,
+                  "prip_publication_date": true,
+                  "product_class 1": true,
+                  "product_class 2": true,
+                  "product_level 1": true,
+                  "product_level 2": true,
+                  "product_type 1": true,
+                  "product_type 2": true,
+                  "product_uuid": true,
+                  "publication_date": true,
+                  "satellite_unit 1": true,
+                  "satellite_unit 2": true,
+                  "sensing_duration 1": true,
+                  "sensing_duration 2": true,
+                  "sensing_end_date 1": true,
+                  "sensing_end_date 2": true,
+                  "sensing_start_date 1": true,
+                  "sensing_start_date 2": true,
+                  "sort 1": true,
+                  "sort 2": true,
+                  "transfer_timeliness": true,
+                  "updateTime 1": true,
+                  "updateTime 2": true
+                },
+                "indexByName": {
+                  "LTA_Acri_is_published": 5,
+                  "LTA_Acri_publication_date": 6,
+                  "LTA_CloudFerro_is_published": 7,
+                  "LTA_CloudFerro_publication_date": 8,
+                  "LTA_Werum_is_published": 9,
+                  "LTA_Werum_publication_date": 10,
+                  "_id 1": 11,
+                  "_id 2": 31,
+                  "_index 1": 12,
+                  "_index 2": 32,
+                  "_type 1": 13,
+                  "_type 2": 33,
+                  "absolute_orbit 1": 14,
+                  "absolute_orbit 2": 34,
+                  "content_length": 35,
+                  "datatake_id 1": 15,
+                  "datatake_id 2": 36,
+                  "expected_lta_number": 2,
+                  "from_sensing_timeliness": 37,
+                  "highlight 1": 16,
+                  "highlight 2": 38,
+                  "instrument_mode 1": 17,
+                  "instrument_mode 2": 39,
+                  "key 1": 18,
+                  "key 2": 40,
+                  "mission 1": 19,
+                  "mission 2": 41,
+                  "modification_date": 42,
+                  "name": 0,
+                  "nb_lta_served": 3,
+                  "origin_date": 43,
+                  "polarization 1": 20,
+                  "polarization 2": 44,
+                  "prip_id": 4,
+                  "prip_publication_date": 21,
+                  "product_class 1": 22,
+                  "product_class 2": 45,
+                  "product_level 1": 23,
+                  "product_level 2": 46,
+                  "product_type 1": 24,
+                  "product_type 2": 47,
+                  "product_uuid": 48,
+                  "publication_date": 49,
+                  "satellite_unit 1": 25,
+                  "satellite_unit 2": 50,
+                  "sensing_duration 1": 26,
+                  "sensing_duration 2": 51,
+                  "sensing_end_date 1": 27,
+                  "sensing_end_date 2": 52,
+                  "sensing_start_date 1": 1,
+                  "sensing_start_date 2": 30,
+                  "service_id": 53,
+                  "service_type": 54,
+                  "sort 1": 28,
+                  "sort 2": 55,
+                  "transfer_timeliness": 56,
+                  "updateTime 1": 29,
+                  "updateTime 2": 57
+                },
+                "renameByName": {
+                  "expected_lta_number": "Expected LTA",
+                  "nb_lta_served": "Served LTA",
+                  "prip_id": ""
+                }
+              }
+            },
+            {
+              "id": "filterByValue",
+              "options": {
+                "filters": [
+                  {
+                    "config": {
+                      "id": "isNull",
+                      "options": {}
+                    },
+                    "fieldName": "_id 1"
+                  },
+                  {
+                    "config": {
+                      "id": "isNotNull",
+                      "options": {}
+                    },
+                    "fieldName": "_id 2"
+                  }
+                ],
+                "match": "all",
+                "type": "include"
+              }
+            }
+          ],
+          "type": "table"
+        }
+      ],
+      "title": "Product Consolidation Details",
+      "type": "row"
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 36,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P1E15E5090AA52157"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"interface_name\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "PRIP Interface Name",
+        "multi": true,
+        "name": "prip_interface_name",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"interface_name\"}",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "PEA18F349EA3C1266"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"interface_name\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "LTA Interface Name",
+        "multi": true,
+        "name": "lta_interface_name",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"interface_name\"}",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P9C1AEFD5EC435EE7"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"mission\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Mission",
+        "multi": true,
+        "name": "mission",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"mission\"}",
+        "refresh": 2,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P313A857D26D5EC17"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"interface_name\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "DD Interface Name",
+        "multi": true,
+        "name": "dd_interface_name",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"interface_name\"}",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P33E3C83CA8742A9C"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"interface_name\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "AUXIP Interface Name",
+        "multi": true,
+        "name": "auxip_interface_name",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"interface_name\"}",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P9C1AEFD5EC435EE7"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"service_type\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Service Type",
+        "multi": true,
+        "name": "service_type",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"service_type\"}",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "allValue": "*",
+        "current": {
+          "selected": true,
+          "text": [
+            "All"
+          ],
+          "value": [
+            "$__all"
+          ]
+        },
+        "datasource": {
+          "type": "elasticsearch",
+          "uid": "P9C1AEFD5EC435EE7"
+        },
+        "definition": "{\"find\": \"terms\", \"field\": \"service_id\"}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "Service Id",
+        "multi": true,
+        "name": "service_id",
+        "options": [],
+        "query": "{\"find\": \"terms\", \"field\": \"service_id\"}",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-1w/w",
+    "to": "now-1w/w"
+  },
+  "timepicker": {},
+  "timezone": "utc",
+  "title": "Consolidation Deltas",
+  "uid": "i7JSHQEnk",
+  "weekStart": ""
+}

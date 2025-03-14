@@ -20,7 +20,7 @@ docker compose -f ${WORK_DIR}/development/docker-compose.yaml --env-file ${WORK_
 Verify database setup
 
 ```bash
-curl $ES_URL  -k -u $ES_USERNAME:$ES_PASSWORD
+curl $ES_URL -k -u $ES_USERNAME:$ES_PASSWORD
 ```
 
 Verify grafana provissioning at `http://localhost:${GRF_PORT}/dashboards`
@@ -230,8 +230,13 @@ Then update also the query
 
 ## Run local python module
 
+```
+
+```
+
 ## Build local python wheel 
 
+```bash
 tox -c ./modules/maas-model/tox.ini -e build
 cp -ar ${WORK_DIR}/modules/maas-model/dist/ ${WORK_DIR}/modules/build/maas-model/
 
@@ -243,10 +248,11 @@ cp -ar ${WORK_DIR}/modules/maas-collector/dist/ ${WORK_DIR}/modules/build/maas-c
 
 tox -c ./modules/maas-cds/tox.ini -e build
 cp -ar ${WORK_DIR}/modules/maas-cds/dist/ ${WORK_DIR}/modules/build/maas-cds/
+```
 
 ## Build local docker image
 
-```
+```bash
 docker build --no-cache -t "maas-cds:2.8.1-beta" -f ./modules/Dockerfile.maas-cds ./modules
 docker build --no-cache -t "maas-collector:3.8.2-beta" -f ./modules/Dockerfile.maas-collector ./modules
 ```

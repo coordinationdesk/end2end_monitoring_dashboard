@@ -1,0 +1,71 @@
+{
+    "collectors": [
+        {
+            "class": "ODataCollectorConfiguration",
+            "id_field": [
+                "product_id",
+                "interface_name"
+            ],
+            "routing_key": "new.raw.data.dd-product",
+            "interface_name": "DD_DHUS",
+            "file_pattern": "DD_DHUS_*.xml",
+            "odata_version": "v3",
+            "odata_query_filter": "CreationDate ge datetime'{publication_start_date}' and CreationDate le datetime'{publication_end_date}'",
+            "odata_query_order_by": "CreationDate asc",
+            "refresh_interval": 10,
+            "product_per_page": 100,
+            "disable_insecure_request_warning": true,
+            "date_attr": "ingestion_date",
+            "model": "DdProduct",
+            "extractor": {
+                "class": "XMLExtractor",
+                "args": {
+                    "attr_map": {
+                        "product_id": {
+                            "python": "lambda root: root.findtext('.//{http://schemas.microsoft.com/ado/2007/08/dataservices}Id')"
+                        },
+                        "product_name": {
+                            "python": "lambda root: root.findtext('.//{http://schemas.microsoft.com/ado/2007/08/dataservices}Name')"
+                        },
+                        "content_length": {
+                            "python": "lambda root: root.findtext('.//{http://schemas.microsoft.com/ado/2007/08/dataservices}ContentLength')"
+                        },
+                        "ingestion_date": {
+                            "python": "lambda root: root.findtext('.//{http://schemas.microsoft.com/ado/2007/08/dataservices}IngestionDate')"
+                        },
+                        "modification_date": {
+                            "python": "lambda root: root.findtext('.//{http://schemas.microsoft.com/ado/2007/08/dataservices}ModificationDate')"
+                        },
+                        "creation_date": {
+                            "python": "lambda root: root.findtext('.//{http://schemas.microsoft.com/ado/2007/08/dataservices}CreationDate')"
+                        },
+                        "start_date": {
+                            "python": "lambda root: root.findtext('.//{http://schemas.microsoft.com/ado/2007/08/dataservices}Start')"
+                        },
+                        "end_date": {
+                            "python": "lambda root: root.findtext('.//{http://schemas.microsoft.com/ado/2007/08/dataservices}End')"
+                        },
+                        "interface_name": {
+                            "python": "lambda c: 'DD_DHUS'"
+                        },
+                        "production_service_type": {
+                            "python": "lambda c: 'DD'"
+                        },
+                        "production_service_name": {
+                            "python": "lambda c: 'DHUS'"
+                        }
+                    },
+                    "default_namespace": "http://www.w3.org/2005/Atom",
+                    "namespace_map": {
+                        "": "http://www.w3.org/2005/Atom",
+                        "m": "http://schemas.microsoft.com/ado/2007/08/dataservices/metadata",
+                        "d": "http://schemas.microsoft.com/ado/2007/08/dataservices",
+                        "base": "https://apihub.copernicus.eu/apihub/odata/v1/"
+                    },
+                    "iterate_nodes": "entry",
+                    "allow_partial": true
+                }
+            }
+        }
+    ]
+}

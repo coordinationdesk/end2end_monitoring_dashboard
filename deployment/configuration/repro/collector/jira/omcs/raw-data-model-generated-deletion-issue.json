@@ -1,0 +1,36 @@
+{
+    "models": [
+        {
+            "index": "raw-data-deletion-issue",
+            "name": "DeletionIssue",
+            "fields": [
+                {
+                    "name": "key",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "interface_name",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "deletion_interfaces",
+                    "type": "Keyword"
+                },
+                {
+                    "name": "deletion_date",
+                    "type": "Date"
+                },
+                {
+                    "name": "deletion_cause",
+                    "type": "Text"
+                },
+                {
+                    "name": "interface_type",
+                    "type": "Keyword"
+                }
+            ],
+            "partition_field": "ingestionTime",
+            "partition_format": "static"
+        }
+    ]
+}

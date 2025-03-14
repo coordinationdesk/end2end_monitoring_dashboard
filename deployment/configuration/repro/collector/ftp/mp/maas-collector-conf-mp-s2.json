@@ -1,0 +1,59 @@
+{
+    "collectors": [
+        {
+            "class": "FTPCollectorConfiguration",
+            "id_field": [
+                "satellite_id",
+                "datatake_id",
+                "reportName"
+            ],
+            "file_pattern": "S2*_MP_ACQ__MTL_*.csv",
+            "directories": [
+                "/eds/S2PDGS/S2MP_SHARED/"
+            ],
+            "routing_key": "",
+            "file_routing_key": "file.raw.data.mp-product",
+            "interface_name": "S2MissionPlanning",
+            "refresh_interval": 10,
+            "model": "MpProduct",
+            "extractor": {
+                "class": "CSVExtractor",
+                "args": {
+                    "allow_partial": true,
+                    "attr_map": {
+                        "satellite_id": "SatelliteID",
+                        "datatake_id": {
+                            "python": "lambda row: row.get('ID') or row.get('AcquisitionID')"
+                        },
+                        "observation_time_start": "ObservationTimeStart",
+                        "observation_time_stop": "ObservationTimeStop",
+                        "observation_duration": "ObservationDuration[msec]",
+                        "number_of_scenes": "NumberOfScenes",
+                        "absolute_orbit": {
+                            "python": "lambda root: None if root.get('AbsoluteOrbit') is None else str(root.get('AbsoluteOrbit'))"
+                        },
+                        "relative_orbit": {
+                            "python": "lambda root: None if root.get('RelativeOrbit') is None else str(root.get('RelativeOrbit'))"
+                        },
+                        "instrument_mode": "InstrumentMode",
+                        "timeliness": "Timeliness",
+                        "interface_name": {
+                            "python": "lambda c: 'S2MissionPlanning'"
+                        },
+                        "production_service_type": {
+                            "python": "lambda c: 'EDS'"
+                        },
+                        "production_service_name": {
+                            "python": "lambda c: 'CGS'"
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "amqp": {
+        "new.raw.data.mp-product": {
+            "chunk_size": 1
+        }
+    }
+}
